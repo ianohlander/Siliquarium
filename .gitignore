@@ -1,0 +1,24 @@
+# Node dependencies and build outputs
+node_modules/
+dist/
+*.log
+
+# OS & Environment files
+.DS_Store
+desktop.ini
+*.ini
+Thumbs.db
+
+# IDE and Editor
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.swp
+*.swo
+
+# Local scratch and test artifacts
+scratch/
+coverage/
+.temp/

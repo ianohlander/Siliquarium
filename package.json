@@ -1,0 +1,33 @@
+{
+  "name": "siliquarium",
+  "version": "0.1.0",
+  "description": "Open-Ended Digital Life & Silicon Abiogenesis in a Hydrothermal Vent Matrix",
+  "type": "module",
+  "main": "src/core/index.ts",
+  "scripts": {
+    "test": "node tests/run_tests.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/ --ext .ts",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "artificial-life",
+    "alife",
+    "autopoiesis",
+    "epistemic-cut",
+    "hydrothermal-vents",
+    "genetic-algorithms",
+    "digital-evolution",
+    "systems-biology",
+    "uri-alon-motifs",
+    "landauer-thermodynamics"
+  ],
+  "author": "Ian Ohlander",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vite": "^5.3.0"
+  }
+}
