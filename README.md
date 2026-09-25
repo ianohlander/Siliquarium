@@ -35,7 +35,8 @@ While BooleanGA explores **heteropoietic engineering synthesis** (evolving ALUs,
 
 ## 📂 Project Manifest & Standards
 
-- **[`THEORETICAL_MODEL.md`](THEORETICAL_MODEL.md):** Complete 20-section master biophysical specification, equations, and thermodynamic models.
+- **[`THEORETICAL_MODEL.md`](THEORETICAL_MODEL.md):** Complete 21-section master biophysical specification, equations, and thermodynamic models.
+- **[`docs/EPISTEMIC_FOUNDATIONS.md`](docs/EPISTEMIC_FOUNDATIONS.md):** Epistemological boundaries, prebiotic battery physics (Mitchell, Russell, Lane), the Epistemic Cut (Pattee, Von Neumann), and the anti-smuggling defense.
 - **[`standards/DEVELOPMENT_STANDARDS.md`](standards/DEVELOPMENT_STANDARDS.md):** Strict OOP/SOLID architecture, complexity budgets ($\le 7$), branded types, Web Worker threading, and anti-monolith file structure.
 - **[`standards/QA_AND_TESTING_STANDARDS.md`](standards/QA_AND_TESTING_STANDARDS.md):** Native zero-dependency Node.js test harness, 8-stage progressive test pipeline, and physical conservation audits.
 - **[`standards/DOCUMENTATION_STANDARDS.md`](standards/DOCUMENTATION_STANDARDS.md):** 5-Dimension Conceptual Rubric (50/50 target), the 4 Sacred Everyday Analogies, and academic provenance.

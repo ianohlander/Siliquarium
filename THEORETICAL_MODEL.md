@@ -798,3 +798,22 @@ Nature solved this without continuous physics, and so does Siliquarium:
      $$\text{Pos}(t+1) = \text{Pos}(t) + \vec{v}_{\text{current}} + \vec{F}_{\text{thrust}}$$
    - *Discrete & Blisteringly Fast:* Movement is simply moving a reference pointer between hex coordinates in the 3D grid array—$O(1)$ computation with zero continuous physics bloat!
    - Organisms can now evolve into **pelagic plankton and grazing protozoa**, swimming between vent plumes in the open water!
+
+---
+
+## 21. Epistemological Boundaries: Why the Battery and Safe Are Not Smuggled Biology
+
+A foundational question in artificial life is whether positing an initial energy battery, an active workshop, and an inert symbolic genome tape secretly smuggles in the very biological intelligence the system purports to explain.
+
+As demonstrated in detail in [docs/EPISTEMIC_FOUNDATIONS.md](docs/EPISTEMIC_FOUNDATIONS.md), these features do not represent smuggled biology; they represent the **absolute physical and mathematical preconditions for open-ended evolution**:
+
+1. **The Prebiotic Battery is Geochemical, Not Biological (Peter Mitchell, Michael Russell, Nick Lane):**  
+   Life did not invent the electrical battery. In alkaline hydrothermal vents, thin inorganic iron-sulfide (FeS) mineral walls separating alkaline vent fluid (pH ~ 10) from acidic Hadean ocean water (pH ~ 5.5) maintained a natural, continuous proton motive force of ~200 mV across nanometer barriers. The pore battery in Siliquarium models this **pre-existing electrostatic mineral capacitance and inorganic pyrophosphate pool**, not an evolved cellular organelle.
+2. **The Workshop is Inorganic Compartmentation (Russell & Hall, 1997):**  
+   Microscopic mineral cavities in porous basalt acted as nature's first cell walls, concentrating reactants and preventing the dilution catastrophe before lipid membranes evolved.
+3. **The Epistemic Cut is a Mathematical Necessity (John von Neumann, Howard Pattee):**  
+   Von Neumann proved that any self-reproducing machine that directly mutates its own active physical components inevitably suffers an unrecoverable error catastrophe. Open-ended evolution is mathematically impossible without separating rate-independent symbolic instructions (The Safe) from rate-dependent physical dynamics (The Workshop).
+4. **Reproduction is Abiotic Template Polymerization:**  
+   The photocopy mechanism at 100 energy tokens models abiotic, mineral-catalyzed surface templating (e.g., RNA polymerization on montmorillonite clay), driven purely by high-energy chemical flux.
+
+For the complete biophysical proofs, worked toy traces, and the Skeptic FAQ, see [docs/EPISTEMIC_FOUNDATIONS.md](docs/EPISTEMIC_FOUNDATIONS.md).
