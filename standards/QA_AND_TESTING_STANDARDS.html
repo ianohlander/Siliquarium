@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA &amp; Testing Standards — Siliquarium</title>
+  <link rel="icon" type="image/jpeg" href="../docs/assets/logos/logo.jpg">
+  
+  <!-- Modern Clean Typography & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <style>
+    :root {
+      --bg-ocean: #060911;
+      --bg-card: #0d1322;
+      --bg-surface: #131c31;
+      --border: #1e2c4a;
+      --border-glow: #00e5ff33;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #00e5ff;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-ocean);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    }
+    .brand-logo span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+    .nav-link.active {
+      color: var(--cyan);
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.4);
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.25rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.25rem; color: #e2e8f0; }
+    h4 { font-size: 1.05rem; color: var(--cyan); }
+    
+    p { margin-bottom: 1.25rem; color: #cbd5e1; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { color: var(--text-primary); font-style: italic; }
+
+    .header-anchor {
+      opacity: 0;
+      color: var(--cyan);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      font-weight: 400;
+      transition: opacity 0.2s;
+    }
+    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
+      opacity: 0.6;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #70f3ff;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+      color: #cbd5e1;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    /* Code & Pre */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Blockquotes & Callouts */
+    blockquote.callout {
+      border-left: 4px solid var(--cyan);
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    /* GitHub-style Alerts */
+    .alert {
+      border-left: 4px solid;
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .alert-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .alert-note { border-color: var(--cyan); }
+    .alert-note .alert-title { color: var(--cyan); }
+    .alert-tip { border-color: var(--emerald); }
+    .alert-tip .alert-title { color: var(--emerald); }
+    .alert-important { border-color: var(--purple); }
+    .alert-important .alert-title { color: var(--purple); }
+    .alert-warning { border-color: var(--amber); }
+    .alert-warning .alert-title { color: var(--amber); }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th {
+      background: var(--bg-surface);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Math */
+    .math-block {
+      overflow-x: auto;
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    /* Images */
+    .img-wrapper {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    .img-caption {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="../docs/index.html" class="brand-logo">
+        <img src="../docs/assets/logos/logo.jpg" alt="Siliquarium Logo">
+        <span>Siliquarium</span>
+      </a>
+      <nav class="nav-bar">
+        <a href="../docs/index.html" class="nav-link ">🐠 Portal / Overview</a>
+<a href="../docs/THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
+<a href="../docs/EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
+<a href="../docs/BRAND_IDENTITY.html" class="nav-link ">🎨 Brand Identity</a>
+<a href="../docs/logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<a href="../docs/DEVELOPMENT_STANDARDS.html" class="nav-link ">🏛️ Dev Standards</a>
+<a href="../docs/QA_AND_TESTING_STANDARDS.html" class="nav-link ">🧪 QA Standards</a>
+<a href="../docs/DOCUMENTATION_STANDARDS.html" class="nav-link ">📚 Doc Standards</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 id="siliquarium-qa-testing-standards">🧪 Siliquarium QA & Testing Standards <a class="header-anchor" href="#siliquarium-qa-testing-standards" title="Link to section">#</a></h1>
+<p><em>Verification Protocols, Invariant Audits, and Staged Pipelines</em></p>
+<hr class="divider" />
+<h2 id="1-the-verification-mandate-100-deterministic-coverage">1. The Verification Mandate: 100% Deterministic Coverage <a class="header-anchor" href="#1-the-verification-mandate-100-deterministic-coverage" title="Link to section">#</a></h2>
+<p>In evolutionary simulations, bugs often hide behind randomness. A buggy mutation operator or an accidental energy leak might produce the illusion of "evolution" when it is actually a software defect.</p>
+<p>To prevent false claims and ensure institutional-grade integrity, Siliquarium adopts BooleanGA's <strong>Zero-Flakiness Testing Mandate</strong>:</p>
+<ol>
+<li><strong>Native, Zero-Bloat Test Runner:</strong>  </li>
+</ol>
+<p>Tests run directly via Node.js using native assertions (<code>import assert from &#39;node:assert&#39;</code>). No massive testing frameworks (Jest, Mocha, Karma) that introduce external dependencies.</p>
+<ol>
+<li><strong>Deterministic Seed Locks:</strong>  </li>
+</ol>
+<p>Every evolutionary test specifies an explicit <code>PRNG.seed(N)</code>. At Tick <span class="katex-inline math-inline" data-math="K">\( K \)</span>, the ecosystem must reproduce the exact same state, down to the bitwise level, across all operating systems.</p>
+<ol>
+<li><strong>100% Core Algorithm Coverage:</strong>  </li>
+</ol>
+<p>Codon tables, prefix parsing, pore energy accounting, vent pulse propagation, and neighbor wire-routing must maintain 100% branch and path coverage.</p>
+<hr class="divider" />
+<h2 id="2-progressive-staged-test-pipeline">2. Progressive Staged Test Pipeline <a class="header-anchor" href="#2-progressive-staged-test-pipeline" title="Link to section">#</a></h2>
+<p>Siliquarium’s automated verification suite (<code>tests/run_tests.mjs</code>) must be organized into progressive verification stages:</p>
+<pre><code class="language-text">[Stage 01: PRNG Determinism] ──► Verified Mulberry32 sequence reproducibility
+       │
+[Stage 02: Codon Translation] ──► 64-entry degenerate codon map &amp; silent introns
+       │
+[Stage 03: Pore Workshop AST] ──► Logic gate placement, wiring validity, and execution
+       │
+[Stage 04: Vent Physics]     ──► Hydrothermal pulse generation &amp; spatial dissipation
+       │
+[Stage 05: Pore Battery]     ──► Landauer switching costs &amp; energy depletion
+       │
+[Stage 06: Replication]      ──► Photocopy to neighbor pore, mutation rate bounds
+       │
+[Stage 07: Thermodynamics]   ──► Conservation of energy invariance audits
+       │
+[Stage 08: Ecological Arms]  ──► Neighbor wiretaps, jammer attacks, and lysis decay</code></pre>
+<hr class="divider" />
+<h2 id="3-the-anti-smuggling-verification-thermodynamic-invariants">3. The Anti-Smuggling Verification (Thermodynamic Invariants) <a class="header-anchor" href="#3-the-anti-smuggling-verification-thermodynamic-invariants" title="Link to section">#</a></h2>
+<p>To uphold the <strong>Zero-Smuggling Mandate</strong>, automated test suites must include strict physical invariant audits:</p>
+<h3 id="invariant-1-conservation-of-energy-the-zero-leak-audit">Invariant 1: Conservation of Energy (The Zero-Leak Audit) <a class="header-anchor" href="#invariant-1-conservation-of-energy-the-zero-leak-audit" title="Link to section">#</a></h3>
+<p>Energy cannot be created or destroyed. In every test run over <span class="katex-inline math-inline" data-math="N">\( N \)</span> ticks, the total energy of the closed simulation must balance perfectly:</p>
+<p><div class="katex-display math-block" data-math="\sum E_{\text{injected by vent}} = \sum E_{\text{stored in batteries}} + \sum E_{\text{burned by gate toggles}} + \sum E_{\text{dissipated heat}}">\[ \sum E_{\text{injected by vent}} = \sum E_{\text{stored in batteries}} + \sum E_{\text{burned by gate toggles}} + \sum E_{\text{dissipated heat}} \]</div></p>
+<ul>
+<li>Any test where total energy tokens do not balance to zero tolerance (<span class="katex-inline math-inline" data-math="0.000">\( 0.000 \)</span>) immediately fails.</li>
+</ul>
+<h3 id="invariant-1b-conservation-of-matter-mass-balance-audit">Invariant 1B: Conservation of Matter (Mass Balance Audit) <a class="header-anchor" href="#invariant-1b-conservation-of-matter-mass-balance-audit" title="Link to section">#</a></h3>
+<p>Physical matter cannot be created or destroyed. Mineral matter tokens (<span class="katex-inline math-inline" data-math="M">\( M \)</span>) required to construct gates, build stone walls, and replicate bodies must balance across the closed universe:</p>
+<p><div class="katex-display math-block" data-math="\sum M_{\text{injected}} = \sum M_{\text{living circuits}} + \sum M_{\text{seafloor carcasses}} + \sum M_{\text{benthic sediment}}">\[ \sum M_{\text{injected}} = \sum M_{\text{living circuits}} + \sum M_{\text{seafloor carcasses}} + \sum M_{\text{benthic sediment}} \]</div></p>
+<ul>
+<li>Any test where total matter tokens fail to balance to zero tolerance (<span class="katex-inline math-inline" data-math="0.000">\( 0.000 \)</span>) immediately fails.</li>
+</ul>
+<h3 id="invariant-2-operator-blindness-audit">Invariant 2: Operator Blindness Audit <a class="header-anchor" href="#invariant-2-operator-blindness-audit" title="Link to section">#</a></h3>
+<p>The mutation operator and replication engine must possess <strong>zero awareness</strong> of the environment:</p>
+<ul>
+<li>The photocopy routine must never inspect vent frequencies, neighbor states, or battery levels to choose mutation targets.</li>
+<li>Mutations must be statistically isotropic across the genome bitstring.</li>
+</ul>
+<h3 id="invariant-3-epistemic-cut-audit">Invariant 3: Epistemic Cut Audit <a class="header-anchor" href="#invariant-3-epistemic-cut-audit" title="Link to section">#</a></h3>
+<p>Active gates in a pore's workshop must never be mutated during runtime.</p>
+<ul>
+<li>Tests must assert that the running circuit topology remains strictly identical to its initial translation, and that mutation occurs exclusively on the inert bitstring during replication into a child pore.</li>
+</ul>
+<hr class="divider" />
+<h2 id="4-failure-mode-edge-case-testing">4. Failure Mode & Edge Case Testing <a class="header-anchor" href="#4-failure-mode-edge-case-testing" title="Link to section">#</a></h2>
+<p>The test suite must aggressively exercise boundary edge cases:</p>
+<ol>
+<li><strong>Starvation Lysis:</strong> When a pore's battery hits <span class="katex-inline math-inline" data-math="0">\( 0 \)</span>, assert that all gates decouple, the pore becomes marked as <code>EMPTY</code>, and residual energy is correctly dissipated or scavenged.</li>
+<li><strong>Grid Saturation / Overcrowding:</strong> When all adjacent neighbor pores are occupied, assert that a full-battery cell holds in a quiescent "dormant" state without crashing the engine or overwriting living neighbors.</li>
+<li><strong>Catastrophic Mutation Survival:</strong> When a genome suffers severe mutations (e.g., 50% bit inversion), assert that the translation engine gracefully isolates corrupted tokens into non-coding introns without throwing unhandled exceptions.</li>
+<li><strong>Wire Boundary Isolation:</strong> Assert that an organism cannot read from or write to a pore that is not an immediate orthogonal neighbor (North, South, East, West).</li>
+</ol>
+<hr class="divider" />
+<h2 id="5-user-acceptance-testing-uat-dashboard-standards">5. User Acceptance Testing (UAT) Dashboard Standards <a class="header-anchor" href="#5-user-acceptance-testing-uat-dashboard-standards" title="Link to section">#</a></h2>
+<p>For visual and user acceptance testing, Siliquarium must provide an interactive HTML UAT dashboard (<code>docs/USER_ACCEPTANCE_TESTING_GUIDE.html</code>) featuring:</p>
+<ul>
+<li><strong>Live Interactive Test Cards:</strong> Allowing non-technical educators and researchers to trigger individual test stages with one click.</li>
+<li><strong>Visual State Assertions:</strong> Color-coded pass/fail badges (Emerald for pass, Rose for fail, Amber for pending).</li>
+<li><strong>Step-by-Step Fossil Playback:</strong> Ability to step forward and backward through individual clock cycles of a pore’s life to inspect voltages, token counts, and codon reads in real time.</li>
+</ul>
+  </main>
+
+  <footer>
+    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
+    <p style="margin-top: 0.4rem;">
+      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
+      PolyForm Noncommercial License 1.0.0
+    </p>
+  </footer>
+</body>
+</html>

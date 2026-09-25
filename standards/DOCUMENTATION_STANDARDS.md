@@ -71,3 +71,32 @@ Siliquarium stands on the shoulders of giants across biophysics, information the
   *Maturana, H. R., & Varela, F. J. (1980).* *Autopoiesis and Cognition: The Realization of the Living.* D. Reidel Publishing.
 - **Self-Reproducing Automata:**  
   *Von Neumann, J. (1966).* *Theory of Self-Reproducing Automata* (Edited and completed by A. W. Burks). University of Illinois Press.
+
+---
+
+## 5. The HTML-First Human Documentation Mandate (Standing Rule)
+
+> ### 📜 Standing Architectural Mandate: Dual-Format Publishing
+> All documentation intended for human comprehension, review, and instruction must be published and maintained in **both** GitHub Flavored Markdown (.md) and rich, self-contained HTML (.html).
+
+1. **Zero-Server Standalone Accessibility:**  
+   Every generated HTML document must open directly in modern web browsers via the local ile:/// protocol without requiring an active HTTP server or build step at view time.
+2. **The Deep-Sea Abyssal Theme:**  
+   HTML documents must follow Siliquarium's dark oceanic design system:
+   - Background: Dark abyssal slate/obsidian (#0a0e17 / #0f172a).
+   - Text: High-contrast legible typography (#e2e8f0 / #f8fafc) with clean sans-serif font stacks.
+   - Accents: Bioluminescent cyan (#00e5ff) for primary links and titles, thermal amber (#ffb300) for emphasis, and emerald (#10b981) for success badges.
+3. **Mathematical & Diagrammatic Fidelity:**  
+   Equations written in LaTeX must render cleanly (via KaTeX / MathJax with clear plaintext fallbacks), and tables must be fully responsive with zebra striping.
+4. **Unified Top Navigation:**  
+   Every human-facing HTML document must include a unified navigation header linking across the entire documentation suite:
+   - **Overview / Portal** (index.html)
+   - **Theoretical Model** (THEORETICAL_MODEL.html)
+   - **Epistemic Foundations** (EPISTEMIC_FOUNDATIONS.html)
+   - **Brand Identity & Logos** (BRAND_IDENTITY.html / logos.html)
+   - **Development Standards** (DEVELOPMENT_STANDARDS.html)
+   - **QA & Testing Standards** (QA_AND_TESTING_STANDARDS.html)
+   - **Documentation Standards** (DOCUMENTATION_STANDARDS.html)
+5. **Continuous Build Synchronization:**  
+   Any prompt or commit that modifies documentation must execute the HTML doc build pipeline (
+ode scripts/build_docs_html.mjs) to guarantee that HTML files never drift out of sync with their Markdown sources.

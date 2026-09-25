@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Master Theoretical Model — Siliquarium</title>
+  <link rel="icon" type="image/jpeg" href="assets/logos/logo.jpg">
+  
+  <!-- Modern Clean Typography & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <style>
+    :root {
+      --bg-ocean: #060911;
+      --bg-card: #0d1322;
+      --bg-surface: #131c31;
+      --border: #1e2c4a;
+      --border-glow: #00e5ff33;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #00e5ff;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-ocean);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    }
+    .brand-logo span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+    .nav-link.active {
+      color: var(--cyan);
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.4);
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.25rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.25rem; color: #e2e8f0; }
+    h4 { font-size: 1.05rem; color: var(--cyan); }
+    
+    p { margin-bottom: 1.25rem; color: #cbd5e1; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { color: var(--text-primary); font-style: italic; }
+
+    .header-anchor {
+      opacity: 0;
+      color: var(--cyan);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      font-weight: 400;
+      transition: opacity 0.2s;
+    }
+    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
+      opacity: 0.6;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #70f3ff;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+      color: #cbd5e1;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    /* Code & Pre */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Blockquotes & Callouts */
+    blockquote.callout {
+      border-left: 4px solid var(--cyan);
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    /* GitHub-style Alerts */
+    .alert {
+      border-left: 4px solid;
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .alert-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .alert-note { border-color: var(--cyan); }
+    .alert-note .alert-title { color: var(--cyan); }
+    .alert-tip { border-color: var(--emerald); }
+    .alert-tip .alert-title { color: var(--emerald); }
+    .alert-important { border-color: var(--purple); }
+    .alert-important .alert-title { color: var(--purple); }
+    .alert-warning { border-color: var(--amber); }
+    .alert-warning .alert-title { color: var(--amber); }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th {
+      background: var(--bg-surface);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Math */
+    .math-block {
+      overflow-x: auto;
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    /* Images */
+    .img-wrapper {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    .img-caption {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logos/logo.jpg" alt="Siliquarium Logo">
+        <span>Siliquarium</span>
+      </a>
+      <nav class="nav-bar">
+        <a href="index.html" class="nav-link ">🐠 Portal / Overview</a>
+<a href="THEORETICAL_MODEL.html" class="nav-link active">🌊 Theoretical Model</a>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
+<a href="BRAND_IDENTITY.html" class="nav-link ">🎨 Brand Identity</a>
+<a href="logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<a href="DEVELOPMENT_STANDARDS.html" class="nav-link ">🏛️ Dev Standards</a>
+<a href="QA_AND_TESTING_STANDARDS.html" class="nav-link ">🧪 QA Standards</a>
+<a href="DOCUMENTATION_STANDARDS.html" class="nav-link ">📚 Doc Standards</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 id="siliquarium-the-theoretical-model">🌊 Siliquarium: The Theoretical Model <a class="header-anchor" href="#siliquarium-the-theoretical-model" title="Link to section">#</a></h1>
+<p><em>Autopoietic Digital Life, Silicon Abiogenesis, and Spatial Ecosystem Dynamics</em></p>
+<hr class="divider" />
+<h2 id="1-the-epistemological-leap-from-cad-to-autopoiesis">1. The Epistemological Leap: From CAD to Autopoiesis <a class="header-anchor" href="#1-the-epistemological-leap-from-cad-to-autopoiesis" title="Link to section">#</a></h2>
+<p>In BooleanGA Tracks 1 through 3, genetic algorithms demonstrated how molecular operators navigate discrete Hamming hypercubes to synthesize human-specified computing architectures (ALUs, sequential latches, Hack microprocessors).</p>
+<p>However, engineering CAD is fundamentally <strong>heteropoietic</strong>—an outside agent defines an external benchmark (truth table) and terminates circuits that fail to meet it. Natural living systems possess no truth tables, no benchmarks, and no external supervisors.</p>
+<p><strong>Siliquarium</strong> transitions from engineering optimization to <strong>autopoiesis</strong> (self-creation and self-maintenance, as formulated by Humberto Maturana and Francisco Varela). In Siliquarium:</p>
+<ul>
+<li><strong>Fitness is not a score; fitness is persistence.</strong></li>
+<li>An organism survives if and only if its internal logic successfully extracts free energy from environmental fluxes to maintain its structure and reproduce before its battery hits zero.</li>
+</ul>
+<pre><code class="language-text">       BOOLEAN-GA (Tracks 1–3)                        SILIQUARIUM (Sister Project)
+  ┌─────────────────────────────────┐              ┌─────────────────────────────────┐
+  │ • Engineering CAD Paradigm      │              │ • Autopoietic Ecosystem         │
+  │ • Target Truth Table (ALU, CPU) │  ────────►   │ • Zero Truth Table (Open-Ended) │
+  │ • External Omniscient Supervisor│              │ • Blind Physical Thermodynamics │
+  │ • Batch Generational Testing    │              │ • Real-Time Spatial Grid        │
+  └─────────────────────────────────┘              └─────────────────────────────────┘</code></pre>
+<hr class="divider" />
+<h2 id="2-the-physical-environment-hydrothermal-vents-rocky-pores">2. The Physical Environment: Hydrothermal Vents & Rocky Pores <a class="header-anchor" href="#2-the-physical-environment-hydrothermal-vents-rocky-pores" title="Link to section">#</a></h2>
+<h3 id="the-dilution-catastrophe-why-vents-beat-solar-gradients">The Dilution Catastrophe & Why Vents Beat Solar Gradients <a class="header-anchor" href="#the-dilution-catastrophe-why-vents-beat-solar-gradients" title="Link to section">#</a></h3>
+<p>In origin-of-life biochemistry (Michael Russell, Nick Lane), life could not have originated on the open ocean surface under the sun because of the <strong>dilution catastrophe</strong>: any catalytic molecule formed immediately drifts away into the infinite ocean.</p>
+<p>Instead, life began in <strong>alkaline hydrothermal vents</strong>:</p>
+<ol>
+<li><strong>Inorganic Rock Pores as Nature’s First Cell Walls:</strong> Deep-sea vents consist of porous mineral foams riddled with microscopic, interconnected cavities. These inorganic rock walls held organic molecules together long before biological lipid membranes evolved.</li>
+<li><strong>Natural Electrical Voltage:</strong> The interface between alkaline vent fluid and acidic ocean water created a permanent, natural electrical voltage across thin mineral walls (<span class="katex-inline math-inline" data-math="\sim 200 \text{ mV}">\( \sim 200 \text{ mV} \)</span>), supplying free energy directly to proto-life.</li>
+</ol>
+<pre><code class="language-text">                      DEEP-SEA HYDROTHERMAL VENT MATRIX
+      
+         Acidic Cold Water / Thermal Noise Sink (High Entropy)
+     ══════════════════════════════════════════════════════════════════
+               │                  │                     │
+               ▼                  ▼                     ▼
+            [░░░░░]            [░░░░░]               [░░░░░]  &lt;-- Microscopic
+            [░ P1 ░]──────────►[░ P2 ░]─────────────►[░ P3 ░]      rock pores
+            [░░░░░]            [░░░░░]               [░░░░░]      act as nature&#39;s
+               ▲                  ▲                     ▲         FIRST cell walls!
+               │                  │                     │
+     ══════════════════════════════════════════════════════════════════
+         Alkaline Hot Vent Fluid (Structured Low-Entropy Bitwaves)</code></pre>
+<p>In Siliquarium, the environment is a <strong>2D lattice of rocky pores</strong> adjacent to a hydrothermal vent nozzle. The vent acts as the Master Power Plant, injecting rhythmic, low-entropy bit pulses into the rock pores every tick.</p>
+<hr class="divider" />
+<h3 id="environmental-dynamics-multi-scale-non-stationary-cycles">Environmental Dynamics: Multi-Scale Non-Stationary Cycles <a class="header-anchor" href="#environmental-dynamics-multi-scale-non-stationary-cycles" title="Link to section">#</a></h3>
+<p>In conventional simulations, static environments cause evolution to stall into permanent monocultures. Siliquarium models the Earth’s dynamic biosphere through <strong>multi-scale overlapping cycles</strong>:</p>
+<pre><code class="language-text">                       THE MULTI-SCALE RHYTHMS OF NATURE
+   HIGH FLOW │      /\        /\        /\
+  (Summer/Day)│     /  \      /  \      /  \
+              │    / /\ \    / /\ \    / /\ \    &lt;--- Fast Vent Pulses (The Meal)
+              │   / /  \ \  / /  \ \  / /  \ \
+              │  / /    \ \/ /    \ \/ /    \ \
+    LOW FLOW  │ / /      \__/      \__/      \ \
+(Winter/Night)│/ /                            \ \_____________________________
+              └───────────────────────────────────────────────────────────────► TIME
+                 Day 1     Day 2     Day 3        WINTER DROUGHT (Lean Period)</code></pre>
+<ol>
+<li><strong>The Fast Pulse (The Meal - Ticks):</strong> High-frequency alternating bit transitions (<span class="katex-inline math-inline" data-math="0 \to 1 \to 0">\( 0 \to 1 \to 0 \)</span>) driving immediate metabolic harvesting.</li>
+<li><strong>Diurnal Cycles (Days - Hundreds of Ticks):</strong> Vent pressure swells during "day" and drops to a trickle at "night," driving the evolution of <strong>internal circadian clocks</strong> to regulate energy use.</li>
+<li><strong>Seasonal Cycles (Months/Seasons - Thousands of Ticks):</strong> Long-term shifts between <strong>Times of Plenty</strong> (high fuel flux) and <strong>Times of Scarcity</strong> (famine/winter).</li>
+<li><em>During Plenty:</em> Selection favors rapid colonizers, fast division, and high-throughput energy processing (<span class="katex-inline math-inline" data-math="r">\( r \)</span>-selection).</li>
+<li><em>During Scarcity:</em> Selection violently purges metabolic bloat, rewarding lean, parsimonious circuits with low basal consumption and large battery reserves (<span class="katex-inline math-inline" data-math="K">\( K \)</span>-selection).</li>
+</ol>
+<hr class="divider" />
+<h3 id="thermodynamic-stresses-heat-cold-in-silico">Thermodynamic Stresses: Heat & Cold in Silico <a class="header-anchor" href="#thermodynamic-stresses-heat-cold-in-silico" title="Link to section">#</a></h3>
+<p>Siliquarium models physical temperature gradients to provoke adaptive structural evolution:</p>
+<ol>
+<li><strong>Heat (Thermal Noise & Spontaneous Glitches):</strong></li>
+<li><em>Physical Effect:</em> High vent temperatures dramatically increase thermal background noise (<span class="katex-inline math-inline" data-math="k_B T">\( k_B T \)</span>). Random spontaneous bit-flips corrupt unprotected signal lines.</li>
+<li><em>Emergent Adaptation:</em> Circuits evolve <strong>"Digital Heat-Shock Proteins"</strong>—majority-logic filter gates (requiring 2-out-of-3 temporal agreement) or parity-checking feedback loops that reject thermal noise and protect internal state.</li>
+<li><strong>Cold (Sluggishness & The Hibernation Trigger):</strong></li>
+<li><em>Physical Effect:</em> Low temperatures reduce vent pulse rates to a near standstill, while basal maintenance continues to bleed energy. Unregulated circuits drain their batteries and starve.</li>
+<li><em>Emergent Adaptation:</em> Circuits evolve <strong>"Metabolic Hibernation"</strong>—gated clock lines that sense declining input frequency and automatically decouple active feedback loops, dropping power dissipation to near zero until the warm flow returns.</li>
+</ol>
+<hr class="divider" />
+<h3 id="primitive-energy-harvesting-the-and-gate-as-chemical-catalyst">Primitive Energy Harvesting: The <code>AND</code> Gate as Chemical Catalyst <a class="header-anchor" href="#primitive-energy-harvesting-the-and-gate-as-chemical-catalyst" title="Link to section">#</a></h3>
+<p>To avoid the fatal mistake of requiring complex sequential machines (flip-flops, latches, or mitochondria) on Day 1, Siliquarium models how <strong>real pre-biotic chemistry ate before enzymes or cells existed</strong>: two-substrate redox catalysis.</p>
+<pre><code class="language-text">     Vent Stream A (Hydrogen Fuel)     ────► [       ]
+                                             [  AND  ] ────► +1 Energy Token to Battery!
+     Vent Stream B (Carbon Oxidizer)   ────► [       ]       (The Reaction Sparks!)</code></pre>
+<ol>
+<li><strong>The Two-Substrate Vent Influx:</strong> The hydrothermal vent injects two complementary chemical streams into each rock pore:</li>
+<li><strong>Stream A (Fuel):</strong> Pulsing e.g. <code>0 1 0 1 1 0...</code></li>
+<li><strong>Stream B (Oxidizer):</strong> Pulsing e.g. <code>0 0 1 1 0 1...</code></li>
+</ol>
+<p>Energy is released if and only if both substrates touch simultaneously at the same physical catalytic site (<span class="katex-inline math-inline" data-math="A=1">\( A=1 \)</span> and <span class="katex-inline math-inline" data-math="B=1">\( B=1 \)</span>).</p>
+<ol>
+<li><strong>The <code>AND</code> Gate as Nature's First Catalyst:</strong> A primitive organism consisting of <strong>just one single <code>AND</code> gate</strong> wired to Stream A and Stream B conducts a reaction whenever both are high, depositing <strong>+1 token into its battery</strong>. Day 1 proto-life needs zero memory, zero clocks, and zero complex wiring to start eating immediately!</li>
+<li><strong>The <code>NOT</code> Gate as Toxin Rejection (Competitive Inhibition):</strong> The vent periodically emits an acidic poison pulse (Stream T). If toxin hits a pore, it corrodes the battery (-5 tokens). A mutant circuit evolving <code>(A AND B) AND (NOT T)</code> closes its intake valve during poison bursts, surviving where unshielded cells die.</li>
+<li><strong>The <code>OR</code> Gate as Dietary Generalist:</strong> Evolving <code>(Reaction 1) OR (Reaction 2)</code> allows an organism to consume alternative substrates when one is out of season.</li>
+</ol>
+<hr class="divider" />
+<h3 id="the-three-stage-evolutionary-ladder-from-chemistry-to-silicon">The Three-Stage Evolutionary Ladder: From Chemistry to Silicon <a class="header-anchor" href="#the-three-stage-evolutionary-ladder-from-chemistry-to-silicon" title="Link to section">#</a></h3>
+<pre><code class="language-text"> ┌────────────────────────────────────────────────────────────────────────┐
+ │ STAGE 1: Primitive Chemical Catalysis (Combinational Logic)            │
+ │ • 1 or 2 gates (AND, OR, NOT).                                         │
+ │ • Eats only when Stream A and Stream B arrive at the exact same tick.  │
+ └───────────────────────────────────┬────────────────────────────────────┘
+                                     │ Vent develops seasonal time delays!
+                                     │ (Stream A in morning, Stream B in evening)
+                                     ▼
+ ┌────────────────────────────────────────────────────────────────────────┐
+ │ STAGE 2: The Emergence of Memory (Sequential Latches &amp; Loops)          │
+ │ • Organism mutates a feedback loop (output wire returning to input).   │
+ │ • Traps and holds Stream A&#39;s pulse in a loop until Stream B arrives!   │
+ │ • Memory evolves as a digestive preservation strategy!                 │
+ └───────────────────────────────────┬────────────────────────────────────┘
+                                     │ Pores require autonomous pacing...
+                                     ▼
+ ┌────────────────────────────────────────────────────────────────────────┐
+ │ STAGE 3: The Proto-Mitochondria (Ring Oscillators / Internal Clocks)   │
+ │ • An odd loop of inverters (NOT gates) oscillates autonomously.        │
+ │ • The cell now has an internal pacemaker independent of the vent!      │
+ └────────────────────────────────────────────────────────────────────────┘</code></pre>
+<hr class="divider" />
+<h2 id="3-the-anatomy-of-an-organism-the-safe-workshop-battery">3. The Anatomy of an Organism: The Safe, Workshop, & Battery <a class="header-anchor" href="#3-the-anatomy-of-an-organism-the-safe-workshop-battery" title="Link to section">#</a></h2>
+<p>To preserve Howard Pattee’s <strong>Epistemic Cut</strong> (the strict separation between symbolic genetic code and physical metabolic machinery), every rock pore contains three distinct physical compartments:</p>
+<pre><code class="language-text">┌─────────────────────────────────────────────────────────────┐
+│                      A SINGLE ROCK PORE                     │
+│                                                             │
+│  1. THE SAFE (The Library Shelf / Genotype)                 │
+│     [ 0 1 1 0 1 0 0 1 1 1 0 1 ... ]  &lt;-- The Genome Tape    │
+│     (Inert 1D bitstring. Conducts no electricity.)          │
+│                                                             │
+│  2. THE WORKSHOP (The Phenotype / Living Circuit)           │
+│     [Vent In] ──► [Gate A] ──► [Gate B] ──► [Battery]       │
+│     (Physical logic gates wired to vent &amp; pins.)            │
+│                                                             │
+│  3. THE BATTERY (The Local Pantry / Capacitor)              │
+│     [  35 / 100 Energy Tokens  ]                            │
+└─────────────────────────────────────────────────────────────┘</code></pre>
+<ol>
+<li><strong>The Safe (The 1D Genome Tape):</strong>  </li>
+</ol>
+<p>An inert strip of 60 bits partitioned into 6-bit codons (with synonymous degeneracy and non-coding introns). It does no work and conducts no power during the organism's lifetime.</p>
+<ol>
+<li><strong>The Workshop (The Active Circuit):</strong>  </li>
+</ol>
+<p>The physical arena inside the pore where gates (AND, OR, NOT, majority filters, and insulators) are placed and wired.</p>
+<ul>
+<li><strong>Compact Canvas Capacity:</strong> The workshop is constrained to a small <span class="katex-inline math-inline" data-math="6 \times 6">\( 6 \times 6 \)</span> or <span class="katex-inline math-inline" data-math="8 \times 8">\( 8 \times 8 \)</span> grid, supporting a maximum of <strong>8 to 16 active gates</strong>. In accordance with Haldane's Rule (Surface Area to Volume ratio), small size prevents uninterpretable bloated circuits and enforces metabolic parsimony.</li>
+<li><strong>Border Pins (Digital Plasmodesmata / Gap Junctions):</strong> Each of the four pore walls (North, South, East, West) contains exposed input/output connection pins. If two adjacent pores wire to opposing pins on a shared wall, an intercellular bridge is formed.</li>
+<li><strong>The Battery (The Local Energy Tank):</strong>  </li>
+</ul>
+<p>A discrete token counter (<span class="katex-inline math-inline" data-math="0">\( 0 \)</span> to <span class="katex-inline math-inline" data-math="100">\( 100 \)</span>). Toggling gates burns tokens; catching vent rhythms adds tokens.</p>
+<h3 id="31-the-codon-table-grounded-molecular-biophysics-zero-smuggling">3.1 The Codon Table: Grounded Molecular Biophysics (Zero Smuggling) <a class="header-anchor" href="#31-the-codon-table-grounded-molecular-biophysics-zero-smuggling" title="Link to section">#</a></h3>
+<p>To prevent smuggled teleology (e.g. artificial opcodes like <code>MOVE</code>, <code>EAT</code>, or <code>SEEK</code>), every 6-bit codon in the 64-entry degenerate table corresponds strictly to one of <strong>four physical classes of biomolecular mechanisms</strong>:</p>
+<ol>
+<li><strong>Catalytic Primitives (Enzymatic Kinetics):</strong></li>
+<li><code>AND</code>: Co-substrate catalysis (e.g., Dehydrogenase requiring dual binding of Substrate + NAD+).</li>
+<li><code>NOT</code>: Allosteric competitive inhibition or repressor protein binding (e.g., Lac/Trp repressor blocking transcription).</li>
+<li><code>OR</code>: Dual-affinity promiscuous enzyme or alternative promoter binding (e.g., Isozymes binding either reactant).</li>
+<li><strong>Substrate Binding Porins (Membrane Channels):</strong></li>
+<li><code>STREAM_A</code>: Porin channel affinity for hydrothermal acidic/proton fuel stream (<span class="katex-inline math-inline" data-math="H^+">\( H^+ \)</span>).</li>
+<li><code>STREAM_B</code>: Porin channel affinity for alkaline/oxidizer stream (<span class="katex-inline math-inline" data-math="OH^-">\( OH^- \)</span> / <span class="katex-inline math-inline" data-math="HS^-">\( HS^- \)</span>).</li>
+<li><code>TOXIN_T</code>: Heavy-metal precipitate or metabolic waste channel.</li>
+<li><strong>Energy & Structural Sinks (Molecular Machines):</strong></li>
+<li><code>BATTERY</code>: Rotary charge translocation into chemical storage (ATP Synthase analogue).</li>
+<li><code>SEPTUM</code>: Cleavage furrow structural trigger for cell division (FtsZ contractile ring analogue).</li>
+<li><strong>Non-Coding Introns & Regulatory Punctuation:</strong></li>
+<li><code>SILENT_PAD</code>: Synonymous degenerate codons acting as mutational buffers (Kimura neutral drift).</li>
+<li><code>OPERATOR</code>: Regulatory boundary marking the initiation or termination of a catalytic domain.</li>
+</ol>
+<h3 id="32-strict-prohibition-on-teleological-smuggling">3.2 Strict Prohibition on Teleological Smuggling <a class="header-anchor" href="#32-strict-prohibition-on-teleological-smuggling" title="Link to section">#</a></h3>
+<ul>
+<li><strong>No arithmetic opcodes:</strong> No <code>ADD</code>, <code>SUB</code>, or <code>MUL</code>. If an organism requires addition, it must evolve an adder circuit through unguided mutation of <code>AND</code>, <code>OR</code>, and <code>NOT</code> gates.</li>
+<li><strong>No arbitrary action verbs:</strong> No <code>SWIM_NORTH</code>, <code>SEEK_FOOD</code>, or <code>FIRE_WEAPON</code>. Locomotion and interactions are physical consequences of metabolic and spatial circuit outputs.</li>
+</ul>
+<hr class="divider" />
+<h2 id="4-the-life-cycle-birth-living-reproduction">4. The Life Cycle: Birth, Living, & Reproduction <a class="header-anchor" href="#4-the-life-cycle-birth-living-reproduction" title="Link to section">#</a></h2>
+<pre><code class="language-text"> 1. BIRTH (Translation)
+    Substrate physics reads 1D tape in Safe ──► Places gates in Workshop.
+    Safe is locked. Tape is now inert.
+           │
+           ▼
+ 2. LIVING &amp; METABOLISM
+    Vent pulses hit Workshop ──► Gates toggle (Burns 1 Token per toggle).
+    Resonance with vent rhythm ──► Charges Battery (+5 Tokens per wave).
+           │
+     ┌─────┴───────────────────────────────┐
+     ▼                                     ▼
+ [Starvation]                         [Reproduction]
+ Battery hits 0                       Battery hits 100
+ ──► Circuit starves, dissolves        ──► Spends 50 tokens to photocopy
+     into empty pore rubble.               Safe to empty neighbor pore
+                                           with mutation typo (0.1%).</code></pre>
+<h3 id="the-three-steps">The Three Steps: <a class="header-anchor" href="#the-three-steps" title="Link to section">#</a></h3>
+<ol>
+<li><strong>Birth (Substrate Ribosome Physics):</strong>  </li>
+</ol>
+<p>When an empty pore receives a genome tape, the substrate physics translates codons into gates and wires inside the workshop. The tape is returned to the safe.</p>
+<ol>
+<li><strong>Living (Metabolism & Landauer Costs):</strong>  </li>
+</ol>
+<p>Every time a gate toggles state (<span class="katex-inline math-inline" data-math="0 \to 1">\( 0 \to 1 \)</span> or <span class="katex-inline math-inline" data-math="1 \to 0">\( 1 \to 0 \)</span>), it consumes <strong>1 Energy Token</strong> (dynamic CMOS switching cost). If the circuit's gates resonate with the vent's rhythm, it captures the pulse and deposits <strong>+5 tokens</strong> into its battery.</p>
+<ol>
+<li><strong>Reproduction (Binary Fission / The Photocopy Machine):</strong>  </li>
+</ol>
+<p>When the battery reaches <strong>100 tokens</strong>, the pore initiates division:</p>
+<ul>
+<li>It claims an adjacent orthogonal empty pore (North, South, East, West).</li>
+<li>It spends 50 tokens (parent retains 50; child begins with 50).</li>
+<li>The substrate photocopies the inert tape from the parent's safe into the child's safe.</li>
+<li><strong>Mutation:</strong> An unguided physical error flips a bit with small probability (<span class="katex-inline math-inline" data-math="p = 0.001">\( p = 0.001 \)</span>).</li>
+<li><strong>Crucial Rule:</strong> The parent's active circuit is never touched or disrupted during copying!</li>
+</ul>
+<hr class="divider" />
+<h2 id="5-the-ecology-of-anchored-organisms-sessile-warfare">5. The Ecology of Anchored Organisms (Sessile Warfare) <a class="header-anchor" href="#5-the-ecology-of-anchored-organisms-sessile-warfare" title="Link to section">#</a></h2>
+<p>Organisms in Siliquarium are initially anchored to their rock pores. In biology, anchored organisms (plants, coral reefs, fungi, bacterial mats) exhibit some of the most sophisticated warfare and cooperation on Earth:</p>
+<pre><code class="language-text">       CELL A (The Producer)                CELL B (The Parasite)
+   ┌─────────────────────────────┐       ┌─────────────────────────────┐
+   │ [Vent] ──► [Filter] ──► [Rail]───────►[Wiretap] ──► [Battery]     │
+   │                           ▲ │       │ (Steals clean power!)       │
+   │ (Doing all the hard work) │ │       │                             │
+   └───────────────────────────┼─┘       └─────────────────────────────┘
+                               │
+                       Shared Pore Wall</code></pre>
+<h3 id="three-emergent-inter-pore-interactions">Three Emergent Inter-Pore Interactions: <a class="header-anchor" href="#three-emergent-inter-pore-interactions" title="Link to section">#</a></h3>
+<ol>
+<li><strong>Parasitism (The Wiretap):</strong>  </li>
+</ol>
+<p>A lazy circuit evolves an input pin extending through a fissure in the rock wall into a neighbor's pore, tapping directly into the neighbor's high-power rail. The parasite gets free energy; the host's battery drains under the extra electrical load.</p>
+<ol>
+<li><strong>Predation (The Jammer / Lytic Attack):</strong>  </li>
+</ol>
+<p>A predatory circuit emits a high-frequency chaotic bit-burst through the wall into a neighbor's workshop, causing the neighbor's timing loops to glitch and starve. When the victim dies, its stored battery spills into the pore, and the predator sucks up the spilled tokens.</p>
+<ol>
+<li><strong>Symbiosis (Metabolic Cross-Feeding):</strong>  </li>
+</ol>
+<p>Cell 1 digests high-frequency pulses and outputs low-frequency waste. Cell 2 digests low-frequency pulses and outputs high-frequency waste. When wired together across a shared boundary, they form an autotrophic mutualism.</p>
+<hr class="divider" />
+<h2 id="6-global-thermodynamics-conservation-laws">6. Global Thermodynamics & Conservation Laws <a class="header-anchor" href="#6-global-thermodynamics-conservation-laws" title="Link to section">#</a></h2>
+<p>Energy flow in Siliquarium is strictly conserved:</p>
+<pre><code class="language-text">        THE MASTER VENT GENERATOR (Primary Energy Source)
+     ════════════════════════════════════════════════════════
+      Injects low-entropy waveforms &amp; energy tokens per tick
+              │                               │
+              ▼                               ▼
+     ┌───────────────────┐           ┌───────────────────┐
+     │   PORE 1 PANTRY   │           │   PORE 2 PANTRY   │
+     │ [50 / 100 Tokens] │           │ [10 / 100 Tokens] │  &lt;-- Local Pantries
+     └─────────┬─────────┘           └─────────┬─────────┘
+               │                               │
+               ▼                               ▼
+      Toggling gates burns            Toggling gates burns
+       energy into &quot;Heat&quot;              energy into &quot;Heat&quot;
+               │                               │
+               └───────────────┬───────────────┘
+                               ▼
+     ════════════════════════════════════════════════════════
+             COLD VOID DRAIN (High-Entropy Waste)</code></pre>
+<p><div class="katex-display math-block" data-math="\sum E_{\text{vent input}} = \sum E_{\text{stored in pores}} + \sum E_{\text{toggled gates}} + \sum E_{\text{dissipated heat}}">\[ \sum E_{\text{vent input}} = \sum E_{\text{stored in pores}} + \sum E_{\text{toggled gates}} + \sum E_{\text{dissipated heat}} \]</div></p>
+<p>No energy is created from nothing; no energy disappears without a trace. Overpopulation naturally depletes localized vent energy, driving spatial competition and territorial expansion.</p>
+<hr class="divider" />
+<h2 id="7-the-boundary-substrate-physics-vs-evolution">7. The Boundary: Substrate Physics vs. Evolution <a class="header-anchor" href="#7-the-boundary-substrate-physics-vs-evolution" title="Link to section">#</a></h2>
+<p>To avoid the "hammer and nail" trap, we strictly separate the laws of the universe from the achievements of evolution:</p>
+<div class="table-container"><table><thead><tr><th>Substrate Physics (Built-In Laws of Nature)</th><th>Emergent Evolution (Organisms' Accomplishments)</th></tr></thead><tbody><tr><td><strong>Inorganic Rock Pores:</strong> Physical boundaries that prevent dilution.</td><td><strong>Membrane Synthesis:</strong> Evolving gates to seal pore openings or build free-floating cells.</td></tr><tr><td><strong>Substrate Translation & Replication:</strong> Translating codons into gates and photocopying tapes at 100 tokens.</td><td><strong>Metabolic Adaptation:</strong> Evolving gate configurations that resonate with complex or shifting vent frequencies.</td></tr><tr><td><strong>Landauer Token Cost:</strong> 1 token consumed per gate toggle.</td><td><strong>Homeostasis & Clocks:</strong> Evolving ring oscillators to regulate timing and prevent metabolic burnout.</td></tr><tr><td><strong>Wire Boundary Rules:</strong> Connecting to orthogonal neighbor pins.</td><td><strong>Ecological Specialization:</strong> Becoming producers, parasites, jammers, or detritivores.</td></tr></tbody></table></div>
+<hr class="divider" />
+<h2 id="8-the-digital-paleontologist-real-time-milestone-recognition-lineage-tracking">8. The Digital Paleontologist: Real-Time Milestone Recognition & Lineage Tracking <a class="header-anchor" href="#8-the-digital-paleontologist-real-time-milestone-recognition-lineage-tracking" title="Link to section">#</a></h2>
+<p>One of the greatest thrills in evolutionary science is witnessing a <strong>major evolutionary transition</strong> the exact moment it occurs. In Richard Lenski's Long-Term Evolution Experiment (LTEE), the historic moment at Generation 31,500 when <em>E. coli</em> suddenly evolved aerobic citrate metabolism (<span class="katex-inline math-inline" data-math="Cit^+">\( Cit^+ \)</span>) was pinpointed directly to a single ancestral tandem duplication.</p>
+<p>Siliquarium features a built-in <strong>Digital Paleontologist</strong>—an intelligent, passive observer engine that monitors the living grid in real time and alerts the user whenever a major evolutionary milestone is unlocked for the first time in history.</p>
+<pre><code class="language-text">       SIMULATION KERNEL (Unbiased Physical Grid)
+  ┌────────────────────────────────────────────────────────┐
+  │  Pores, Vent Waves, Gate Toggles, Natural Selection    │
+  └───────────────────────────┬────────────────────────────┘
+                              │ Passive Telemetry (Read-Only)
+                              ▼
+       THE DIGITAL PALEONTOLOGIST (External Spectator)
+  ┌────────────────────────────────────────────────────────┐
+  │ • Scans circuit topologies after each division         │
+  │ • Detects graph cycles, latches, oscillators, bridges  │
+  │ • Has ZERO influence on physics or fitness (No Cheats!)│
+  └───────────────────────────┬────────────────────────────┘
+                              │
+                              ▼
+  🔔 HUD ALERT: &quot;Tick 2,450 • Pore (4, 7): BISTABLE MEMORY LATCH FORMED!&quot;</code></pre>
+<h3 id="81-the-seven-evolutionary-milestones">8.1 The Seven Evolutionary Milestones <a class="header-anchor" href="#81-the-seven-evolutionary-milestones" title="Link to section">#</a></h3>
+<p>The Paleontologist continuously scans circuits for canonical topological motifs:</p>
+<ol>
+<li><strong>The First Feedback Wire (Recurrence):</strong>  </li>
+<li><em>Detection:</em> A directed graph cycle is detected in a pore's wiring (<code>hasCycle(workshopGraph) === true</code>).</li>
+<li><em>Significance:</em> Transition from pure combinational reflexes to recurrent state.</li>
+<li><strong>The Bistable Memory Latch (True Memory):</strong>  </li>
+<li><em>Detection:</em> A circuit maintains internal state across <span class="katex-inline math-inline" data-math="\ge 3">\( \ge 3 \)</span> consecutive ticks without external input.</li>
+<li><em>Significance:</em> The birth of digital memory and delayed digestive synthesis.</li>
+<li><strong>The Ring Oscillator (The Proto-Mitochondria):</strong>  </li>
+<li><em>Detection:</em> An odd-numbered loop of inverters pulsing autonomously at a stable frequency.</li>
+<li><em>Significance:</em> The emergence of an internal circadian pacemaker.</li>
+<li><strong>The Inter-Cellular Bridge (Digital Plasmodesmata):</strong>  </li>
+<li><em>Detection:</em> Two adjacent pores connect active wires to opposing border pins on a shared rock wall.</li>
+<li><em>Significance:</em> The physical prerequisite for multi-cellular cooperation.</li>
+<li><strong>The Parasite Wiretap:</strong>  </li>
+<li><em>Detection:</em> An organism draws power from a neighbor's internal rail while contributing zero incoming pulses.</li>
+<li><em>Significance:</em> The dawn of parasitic ecology.</li>
+<li><strong>The Predatory Noise Jammer:</strong>  </li>
+<li><em>Detection:</em> An organism shoots high-frequency chaotic pulses into a neighbor's pore, inducing starvation.</li>
+<li><em>Significance:</em> The emergence of active predation and territorial warfare.</li>
+<li><strong>The Arithmetic Core (1-Bit Half-Adder):</strong>  </li>
+<li><em>Detection:</em> A sub-circuit computes simultaneous sum (<span class="katex-inline math-inline" data-math="A \oplus B">\( A \oplus B \)</span>) and carry (<span class="katex-inline math-inline" data-math="A \land B">\( A \land B \)</span>) outputs from dual inputs.</li>
+<li><em>Significance:</em> The unguided discovery of arithmetic computation.</li>
+</ol>
+<hr class="divider" />
+<h3 id="82-real-time-hud-ticker-interactive-time-machine-replay">8.2 Real-Time HUD Ticker & Interactive Time-Machine Replay <a class="header-anchor" href="#82-real-time-hud-ticker-interactive-time-machine-replay" title="Link to section">#</a></h3>
+<p>When a milestone is reached, the UI presents an interactive notification:</p>
+<ul>
+<li><strong>Instant Microscope Zoom:</strong> Clicking the milestone notification instantly zooms the camera to the exact pore, highlighting the newly evolved gates in glowing neon.</li>
+<li><strong>Phylogenetic Ribbon (Ancestral Lineage Tree):</strong> Traces the organism's family tree backward through 10, 50, or 500 generations.</li>
+<li><strong>The Lenski Fossil Freezer (Counterfactual Thaw):</strong> Because all runs are backed by deterministic PRNG seeds, users can "thaw" the parent fossil from 5 generations prior, step forward clock cycle by clock cycle, and watch the <strong>exact single-bit mutation</strong> that sparked the breakthrough!</li>
+</ul>
+<hr class="divider" />
+<h3 id="83-strict-zero-smuggling-compliance">8.3 Strict Zero-Smuggling Compliance <a class="header-anchor" href="#83-strict-zero-smuggling-compliance" title="Link to section">#</a></h3>
+<p>The Digital Paleontologist is an <strong>external voltmeter</strong>, completely decoupled from the simulation physics:</p>
+<ul>
+<li>It is <strong>purely descriptive, never prescriptive</strong>.</li>
+<li>The organisms receive zero bonus points, zero extra tokens, and zero hints for achieving a milestone.</li>
+<li>Nature remains completely blind; only the human observer celebrates the breakthrough.</li>
+</ul>
+<hr class="divider" />
+<h3 id="84-the-biological-cognate-rosetta-stone-uri-alons-network-motifs">8.4 The Biological Cognate Rosetta Stone (Uri Alon's Network Motifs) <a class="header-anchor" href="#84-the-biological-cognate-rosetta-stone-uri-alons-network-motifs" title="Link to section">#</a></h3>
+<p>Grounding in <strong>Systems Biology</strong> (<em>Uri Alon, "An Introduction to Systems Biology"</em>): The Paleontologist recognizes that digital logic circuits and biological regulatory networks are mathematical isomorphisms. When a circuit evolves, the Paleontologist maps it to its verified natural counterpart:</p>
+<div class="table-container"><table><thead><tr><th>Digital Hardware Circuit</th><th>Biological Regulatory Cognate</th><th>Natural Function in Molecular Biology</th><th>Dynamical Diagnostic Signature</th></tr></thead><tbody><tr><td><strong>SR Latch / Flip-Flop</strong> (2 cross-coupled NOR/NAND)</td><td><strong>Bistable Genetic Toggle Switch</strong> (Gardner & Collins, 2000)</td><td><strong>Cell Fate & Lysogeny:</strong> <span class="katex-inline math-inline" data-math="\lambda">\( \lambda \)</span>-phage lysis vs. lysogeny genetic switch.</td><td><strong>Hysteresis / 1-Bit Memory:</strong> Holds state <span class="katex-inline math-inline" data-math="Q=1">\( Q=1 \)</span> after initiating input drops to 0.</td></tr><tr><td><strong>Ring Oscillator</strong> (3 inverters in negative loop)</td><td><strong>The Repressilator / Circadian Clock</strong> (Elowitz & Leibler, 2000)</td><td><strong>Biological Rhythms:</strong> Pacemaker cells, cyanobacteria day/night cycles.</td><td><strong>Autonomous Limit Cycle:</strong> Stable continuous oscillation without external drive.</td></tr><tr><td><strong>Glitch / Debounce Delay Filter</strong> (AND gate + delayed path)</td><td><strong>Coherent Feed-Forward Loop (C-FFL Type 1)</strong></td><td><strong>Sign-Sensitive Delay:</strong> <em>E. coli</em> arabinose/<em>lac</em> operon noise rejection.</td><td><strong>Persistence Filter:</strong> Fires only when input sustains <span class="katex-inline math-inline" data-math="&gt; k">\( &gt; k \)</span> ticks; ignores spikes.</td></tr><tr><td><strong>Edge Detector / One-Shot Pulse</strong> (AND gate + inverted delay)</td><td><strong>Incoherent Feed-Forward Loop (I-FFL Type 1)</strong></td><td><strong>Sensory Adaptation:</strong> Bacterial chemotaxis adaptation to continuous attractant.</td><td><strong>Fold-Change Pulse:</strong> Brief output burst upon step change, then adapts to zero.</td></tr><tr><td><strong>Negative Feedback Clamp</strong> (Self-inverting amplifier)</td><td><strong>Negative Autoregulation</strong></td><td><strong>Homeostatic Clamping:</strong> Ribosomal proteins, SOS DNA repair stability.</td><td><strong>Rapid Rise to Plateau:</strong> Accelerates response time without steady-state overshoot.</td></tr><tr><td><strong>Schmitt Trigger with Deadband</strong></td><td><strong>Positive Autoregulation with Cooperativity</strong></td><td><strong>Irreversible Morphogenesis:</strong> Xenopus oocyte maturation, cell lineage locking.</td><td><strong>High On-Threshold, Low Off-Threshold:</strong> Locks in state despite thermal noise.</td></tr></tbody></table></div>
+<hr class="divider" />
+<h3 id="85-convergent-evolution-de-novo-attractor-discovery">8.5 Convergent Evolution & De Novo Attractor Discovery <a class="header-anchor" href="#85-convergent-evolution-de-novo-attractor-discovery" title="Link to section">#</a></h3>
+<p>The Paleontologist distinguishes between familial inheritance and independent discovery:</p>
+<ol>
+<li><strong>Topological Graph Signature (Weisfeiler-Lehman Hash):</strong> Every pore's directed circuit netlist is hashed into a canonical invariant. Isomorphic wiring topologies share identical hashes regardless of codon ordering.</li>
+<li><strong>Homology vs. Homoplasy (Convergent Evolution):</strong></li>
+<li>When a matching motif hash is discovered in two pores, the engine walks their phylogenetic trees to their <strong>Least Common Ancestor (LCA)</strong>.</li>
+<li>If the LCA lacked the circuit: <strong>Homoplasy (Convergent Evolution)</strong> is formally declared (independent evolutionary discovery along separate lineages, analogous to the independent evolution of eyes in cephalopods and vertebrates).</li>
+<li>If the LCA possessed the circuit: <strong>Homology</strong> (divergent descent from a common ancestor).</li>
+<li><strong>De Novo Novelty Discovery (Attractor Complexity):</strong></li>
+<li>For circuits not in the pre-defined catalog, the Paleontologist audits their dynamical state space.</li>
+<li>If a circuit exhibits non-trivial state attractors (e.g. multi-step cycle or memory) and undergoes <strong>purifying selection</strong> (persists intact across <span class="katex-inline math-inline" data-math="\ge 5">\( \ge 5 \)</span> generations of descendants), it is flagged as an <strong>Uncatalogued De Novo Organ</strong>, prompting the user to name the discovery.</li>
+</ol>
+<hr class="divider" />
+<h2 id="9-hexagonal-honeycomb-matrix-multi-cellular-morphogenesis">9. Hexagonal Honeycomb Matrix & Multi-Cellular Morphogenesis <a class="header-anchor" href="#9-hexagonal-honeycomb-matrix-multi-cellular-morphogenesis" title="Link to section">#</a></h2>
+<p>To provide the foundational physical substrate for complex higher-order life, Siliquarium models the spatial environment as a <strong>hexagonal honeycomb</strong> with built-in physics supporting <strong>multi-cellularity and morphogenetic differentiation</strong>.</p>
+<pre><code class="language-text">                       HEXAGONAL HONEYCOMB MATRIX
+                     (6 Equidistant Neighbor Walls)
+                            
+                                 ┌──────┐
+                                /        \
+                        ┌──────┐   NW     ┌──────┐
+                       /        \        /        \
+                      │    W     │ PORE  │    E    │
+                       \        /        \        /
+                        └──────┐   SW     ┌──────┐
+                                \        /
+                                 └──────┘</code></pre>
+<h3 id="91-hexagonal-honeycomb-topology">9.1 Hexagonal Honeycomb Topology <a class="header-anchor" href="#91-hexagonal-honeycomb-topology" title="Link to section">#</a></h3>
+<ol>
+<li><strong>6 Equidistant Neighbors:</strong> Unlike square grids where diagonals are <span class="katex-inline math-inline" data-math="\sqrt{2} \approx 1.41">\( \sqrt{2} \approx 1.41 \)</span> times farther away, all 6 neighbors on a hex grid (N, NE, SE, S, SW, NW) are at the exact same physical distance (<span class="katex-inline math-inline" data-math="1.0">\( 1.0 \)</span>).</li>
+<li><strong>Axial Coordinate Indexing:</strong> The grid is mathematically indexed using axial coordinates <span class="katex-inline math-inline" data-math="(q, r)">\( (q, r) \)</span>, with 6 unit displacement vectors:</li>
+</ol>
+<p><div class="katex-display math-block" data-math="\Delta \in \{(+1, 0), (+1, -1), (0, -1), (-1, 0), (-1, +1), (0, +1)\}">\[ \Delta \in \{(+1, 0), (+1, -1), (0, -1), (-1, 0), (-1, +1), (0, +1)\} \]</div></p>
+<ol>
+<li><strong>Natural Bubble Geometry:</strong> Hexagons minimize wall perimeter while maximizing internal volume (the Kelvin and Kepler conjectures), causing dividing cell lineages to form natural, organic, circular colonies.</li>
+</ol>
+<hr class="divider" />
+<h3 id="92-the-multi-cellular-transition-from-colony-to-collective-organism">9.2 The Multi-Cellular Transition: From Colony to Collective Organism <a class="header-anchor" href="#92-the-multi-cellular-transition-from-colony-to-collective-organism" title="Link to section">#</a></h3>
+<p>Siliquarium establishes a rigorous distinction between a <strong>symbiotic colony</strong> and a <strong>true multi-cellular organism</strong>:</p>
+<pre><code class="language-text">          PORE 1: THE SHIELD / SENSOR               PORE 2: THE METABOLIC CORE
+        ┌─────────────────────────────┐           ┌─────────────────────────────┐
+        │ [Exposed to Vent &amp; Heat]    │           │ [Sheltered in Deep Rock]    │
+        │ Morphogen Bias = 1          │           │ Morphogen Bias = 0          │
+        │                             │           │                             │
+        │ EXPRESSES:                  │══ UMBILICAL ══ EXPRESSES:               │
+        │ • Thick Filter Walls        │   BUS     │ • Heavy Compute             │
+        │ • Toxin Rejection (NOT T)   │ (Permanent│ • Ring Oscillator Clock      │
+        │                             │  Bridge)  │ • Battery Reserve           │
+        └─────────────────────────────┘           └─────────────────────────────┘
+          SHARED MASTER GENOME: [ ... Exon Segment 0 ... | ... Exon Segment 1 ... ]</code></pre>
+<ol>
+<li><strong>The Colony (Independent Lives):</strong> Two neighboring unicellular circuits wire pins together across a shared rock wall. Each retains its own independent genome tape and private battery; either cell can die or divide independently.</li>
+<li><strong>The Multi-Cellular Collective (Single Organism Across 2+ Pores):</strong></li>
+<li><em>The Incomplete Division Mutation:</em> A mutation in the replication codon prevents the umbilical cleavage of the daughter cell.</li>
+<li><em>Shared Collective Fate:</em> The two pores share a <strong>single combined battery</strong> and a <strong>permanent multi-wire umbilical bus</strong>. If the collective battery reaches <span class="katex-inline math-inline" data-math="0">\( 0 \)</span>, both pores undergo lysis. If the collective battery reaches division threshold, both pores reproduce together.</li>
+</ol>
+<hr class="divider" />
+<h3 id="93-the-morphogenetic-gradient-mothers-code">9.3 The Morphogenetic Gradient ("Mother's Code") <a class="header-anchor" href="#93-the-morphogenetic-gradient-mothers-code" title="Link to section">#</a></h3>
+<p>How do two adjacent pores containing the <strong>exact same genome tape</strong> express completely different specialized circuits?</p>
+<p>In developmental biology, this was resolved by Christiane Nüsslein-Volhard and Eric Wieschaus (Nobel Prize 1995) studying maternal mRNA gradients (<em>Bicoid</em> in <em>Drosophila</em>). Siliquarium mirrors this physical mechanism:</p>
+<ol>
+<li><strong>Environmental Spatial Asymmetry:</strong> Pore 1 is on the perimeter, directly exposed to the hot vent flux. Pore 2 is sheltered deeper in the rock crevice.</li>
+<li><strong>The Morphogen Bias Pin:</strong> The substrate measures this natural physical gradient and provides a local bias value (e.g., <span class="katex-inline math-inline" data-math="1">\( 1 \)</span> for outer exposed, <span class="katex-inline math-inline" data-math="0">\( 0 \)</span> for inner sheltered) to the pore’s codon translator.</li>
+<li><strong>Hox Gene Segment Selection:</strong> The genome tape contains distinct <strong>Exon Segments</strong> (e.g., Segment 0 for outer armor; Segment 1 for internal metabolism). The morphogen bias determines which segment is translated:</li>
+<li><em>Pore 1 (Exposed):</em> Translates Segment 0 <span class="katex-inline math-inline" data-math="\to">\( \to \)</span> Expresses <strong>Majority Filter Walls & Toxin Shields</strong>.</li>
+<li><em>Pore 2 (Sheltered):</em> Translates Segment 1 <span class="katex-inline math-inline" data-math="\to">\( \to \)</span> Expresses <strong>Ring Oscillator Clocks & Metabolic Storage</strong>.</li>
+</ol>
+<hr class="divider" />
+<h3 id="94-gene-regulatory-networks-grns-as-boolean-latches">9.4 Gene Regulatory Networks (GRNs) as Boolean Latches <a class="header-anchor" href="#94-gene-regulatory-networks-grns-as-boolean-latches" title="Link to section">#</a></h3>
+<p>As proven by Stuart Kauffman in 1969, <strong>Gene Regulatory Networks are mathematically identical to Boolean networks</strong>:</p>
+<ul>
+<li>A gene turning another gene on or off is simply an <code>AND</code> gate feeding an inverter or latch.</li>
+<li>Internal feedback latches establish stable <strong>attractor states</strong>.</li>
+<li>Each attractor state represents a differentiated <strong>cell fate</strong>. Once latched, a cell remains stably locked in its specialized identity (Armor vs. Engine) throughout its lifespan.</li>
+</ul>
+<hr class="divider" />
+<h2 id="10-geothermal-architecture-central-caldera-branch-vents-energy-caps">10. Geothermal Architecture: Central Caldera, Branch Vents, & Energy Caps <a class="header-anchor" href="#10-geothermal-architecture-central-caldera-branch-vents-energy-caps" title="Link to section">#</a></h2>
+<p>Siliquarium’s physical landscape is defined by an interactive, energy-conserving geothermal network:</p>
+<pre><code class="language-text">                          CENTRAL CALDERA WITH BRANCH VENTS
+                              (Constant Total Energy Flux)
+                                        
+                                         [Branch Vent 1]
+                                           *  (Small)
+                                         /
+                                       / 
+                        [Central Vent] * (Medium)
+                                       \
+                                         \
+                                           * [Branch Vent 2]
+                                             (Small)</code></pre>
+<ol>
+<li><strong>Central Vent & Branching Fissures:</strong> The default landscape features a primary central hydrothermal caldera accompanied by a variable number of smaller branch vents (between <span class="katex-inline math-inline" data-math="0">\( 0 \)</span> and <span class="katex-inline math-inline" data-math="k">\( k \)</span> fissures).</li>
+<li><strong>The Constant Energy Cap Invariant:</strong> The total energy emitted across the entire simulation is strictly bounded:</li>
+</ol>
+<p><div class="katex-display math-block" data-math="E_{\text{total}} = E_{\text{central}} + \sum_{i=1}^k E_{\text{branch}_i} = \text{Constant}">\[ E_{\text{total}} = E_{\text{central}} + \sum_{i=1}^k E_{\text{branch}_i} = \text{Constant} \]</div></p>
+<p>The more branch vents present on the grid, the smaller and more diffuse each individual vent becomes. This enforces strict thermodynamic conservation and forces organisms to adapt to distributed, low-power pockets vs. concentrated central plumes.</p>
+<ol>
+<li><strong>Interactive & Procedural Placement:</strong> Users can choose procedurally generated volcanic layouts or manually place vents and fissure nozzles to observe how geographical topology shapes evolutionary trajectories.</li>
+</ol>
+<hr class="divider" />
+<h2 id="11-abiogenesis-the-detritus-scavenger-cycle">11. Abiogenesis & The Detritus Scavenger Cycle <a class="header-anchor" href="#11-abiogenesis-the-detritus-scavenger-cycle" title="Link to section">#</a></h2>
+<h3 id="111-dual-mode-abiogenesis">11.1 Dual-Mode Abiogenesis <a class="header-anchor" href="#111-dual-mode-abiogenesis" title="Link to section">#</a></h3>
+<p>Siliquarium supports two distinct origin-of-life modes, selectable via a UI toggle:</p>
+<ul>
+<li><strong>Mode A: Primordial Soup (Adjustable Seeding %):</strong> An adjustable percentage of pores (e.g., slider from 1% to 100%, default 20%) is seeded with random 60-bit genome tapes on Day 0. The remaining pores are left as empty rock cavities, providing room for colonization and territorial expansion.</li>
+<li><strong>Mode B: The Inoculated "Adam" (Proto-Biont):</strong> The grid starts 100% abiotic and empty. The user clicks to drop a single minimal 1-gate proto-biont (an <code>AND</code> catalyst) into a pore adjacent to a vent nozzle to watch a single lineage radiate outwards.</li>
+</ul>
+<h3 id="112-the-biological-detritus-cycle-marine-snow-scavengers">11.2 The Biological Detritus Cycle (Marine Snow & Scavengers) <a class="header-anchor" href="#112-the-biological-detritus-cycle-marine-snow-scavengers" title="Link to section">#</a></h3>
+<p>In natural ecosystems, death is not an instantaneous vanishing act—death is the foundation of the nutrient cycle:</p>
+<ol>
+<li><strong>The Carcass Phase:</strong> When an organism’s battery reaches <span class="katex-inline math-inline" data-math="0">\( 0 \)</span>, it undergoes lysis: its active gates freeze, but its <strong>unspent tokens and physical scrap gates linger in the pore as a carcass for <span class="katex-inline math-inline" data-math="N">\( N \)</span> ticks</strong> (e.g., 50 ticks).</li>
+<li><strong>The Scavenger Ecological Niche:</strong> Adjacent living organisms can extend intake wires into the dead pore or divide into the carcass pore to <strong>digest the lingering corpse energy</strong>, unlocking an authentic evolutionary niche for <strong>detritivores, decomposers, and scavengers</strong>.</li>
+<li><strong>Mineralization:</strong> After <span class="katex-inline math-inline" data-math="N">\( N \)</span> ticks, residual unclaimed matter dissolves completely, resetting the pore to clean, open rock ready for recolonization.</li>
+</ol>
+<hr class="divider" />
+<h2 id="12-the-interactive-god-suite-the-pipette">12. The Interactive God Suite ("The Pipette") <a class="header-anchor" href="#12-the-interactive-god-suite-the-pipette" title="Link to section">#</a></h2>
+<p>To allow users to actively experiment with evolutionary resilience, Siliquarium provides an interactive toolkit:</p>
+<ol>
+<li><strong>The Nutrient Pipette:</strong> Click anywhere on the honeycomb to inject a localized swirling burst of low-entropy fuel (<span class="katex-inline math-inline" data-math="A \land B">\( A \land B \)</span>), creating a temporary bloom of local life.</li>
+<li><strong>The Thermal Torch:</strong> Click and drag to heat up a region, artificially spiking thermal noise (<span class="katex-inline math-inline" data-math="k_B T">\( k_B T \)</span>) and injecting spontaneous bit-flips to test which lineages possess resilient majority-filter armor.</li>
+<li><strong>The Extinction Brush (Volcanic Cleansing):</strong> Erase an overgrown, stagnant monoculture across a quadrant to observe <strong>secondary ecological succession</strong>—watching dormant pioneer species reclaim the empty rock pores.</li>
+</ol>
+<hr class="divider" />
+<h2 id="13-deep-zoom-circuit-microscope-milestone-callout-cards">13. Deep-Zoom Circuit Microscope & Milestone Callout Cards <a class="header-anchor" href="#13-deep-zoom-circuit-microscope-milestone-callout-cards" title="Link to section">#</a></h2>
+<p>Siliquarium is an educational window into living silicon. Users can transition seamlessly from the macro-scale honeycomb to the microscopic logic level:</p>
+<pre><code class="language-text">┌─────────────────────────────────────────────────────────────┐
+│                    LIVE CIRCUIT MICROSCOPE                  │
+│                                                             │
+│   Stream A ─────► [ AND Gate 1 ] ─────► [ Battery: 78 ]     │
+│                         ▲                                   │
+│   Stream B ─────────────┘                                   │
+│                         │ (Feedback Wire)                   │
+│   East Out ◄──── [ Latch L1 ] ◄───────                      │
+│                                                             │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ 🏆 MILESTONE RECOGNIZED: Bistable Memory Latch          │ │
+│ │ • Truth Table: Q(t+1) = D · Clock + Q(t) · ~Clock       │ │
+│ │ • Biological Utility: Preserves food pulses across ticks│ │
+│ │ • Scientific Provenance: Elowitz &amp; Leibler (2000)       │ │
+│ └─────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘</code></pre>
+<ol>
+<li><strong>Microscopic Schematic Inspector:</strong> Clicking or zooming into any hexagonal pore renders its internal logic circuit as a clean, animated schematic diagram showing real-time gate toggles, pulsing wire potentials, and battery token counts.</li>
+<li><strong>Milestone Neon Highlighting:</strong> When the Digital Paleontologist detects a major transition (e.g., first feedback loop, bistable latch, or half-adder), the pore on the honeycomb glows in high-visibility neon, and the specific sub-circuit within the schematic is highlighted with an animated energy aura.</li>
+<li><strong>Educational Milestone Card:</strong> An interactive flyout card breaks down the breakthrough:</li>
+<li><strong>Circuit Name & Class:</strong> (e.g., <em>"Sequential Bistable Latch (SR Flip-Flop)"</em>).</li>
+<li><strong>Interactive Truth Table / State Machine:</strong> A rendered truth table showing the exact inputs, outputs, and clock cycles.</li>
+<li><strong>Biological & Computational Function:</strong> Plain-English explanation of why this circuit gives the organism a survival advantage.</li>
+<li><strong>Academic Links:</strong> Citations to foundational peer-reviewed literature in synthetic biology and circuit theory.</li>
+</ol>
+<hr class="divider" />
+<h2 id="14-real-time-parameter-tuning-panel-the-lab-flyout">14. Real-Time Parameter Tuning Panel (The Lab Flyout) <a class="header-anchor" href="#14-real-time-parameter-tuning-panel-the-lab-flyout" title="Link to section">#</a></h2>
+<p>All foundational physical constants are exposed in a live, collapsible flyout control panel, allowing researchers to experiment with different physical universes in real time:</p>
+<ul>
+<li><code>Battery Capacity</code>: Default <span class="katex-inline math-inline" data-math="100">\( 100 \)</span> tokens (slider: <span class="katex-inline math-inline" data-math="20–500">\( 20–500 \)</span>).</li>
+<li><code>Division Threshold</code>: Default <span class="katex-inline math-inline" data-math="100">\( 100 \)</span> tokens.</li>
+<li><code>Reaction Yield (&lt;span class=&quot;katex-inline math-inline&quot; data-math=&quot;A \land B&quot;&gt;\( A \land B \)&lt;/span&gt;)</code>: Default <span class="katex-inline math-inline" data-math="+2">\( +2 \)</span> tokens (slider: <span class="katex-inline math-inline" data-math="+1">\( +1 \)</span> to <span class="katex-inline math-inline" data-math="+10">\( +10 \)</span>).</li>
+<li><code>Basal Cost of Living</code>: Default <span class="katex-inline math-inline" data-math="-1">\( -1 \)</span> token / <span class="katex-inline math-inline" data-math="10">\( 10 \)</span> ticks (slider: <span class="katex-inline math-inline" data-math="1–50">\( 1–50 \)</span> ticks).</li>
+<li><code>Dynamic Toggle Cost</code>: Default <span class="katex-inline math-inline" data-math="-1">\( -1 \)</span> token / toggle (slider: <span class="katex-inline math-inline" data-math="0–5">\( 0–5 \)</span>).</li>
+<li><code>Toxin Acid Penalty</code>: Default <span class="katex-inline math-inline" data-math="-5">\( -5 \)</span> tokens (slider: <span class="katex-inline math-inline" data-math="-1">\( -1 \)</span> to <span class="katex-inline math-inline" data-math="-25">\( -25 \)</span>).</li>
+<li><code>Mutation Rate</code>: Default <span class="katex-inline math-inline" data-math="0.1\%">\( 0.1\% \)</span> per bit (slider: <span class="katex-inline math-inline" data-math="0.001\%–5\%">\( 0.001\%–5\% \)</span>).</li>
+<li><code>Soup Seeding Ratio</code>: Default <span class="katex-inline math-inline" data-math="20\%">\( 20\% \)</span> (slider: <span class="katex-inline math-inline" data-math="1\%–100\%">\( 1\%–100\% \)</span>).</li>
+<li><code>Detritus Decay Time</code>: Default <span class="katex-inline math-inline" data-math="50">\( 50 \)</span> ticks (slider: <span class="katex-inline math-inline" data-math="10–200">\( 10–200 \)</span> ticks).</li>
+</ul>
+<hr class="divider" />
+<h2 id="15-fundamental-physical-forces-electromagnetism-gravity-convection">15. Fundamental Physical Forces: Electromagnetism, Gravity, & Convection <a class="header-anchor" href="#15-fundamental-physical-forces-electromagnetism-gravity-convection" title="Link to section">#</a></h2>
+<p>Life on Earth is physically embodied—it survives by sensing and steering fundamental physical forces. Siliquarium models the two dominant macroscopic forces of biology in computationally lightweight, discrete representations (<span class="katex-inline math-inline" data-math="O(1)">\( O(1) \)</span> per tick):</p>
+<pre><code class="language-text">                       THE LIVING PHYSICAL FORCE FIELD
+                       
+      Cold Ocean Surface (Low Pressure, Low Light)
+   ══════════════════════════════════════════════════════════════════
+               ▲                 ▲                 ▲
+               │  HOT CONVECTIVE │ THERMAL PLUMES  │
+               │  (Rises Upward  │ Against Gravity)│
+               │                 │                 │
+            [░░░░░]           [░░░░░]           [░░░░░]
+            [ PORE]           [ PORE]           [ PORE]
+            [░░░░░]           [░░░░░]           [░░░░░]
+               │                                   │
+               ▼                                   ▼
+          FALLING MARINE SNOW                 SEDIMENT DETRITUS
+         (Sinks Downward under                (Accumulates on Floor)
+              Gravity g)                           │
+   ════════════════════════════════════════════════╧═════════════════
+      Deep Benthic Bedrock Floor (High Pressure, Solid Rock Anchor)</code></pre>
+<h3 id="151-gravity-vecg-thermal-convection">15.1 Gravity (<span class="katex-inline math-inline" data-math="\vec{g}">\( \vec{g} \)</span>) & Thermal Convection <a class="header-anchor" href="#151-gravity-vecg-thermal-convection" title="Link to section">#</a></h3>
+<ol>
+<li><strong>Vertical Orientation:</strong> Gravity defines an absolute vector <span class="katex-inline math-inline" data-math="\vec{g} = (0, 0, -1)">\( \vec{g} = (0, 0, -1) \)</span> pointing down toward the ocean bedrock.</li>
+<li><strong>Convective Updraft Plumes:</strong> Hot vent fluids are less dense than ambient seawater. Energy wave pulses released by vents naturally drift <strong>upward against gravity</strong>, creating vertical nutrient highways. Organisms situated above a vent catch the rising updraft; organisms below sit in the thermal shadow.</li>
+<li><strong>Marine Snow Sedimentation:</strong> Carcass particles and unharvested matter slowly drift <strong>downward</strong>, accumulating on the benthic seafloor. This establishes a permanent <strong>benthic scavenger niche</strong>—organisms anchored to the deep bedrock that feed entirely on the nutrient rain from above.</li>
+<li><strong>Gravitropic Orientation:</strong> Pores possess an ambient tilt sensor pin reporting <span class="katex-inline math-inline" data-math="\vec{g}">\( \vec{g} \)</span>, enabling multi-cellular colonies to orient root anchors downward and sensory canopies upward.</li>
+</ol>
+<h3 id="152-the-electromagnetic-spectrum-radiant-waves-vision">15.2 The Electromagnetic Spectrum: Radiant Waves & Vision <a class="header-anchor" href="#152-the-electromagnetic-spectrum-radiant-waves-vision" title="Link to section">#</a></h3>
+<ol>
+<li><strong>Ambient Radiant Flux (<span class="katex-inline math-inline" data-math="1/d^2">\( 1/d^2 \)</span> Decay):</strong> Vents and high-activity organisms emit radiant electromagnetic flux into open water that decays quadratically with distance (<span class="katex-inline math-inline" data-math="I \propto I_0 / (1 + \alpha d^2)">\( I \propto I_0 / (1 + \alpha d^2) \)</span>).</li>
+<li><strong>The Emergence of Vision (Photoreceptor Gates):</strong> Pores can evolve input gates connected to ambient optical sensors, allowing organisms to <strong>see</strong> glowing hydrothermal chimneys from several hexes away without needing a physical contact wire.</li>
+<li><strong>Bioluminescent Signaling:</strong> Organisms can evolve optical emitter gates to flash rhythmic light pulses into the water column, enabling long-range colonial synchronization or predatory lures.</li>
+<li><strong>Near-Field Capacitive Cross-Talk:</strong> High-frequency current pulses in a pore induce subtle electromagnetic ripples in adjacent pores across thin rock walls, giving organisms a primitive acoustic/vibrational sense.</li>
+</ol>
+<hr class="divider" />
+<h2 id="16-the-3d-topographical-landscape-the-z-axis-seafloor-honeycomb">16. The 3D Topographical Landscape: The Z-Axis & Seafloor Honeycomb <a class="header-anchor" href="#16-the-3d-topographical-landscape-the-z-axis-seafloor-honeycomb" title="Link to section">#</a></h2>
+<p>Siliquarium’s environment is not a flat 2D board; it is an authentic <strong>3D deep-sea benthic terrain</strong> modeled as a stacked hexagonal prism lattice with axial coordinates <span class="katex-inline math-inline" data-math="(q, r, z)">\( (q, r, z) \)</span>:</p>
+<pre><code class="language-text">                                  [Z = 3: Hydrothermal Chimney Tip]
+                                        ▲
+                                       / \  (Plumes Spew into Water Column)
+                                      /   \
+                         [Z = 2: Volcanic Ridge / Rock Overhang]
+                                  /       \
+                    [Z = 1: Sheltered Benthic Pockets]
+                           /                 \
+        [Z = 0: Basalt Bedrock Floor &amp; Sediment Basin]</code></pre>
+<ol>
+<li><strong>Topographical Seabed Elevation:</strong> The rock substrate follows natural geological contours—volcanic slopes, deep sediment trenches, and elevated ridges conforming to the grade of the central caldera.</li>
+<li><strong>Protruding Chimney Spires:</strong> Hydrothermal vents protrude upward along the <span class="katex-inline math-inline" data-math="Z">\( Z \)</span>-axis as vertical mineral chimneys, spewing plumes into the mid-water column at different depths.</li>
+<li><strong>Inert Stonewall Impedance Blocks:</strong> Randomly distributed basalt boulders and mineral overhangs take up honeycomb cells, creating sheltered crevices, dead ends, and caves with high physical impedance (<span class="katex-inline math-inline" data-math="\text{Conductance} = 0">\( \text{Conductance} = 0 \)</span>). These natural rock formations protect pioneer organisms from turbulent currents and predator lines.</li>
+</ol>
+<hr class="divider" />
+<h2 id="17-the-dual-currency-thermodynamic-economy-energy-e-matter-m">17. The Dual-Currency Thermodynamic Economy: Energy (<span class="katex-inline math-inline" data-math="E">\( E \)</span>) & Matter (<span class="katex-inline math-inline" data-math="M">\( M \)</span>) <a class="header-anchor" href="#17-the-dual-currency-thermodynamic-economy-energy-e-matter-m" title="Link to section">#</a></h2>
+<p>In the physical universe, life cannot be built out of pure energy. You cannot construct a physical logic gate or a protective cell wall out of pure sunlight; you need <strong>matter (atoms, carbon, silica, iron)</strong>.</p>
+<p>Siliquarium implements an authentic <strong>dual-currency thermodynamic economy</strong>:</p>
+<pre><code class="language-text"> ┌────────────────────────────────────────────────────────────────────────┐
+ │                      DUAL METABOLIC CURRENCIES                         │
+ │                                                                        │
+ │  1. ENERGY TOKENS (E - Calories / ATP)                                 │
+ │     • Sourced from two-substrate catalytic reactions (A AND B).        │
+ │     • Consumed by Landauer dynamic gate toggles &amp; basal cost of life.  │
+ │     • Dissipates as thermal heat into the cold water sink.             │
+ │                                                                        │
+ │  2. MINERAL MATTER TOKENS (M - Mass / Atoms / Silica Bricks)           │
+ │     • Sourced from vent mineral ash, falling marine snow, &amp; carcasses. │
+ │     • Consumed to physically construct gates, wires, &amp; stone walls.    │
+ │     • Strictly conserved: mass cannot be destroyed, only recycled.     │
+ └────────────────────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="171-construction-costs-biomineralization">17.1 Construction Costs & Biomineralization <a class="header-anchor" href="#171-construction-costs-biomineralization" title="Link to section">#</a></h3>
+<ol>
+<li><strong>Gate Synthesis Cost:</strong> Placing a new logic gate in a pore's workshop requires both <strong><span class="katex-inline math-inline" data-math="5">\( 5 \)</span> Energy Tokens</strong> (assembly work) AND <strong><span class="katex-inline math-inline" data-math="2">\( 2 \)</span> Matter Tokens</strong> (physical silicon/protein material).</li>
+<li><strong>Shell Secretion (Biomineralization):</strong> An organism can spend <strong><span class="katex-inline math-inline" data-math="10">\( 10 \)</span> Energy Tokens</strong> and <strong><span class="katex-inline math-inline" data-math="5">\( 5 \)</span> Matter Tokens</strong> to convert an open pore boundary into an <strong>impenetrable stone armor wall</strong> (building its own coral shell).</li>
+<li><strong>Reproduction Threshold:</strong> Binary fission requires <strong>BOTH</strong> currencies:</li>
+</ol>
+<p><div class="katex-display math-block" data-math="\text{Division Ready} \iff E_{\text{battery}} \ge 100 \quad \text{AND} \quad M_{\text{reservoir}} \ge 20">\[ \text{Division Ready} \iff E_{\text{battery}} \ge 100 \quad \text{AND} \quad M_{\text{reservoir}} \ge 20 \]</div></p>
+<p>A cell with 100 energy but 0 matter cannot reproduce; it must wait until it ingests enough physical mineral mass to construct the child's physical body.</p>
+<h3 id="172-dual-conservation-laws">17.2 Dual Conservation Laws <a class="header-anchor" href="#172-dual-conservation-laws" title="Link to section">#</a></h3>
+<p><div class="katex-display math-block" data-math="\sum E_{\text{in}} = \sum E_{\text{stored}} + \sum E_{\text{toggled}} + \sum E_{\text{dissipated heat}}">\[ \sum E_{\text{in}} = \sum E_{\text{stored}} + \sum E_{\text{toggled}} + \sum E_{\text{dissipated heat}} \]</div></p>
+<p><div class="katex-display math-block" data-math="\sum M_{\text{in}} = \sum M_{\text{living bodies}} + \sum M_{\text{carcasses}} + \sum M_{\text{seafloor sediment}}">\[ \sum M_{\text{in}} = \sum M_{\text{living bodies}} + \sum M_{\text{carcasses}} + \sum M_{\text{seafloor sediment}} \]</div></p>
+<hr class="divider" />
+<h2 id="18-deterministic-world-generation-seed-presets-comparative-science">18. Deterministic World Generation, Seed Presets, & Comparative Science <a class="header-anchor" href="#18-deterministic-world-generation-seed-presets-comparative-science" title="Link to section">#</a></h2>
+<p>To transform Siliquarium from a casual toy into an institutional-grade scientific laboratory, the entire world generation engine is 100% deterministic and reproducible:</p>
+<pre><code class="language-text">  [32-Bit World Seed: #4815162342]
+                 │
+                 ▼ (Mulberry32 PRNG)
+  • 3D Seabed Heightmap (q, r, z)
+  • Chimney Spire Locations &amp; Grades
+  • Inert Stonewall Boulder Placement
+  • Vent Plume Waveform Frequencies
+  • Primordial Soup Inoculation Pores
+                 │
+                 ▼
+  100% Identical Historical Run on Any Machine</code></pre>
+<ol>
+<li><strong>Deterministic PRNG World Generator:</strong> A single 32-bit seed completely determines the 3D elevation profile, vent spire coordinates, basalt boulder layout, and initial primordial soup seeding.</li>
+<li><strong>Savable & Shareable <code>.siliquarium</code> Presets:</strong> Users can export and import complete world states as clean JSON files, saving exact initial conditions, terrain topographies, and metabolic slider settings.</li>
+<li><strong>Counterfactual Evolutionary Experiments:</strong> Researchers can run identical terrain seeds under controlled variables—e.g., comparing <strong>Seed #42 under a High-Matter Tropical Climate</strong> vs. <strong>Seed #42 under a Starved Cold Drought</strong>—to isolate the exact environmental drivers of morphological complexity.</li>
+</ol>
+<hr class="divider" />
+<h2 id="19-the-lenski-fossil-freezer-full-historical-playback-3d-orbit-camera">19. The Lenski Fossil Freezer, Full Historical Playback, & 3D Orbit Camera <a class="header-anchor" href="#19-the-lenski-fossil-freezer-full-historical-playback-3d-orbit-camera" title="Link to section">#</a></h2>
+<p>To bridge computational artificial life with empirical evolutionary biology, Siliquarium provides an institutional-grade scientific recording and observation suite:</p>
+<pre><code class="language-text">┌────────────────────────────────────────────────────────────────────────┐
+│                        THE TIME-MACHINE SCRUBBER                       │
+│                                                                        │
+│   [◄◄ Rewind]  [◄ Step]  [❚❚ Pause]  [► Play]  [Step ►]  [Fast ►►]     │
+│   ───●────────────────────────────◆───────────────────────▲─────────   │
+│   Tick 0                       Tick 2,450             Current (4,120)  │
+│   (Soup)                    (Milestone: Latch)        (Live Evolution) │
+└────────────────────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="191-live-world-snapshots-full-historical-persistence">19.1 Live World Snapshots & Full Historical Persistence <a class="header-anchor" href="#191-live-world-snapshots-full-historical-persistence" title="Link to section">#</a></h3>
+<ul>
+<li><strong>Complete World State Serialization:</strong> Users can save not just the starting seed, but the <strong>live running current world state</strong>—including every cell’s internal gates, battery tokens, matter reserves, unspent carcasses, and the full phylogenetic family tree.</li>
+<li><strong>Portable <code>.siliquarium</code> Archive:</strong> A single compressed JSON file stores the complete world snapshot, allowing simulations to be paused, shared across institutions, and resumed on any browser.</li>
+</ul>
+<h3 id="192-the-lenski-80circtextc-fossil-freezer">19.2 The Lenski <span class="katex-inline math-inline" data-math="-80^\circ\text{C}">\( -80^\circ\text{C} \)</span> Fossil Freezer <a class="header-anchor" href="#192-the-lenski-80circtextc-fossil-freezer" title="Link to section">#</a></h3>
+<p>Inspired by Richard Lenski’s famous Long-Term Evolution Experiment (LTEE):</p>
+<ol>
+<li><strong>Periodic Automated Freezing:</strong> Every <span class="katex-inline math-inline" data-math="K">\( K \)</span> ticks (e.g., every 500 or 1,000 ticks), the simulator automatically records a compressed "frozen fossil" snapshot of all living genomes and their spatial locations into an indexed ledger.</li>
+<li><strong>Ancestral Thawing & Tournament Testing:</strong> Users can "thaw" an ancestor from Generation 1,000, place it into a competition arena alongside a modern descendant from Generation 10,000, and measure <strong>Relative Fitness</strong> (<span class="katex-inline math-inline" data-math="\omega = \ln[N_{\text{modern}} / N_{\text{ancestor}}]">\( \omega = \ln[N_{\text{modern}} / N_{\text{ancestor}}] \)</span>) to empirically verify evolutionary adaptation.</li>
+<li><strong>Phylogenetic Lineage Reconstruction:</strong> Trace any living organism's exact ancestry all the way back to the original primordial soup ancestor, viewing the specific mutations that accumulated along every branch.</li>
+</ol>
+<h3 id="193-the-time-machine-scrubber-historical-playback">19.3 The Time-Machine Scrubber & Historical Playback <a class="header-anchor" href="#193-the-time-machine-scrubber-historical-playback" title="Link to section">#</a></h3>
+<ul>
+<li><strong>Universal Scrub Bar:</strong> A timeline slider at the bottom of the interface allows users to scrub backward and forward through the entire recorded history of the world.</li>
+<li><strong>Frame-by-Frame Stepping:</strong> Pause at any pivotal moment and step clock cycle by clock cycle (<span class="katex-inline math-inline" data-math="\pm 1">\( \pm 1 \)</span> tick) to watch an organism undergo division or observe a predator breach a cell wall.</li>
+<li><strong>Milestone Bookmarks:</strong> The scrubber timeline is automatically bookmarked with glowing diamond icons indicating where the Digital Paleontologist discovered major milestones (feedback loops, latches, adders).</li>
+</ul>
+<h3 id="194-3d-webgl-orbit-camera-controls">19.4 3D WebGL Orbit Camera Controls <a class="header-anchor" href="#194-3d-webgl-orbit-camera-controls" title="Link to section">#</a></h3>
+<p>The 3D benthic seamount is fully navigable via intuitive mouse and touch gestures:</p>
+<ul>
+<li><strong>Orbit / Rotate (Pitch & Yaw):</strong> Left-click and drag to rotate the camera around the central hydrothermal caldera at any angle.</li>
+<li><strong>Pan (Lateral Movement):</strong> Right-click (or two-finger drag) to glide across volcanic ridges, deep trenches, and chimney spires.</li>
+<li><strong>Zoom (Depth):</strong> Scroll wheel zooms continuously from a macro bird's-eye view of the entire ocean seamount down into an individual microscopic hexagonal pore.</li>
+<li><strong>Click-to-Focus (Microscope Lock):</strong> Double-clicking any pore or milestone notification centers the camera smoothly on that cell, locking the camera to track that lineage.</li>
+</ul>
+<hr class="divider" />
+<h3 id="195-the-evolutionary-flight-recorder-solution-space-trajectory">19.5 The Evolutionary Flight Recorder & Solution-Space Trajectory <a class="header-anchor" href="#195-the-evolutionary-flight-recorder-solution-space-trajectory" title="Link to section">#</a></h3>
+<p>When a milestone or de novo discovery is triggered (or when the user inspects any living pore), the simulator generates an interactive <strong>"Evolutionary Autopsy"</strong> modal reconstructing the exact mathematical path taken through genotype space:</p>
+<pre><code class="language-text">Fitness Altitude (Metabolic Flux)
+     ▲
+1.0 ─┤                                         ★ Novel Discovery (SR Latch)
+     │                                        /
+0.8 ─┤                                  (Gen 412)
+     │                                     ▲  (Positive Selection)
+0.6 ─┤                  ┌───[Gen 340]──────┘
+     │                  │   (Kimura Neutral Drift: d_H = 14 bits,
+0.4 ─┤  [Gen 120]───────┘    same fitness plateau along saddle)
+     │  (Pioneer)
+0.0 ─┴──────────────────────────────────────────────────────►
+     0       50      100     150     200     250      Genotype Hamming Distance</code></pre>
+<ol>
+<li><strong>The 4-Layer Retrospective Breakdown:</strong></li>
+<li><strong>Molecular Diff:</strong> Exact nucleotide/codon changes (point mutations, Ohno duplications, frame-shifts).</li>
+<li><strong>Topological Morph:</strong> Visual circuit schematic showing inactive buffer wires morphing into a functional closed loop.</li>
+<li><strong>Thermodynamic Shift:</strong> Landauer dissipation rate (<span class="katex-inline math-inline" data-math="kT \ln 2">\( kT \ln 2 \)</span>) vs. metabolic energy capture rate.</li>
+<li><strong>Pedagogical Theory Card:</strong> Academic citation explaining the evolutionary mechanism (e.g. Kimura's Neutral Drift, Stoltzfus's Constructive Neutral Evolution, or Ohno's Neofunctionalization).</li>
+<li><strong>Mathematical Honesty (No Fake Coordinates):</strong></li>
+<li>The solution space is an <span class="katex-inline math-inline" data-math="N">\( N \)</span>-dimensional Hamming hypercube <span class="katex-inline math-inline" data-math="\{0,1\}^N">\( \{0,1\}^N \)</span>. Rather than inventing fictional 3D spatial points, the trajectory is projected onto a rigorous <strong>Hamming Distance vs. Metabolic Altitude Manifold</strong>:</li>
+</ol>
+<p><div class="katex-display math-block" data-math="d_H(\text{Lineage}) = \sum_{i=0}^{k-1} \text{popcount}(G_{i} \oplus G_{i+1})">\[ d_H(\text{Lineage}) = \sum_{i=0}^{k-1} \text{popcount}(G_{i} \oplus G_{i+1}) \]</div></p>
+<ul>
+<li>Edge styling encodes the selective force:</li>
+<li><strong>Blue Edges (Kimura Neutral Drift):</strong> <span class="katex-inline math-inline" data-math="d_H &gt; 0">\( d_H &gt; 0 \)</span>, fitness invariant (walking along neutral saddles).</li>
+<li><strong>Green Edges (Positive Selection):</strong> Sudden upward jump in metabolic throughput.</li>
+<li><strong>Yellow Edges (Ohno Duplication):</strong> Genome length expansion creating redundant mutational reserves.</li>
+<li><strong>Red Edges (Nearly Neutral Hitchhiking):</strong> Mildly deleterious mutations conserved by linkage.</li>
+<li><strong>Zero-Lag Lazy Evaluation:</strong></li>
+<li>Living cells maintain only parent pointers (<span class="katex-inline math-inline" data-math="O(1)">\( O(1) \)</span> memory). The full ancestral tree and diffs are computed on-demand in milliseconds only when an autopsy is requested.</li>
+</ul>
+<hr class="divider" />
+<h2 id="20-pelagic-detachment-the-planktonic-transition-discrete-movement">20. Pelagic Detachment & The Planktonic Transition: Discrete Movement <a class="header-anchor" href="#20-pelagic-detachment-the-planktonic-transition-discrete-movement" title="Link to section">#</a></h2>
+<h3 id="201-an-honest-engineering-assessment-avoiding-physics-engine-bloat">20.1 An Honest Engineering Assessment: Avoiding Physics Engine Bloat <a class="header-anchor" href="#201-an-honest-engineering-assessment-avoiding-physics-engine-bloat" title="Link to section">#</a></h3>
+<p>In standard game engines, simulating free-floating 3D rigid bodies requires continuous collision detection, inertia tensors, fluid drag equations, and soft-body meshes. If applied to hundreds of floating circuits, this would cause catastrophic computational lag, heavy garbage-collection pauses, and distract from the core information-theoretic genetics of Siliquarium.</p>
+<h3 id="202-the-discrete-solution-the-permeable-water-column">20.2 The Discrete Solution: The Permeable Water Column <a class="header-anchor" href="#202-the-discrete-solution-the-permeable-water-column" title="Link to section">#</a></h3>
+<p>Nature solved this without continuous physics, and so does Siliquarium:</p>
+<ul>
+<li>In the 3D lattice <span class="katex-inline math-inline" data-math="(q, r, z)">\( (q, r, z) \)</span>, the seabed rock pores are permanent solid cavities.</li>
+<li>But the space above the rock is <strong>The Permeable Water Column</strong>—hexagonal cells filled with fluid rather than solid stone!</li>
+</ul>
+<pre><code class="language-text">       WATER COLUMN (Fluid Hexes)
+   ┌──────┐      ┌──────┐      ┌──────┐
+   │ P1   │ ──►  │ P2   │ ──►  │ P3   │  &lt;--- Planktonic Capsule drifts
+   └──────┘      └──────┘      └──────┘       hop-by-hop along fluid vector v!
+   ════════════════════════════════════
+       SOLID BASALT BEDROCK SEABED
+   [ROCK]        [PORE]        [ROCK]    &lt;--- Anchored benthic organisms</code></pre>
+<h3 id="203-the-two-stages-of-marine-detachment">20.3 The Two Stages of Marine Detachment <a class="header-anchor" href="#203-the-two-stages-of-marine-detachment" title="Link to section">#</a></h3>
+<ol>
+<li><strong>Stage A: Spore Drifting & Broadcast Spawning (Larval Dispersal):</strong>  </li>
+<li>Adult organisms remain anchored in their benthic rock pores (like corals, barnacles, and kelp).</li>
+<li><em>The Detachment Operator:</em> Upon division, an organism can choose to package its daughter genome into a <strong>buoyant spore capsule</strong> that enters the fluid water column.</li>
+<li><em>Convective Drift:</em> The spore drifts upward and outward along the convective thermal plume vector <span class="katex-inline math-inline" data-math="\vec{v}_{\text{plume}}">\( \vec{v}_{\text{plume}} \)</span> for <span class="katex-inline math-inline" data-math="T">\( T \)</span> ticks (e.g., 20 ticks).</li>
+<li><em>Settlement:</em> When the spore encounters an empty solid rock pore on a distant ridge, it settles, binds, and begins building its anchored workshop. This enables <strong>trans-oceanic colonization</strong> across distant volcanic spires!</li>
+</ol>
+<ol>
+<li><strong>Stage B: Free-Floating Plankton & Flagellar Motility:</strong>  </li>
+<li>A cell evolves a self-contained <strong>membrane shell</strong> (synthesized from its own matter tokens), freeing it from requiring an inorganic rock wall.</li>
+<li><em>The Step-Displacement Operator:</em> Every tick, a cell in the fluid column updates its position to an adjacent fluid hex based on ambient current plus any internal <strong>motility thrust</strong>:</li>
+</ol>
+<p><div class="katex-display math-block" data-math="\text{Pos}(t+1) = \text{Pos}(t) + \vec{v}_{\text{current}} + \vec{F}_{\text{thrust}}">\[ \text{Pos}(t+1) = \text{Pos}(t) + \vec{v}_{\text{current}} + \vec{F}_{\text{thrust}} \]</div></p>
+<ul>
+<li><em>Discrete & Blisteringly Fast:</em> Movement is simply moving a reference pointer between hex coordinates in the 3D grid array—<span class="katex-inline math-inline" data-math="O(1)">\( O(1) \)</span> computation with zero continuous physics bloat!</li>
+<li>Organisms can now evolve into <strong>pelagic plankton and grazing protozoa</strong>, swimming between vent plumes in the open water!</li>
+</ul>
+<hr class="divider" />
+<h2 id="21-epistemological-boundaries-why-the-battery-and-safe-are-not-smuggled-biology">21. Epistemological Boundaries: Why the Battery and Safe Are Not Smuggled Biology <a class="header-anchor" href="#21-epistemological-boundaries-why-the-battery-and-safe-are-not-smuggled-biology" title="Link to section">#</a></h2>
+<p>A foundational question in artificial life is whether positing an initial energy battery, an active workshop, and an inert symbolic genome tape secretly smuggles in the very biological intelligence the system purports to explain.</p>
+<p>As demonstrated in detail in <a href="EPISTEMIC_FOUNDATIONS.html">docs/EPISTEMIC_FOUNDATIONS.md</a>, these features do not represent smuggled biology; they represent the <strong>absolute physical and mathematical preconditions for open-ended evolution</strong>:</p>
+<ol>
+<li><strong>The Prebiotic Battery is Geochemical, Not Biological (Peter Mitchell, Michael Russell, Nick Lane):</strong>  </li>
+</ol>
+<p>Life did not invent the electrical battery. In alkaline hydrothermal vents, thin inorganic iron-sulfide (FeS) mineral walls separating alkaline vent fluid (pH ~ 10) from acidic Hadean ocean water (pH ~ 5.5) maintained a natural, continuous proton motive force of ~200 mV across nanometer barriers. The pore battery in Siliquarium models this <strong>pre-existing electrostatic mineral capacitance and inorganic pyrophosphate pool</strong>, not an evolved cellular organelle.</p>
+<ol>
+<li><strong>The Workshop is Inorganic Compartmentation (Russell & Hall, 1997):</strong>  </li>
+</ol>
+<p>Microscopic mineral cavities in porous basalt acted as nature's first cell walls, concentrating reactants and preventing the dilution catastrophe before lipid membranes evolved.</p>
+<ol>
+<li><strong>The Epistemic Cut is a Mathematical Necessity (John von Neumann, Howard Pattee):</strong>  </li>
+</ol>
+<p>Von Neumann proved that any self-reproducing machine that directly mutates its own active physical components inevitably suffers an unrecoverable error catastrophe. Open-ended evolution is mathematically impossible without separating rate-independent symbolic instructions (The Safe) from rate-dependent physical dynamics (The Workshop).</p>
+<ol>
+<li><strong>Reproduction is Abiotic Template Polymerization:</strong>  </li>
+</ol>
+<p>The photocopy mechanism at 100 energy tokens models abiotic, mineral-catalyzed surface templating (e.g., RNA polymerization on montmorillonite clay), driven purely by high-energy chemical flux.</p>
+<p>For the complete biophysical proofs, worked toy traces, and the Skeptic FAQ, see <a href="EPISTEMIC_FOUNDATIONS.html">docs/EPISTEMIC_FOUNDATIONS.md</a>.</p>
+  </main>
+
+  <footer>
+    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
+    <p style="margin-top: 0.4rem;">
+      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
+      PolyForm Noncommercial License 1.0.0
+    </p>
+  </footer>
+</body>
+</html>

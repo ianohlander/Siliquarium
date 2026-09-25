@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Identity &amp; Visual Philosophy — Siliquarium</title>
+  <link rel="icon" type="image/jpeg" href="assets/logos/logo.jpg">
+  
+  <!-- Modern Clean Typography & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <style>
+    :root {
+      --bg-ocean: #060911;
+      --bg-card: #0d1322;
+      --bg-surface: #131c31;
+      --border: #1e2c4a;
+      --border-glow: #00e5ff33;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #00e5ff;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-ocean);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    }
+    .brand-logo span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+    .nav-link.active {
+      color: var(--cyan);
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.4);
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.25rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.25rem; color: #e2e8f0; }
+    h4 { font-size: 1.05rem; color: var(--cyan); }
+    
+    p { margin-bottom: 1.25rem; color: #cbd5e1; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { color: var(--text-primary); font-style: italic; }
+
+    .header-anchor {
+      opacity: 0;
+      color: var(--cyan);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      font-weight: 400;
+      transition: opacity 0.2s;
+    }
+    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
+      opacity: 0.6;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #70f3ff;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+      color: #cbd5e1;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    /* Code & Pre */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Blockquotes & Callouts */
+    blockquote.callout {
+      border-left: 4px solid var(--cyan);
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    /* GitHub-style Alerts */
+    .alert {
+      border-left: 4px solid;
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .alert-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .alert-note { border-color: var(--cyan); }
+    .alert-note .alert-title { color: var(--cyan); }
+    .alert-tip { border-color: var(--emerald); }
+    .alert-tip .alert-title { color: var(--emerald); }
+    .alert-important { border-color: var(--purple); }
+    .alert-important .alert-title { color: var(--purple); }
+    .alert-warning { border-color: var(--amber); }
+    .alert-warning .alert-title { color: var(--amber); }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th {
+      background: var(--bg-surface);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Math */
+    .math-block {
+      overflow-x: auto;
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    /* Images */
+    .img-wrapper {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    .img-caption {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logos/logo.jpg" alt="Siliquarium Logo">
+        <span>Siliquarium</span>
+      </a>
+      <nav class="nav-bar">
+        <a href="index.html" class="nav-link ">🐠 Portal / Overview</a>
+<a href="THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
+<a href="BRAND_IDENTITY.html" class="nav-link active">🎨 Brand Identity</a>
+<a href="logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<a href="DEVELOPMENT_STANDARDS.html" class="nav-link ">🏛️ Dev Standards</a>
+<a href="QA_AND_TESTING_STANDARDS.html" class="nav-link ">🧪 QA Standards</a>
+<a href="DOCUMENTATION_STANDARDS.html" class="nav-link ">📚 Doc Standards</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 id="siliquarium-brand-identity-design-systems">🎨 Siliquarium Brand Identity & Design Systems <a class="header-anchor" href="#siliquarium-brand-identity-design-systems" title="Link to section">#</a></h1>
+<p><em>Biophysical Symbolism, Geometric Morphology, and Visual Assets</em></p>
+<hr class="divider" />
+<h2 id="1-visual-philosophy-the-convergence-of-nature-and-silicon">1. Visual Philosophy: The Convergence of Nature and Silicon <a class="header-anchor" href="#1-visual-philosophy-the-convergence-of-nature-and-silicon" title="Link to section">#</a></h2>
+<p>The visual identity of <strong>Siliquarium</strong> reflects the central scientific thesis of the laboratory:</p>
+<blockquote class="callout"><em>"What happens when digital circuits are freed from engineering benchmarks and left to survive in an unguided physical world?"</em></blockquote>
+<p>Every brand asset is constructed around three foundational biophysical anchors:</p>
+<ol>
+<li><strong>The Logarithmic Golden Spiral (<span class="katex-inline math-inline" data-math="r = a e^{b\theta}">\( r = a e^{b\theta} \)</span>):</strong>  </li>
+</ol>
+<p>The universal mathematical signature of biological accretion and growth (from the chambers of <em>Nautilus pompilius</em> to spiraling benthic plumes). In Siliquarium, it symbolizes open-ended self-organization.</p>
+<ol>
+<li><strong>The Hexagonal Honeycomb (<span class="katex-inline math-inline" data-math="q, r, z">\( q, r, z \)</span>):</strong>  </li>
+</ol>
+<p>The natural geometry of minimal surface tension (Kelvin conjecture) and the discrete coordinate system of the benthic rock pores.</p>
+<ol>
+<li><strong>The Abyssal Gradient (Thermal Amber to Oceanic Cyan):</strong>  </li>
+</ol>
+<p>The thermal non-equilibrium energy gradient: warm volcanic alkaline vents (<span class="katex-inline math-inline" data-math="40–90^\circ\text{C}">\( 40–90^\circ\text{C} \)</span>, amber/gold) meeting the cold acidic ocean sink (<span class="katex-inline math-inline" data-math="2^\circ\text{C}">\( 2^\circ\text{C} \)</span>, bioluminescent cyan/teal).</p>
+<hr class="divider" />
+<h2 id="2-the-golden-spiral-nautilus-suite-option-4-variations">2. The Golden Spiral Nautilus Suite (Option 4 Variations) <a class="header-anchor" href="#2-the-golden-spiral-nautilus-suite-option-4-variations" title="Link to section">#</a></h2>
+<p>The Nautilus series synthesizes biological morphology with integrated circuit architecture across five distinct design languages:</p>
+<div class="table-container"><table><thead><tr><th>Variation</th><th>Design Language</th><th>Biophysical & Architectural Cognate</th><th>File Location</th></tr></thead><tbody><tr><td><strong>Variation 1: Minimalist Hex Shell</strong></td><td>Clean Flat Vector Line Art</td><td>Discrete mathematical boundaries and minimal cell wall geometry.</td><td><a href="assets/logos/nautilus_var1_minimal.jpg"><code>docs/assets/logos/nautilus_var1_minimal.jpg</code></a></td></tr><tr><td><strong>Variation 2: Hydrothermal Thermal Core</strong></td><td>Dual-Temperature Radiant Glow</td><td>The Mitchell proton motive force: hot volcanic vent fluid venting through cold seawater.</td><td><a href="assets/logos/nautilus_var2_thermal.jpg"><code>docs/assets/logos/nautilus_var2_thermal.jpg</code></a></td></tr><tr><td><strong>Variation 3: Fibonacci Circuit Ribbon</strong></td><td>Layered PCB Micro-Architecture</td><td>Physical hardware implementation; continuous intercellular data buses and microprocessor die core.</td><td><a href="assets/logos/nautilus_var3_circuit.jpg"><code>docs/assets/logos/nautilus_var3_circuit.jpg</code></a></td></tr><tr><td><strong>Variation 4: 3D Benthic Basalt Columns</strong> 🏆 <em>(Official Logo)</em></td><td>Isometric Hexagonal Prisms</td><td>Direct visualization of the 3D <span class="katex-inline math-inline" data-math="(q, r, z)">\( (q, r, z) \)</span> stacked hexagonal prism seabed topography.</td><td><a href="assets/logos/nautilus_var4_isometric.jpg"><code>docs/assets/logos/nautilus_var4_isometric.jpg</code></a></td></tr><tr><td><strong>Variation 5: The Living Silicon Embryo</strong></td><td>Epistemic Cut & Genetic Tape</td><td>Pattee's Epistemic Cut: inert 1D symbolic code ribbon (The Safe) feeding active 2D logic gates (The Workshop).</td><td><a href="assets/logos/nautilus_var5_embryo.jpg"><code>docs/assets/logos/nautilus_var5_embryo.jpg</code></a></td></tr></tbody></table></div>
+<hr class="divider" />
+<h2 id="3-asset-directory-reference">3. Asset Directory Reference <a class="header-anchor" href="#3-asset-directory-reference" title="Link to section">#</a></h2>
+<p>All high-resolution production assets are maintained in <a href="assets/logos/"><code>docs/assets/logos/</code></a>:</p>
+<ul>
+<li><code>logo.jpg</code>: Active primary repository logo.</li>
+<li><code>logo_option_1_hex_gate.jpg</code>: The Hydrothermal Hex Gate.</li>
+<li><code>logo_option_2_silicon_diatom.jpg</code>: The Silicon Diatom.</li>
+<li><code>logo_option_3_vent_spire.jpg</code>: The Abyssal Vent Spire.</li>
+<li><code>logo_option_4_silicon_nautilus.jpg</code>: The Silicon Nautilus (Original).</li>
+<li><code>logo_option_5_silicon_fish.jpg</code>: The Benthic Circuit Fish.</li>
+<li><code>nautilus_var1_minimal.jpg</code>: Nautilus Variation 1 (Minimalist Line Art).</li>
+<li><code>nautilus_var2_thermal.jpg</code>: Nautilus Variation 2 (Thermal Gradient).</li>
+<li><code>nautilus_var3_circuit.jpg</code>: Nautilus Variation 3 (PCB Ribbon & Core Die).</li>
+<li><code>nautilus_var4_isometric.jpg</code>: Nautilus Variation 4 (3D Basalt Columns).</li>
+<li><code>nautilus_var5_embryo.jpg</code>: Nautilus Variation 5 (The Living Silicon Embryo).</li>
+</ul>
+  </main>
+
+  <footer>
+    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
+    <p style="margin-top: 0.4rem;">
+      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
+      PolyForm Noncommercial License 1.0.0
+    </p>
+  </footer>
+</body>
+</html>

@@ -6,6 +6,7 @@
  */
 
 import { performance } from 'node:perf_hooks';
+import fs from 'node:fs';
 
 console.log('=========================================');
 console.log('🐠 Siliquarium Comprehensive Test Suite');
@@ -28,11 +29,40 @@ function runStage(stageNum, name, testFn) {
   }
 }
 
-// Stage 0: Verification of Sealed Architecture & Theoretical Specs
-runStage(0, 'Testing Architecture & Theoretical Specification Completeness', () => {
+// Stage 0: Verification of Sealed Architecture, HTML Docs & Specification Completeness
+runStage(0, 'Testing Architecture, HTML Docs & Theoretical Specification Completeness', () => {
   // Verifies baseline environment
   if (typeof performance.now !== 'function') {
     throw new Error('High-resolution performance timer unavailable.');
+  }
+
+  // Verify critical documentation files
+  const requiredDocs = [
+    'README.md',
+    'THEORETICAL_MODEL.md',
+    'docs/EPISTEMIC_FOUNDATIONS.md',
+    'docs/BRAND_IDENTITY.md',
+    'standards/DEVELOPMENT_STANDARDS.md',
+    'standards/QA_AND_TESTING_STANDARDS.md',
+    'standards/DOCUMENTATION_STANDARDS.md',
+    'docs/index.html',
+    'docs/THEORETICAL_MODEL.html',
+    'docs/EPISTEMIC_FOUNDATIONS.html',
+    'docs/BRAND_IDENTITY.html',
+    'docs/logos.html',
+    'logos/index.html',
+    'logos/logo.jpg',
+    'docs/assets/logos/logo.jpg'
+  ];
+
+  for (const doc of requiredDocs) {
+    if (!fs.existsSync(doc)) {
+      throw new Error(`Required documentation or asset file missing: ${doc}`);
+    }
+    const stat = fs.statSync(doc);
+    if (stat.size === 0) {
+      throw new Error(`Documentation or asset file is empty: ${doc}`);
+    }
   }
 });
 

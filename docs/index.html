@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siliquarium: Open-Ended Digital Life — Siliquarium</title>
+  <link rel="icon" type="image/jpeg" href="assets/logos/logo.jpg">
+  
+  <!-- Modern Clean Typography & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <style>
+    :root {
+      --bg-ocean: #060911;
+      --bg-card: #0d1322;
+      --bg-surface: #131c31;
+      --border: #1e2c4a;
+      --border-glow: #00e5ff33;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #00e5ff;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-ocean);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    }
+    .brand-logo span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+    .nav-link.active {
+      color: var(--cyan);
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.4);
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.25rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.25rem; color: #e2e8f0; }
+    h4 { font-size: 1.05rem; color: var(--cyan); }
+    
+    p { margin-bottom: 1.25rem; color: #cbd5e1; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { color: var(--text-primary); font-style: italic; }
+
+    .header-anchor {
+      opacity: 0;
+      color: var(--cyan);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      font-weight: 400;
+      transition: opacity 0.2s;
+    }
+    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
+      opacity: 0.6;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #70f3ff;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+      color: #cbd5e1;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    /* Code & Pre */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Blockquotes & Callouts */
+    blockquote.callout {
+      border-left: 4px solid var(--cyan);
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    /* GitHub-style Alerts */
+    .alert {
+      border-left: 4px solid;
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .alert-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .alert-note { border-color: var(--cyan); }
+    .alert-note .alert-title { color: var(--cyan); }
+    .alert-tip { border-color: var(--emerald); }
+    .alert-tip .alert-title { color: var(--emerald); }
+    .alert-important { border-color: var(--purple); }
+    .alert-important .alert-title { color: var(--purple); }
+    .alert-warning { border-color: var(--amber); }
+    .alert-warning .alert-title { color: var(--amber); }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th {
+      background: var(--bg-surface);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Math */
+    .math-block {
+      overflow-x: auto;
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    /* Images */
+    .img-wrapper {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    .img-caption {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logos/logo.jpg" alt="Siliquarium Logo">
+        <span>Siliquarium</span>
+      </a>
+      <nav class="nav-bar">
+        <a href="index.html" class="nav-link active">🐠 Portal / Overview</a>
+<a href="THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
+<a href="BRAND_IDENTITY.html" class="nav-link ">🎨 Brand Identity</a>
+<a href="logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<a href="DEVELOPMENT_STANDARDS.html" class="nav-link ">🏛️ Dev Standards</a>
+<a href="QA_AND_TESTING_STANDARDS.html" class="nav-link ">🧪 QA Standards</a>
+<a href="DOCUMENTATION_STANDARDS.html" class="nav-link ">📚 Doc Standards</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <p align="center">
+<img src="docs/assets/logos/logo.jpg" alt="Siliquarium Logo" width="240" />
+</p>
+<h1 id="siliquarium-open-ended-digital-life-silicon-abiogenesis">🐠 Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis <a class="header-anchor" href="#siliquarium-open-ended-digital-life-silicon-abiogenesis" title="Link to section">#</a></h1>
+<p><a href="https://polyformproject.org/licenses/noncommercial/1.0.0/" target="_blank" rel="noopener noreferrer"><div class="img-wrapper"><img src="https://img.shields.io/badge/License-PolyForm%20Noncommercial%201.0.0-blue.svg" alt="License: PolyForm Noncommercial 1.0.0" loading="lazy" /><div class="img-caption">License: PolyForm Noncommercial 1.0.0</div></div></a></p>
+<p><a href="https://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer"><div class="img-wrapper"><img src="https://img.shields.io/badge/Language-TypeScript%20Strict-blue.svg" alt="TypeScript" loading="lazy" /><div class="img-caption">TypeScript</div></div></a></p>
+<p><a href="THEORETICAL_MODEL.html"><div class="img-wrapper"><img src="https://img.shields.io/badge/Thermodynamics-Strict%20Conservation-emerald.svg" alt="Physics" loading="lazy" /><div class="img-caption">Physics</div></div></a></p>
+<p><a href="THEORETICAL_MODEL.html"><div class="img-wrapper"><img src="https://img.shields.io/badge/Substrate-3D%20Hex%20Lattice%20(q%2Cr%2Cz" alt="Architecture" loading="lazy" /><div class="img-caption">Architecture</div></div>-purple.svg)</a></p>
+<p><a href="THEORETICAL_MODEL.html"><div class="img-wrapper"><img src="https://img.shields.io/badge/Systems%20Biology-Uri%20Alon%20Motifs-amber.svg" alt="Systems Biology" loading="lazy" /><div class="img-caption">Systems Biology</div></div></a></p>
+<blockquote class="callout"><strong>"What happens when digital circuits are freed from engineering benchmarks and left to survive in an unguided physical world?"</strong></blockquote>
+<p>Siliquarium is an open-ended digital life and silicon abiogenesis computational laboratory. It is the standalone autopoietic sister project to <a href="https://github.com/ianohlander/BooleanGA" target="_blank" rel="noopener noreferrer">BooleanGA</a>.</p>
+<p>While BooleanGA explores <strong>heteropoietic engineering synthesis</strong> (evolving ALUs, RAM, and CPUs toward external truth tables), Siliquarium explores <strong>autopoietic open-ended evolution</strong>—an ecological simulation situated in a deep-sea hydrothermal vent matrix, where digital circuits must extract energy from non-equilibrium chemical and thermal gradients, maintain their internal state against Landauer dissipation, and reproduce before their batteries run dry.</p>
+<hr class="divider" />
+<h2 id="core-architectural-pillars">📌 Core Architectural Pillars <a class="header-anchor" href="#core-architectural-pillars" title="Link to section">#</a></h2>
+<ol>
+<li><strong>The Epistemic Cut (Howard Pattee):</strong>  </li>
+</ol>
+<p>Strict physical separation between symbolic genetic code (<strong>The Safe</strong> / 1D genome tape) and metabolic dynamic machinery (<strong>The Workshop</strong> / active logic gates). Genomes are never mutated during runtime—only during reproduction into adjacent pores.</p>
+<ol>
+<li><strong>Hydrothermal Two-Substrate Redox Chemistry:</strong>  </li>
+</ol>
+<p>No pre-baked clocks or batteries. The vent emits pulsed Streams A (fuel) and B (oxidizer). Primitive catalytic gates (<code>AND</code> = co-substrate catalyst, <code>NOT</code> = allosteric inhibitor, <code>OR</code> = promiscuous generalist) convert free energy into internal battery tokens.</p>
+<ol>
+<li><strong>Dual-Currency Physical Economy (Energy + Matter):</strong>  </li>
+</ol>
+<p>Strict conservation laws (<span class="katex-inline math-inline" data-math="\sum E_{\text{in}} = \sum E_{\text{out}}">\( \sum E_{\text{in}} = \sum E_{\text{out}} \)</span>, <span class="katex-inline math-inline" data-math="\sum M_{\text{in}} = \sum M_{\text{out}}">\( \sum M_{\text{in}} = \sum M_{\text{out}} \)</span>). Replication requires both 100 energy tokens and mineral matter tokens mined from basalt or scavenged from carcasses.</p>
+<ol>
+<li><strong>3D Stacked Hexagonal Prism Seafloor <span class="katex-inline math-inline" data-math="(q, r, z)">\( (q, r, z) \)</span>:</strong>  </li>
+</ol>
+<p>Topographical benthic landscape featuring protruding chimney spires, hydrothermal calderas, basalt boulders, and porous rock honeycomb pores.</p>
+<ol>
+<li><strong>The Digital Paleontologist & Uri Alon Network Motifs:</strong>  </li>
+</ol>
+<p>A purely passive observer scanning for structural milestones and biological regulatory cognates (Bistable Toggle Switches, Repressilator clocks, Coherent/Incoherent Feed-Forward Loops, Autoregulatory clamps). Distinguishes between shared inheritance (<strong>Homology</strong>) and independent discovery (<strong>Homoplasy / Convergent Evolution</strong>).</p>
+<ol>
+<li><strong>The Evolutionary Flight Recorder:</strong>  </li>
+</ol>
+<p>Zero-lag retrospective reconstruction of the exact trajectory through genotype space, plotting the lineage on a rigorous <strong>Hamming Distance vs. Metabolic Flux Manifold</strong> showing Kimura neutral drift saddles, Ohno gene duplications, and selective leaps.</p>
+<ol>
+<li><strong>Pelagic Spore Dispersal & <span class="katex-inline math-inline" data-math="O(1)">\( O(1) \)</span> Planktonic Movement:</strong>  </li>
+</ol>
+<p>Discrete hop-by-hop water column movement avoiding 3D continuous physics engine bloat while supporting larval spore drift, colonization, and free-swimming protozoa.</p>
+<hr class="divider" />
+<h2 id="project-manifest-standards">📂 Project Manifest & Standards <a class="header-anchor" href="#project-manifest-standards" title="Link to section">#</a></h2>
+<ul>
+<li><strong><a href="THEORETICAL_MODEL.html"><code>THEORETICAL_MODEL.md</code></a>:</strong> Complete 21-section master biophysical specification, equations, and thermodynamic models.</li>
+<li><strong><a href="EPISTEMIC_FOUNDATIONS.html"><code>docs/EPISTEMIC_FOUNDATIONS.md</code></a>:</strong> Epistemological boundaries, prebiotic battery physics (Mitchell, Russell, Lane), the Epistemic Cut (Pattee, Von Neumann), and the anti-smuggling defense.</li>
+<li><strong><a href="BRAND_IDENTITY.html"><code>docs/BRAND_IDENTITY.md</code></a>:</strong> Brand philosophy, Fibonacci nautilus suites, biophysical design cognates, and asset inventory.</li>
+<li><strong><a href="DEVELOPMENT_STANDARDS.html"><code>standards/DEVELOPMENT_STANDARDS.md</code></a>:</strong> Strict OOP/SOLID architecture, complexity budgets (<span class="katex-inline math-inline" data-math="\le 7">\( \le 7 \)</span>), branded types, Web Worker threading, and anti-monolith file structure.</li>
+<li><strong><a href="QA_AND_TESTING_STANDARDS.html"><code>standards/QA_AND_TESTING_STANDARDS.md</code></a>:</strong> Native zero-dependency Node.js test harness, 8-stage progressive test pipeline, and physical conservation audits.</li>
+<li><strong><a href="DOCUMENTATION_STANDARDS.html"><code>standards/DOCUMENTATION_STANDARDS.md</code></a>:</strong> 5-Dimension Conceptual Rubric (50/50 target), the 4 Sacred Everyday Analogies, and academic provenance.</li>
+</ul>
+<hr class="divider" />
+<h2 id="repository-roadmap-phased-bootstrap">🚀 Repository Roadmap (Phased Bootstrap) <a class="header-anchor" href="#repository-roadmap-phased-bootstrap" title="Link to section">#</a></h2>
+<ul>
+<li>[x] <strong>Phase 0:</strong> Sealed Theoretical Model, Development Standards, QA & Testing Protocols, and GitHub Repository Bootstrap.</li>
+<li>[ ] <strong>Phase 1:</strong> Core Kernel (<code>Mulberry32</code>, <code>CodonTable</code>, <code>HexGrid3D</code>, <code>PoreCell</code>, <code>VentPhysics</code>, <code>Thermodynamics</code>).</li>
+<li>[ ] <strong>Phase 2:</strong> Progressive 8-Stage Zero-Dependency Test Suite & Energy/Mass Invariant Audits.</li>
+<li>[ ] <strong>Phase 3:</strong> WebGL 3D Seafloor & Interactive Circuit Microscope Visualizer.</li>
+<li>[ ] <strong>Phase 4:</strong> Digital Paleontologist Motif Scanner, Evolutionary Flight Recorder & Lenski Fossil Freezer.</li>
+<li>[ ] <strong>Phase 5:</strong> Pelagic Planktonic Detachment, Spore Dispersal, and God-Suite Interactive Controls.</li>
+</ul>
+  </main>
+
+  <footer>
+    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
+    <p style="margin-top: 0.4rem;">
+      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
+      PolyForm Noncommercial License 1.0.0
+    </p>
+  </footer>
+</body>
+</html>

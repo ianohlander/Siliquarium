@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering &amp; Software Architecture Standards — Siliquarium</title>
+  <link rel="icon" type="image/jpeg" href="../docs/assets/logos/logo.jpg">
+  
+  <!-- Modern Clean Typography & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <style>
+    :root {
+      --bg-ocean: #060911;
+      --bg-card: #0d1322;
+      --bg-surface: #131c31;
+      --border: #1e2c4a;
+      --border-glow: #00e5ff33;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #00e5ff;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-ocean);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    }
+    .brand-logo span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+    .nav-link.active {
+      color: var(--cyan);
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.4);
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.25rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.25rem; color: #e2e8f0; }
+    h4 { font-size: 1.05rem; color: var(--cyan); }
+    
+    p { margin-bottom: 1.25rem; color: #cbd5e1; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { color: var(--text-primary); font-style: italic; }
+
+    .header-anchor {
+      opacity: 0;
+      color: var(--cyan);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      font-weight: 400;
+      transition: opacity 0.2s;
+    }
+    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
+      opacity: 0.6;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #70f3ff;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+      color: #cbd5e1;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    /* Code & Pre */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Blockquotes & Callouts */
+    blockquote.callout {
+      border-left: 4px solid var(--cyan);
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    /* GitHub-style Alerts */
+    .alert {
+      border-left: 4px solid;
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .alert-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .alert-note { border-color: var(--cyan); }
+    .alert-note .alert-title { color: var(--cyan); }
+    .alert-tip { border-color: var(--emerald); }
+    .alert-tip .alert-title { color: var(--emerald); }
+    .alert-important { border-color: var(--purple); }
+    .alert-important .alert-title { color: var(--purple); }
+    .alert-warning { border-color: var(--amber); }
+    .alert-warning .alert-title { color: var(--amber); }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th {
+      background: var(--bg-surface);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Math */
+    .math-block {
+      overflow-x: auto;
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    /* Images */
+    .img-wrapper {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    .img-caption {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="../docs/index.html" class="brand-logo">
+        <img src="../docs/assets/logos/logo.jpg" alt="Siliquarium Logo">
+        <span>Siliquarium</span>
+      </a>
+      <nav class="nav-bar">
+        <a href="../docs/index.html" class="nav-link ">🐠 Portal / Overview</a>
+<a href="../docs/THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
+<a href="../docs/EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
+<a href="../docs/BRAND_IDENTITY.html" class="nav-link ">🎨 Brand Identity</a>
+<a href="../docs/logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<a href="../docs/DEVELOPMENT_STANDARDS.html" class="nav-link ">🏛️ Dev Standards</a>
+<a href="../docs/QA_AND_TESTING_STANDARDS.html" class="nav-link ">🧪 QA Standards</a>
+<a href="../docs/DOCUMENTATION_STANDARDS.html" class="nav-link ">📚 Doc Standards</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 id="siliquarium-engineering-software-architecture-standards">🏛️ Siliquarium Engineering & Software Architecture Standards <a class="header-anchor" href="#siliquarium-engineering-software-architecture-standards" title="Link to section">#</a></h1>
+<p><em>The Master Specification: OOP, SOLID, DRY, KISS, YAGNI, Complexity Budgets, Anti-Monolith, Clean Architecture, and Anti-Smuggling Mandates</em></p>
+<blockquote class="callout"><strong>Mandate for All Engineers & AI Agents:</strong><br/>This document is the absolute engineering contract for Siliquarium. Every module, class, interface, and test authored for this project must strictly comply with every section below. No shortcuts, no legacy anti-patterns, and no technical debt.</blockquote>
+<hr class="divider" />
+<h2 id="1-core-architectural-paradigms-object-oriented-design">1. Core Architectural Paradigms & Object-Oriented Design <a class="header-anchor" href="#1-core-architectural-paradigms-object-oriented-design" title="Link to section">#</a></h2>
+<h3 id="11-object-oriented-programming-oop-domain-driven-design-ddd">1.1 Object-Oriented Programming (OOP) & Domain-Driven Design (DDD) <a class="header-anchor" href="#11-object-oriented-programming-oop-domain-driven-design-ddd" title="Link to section">#</a></h3>
+<ul>
+<li><strong>Rich Domain Entities (Anti-Anemic Model):</strong>  </li>
+</ul>
+<p>Domain classes (e.g., <code>Pore</code>, <code>PoreCell</code>, <code>GenomeSafe</code>, <code>PoreWorkshop</code>, <code>PoreBattery</code>) must encapsulate both state and behavior. Never create "dumb" data structures that are manipulated by external, bloated procedural service classes. The entity itself must enforce its internal business and physical rules.</p>
+<ul>
+<li><strong>Strict Encapsulation & Information Hiding:</strong>  </li>
+</ul>
+<p>All state fields must be <code>private</code> or <code>protected</code>. State transitions must occur exclusively through explicit, well-named domain methods (e.g., <code>battery.drainTokens(count)</code>, <code>safe.photocopy(mutationRate)</code>). External consumers must never directly modify an entity's internal properties.</p>
+<ul>
+<li><strong>Favor Composition Over Inheritance:</strong>  </li>
+</ul>
+<p>Avoid deep class inheritance hierarchies (maximum inheritance depth: 1 level). Assemble complex behavior by composing small, focused components (e.g., a <code>Pore</code> <em>has a</em> <code>PoreBattery</code> and <em>has a</em> <code>PoreWorkshop</code>, rather than inheriting from an abstract <code>LivingContainer</code>).</p>
+<ul>
+<li><strong>Polymorphism Over Conditionals:</strong>  </li>
+</ul>
+<p>Never use sprawling <code>switch</code> statements or <code>if/else</code> ladders to branch on object types. Use polymorphic interfaces (e.g., <code>ILogicNode</code>, <code>IVentEmitter</code>, <code>IEcologicalInteraction</code>) with specialized class implementations.</p>
+<ul>
+<li><strong>Avoid Primitive Obsession:</strong>  </li>
+</ul>
+<p>Do not represent domain concepts with generic primitives (e.g., raw <code>number</code> or <code>string</code>). Use branded/nominal types, value objects, and enums:</p>
+<pre><code class="language-typescript">  // ❌ Primitive Obsession
+  function setPore(x: number, y: number, state: string, energy: number): void;
+
+  // ✅ Rich Domain Types
+  type PoreCoord = { readonly x: number; readonly y: number };
+  enum CellState { Dormant, Active, Lysis, Empty }
+  type EnergyTokens = number &amp; { readonly __brand: unique symbol };</code></pre>
+<hr class="divider" />
+<h3 id="12-the-solid-principles-exhaustively-enforced">1.2 The SOLID Principles (Exhaustively Enforced) <a class="header-anchor" href="#12-the-solid-principles-exhaustively-enforced" title="Link to section">#</a></h3>
+<h4 id="s-single-responsibility-principle-srp">S — Single Responsibility Principle (SRP) <a class="header-anchor" href="#s-single-responsibility-principle-srp" title="Link to section">#</a></h4>
+<p>Every class and module must have <strong>exactly one reason to change</strong>.</p>
+<ul>
+<li><code>PoreGrid.ts</code> manages 2D spatial indexing and neighbor lookups; it does <strong>not</strong> evaluate logic gates or track batteries.</li>
+<li><code>CodonTranslator.ts</code> translates 6-bit strings to tokens; it does <strong>not</strong> manage genome replication.</li>
+<li><code>PoreBattery.ts</code> tracks energy balances; it does <strong>not</strong> emit vent waveforms.</li>
+</ul>
+<h4 id="o-openclosed-principle-ocp">O — Open/Closed Principle (OCP) <a class="header-anchor" href="#o-openclosed-principle-ocp" title="Link to section">#</a></h4>
+<p>Modules must be <strong>open for extension, but closed for modification</strong>.</p>
+<ul>
+<li>The core simulation engine must not be edited to add a new gate type, new environmental waveform, or new ecological behavior. </li>
+<li>New features are introduced by implementing open interfaces (<code>ILogicNode</code>, <code>IVentWaveform</code>, <code>IEnergySink</code>).</li>
+</ul>
+<h4 id="l-liskov-substitution-principle-lsp">L — Liskov Substitution Principle (LSP) <a class="header-anchor" href="#l-liskov-substitution-principle-lsp" title="Link to section">#</a></h4>
+<p>Subtypes must be <strong>completely substitutable for their base types</strong> without altering correctness or breaking contract assumptions.</p>
+<ul>
+<li>An <code>InsulatorGate</code> or a <code>MajorityFilterGate</code> must implement <code>ILogicNode</code> identically to an <code>AndGate</code>, accepting the same input bus and returning boolean outputs without throwing unexpected exceptions or requiring special-case branching by callers.</li>
+</ul>
+<h4 id="i-interface-segregation-principle-isp">I — Interface Segregation Principle (ISP) <a class="header-anchor" href="#i-interface-segregation-principle-isp" title="Link to section">#</a></h4>
+<p>Clients must <strong>never be forced to depend on interfaces they do not use</strong>.</p>
+<ul>
+<li>Favor granular, role-specific interfaces over fat monolithic contracts:</li>
+</ul>
+<pre><code class="language-typescript">  // ❌ Fat monolithic interface
+  interface IPore {
+    readVoltage(): boolean;
+    drainBattery(): void;
+    replicateGenome(): void;
+    renderCanvas(): void;
+  }
+
+  // ✅ Granular, segregated interfaces
+  interface IReadablePin { readState(): boolean; }
+  interface IWritablePin { writeState(val: boolean): void; }
+  interface IEnergySink { consumeTokens(amount: number): boolean; }
+  interface IGenomeHolder { getGenome(): string; }</code></pre>
+<ul>
+<li>An adjacent neighbor pore only sees exposed <code>IReadablePin</code> border connections—it never has access to the internal <code>IEnergySink</code> or <code>IGenomeHolder</code>.</li>
+</ul>
+<h4 id="d-dependency-inversion-principle-dip">D — Dependency Inversion Principle (DIP) <a class="header-anchor" href="#d-dependency-inversion-principle-dip" title="Link to section">#</a></h4>
+<p>High-level modules must <strong>depend on abstractions (interfaces), never on low-level concrete details</strong>.</p>
+<ul>
+<li>The <code>SimulationEngine</code> depends on <code>ISubstratePhysics</code> and <code>IEnvironmentSource</code>, never on concrete implementations. This enables standalone headless unit testing, test doubles, and alternate environmental rules.</li>
+</ul>
+<hr class="divider" />
+<h3 id="13-dry-dont-repeat-yourself-single-source-of-truth-ssot">1.3 DRY (Don't Repeat Yourself) & Single Source of Truth (SSOT) <a class="header-anchor" href="#13-dry-dont-repeat-yourself-single-source-of-truth-ssot" title="Link to section">#</a></h3>
+<ul>
+<li><strong>Single Source of Truth:</strong> Every constant, codon mapping, mathematical conversion, and physical rule must reside in exactly one canonical file (e.g., <code>CodonTable.ts</code>, <code>PhysicalConstants.ts</code>).</li>
+<li><strong>No Duplicated Bitwise Logic:</strong> Low-level bit-twiddling, Gray code conversions, and word-level parallel operations must be centralized in thoroughly tested math modules (<code>BitwiseMath.ts</code>).</li>
+<li><strong>The Rule of Three:</strong> Do not introduce premature abstractions for code that appears twice. When a pattern appears a third time, extract it into a clean, reusable component.</li>
+</ul>
+<hr class="divider" />
+<h3 id="14-kiss-keep-it-simple-stupid-yagni-you-arent-gonna-need-it">1.4 KISS (Keep It Simple, Stupid) & YAGNI (You Aren't Gonna Need It) <a class="header-anchor" href="#14-kiss-keep-it-simple-stupid-yagni-you-arent-gonna-need-it" title="Link to section">#</a></h3>
+<ul>
+<li><strong>No Speculative Architecture:</strong> Do not build abstract factory generators, multi-tiered plugin registries, or reflection frameworks for hypothetical future needs.</li>
+<li><strong>Direct, Transparent Logic:</strong> Prefer straightforward, readable code over clever, opaque tricks. The codebase is an open-source educational laboratory; readability is paramount.</li>
+</ul>
+<hr class="divider" />
+<h2 id="2-complexity-budgets-code-size-metrics">2. Complexity Budgets & Code Size Metrics <a class="header-anchor" href="#2-complexity-budgets-code-size-metrics" title="Link to section">#</a></h2>
+<p>To ensure maintainability and eliminate cognitive overhead, all code must satisfy strict numerical budgets:</p>
+<pre><code class="language-text">┌───────────────────────────────────────────────────────────────┐
+│                      STRICT CODE BUDGETS                      │
+│                                                               │
+│  • Cyclomatic Complexity per Function:  MAX 7 (ESLint Error)  │
+│  • Function Length:                     MAX 50–60 Lines       │
+│  • File Length:                         MAX 250–300 Lines     │
+│  • Parameter Count per Function:        MAX 3–4 Parameters    │
+│  • Maximum Nesting Depth:               MAX 3 Levels          │
+└───────────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="21-cyclomatic-complexity-maximum-le-7">2.1 Cyclomatic Complexity Maximum <span class="katex-inline math-inline" data-math="\le 7">\( \le 7 \)</span> <a class="header-anchor" href="#21-cyclomatic-complexity-maximum-le-7" title="Link to section">#</a></h3>
+<ul>
+<li><strong>Enforcement:</strong> Enforced via automated linting (<code>complexity: [&quot;error&quot;, 7]</code>).</li>
+<li><strong>Remediation Techniques:</strong></li>
+<li><em>Guard Clauses / Early Returns (Bouncer Pattern):</em> Exit early on invalid conditions to eliminate nested <code>if/else</code> pyramids (the Arrow Anti-Pattern).</li>
+<li><em>Lookup Tables & Dispatch Maps:</em> Replace multi-case switch statements with <code>Map&lt;Key, Handler&gt;</code> or object dispatchers.</li>
+<li><em>Subroutine Decomposition:</em> Break multi-stage procedures into atomic, well-named private helper functions.</li>
+<li><em>Polymorphism:</em> Delegate variant behavior to specialized strategy objects.</li>
+</ul>
+<h3 id="22-maximum-function-file-length">2.2 Maximum Function & File Length <a class="header-anchor" href="#22-maximum-function-file-length" title="Link to section">#</a></h3>
+<ul>
+<li><strong>Function Length (<span class="katex-inline math-inline" data-math="\le 50-60">\( \le 50-60 \)</span> lines):</strong> Every function must fit on a single screen without vertical scrolling. If a routine exceeds 60 lines, it is violating SRP and must be split.</li>
+<li><strong>File Length (<span class="katex-inline math-inline" data-math="\le 250-300">\( \le 250-300 \)</span> lines):</strong> No file should exceed 300 lines. Larger files indicate mixed responsibilities and must be decomposed into cohesive sub-modules.</li>
+<li><strong>Parameter Count (<span class="katex-inline math-inline" data-math="\le 3-4">\( \le 3-4 \)</span> params):</strong> If a function requires more than 3 parameters, bundle them into a strongly-typed options/config object.</li>
+</ul>
+<hr class="divider" />
+<h2 id="3-anti-monolith-mandate-no-kitchen-sink-files">3. Anti-Monolith Mandate ("No Kitchen Sink Files") <a class="header-anchor" href="#3-anti-monolith-mandate-no-kitchen-sink-files" title="Link to section">#</a></h2>
+<p>One of the most destructive anti-patterns is the "Kitchen Sink" file: dumping miscellaneous helpers into a catch-all file or creating a massive, God-object <code>GameManager.ts</code>.</p>
+<h3 id="strict-anti-monolith-rules">Strict Anti-Monolith Rules: <a class="header-anchor" href="#strict-anti-monolith-rules" title="Link to section">#</a></h3>
+<ol>
+<li><strong>Forbidden Catch-All File Names:</strong>  </li>
+</ol>
+<p>The creation of any of the following files is <strong>strictly banned</strong>:</p>
+<ul>
+<li>❌ <code>utils.ts</code> / <code>utils.js</code></li>
+<li>❌ <code>helpers.ts</code> / <code>helpers.js</code></li>
+<li>❌ <code>common.ts</code> / <code>common.js</code></li>
+<li>❌ <code>misc.ts</code> / <code>misc.js</code></li>
+<li>❌ <code>manager.ts</code> / <code>shared.ts</code></li>
+<li><strong>Cohesive, Domain-Specific Naming:</strong>  </li>
+</ul>
+<p>Every utility must be explicitly named after its bounded domain:</p>
+<ul>
+<li>❌ <code>utils.ts</code> <span class="katex-inline math-inline" data-math="\longrightarrow">\( \longrightarrow \)</span> ✅ <code>BitwiseMath.ts</code>, <code>ManhattanDistance.ts</code>, <code>SeedablePrng.ts</code></li>
+<li>❌ <code>helpers.ts</code> <span class="katex-inline math-inline" data-math="\longrightarrow">\( \longrightarrow \)</span> ✅ <code>CodonFormatter.ts</code>, <code>WaveformGenerator.ts</code></li>
+<li><strong>One Primary Class Per File:</strong>  </li>
+</ul>
+<p>Each source file must declare exactly one primary class or interface. Supporting types/enums may live in the same file only if they are private to that module.</p>
+<ol>
+<li><strong>Strict Directory Taxonomy:</strong>  </li>
+</ol>
+<p>Organize files into cohesive domain packages:</p>
+<pre><code class="language-text">   src/
+   ├── core/
+   │   ├── domain/        # Pore, Cell, GenomeSafe, PoreWorkshop, PoreBattery
+   │   ├── physics/       # Vent emission, thermodynamics, Landauer power
+   │   ├── logic/         # Gate definitions, AST nodes, parallel evaluation
+   │   ├── codons/        # 64-entry degenerate table, translation, introns
+   │   └── prng/          # Mulberry32 seedable generator
+   ├── engine/            # Simulation loop, scheduler, Web Worker dispatch
+   └── presentation/      # Canvas/WebGL renderer, UI components, HUD telemetry</code></pre>
+<hr class="divider" />
+<h2 id="4-separation-of-concerns-clean-layered-architecture">4. Separation of Concerns & Clean Layered Architecture <a class="header-anchor" href="#4-separation-of-concerns-clean-layered-architecture" title="Link to section">#</a></h2>
+<p>Siliquarium enforces a strict unidirectional dependency rule:</p>
+<pre><code class="language-text">  [Presentation Layer]   (React, HTML5 Canvas, WebGL, UI Controls)
+           │
+           ▼ (Reads telemetry packets)
+  [Engine / Application] (Web Worker Dispatch, Tick Loop, Scheduler)
+           │
+           ▼ (Executes domain physics)
+  [Core Domain Layer]    (Pores, Cells, Gates, Codons, Thermodynamics)</code></pre>
+<ul>
+<li><strong>The Zero-DOM Mandate in Core:</strong>  </li>
+</ul>
+<p>The core simulation kernel (<code>src/core/</code> and <code>src/engine/</code>) must have <strong>zero imports or dependencies on browser APIs</strong>:</p>
+<ul>
+<li>❌ No <code>document</code>, <code>window</code>, <code>HTMLElement</code>, <code>localStorage</code>, or <code>CanvasRenderingContext2D</code>.</li>
+<li>The simulation must be 100% executable inside Node.js CLI test runners and headless Web Workers.</li>
+<li><strong>Decoupled Telemetry:</strong>  </li>
+</ul>
+<p>The core engine communicates with the UI thread strictly via flat, compressed binary buffers (<code>Float32Array</code>, <code>Uint8Array</code>) or typed messaging ports, preventing GC lag on the 60 FPS render thread.</p>
+<hr class="divider" />
+<h2 id="5-type-safety-immutability-defensive-programming">5. Type Safety, Immutability, & Defensive Programming <a class="header-anchor" href="#5-type-safety-immutability-defensive-programming" title="Link to section">#</a></h2>
+<ol>
+<li><strong>Strict TypeScript Compiler Settings:</strong></li>
+<li><code>&quot;strict&quot;: true</code></li>
+<li><code>&quot;noImplicitAny&quot;: true</code></li>
+<li><code>&quot;strictNullChecks&quot;: true</code></li>
+<li><code>&quot;strictFunctionTypes&quot;: true</code></li>
+<li><code>&quot;noUnusedLocals&quot;: true</code></li>
+<li><code>&quot;noUnusedParameters&quot;: true</code></li>
+<li><code>&quot;noImplicitReturns&quot;: true</code></li>
+<li><strong>Zero <code>any</code> Types:</strong>  </li>
+</ol>
+<p>Use of <code>any</code> is strictly prohibited. Use <code>unknown</code> with type narrowing guards, generic parameters, or discriminated unions.</p>
+<ol>
+<li><strong>Immutability & Pure Functions:</strong>  </li>
+<li>Declare properties as <code>readonly</code> wherever possible.</li>
+<li>Core mathematical evaluations (AST evaluation, codon parsing, metric distances) must be pure functions with zero hidden side effects.</li>
+<li><strong>Fail-Fast Boundary Validation:</strong>  </li>
+</ol>
+<p>Public methods must validate preconditions immediately (e.g., verifying grid coordinate bounds, non-negative energy tokens, valid 6-bit strings). Throw descriptive, custom domain errors rather than letting corrupt state silently propagate.</p>
+<hr class="divider" />
+<h2 id="6-scientific-algorithmic-integrity-the-zero-smuggling-mandate">6. Scientific & Algorithmic Integrity (The Zero-Smuggling Mandate) <a class="header-anchor" href="#6-scientific-algorithmic-integrity-the-zero-smuggling-mandate" title="Link to section">#</a></h2>
+<p>Siliquarium is an authentic artificial life simulator, not an engineering CAD tool with smuggled answers:</p>
+<ol>
+<li><strong>Strict Operator Blindness:</strong>  </li>
+</ol>
+<p>The replication and mutation operators must operate completely blind to the environment. They cannot inspect vent rhythms, cell energy levels, or neighbor circuits to guide mutation targets.</p>
+<ol>
+<li><strong>Zero Hidden Gradients:</strong>  </li>
+</ol>
+<p>No external cost functions or artificial directional beacons are permitted.</p>
+<ol>
+<li><strong>The Epistemic Cut:</strong>  </li>
+</ol>
+<p>Active gates in a pore's workshop must never be mutated during their operational lifetime. Mutation occurs exclusively on the inert symbolic bitstring during replication into a child pore.</p>
+<ol>
+<li><strong>Thermodynamic Energy Conservation:</strong>  </li>
+</ol>
+<p>Energy is strictly conserved: <span class="katex-inline math-inline" data-math="\sum E_{\text{in}} = \sum E_{\text{stored}} + \sum E_{\text{dissipated}}">\( \sum E_{\text{in}} = \sum E_{\text{stored}} + \sum E_{\text{dissipated}} \)</span>. No energy tokens may appear or disappear without accounting.</p>
+  </main>
+
+  <footer>
+    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
+    <p style="margin-top: 0.4rem;">
+      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
+      PolyForm Noncommercial License 1.0.0
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand &amp; Logo Gallery — Siliquarium</title>
+  <link rel="icon" type="image/jpeg" href="assets/logos/logo.jpg">
+  
+  <!-- Modern Clean Typography & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <style>
+    :root {
+      --bg-ocean: #060911;
+      --bg-card: #0d1322;
+      --bg-surface: #131c31;
+      --border: #1e2c4a;
+      --border-glow: #00e5ff33;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #00e5ff;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-ocean);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    }
+    .brand-logo span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+    .nav-link.active {
+      color: var(--cyan);
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.4);
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.25rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.25rem; color: #e2e8f0; }
+    h4 { font-size: 1.05rem; color: var(--cyan); }
+    
+    p { margin-bottom: 1.25rem; color: #cbd5e1; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { color: var(--text-primary); font-style: italic; }
+
+    .header-anchor {
+      opacity: 0;
+      color: var(--cyan);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      font-weight: 400;
+      transition: opacity 0.2s;
+    }
+    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
+      opacity: 0.6;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #70f3ff;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+      color: #cbd5e1;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    /* Code & Pre */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Blockquotes & Callouts */
+    blockquote.callout {
+      border-left: 4px solid var(--cyan);
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    /* GitHub-style Alerts */
+    .alert {
+      border-left: 4px solid;
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .alert-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .alert-note { border-color: var(--cyan); }
+    .alert-note .alert-title { color: var(--cyan); }
+    .alert-tip { border-color: var(--emerald); }
+    .alert-tip .alert-title { color: var(--emerald); }
+    .alert-important { border-color: var(--purple); }
+    .alert-important .alert-title { color: var(--purple); }
+    .alert-warning { border-color: var(--amber); }
+    .alert-warning .alert-title { color: var(--amber); }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th {
+      background: var(--bg-surface);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Math */
+    .math-block {
+      overflow-x: auto;
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    /* Images */
+    .img-wrapper {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    .img-caption {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logos/logo.jpg" alt="Siliquarium Logo">
+        <span>Siliquarium</span>
+      </a>
+      <nav class="nav-bar">
+        <a href="index.html" class="nav-link ">🐠 Portal / Overview</a>
+<a href="THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
+<a href="BRAND_IDENTITY.html" class="nav-link ">🎨 Brand Identity</a>
+<a href="logos.html" class="nav-link active">🖼️ Logo Gallery</a>
+<a href="DEVELOPMENT_STANDARDS.html" class="nav-link ">🏛️ Dev Standards</a>
+<a href="QA_AND_TESTING_STANDARDS.html" class="nav-link ">🧪 QA Standards</a>
+<a href="DOCUMENTATION_STANDARDS.html" class="nav-link ">📚 Doc Standards</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <h1>🖼️ Siliquarium Brand & Logo Gallery</h1>
+    <p>Complete production asset gallery featuring the official canonical brand mark, the 5 Golden Spiral Nautilus variations, and the original prebiotic candidate suite.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <a href="assets/logos/logo.jpg" target="_blank">
+            <img src="assets/logos/logo.jpg" alt="Official Canonical Logo" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+        </div>
+        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Official</span>
+            <code style="font-size: 0.75rem;">logo.jpg</code>
+          </div>
+          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">Official Canonical Logo</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">Variation 4: The 3D Benthic Basalt Columns (q, r, z)</p>
+          <a href="assets/logos/logo.jpg" download="logo.jpg" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+        </div>
+      </div>
+    
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <a href="assets/logos/nautilus_var4_isometric.jpg" target="_blank">
+            <img src="assets/logos/nautilus_var4_isometric.jpg" alt="Variation 4: 3D Benthic Basalt Columns" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+        </div>
+        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Selected</span>
+            <code style="font-size: 0.75rem;">nautilus_var4_isometric.jpg</code>
+          </div>
+          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">Variation 4: 3D Benthic Basalt Columns</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">Isometric 3D hexagonal basalt columns with etched (q, r, z) foundation.</p>
+          <a href="assets/logos/nautilus_var4_isometric.jpg" download="nautilus_var4_isometric.jpg" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+        </div>
+      </div>
+    
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <a href="assets/logos/nautilus_var5_embryo.jpg" target="_blank">
+            <img src="assets/logos/nautilus_var5_embryo.jpg" alt="Variation 5: The Living Silicon Embryo" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+        </div>
+        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Epistemic Cut</span>
+            <code style="font-size: 0.75rem;">nautilus_var5_embryo.jpg</code>
+          </div>
+          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">Variation 5: The Living Silicon Embryo</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">Coiled 1D genome tape at center radiating into logic gate chambers.</p>
+          <a href="assets/logos/nautilus_var5_embryo.jpg" download="nautilus_var5_embryo.jpg" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+        </div>
+      </div>
+    
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <a href="assets/logos/nautilus_var2_thermal.jpg" target="_blank">
+            <img src="assets/logos/nautilus_var2_thermal.jpg" alt="Variation 2: Hydrothermal Thermal Core" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+        </div>
+        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Thermal Glow</span>
+            <code style="font-size: 0.75rem;">nautilus_var2_thermal.jpg</code>
+          </div>
+          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">Variation 2: Hydrothermal Thermal Core</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">Volcanic amber thermal glow at center venting into cyan outer chambers.</p>
+          <a href="assets/logos/nautilus_var2_thermal.jpg" download="nautilus_var2_thermal.jpg" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+        </div>
+      </div>
+    
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <a href="assets/logos/nautilus_var1_minimal.jpg" target="_blank">
+            <img src="assets/logos/nautilus_var1_minimal.jpg" alt="Variation 1: Minimalist Hex Shell" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+        </div>
+        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Minimalist</span>
+            <code style="font-size: 0.75rem;">nautilus_var1_minimal.jpg</code>
+          </div>
+          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">Variation 1: Minimalist Hex Shell</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">Clean high-contrast flat vector line art on dark obsidian.</p>
+          <a href="assets/logos/nautilus_var1_minimal.jpg" download="nautilus_var1_minimal.jpg" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+        </div>
+      </div>
+    
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <a href="assets/logos/nautilus_var3_circuit.jpg" target="_blank">
+            <img src="assets/logos/nautilus_var3_circuit.jpg" alt="Variation 3: Fibonacci Circuit Ribbon" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+        </div>
+        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">PCB Die</span>
+            <code style="font-size: 0.75rem;">nautilus_var3_circuit.jpg</code>
+          </div>
+          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">Variation 3: Fibonacci Circuit Ribbon</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">Layered golden microchip ribbon with central microprocessor die.</p>
+          <a href="assets/logos/nautilus_var3_circuit.jpg" download="nautilus_var3_circuit.jpg" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+        </div>
+      </div>
+    
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <a href="assets/logos/logo_option_1_hex_gate.jpg" target="_blank">
+            <img src="assets/logos/logo_option_1_hex_gate.jpg" alt="Option 1: The Hydrothermal Hex Gate" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+        </div>
+        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Candidate</span>
+            <code style="font-size: 0.75rem;">logo_option_1_hex_gate.jpg</code>
+          </div>
+          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">Option 1: The Hydrothermal Hex Gate</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">Basalt hex pore with branching bioluminescent cyan &amp; gold circuits.</p>
+          <a href="assets/logos/logo_option_1_hex_gate.jpg" download="logo_option_1_hex_gate.jpg" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+        </div>
+      </div>
+    
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <a href="assets/logos/logo_option_2_silicon_diatom.jpg" target="_blank">
+            <img src="assets/logos/logo_option_2_silicon_diatom.jpg" alt="Option 2: The Silicon Diatom" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+        </div>
+        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Candidate</span>
+            <code style="font-size: 0.75rem;">logo_option_2_silicon_diatom.jpg</code>
+          </div>
+          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">Option 2: The Silicon Diatom</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">Microscopic diatom shell integrated with AND/OR/NOT logic gates.</p>
+          <a href="assets/logos/logo_option_2_silicon_diatom.jpg" download="logo_option_2_silicon_diatom.jpg" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+        </div>
+      </div>
+    
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <a href="assets/logos/logo_option_3_vent_spire.jpg" target="_blank">
+            <img src="assets/logos/logo_option_3_vent_spire.jpg" alt="Option 3: The Abyssal Vent Spire" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+        </div>
+        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Candidate</span>
+            <code style="font-size: 0.75rem;">logo_option_3_vent_spire.jpg</code>
+          </div>
+          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">Option 3: The Abyssal Vent Spire</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">Volcanic basalt chimney releasing an upward plume of glowing digital pulses.</p>
+          <a href="assets/logos/logo_option_3_vent_spire.jpg" download="logo_option_3_vent_spire.jpg" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+        </div>
+      </div>
+    
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <a href="assets/logos/logo_option_4_silicon_nautilus.jpg" target="_blank">
+            <img src="assets/logos/logo_option_4_silicon_nautilus.jpg" alt="Option 4: The Silicon Nautilus (Original)" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+        </div>
+        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Candidate</span>
+            <code style="font-size: 0.75rem;">logo_option_4_silicon_nautilus.jpg</code>
+          </div>
+          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">Option 4: The Silicon Nautilus (Original)</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">Initial nautilus concept with glowing logic traces in hex chambers.</p>
+          <a href="assets/logos/logo_option_4_silicon_nautilus.jpg" download="logo_option_4_silicon_nautilus.jpg" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+        </div>
+      </div>
+    
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <a href="assets/logos/logo_option_5_silicon_fish.jpg" target="_blank">
+            <img src="assets/logos/logo_option_5_silicon_fish.jpg" alt="Option 5: The Benthic Circuit Fish" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          </a>
+        </div>
+        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Candidate</span>
+            <code style="font-size: 0.75rem;">logo_option_5_silicon_fish.jpg</code>
+          </div>
+          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">Option 5: The Benthic Circuit Fish</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">Minimalist geometric fish silhouette formed of circuit traces &amp; logic core.</p>
+          <a href="assets/logos/logo_option_5_silicon_fish.jpg" download="logo_option_5_silicon_fish.jpg" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+        </div>
+      </div>
+    </div>
+  
+  </main>
+
+  <footer>
+    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
+    <p style="margin-top: 0.4rem;">
+      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
+      PolyForm Noncommercial License 1.0.0
+    </p>
+  </footer>
+</body>
+</html>

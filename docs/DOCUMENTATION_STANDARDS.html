@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation &amp; Pedagogical Standards — Siliquarium</title>
+  <link rel="icon" type="image/jpeg" href="assets/logos/logo.jpg">
+  
+  <!-- Modern Clean Typography & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <style>
+    :root {
+      --bg-ocean: #060911;
+      --bg-card: #0d1322;
+      --bg-surface: #131c31;
+      --border: #1e2c4a;
+      --border-glow: #00e5ff33;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #00e5ff;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-ocean);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    }
+    .brand-logo span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+    .nav-link.active {
+      color: var(--cyan);
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.4);
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.25rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.25rem; color: #e2e8f0; }
+    h4 { font-size: 1.05rem; color: var(--cyan); }
+    
+    p { margin-bottom: 1.25rem; color: #cbd5e1; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { color: var(--text-primary); font-style: italic; }
+
+    .header-anchor {
+      opacity: 0;
+      color: var(--cyan);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      font-weight: 400;
+      transition: opacity 0.2s;
+    }
+    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
+      opacity: 0.6;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #70f3ff;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+      color: #cbd5e1;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    /* Code & Pre */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Blockquotes & Callouts */
+    blockquote.callout {
+      border-left: 4px solid var(--cyan);
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    /* GitHub-style Alerts */
+    .alert {
+      border-left: 4px solid;
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .alert-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .alert-note { border-color: var(--cyan); }
+    .alert-note .alert-title { color: var(--cyan); }
+    .alert-tip { border-color: var(--emerald); }
+    .alert-tip .alert-title { color: var(--emerald); }
+    .alert-important { border-color: var(--purple); }
+    .alert-important .alert-title { color: var(--purple); }
+    .alert-warning { border-color: var(--amber); }
+    .alert-warning .alert-title { color: var(--amber); }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th {
+      background: var(--bg-surface);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Math */
+    .math-block {
+      overflow-x: auto;
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    /* Images */
+    .img-wrapper {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    .img-caption {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logos/logo.jpg" alt="Siliquarium Logo">
+        <span>Siliquarium</span>
+      </a>
+      <nav class="nav-bar">
+        <a href="index.html" class="nav-link ">🐠 Portal / Overview</a>
+<a href="THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
+<a href="BRAND_IDENTITY.html" class="nav-link ">🎨 Brand Identity</a>
+<a href="logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<a href="DEVELOPMENT_STANDARDS.html" class="nav-link ">🏛️ Dev Standards</a>
+<a href="QA_AND_TESTING_STANDARDS.html" class="nav-link ">🧪 QA Standards</a>
+<a href="DOCUMENTATION_STANDARDS.html" class="nav-link active">📚 Doc Standards</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 id="siliquarium-documentation-pedagogical-standards">📚 Siliquarium Documentation & Pedagogical Standards <a class="header-anchor" href="#siliquarium-documentation-pedagogical-standards" title="Link to section">#</a></h1>
+<p><em>The 5-Dimension Conceptual Rubric, Non-Engineer Accessibility, and Epistemological Integrity</em></p>
+<hr class="divider" />
+<h2 id="1-the-5-dimension-conceptual-pedagogical-rubric">1. The 5-Dimension Conceptual Pedagogical Rubric <a class="header-anchor" href="#1-the-5-dimension-conceptual-pedagogical-rubric" title="Link to section">#</a></h2>
+<p>All documentation, tutorials, and academic treatises in Siliquarium must meet institutional-grade teaching standards evaluated across five strict dimensions (targeting a perfect 50/50 score):</p>
+<div class="table-container"><table><thead><tr><th>Dimension</th><th>Standard</th><th>How to Implement in Siliquarium</th></tr></thead><tbody><tr><td><strong>D1: Visceral Intuition & Foundational Motivation</strong></td><td>Never drop a student into formal mathematics without establishing the physical stakes and intuitive motivation first.</td><td>Open every chapter by explaining <em>why</em> an organism faces an existential crisis (e.g., the dilution catastrophe, the danger of thermal noise, the struggle for limited vent calories).</td></tr><tr><td><strong>D2: The Gradient of Abstraction</strong></td><td>Build a gentle, continuous bridge from everyday common sense to formal mechanics. Avoid "complexity cliffs."</td><td>Never jump straight from a metaphor to a differential equation or measure-theoretic summation. Introduce a 2-bit toy example first, then generalize.</td></tr><tr><td><strong>D3: Deconstructive Equation Anatomy</strong></td><td>Every formula must be accompanied by an "Equation Decoder" breaking down each algebraic variable.</td><td>Color-code terms and provide a 3-part breakdown: (1) Formal symbol, (2) Plain-English meaning, (3) Physical biological consequence.</td></tr><tr><td><strong>D4: Concrete Micro-Scaffolding & Toy Pre-Traces</strong></td><td>Provide concrete, worked numerical traces before showing large-scale aggregate results.</td><td>Include worked step-by-step trace tables showing a single pore over 5 ticks (e.g., Tick 1: Battery = 50, Vent pulse = 1, Gate toggles = 2, Net Tokens = +3).</td></tr><tr><td><strong>D5: Conceptual Misconception Immunity</strong></td><td>Proactively identify and dismantle common student and skeptic misunderstandings before they take root.</td><td>Include explicit "Skeptic FAQ" callouts addressing teleology, "smuggled intelligence," and the difference between mutating code vs mutating bodies.</td></tr></tbody></table></div>
+<hr class="divider" />
+<h2 id="2-the-non-engineer-accessibility-mandate">2. The Non-Engineer Accessibility Mandate <a class="header-anchor" href="#2-the-non-engineer-accessibility-mandate" title="Link to section">#</a></h2>
+<p>Siliquarium is designed to be understood by biologists, students, curious thinkers, and non-engineers. <strong>Engineering jargon must never be used as a substitute for clear explanation.</strong></p>
+<h3 id="the-four-sacred-analogies">The Four Sacred Analogies <a class="header-anchor" href="#the-four-sacred-analogies" title="Link to section">#</a></h3>
+<p>When explaining Siliquarium mechanics, always anchor explanations to these foundational metaphors:</p>
+<ol>
+<li><strong>The Safe and the Workshop (The Epistemic Cut):</strong>  </li>
+<li><em>Jargon:</em> Genotype-phenotype translation bottleneck.  </li>
+<li><em>Plain English:</em> The genome is an inert recipe resting in a safe (the cookbook). The active circuit is the kitchen. You never mutate the frying pan while cooking; you only photocopy the recipe when opening a new restaurant.</li>
+<li><strong>The Hydrothermal Vent (The Digital Drumbeat):</strong>  </li>
+<li><em>Jargon:</em> Non-equilibrium periodic bitstream flux.  </li>
+<li><em>Plain English:</em> Digital food is a musical rhythm or drumbeat passing by. An organism "eats" by catching the rhythm with its internal pendulum.</li>
+<li><strong>The Rock Pores (Nature's First Walls):</strong>  </li>
+<li><em>Jargon:</em> Inorganic mineral micro-compartmentation.  </li>
+<li><em>Plain English:</em> Microscopic pockets in deep-sea volcanic rocks that act as free stone houses, protecting proto-life from being washed away before lipid cell membranes evolved.</li>
+<li><strong>The Battery (The Local Pantry):</strong>  </li>
+<li><em>Jargon:</em> Discrete dynamic CMOS power counter.  </li>
+<li><em>Plain English:</em> A calorie counter or health meter. Toggling gates burns calories; catching vent rhythms adds calories. Reaching 100 calories triggers division.</li>
+</ol>
+<hr class="divider" />
+<h2 id="3-equation-decoder-anatomy-format">3. Equation Decoder Anatomy Format <a class="header-anchor" href="#3-equation-decoder-anatomy-format" title="Link to section">#</a></h2>
+<p>Whenever a mathematical formula is introduced, format it using the standardized Equation Decoder pattern:</p>
+<pre><code class="language-markdown">$$E_{\text{net}} = E_{\text{harvest}} - \sum_{i=1}^G \Delta E_i - E_{\text{leak}}$$
+
+&gt; ### 🔍 Equation Decoder
+&gt; - **$E_{\text{harvest}}$ (Food Influx):** The raw energy tokens captured when the circuit synchronizes with the incoming vent pulse (+5 tokens per harmonic match).
+&gt; - **$\sum \Delta E_i$ (Metabolic Cost):** The Landauer dynamic power dissipated by all $G$ toggling gates (1 token burned per gate transition).
+&gt; - **$E_{\text{leak}}$ (Basal Maintenance):** Constant background entropy cost required to prevent internal latches from decaying (e.g., 1 token every 10 ticks).</code></pre>
+<hr class="divider" />
+<h2 id="4-academic-provenance-master-citations">4. Academic Provenance & Master Citations <a class="header-anchor" href="#4-academic-provenance-master-citations" title="Link to section">#</a></h2>
+<p>Siliquarium stands on the shoulders of giants across biophysics, information theory, and evolutionary biology. Every major mechanism must cite its peer-reviewed foundation:</p>
+<ul>
+<li><strong>Alkaline Hydrothermal Vents & Inorganic Pores:</strong>  </li>
+</ul>
+<p><em>Russell, M. J., & Hall, A. J. (1997).</em> "The emergence of life from iron monosulphide bubbles at a submarine hydrothermal spring." <em>Journal of the Geological Society</em>, 154(3), 377–402.</p>
+<p><em>Lane, N. (2015).</em> *The Vital Question: Energy, Evolution, and the Origins of Complex Life.* W. W. Norton & Company.</p>
+<ul>
+<li><strong>The Epistemic Cut (Genotype-Phenotype Separation):</strong>  </li>
+</ul>
+<p><em>Pattee, H. H. (1972).</em> "The nature of hierarchical controls in living matter." <em>Foundations of Mathematical Biology</em>, 1, 1–22.</p>
+<p><em>Davies, P. (1999).</em> *The Fifth Miracle: The Search for the Origin and Meaning of Life.* Simon & Schuster.</p>
+<ul>
+<li><strong>Thermodynamic Limits of Information:</strong>  </li>
+</ul>
+<p><em>Landauer, R. (1961).</em> "Irreversibility and heat generation in the computing process." <em>IBM Journal of Research and Development</em>, 5(3), 183–191.</p>
+<p><em>Bennett, C. H. (1982).</em> "The thermodynamics of computation—a review." <em>International Journal of Theoretical Physics</em>, 21(12), 905–940.</p>
+<ul>
+<li><strong>Autopoiesis & Self-Maintenance:</strong>  </li>
+</ul>
+<p><em>Maturana, H. R., & Varela, F. J. (1980).</em> *Autopoiesis and Cognition: The Realization of the Living.* D. Reidel Publishing.</p>
+<ul>
+<li><strong>Self-Reproducing Automata:</strong>  </li>
+</ul>
+<p><em>Von Neumann, J. (1966).</em> *Theory of Self-Reproducing Automata* (Edited and completed by A. W. Burks). University of Illinois Press.</p>
+<hr class="divider" />
+<h2 id="5-the-html-first-human-documentation-mandate-standing-rule">5. The HTML-First Human Documentation Mandate (Standing Rule) <a class="header-anchor" href="#5-the-html-first-human-documentation-mandate-standing-rule" title="Link to section">#</a></h2>
+<blockquote class="callout">### 📜 Standing Architectural Mandate: Dual-Format Publishing<br/>All documentation intended for human comprehension, review, and instruction must be published and maintained in <strong>both</strong> GitHub Flavored Markdown (.md) and rich, self-contained HTML (.html).</blockquote>
+<ol>
+<li><strong>Zero-Server Standalone Accessibility:</strong>  </li>
+</ol>
+<p>Every generated HTML document must open directly in modern web browsers via the local ile:/// protocol without requiring an active HTTP server or build step at view time.</p>
+<ol>
+<li><strong>The Deep-Sea Abyssal Theme:</strong>  </li>
+</ol>
+<p>HTML documents must follow Siliquarium's dark oceanic design system:</p>
+<ul>
+<li>Background: Dark abyssal slate/obsidian (#0a0e17 / #0f172a).</li>
+<li>Text: High-contrast legible typography (#e2e8f0 / #f8fafc) with clean sans-serif font stacks.</li>
+<li>Accents: Bioluminescent cyan (#00e5ff) for primary links and titles, thermal amber (#ffb300) for emphasis, and emerald (#10b981) for success badges.</li>
+<li><strong>Mathematical & Diagrammatic Fidelity:</strong>  </li>
+</ul>
+<p>Equations written in LaTeX must render cleanly (via KaTeX / MathJax with clear plaintext fallbacks), and tables must be fully responsive with zebra striping.</p>
+<ol>
+<li><strong>Unified Top Navigation:</strong>  </li>
+</ol>
+<p>Every human-facing HTML document must include a unified navigation header linking across the entire documentation suite:</p>
+<ul>
+<li><strong>Overview / Portal</strong> (index.html)</li>
+<li><strong>Theoretical Model</strong> (THEORETICAL_MODEL.html)</li>
+<li><strong>Epistemic Foundations</strong> (EPISTEMIC_FOUNDATIONS.html)</li>
+<li><strong>Brand Identity & Logos</strong> (BRAND_IDENTITY.html / logos.html)</li>
+<li><strong>Development Standards</strong> (DEVELOPMENT_STANDARDS.html)</li>
+<li><strong>QA & Testing Standards</strong> (QA_AND_TESTING_STANDARDS.html)</li>
+<li><strong>Documentation Standards</strong> (DOCUMENTATION_STANDARDS.html)</li>
+<li><strong>Continuous Build Synchronization:</strong>  </li>
+</ul>
+<p>Any prompt or commit that modifies documentation must execute the HTML doc build pipeline (</p>
+<p>ode scripts/build_docs_html.mjs) to guarantee that HTML files never drift out of sync with their Markdown sources.</p>
+  </main>
+
+  <footer>
+    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
+    <p style="margin-top: 0.4rem;">
+      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
+      PolyForm Noncommercial License 1.0.0
+    </p>
+  </footer>
+</body>
+</html>
