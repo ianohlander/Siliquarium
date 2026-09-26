@@ -43,7 +43,7 @@ export class DigitalPaleontologist {
 
     for (const pore of pores) {
       const cell = pore.getResident();
-      if (!cell) continue;
+      if (!cell || cell.getGeneration() === 0) continue;
 
       const workshop = cell.getWorkshop();
       const matches = MotifScanner.scanWorkshop(workshop);

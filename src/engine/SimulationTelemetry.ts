@@ -19,6 +19,8 @@ export interface IPoreTelemetry {
   readonly age: number;
   readonly generation: number;
   readonly gateCount: number;
+  readonly gateTypes: readonly string[];
+  readonly hasSpore: boolean;
   readonly tapeBitstring: string;
   readonly catalyticYield: number;
   readonly toggleCount: number;
@@ -38,6 +40,7 @@ export interface ISimulationTelemetry {
   readonly livingCount: number;
   readonly carcassCount: number;
   readonly emptyCount: number;
+  readonly sporeCount: number;
   readonly totalEnergyInUniverse: number;
   readonly ledger: ILedgerReport;
   readonly vent: IVentTelemetry;

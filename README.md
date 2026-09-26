@@ -42,8 +42,11 @@ While BooleanGA explores **heteropoietic engineering synthesis** (evolving ALUs,
 - **[`THEORETICAL_MODEL.md`](THEORETICAL_MODEL.md):** Complete 21-section master biophysical specification, equations, and thermodynamic models.
 - **[`docs/EPISTEMIC_FOUNDATIONS.md`](docs/EPISTEMIC_FOUNDATIONS.md):** Epistemological boundaries, prebiotic battery physics (Mitchell, Russell, Lane), the Epistemic Cut (Pattee, Von Neumann), and the anti-smuggling defense.
 - **[`docs/BRAND_IDENTITY.md`](docs/BRAND_IDENTITY.md):** Brand philosophy, Fibonacci nautilus suites, biophysical design cognates, and asset inventory.
+- **[`docs/PHASE_3_VISUALIZER_GUIDE.md`](docs/PHASE_3_VISUALIZER_GUIDE.md):** 3D Seafloor rendering, hex math, and interactive circuit microscope.
+- **[`docs/PHASE_4_PALEONTOLOGY_GUIDE.md`](docs/PHASE_4_PALEONTOLOGY_GUIDE.md):** Digital Paleontologist, Weisfeiler-Lehman topological graph hashing, and Uri Alon motifs.
+- **[`docs/PHASE_5_PELAGIC_SPORES_GUIDE.md`](docs/PHASE_5_PELAGIC_SPORES_GUIDE.md):** Pelagic planktonic detachment, advection drift, transparent aqueous water columns, and God-suite interactive controls.
 - **[`standards/DEVELOPMENT_STANDARDS.md`](standards/DEVELOPMENT_STANDARDS.md):** Strict OOP/SOLID architecture, complexity budgets ($\le 7$), branded types, Web Worker threading, and anti-monolith file structure.
-- **[`standards/QA_AND_TESTING_STANDARDS.md`](standards/QA_AND_TESTING_STANDARDS.md):** Native zero-dependency Node.js test harness, 8-stage progressive test pipeline, and physical conservation audits.
+- **[`standards/QA_AND_TESTING_STANDARDS.md`](standards/QA_AND_TESTING_STANDARDS.md):** Native zero-dependency Node.js test harness, progressive test pipeline, and physical conservation audits.
 - **[`standards/DOCUMENTATION_STANDARDS.md`](standards/DOCUMENTATION_STANDARDS.md):** 5-Dimension Conceptual Rubric (50/50 target), the 4 Sacred Everyday Analogies, and academic provenance.
 
 ---
@@ -55,7 +58,7 @@ While BooleanGA explores **heteropoietic engineering synthesis** (evolving ALUs,
 - [x] **Phase 2:** Progressive 8-Stage Zero-Dependency Test Suite & Energy/Mass Invariant Audits.
 - [x] **Phase 3:** WebGL 3D Seafloor & Interactive Circuit Microscope Visualizer (`OrbitCamera`, `SeafloorRenderer3D`, `CircuitMicroscopeView`, `HUDController`, `SimulationLoop`).
 - [x] **Phase 4:** Digital Paleontologist Motif Scanner, Evolutionary Flight Recorder & Lenski Fossil Freezer (`MotifScanner`, `WeisfeilerLehmanHasher`, `EvolutionaryFlightRecorder`, `FossilFreezer`).
-- [ ] **Phase 5:** Pelagic Planktonic Detachment, Spore Dispersal, and God-Suite Interactive Controls.
+- [x] **Phase 5:** Pelagic Planktonic Detachment, Spore Dispersal, Transparent Aqueous Water Columns, and God-Suite Interactive Controls.
 
 ---
 
@@ -67,7 +70,7 @@ Siliquarium features a native zero-dependency local development server:
 # 1. Compile TypeScript to dist/
 npm run build
 
-# 2. Run the 12-Stage Comprehensive Test Suite
+# 2. Run the 13-Stage Comprehensive Test Suite
 npm test
 
 # 3. Launch the 3D Seafloor & Circuit Microscope Visualizer

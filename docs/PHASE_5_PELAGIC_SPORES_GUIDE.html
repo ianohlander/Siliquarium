@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 5 Pelagic Spore Dispersal &amp; God-Suite Guide — Siliquarium</title>
+  <link rel="icon" type="image/jpeg" href="assets/logos/logo.jpg">
+  
+  <!-- Modern Clean Typography & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <style>
+    :root {
+      --bg-ocean: #060911;
+      --bg-card: #0d1322;
+      --bg-surface: #131c31;
+      --border: #1e2c4a;
+      --border-glow: #00e5ff33;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #00e5ff;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-ocean);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    }
+    .brand-logo span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+    .nav-link.active {
+      color: var(--cyan);
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.4);
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.25rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.25rem; color: #e2e8f0; }
+    h4 { font-size: 1.05rem; color: var(--cyan); }
+    
+    p { margin-bottom: 1.25rem; color: #cbd5e1; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { color: var(--text-primary); font-style: italic; }
+
+    .header-anchor {
+      opacity: 0;
+      color: var(--cyan);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      font-weight: 400;
+      transition: opacity 0.2s;
+    }
+    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
+      opacity: 0.6;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #70f3ff;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+      color: #cbd5e1;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    /* Code & Pre */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Blockquotes & Callouts */
+    blockquote.callout {
+      border-left: 4px solid var(--cyan);
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    /* GitHub-style Alerts */
+    .alert {
+      border-left: 4px solid;
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .alert-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .alert-note { border-color: var(--cyan); }
+    .alert-note .alert-title { color: var(--cyan); }
+    .alert-tip { border-color: var(--emerald); }
+    .alert-tip .alert-title { color: var(--emerald); }
+    .alert-important { border-color: var(--purple); }
+    .alert-important .alert-title { color: var(--purple); }
+    .alert-warning { border-color: var(--amber); }
+    .alert-warning .alert-title { color: var(--amber); }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th {
+      background: var(--bg-surface);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Math */
+    .math-block {
+      overflow-x: auto;
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    /* Images */
+    .img-wrapper {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    .img-caption {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logos/logo.jpg" alt="Siliquarium Logo">
+        <span>Siliquarium</span>
+      </a>
+      <nav class="nav-bar">
+        <a href="index.html" class="nav-link ">🐠 Portal / Overview</a>
+<a href="THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
+<a href="BRAND_IDENTITY.html" class="nav-link ">🎨 Brand Identity</a>
+<a href="PHASE_3_VISUALIZER_GUIDE.html" class="nav-link ">🔬 Phase 3 Visualizer</a>
+<a href="PHASE_4_PALEONTOLOGY_GUIDE.html" class="nav-link ">🦕 Phase 4 Paleontology</a>
+<a href="PHASE_5_PELAGIC_SPORES_GUIDE.html" class="nav-link active">🌊 Phase 5 Spores</a>
+<a href="logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<a href="DEVELOPMENT_STANDARDS.html" class="nav-link ">🏛️ Dev Standards</a>
+<a href="QA_AND_TESTING_STANDARDS.html" class="nav-link ">🧪 QA Standards</a>
+<a href="DOCUMENTATION_STANDARDS.html" class="nav-link ">📚 Doc Standards</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 id="phase-5-pelagic-planktonic-detachment-spore-dispersal-god-suite-guide">🌊 Phase 5: Pelagic Planktonic Detachment, Spore Dispersal & God-Suite Guide <a class="header-anchor" href="#phase-5-pelagic-planktonic-detachment-spore-dispersal-god-suite-guide" title="Link to section">#</a></h1>
+<p><em>The Oceanic Transition: From Sessile Benthic Mound Colonizers to Drifting Pelagic Life</em></p>
+<hr class="divider" />
+<h2 id="1-visceral-motivation-the-broadcast-spawning-of-the-abyssal-seamount">1. Visceral Motivation: The Broadcast Spawning of the Abyssal Seamount <a class="header-anchor" href="#1-visceral-motivation-the-broadcast-spawning-of-the-abyssal-seamount" title="Link to section">#</a></h2>
+<p>In terrestrial and marine biology, sessile organisms anchored to rocky substrates—corals, sponges, bryozoans, and kelp—face a fundamental existential bottleneck: <strong>spatial crowding</strong>. Once all contiguous rock crevices on a hydrothermal mound are occupied by living cells or mineralizing detritus, local division halts. Without dispersal, an entire colony risks catastrophic local extinction if their host vent shifts or cools.</p>
+<p>Nature's solution is <strong>broadcast spawning and pelagic spore dispersal</strong>:</p>
+<ol>
+<li>Mature organisms package daughter genomes into buoyant, dormant <strong>spore capsules</strong>.</li>
+<li>Spores detach from the rock wall and launch into the <strong>permeable water column</strong>.</li>
+<li>Hydrothermal convection plumes and ambient oceanic currents carry spores across abyssal distances.</li>
+<li>When a spore encounters an unoccupied volcanic ridge or caldera terrace, it binds to the mineral substrate, reactivates its metabolic workshop, and founds a new benthic colony.</li>
+</ol>
+<pre><code class="language-text">┌────────────────────────────────────────────────────────────────────────┐
+│                   THE MARINE DISPERSAL CYCLE                           │
+│                                                                        │
+│   [ BENTHIC ADULT ]   ──►   [ PELAGIC SPORE ]   ──►   [ RE-COLONIZE ]  │
+│   • Anchored in Rock        • Enters Fluid Column     • Lands on Ridge │
+│   • Catalytic Metabolism    • Convective Advection    • Binds Substrate│
+│   • Energy Satiation        • Buoyancy Lifespan       • Germinates Cell│
+└────────────────────────────────────────────────────────────────────────┘</code></pre>
+<hr class="divider" />
+<h2 id="2-mathematical-architecture-discrete-o1-advection">2. Mathematical Architecture: Discrete <span class="katex-inline math-inline" data-math="O(1)">\( O(1) \)</span> Advection <a class="header-anchor" href="#2-mathematical-architecture-discrete-o1-advection" title="Link to section">#</a></h2>
+<h3 id="21-the-permeable-water-column">2.1 The Permeable Water Column <a class="header-anchor" href="#21-the-permeable-water-column" title="Link to section">#</a></h3>
+<p>Rather than introducing heavy continuous rigid-body physics engines with floating-point drift and <span class="katex-inline math-inline" data-math="O(N^2)">\( O(N^2) \)</span> collision detection, Siliquarium models marine detachment discretely in the stacked 3D hexagonal lattice <span class="katex-inline math-inline" data-math="(q, r, z)">\( (q, r, z) \)</span>:</p>
+<ul>
+<li><strong>Bedrock & Chimney (<code>PoreMedium.ROCK_SUBSTRATE</code>):</strong> The <span class="katex-inline math-inline" data-math="z=0">\( z=0 \)</span> benthic floor and central volcanic chimney spires (<span class="katex-inline math-inline" data-math="z \ge 1, q^2+r^2+qr \le 1">\( z \ge 1, q^2+r^2+qr \le 1 \)</span>) form permanent solid mineral substrates.</li>
+<li><strong>Aqueous Column (<code>PoreMedium.AQUEOUS_FLUID</code>):</strong> Hexagonal cells surrounding the chimney at <span class="katex-inline math-inline" data-math="z \ge 1">\( z \ge 1 \)</span> are permeable fluid parcels.</li>
+</ul>
+<h3 id="22-the-dispersal-advection-operator">2.2 The Dispersal & Advection Operator <a class="header-anchor" href="#22-the-dispersal-advection-operator" title="Link to section">#</a></h3>
+<p>When an adult silicoid reaches division thresholds (<span class="katex-inline math-inline" data-math="E \ge 100, M \ge 20">\( E \ge 100, M \ge 20 \)</span>) but all adjacent substrate pores are occupied, it synthesizes a pelagic spore capsule:</p>
+<p><div class="katex-display math-block" data-math="\vec{x}_{\text{spore}}(t+1) = \vec{x}_{\text{spore}}(t) + \vec{v}_{\text{plume}} + \vec{v}_{\text{drift}}">\[ \vec{x}_{\text{spore}}(t+1) = \vec{x}_{\text{spore}}(t) + \vec{v}_{\text{plume}} + \vec{v}_{\text{drift}} \]</div></p>
+<p><div class="katex-display math-block" data-math="\tau_{\text{lifespan}}(t+1) = \tau_{\text{lifespan}}(t) - 1">\[ \tau_{\text{lifespan}}(t+1) = \tau_{\text{lifespan}}(t) - 1 \]</div></p>
+<blockquote class="callout">### 🔍 Equation Decoder<br/>- <strong><span class="katex-inline math-inline" data-math="\vec{x}_{\text{spore}}(t)">\( \vec{x}_{\text{spore}}(t) \)</span>:</strong> Current 3D hexagonal coordinate of the drifting spore.<br/>- <strong><span class="katex-inline math-inline" data-math="\vec{v}_{\text{plume}}">\( \vec{v}_{\text{plume}} \)</span>:</strong> Upward convective velocity vector induced by the hydrothermal nozzle thermal gradient.<br/>- <strong><span class="katex-inline math-inline" data-math="\vec{v}_{\text{drift}}">\( \vec{v}_{\text{drift}} \)</span>:</strong> Planar rotational current vector carrying the spore to adjacent fluid hexes.<br/>- <strong><span class="katex-inline math-inline" data-math="\tau_{\text{lifespan}}">\( \tau_{\text{lifespan}} \)</span>:</strong> Metabolic survival clock (<span class="katex-inline math-inline" data-math="\tau_0 = 25">\( \tau_0 = 25 \)</span> ticks). If <span class="katex-inline math-inline" data-math="\tau = 0">\( \tau = 0 \)</span> before settling, the spore lyses into mineral detritus, strictly satisfying energy/mass conservation:<br/>  <div class="katex-display math-block" data-math="\Delta E_{\text{dissipated}} = E_{\text{spore}}, \quad \Delta M_{\text{sediment}} = M_{\text{spore}}">\[ \Delta E_{\text{dissipated}} = E_{\text{spore}}, \quad \Delta M_{\text{sediment}} = M_{\text{spore}} \]</div></blockquote>
+<hr class="divider" />
+<h2 id="3-real-phenotypic-circuit-magnification-zero-mock-data">3. Real Phenotypic Circuit Magnification: Zero Mock Data <a class="header-anchor" href="#3-real-phenotypic-circuit-magnification-zero-mock-data" title="Link to section">#</a></h2>
+<p>In Phase 5, in-situ 3D cell visualization reflects the <strong>actual phenotypic netlist</strong> of each organism:</p>
+<ul>
+<li><strong>Exact Gate Labels:</strong> The 3D micro-chamber displays only the decoded gates present in the cell's active netlist (<code>NOT</code>, <code>AND</code>, <code>OR</code>, <code>XOR</code>, <code>BUF</code>). Primitive diffusion cells without logic gates display only their pulsing golden Fibonacci genome spiral—eliminating artificial gate illusions.</li>
+<li><strong>Visual Targeting Beacon:</strong> Selecting a pore casts an illuminated vertical holographic beacon beam rising through the water column with a pulsing targeting reticle, ensuring researchers can instantly track specimens across wide seamounts.</li>
+<li><strong>Crystal-Clear Water Column:</strong> Empty aqueous cells are rendered with near-total optical transparency (<span class="katex-inline math-inline" data-math="\alpha = 0.015">\( \alpha = 0.015 \)</span>), giving researchers unobstructed line-of-sight to the seabed floor, volcanic chimney spires, and drifting bioluminescent spores.</li>
+</ul>
+<hr class="divider" />
+<h2 id="4-god-suite-interactive-controls">4. God-Suite Interactive Controls <a class="header-anchor" href="#4-god-suite-interactive-controls" title="Link to section">#</a></h2>
+<p>Researchers can perturb and stimulate the ecosystem in real time via the Lab Flyout drawer:</p>
+<div class="table-container"><table><thead><tr><th>Control</th><th>Mechanism</th><th>Evolutionary Pressure Provoked</th></tr></thead><tbody><tr><td><strong>🔥 Hydrothermal Surge Pulse</strong></td><td>Injects <span class="katex-inline math-inline" data-math="+200">\( +200 \)</span> energy tokens into the vent plume.</td><td>Tests explosive metabolic capture and rate-dependent division.</td></tr><tr><td><strong>💥 Local Extinction Pulse</strong></td><td>Induces localized cell lysis in a chosen radius.</td><td>Creates vacant ecological niches to test recolonization via pelagic spores.</td></tr><tr><td><strong>⚡ Re-Seed Primordial Soup</strong></td><td>Injects randomized prebiotic RNA/silicon genome tapes.</td><td>Tests competition between ancestral lineages and de novo invaders.</td></tr><tr><td><strong>⚙️ Mutation Rate Tuning</strong></td><td>Live slider adjusting error rate per bit (<span class="katex-inline math-inline" data-math="0.05\%">\( 0.05\% \)</span> to <span class="katex-inline math-inline" data-math="5.0\%">\( 5.0\% \)</span>).</td><td>Explores Eigen's Error Threshold and neutral drift dynamics.</td></tr></tbody></table></div>
+<hr class="divider" />
+<h2 id="5-verification-academic-invariants">5. Verification & Academic Invariants <a class="header-anchor" href="#5-verification-academic-invariants" title="Link to section">#</a></h2>
+<ul>
+<li><strong>Closed-Universe Conservation Invariant:</strong> All spore synthesis, drift, settlement, and expiration strictly adhere to the First Law of Thermodynamics:</li>
+</ul>
+<p><div class="katex-display math-block" data-math="\Delta E_{\text{universe}} = 0.000, \quad \Delta M_{\text{universe}} = 0.000">\[ \Delta E_{\text{universe}} = 0.000, \quad \Delta M_{\text{universe}} = 0.000 \]</div></p>
+<ul>
+<li><strong>13-Stage Comprehensive Test Suite:</strong> Phase 5 is verified across all 13 test stages in under 70 milliseconds.</li>
+</ul>
+  </main>
+
+  <footer>
+    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
+    <p style="margin-top: 0.4rem;">
+      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
+      PolyForm Noncommercial License 1.0.0
+    </p>
+  </footer>
+</body>
+</html>

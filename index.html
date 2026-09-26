@@ -508,8 +508,12 @@
         <span class="telemetry-val" id="hud-living" style="color: var(--accent-emerald);">0</span>
       </div>
       <div class="telemetry-item">
+        <span class="telemetry-label">Pelagic Spores</span>
+        <span class="telemetry-val" id="hud-spores" style="color: var(--accent-gold);">0</span>
+      </div>
+      <div class="telemetry-item">
         <span class="telemetry-label">Carcasses</span>
-        <span class="telemetry-val" id="hud-carcass" style="color: var(--accent-gold);">0</span>
+        <span class="telemetry-val" id="hud-carcass" style="color: #94a3b8;">0</span>
       </div>
       <div class="telemetry-item">
         <span class="telemetry-label">Stored Energy</span>
@@ -535,7 +539,7 @@
     <!-- Left Parameter Flyout Drawer -->
     <div id="lab-drawer" class="-translate-x-full">
       <div class="drawer-title">
-        <span>🔬 Physical Parameters</span>
+        <span>🔬 Lab & God-Suite Controls</span>
       </div>
 
       <div class="slider-row">
@@ -554,7 +558,9 @@
         <input type="range" id="slider-soup" min="0.05" max="0.60" step="0.05" value="0.20">
       </div>
 
-      <button id="btn-seed-soup" class="drawer-btn">⚡ Seed Primordial Soup</button>
+      <button id="btn-seed-soup" class="drawer-btn">⚡ Re-Seed Primordial Soup</button>
+      <button id="btn-thermal-surge" class="drawer-btn">🔥 Hydrothermal Surge Pulse</button>
+      <button id="btn-extinction-pulse" class="drawer-btn btn-danger">💥 Local Extinction Pulse</button>
       <button id="btn-reset-sim" class="drawer-btn btn-danger">⚠️ Reset Simulation</button>
     </div>
 

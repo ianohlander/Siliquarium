@@ -9,6 +9,7 @@ import { ISimulationTelemetry, IPoreTelemetry } from '../engine/SimulationTeleme
 export class HUDController {
   private readonly tickEl: HTMLElement | null;
   private readonly livingEl: HTMLElement | null;
+  private readonly sporeEl: HTMLElement | null;
   private readonly carcassEl: HTMLElement | null;
   private readonly energyEl: HTMLElement | null;
   private readonly deltaEl: HTMLElement | null;
@@ -20,6 +21,7 @@ export class HUDController {
   constructor() {
     this.tickEl = document.getElementById('hud-ticks');
     this.livingEl = document.getElementById('hud-living');
+    this.sporeEl = document.getElementById('hud-spores');
     this.carcassEl = document.getElementById('hud-carcass');
     this.energyEl = document.getElementById('hud-energy');
     this.deltaEl = document.getElementById('hud-delta');
@@ -32,6 +34,7 @@ export class HUDController {
   public update(telemetry: ISimulationTelemetry, selectedPore: IPoreTelemetry | null): void {
     if (this.tickEl) this.tickEl.textContent = telemetry.tick.toLocaleString();
     if (this.livingEl) this.livingEl.textContent = telemetry.livingCount.toString();
+    if (this.sporeEl) this.sporeEl.textContent = (telemetry.sporeCount || 0).toString();
     if (this.carcassEl) this.carcassEl.textContent = telemetry.carcassCount.toString();
     if (this.energyEl) this.energyEl.textContent = `${telemetry.totalEnergyInUniverse} T`;
 

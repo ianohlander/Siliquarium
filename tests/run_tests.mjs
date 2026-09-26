@@ -32,6 +32,7 @@ import { runStage8 } from './stage8_engine.mjs';
 import { runStage9 } from './stage9_visualizers.mjs';
 import { runStage10 } from './stage10_paleontologist.mjs';
 import { runStage11 } from './stage11_fossil_freezer.mjs';
+import { runStage12 } from './stage12_pelagic_spores.mjs';
 
 console.log('=========================================');
 console.log('🐠 Siliquarium Comprehensive Test Suite');
@@ -39,7 +40,7 @@ console.log(`   Version: ${SILIQUARIUM_VERSION}`);
 console.log('=========================================');
 
 const startTime = performance.now();
-const totalStages = 12;
+const totalStages = 13;
 let passedStages = 0;
 
 function runStage(stageNum, name, testFn) {
@@ -76,6 +77,8 @@ runStage(0, 'Testing Architecture, HTML Docs & Theoretical Specification Complet
     'docs/PHASE_3_VISUALIZER_GUIDE.html',
     'docs/PHASE_4_PALEONTOLOGY_GUIDE.md',
     'docs/PHASE_4_PALEONTOLOGY_GUIDE.html',
+    'docs/PHASE_5_PELAGIC_SPORES_GUIDE.md',
+    'docs/PHASE_5_PELAGIC_SPORES_GUIDE.html',
     'docs/logos.html',
     'logos/index.html',
     'logos/logo.jpg',
@@ -275,6 +278,11 @@ runStage(10, 'Testing Digital Paleontologist, Weisfeiler-Lehman Hashes & Uri Alo
 // Stage 11: Evolutionary Flight Recorder, Lenski Fossil Freezer & Counterfactual Autopsies
 runStage(11, 'Testing Evolutionary Flight Recorder, Fossil Freezer & Single-Bit Autopsies', () => {
   runStage11();
+});
+
+// Stage 12: Phase 5 Pelagic Spores, Advection Drift & God-Suite Controls
+runStage(12, 'Testing Pelagic Spore Dispersal, Advection, Settlement & God-Suite Controls', () => {
+  runStage12();
 });
 
 const elapsed = (performance.now() - startTime).toFixed(1);

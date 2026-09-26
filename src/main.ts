@@ -31,7 +31,7 @@ class SiliquariumApp {
   private selectedPoreCoord: HexCoord3D | null = null;
 
   constructor() {
-    this.world = new SimulationWorld({ radius: 4, minZ: 0, maxZ: 2, soupDensity: 0.25 });
+    this.world = new SimulationWorld({ radius: 5, minZ: 0, maxZ: 2, soupDensity: 0.25 });
     this.loop = new SimulationLoop(this.world);
     this.camera = new OrbitCamera();
 
@@ -45,7 +45,11 @@ class SiliquariumApp {
     this.flyout = new LabFlyout(this.world, {
       onSeedRequested: (density) => this.world.seedPrimordialSoup(density),
       onResetRequested: () => this.resetSimulation(),
-      onThermalPulseRequested: () => {}
+      onThermalPulseRequested: () => this.world.triggerThermalSurge(),
+      onExtinctionRequested: () => {
+        const center = this.selectedPoreCoord ?? new HexCoord3D(0, 0, 0);
+        this.world.triggerExtinctionEvent(center, 2);
+      }
     });
 
     this.controls = new InteractiveControls(this.loop, this.camera);
@@ -54,7 +58,7 @@ class SiliquariumApp {
       this.selectedPoreCoord = coord;
       this.seafloorRenderer.setSelectedCoord(coord);
       const worldPos = this.seafloorRenderer.axialToWorld(coord);
-      this.camera.target = { x: worldPos.x, y: worldPos.y, z: worldPos.z };
+      this.camera.setTarget(worldPos.x, worldPos.y, worldPos.z);
       this.camera.distance = 14.0;
     });
 
@@ -131,9 +135,9 @@ class SiliquariumApp {
         lastY = e.clientY;
 
         if (dragMode === 'orbit') {
-          this.camera.rotate(-dx * 0.008, dy * 0.008);
+          this.camera.rotate(-dx * 0.008, -dy * 0.008);
         } else {
-          this.camera.pan(-dx * 0.05, -dy * 0.05);
+          this.camera.pan(dx, dy);
         }
       } else {
         const rect = this.seafloorCanvas.getBoundingClientRect();
@@ -169,6 +173,8 @@ class SiliquariumApp {
       if (clicked) {
         this.selectedPoreCoord = clicked;
         this.seafloorRenderer.setSelectedCoord(clicked);
+        const worldPos = this.seafloorRenderer.axialToWorld(clicked);
+        this.camera.setTarget(worldPos.x, worldPos.y, worldPos.z);
       }
     });
   }

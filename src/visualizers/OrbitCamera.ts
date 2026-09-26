@@ -36,12 +36,19 @@ export class OrbitCamera {
     this.elevation = Math.max(this.minElevation, Math.min(this.maxElevation, this.elevation + deltaElevation));
   }
 
-  public pan(deltaX: number, deltaZ: number): void {
+  public pan(deltaScreenX: number, deltaScreenY: number): void {
     const cosA = Math.cos(this.azimuth);
     const sinA = Math.sin(this.azimuth);
-    // Pan parallel to ground plane
-    this.target.x += deltaX * cosA - deltaZ * sinA;
-    this.target.z += deltaX * sinA + deltaZ * cosA;
+    const scale = this.distance * 0.002;
+    this.target.x += (-deltaScreenX * cosA - deltaScreenY * sinA * Math.sin(this.elevation)) * scale;
+    this.target.z += (deltaScreenX * sinA - deltaScreenY * cosA * Math.sin(this.elevation)) * scale;
+    this.target.y += (deltaScreenY * Math.cos(this.elevation)) * scale;
+  }
+
+  public setTarget(x: number, y: number, z: number): void {
+    this.target.x = x;
+    this.target.y = y;
+    this.target.z = z;
   }
 
   public zoom(deltaDistance: number): void {

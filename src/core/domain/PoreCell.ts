@@ -15,6 +15,10 @@ export interface ICellTickResult {
   readonly energy: number;
   readonly matter: number;
   readonly telemetry: IWorkshopTelemetry;
+  readonly energyCharged: number;
+  readonly energyOverflow: number;
+  readonly landauerBurned: number;
+  readonly basalLeak: number;
   readonly isStarved: boolean;
   readonly canDivide: boolean;
 }
@@ -49,21 +53,25 @@ export class PoreCell {
     const telemetry = this.workshop.stepTick(streamA, streamB, toxinT);
 
     // Charge battery from catalytic yield
+    let energyCharged = 0;
+    let energyOverflow = 0;
     if (telemetry.catalyticYield > 0) {
-      this.battery.chargeEnergy(telemetry.catalyticYield);
+      energyCharged = this.battery.chargeEnergy(telemetry.catalyticYield);
+      energyOverflow = telemetry.catalyticYield - energyCharged;
     }
 
     // Burn Landauer power for gate toggles
-    this.battery.burnLandauer(telemetry.toggleCount);
+    let landauerBurned = this.battery.burnLandauer(telemetry.toggleCount);
 
     // Apply toxin corrosion if hit
     if (telemetry.toxinIngested) {
-      this.battery.burnLandauer(PoreWorkshop.TOXIN_CORROSION_PENALTY);
+      landauerBurned += this.battery.burnLandauer(PoreWorkshop.TOXIN_CORROSION_PENALTY);
     }
 
     // Basal leak: 1 token every 10 ticks
+    let basalLeak = 0;
     if (this.age % 10 === 0) {
-      this.battery.dissipateBasalLeak(1);
+      basalLeak = this.battery.dissipateBasalLeak(1);
     }
 
     return {
@@ -71,6 +79,10 @@ export class PoreCell {
       energy: this.battery.getEnergy(),
       matter: this.battery.getMatter(),
       telemetry,
+      energyCharged,
+      energyOverflow,
+      landauerBurned,
+      basalLeak,
       isStarved: this.battery.isStarved(),
       canDivide: this.battery.isDivisionReady()
     };

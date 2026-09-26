@@ -39,12 +39,30 @@ export class CircuitMicroscopeView {
       return;
     }
 
+    if (pore.hasSpore) {
+      this.drawSporeState(w, h, pore);
+      return;
+    }
+
     if (pore.state === PoreState.CARCASS) {
       this.drawCarcassState(w, h, pore);
       return;
     }
 
     this.drawLivingCellMicroscope(w, h, pore, vent);
+  }
+
+  private drawSporeState(_w: number, _h: number, pore: IPoreTelemetry): void {
+    this.ctx.fillStyle = '#fbbf24';
+    this.ctx.font = 'bold 14px monospace';
+    this.ctx.textAlign = 'left';
+    this.ctx.fillText(`PORE [${pore.coord.q}, ${pore.coord.r}, ${pore.coord.z}]`, 20, 30);
+    this.ctx.fillStyle = '#fef08a';
+    this.ctx.font = '12px monospace';
+    this.ctx.fillText('STATUS: PELAGIC SPORE CAPSULE (STAGE A DISPERSAL)', 20, 52);
+    this.ctx.fillText('Drifting along convective hydrothermal plume...', 20, 75);
+    this.ctx.fillText(`Stored Energy: ${pore.energy} tokens | Matter: ${pore.matter} tokens`, 20, 98);
+    this.ctx.fillText('Searching for vacant benthic substrate to colonize', 20, 122);
   }
 
   private drawBackground(w: number, h: number): void {
@@ -73,6 +91,7 @@ export class CircuitMicroscopeView {
   }
 
   private drawEmptyPoreState(_w: number, _h: number, pore: IPoreTelemetry): void {
+    const mediumStr = pore.isAqueous ? 'AQUEOUS FLUID PARCEL' : 'VACANT BENTHIC CAVITY';
     this.ctx.fillStyle = '#38bdf8';
     this.ctx.font = 'bold 14px monospace';
     this.ctx.textAlign = 'left';
@@ -80,8 +99,8 @@ export class CircuitMicroscopeView {
 
     this.ctx.fillStyle = '#94a3b8';
     this.ctx.font = '12px monospace';
-    this.ctx.fillText('STATUS: VACANT BENTHIC CAVITY', 20, 52);
-    this.ctx.fillText('Awaiting primordial soup colonizer...', 20, 80);
+    this.ctx.fillText(`STATUS: ${mediumStr}`, 20, 52);
+    this.ctx.fillText(pore.isAqueous ? 'Open water column awaiting pelagic spores...' : 'Awaiting primordial soup colonizer...', 20, 80);
   }
 
   private drawCarcassState(_w: number, _h: number, pore: IPoreTelemetry): void {
@@ -99,11 +118,11 @@ export class CircuitMicroscopeView {
   }
 
   private drawLivingCellMicroscope(w: number, h: number, pore: IPoreTelemetry, vent: IVentTelemetry): void {
-    // 1. Header info
+    const mediumStr = pore.isAqueous ? 'AQUEOUS' : 'ROCK';
     this.ctx.fillStyle = '#38bdf8';
-    this.ctx.font = 'bold 13px monospace';
+    this.ctx.font = 'bold 12px monospace';
     this.ctx.textAlign = 'left';
-    this.ctx.fillText(`PORE [${pore.coord.q}, ${pore.coord.r}, ${pore.coord.z}] - GEN ${pore.generation}`, 16, 25);
+    this.ctx.fillText(`PORE [${pore.coord.q},${pore.coord.r},${pore.coord.z}] • ${mediumStr} • GEN ${pore.generation}`, 16, 25);
 
     // 2. Battery & Matter Meter
     this.drawGauges(pore, 16, 42, w - 32);

@@ -10,6 +10,7 @@ export interface ILabCallbacks {
   readonly onSeedRequested: (density: number) => void;
   readonly onResetRequested: () => void;
   readonly onThermalPulseRequested: () => void;
+  readonly onExtinctionRequested: () => void;
 }
 
 export class LabFlyout {
@@ -70,6 +71,20 @@ export class LabFlyout {
       seedBtn.addEventListener('click', () => {
         const density = parseFloat(this.soupSlider?.value ?? '0.20');
         this.callbacks.onSeedRequested(density);
+      });
+    }
+
+    const surgeBtn = document.getElementById('btn-thermal-surge');
+    if (surgeBtn) {
+      surgeBtn.addEventListener('click', () => {
+        this.callbacks.onThermalPulseRequested();
+      });
+    }
+
+    const extinctionBtn = document.getElementById('btn-extinction-pulse');
+    if (extinctionBtn) {
+      extinctionBtn.addEventListener('click', () => {
+        this.callbacks.onExtinctionRequested();
       });
     }
 
