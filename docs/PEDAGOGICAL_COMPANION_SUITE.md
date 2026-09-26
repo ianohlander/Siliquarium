@@ -22,25 +22,14 @@ This **Pedagogical Companion Suite** resolves this deficit. Grounded in non-equi
 2. **The Zero-Smuggling Mandate:** Life did not invent batteries, cell walls, or templates from scratch. The prebiotic Earth provided the battery (alkaline vent chemiosmosis), the cell walls (porous basalt micro-cavities), and the photocopy copier (surface-catalyzed mineral templating).
 3. **The Epistemic Cut:** John von Neumann (1966) and Howard Pattee (1972) proved that open-ended evolution is mathematically impossible without separating rate-independent symbolic instructions (the genotype safe) from rate-dependent continuous dynamics (the metabolic workshop).
 
-```
-                         THE SILIQUARIUM MODULAR PEDAGOGICAL SUITE
-    ┌──────────────────────────────────────────────────────────────────────────────────┐
-    │                                                                                  │
-    │   🎓 CURRICULUM & SYLLABUS        🏛️ MASTER COMPANION SUITE (This Hub)           │
-    │   • 4 Core Modular Units          • Pedagogical Philosophy & Epistemic Grounding │
-    │   • 5 Laboratory Practicums       • The Non-Primitive Nature of XOR Treatise     │
-    │   • Telemetry Worksheets          • 3 Four-Tier Analytic Assessment Rubrics      │
-    │                                                                                  │
-    │   ├───────────────────────────────┬───────────────────────────────┤              │
-    │   ▼                               ▼                               ▼              │
-    │   📖 LEXICON & GLOSSARY           🧭 STUDY GUIDES & DECODERS      📚 ANNOTATED BIBLIOGRAPHY │
-    │   • 55+ Formal Terms              • 8 Color Equation Decoders     • 14 Landmark Papers   │
-    │   • 5 Specialized Modules         • Responsive 4-Card Breakdowns  • Full Primary Citations │
-    │   • Mathematical Formulations     • 12 Formal Derivations         • Biophysical Mechanisms│
-    │   • In Silico Code Mappings       • Worked Academic Problem Sets  • Seminar Guidance     │
-    │                                                                                  │
-    └──────────────────────────────────────────────────────────────────────────────────┘
-```
+| Pedagogical Component | Focus & Modality | Target Outcomes | Core Architectural Artifacts |
+| :--- | :--- | :--- | :--- |
+| **🎓 Curriculum & Syllabus** | 4 Core Modular Units, 5 Hands-on Practicums | Foundational biophysics, Pattee's cut, macro-evolution | [`CURRICULUM_AND_SYLLABUS.md`](CURRICULUM_AND_SYLLABUS.md) |
+| **🏛️ Master Companion Suite** | Epistemic grounding & XOR treatise (This Hub) | Proof of XOR non-separability, pedagogical philosophy | [`PEDAGOGICAL_COMPANION_SUITE.md`](PEDAGOGICAL_COMPANION_SUITE.md) |
+| **📖 Lexicon & Glossary** | 55+ Formal mathematical terms across 5 domains | Theoretical rigor, eradication of teleological jargon | [`companion/glossary.md`](companion/glossary.md) |
+| **🧭 Study Guides & Decoders** | 8 Color equation decoders, 12 formal derivations | Mathematical fluency, Landauer dissipation bounds | [`companion/study_guides.md`](companion/study_guides.md) |
+| **📚 Annotated Bibliography** | 14 Landmark primary papers (Mitchell, Landauer, Lenski) | Scientific literacy & historical provenance | [`companion/bibliography.md`](companion/bibliography.md) |
+| **🔍 Student QA & Usability Audit** | 12th-grade usability report with browser screenshots | Real student feedback, DOM interaction telemetry | [`QA/STUDENT_UX_REPORT.md`](../QA/STUDENT_UX_REPORT.md) |
 
 ---
 
@@ -77,6 +66,15 @@ In molecular biophysics, this geometric barrier corresponds to fundamental physi
 2. **The `OR` Gate (Isozymic Promiscuity):** Easily achieved by a single promiscuous catalytic pocket with chemical affinity for either of two alternate substrates (e.g., hexokinase binding glucose or fructose). The reaction occurs if either reagent is present ($A \lor B$).
 3. **The `NOT` Gate (Allosteric Inhibition):** Easily achieved by a single repressor protein or allosteric site that changes conformation upon binding an effector to block the active site ($\neg A$).
 4. **The `XOR` Gate (Combinatorial Parity):** **Physically impossible in a single active site!** For a single pocket to compute XOR, it would have to bind Substrate A and fire; bind Substrate B and fire; but when *both* Substrate A and Substrate B are present in high concentrations, it must physically extinguish its own activity! A single binding pocket cannot distinguish the simultaneous presence of both favorable ligands from individual ligands to suppress itself without a separate, cross-inhibitory regulatory pathway.
+
+![Figure 2.1: The Three Primitive Catalytic Logic Gates vs. Composite XOR Logic](assets/diagrams/fig2_1_primitive_enzymes.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 2.1 — Primitive Enzymatic Logic vs. Composite XOR
+> - **Visual Guide:** Panels A, B, and C depict the three physically primitive enzyme active sites: co-catalysis (`AND`), promiscuous substrate affinity (`OR`), and allosteric conformational inhibition (`NOT`). Panel D depicts the 3-gate composite network $(A \lor B) \land \neg(A \land B)$ required to compute XOR parity logic.
+> - **Biophysical Reality:** Minsky and Papert (1969) proved that XOR is linearly non-separable: no single linear hyperplane can partition $(0,1)$ and $(1,0)$ from $(0,0)$ and $(1,1)$. In biochemistry, no single active site can extinguish its own catalysis only when saturated with both complementary ligands without distinct regulatory feedback.
+> - **Digital Mapping:** In Siliquarium, the codon translation table contains opcodes for `AND`, `OR`, `NOT`, and `BUF`. There is no primitive `XOR` opcode in the genetic code. XOR logic must evolve as a composite multi-gate network topology.
+> - **Core Principle:** *Evolution builds complex logic from simple physical primitives.* Parity detection is an emergent milestone of network topology, not an arbitrary primitive.
 
 ### 2.3 The Evolutionary Milestone of Parity Logic
 To compute XOR parity logic ($A \oplus B$), an organism **must evolve a multi-gate network topology**:
@@ -154,16 +152,12 @@ To evaluate student mastery across laboratory inquiries, experimental design, an
 
 ### 3.4 Master Assessment Architecture & Evaluative Protocols
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   SEMESTER EVALUATIVE COMPOSITION                      │
-├────────────────────────────────────────────────────────────────────────┤
-│  • Formative Laboratory Notebooks (Labs 1–5):                  40%     │
-│  • Experimental Perturbation & Hypothesis Project (Lab 4):     25%     │
-│  • Summative Computational Autopsy & Phylogenetic Proof (Lab 5): 25%   │
-│  • Socratic Seminar Oral Defense & Colloquium:                 10%     │
-└────────────────────────────────────────────────────────────────────────┘
-```
+| Assessment Category | Weight | Target Modality & Deliverables | Focus Areas |
+| :--- | :---: | :--- | :--- |
+| **Formative Laboratory Notebooks** | **40%** | Labs 1–5 Telemetry Logs & Hypotheses | Chemiosmosis, Landauer power budgets, redox filtering |
+| **Experimental Perturbation Project** | **25%** | Lab 4 God-Suite Environmental Stress | Thermal surge, extinction pulses, Shannon diversity $H$ |
+| **Summative Computational Autopsy** | **25%** | Lab 5 Phylogenetic Lineage Reconstruction | LCA ancestry queries, Homoplasy Predicate $\mathcal{H}(A,B,M)$ |
+| **Socratic Seminar & Colloquium** | **10%** | Oral Defense & Theoretical Critique | Pattee's Epistemic Cut, Kimura drift, Lenski dynamics |
 
 #### Letter Grade Conversion Standards
 - **A (93.0% – 100.0%):** Publication-quality laboratory analysis. Rigorous mathematical derivations with zero teleological language. Full mastery of Mitchell, Russell, Pattee, Landauer, and Lenski frameworks. Complete execution of graph invariants and LCA proofs.

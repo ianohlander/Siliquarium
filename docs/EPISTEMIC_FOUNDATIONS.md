@@ -45,25 +45,14 @@ The most urgent concern is often: **"Why does a battery already exist? Isn't a b
 The answer from modern geobiology (Peter Mitchell, Michael Russell, Nick Lane, William Martin) is unambiguous:  
 **Life did not invent the electrical battery. The prebiotic hydrothermal vent was literally an inorganic geochemical battery.**
 
-```
-                        THE PREBIOTIC HYDROTHERMAL BATTERY
-                        
-       Acidic Ocean Water (H+ Protons Everywhere, pH ~ 5.5, Cold)
-   ═════════════════════════════════════════════════════════════════════════
-          +     +     +     +     +     +     +     +     +     +
-         [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  (Positive Rail)
-   ─────────────────────────────────────────────────────────────────────────
-      INORGANIC THIN MINERAL WALL (Iron Monosulphide / Silica FeS Foam)
-      Natural Dielectric Thickness: d ≈ 5–10 nanometers
-      Electrical Capacitance: C = ε · (A / d)  ===>  Stores Real Voltage!
-   ─────────────────────────────────────────────────────────────────────────
-         [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] (Negative Rail)
-          -     -     -     -     -     -     -     -     -     -
-   ═════════════════════════════════════════════════════════════════════════
-       Alkaline Vent Fluid (OH- Hydroxide Ions, pH ~ 10.0, Warm 60°C)
-       
-       ★ RESULT: Natural Proton Motive Force (PMF) = ΔpH ≈ 4.5 units ≈ 200 mV!
-```
+![Figure 1.2: Porous Hydrothermal Chimney Mineral Membrane and Abiotic Proton Motive Force (PMF)](assets/diagrams/fig1_2_hydrothermal_chimney.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 1.2 — The Inorganic Hydrothermal Battery
+> - **Visual Guide:** The left panel diagrams the towering hydrothermal mound with alkaline fluid channels ($pH \approx 10.0$) meeting the acidic Hadean ocean ($pH \approx 5.5$). The right panel magnifies the $5\text{ nm}$ semi-permeable iron-sulfide ($FeS$) mineral wall acting as a natural electrostatic capacitor.
+> - **Biophysical Reality:** Peter Mitchell's chemiosmotic hypothesis and Russell-Martin vent models demonstrate that an abiotic transmembrane proton gradient ($\Delta pH = 4.5$, $\Delta \psi \approx 200\text{ mV}$) generated field strengths of $40\text{ MV/m}$ across thin mineral membranes before proteins or ATP synthase existed.
+> - **Digital Mapping:** In Siliquarium, the pore battery ($E_{\text{battery}} \in [0, 100]$ tokens) directly models this inorganic mineral capacitance. Incoming catalytic metabolic reactions pump charge into the capacitor, while Landauer switching and basal membrane leakage continually drain it toward equilibrium ($E=0$).
+> - **Core Principle:** *Life did not invent the electrical battery; the Earth did.* The cell membrane and proton-motive bioenergetics are evolutionary replacements for pre-existing geochemical rock walls.
 
 ### 2.1 Mitchell's Chemiosmosis & The Geochemical Proton Gradient
 In 1961, Peter Mitchell proposed the Chemiosmotic Hypothesis (Nobel Prize 1978): life does not power itself with direct chemical combustion; life powers itself with an **electrical circuit driven by a proton gradient** across a membrane.
@@ -103,18 +92,14 @@ The second question: **"Are we smuggling in a workshop?"**
 In traditional artificial life, an organism is granted an arbitrary coordinate in empty space with a magic radius. In physical reality, this is destroyed by the **Dilution Catastrophe**:
 - If catalytic molecules (like proto-RNA or catalytic peptides) form in open water, they immediately diffuse into the vast ocean. Concentration drops to zero, and reactions cease.
 
-```
-       OPEN OCEAN (The Dilution Catastrophe)          ALKALINE VENT (Inorganic Pores)
-    ┌──────────────────────────────────────┐       ┌──────────────────────────────────────┐
-    │                                      │       │    [Solid Basalt Mineral Matrix]     │
-    │      A                B              │       │    ┌────────────────────────────┐    │
-    │         (Drifts Away)                │       │    │ Reactants A and B trapped  │    │
-    │                *                     │       │    │ in microscopic rock foam!  │    │
-    │        ~                             │       │    │ Concentration increases    │    │
-    │                                      │       │    │ by 1,000,000x!             │    │
-    │   Reactions impossible; density = 0  │       │    └────────────────────────────┘    │
-    └──────────────────────────────────────┘       └──────────────────────────────────────┘
-```
+![Figure 1.1: The Dilution Catastrophe vs. Hydrothermal Micro-Pore Concentration](assets/diagrams/fig1_1_dilution_catastrophe.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 1.1 — The Dilution Catastrophe & Mineral Compartmentation
+> - **Visual Guide:** The left chamber illustrates the open primordial sea where prebiotic organic monomers ($A$ and $B$) rapidly disperse to infinite dilution ($\rho \to 0$), preventing bimolecular collisions. The right chamber illustrates the interconnected micro-cavities ($10\text{–}100\,\mu\text{m}$) of an alkaline hydrothermal chimney where thermal siphoning and mineral adsorption concentrate reactants by $>1,000,000\times$.
+> - **Biophysical Reality:** Without physical compartmentation, second-order reaction rates $v = k[A][B]$ drop toward zero. Hydrothermal chimney mounds provided inorganic catalytic cell walls millions of years before the synthesis of phospholipid bilayers.
+> - **Digital Mapping:** In Siliquarium, the $8 \times 8$ `PoreWorkshop` bounds spatial execution. Substrate logic gates and metabolites are confined within the inorganic pore volume, preventing the unphysical dispersion typical of uncompartmentalized artificial life models.
+> - **Core Principle:** *Compartmentation must precede metabolism.* Pores are not arbitrary bounding boxes; they are nature's primordial mineral incubators.
 
 The "Workshop" in Siliquarium is simply the **interior physical volume of a mineral pore**.
 - Deep-sea hydrothermal mounds are not smooth chimneys; they are porous mineral sponges honeycombed with interconnected micro-cavities ($10 \text{ to } 100 \; \mu\text{m}$).
@@ -143,22 +128,14 @@ In the 1940s, mathematician John von Neumann investigated what is required for a
 
 Von Neumann deduced the exact structure of DNA transcription and translation **before Watson and Crick discovered the double helix in 1953**!
 
-```
-                VON NEUMANN'S THEOREM & HOWARD PATTEE'S EPISTEMIC CUT
-                
-        [ THE SAFE: Genotype ]                     [ THE WORKSHOP: Phenotype ]
-      (Rate-Independent Symbols)                      (Rate-Dependent Physics)
-     ┌───────────────────────────┐                 ┌─────────────────────────────┐
-     │ 1D Genome Tape:           │   Translation   │ Active 2D Logic Netlist:    │
-     │ [ 0 1 1 0 1 0 0 1 ... ]   │ ──────────────► │ Vent ──► AND ──► NOT ──► Out│
-     │ • Conducts no power       │                 │ • Toggles gates             │
-     │ • Inert against noise     │                 │ • Burns Landauer energy     │
-     └─────────────┬─────────────┘                 └──────────────┬──────────────┘
-                   │                                              │
-                   │ Blind Photocopy                              │ Metabolism
-                   ▼ (Substrate Law)                              ▼
-        [ Child Pore Safe ]                        [ Charges Mineral Battery ]
-```
+![Figure 1.3: Von Neumann's Self-Replication Architecture & Howard Pattee's Epistemic Cut](assets/diagrams/fig1_3_epistemic_cut.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 1.3 — The Epistemic Cut & Self-Reproducing Automata
+> - **Visual Guide:** The top branch illustrates the lethal error catastrophe: when an active dynamic engine attempts to self-inspect and copy its own functioning parts, small transcription errors compound exponentially into collapse. The lower architecture illustrates von Neumann and Pattee's solution: bifurcating the organism into a quiescent, rate-independent symbolic tape (`The Safe`) and a dynamic, rate-dependent metabolic engine (`The Workshop`).
+> - **Biophysical Reality:** Living organisms do not replicate by having ribosomes photocopy active ribosomes. They transcribe inert, uninterpreted DNA into mRNA and translate it into catalytic enzymes. The genetic code is rate-independent; chemical catalysis is rate-dependent.
+> - **Digital Mapping:** Siliquarium enforces this separation with architectural purity: the 60-bit genome tape is locked within the `GenomeSafe` during life, conducting no electrical current and incurring no switching dissipation. Only during replication at $E_{\text{battery}} = 100$ is the inert tape blindly copied into the daughter safe with error rate $p_{\text{mut}} = 0.001$.
+> - **Core Principle:** *Indefinite evolutionary open-endedness requires the Epistemic Cut.* Rate-independent symbols must govern rate-dependent dynamics through an uninterpreted template photocopy mechanism.
 
 ### 4.2 Howard Pattee's "Epistemic Cut" (1972)
 Theoretical biophysicist Howard Pattee formalized this boundary:

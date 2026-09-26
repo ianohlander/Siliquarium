@@ -13,14 +13,12 @@ In biophysics and synthetic biology, these two views are **mathematical isomorph
 
 Life does not calculate arithmetic for its own sake. In living cells, **computation is metabolism, and metabolism is computation**.
 
-```
-       CONVENTIONAL DIGITAL LOGIC                     PREBIOTIC BIOCHEMICAL LOGIC
-  ┌───────────────────────────────────┐              ┌───────────────────────────────────┐
-  │ • Copper Wire (5 Volts / 0 Volts) │  ════════►   │ • Solute Stream (High / Low Conc) │
-  │ • Silicon Transistor (CMOS Gate)  │  ISOMORPHISM │ • Enzymatic Active Site (Protein) │
-  │ • Power Supply (Wall Outlet)      │  ════════►   │ • Redox Potential (Vent Battery)  │
-  └───────────────────────────────────┘              └───────────────────────────────────┘
-```
+| Conventional Digital Hardware Logic | Prebiotic Biochemical Enzymatic Logic |
+| :--- | :--- |
+| **Copper Wire (5V / 0V)** | **Solute Fluid Stream (High / Low Concentration)** |
+| **Silicon Transistor (CMOS Gate)** | **Enzymatic Active Site / Catalytic Pocket** |
+| **Regulated Power Supply (Wall Outlet)** | **Mitchell Redox Potential (Vent Battery)** |
+| **Clock Signal (Quartz Oscillator)** | **Periodic Hydrothermal Pulse Rhythms** |
 
 ---
 
@@ -28,21 +26,14 @@ Life does not calculate arithmetic for its own sake. In living cells, **computat
 
 In prebiotic chemistry, catalytic molecules (whether ribozymes or iron-sulfur peptide clusters) interact with substrates through physical binding pockets. Siliquarium models how **real enzymes operate before complex organs existed** through three fundamental catalytic primitives:
 
-```
-  1. CO-SUBSTRATE CATALYST (AND)      2. PROMISCUOUS CATALYST (OR)      3. ALLOSTERIC INHIBITOR (NOT)
-  
-       Substrate A   Substrate B             Substrate A   Substrate B             Substrate A   Inhibitor T
-            │             │                       \       /                             │             │
-            ▼             ▼                        ▼     ▼                              ▼             ▼
-       ┌─────────┬─────────┐                      ┌─────────┐                      ┌─────────┬─────────┐
-       │ Pocket  │ Pocket  │                      │ P-Site  │                      │ Active  │ Allost. │
-       │    A    │    B    │                      │ (Either)│                      │  Site   │  Site   │
-       └────┬────┴────┬────┘                      └────┬────┘                      └────┬────┴────┬────┘
-            └────┬────┘                                │                                │     (Blocks)
-                 ▼                                     ▼                                ▼         ▲
-           CATALYSIS!                             CATALYSIS!                       CATALYSIS! ────┘
-         (Both Required)                        (Either Reacts)                  (Inhibitor Quenches)
-```
+![Figure 2.1: The Three Primitive Catalysts, Linear Separability, and the Composite XOR Motif](assets/diagrams/fig2_1_primitive_enzymes.svg)
+
+> [!ANALYSIS]
+> **Figure 2.1 Architectural Breakdown: Primitive Enzymatic Pockets & The XOR Barrier**
+> - **🔍 Visual Guide & Structural Mechanics:** The top panel details the physical mechanics of the three primitive catalysts: 1) Co-Substrate Catalyst (`AND`, requiring simultaneous binding in Pockets A & B), 2) Promiscuous Catalyst (`OR`, flexible active site accommodating either substrate), and 3) Allosteric Inhibitor (`NOT`, inhibitor binding at an allosteric regulatory site induces conformational shutdown). The bottom panel contrasts linearly separable gates (`AND`) with linearly non-separable gates (`XOR`), detailing the emergent 3-gate composite network motif $(A \lor B) \land \neg(A \land B)$.
+> - **🔬 Biophysical & Mathematical Reality:** In single protein active sites, single-substrate binding obeys Michaelis-Menten kinetics, and bi-substrate binding obeys ternary complex mechanisms. A single pocket can easily execute conjunction (`AND`) or disjunction (`OR`), but cannot physically execute exclusive disjunction (`XOR`) because binding of both substrates would have to produce negative catalytic output.
+> - **💻 Digital Mapping & Silicon Architecture:** In Siliquarium, `GATE_AND`, `GATE_OR`, and `GATE_NOT` are primitive codons in [`CodonTable.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts). `XOR` has no codon. It can only emerge when random mutation wires an `OR` gate, an `AND` gate, and a `NOT` gate together in [`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts).
+> - **🏛️ Core Principle & Intuitive Summary:** *Complexity Emerges from Composition, Not Special Creation.* High-level logical decisions are not fundamental particles; they are networks of simple physical switches cooperating in space.
 
 ### 2.1 The `GATE_AND` Primitive: Co-Substrate Catalysis
 - **Biochemical Reality:** Many fundamental metabolic reactions are bi-molecular: they cannot proceed unless two distinct substrate molecules bind simultaneously in adjacent catalytic pockets.
@@ -67,20 +58,7 @@ Students frequently ask: *"If AND, OR, and NOT are primitive gates, why isn't XO
 
 The answer is a foundational principle of biophysics, neurobiology, and machine learning: **The Principle of Linear Non-Separability**.
 
-```
-             LINEAR SEPARABILITY OF PRIMITIVE LOGIC GATES
-             
-         AND GATE (Linearly Separable)           XOR GATE (NON-SEPARABLE!)
-     B                                       B
-     ▲                                       ▲
-   1 ┼─── ○ (0)      ● (1)                 1 ┼─── ● (1)      ○ (0)
-     │         \                             │       \     /
-     │          \ Separating                 │        \   /  CANNOT BE SEPARATED
-     │           \ Hyperplane                │         \ /   BY A SINGLE LINE!
-   0 ┼─── ○ (0)    \ ○ (0)                 0 ┼─── ○ (0) X    ● (1)
-     └─────┼─────────┼───► A                 └─────┼─────────┼───► A
-           0         1                             0         1
-```
+As illustrated in Figure 2.1 above, the geometric contrast is decisive:
 
 ### 3.1 The Minsky-Papert Perceptron Barrier (1969)
 In 1969, Marvin Minsky and Seymour Papert proved that a single computational node (a single-layer perceptron or a single physical active site) can only classify patterns that are **linearly separable** by a single linear hyperplane:
@@ -109,26 +87,9 @@ Consider what a single `XOR` enzyme would physically have to do:
 2. If Substrate B enters alone, the enzyme must fire.
 3. But if *both* Substrate A and Substrate B enter together, the enzyme must suddenly quench itself and produce zero output!
 
-No single physical catalytic pocket can achieve this behavior with simple binding kinetics. To produce an XOR response, nature must assemble a **multi-enzyme regulatory network motif**:
+No single physical catalytic pocket can achieve this behavior with simple binding kinetics. To produce an XOR response, nature must assemble a **multi-enzyme regulatory network motif** (shown in Figure 2.1):
 
 $$(A \oplus B) \equiv (A \lor B) \land \neg(A \land B)$$
-
-```
-                     THE COMPOSITE XOR NETWORK MOTIF
-                     (Requires 3+ Primitive Gates!)
-                     
-   Stream A ────┬──────────────────► ┌─────────┐
-                │                    │   OR    │ ──────┐
-   Stream B ────┼──────────┬───────► └─────────┘       │
-                │          │                           ▼
-                │          │                     ┌───────────┐
-                │          │                     │    AND    │ ──► Output (A XOR B)
-                ▼          ▼                     └─────▲─────┘
-              ┌──────────────┐                         │
-              │     AND      │ ──► ┌─────────┐         │
-              └──────────────┘     │   NOT   │ ────────┘
-                                   └─────────┘
-```
 
 > [!IMPORTANT]
 > **Evolutionary Consequence:** In Siliquarium, `XOR` does not exist as a single codon in the degenerate codon table. An organism cannot "spawn" with an XOR gate. It must evolve an XOR circuit de novo by accumulating multiple gene duplications, linking an `OR` gate, an `AND` gate, and an inhibitory `NOT` gate into a coherent multi-gene regulatory network!
@@ -139,12 +100,14 @@ $$(A \oplus B) \equiv (A \lor B) \land \neg(A \land B)$$
 
 To prevent smuggled teleology (e.g. artificial opcodes like `MOVE`, `EAT`, or `FIGHT`), every 6-bit codon in Siliquarium's degenerate table ([`CodonTable.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts)) corresponds strictly to physical biomolecular primitives:
 
-```
-[ Bit 5 | Bit 4 | Bit 3 | Bit 2 | Bit 1 | Bit 0 ]
-  ▲                     ▲
-  │                     └─ Synonymous degenerate bits (Kimura neutral drift)
-  └─ Functional class selector
-```
+![Figure 2.2: 64-Entry Degenerate Codon Architecture and Neutral Introns](assets/diagrams/fig2_2_codon_table.svg)
+
+> [!ANALYSIS]
+> **Figure 2.2 Architectural Breakdown: Degenerate Codon Anatomy & Mutational Buffers**
+> - **🔍 Visual Guide & Structural Mechanics:** Details the 6-bit codon bitfield anatomy: Bits 5–4 designate the primary functional class (Logic Gates, Membrane Porins, Organelle Sinks, and Non-Coding Introns); Bits 3–2 determine the specific subtype; and Bits 1–0 provide synonymous neutral degeneracy (the molecular "wobble" hypothesis).
+> - **🔬 Biophysical & Mathematical Reality:** In natural molecular genetics, 64 mRNA codons encode only 20 amino acids plus stop signals. This redundancy creates neutral saddles across sequence space. In Siliquarium, 12 codons encode `GATE_AND`, 10 encode `GATE_NOT`, 10 encode `GATE_OR`, and 6 encode non-coding introns (`INTRON_SILENT`).
+> - **💻 Digital Mapping & Silicon Architecture:** Codified in [`CodonTable.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts). A point mutation in Bits 1–0 flips the bit on the genome tape but produces the exact same translated gate type in [`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts).
+> - **🏛️ Core Principle & Intuitive Summary:** *Degeneracy Shields Function While Permitting Exploration.* Without non-coding buffers and synonymous codons, every single mutation would alter phenotypes, destroying delicate catalytic complexes.
 
 | Codon Range (Decimal) | Binary Prefix | Codon Type | Biophysical Equivalent | Natural Function |
 | :---: | :---: | :--- | :--- | :--- |
@@ -181,6 +144,15 @@ $$P_{\text{dynamic}} = \alpha \cdot C \cdot V^2 \cdot f$$
 - If a gate holds its state ($0 \to 0$ or $1 \to 1$), dynamic dissipation is zero.
 
 In Siliquarium, every time a logic gate switches state, it incurs a non-negotiable Landauer penalty of **$1$ Energy Token** ([`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts)).
+
+![Figure 2.3: Rolf Landauer's Thermodynamic Bound & CMOS Dynamic Power Ledger](assets/diagrams/fig2_3_landauer_dissipation.svg)
+
+> [!ANALYSIS]
+> **Figure 2.3 Architectural Breakdown: Landauer Dynamic Power & The Thermodynamic Ledger**
+> - **🔍 Visual Guide & Structural Mechanics:** Shows the three branches of the metabolic token ledger: 1) Catalytic Influx ($+2\text{ to }+3$ tokens when complementary substrates bind), 2) Dynamic Landauer Dissipation ($-1$ token deducted for every logic gate transition $0 \to 1$ or $1 \to 0$), and 3) Basal Maintenance Leak ($-1$ token lost every 10 ticks due to spontaneous dielectric decay). The lower curve tracks battery depletion toward starvation lysis ($E=0$).
+> - **🔬 Biophysical & Mathematical Reality:** In modern physics, logical irreversibility demands thermodynamic entropy production: $Q \ge k_B T \ln 2$. In CMOS integrated circuits and biological allosteric enzymes, physical power consumption scales with switching frequency: $P = \alpha C V^2 f$. Holding state dissipates almost nothing; changing state burns finite energy.
+> - **💻 Digital Mapping & Silicon Architecture:** Tracked in [`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts) via `toggledGates` and integrated in the global HUD `Thermodynamic Ledger`: $\Delta E_{\text{universe}} = 0.000$.
+> - **🏛️ Core Principle & Intuitive Summary:** *Thinking Costs Calories.* Complex brains and hyperactive regulatory circuits are lethal liabilities unless their computation generates more catalytic energy than they dissipate.
 
 ---
 

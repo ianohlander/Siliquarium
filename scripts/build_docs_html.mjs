@@ -80,7 +80,7 @@ function slugify(text) {
     .replace(/[\s_-]+/g, '-');
 }
 
-function parseMarkdown(md, currentDocId) {
+function parseMarkdown(md, currentDocId, relativeRoot = '') {
   const lines = md.split(/\r?\n/);
   const out = [];
   let inCodeBlock = false;
@@ -103,13 +103,13 @@ function parseMarkdown(md, currentDocId) {
     if (inTable) {
       let tHtml = '<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider">';
       for (const th of tableHeader) {
-        tHtml += `<th class="p-3.5 font-semibold">${inlineFormat(th.trim(), currentDocId)}</th>`;
+        tHtml += `<th class="p-3.5 font-semibold">${inlineFormat(th.trim(), currentDocId, relativeRoot)}</th>`;
       }
       tHtml += '</tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300">';
       for (const row of tableRows) {
         tHtml += '<tr class="hover:bg-slate-800/30 transition-colors">';
         for (const td of row) {
-          tHtml += `<td class="p-3.5 leading-relaxed">${inlineFormat(td.trim(), currentDocId)}</td>`;
+          tHtml += `<td class="p-3.5 leading-relaxed">${inlineFormat(td.trim(), currentDocId, relativeRoot)}</td>`;
         }
         tHtml += '</tr>';
       }
@@ -216,7 +216,7 @@ function parseMarkdown(md, currentDocId) {
         bqLines.push(lines[i].trim().replace(/^>\s?/, ''));
       }
 
-      const formattedBq = bqLines.map(l => inlineFormat(l, currentDocId)).join('<br/>');
+      const formattedBq = bqLines.map(l => inlineFormat(l, currentDocId, relativeRoot)).join('<br/>');
 
       if (alertType === 'analogy') {
         out.push(`<div class="card-analogy p-5 rounded-2xl border border-amber-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
@@ -271,7 +271,7 @@ function parseMarkdown(md, currentDocId) {
       if (level === 3) sizeClasses = 'text-lg font-bold font-mono text-cyan-400 mt-6 mb-2';
       if (level === 4) sizeClasses = 'text-base font-semibold font-mono text-amber-400 mt-4 mb-2';
 
-      out.push(`<h${level} id="${id}" class="${sizeClasses}">${inlineFormat(text, currentDocId)} <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#${id}" title="Direct link">#</a></h${level}>`);
+      out.push(`<h${level} id="${id}" class="${sizeClasses}">${inlineFormat(text, currentDocId, relativeRoot)} <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#${id}" title="Direct link">#</a></h${level}>`);
       continue;
     }
 
@@ -287,7 +287,7 @@ function parseMarkdown(md, currentDocId) {
         const listClasses = curType === 'ul' ? 'list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed' : 'list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed';
         out.push(`<${listType} class="${listClasses}">`);
       }
-      out.push(`<li>${inlineFormat(match[2], currentDocId)}</li>`);
+      out.push(`<li>${inlineFormat(match[2], currentDocId, relativeRoot)}</li>`);
       continue;
     } else {
       closeList();
@@ -300,7 +300,7 @@ function parseMarkdown(md, currentDocId) {
     }
 
     // Paragraph
-    out.push(`<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">${inlineFormat(trimmed, currentDocId)}</p>`);
+    out.push(`<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">${inlineFormat(trimmed, currentDocId, relativeRoot)}</p>`);
   }
 
   closeList();
@@ -308,16 +308,34 @@ function parseMarkdown(md, currentDocId) {
   return out.join('\n');
 }
 
-function inlineFormat(text, currentDocId) {
+function inlineFormat(text, currentDocId, relativeRoot = '') {
   // Inline citations: [n](#ref-n)
   text = text.replace(/\[(\d+)\]\(#ref-(\d+)\)/g, '<sup class="text-cyan-400 font-mono text-[10px]"><a href="#ref-$2">[$1]</a></sup>');
 
   // Inline images: ![alt](src)
   text = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, src) => {
-    let cleanSrc = src;
+    let cleanSrc = src.trim();
     if (cleanSrc.startsWith('/')) cleanSrc = cleanSrc.slice(1);
     cleanSrc = cleanSrc.replace(/^[A-Za-z]:[\\/]/, '');
-    return `<div class="my-6 text-center"><img src="${cleanSrc}" alt="${escapeHtml(alt)}" loading="lazy" class="max-w-full h-auto rounded-xl border border-slate-800 shadow-2xl mx-auto" /><div class="mt-2 text-xs font-mono text-slate-500">${escapeHtml(alt)}</div></div>`;
+    if (!cleanSrc.startsWith('http://') && !cleanSrc.startsWith('https://')) {
+      if (cleanSrc.startsWith('docs/assets/')) {
+        cleanSrc = cleanSrc.slice(5);
+      }
+      if (cleanSrc.startsWith('QA/screenshots/')) {
+        cleanSrc = 'assets/screenshots/' + cleanSrc.slice('QA/screenshots/'.length);
+      }
+      if (cleanSrc.startsWith('assets/')) {
+        cleanSrc = (relativeRoot || '') + cleanSrc;
+      }
+    }
+    return `<figure class="my-8 text-center group">
+      <div class="relative inline-block w-full max-w-4xl rounded-2xl p-1 bg-gradient-to-b from-slate-700/40 via-slate-800/20 to-slate-900/60 shadow-2xl border border-slate-800/80 hover:border-cyan-500/50 transition-all duration-300">
+        <img src="${cleanSrc}" alt="${escapeHtml(alt)}" loading="eager" class="w-full h-auto rounded-xl mx-auto block" />
+      </div>
+      <figcaption class="mt-3 text-xs font-mono text-slate-400 group-hover:text-cyan-300 transition-colors flex items-center justify-center gap-1.5">
+        <span class="text-cyan-400">📷</span> <span>${escapeHtml(alt)}</span>
+      </figcaption>
+    </figure>`;
   });
 
   // Inline links: [text](href)
@@ -919,7 +937,7 @@ function buildDoc(doc) {
     return;
   }
   const md = fs.readFileSync(fullSrc, 'utf8');
-  const bodyHtml = parseMarkdown(md, doc.docId);
+  const bodyHtml = parseMarkdown(md, doc.docId, doc.relativeRoot);
   const finalHtml = renderHtmlTemplate({
     title: doc.title,
     content: bodyHtml,

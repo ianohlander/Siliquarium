@@ -7,34 +7,13 @@
 
 To prevent vertical scrolling fatigue and provide a structured, college-level learning trajectory, this course is divided into **four core theoretical units** and an **interactive student laboratory manual**. Each module is published as an independent chapter equipped with high-resolution visual scaffolding, worked toy traces, BooleanGA Equation Decoders, and conceptual misconception immunity.
 
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                        COURSE SYLLABUS & MODULAR CHAPTER PORTAL                        │
-│                                                                                        │
-│  [ UNIT 1: PREBIOTIC THRESHOLD ]             [ UNIT 2: THE LOGIC OF LIFE ]             │
-│  • The Dilution Catastrophe                  • Co-Catalysis as AND, Inhibition as NOT  │
-│  • Russell-Hall Alkaline Chimneys            • The XOR Impossibility Proof             │
-│  • Mitchell's Chemiosmotic Battery           • 64-Entry Codon Table Biophysics         │
-│  • Von Neumann & Pattee's Epistemic Cut      • Rolf Landauer's Thermodynamic Bound     │
-│  📖 Read: unit1_prebiotic_threshold.md       📖 Read: unit2_logic_of_life.md           │
-│                                                                                        │
-│  [ UNIT 3: SYSTEMS BIOLOGY MOTIFS ]          [ UNIT 4: EVOLUTIONARY DYNAMICS ]         │
-│  • Uri Alon Canonical Network Motifs         • Motoo Kimura's Neutral Drift Saddles    │
-│  • Bistable Memory Latches & Repressilators  • Susumu Ohno's Gene Duplications         │
-│  • C-FFL & I-FFL Sensory Adaptation          • Mathematical Homology vs. Homoplasy     │
-│  • Weisfeiler-Lehman Graph Hashes            • Lenski LTEE & Pelagic Spore Advection   │
-│  📖 Read: unit3_systems_biology_motifs.md    📖 Read: unit4_evolutionary_dynamics.md   │
-│                                                                                        │
-│  [ PRACTICUMS: STUDENT LAB MANUAL ]                                                    │
-│  • Lab 1: Seafloor Navigation & Circuit Microscope                                     │
-│  • Lab 2: Landauer Power Dissipation & Metabolic Starvation                            │
-│  • Lab 3: Phenotypic Adaptation to Vent Chemistry & Toxin Shielding                    │
-│  • Lab 4: God-Suite Perturbations: Thermal Surges & Succession                         │
-│  • Lab 5: Lenski LTEE & Counterfactual Evolutionary Flight Recorder Autopsy            │
-│  • Formative Diagnostic Assessments (Multiple Choice & Quantitative Math Problems)     │
-│  📖 Read: practicums_lab_manual.md                                                     │
-└────────────────────────────────────────────────────────────────────────────────────────┘
-```
+| Curriculum Module | Core Theoretical Focus | Laboratory & Experimental Connections | Modular Link |
+| :--- | :--- | :--- | :---: |
+| **Unit 1: Prebiotic Threshold** | Dilution Catastrophe, Russell-Hall Alkaline Chimneys, Mitchell PMF, Epistemic Cut | Lab 1: Seafloor Navigation & Circuit Microscope | [Open Unit 1 →](curriculum/unit1_prebiotic_threshold.md) |
+| **Unit 2: The Logic of Life** | Primitive Catalysts (`AND`, `OR`, `NOT`), XOR Impossibility Proof, Codon Table, Landauer Bound | Lab 2: Landauer Dissipation; Lab 3: Toxin Shielding | [Open Unit 2 →](curriculum/unit2_logic_of_life.md) |
+| **Unit 3: Systems Biology Motifs** | Uri Alon Motifs (Latches, Repressilator, FFLs), Weisfeiler-Lehman Graph Hashes | Real-Time Milestone Detection & State Hysteresis | [Open Unit 3 →](curriculum/unit3_systems_biology_motifs.md) |
+| **Unit 4: Evolutionary Dynamics** | Kimura Neutral Drift, Ohno Duplications, Homology vs Homoplasy, Lenski LTEE | Lab 4: God-Suite Perturbations; Lab 5: Flight Recorder Autopsy | [Open Unit 4 →](curriculum/unit4_evolutionary_dynamics.md) |
+| **Practicums: Student Lab Manual** | Five 90-Minute Block Practicums, Socratic Seminars, Formative Diagnostic Assessments | Interactive 3D WebGL Seamount & Single-Bit Autopsy | [Open Lab Manual →](curriculum/practicums_lab_manual.md) |
 
 ---
 
@@ -56,15 +35,13 @@ In conventional high school and undergraduate computer science, genetic algorith
 
 This introduces a fatal pedagogical misconception: students assume evolution possesses goals, foresight, and an omniscient supervisor.
 
-```
-       BOOLEAN-GA (Engineering CAD)                    SILIQUARIUM (Autopoietic Ecosystem)
-  ┌─────────────────────────────────────┐            ┌─────────────────────────────────────┐
-  │ • Heteropoietic Optimization        │            │ • Autopoietic Self-Maintenance      │
-  │ • Target Truth Table (Loss Function)│  ──────►   │ • Zero Truth Table (Open-Ended)     │
-  │ • Omniscient External Supervisor    │            │ • Blind Physical Thermodynamics     │
-  │ • Generational Batch Cadence        │            │ • Continuous Spatial Honeycomb Grid │
-  └─────────────────────────────────────┘            └─────────────────────────────────────┘
-```
+| Architectural Dimension | Conventional Boolean-GA (Engineering CAD) | Siliquarium (Autopoietic Ecosystem) |
+| :--- | :--- | :--- |
+| **System Classification** | Heteropoietic Optimization | Autopoietic Self-Maintenance |
+| **Fitness Criterion** | Target Truth Table (Loss Function Error) | Blind Thermodynamic Persistence (Battery $> 0$) |
+| **Supervision** | Omniscient External Supervisor | Zero Supervisor; Autonomous Physical Laws |
+| **Time Execution** | Generational Batch Cadence | Continuous Asynchronous Spatial Mesh |
+| **Hereditary Structure** | Monolithic String Vector | Howard Pattee Epistemic Cut (Safe vs. Workshop) |
 
 **Siliquarium** transitions from engineering CAD to **autopoiesis** (Humberto Maturana and Francisco Varela):
 - **Fitness is not an external score; fitness is persistence.**

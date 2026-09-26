@@ -13,18 +13,23 @@ Before Phase 3, Siliquarium's digital ecosystem was locked inside numerical arra
 1. **The Macroscope (3D WebGL Seafloor Caldera):** A volumetric perspective of the abyssal hydrothermal vent field, rendering basalt terraces, buoyant thermal plumes rising against gravity, and glowing colonies of living silicon cells.
 2. **The Microscope (2D Logic Workshop Inspector):** A nanoscopic schematic window into an individual pore's `PoreWorkshop`, displaying real-time logic gate toggles (`AND`, `OR`, `NOT`, `BUF`), pulsing electron wires, battery token reserves ($0..100$), and the 60-bit genome tape.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   THE TWO OBSERVATIONAL LENSES                         │
-│                                                                        │
-│   [ MACROSCOPE: 3D Seafloor ]       ──►   [ MICROSCOPE: 2D Pore ]      │
-│   • 3D Stacked Hex Lattice (q,r,z)        • Real-Time Logic Gates      │
-│   • Buoyant Hydrothermal Plumes           • Pulsing Binary Wires (0/1) │
-│   • Substrate vs Aqueous Mediums          • Battery Token Gauge        │
-│   • In-Situ 3D Circuit Magnification      • 1D Decoded Genome Tape     │
-│   • Pixel-Perfect Polygon Picking         • Single-Bit Autopsy Trace   │
-└────────────────────────────────────────────────────────────────────────┘
-```
+![Figure 3.1: The Macroscope — Volumetric 3D Hydrothermal Caldera](assets/screenshots/01_overview_and_lattice_key.png)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 3.1 — The 3D Abyssal Macroscope
+> - **Visual Guide:** The panoramic WebGL viewport renders the stacked hexagonal basalt terraces $(q, r, z=0)$, the central thermal hydrothermal chimney spires, and buoyant convective updrafts rising into the permeable aqueous fluid column.
+> - **Biophysical Reality:** Benthic hydrothermal ecosystems exhibit extreme vertical and radial chemical stratification. Temperature, pH, and redox potential drop steeply as fluids mix with ambient abyssal ocean water.
+> - **Digital Mapping:** Each pore is color-coded in real time according to its metabolic state and battery charge ($0\text{--}100\text{ tokens}$). Active autotrophs glow emerald green, while saturated spores detach and rise through the permeable water column.
+> - **Core Principle:** *Spatial context drives macro-ecological dynamics.* Evolution is shaped by local geometric gradients, diffusion boundaries, and fluid advection.
+
+![Figure 3.2: The Microscope — Real-Time Logic Workshop & Reticle Lock](assets/screenshots/03_selected_silicoid_and_microscope.png)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 3.2 — The In-Situ Circuit Microscope
+> - **Visual Guide:** Clicking any living pore activates the holographic 3D reticle and expands the live `PoreWorkshop` inspector drawer on the right. The panel displays real-time logic gate toggles (`AND`, `OR`, `NOT`), active signal wires, current battery reserves, and the 60-bit decoded genome tape.
+> - **Biophysical Reality:** Directly verifies Howard Pattee's Epistemic Cut: students observe the rate-independent symbolic genome tape resting safely on the library shelf, while rate-dependent CMOS logic gates toggle dynamically to process incoming vent pulses.
+> - **Digital Mapping:** Dynamic Landauer power dissipation ($1\text{ token per toggle}$) and basal membrane leakage are metered in real time. If battery reserves hit zero, the cell undergoes immediate lysis into mineral rubble.
+> - **Core Principle:** *Observation without perturbation.* The microscope provides a non-invasive telemetry window into the living cell's internal state without altering its physical thermodynamics.
 
 ---
 

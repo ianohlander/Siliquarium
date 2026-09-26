@@ -13,21 +13,7 @@ Analyzing the transcriptional regulatory networks of *Escherichia coli* and *Sac
 
 Alon termed these recurring functional patterns **Network Motifs** (*Alon, 2007, 2019*).
 
-```
-         RANDOM CONTROL NETWORK                           LIVING REGULATORY NETWORK
-      (No Favored Sub-Structures)                         (Enriched with Network Motifs)
-    ┌─────────────────────────────┐                    ┌─────────────────────────────┐
-    │     ○ ──► ○ ──► ○           │                    │     ┌──► [NOR] ──┐          │
-    │     │     ▲     │           │                    │     │      ▲     │ (Latch)  │
-    │     ▼     │     ▼           │   NATURAL          │     └─── [NOR] ◄─┘          │
-    │     ○ ◄───○ ──► ○           │  SELECTION         │     ┌──► [NOT] ──► [NOT] ─┐ │
-    │                             │ ─────────────►     │     │                     │ │
-    │   Chaotic wiring;           │                    │     └──────── [NOT] ◄─────┘ │
-    │   No stable regulatory      │                    │         (Repressilator)     │
-    │   functions emerge.         │                    │   Enriched with functional  │
-    │                             │                    │   sub-circuits of life!     │
-    └─────────────────────────────┘                    └─────────────────────────────┘
-```
+Natural selection acts as a powerful sieve, repeatedly preserving certain compact, directed subgraph patterns that confer vital physiological advantages: cellular memory, autonomous timing, noise filtration, and pulse generation.
 
 In Siliquarium, the [`DigitalPaleontologist`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/DigitalPaleontologist.ts) and [`MotifScanner`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts) act as an automated, passive external voltmeter, detecting when living silicoids evolve these canonical network motifs de novo.
 
@@ -37,31 +23,14 @@ In Siliquarium, the [`DigitalPaleontologist`](file:///h:/My%20Drive/Repos/Siliqu
 
 Siliquarium establishes a direct biophysical correspondence between digital hardware circuits and verified molecular regulatory networks:
 
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                        CANONICAL SYSTEMS BIOLOGY NETWORK MOTIFS                        │
-│                                                                                        │
-│   1. BISTABLE TOGGLE SWITCH (SR LATCH)            2. THE REPRESSILATOR (RING OSCILLATOR)│
-│                                                                                        │
-│           Set (S) ──► ┌───────┐                          ┌──► [NOT A] ──► [NOT B] ─┐   │
-│                       │  NOR  │ ──┬──► Q (Output)        │                         │   │
-│                   ┌──►└───────┘   │                      └──────── [NOT C] ◄───────┘   │
-│                   │               │                                (Limit Cycle)       │
-│                   │   ┌───────┐   │                                                    │
-│                   └───│  NOR  │◄──┘               3. FEED-FORWARD LOOPS (C-FFL / I-FFL)│
-│                       └───────┘                                                        │
-│                           ▲                                      ┌─────────┐           │
-│                           │                                      │    X    │           │
-│                        Reset (R)                                ┌┴─────────┴┐          │
-│                                                                 │           │          │
-│                                                                 ▼           ▼          │
-│                                                            ┌─────────┐ ┌─────────┐     │
-│                                                            │    Y    │ │         │     │
-│                                                            └────┬────┘ │    Z    │     │
-│                                                                 └──────►│ (Target)│     │
-│                                                                        └─────────┘     │
-└────────────────────────────────────────────────────────────────────────────────────────┘
-```
+![Figure 3.1: Uri Alon's Canonical Systems Biology Network Motifs](assets/diagrams/fig3_1_network_motifs.svg)
+
+> [!ANALYSIS]
+> **Figure 3.1 Architectural Breakdown: Canonical Systems Biology Regulatory Motifs**
+> - **🔍 Visual Guide & Structural Mechanics:** Displays the four foundational network motifs discovered by Uri Alon in *E. coli* and yeast: 1) The Bistable Toggle Switch (cross-coupled `NOR` or `NAND` gates with feedback wires), 2) The Repressilator (an odd-numbered cyclic ring oscillator of inverting `NOT` gates), 3) The Coherent Feed-Forward Loop (C-FFL, where $X$ and $Y$ jointly activate target $Z$), and 4) The Incoherent Feed-Forward Loop (I-FFL, where $X$ activates $Z$ while simultaneously activating inhibitor $Y$).
+> - **🔬 Biophysical & Mathematical Reality:** While random network graphs exhibit Poisson or power-law degree distributions without enriched subgraphs, natural selection preferentially preserves these four motifs because they solve universal dynamical problems: bistable state memory, autonomous circadian pacing, noise rejection, and fold-change sensory adaptation.
+> - **💻 Digital Mapping & Silicon Architecture:** Scanned dynamically by [`MotifScanner.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts). When an organism's directed netlist matches one of these topologies and demonstrates functional dynamical fidelity (e.g., hysteresis or limit-cycle oscillation), the Paleontologist logs an evolutionary milestone in [`EvolutionaryFlightRecorder.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts).
+> - **🏛️ Core Principle & Intuitive Summary:** *Nature Reinvents the Same Circuit Blocks Everywhere.* From bacterial plasmids to human stem cell differentiation, evolution converges on the exact same functional wiring motifs.
 
 ### 2.1 The Bistable Toggle Switch (SR Latch) & Memory as Digestive Preservation
 - **Hardware Architecture:** Two cross-coupled inverting gates (`NOR` or `NAND`) with feedback wires returning each output to the other gate's input.
@@ -71,36 +40,10 @@ Siliquarium establishes a direct biophysical correspondence between digital hard
   - When Stream B finally arrives, the stored state completes the catalytic reaction!
   - **Memory did not evolve for abstract cognition; memory evolved as a digestive food preservation strategy!**
 
-```
-                         THE DYNAMIC HYSTERESIS CURVE
-                         
-               Internal Output Q (State)
-                     ▲
-                 1.0 ┼──────────────●──────────────┐ (LATCHED HIGH: State = 1)
-                     │             /               │
-                     │            /                │ State remains HIGH
-                     │   Turn-ON /                 │ even when input S
-                     │  Threshold                  │ drops back to 0!
-                 0.0 ┼───────●─────────────────────┴───► Set Input (S)
-                             0.0   1.0
-```
-
 ### 2.2 The Repressilator (Ring Oscillator) & Autonomous Circadian Timing
 - **Hardware Architecture:** An odd-numbered cyclic chain of inverters (`NOT` gates, typically $N=3$) wired in a closed directed ring ($A \to B \to C \to A$).
 - **Biological Regulatory Cognate:** The Repressilator engineered by Michael Elowitz and Stanislas Leibler (2000), modeling the circadian pacemaker rhythms of cyanobacteria and suprachiasmatic mammalian neurons.
 - **Biophysical Function in Siliquarium:** Pores sheltered deep in rock crevices receive attenuated, sluggish vent pulses. An organism with a ring oscillator generates its own autonomous, periodic clock pulse, pacing its internal gates without relying on the erratic rhythms of the vent.
-
-```
-                  REPRESSILATOR THREE-PHASE LIMIT CYCLE
-                  
-     Logic Voltage
-          ▲
-      1.0 ┼   /\          /\          /\          Gate A
-          │  /  \  /\    /  \  /\    /  \  /\     Gate B
-          │ /    \/  \  /    \/  \  /    \/  \    Gate C
-      0.0 ┼/      \___\/      \___\/      \___\──► Time (Ticks)
-            Phase 1     Phase 2     Phase 3
-```
 
 ### 2.3 Feed-Forward Loops (FFLs): Noise Filters & Pulse Generators
 A Feed-Forward Loop consists of three genes or gates: a master regulator ($X$) that regulates both a secondary regulator ($Y$) and a downstream target gene ($Z$), while $Y$ also regulates $Z$.
@@ -111,35 +54,20 @@ A Feed-Forward Loop consists of three genes or gates: a master regulator ($X$) t
 - **Diagnostic Signature:** When input $X$ steps from $0 \to 1$, target $Z$ does not fire immediately; it must wait until $Y$ accumulates to threshold. However, when $X$ drops back to $0$, $Z$ shuts down instantly.
 - **Evolutionary Utility:** **Rejects spurious thermal noise spikes.** If a momentary thermal fluctuation creates a 1-tick glitch ($X=1$ for 1 tick), $Z$ ignores it. $Z$ only fires if the food pulse sustains for $> k$ consecutive ticks.
 
-```
-                   COHERENT FEED-FORWARD LOOP (C-FFL) RESPONSE
-                   
-    Input X     ┌──────┐
-    (Food/Vent) │      │   (Brief Spike: Ignored)
-    ────────────┘      └───────────────────────────────► Time
-    
-    Output Z                                 ┌─────────┐
-    (Digestion)                              │         │ (Fires only on sustained pulse!)
-    ─────────────────────────────────────────┘         └─► Time
-```
-
 #### B. Incoherent FFL Type 1 (I-FFL): The Biphasic Pulse Generator & Sensory Adaptation
 - **Wiring:** $X$ activates target $Z$, but $X$ also activates $Y$, which *inhibits* $Z$ (`AND NOT` logic).
 - **Biological Cognate:** Bacterial chemotaxis adaptation (*E. coli* swimming up nutrient gradients).
 - **Diagnostic Signature:** When input $X$ steps up from $0 \to 1$, $Z$ fires immediately because the direct activating path ($X \to Z$) is fast. But with a delay, repressor $Y$ accumulates, physically shutting $Z$ back down to zero even while input $X$ remains high!
 - **Evolutionary Utility:** **Sensory Adaptation.** It computes a temporal fold-change derivative ($d/dt$), firing a brief burst upon a sudden environmental shift, then adapting its baseline to conserve energy.
 
-```
-                  INCOHERENT FEED-FORWARD LOOP (I-FFL) RESPONSE
-                  
-    Input X     ┌──────────────────────────────────────┐ (Continuous Step Input)
-    (Solute)    │                                      │
-    ────────────┘                                      └─► Time
-    
-    Output Z       ┌──┐
-    (Adaptation)   │  │   (Brief Biphasic Pulse, then adapts to 0)
-    ───────────────┘  └──────────────────────────────────► Time
-```
+![Figure 3.3: Dynamic Analog Response Waveforms of Uri Alon Motifs](assets/diagrams/fig3_3_motif_waveforms.svg)
+
+> [!ANALYSIS]
+> **Figure 3.3 Architectural Breakdown: Dynamic Analog Waveforms & Dynamical Systems Behavior**
+> - **🔍 Visual Guide & Structural Mechanics:** Compares the time-domain voltage waveforms across the four motifs: 1) SR Latch Hysteresis (state remains $Q=1$ even after input $S$ returns to zero), 2) Repressilator 3-Phase Limit Cycle (self-sustaining 3-phase sinusoidal clock), 3) C-FFL Persistence Filter (ignores 1-tick noise spike, fires only on sustained input), and 4) I-FFL Sensory Adaptation (outputs a sharp derivative pulse at step onset, then adapts back to zero baseline).
+> - **🔬 Biophysical & Mathematical Reality:** Regulated by coupled non-linear differential rate equations $\frac{dx_i}{dt} = \beta_i \frac{x_j^n}{\theta^n + x_j^n} - \gamma_i x_i$. Feedback and feed-forward loops transform simple Boolean gates into analog dynamical filters with memory, limit cycles, and adaptation.
+> - **💻 Digital Mapping & Silicon Architecture:** Evaluated by [`MotifScanner.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts) across successive ticks. A topology is only classified as a functional motif if its observed state trajectories exhibit the expected analytical signature.
+> - **🏛️ Core Principle & Intuitive Summary:** *Dynamics Trump Static Wiring.* A circuit is defined not merely by which gates are connected, but by the time-dependent trajectory of voltages flowing through it.
 
 ---
 
@@ -186,17 +114,14 @@ Let us manually trace 2 rounds of Weisfeiler-Lehman color refinement on a 3-gate
 - Gates: $G_1 = \text{NOT}, G_2 = \text{NOT}, G_3 = \text{NOT}$.
 - Wires: $(G_1 \to G_2), (G_2 \to G_3), (G_3 \to G_1)$.
 
-```
-   ┌─────────┐         ┌─────────┐
-   │ Gate 1  │ ──────► │ Gate 2  │
-   │  (NOT)  │         │  (NOT)  │
-   └─────────┘         └────┬────┘
-        ▲                   │
-        │      ┌─────────┐  │
-        └───── │ Gate 3  │ ◄┘
-               │  (NOT)  │
-               └─────────┘
-```
+![Figure 3.2: The Weisfeiler-Lehman 1-WL Color Refinement Algorithm](assets/diagrams/fig3_2_weisfeiler_lehman.svg)
+
+> [!ANALYSIS]
+> **Figure 3.2 Architectural Breakdown: Weisfeiler-Lehman Multi-Round Gossip Refinement**
+> - **🔍 Visual Guide & Structural Mechanics:** Traces two successive rounds of 1-WL color refinement across a 3-gate inverting ring ($G_1 \to G_2 \to G_3 \to G_1$). Round 0 assigns baseline functional colors (`GATE_NOT`). Round 1 gathers immediate neighbor multiset signatures (`c0:[c0]`). Round 2 aggregates second-degree neighborhoods, converging to the canonical invariant `"WL-7f8a9b2c"`.
+> - **🔬 Biophysical & Mathematical Reality:** Solves the Graph Isomorphism problem for directed biological networks. Because node indices are arbitrary (a gate could be placed at slot 1 or slot 15), lexical sorting of incoming neighbor sets (`SORT`) erases node permutation, making the resulting hash completely invariant to spatial reordering.
+> - **💻 Digital Mapping & Silicon Architecture:** Implemented in [`WeisfeilerLehmanHasher.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/WeisfeilerLehmanHasher.ts). When two separate lineages on the seamount develop identical circuits with different genome bitstrings, the hasher recognizes that their physical circuit phenotypes are 100% identical.
+> - **🏛️ Core Principle & Intuitive Summary:** *Identity is Defined by Connections, Not Labels.* Two organisms have the same circuit phenotype if their gates talk to the same topological pattern of neighbors, regardless of internal memory addresses.
 
 | Round | Node | Gate Type | Neighbor Set $\mathcal{N}(v)$ | Sorted Neighbor Multiset | Neighborhood Signature | Canonical Hash Output |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |

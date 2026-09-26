@@ -31,14 +31,38 @@ Review Unit 1, Section 5. In your notebook, define Pattee's **Epistemic Cut** an
    - **Pan:** Right-click and drag (or two-finger drag) to move across basalt shelves and volcanic ridges.
    - **Zoom:** Scroll wheel to zoom from a bird's-eye view of the caldera down to an individual hexagonal pore.
 3. Locate the central hydrothermal caldera nozzle at coordinates $(0, 0, 0)$. Notice the glowing thermal convection plume rising vertically into the water column.
+
+![Figure L1.1: The Panoramic 3D Seafloor Seamount & Interactive Lattice Key](assets/screenshots/01_overview_and_lattice_key.png)
+
+> [!TIP]
+> **Field Guide Callout: Reading the 3D Seamount & Lattice States**
+> - **Rock Bedrock ($z=0$):** Dark hexagonal basalt matrix providing physical cavities.
+> - **Water Column ($z \ge 1$):** Permeable cyan-tinted hexes allowing thermal plume convection and spore drift.
+> - **Silicoid Pores:** Color-coded by state: Green (Active Homeostatic Silicoids), Amber (Starving cells $E < 20$), Grey (Mineralizing Carcasses).
+
 4. Click on an occupied hexagonal pore immediately adjacent to the vent nozzle (e.g., coordinates $(1, 0, 0)$ or $(0, 1, 0)$).
 5. Observe the **Electric Neon Targeting Reticle** lock onto the selected pore.
 6. Open the **Circuit Microscope** panel on the right side of the screen. Identify the three core anatomical compartments:
    - **The Genome Safe Ribbon:** The 60-bit inert tape displayed across the top.
    - **The Active Workshop Netlist:** The physical logic gates (`AND`, `OR`, `NOT`, `BUF`) and pulsing signal wires.
    - **The Battery Gauge:** Real-time token counter ($0..100$).
+
+![Figure L1.2: Selected Silicoid with Neon Reticle and Live Circuit Microscope](assets/screenshots/03_selected_silicoid_and_microscope.png)
+
+> [!NOTE]
+> **Field Guide Callout: Anatomy of the Circuit Microscope**
+> - **Top Ribbon (Genome Safe):** Displays the 10 codons (60 bits total) of inert genetic instructions. Notice zero electrical activity touches this tape.
+> - **Central Workshop Canvas:** The translated 2D CMOS logic circuit showing logic gates (`AND`, `NOT`, `OR`) connected to input porins ($A$, $B$, $T$) and output sinks ($E$, $M$, Septum).
+> - **Telemetry Bar:** Displays Real-Time Battery ($E$), Mineral Reserves ($M$), Lineage Generation, and Age.
+
 7. Click the **Pause** button (`❚❚`) on the bottom transport bar. Use the **Step Forward** button (`Step ►`) to advance the simulation clock cycle by clock cycle ($\pm 1$ tick).
 8. Observe how gate pins light up when vent pulses enter the pore, and track whether the battery charges or discharges.
+
+![Figure L1.3: Deep Zoom into In-Situ Hexagonal Logic Gate Netlist](assets/screenshots/04_deep_zoom_and_insitu_circuit.png)
+
+> [!NOTE]
+> **Field Guide Callout: In-Situ Micro-Pore Inspection**
+> - Zooming directly into an occupied basalt pore reveals the physical gate chips rendered in-situ on the seafloor floor. Wires glow when signals propagate, visually uniting the 3D physical world with the 2D schematic microscope.
 
 ### 4. Data Collection Table
 Select three distinct occupied pores at varying distances from the vent nozzle and record their physiological metrics:
@@ -80,6 +104,13 @@ Review Unit 2, Section 5. Write the algebraic formula for Rolf Landauer's thermo
 8. Inspect the **Thermodynamic Ledger HUD badge** at the top right:
    $$\Delta E_{\text{universe}} = \sum E_{\text{in}} - \sum E_{\text{stored}} - \sum E_{\text{dissipated}} = 0.000$$
 
+![Figure L2.1: Landauer Power Dissipation & Dynamic CMOS Switching Ledger](assets/diagrams/fig2_3_landauer_dissipation.svg)
+
+> [!NOTE]
+> **Field Guide Callout: Reading the Thermodynamic Ledger**
+> - Note the three ledger columns: Influx ($+3$), Dissipation ($-1$ per gate toggle), and Basal Leak ($-1$ per 10 ticks).
+> - Observe how uncoordinated circuits dissipate their battery to zero, triggering immediate lysis into a carcass.
+
 ### 4. Data Collection Table
 
 | Tick | Stream A | Stream B | Gate Switches | Landauer Burn ($E_L$) | Catalytic Yield ($E_C$) | Basal Leak ($E_{\text{leak}}$) | Net Battery ($E$) |
@@ -118,6 +149,14 @@ Review Unit 2, Section 2. Explain why a cell with genotype expressing `(A AND B)
 6. In the Circuit Microscope, translate its 60-bit genome tape into codons using [`CodonTable.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts):
    - Group the 60 bits into ten 6-bit codons: `[Bits 0-5]`, `[Bits 6-11]`, ..., `[Bits 54-59]`.
    - Identify whether the cell possesses `PORIN_TOXIN_T` coupled to an inhibitory `GATE_NOT`.
+
+![Figure L3.1: Primitive Catalytic Enzymes and Toxin Inhibition Motifs](assets/diagrams/fig2_1_primitive_enzymes.svg)
+
+> [!NOTE]
+> **Field Guide Callout: Codons to Catalytic Gates**
+> - Match your translated codon list against the three primitive enzymatic pockets shown above.
+> - Verify whether an inhibitory `GATE_NOT` is wired downstream of `PORIN_TOXIN_T` to protect against acidic bursts.
+
 7. Compare this adapted specimen with a peripheral cell that died or has a low battery.
 
 ### 4. Genome Codon Translation Worksheet
@@ -157,11 +196,28 @@ Review Unit 4, Section 6. Define the Shannon Diversity Index ($H$). What happens
 4. **Thermal Surge Pulse:**
    - Click **"🔥 Thermal Surge Pulse"** (+200 tokens injected into the central plume).
    - Observe the immediate metabolic boom: cells adjacent to the caldera rapidly hit $100$ tokens and trigger a wave of binary fissions.
+
+![Figure L4.1: God-Suite Experimental Interventions Panel](assets/screenshots/05_god_suite_lab_controls.png)
+
+> [!TIP]
+> **Field Guide Callout: Operating the God-Suite Drawer**
+> - The Lab Flyout drawer slides out from the left edge.
+> - Use the **Thermal Surge Pulse** (+200 tokens) to induce localized explosive division.
+> - Use the **Extinction Pulse** to wipe out dominant clades and trigger ecological succession.
+
 5. **Catastrophic Extinction Pulse:**
    - Select the center of the dominant monoculture colony.
    - Click **"💥 Local Extinction Pulse"** (clearing living cells in radius $r=2$).
    - Watch the selected quadrant collapse into carcass rubble.
 6. Record the immediate collapse of $H$ and $N_{\text{living}}$.
+
+![Figure L4.2: Thermal Surge Pulse & Catastrophic Extinction Shock](assets/screenshots/06_thermal_surge_and_extinction.png)
+
+> [!WARNING]
+> **Field Guide Callout: Post-Extinction Collapse & Rubble**
+> - Notice the shockwave of red thermal dissipation and the sudden formation of grey carcass rubble.
+> - Watch the Shannon Diversity Index ($H$) plummet in the telemetry HUD as monocultures collapse.
+
 7. Do not reset. Let the simulation run for $300$ ticks and watch **secondary ecological succession**:
    - Observe whether dormant spores drifting in the water column land on the cleared rock cavities.
    - Note which clade re-colonizes the empty territory.
@@ -213,30 +269,27 @@ Review Unit 4, Section 5. Review Richard Lenski's discovery of the $Cit^+$ trait
    - Run the automated Least Common Ancestor (LCA) query.
    - Check the audit verdict: does it declare **HOMOLOGY** or **HOMOPLASY**?
 
+![Figure L5.1: Richard Lenski LTEE Trajectory and Homology vs. Homoplasy Phylogeny](assets/diagrams/fig4_2_lenski_and_phylogeny.svg)
+
+> [!NOTE]
+> **Field Guide Callout: Reading the Phylogenetic Audit**
+> - Follow the Least Common Ancestor (LCA) decision rule in Figure L5.1.
+> - If the LCA possessed the motif, the verdict is **HOMOLOGY**. If the LCA lacked the motif, the verdict is **HOMOPLASY (Convergent Evolution)**.
+
 ### 4. Evolutionary Autopsy Record Sheet
 
-```
-Specimen ID: ______________________      Milestone Discovered: ______________________
-Generation:  ______________________      Pore Coordinate:      ( ____, ____, ____ )
-
-1. ANCESTRAL HAMMING TRAJECTORY:
-   Total Ancestral Generations: _____
-   Cumulative Hamming Distance Traversals (dH): _____ bits
-   Number of Neutral Drift Steps (Blue Edges):  _____
-
-2. COUNTERFACTUAL SINGLE-BIT AUTOPSY:
-   Bit Index Inverted: _______ (Bit position 0 to 59)
-   Codon Index:        _______ (Codon 0 to 9)
-   Parent Codon:       [ _ _ _ _ _ _ ] ──► Translation: ______________________
-   Child Codon:        [ _ _ _ _ _ _ ] ──► Translation: ______________________
-   Biophysical Consequence of Mutation: _________________________________________
-
-3. HOMOLOGY VS. HOMOPLASY AUDIT:
-   Comparison Specimen ID:   ______________________
-   Least Common Ancestor ID: ______________________ (Generation: _____)
-   Did LCA possess the motif? [ YES / NO ]
-   FINAL VERDICT:            [ HOMOLOGY / HOMOPLASY (CONVERGENT EVOLUTION) ]
-```
+| Autopsy Dimension | Diagnostic Field | Student Laboratory Measurement |
+| :--- | :--- | :--- |
+| **Specimen Identification** | Specimen ID & Milestone | `______________________` \| `______________________` |
+| **Spatial Lineage** | Generation & Pore $(q, r, z)$ | `Gen: _______` \| `Coordinates: ( __, __, __ )` |
+| **Ancestral Hamming Trajectory** | Total Generations & Cumulative $d_H$ | `Generations: _____` \| `Hamming Traverse: _____ bits` |
+| **Neutral Drift Fraction** | Blue Edges (Kimura Drift) | `_____ neutral transitions` |
+| **Single-Bit Mutation** | Inverted Bit Index & Codon Index | `Bit: ____ (0..59)` \| `Codon: ____ (0..9)` |
+| **Allelic Transition** | Parent Codon $\to$ Child Codon | `[ _ _ _ _ _ _ ]` $\to$ `[ _ _ _ _ _ _ ]` |
+| **Biophysical Impact** | Functional Consequence | `________________________________________________` |
+| **LCA Audit** | Least Common Ancestor ID & Gen | `LCA ID: ______________` \| `Gen: _____` |
+| **LCA Trait Check** | Did LCA possess the motif? | `[ YES / NO ]` |
+| **Evolutionary Verdict** | Phylogenetic Classification | **`[ HOMOLOGY / HOMOPLASY (CONVERGENT) ]`** |
 
 ### 5. Post-Lab Synthesis Questions
 1. How does the existence of neutral introns facilitate the discovery of complex motifs like the bistable latch or half-adder?

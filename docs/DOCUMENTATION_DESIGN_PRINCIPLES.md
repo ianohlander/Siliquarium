@@ -31,31 +31,12 @@ Rather than treating documentation as static text or a generic developer wiki, B
 
 BooleanGA's aesthetic power stems from a carefully balanced juxtaposition: **deep, non-fatiguing dark abyssal backgrounds** paired with **high-contrast, bioluminescent neon accents** that mirror the physical reality of the systems being described.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│  DEEP ABYSSAL OBSIDIAN BASE (#060911 / #080d11)                        │
-│                                                                        │
-│   ┌──────────────────────────────────────────────────────────────┐    │
-│   │ .card-bio / .card-chemiosmotic (135° Emerald Gradient Glow)  │    │
-│   │ border: 1px solid rgba(16, 185, 129, 0.40)                   │    │
-│   └──────────────────────────────────────────────────────────────┘    │
-│                                                                        │
-│   ┌──────────────────────────────────────────────────────────────┐    │
-│   │ .card-digital / .card-silicon (135° Cyan Gradient Glow)      │    │
-│   │ border: 1px solid rgba(6, 182, 212, 0.40)                    │    │
-│   └──────────────────────────────────────────────────────────────┘    │
-│                                                                        │
-│   ┌──────────────────────────────────────────────────────────────┐    │
-│   │ .card-margin / .card-analogy (135° Amber Gradient Glow)      │    │
-│   │ border: 1px solid rgba(245, 158, 11, 0.35)                   │    │
-│   └──────────────────────────────────────────────────────────────┘    │
-│                                                                        │
-│   ┌──────────────────────────────────────────────────────────────┐    │
-│   │ .card-experiment / .card-paleo (135° Purple Gradient Glow)   │    │
-│   │ border: 1px solid rgba(168, 85, 247, 0.40)                   │    │
-│   └──────────────────────────────────────────────────────────────┘    │
-└────────────────────────────────────────────────────────────────────────┘
-```
+| Semantic Container | CSS Class & Glow Gradient | Border Specification | Primary Curricular Use |
+| :--- | :--- | :--- | :--- |
+| **Biophysical Reality** | `.card-bio` (135° Emerald Glow) | `border: 1px solid rgba(16, 185, 129, 0.40)` | Peter Mitchell chemiosmosis, vents, natural selection |
+| **Digital Architecture** | `.card-digital` (135° Cyan Glow) | `border: 1px solid rgba(6, 182, 212, 0.40)` | CMOS netlists, logic gates, Landauer token costs |
+| **Sacred Analogy** | `.card-margin` (135° Amber Glow) | `border: 1px solid rgba(245, 158, 11, 0.35)` | Everyday conceptual anchors, apartment analogies |
+| **Paleontological Fossil** | `.card-experiment` (135° Purple Glow) | `border: 1px solid rgba(168, 85, 247, 0.40)` | Lenski LTEE, Weisfeiler-Lehman hashes, frozen clades |
 
 ### 2.1 The Deep-Sea Abyssal Palette
 
@@ -117,33 +98,15 @@ Instead of generic grey cards, BooleanGA assigns **strict epistemological roles*
 
 BooleanGA structures its textbook volumes and portal pages using an unmistakable architectural hierarchy:
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│ 1. MASTER HEADER & INTERACTIVE BREADCRUMBS                             │
-│    📚 Master Portal  /  Volume 01  /  Chapter 01                       │
-├────────────────────────────────────────────────────────────────────────┤
-│ 2. TITLE HERO & GRADIENT EMBLEM BOX                                    │
-│    [ 🧬 Logo ]  CHAPTER 01: MOLECULAR ARCHITECTURE OF HEREDITY        │
-│                 Physical DNA, Watson-Crick Base Pairing & Density      │
-├────────────────────────────────────────────────────────────────────────┤
-│ 3. STATUS & PEDAGOGICAL COMPASS STRIP                                  │
-│    [ 15 Modules ]  Part I (Ch 1-5) • Keystones • Part II • Matrix      │
-├────────────────────────────────────────────────────────────────────────┤
-│ 4. TEACHER'S ORIENTATION PROLOGUE (Existential Stakes)                 │
-├────────────────────────────────────────────────────────────────────────┤
-│ 5. MODULAR CHAPTER CARDS GRID (2-Column Responsive Layout)             │
-│    ┌──────────────────────────────┐  ┌──────────────────────────────┐  │
-│    │ Chapter 01                   │  │ Chapter 02                   │  │
-│    │ Core Subchapters (Roster)    │  │ Core Subchapters (Roster)    │  │
-│    │ Feature Pills (Figures/Data) │  │ Feature Pills (Figures/Data) │  │
-│    │ [ Open Chapter 01 → ]        │  │ [ Open Chapter 02 → ]        │  │
-│    └──────────────────────────────┘  └──────────────────────────────┘  │
-├────────────────────────────────────────────────────────────────────────┤
-│ 6. FLAGSHIP KEYSTONES (Epistemic Cut & Mathematical Bridges)           │
-├────────────────────────────────────────────────────────────────────────┤
-│ 7. ACADEMIC REFERENCES & CITATIONS (Interactive Pulsing Engine)        │
-└────────────────────────────────────────────────────────────────────────┘
-```
+| Document Section | Visual Treatment | Interactive Functionality |
+| :--- | :--- | :--- |
+| **1. Master Header** | Glassmorphic sticky bar with dynamic breadcrumbs | Quick jump to portal hub and volume root |
+| **2. Title Hero** | High-contrast gradient emblem box + typography | Displays chapter, subtitles, and cognitive scope |
+| **3. Pedagogical Compass** | Horizontal badge strip with reading time | Real-time progress orientation and module roster |
+| **4. Orientation Prologue** | `blockquote` with deep cyan vertical border | Explains existential stakes and foundational questions |
+| **5. Modular Chapter Grid** | Responsive 2-column card layout | Visual subchapters, feature pills, direct action links |
+| **6. Flagship Figures** | Glowing gradient borders + 4-pillar analysis cards | Full SVG diagrams and high-res browser screenshots |
+| **7. Academic Citations** | Pop-in `CITED IN TEXT 🎯` beacon badge | Smooth jump to bibliography with pulse animation |
 
 ### 3.1 The Standardized Master Header
 Every page features a top breadcrumb navigation row anchored to the master portal, accompanied by quick-action simulator links:

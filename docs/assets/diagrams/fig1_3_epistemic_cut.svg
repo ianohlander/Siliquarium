@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 380" width="880" height="380" class="w-full h-auto font-sans">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#6b21a8" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+
+    <!-- Glow Filters -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-emerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title { font-family: 'Cascadia Code', Consolas, monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: 'Cascadia Code', Consolas, monospace; font-size: 9.5px; font-weight: bold; }
+  </style>
+
+  <!-- Canvas Background -->
+  <rect width="880" height="380" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  
+  <g transform="translate(30, 35)">
+    <text class="title">Figure 1.3: Howard Pattee's Epistemic Cut &amp; Von Neumann's Architecture</text>
+    <text y="20" class="subtitle">The physical partition between rate-independent symbolic tapes and rate-dependent catalytic dynamics</text>
+  </g>
+
+  <!-- Left: The Safe (Genotype / Symbolic Memory) -->
+  <g transform="translate(40, 75)">
+    <rect width="370" height="270" rx="12" fill="#081528" stroke="#0284c7" stroke-width="2" />
+    <rect x="20" y="15" width="160" height="24" rx="6" fill="#075985" stroke="#38bdf8" stroke-width="1" />
+    <text x="30" y="31" class="badge" fill="#e0f2fe">THE SAFE (GENOME)</text>
+    <text x="190" y="31" class="code" fill="#38bdf8">GenomeSafe.ts</text>
+
+    <!-- Subtitle -->
+    <text x="20" y="65" class="label-bold" fill="#7dd3fc">Rate-Independent Symbolic Tape</text>
+    <text x="20" y="82" class="subtitle">• Quiescent 60-bit binary polymer</text>
+    <text x="20" y="98" class="subtitle">• Conducts ZERO electricity; burns ZERO power</text>
+    <text x="20" y="114" class="subtitle">• Immune to thermal execution noise</text>
+
+    <!-- 1D Tape Visual -->
+    <g transform="translate(20, 130)">
+      <rect width="330" height="40" rx="6" fill="#030712" stroke="#0ea5e9" stroke-width="1.5" />
+      <g transform="translate(10, 8)" class="code" font-size="13" font-weight="bold">
+        <rect x="0" y="0" width="28" height="24" rx="4" fill="#0c4a6e" /><text x="8" y="17" fill="#38bdf8">0</text>
+        <rect x="32" y="0" width="28" height="24" rx="4" fill="#0c4a6e" /><text x="40" y="17" fill="#38bdf8">1</text>
+        <rect x="64" y="0" width="28" height="24" rx="4" fill="#047857" /><text x="72" y="17" fill="#4ade80">1</text>
+        <rect x="96" y="0" width="28" height="24" rx="4" fill="#047857" /><text x="104" y="17" fill="#4ade80">0</text>
+        <rect x="128" y="0" width="28" height="24" rx="4" fill="#9f1239" /><text x="136" y="17" fill="#fb7185">1</text>
+        <rect x="160" y="0" width="28" height="24" rx="4" fill="#9f1239" /><text x="168" y="17" fill="#fb7185">1</text>
+        <text x="205" y="17" fill="#64748b" font-size="14">... 60 bits</text>
+      </g>
+    </g>
+
+    <!-- Safe to Safe Replication Arrow -->
+    <path d="M 185 180 L 185 220" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrow-cyan)" />
+    <rect x="70" y="225" width="230" height="30" rx="6" fill="#0f172a" stroke="#0284c7" stroke-width="1" />
+    <text x="185" y="244" class="code" text-anchor="middle" font-size="10" fill="#38bdf8">Blind Photocopy (μ = 0.001)</text>
+  </g>
+
+  <!-- The Epistemic Cut Wall -->
+  <g transform="translate(425, 75)">
+    <line x1="15" y1="20" x2="15" y2="250" stroke="#f43f5e" stroke-width="3" stroke-dasharray="6 4" filter="url(#glow-emerald)" />
+    <rect x="0" y="115" width="30" height="60" rx="4" fill="#881337" stroke="#f43f5e" stroke-width="1" />
+    <text x="15" y="138" class="badge" text-anchor="middle" fill="#fecdd3" transform="rotate(-90 15 138)">EPISTEMIC CUT</text>
+  </g>
+
+  <!-- Right: The Workshop (Phenotype / Continuous Dynamic Machine) -->
+  <g transform="translate(470, 75)">
+    <rect width="370" height="270" rx="12" fill="#1c0f18" stroke="#e11d48" stroke-width="2" />
+    <rect x="20" y="15" width="180" height="24" rx="6" fill="#881337" stroke="#fb7185" stroke-width="1" />
+    <text x="30" y="31" class="badge" fill="#ffe4e6">THE WORKSHOP (PHENOTYPE)</text>
+    <text x="215" y="31" class="code" fill="#fb7185">PoreWorkshop.ts</text>
+
+    <!-- Subtitle -->
+    <text x="20" y="65" class="label-bold" fill="#fda4af">Rate-Dependent Physical Dynamics</text>
+    <text x="20" y="82" class="subtitle">• Active 2D CMOS logic gate netlist</text>
+    <text x="20" y="98" class="subtitle">• Switches voltages; burns Landauer heat</text>
+    <text x="20" y="114" class="subtitle">• Governed by differential equations &amp; fluxes</text>
+
+    <!-- Active Netlist Visual -->
+    <g transform="translate(20, 130)">
+      <rect width="330" height="75" rx="6" fill="#030712" stroke="#f43f5e" stroke-width="1.5" />
+      
+      <!-- Logic Gates -->
+      <g transform="translate(15, 15)">
+        <rect x="0" y="8" width="55" height="30" rx="4" fill="#0369a1" stroke="#38bdf8" />
+        <text x="12" y="28" class="code" fill="#fff" font-weight="bold">AND</text>
+
+        <path d="M 55 23 L 95 23" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)" />
+
+        <rect x="95" y="8" width="55" height="30" rx="4" fill="#be123c" stroke="#f43f5e" />
+        <text x="107" y="28" class="code" fill="#fff" font-weight="bold">NOT</text>
+
+        <path d="M 150 23 L 190 23" stroke="#f43f5e" stroke-width="1.5" marker-end="url(#arrow-rose)" />
+
+        <rect x="190" y="8" width="55" height="30" rx="4" fill="#047857" stroke="#10b981" />
+        <text x="205" y="28" class="code" fill="#fff" font-weight="bold">OR</text>
+
+        <path d="M 245 23 L 285 23" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrow-emerald)" />
+      </g>
+    </g>
+
+    <!-- Dynamic Metabolic Charging -->
+    <rect x="40" y="225" width="290" height="30" rx="6" fill="#0f172a" stroke="#e11d48" stroke-width="1" />
+    <text x="185" y="244" class="code" text-anchor="middle" font-size="10" fill="#fb7185">Charges Pore Battery (+2T) / Burns Leak (-1T)</text>
+  </g>
+
+</svg>

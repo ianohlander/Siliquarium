@@ -13,15 +13,13 @@ However, engineering CAD is fundamentally **heteropoietic**—an outside agent d
 - **Fitness is not a score; fitness is persistence.**
 - An organism survives if and only if its internal logic successfully extracts free energy from environmental fluxes to maintain its structure and reproduce before its battery hits zero.
 
-```
-       BOOLEAN-GA (Tracks 1–3)                        SILIQUARIUM (Sister Project)
-  ┌─────────────────────────────────┐              ┌─────────────────────────────────┐
-  │ • Engineering CAD Paradigm      │              │ • Autopoietic Ecosystem         │
-  │ • Target Truth Table (ALU, CPU) │  ────────►   │ • Zero Truth Table (Open-Ended) │
-  │ • External Omniscient Supervisor│              │ • Blind Physical Thermodynamics │
-  │ • Batch Generational Testing    │              │ • Real-Time Spatial Grid        │
-  └─────────────────────────────────┘              └─────────────────────────────────┘
-```
+| Dimension | BooleanGA (Tracks 1–3) | Siliquarium (Autopoietic Ecosystem) |
+| :--- | :--- | :--- |
+| **Philosophical Paradigm** | Heteropoietic Engineering CAD | Autopoietic Self-Creation & Maintenance |
+| **Fitness Function** | Target Truth Table (ALU, Hack CPU) | Zero Truth Table (Pure Thermodynamic Persistence) |
+| **Supervision** | Omniscient External Supervisor | Blind Physical Laws & Local Energy Influx |
+| **Evaluation Method** | Batch Generational Benchmark Testing | Continuous Real-Time Spatial Grid Dynamics |
+| **Death & Termination** | Pruned by Genetic Algorithm Selection | Metabolic Starvation ($E_{\text{battery}} = 0$) |
 
 ---
 
@@ -34,21 +32,14 @@ Instead, life began in **alkaline hydrothermal vents**:
 1. **Inorganic Rock Pores as Nature’s First Cell Walls:** Deep-sea vents consist of porous mineral foams riddled with microscopic, interconnected cavities. These inorganic rock walls held organic molecules together long before biological lipid membranes evolved.
 2. **Natural Electrical Voltage:** The interface between alkaline vent fluid and acidic ocean water created a permanent, natural electrical voltage across thin mineral walls ($\sim 200 \text{ mV}$), supplying free energy directly to proto-life.
 
-```
-                      DEEP-SEA HYDROTHERMAL VENT MATRIX
-      
-         Acidic Cold Water / Thermal Noise Sink (High Entropy)
-     ══════════════════════════════════════════════════════════════════
-               │                  │                     │
-               ▼                  ▼                     ▼
-            [░░░░░]            [░░░░░]               [░░░░░]  <-- Microscopic
-            [░ P1 ░]──────────►[░ P2 ░]─────────────►[░ P3 ░]      rock pores
-            [░░░░░]            [░░░░░]               [░░░░░]      act as nature's
-               ▲                  ▲                     ▲         FIRST cell walls!
-               │                  │                     │
-     ══════════════════════════════════════════════════════════════════
-         Alkaline Hot Vent Fluid (Structured Low-Entropy Bitwaves)
-```
+![Figure 1.2: Deep-Sea Hydrothermal Vent Matrix & Inorganic Mineral Walls](assets/diagrams/fig1_2_hydrothermal_chimney.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 1.2 — The Deep-Sea Hydrothermal Vent Matrix
+> - **Visual Guide:** Shows the geological cross-section of an alkaline hydrothermal chimney with mineral channels separating warm alkaline fluid ($pH \approx 10$) from cold acidic ocean water ($pH \approx 5.5$).
+> - **Biophysical Reality:** Inorganic porous basalt micro-cavities acted as nature's first cell walls, maintaining steep chemical and electrical gradients long before lipid membranes evolved.
+> - **Digital Mapping:** In Siliquarium, the 2D lattice of rocky pores adjacent to the hydrothermal nozzle serves as the master power plant, injecting rhythmic bit pulses into living circuits.
+> - **Core Principle:** *The Earth provided the energetic and structural scaffolding for the origin of life.*
 
 In Siliquarium, the environment is a **2D lattice of rocky pores** adjacent to a hydrothermal vent nozzle. The vent acts as the Master Power Plant, injecting rhythmic, low-entropy bit pulses into the rock pores every tick.
 
@@ -114,29 +105,11 @@ To avoid the fatal mistake of requiring complex sequential machines (flip-flops,
 
 ### The Three-Stage Evolutionary Ladder: From Chemistry to Silicon
 
-```
- ┌────────────────────────────────────────────────────────────────────────┐
- │ STAGE 1: Primitive Chemical Catalysis (Combinational Logic)            │
- │ • 1 or 2 gates (AND, OR, NOT).                                         │
- │ • Eats only when Stream A and Stream B arrive at the exact same tick.  │
- └───────────────────────────────────┬────────────────────────────────────┘
-                                     │ Vent develops seasonal time delays!
-                                     │ (Stream A in morning, Stream B in evening)
-                                     ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ STAGE 2: The Emergence of Memory (Sequential Latches & Loops)          │
- │ • Organism mutates a feedback loop (output wire returning to input).   │
- │ • Traps and holds Stream A's pulse in a loop until Stream B arrives!   │
- │ • Memory evolves as a digestive preservation strategy!                 │
- └───────────────────────────────────┬────────────────────────────────────┘
-                                     │ Pores require autonomous pacing...
-                                     ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │ STAGE 3: The Proto-Mitochondria (Ring Oscillators / Internal Clocks)   │
- │ • An odd loop of inverters (NOT gates) oscillates autonomously.        │
- │ • The cell now has an internal pacemaker independent of the vent!      │
- └────────────────────────────────────────────────────────────────────────┘
-```
+| Evolutionary Stage | Circuit Architecture | Biological Cognate | Emergent Capability |
+| :--- | :--- | :--- | :--- |
+| **Stage 1: Primitive Catalysis** | Combinational 1–2 Gate Netlists (`AND`, `OR`, `NOT`) | Co-catalytic enzymes & allosteric repressors | Feeds only when complementary substrates arrive synchronously |
+| **Stage 2: Emergence of Memory** | Directed Feedback Loops (Sequential Latches) | Phosphorylation cascades & bistable genetic switches | Preserves transient substrate pulses across time delays |
+| **Stage 3: Autonomous Pacemakers** | Ring Oscillators (Odd-cycle inverters) | Circadian clocks & mitochondrial pacemakers | Generates internal metabolic pacing independent of vent fluctuations |
 
 ---
 
@@ -144,22 +117,14 @@ To avoid the fatal mistake of requiring complex sequential machines (flip-flops,
 
 To preserve Howard Pattee’s **Epistemic Cut** (the strict separation between symbolic genetic code and physical metabolic machinery), every rock pore contains three distinct physical compartments:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      A SINGLE ROCK PORE                     │
-│                                                             │
-│  1. THE SAFE (The Library Shelf / Genotype)                 │
-│     [ 0 1 1 0 1 0 0 1 1 1 0 1 ... ]  <-- The Genome Tape    │
-│     (Inert 1D bitstring. Conducts no electricity.)          │
-│                                                             │
-│  2. THE WORKSHOP (The Phenotype / Living Circuit)           │
-│     [Vent In] ──► [Gate A] ──► [Gate B] ──► [Battery]       │
-│     (Physical logic gates wired to vent & pins.)            │
-│                                                             │
-│  3. THE BATTERY (The Local Pantry / Capacitor)              │
-│     [  35 / 100 Energy Tokens  ]                            │
-└─────────────────────────────────────────────────────────────┘
-```
+![Figure 1.3: The Anatomy of a Rock Pore: Safe, Workshop, and Battery](assets/diagrams/fig1_3_epistemic_cut.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 1.3 — The Anatomy of a Living Rock Pore
+> - **Visual Guide:** Diagram of the three physical compartments of an individual rock pore: The Safe (inert 1D genome tape), The Workshop (active 2D CMOS logic netlist), and The Battery (mineral capacitor).
+> - **Biophysical Reality:** Enforces Howard Pattee's Epistemic Cut: separating rate-independent genetic instructions from rate-dependent continuous metabolic dynamics.
+> - **Digital Mapping:** The 60-bit genome tape conducts no power during life. Dynamic gate toggles burn Landauer tokens from the battery. When the battery reaches 100 tokens, the tape is copied into a neighbor pore.
+> - **Core Principle:** *Genotype and phenotype must occupy distinct operational domains.*
 
 1. **The Safe (The 1D Genome Tape):**  
    An inert strip of 60 bits partitioned into 6-bit codons (with synonymous degeneracy and non-coding introns). It does no work and conducts no power during the organism's lifetime.
@@ -196,24 +161,12 @@ To prevent smuggled teleology (e.g. artificial opcodes like `MOVE`, `EAT`, or `S
 
 ## 4. The Life Cycle: Birth, Living, & Reproduction
 
-```
- 1. BIRTH (Translation)
-    Substrate physics reads 1D tape in Safe ──► Places gates in Workshop.
-    Safe is locked. Tape is now inert.
-           │
-           ▼
- 2. LIVING & METABOLISM
-    Vent pulses hit Workshop ──► Gates toggle (Burns 1 Token per toggle).
-    Resonance with vent rhythm ──► Charges Battery (+5 Tokens per wave).
-           │
-     ┌─────┴───────────────────────────────┐
-     ▼                                     ▼
- [Starvation]                         [Reproduction]
- Battery hits 0                       Battery hits 100
- ──► Circuit starves, dissolves        ──► Spends 50 tokens to photocopy
-     into empty pore rubble.               Safe to empty neighbor pore
-                                           with mutation typo (0.1%).
-```
+| Life Cycle Phase | Physical Process | Energetic Cost / Yield | Substrate Physics Rule |
+| :--- | :--- | :--- | :--- |
+| **1. Translation (Birth)** | Substrate reads 1D tape in Safe $\to$ instantiates 2D netlist in Workshop | 0 tokens (passive crystallization) | Safe is locked; tape remains inert during life |
+| **2. Metabolism (Living)** | Vent pulses toggle logic gates; resonant circuits capture energy | Toggle: $-1$ token; Influx: $+5$ tokens | Gates burn Landauer switching energy; net charge stored in battery |
+| **3a. Starvation (Death)** | Battery hits 0 tokens $\to$ circuit undergoes irreversible lysis | Complete discharge | Netlist dissolves; pore reverts to vacant mineral substrate |
+| **3b. Division (Fission)** | Battery hits 100 tokens $\to$ blind photocopy of tape to neighbor pore | Cost: $-50$ tokens ($50$ to parent, $50$ to child) | Tape copied with unguided point mutation error rate ($p=0.001$) |
 
 ### The Three Steps:
 1. **Birth (Substrate Ribosome Physics):**  
@@ -234,16 +187,12 @@ To prevent smuggled teleology (e.g. artificial opcodes like `MOVE`, `EAT`, or `S
 
 Organisms in Siliquarium are initially anchored to their rock pores. In biology, anchored organisms (plants, coral reefs, fungi, bacterial mats) exhibit some of the most sophisticated warfare and cooperation on Earth:
 
-```
-       CELL A (The Producer)                CELL B (The Parasite)
-   ┌─────────────────────────────┐       ┌─────────────────────────────┐
-   │ [Vent] ──► [Filter] ──► [Rail]───────►[Wiretap] ──► [Battery]     │
-   │                           ▲ │       │ (Steals clean power!)       │
-   │ (Doing all the hard work) │ │       │                             │
-   └───────────────────────────┼─┘       └─────────────────────────────┘
-                               │
-                       Shared Pore Wall
-```
+| Interaction Type | Circuit Mechanism | Ecological Role | Energetic Dynamic |
+| :--- | :--- | :--- | :--- |
+| **Producer (Autotroph)** | Wires directly to vent stream; extracts clean power | Primary producer | Synthesizes energy tokens from abiotic waveforms |
+| **Parasite (Wiretap)** | Extends input pin across rock wall into neighbor's power rail | Kleptoparasite | Steals energy without investing in filter gates; increases host load |
+| **Predator (Jammer)** | Emits chaotic high-frequency bit bursts into neighbor pore | Lytic predator | Causes neighbor timing loops to glitch, starve, and spill stored tokens |
+| **Mutualist (Syntrophy)** | Exchanges complementary metabolic waste products across boundary | Symbiont | Mutual cross-feeding increases collective survival under nutrient shifts |
 
 ### Three Emergent Inter-Pore Interactions:
 1. **Parasitism (The Wiretap):**  
@@ -259,26 +208,14 @@ Organisms in Siliquarium are initially anchored to their rock pores. In biology,
 
 Energy flow in Siliquarium is strictly conserved:
 
-```
-        THE MASTER VENT GENERATOR (Primary Energy Source)
-     ════════════════════════════════════════════════════════
-      Injects low-entropy waveforms & energy tokens per tick
-              │                               │
-              ▼                               ▼
-     ┌───────────────────┐           ┌───────────────────┐
-     │   PORE 1 PANTRY   │           │   PORE 2 PANTRY   │
-     │ [50 / 100 Tokens] │           │ [10 / 100 Tokens] │  <-- Local Pantries
-     └─────────┬─────────┘           └─────────┬─────────┘
-               │                               │
-               ▼                               ▼
-      Toggling gates burns            Toggling gates burns
-       energy into "Heat"              energy into "Heat"
-               │                               │
-               └───────────────┬───────────────┘
-                               ▼
-     ════════════════════════════════════════════════════════
-             COLD VOID DRAIN (High-Entropy Waste)
-```
+![Figure 2.3: Global Thermodynamic Energy Flow & Landauer Dissipation](assets/diagrams/fig2_3_landauer_dissipation.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 2.3 — Conservation of Energy & Thermodynamic Limits
+> - **Visual Guide:** Tracks energy flux from the primary hydrothermal vent generator through individual pore batteries, gate switching dissipation, and waste heat loss into the abyssal ocean sink.
+> - **Biophysical Reality:** Rolf Landauer (1961) proved that erasing or switching 1 bit of information dissipates a minimum energy $Q \ge k_B T \ln 2$. The first law of thermodynamics mandates that energy is conserved across all transitions ($\Delta E_{\text{universe}} = 0$).
+> - **Digital Mapping:** In Siliquarium, every gate toggle incurs a mandatory Landauer cost of 1 token. Total energy injected by the vent exactly equals energy stored plus energy dissipated.
+> - **Core Principle:** *Computation is an irreversible thermodynamic physical process.* Life cannot escape the laws of thermodynamics.
 
 $$\sum E_{\text{vent input}} = \sum E_{\text{stored in pores}} + \sum E_{\text{toggled gates}} + \sum E_{\text{dissipated heat}}$$
 
@@ -305,23 +242,14 @@ One of the greatest thrills in evolutionary science is witnessing a **major evol
 
 Siliquarium features a built-in **Digital Paleontologist**—an intelligent, passive observer engine that monitors the living grid in real time and alerts the user whenever a major evolutionary milestone is unlocked for the first time in history.
 
-```
-       SIMULATION KERNEL (Unbiased Physical Grid)
-  ┌────────────────────────────────────────────────────────┐
-  │  Pores, Vent Waves, Gate Toggles, Natural Selection    │
-  └───────────────────────────┬────────────────────────────┘
-                              │ Passive Telemetry (Read-Only)
-                              ▼
-       THE DIGITAL PALEONTOLOGIST (External Spectator)
-  ┌────────────────────────────────────────────────────────┐
-  │ • Scans circuit topologies after each division         │
-  │ • Detects graph cycles, latches, oscillators, bridges  │
-  │ • Has ZERO influence on physics or fitness (No Cheats!)│
-  └───────────────────────────┬────────────────────────────┘
-                              │
-                              ▼
-  🔔 HUD ALERT: "Tick 2,450 • Pore (4, 7): BISTABLE MEMORY LATCH FORMED!"
-```
+![Figure 4.2: The Digital Paleontologist: Unbiased Real-Time Telemetry](assets/diagrams/fig3_2_weisfeiler_lehman.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 4.2 — Passive Telemetry & Motif Recognition
+> - **Visual Guide:** Illustrates the architectural firewall between the unbiased physical simulation kernel (pores, vent pulses, natural selection) and the external Digital Paleontologist observer.
+> - **Biophysical Reality:** Evolutionary biology requires purely descriptive, non-invasive measurement tools that do not perturb the living system being observed.
+> - **Digital Mapping:** The Paleontologist scans evolved circuit topologies using Weisfeiler-Lehman graph hashing. When a landmark motif (latch, ring clock, adder) is detected, it logs an alert without granting bonus tokens or altering fitness.
+> - **Core Principle:** *The observer does not guide the course of evolution.* Life evolves blindly; science measures passively.
 
 ### 8.1 The Seven Evolutionary Milestones
 The Paleontologist continuously scans circuits for canonical topological motifs:
@@ -400,20 +328,14 @@ The Paleontologist distinguishes between familial inheritance and independent di
 
 To provide the foundational physical substrate for complex higher-order life, Siliquarium models the spatial environment as a **hexagonal honeycomb** with built-in physics supporting **multi-cellularity and morphogenetic differentiation**.
 
-```
-                       HEXAGONAL HONEYCOMB MATRIX
-                     (6 Equidistant Neighbor Walls)
-                            
-                                 ┌──────┐
-                                /        \
-                        ┌──────┐   NW     ┌──────┐
-                       /        \        /        \
-                      │    W     │ PORE  │    E    │
-                       \        /        \        /
-                        └──────┐   SW     ┌──────┐
-                                \        /
-                                 └──────┘
-```
+| Neighbor Direction | Axial Offset Vector $(\Delta q, \Delta r)$ | Geometric Properties | Physical Connection |
+| :---: | :---: | :--- | :--- |
+| **East (E)** | $(+1, 0)$ | Distance $d = 1.0$, Angle $0^\circ$ | Direct pore wall interface, fluid-permeable pin |
+| **North-East (NE)** | $(+1, -1)$ | Distance $d = 1.0$, Angle $60^\circ$ | Direct pore wall interface, fluid-permeable pin |
+| **North-West (NW)** | $(0, -1)$ | Distance $d = 1.0$, Angle $120^\circ$ | Direct pore wall interface, fluid-permeable pin |
+| **West (W)** | $(-1, 0)$ | Distance $d = 1.0$, Angle $180^\circ$ | Direct pore wall interface, fluid-permeable pin |
+| **South-West (SW)** | $(-1, +1)$ | Distance $d = 1.0$, Angle $240^\circ$ | Direct pore wall interface, fluid-permeable pin |
+| **South-East (SE)** | $(0, +1)$ | Distance $d = 1.0$, Angle $300^\circ$ | Direct pore wall interface, fluid-permeable pin |
 
 ### 9.1 Hexagonal Honeycomb Topology
 1. **6 Equidistant Neighbors:** Unlike square grids where diagonals are $\sqrt{2} \approx 1.41$ times farther away, all 6 neighbors on a hex grid (N, NE, SE, S, SW, NW) are at the exact same physical distance ($1.0$).
@@ -427,19 +349,10 @@ To provide the foundational physical substrate for complex higher-order life, Si
 
 Siliquarium establishes a rigorous distinction between a **symbiotic colony** and a **true multi-cellular organism**:
 
-```
-          PORE 1: THE SHIELD / SENSOR               PORE 2: THE METABOLIC CORE
-        ┌─────────────────────────────┐           ┌─────────────────────────────┐
-        │ [Exposed to Vent & Heat]    │           │ [Sheltered in Deep Rock]    │
-        │ Morphogen Bias = 1          │           │ Morphogen Bias = 0          │
-        │                             │           │                             │
-        │ EXPRESSES:                  │══ UMBILICAL ══ EXPRESSES:               │
-        │ • Thick Filter Walls        │   BUS     │ • Heavy Compute             │
-        │ • Toxin Rejection (NOT T)   │ (Permanent│ • Ring Oscillator Clock      │
-        │                             │  Bridge)  │ • Battery Reserve           │
-        └─────────────────────────────┘           └─────────────────────────────┘
-          SHARED MASTER GENOME: [ ... Exon Segment 0 ... | ... Exon Segment 1 ... ]
-```
+| Compartment Role | Spatial Location & Morphogen Bias | Expressed Circuit Features | Shared Umbilical Bus Function |
+| :--- | :--- | :--- | :--- |
+| **Pore 1: Shield / Sensor** | Outer vent-facing boundary (Bias = 1) | Thick mineral filter walls, toxin rejection (`NOT T`) | Conducts filtered substrate pulses into core |
+| **Pore 2: Metabolic Core** | Sheltered deep rock crevice (Bias = 0) | Heavy compute netlist, ring oscillator clock, battery bank | Shares stored energy tokens back to shield pore |
 
 1. **The Colony (Independent Lives):** Two neighboring unicellular circuits wire pins together across a shared rock wall. Each retains its own independent genome tape and private battery; either cell can die or divide independently.
 2. **The Multi-Cellular Collective (Single Organism Across 2+ Pores):**
@@ -525,24 +438,14 @@ To allow users to actively experiment with evolutionary resilience, Siliquarium 
 
 Siliquarium is an educational window into living silicon. Users can transition seamlessly from the macro-scale honeycomb to the microscopic logic level:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    LIVE CIRCUIT MICROSCOPE                  │
-│                                                             │
-│   Stream A ─────► [ AND Gate 1 ] ─────► [ Battery: 78 ]     │
-│                         ▲                                   │
-│   Stream B ─────────────┘                                   │
-│                         │ (Feedback Wire)                   │
-│   East Out ◄──── [ Latch L1 ] ◄───────                      │
-│                                                             │
-│ ┌─────────────────────────────────────────────────────────┐ │
-│ │ 🏆 MILESTONE RECOGNIZED: Bistable Memory Latch          │ │
-│ │ • Truth Table: Q(t+1) = D · Clock + Q(t) · ~Clock       │ │
-│ │ • Biological Utility: Preserves food pulses across ticks│ │
-│ │ • Scientific Provenance: Elowitz & Leibler (2000)       │ │
-│ └─────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
-```
+![Figure 3.2: The Live Circuit Microscope & Milestone Inspector](assets/screenshots/03_selected_silicoid_and_microscope.png)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 3.2 — Live Circuit Microscope & Milestone Recognition
+> - **Visual Guide:** Shows the real-time circuit microscope inspecting a selected silicoid pore. The panel displays the active CMOS logic gates (`AND`, `OR`, `NOT`), pulsing electron wires, current battery tokens ($0..100$), and the 60-bit decoded genome tape.
+> - **Biophysical Reality:** Verifies Howard Pattee's Epistemic Cut by maintaining a strict operational divide between the inert symbolic tape and the active, Landauer-dissipating metabolic logic network.
+> - **Digital Mapping:** When a milestone motif (bistable latch, ring clock, adder) evolves, the Digital Paleontologist highlights the topological subgraph and opens the detailed theoretical citation card.
+> - **Core Principle:** *Dynamic telemetry without perturbation.* Science observes the living system passively without injecting cheats or guidance.
 
 1. **Microscopic Schematic Inspector:** Clicking or zooming into any hexagonal pore renders its internal logic circuit as a clean, animated schematic diagram showing real-time gate toggles, pulsing wire potentials, and battery token counts.
 2. **Milestone Neon Highlighting:** When the Digital Paleontologist detects a major transition (e.g., first feedback loop, bistable latch, or half-adder), the pore on the honeycomb glows in high-visibility neon, and the specific sub-circuit within the schematic is highlighted with an animated energy aura.
@@ -573,26 +476,14 @@ All foundational physical constants are exposed in a live, collapsible flyout co
 
 Life on Earth is physically embodied—it survives by sensing and steering fundamental physical forces. Siliquarium models the two dominant macroscopic forces of biology in computationally lightweight, discrete representations ($O(1)$ per tick):
 
-```
-                       THE LIVING PHYSICAL FORCE FIELD
-                       
-      Cold Ocean Surface (Low Pressure, Low Light)
-   ══════════════════════════════════════════════════════════════════
-               ▲                 ▲                 ▲
-               │  HOT CONVECTIVE │ THERMAL PLUMES  │
-               │  (Rises Upward  │ Against Gravity)│
-               │                 │                 │
-            [░░░░░]           [░░░░░]           [░░░░░]
-            [ PORE]           [ PORE]           [ PORE]
-            [░░░░░]           [░░░░░]           [░░░░░]
-               │                                   │
-               ▼                                   ▼
-          FALLING MARINE SNOW                 SEDIMENT DETRITUS
-         (Sinks Downward under                (Accumulates on Floor)
-              Gravity g)                           │
-   ════════════════════════════════════════════════╧═════════════════
-      Deep Benthic Bedrock Floor (High Pressure, Solid Rock Anchor)
-```
+![Figure 5.1: Abyssal Physical Force Fields: Gravity, Thermal Plumes & Marine Snow](assets/diagrams/fig4_3_pelagic_spores.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 5.1 — Physical Force Fields & Environmental Stratification
+> - **Visual Guide:** Cross-section of the 3D abyssal caldera illustrating buoyant hydrothermal updrafts rising against gravity ($z \ge 1$) and falling organic detritus sedimenting toward the benthic rock substrate ($z=0$).
+> - **Biophysical Reality:** Non-equilibrium hydrothermal systems feature steep vertical thermal and chemical gradients that drive natural convective transport.
+> - **Digital Mapping:** Discrete $O(1)$ fluid advection moves pelagic spores and metabolic pulses upward, while spent carcasses slowly sink to form a benthic nutrient layer.
+> - **Core Principle:** *Physical forces scaffold ecological niches.* Gravity and convection dictate spatial survival strategies.
 
 ### 15.1 Gravity ($\vec{g}$) & Thermal Convection
 1. **Vertical Orientation:** Gravity defines an absolute vector $\vec{g} = (0, 0, -1)$ pointing down toward the ocean bedrock.
@@ -612,17 +503,12 @@ Life on Earth is physically embodied—it survives by sensing and steering funda
 
 Siliquarium’s environment is not a flat 2D board; it is an authentic **3D deep-sea benthic terrain** modeled as a stacked hexagonal prism lattice with axial coordinates $(q, r, z)$:
 
-```
-                                  [Z = 3: Hydrothermal Chimney Tip]
-                                        ▲
-                                       / \  (Plumes Spew into Water Column)
-                                      /   \
-                         [Z = 2: Volcanic Ridge / Rock Overhang]
-                                  /       \
-                    [Z = 1: Sheltered Benthic Pockets]
-                           /                 \
-        [Z = 0: Basalt Bedrock Floor & Sediment Basin]
-```
+| Topographical Layer | Elevation & Medium | Geological Features | Ecological Role |
+| :---: | :--- | :--- | :--- |
+| **$Z = 3$** | Chimney Apex (`ROCK_SUBSTRATE`) | Sinuous hydrothermal spires spewing into open water | Maximum energy injection, extreme thermal flux |
+| **$Z = 2$** | Volcanic Ridge (`AQUEOUS_FLUID` / Rock) | Elevated ledges, volcanic overhangs, mineral shelves | Pelagic spore drift highway, secondary colonization |
+| **$Z = 1$** | Sheltered Basalt (`ROCK_SUBSTRATE`) | Deep crevices, boulder dead ends, low turbulence | Protected nursery pockets for fragile nascent clades |
+| **$Z = 0$** | Bedrock Seabed (`ROCK_SUBSTRATE`) | Solid basalt ocean floor, marine snow sediment basin | Benthic scavenger niche, detritivore foraging zone |
 
 1. **Topographical Seabed Elevation:** The rock substrate follows natural geological contours—volcanic slopes, deep sediment trenches, and elevated ridges conforming to the grade of the central caldera.
 2. **Protruding Chimney Spires:** Hydrothermal vents protrude upward along the $Z$-axis as vertical mineral chimneys, spewing plumes into the mid-water column at different depths.
@@ -636,21 +522,10 @@ In the physical universe, life cannot be built out of pure energy. You cannot co
 
 Siliquarium implements an authentic **dual-currency thermodynamic economy**:
 
-```
- ┌────────────────────────────────────────────────────────────────────────┐
- │                      DUAL METABOLIC CURRENCIES                         │
- │                                                                        │
- │  1. ENERGY TOKENS (E - Calories / ATP)                                 │
- │     • Sourced from two-substrate catalytic reactions (A AND B).        │
- │     • Consumed by Landauer dynamic gate toggles & basal cost of life.  │
- │     • Dissipates as thermal heat into the cold water sink.             │
- │                                                                        │
- │  2. MINERAL MATTER TOKENS (M - Mass / Atoms / Silica Bricks)           │
- │     • Sourced from vent mineral ash, falling marine snow, & carcasses. │
- │     • Consumed to physically construct gates, wires, & stone walls.    │
- │     • Strictly conserved: mass cannot be destroyed, only recycled.     │
- └────────────────────────────────────────────────────────────────────────┘
-```
+| Metabolic Currency | Physical / Biological Analogy | Acquisition Mechanism | Expenditure & Thermodynamic Sink |
+| :--- | :--- | :--- | :--- |
+| **Energy Tokens ($E$)** | ATP / Chemiosmotic PMF (Calories) | Two-substrate catalytic reactions ($A \land B$) | Landauer dynamic gate toggles ($-1$ token), basal decay |
+| **Matter Tokens ($M$)** | Carbon / Silica / Iron Biomass | Mineral absorption from chimney plumes and detritus | Synthesizing physical logic gates, cell walls, and spores |
 
 ### 17.1 Construction Costs & Biomineralization
 1. **Gate Synthesis Cost:** Placing a new logic gate in a pore's workshop requires both **$5$ Energy Tokens** (assembly work) AND **$2$ Matter Tokens** (physical silicon/protein material).
@@ -693,16 +568,14 @@ To transform Siliquarium from a casual toy into an institutional-grade scientifi
 
 To bridge computational artificial life with empirical evolutionary biology, Siliquarium provides an institutional-grade scientific recording and observation suite:
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        THE TIME-MACHINE SCRUBBER                       │
-│                                                                        │
-│   [◄◄ Rewind]  [◄ Step]  [❚❚ Pause]  [► Play]  [Step ►]  [Fast ►►]     │
-│   ───●────────────────────────────◆───────────────────────▲─────────   │
-│   Tick 0                       Tick 2,450             Current (4,120)  │
-│   (Soup)                    (Milestone: Latch)        (Live Evolution) │
-└────────────────────────────────────────────────────────────────────────┘
-```
+| Control Component | Keyboard / Mouse Action | Historical Playback Function | Scientific Purpose |
+| :--- | :--- | :--- | :--- |
+| **◄◄ Rewind** | Click / Left Arrow | Rewinds simulation backward across recorded epoch | Inspect initial primordial soup conditions |
+| **◄ Step** | Click / Shift + Left | Single-frame backward step ($-1$ tick) | Trace precise single-tick gate transitions |
+| **❚❚ Pause / ► Play** | Click / Spacebar | Freezes or resumes active physical simulation | Halt simulation for micro-inspection |
+| **Step ►** | Click / Shift + Right | Single-frame forward step ($+1$ tick) | Step through division or viral breach |
+| **Fast ►►** | Click / Right Arrow | Accelerates tick execution speed ($1\times$ to $20\times$) | Rapid multi-thousand generation evolution runs |
+| **Milestone Gems (◆)** | Click on Timeline Bookmark | Jumps directly to major historical milestone event | Instant access to landmark evolutionary discoveries |
 
 ### 19.1 Live World Snapshots & Full Historical Persistence
 - **Complete World State Serialization:** Users can save not just the starting seed, but the **live running current world state**—including every cell’s internal gates, battery tokens, matter reserves, unspent carcasses, and the full phylogenetic family tree.
@@ -731,20 +604,14 @@ The 3D benthic seamount is fully navigable via intuitive mouse and touch gesture
 ### 19.5 The Evolutionary Flight Recorder & Solution-Space Trajectory
 When a milestone or de novo discovery is triggered (or when the user inspects any living pore), the simulator generates an interactive **"Evolutionary Autopsy"** modal reconstructing the exact mathematical path taken through genotype space:
 
-```
-Fitness Altitude (Metabolic Flux)
-     ▲
-1.0 ─┤                                         ★ Novel Discovery (SR Latch)
-     │                                        /
-0.8 ─┤                                  (Gen 412)
-     │                                     ▲  (Positive Selection)
-0.6 ─┤                  ┌───[Gen 340]──────┘
-     │                  │   (Kimura Neutral Drift: d_H = 14 bits,
-0.4 ─┤  [Gen 120]───────┘    same fitness plateau along saddle)
-     │  (Pioneer)
-0.0 ─┴──────────────────────────────────────────────────────►
-     0       50      100     150     200     250      Genotype Hamming Distance
-```
+![Figure 4.1: Neutral Saddles, Gene Duplication, and Adaptive Breakthroughs](assets/diagrams/fig4_1_kimura_and_ohno.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 4.1 — Kimura Neutral Saddles & Ohno Gene Duplication
+> - **Visual Guide:** The left panel diagrams a complex multi-peaked fitness landscape: populations navigate across extensive neutral fitness plateaus (Motoo Kimura's Neutral Drift) before discovering adaptive ridges. The right panel illustrates Susumu Ohno's gene duplication mechanism: a redundant paralogous copy of a functional gene escapes purifying selection, freely accumulating mutations until acquiring a novel catalytic function (neofunctionalization).
+> - **Biophysical Reality:** Without neutral drift and gene duplication, populations become trapped on local sub-optimal fitness peaks. Redundancy is nature's laboratory for evolutionary innovation.
+> - **Digital Mapping:** In Siliquarium, non-coding synonymous codons and tandem codon duplications create neutral reserves. Evolving lineages traverse Hamming distance ($d_H > 0$) at constant fitness altitude until stumbling upon high-yield network motifs.
+> - **Core Principle:** *Neutrality enables open-ended evolution.* Most mutations are neutral; redundancy provides the raw material for macro-evolutionary leaps.
 
 1. **The 4-Layer Retrospective Breakdown:**
    - **Molecular Diff:** Exact nucleotide/codon changes (point mutations, Ohno duplications, frame-shifts).
@@ -774,15 +641,10 @@ Nature solved this without continuous physics, and so does Siliquarium:
 - In the 3D lattice $(q, r, z)$, the seabed rock pores are permanent solid cavities.
 - But the space above the rock is **The Permeable Water Column**—hexagonal cells filled with fluid rather than solid stone!
 
-```
-       WATER COLUMN (Fluid Hexes)
-   ┌──────┐      ┌──────┐      ┌──────┐
-   │ P1   │ ──►  │ P2   │ ──►  │ P3   │  <--- Planktonic Capsule drifts
-   └──────┘      └──────┘      └──────┘       hop-by-hop along fluid vector v!
-   ════════════════════════════════════
-       SOLID BASALT BEDROCK SEABED
-   [ROCK]        [PORE]        [ROCK]    <--- Anchored benthic organisms
-```
+| Marine Stratification | Lattice Coordinate Medium | Mechanical Physics | Biological Manifestation |
+| :--- | :--- | :--- | :--- |
+| **Permeable Water Column** | $z \ge 1, \text{medium} = \text{AQUEOUS\_FLUID}$ | Discrete hop-by-hop advection vector $\vec{v}$ | Pelagic spore capsules, buoyant broadcast spawning |
+| **Basalt Bedrock Substrate** | $z = 0, \text{medium} = \text{ROCK\_SUBSTRATE}$ | Solid stationary mineral boundaries ($d = 0$) | Anchored benthic silicoids, sessile pore workshops |
 
 ### 20.3 The Two Stages of Marine Detachment
 

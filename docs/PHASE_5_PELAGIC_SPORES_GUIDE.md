@@ -13,16 +13,14 @@ Nature's solution is **broadcast spawning and pelagic spore dispersal**:
 3. Hydrothermal convection plumes and ambient oceanic currents carry spores across abyssal distances.
 4. When a spore encounters an unoccupied volcanic ridge or caldera terrace, it binds to the mineral substrate, reactivates its metabolic workshop, and founds a new benthic colony.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   THE MARINE DISPERSAL CYCLE                           │
-│                                                                        │
-│   [ BENTHIC ADULT ]   ──►   [ PELAGIC SPORE ]   ──►   [ RE-COLONIZE ]  │
-│   • Anchored in Rock        • Enters Fluid Column     • Lands on Ridge │
-│   • Catalytic Metabolism    • Convective Advection    • Binds Substrate│
-│   • Energy Satiation        • Buoyancy Lifespan       • Germinates Cell│
-└────────────────────────────────────────────────────────────────────────┘
-```
+![Figure 5.1: 3D Pelagic Spore Dispersal & Caldera Colonization Dynamics](assets/diagrams/fig4_3_pelagic_spores.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 5.1 — 3D Marine Stratification & Pelagic Advection
+> - **Visual Guide:** Cross-section of the 3D hydrothermal seafloor showing benthic rock pores at $z=0$, thermal convection updrafts rising through $z=1$, and horizontal pelagic fluid currents transporting dormant spore capsules across abyssal distances at $z=2$.
+> - **Biophysical Reality:** Sessile marine organisms (corals, barnacles, vent tube worms) rely on broadcast spawning to escape local resource depletion and colonize distant geothermal vents across hostile oceanic trenches.
+> - **Digital Mapping:** In Siliquarium, saturated cells ($E_{\text{battery}} = 100$) launch daughter spores into the permeable water column (`AQUEOUS_FLUID`). Spores drift with discrete $O(1)$ fluid advection until binding an unoccupied rock pore or decaying.
+> - **Core Principle:** *Dispersal rescues ecosystems from spatial gridlock.* The fluid column provides the transport medium that transforms isolated benthic pockets into a globally connected meta-population.
 
 ---
 

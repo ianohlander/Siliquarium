@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 430" width="880" height="430" class="w-full h-auto font-sans">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#6b21a8" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+
+    <!-- Glow Filters -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-emerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title { font-family: 'Cascadia Code', Consolas, monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: 'Cascadia Code', Consolas, monospace; font-size: 9.5px; font-weight: bold; }
+  </style>
+
+  <!-- Canvas Background -->
+  <rect width="880" height="430" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  
+  <g transform="translate(30, 35)">
+    <text class="title">Figure 2.1: The Three Primitive Catalytic Enzymes vs. The Composite XOR Motif</text>
+    <text y="20" class="subtitle">Single-site active biophysics vs. why exclusive-OR requires an evolved multi-gene regulatory network</text>
+  </g>
+
+  <!-- 1. AND Gate (Co-substrate) -->
+  <g transform="translate(40, 75)">
+    <rect width="250" height="180" rx="10" fill="#0b1728" stroke="#38bdf8" stroke-width="1.5" />
+    <rect x="12" y="12" width="90" height="20" rx="4" fill="#0369a1" />
+    <text x="20" y="26" class="badge" fill="#e0f2fe">GATE_AND</text>
+    <text x="110" y="26" class="label-bold" fill="#38bdf8">Co-Catalyst</text>
+
+    <!-- Active site with 2 adjacent pockets -->
+    <rect x="35" y="55" width="70" height="60" rx="6" fill="#132a4a" stroke="#0ea5e9" stroke-width="1" />
+    <text x="45" y="80" class="code" font-size="10" fill="#38bdf8">Pocket A</text>
+    <text x="45" y="100" class="subtitle" font-size="9">Substrate A</text>
+
+    <rect x="115" y="55" width="70" height="60" rx="6" fill="#132a4a" stroke="#0ea5e9" stroke-width="1" />
+    <text x="125" y="80" class="code" font-size="10" fill="#38bdf8">Pocket B</text>
+    <text x="125" y="100" class="subtitle" font-size="9">Substrate B</text>
+
+    <!-- Catalysis output -->
+    <path d="M 110 115 L 110 145" stroke="#facc15" stroke-width="2.5" marker-end="url(#arrow-amber)" />
+    <text x="125" y="160" class="label-bold" fill="#facc15">Fires only if A ∧ B!</text>
+  </g>
+
+  <!-- 2. OR Gate (Promiscuous) -->
+  <g transform="translate(315, 75)">
+    <rect width="250" height="180" rx="10" fill="#091f1a" stroke="#10b981" stroke-width="1.5" />
+    <rect x="12" y="12" width="80" height="20" rx="4" fill="#047857" />
+    <text x="20" y="26" class="badge" fill="#d1fae5">GATE_OR</text>
+    <text x="100" y="26" class="label-bold" fill="#10b981">Promiscuous</text>
+
+    <!-- Single flexible pocket accommodating either -->
+    <rect x="65" y="55" width="120" height="60" rx="8" fill="#113e33" stroke="#059669" stroke-width="1" />
+    <text x="80" y="80" class="code" font-size="10" fill="#4ade80">Dual P-Site</text>
+    <text x="80" y="98" class="subtitle" font-size="9">Binds either A or B</text>
+
+    <!-- Catalysis output -->
+    <path d="M 125 115 L 125 145" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow-emerald)" />
+    <text x="125" y="160" class="label-bold" text-anchor="middle" fill="#4ade80">Fires if A ∨ B!</text>
+  </g>
+
+  <!-- 3. NOT Gate (Allosteric Repressor) -->
+  <g transform="translate(590, 75)">
+    <rect width="250" height="180" rx="10" fill="#200d17" stroke="#f43f5e" stroke-width="1.5" />
+    <rect x="12" y="12" width="85" height="20" rx="4" fill="#be123c" />
+    <text x="20" y="26" class="badge" fill="#ffe4e6">GATE_NOT</text>
+    <text x="105" y="26" class="label-bold" fill="#f43f5e">Inhibitor</text>
+
+    <!-- Active pocket + Allosteric pocket -->
+    <rect x="35" y="55" width="70" height="60" rx="6" fill="#3b1123" stroke="#e11d48" stroke-width="1" />
+    <text x="45" y="80" class="code" font-size="10" fill="#fb7185">Catalytic</text>
+    <text x="50" y="98" class="subtitle" font-size="9">Site</text>
+
+    <rect x="115" y="55" width="75" height="60" rx="6" fill="#4c0519" stroke="#f43f5e" stroke-width="1" />
+    <text x="120" y="80" class="code" font-size="10" fill="#fda4af">Allosteric</text>
+    <text x="120" y="98" class="subtitle" font-size="9">Toxin T blocks</text>
+
+    <!-- Quenched output -->
+    <line x1="70" y1="120" x2="110" y2="150" stroke="#f43f5e" stroke-width="2.5" />
+    <line x1="110" y1="120" x2="70" y2="150" stroke="#f43f5e" stroke-width="2.5" />
+    <text x="125" y="160" class="label-bold" text-anchor="middle" fill="#fda4af">Toxin Quenches (¬T)</text>
+  </g>
+
+  <!-- Lower Panel: Why XOR is Composite -->
+  <g transform="translate(40, 270)">
+    <rect width="800" height="135" rx="12" fill="#090d16" stroke="#a855f7" stroke-width="1.5" />
+    <rect x="15" y="12" width="310" height="22" rx="4" fill="#581c87" />
+    <text x="25" y="27" class="badge" fill="#f3e8ff">XOR IS STRICTLY NON-PRIMITIVE</text>
+    <text x="340" y="27" class="code" fill="#c084fc">(A ⊕ B) ≡ (A ∨ B) ∧ ¬(A ∧ B)</text>
+
+    <!-- Diagram of 3-gate composite circuit -->
+    <g transform="translate(30, 45)">
+      <!-- Inputs A and B -->
+      <text x="0" y="22" class="code" fill="#38bdf8">Stream A ──┬──►</text>
+      <text x="0" y="55" class="code" fill="#38bdf8">Stream B ──┼──►</text>
+
+      <!-- Gate 1: OR -->
+      <rect x="120" y="8" width="55" height="26" rx="4" fill="#047857" stroke="#10b981" />
+      <text x="135" y="25" class="code" fill="#fff" font-weight="bold">OR</text>
+
+      <!-- Gate 2: AND -->
+      <rect x="120" y="42" width="55" height="26" rx="4" fill="#0369a1" stroke="#38bdf8" />
+      <text x="131" y="59" class="code" fill="#fff" font-weight="bold">AND</text>
+
+      <!-- Gate 3: NOT -->
+      <path d="M 175 55 L 205 55" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)" />
+      <rect x="205" y="42" width="55" height="26" rx="4" fill="#be123c" stroke="#f43f5e" />
+      <text x="217" y="59" class="code" fill="#fff" font-weight="bold">NOT</text>
+
+      <!-- Conjunction Gate 4: Final AND -->
+      <path d="M 175 21 L 285 21 L 285 35" stroke="#10b981" stroke-width="1.5" />
+      <path d="M 260 55 L 285 55 L 285 45" stroke="#f43f5e" stroke-width="1.5" />
+      <rect x="295" y="25" width="60" height="28" rx="4" fill="#0369a1" stroke="#38bdf8" />
+      <text x="307" y="43" class="code" fill="#fff" font-weight="bold">AND</text>
+
+      <!-- Output wire -->
+      <path d="M 355 39 L 410 39" stroke="#c084fc" stroke-width="2.5" marker-end="url(#arrow-purple)" />
+      <text x="420" y="43" class="label-bold" fill="#c084fc">Output (A XOR B)</text>
+    </g>
+
+    <!-- Side Explanation Box -->
+    <rect x="540" y="45" width="240" height="75" rx="6" fill="#190e24" stroke="#7e22ce" stroke-width="1" />
+    <text x="550" y="65" class="label-bold" fill="#e9d5ff">Minsky &amp; Papert Barrier (1969)</text>
+    <text x="550" y="82" class="subtitle" font-size="10">XOR is linearly non-separable.</text>
+    <text x="550" y="96" class="subtitle" font-size="10">No single protein pocket can execute XOR.</text>
+    <text x="550" y="110" class="label" font-size="9.5" fill="#facc15">★ Discovered via gene duplication!</text>
+  </g>
+
+</svg>

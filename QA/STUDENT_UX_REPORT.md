@@ -53,33 +53,10 @@ Over a 90-minute testing session, I interacted with the live web application on 
 
 ## 2. Features Explored & Observed Across Practicums 1–4
 
-```
-                                  SILIQUARIUM TESTBENCH TOPOLOGY
-  ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-  │                                    TOP TELEMETRY HEADER                                      │
-  │ [Epoch Ticks: 21] [Living: 26] [Spores: 0] [Clades: 26 (H=3.258)] [Stored: 1248 T] [ΔE=0]   │
-  ├─────────────────────────────────────────────────────────────┬────────────────────────────────┤
-  │                                                             │    LIVE CIRCUIT MICROSCOPE     │
-  │                  3D HEXAGONAL SEAFLOOR                      │         (Pore Workshop)        │
-  │                                                             │ ┌────────────────────────────┐ │
-  │    • Central Caldera Nozzle at (0,0,0)                      │ │ PORE [-5,4,0] • ROCK • GEN 0│ │
-  │    • Convective Amber Thermal Plume Particle System        │ │ Battery: 53/100 [██████░░░░] │ │
-  │    • Basalt Bedrock Substrate & Porous Cavities             │ │ Matter:  20/40  [████░░░░░░] │ │
-  │    • Holographic Reticle with Zenith Beam Indicator         │ ├────────────────────────────┤ │
-  │    • In-Situ Logic Gate Chips on Cell Surfaces              │ │ SUBSTRATE PORIN BUS:       │ │
-  │                                                             │ │ (A: 0) (B: 1) (T: 0)       │ │
-  │  ┌──────────────────────────┐                               │ ├────────────────────────────┤ │
-  │  │  ⚙️ LAB FLYOUT (Drawer)   │                               │ │ PHENOTYPIC NETLIST:        │ │
-  │  │  • Point Mutation Slider │                               │ │ [  OR  ]    [  NOT  ]      │ │
-  │  │  • Soup Density Slider   │                               │ ├────────────────────────────┤ │
-  │  │  • Thermal Surge Button  │                               │ │ 1D GENOME TAPE (60 Bits):  │ │
-  │  │  • Extinction Pulse      │                               │ │ [101][110][110][010]...    │ │
-  │  └──────────────────────────┘                               │ └────────────────────────────┘ │
-  ├─────────────────────────────────────────────────────────────┴────────────────────────────────┤
-  │             [⚙ Lab]  [⏸ Pause]  [⏭ +1 Tick]  [1x 2x 5x 10x]  [Caldera | Top-Down | Reset]      │
-  │                                FLOATING TRANSPORT BAR                                        │
-  └──────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+![Figure 2.1: Siliquarium Testbench Surface & 3D Bathymetry](assets/screenshots/01_overview_and_lattice_key.png)
+
+> [!NOTE]
+> **Siliquarium Testbench Topology & HUD Architecture:** The browser UI displays the global telemetry header at the top (epoch ticks, living count, spore count, clade diversity $H$, total stored energy, and universal conservation $\Delta E = 0.000$), the 3D WebGL seafloor viewport in the center, and the contextual inspection drawer on the right.
 
 ### 2.1 Hydrothermal Seafloor & Geological Substrate (Practicum 1)
 Upon launch, Siliquarium renders an immersive 3D bathymetric environment representing an abyssal hydrothermal mound:
@@ -403,20 +380,14 @@ No interpolation, no tween, no lerp. A single-frame step makes the 3D space feel
 
 During the live testing session on Microsoft Edge, I captured six real browser screenshots documenting my workflow, successful telemetry verifications, and user-experience friction points.
 
-```
-+----------------------------------------------------------------------------------------------------+
-|                                    STUDENT FIELD ARTIFACT INDEX                                    |
-+----+----------------------------------------------+----------+-------------------------------------+
-| ID | Artifact Filename                            | Epoch    | Primary Evaluative Focus            |
-+----+----------------------------------------------+----------+-------------------------------------+
-| 01 | 01_overview_and_lattice_key.png              | Tick 20  | Seamount Overview & Lattice Key     |
-| 02 | 02_zooming_difficulty_drift.png              | Tick 21  | Zoom Drift & Peripheral Loss        |
-| 03 | 03_selected_silicoid_and_microscope.png      | Tick 21  | Reticle Lock & Live Microscope      |
-| 04 | 04_deep_zoom_and_insitu_circuit.png          | Tick 21  | In-Situ 3D Breadboard Font Crisis   |
-| 05 | 05_god_suite_lab_controls.png                | Tick 21  | Lab Drawer Overlay Collisions       |
-| 06 | 06_thermal_surge_and_extinction.png          | Tick 36  | Milestone Toast & Lattice Overlap   |
-+----+----------------------------------------------+----------+-------------------------------------+
-```
+| ID | Artifact Filename | Epoch | Primary Evaluative Focus |
+| :---: | :--- | :---: | :--- |
+| **01** | `01_overview_and_lattice_key.png` | Tick 20 | Seamount Overview & Lattice Key |
+| **02** | `02_zooming_difficulty_drift.png` | Tick 21 | Zoom Drift & Peripheral Loss |
+| **03** | `03_selected_silicoid_and_microscope.png` | Tick 21 | Reticle Lock & Live Microscope |
+| **04** | `04_deep_zoom_and_insitu_circuit.png` | Tick 21 | In-Situ 3D Breadboard Font Crisis |
+| **05** | `05_god_suite_lab_controls.png` | Tick 21 | Lab Drawer Overlay Collisions |
+| **06** | `06_thermal_surge_and_extinction.png` | Tick 36 | Milestone Toast & Lattice Overlap |
 
 ---
 
@@ -519,19 +490,13 @@ During the live testing session on Microsoft Edge, I captured six real browser s
 
 As a high school student who loves both biology and programming, I want Siliquarium to succeed and be adopted in AP science classrooms nationwide. Based on my hands-on testing session, here are five prioritized, concrete engineering recommendations to resolve these friction points.
 
-```
-+----------------------------------------------------------------------------------------------------+
-|                               STUDENT ENGINEERING RECOMMENDATION MATRIX                            |
-+-----+-------------------------------+--------------------------+----------+------------------------+
-| Rec | Proposed Feature / Fix        | Target File(s)           | Priority | Estimated Impact       |
-+-----+-------------------------------+--------------------------+----------+------------------------+
-| 01  | Cursor-Centric Raycast Zoom   | OrbitCamera.ts, main.ts  | CRITICAL | Eliminates zoom drift  |
-| 02  | Double-Click Smooth Ease-In   | OrbitCamera.ts, main.ts  | HIGH     | Cinematic orientation  |
-| 03  | Aqueous Hit-Test Filter       | SeafloorRenderer3D.ts    | HIGH     | Reliable pore clicking |
-| 04  | Billboarded In-Situ Text LOD  | SeafloorRenderer3D.ts    | MEDIUM   | Readable 3D chips      |
-| 05  | Non-Overlapping HUD Layout    | index.html, main.ts      | MEDIUM   | No control occlusion   |
-+-----+-------------------------------+--------------------------+----------+------------------------+
-```
+| Rec | Proposed Feature / Fix | Target File(s) | Priority | Estimated Impact |
+| :---: | :--- | :--- | :---: | :--- |
+| **01** | Cursor-Centric Raycast Zoom | `OrbitCamera.ts`, `main.ts` | **CRITICAL** | Eliminates zoom drift; zooms to mouse position |
+| **02** | Double-Click Smooth Ease-In | `OrbitCamera.ts`, `main.ts` | **HIGH** | Cinematic orientation and smooth target acquisition |
+| **03** | Aqueous Hit-Test Filter | `SeafloorRenderer3D.ts` | **HIGH** | Reliable benthic pore selection without fluid obstruction |
+| **04** | Billboarded In-Situ Text LOD | `SeafloorRenderer3D.ts` | **MEDIUM** | Crisp, readable 3D gate icons across all camera angles |
+| **05** | Non-Overlapping HUD Layout | `index.html`, `main.ts` | **MEDIUM** | Preserves visibility of telemetry bar and controls |
 
 ---
 

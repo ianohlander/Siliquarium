@@ -14,22 +14,23 @@ In computational artificial life, evolution happens at blinding electronic speed
 2. **The Evolutionary Flight Recorder (`EvolutionaryFlightRecorder`):** A phylogenetic flight data recorder that logs the family tree of every organism back to Generation 0, measuring exact Hamming trajectories across genotype space and mathematically distinguishing between familial inheritance (**Homology**) and independent discovery (**Homoplasy / Convergent Evolution**).
 3. **The Lenski $-80^\circ\text{C}$ Fossil Freezer (`FossilFreezer`):** Inspired by Richard Lenski's Long-Term Evolution Experiment (LTEE), this module automatically archives complete digital fossils, enabling researchers to thaw ancestors, step clock cycle by clock cycle, and perform **counterfactual single-bit autopsies** to witness the exact mutation that sparked the adaptation.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   THE DIGITAL PALEONTOLOGY SUITE                       │
-│                                                                        │
-│   [ MOTIF SCANNER ]             ──►   [ FLIGHT RECORDER ]              │
-│   • Uri Alon Systems Biology          • Phylogenetic Lineage Trees     │
-│   • Weisfeiler-Lehman Graph Hash      • Hamming Distance Trajectories  │
-│   • Pure Descriptive Voltmeter        • Homology vs Homoplasy Audit    │
-│                                               │                        │
-│                                               ▼                        │
-│                                     [ LENSKI FOSSIL FREEZER ]          │
-│                                     • Periodic Snapshots               │
-│                                     • Ancestral Thawing                │
-│                                     • Counterfactual Bit Autopsies     │
-└────────────────────────────────────────────────────────────────────────┘
-```
+![Figure 4.1: Canonical Network Motifs of Systems Biology](assets/diagrams/fig3_1_network_motifs.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 4.1 — Uri Alon Canonical Systems Biology Motifs
+> - **Visual Guide:** Displays the four fundamental regulatory circuits discovered across living cells: the bistable SR latch (memory toggle), the 3-inverter repressilator (ring clock), the Coherent Type-1 Feed-Forward Loop (sign-sensitive persistence delay), and the Incoherent Type-1 Feed-Forward Loop (biphasic pulse generator).
+> - **Biophysical Reality:** In *E. coli* and yeast, transcriptional networks utilize these precise subgraphs to filter noise, time cell-cycle events, and coordinate metabolic transitions.
+> - **Digital Mapping:** Siliquarium's `MotifScanner` audits living pore workshops in real time, detecting these graph topologies using Weisfeiler-Lehman color refinement without altering simulation physics.
+> - **Core Principle:** *Network motifs are the universal building blocks of living regulation.* Recurring circuits emerge repeatedly because they solve universal dynamical control problems.
+
+![Figure 4.2: Weisfeiler-Lehman Graph Color Refinement Hashing](assets/diagrams/fig3_2_weisfeiler_lehman.svg)
+
+> [!ANALYSIS]
+> ### 🔬 Pedagogical Breakdown: Figure 4.2 — 1-WL Topological Graph Invariant Hashing
+> - **Visual Guide:** Illustrates multi-round color refinement on directed circuit netlists. Initial gate opcodes (`AND`, `NOT`, `OR`) are iteratively hashed with sorted neighbor colors until the color histogram stabilizes into a canonical 64-bit fingerprint.
+> - **Biophysical Reality:** Living regulatory networks vary widely in spatial placement and wiring permutations while performing identical logical functions. Canonical graph invariants allow researchers to group functionally identical circuits regardless of node labeling.
+> - **Digital Mapping:** Siliquarium uses 1-WL hashing to classify evolved organisms into structural clades ($O(|V| + |E|)$ complexity), enabling instant phylogenetic tracking and diversity indexing ($H$).
+> - **Core Principle:** *Isomorphic circuits share identical ecological function.* Structural graph theory provides the mathematical bridge between genotype and phenotype.
 
 ---
 

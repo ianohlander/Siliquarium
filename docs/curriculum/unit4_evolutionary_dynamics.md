@@ -14,19 +14,14 @@ To understand macro-evolution, students must explore three foundational pillars:
 2. **Susumu Ohno's Gene Duplication (1970):** Innovation requires redundant genetic copies freed from purifying selection to explore novel functions.
 3. **Richard Lenski's Long-Term Evolution Experiment (LTEE, 1988–Present):** Adaptation is characterized by hyperbolic decelerating velocity punctuated by rare, historically contingent breakthrough innovations.
 
-```
-       CONVENTIONAL GRADIENT ASCENT                       BIOLOGICAL EVOLUTIONARY MANIFOLD
-  ┌─────────────────────────────────────┐               ┌─────────────────────────────────────┐
-  │ Fitness                             │               │ Fitness                             │
-  │    ▲          ▲ Peak                │               │    ▲                     ★ Cit+     │
-  │    │         / \                    │               │    │                   /   Jump     │
-  │    │        /   \                   │   VS.         │    │       ┌───────────┘            │
-  │    │       /     \                  │               │    │   ────┘ (Neutral Saddle Walk)  │
-  │    └──────┴───────┴───────► Gen     │               │    └───┴───────────────────────► Gen│
-  │   Simple uphill crawling;           │               │   Neutral drift, duplications,      │
-  │   Trapped in local optima!          │               │   and historical contingency!       │
-  └─────────────────────────────────────┘               └─────────────────────────────────────┘
-```
+![Figure 4.1: Motoo Kimura's Neutral Drift Saddles & Susumu Ohno's Gene Duplications](assets/diagrams/fig4_1_kimura_and_ohno.svg)
+
+> [!ANALYSIS]
+> **Figure 4.1 Architectural Breakdown: Neutral Drift Manifolds & Paralog Neofunctionalization**
+> - **🔍 Visual Guide & Structural Mechanics:** The left panel contrasts a naive gradient climbing ascent (where populations become permanently trapped in local sub-optimal peaks) against the multi-dimensional biological manifold, where lineages walk across neutral saddles ($\Delta W = 0$) until discovering adaptive breakthroughs. The right panel illustrates Susumu Ohno's gene duplication mechanism: an ancestral essential gene duplicates into twin copies. The primary paralog maintains homeostatic feeding under purifying selection, while the duplicate paralog is freed from selective constraints, accumulating neutral mutations until unlocking a novel catalytic adaptation (`GATE_NOT` or `GATE_OR`).
+> - **🔬 Biophysical & Mathematical Reality:** In molecular evolution (Kimura, 1968), the substitution rate of neutral mutations equals the mutation rate ($k = \mu$), independent of population size. Without neutral drift ridges, populations are paralyzed by local fitness valleys. Ohno's duplication (1970) provides the mutational raw material for evolutionary innovation without risking metabolic collapse.
+> - **💻 Digital Mapping & Silicon Architecture:** In Siliquarium, non-coding codons (`INTRON_SILENT`) act as duplicated genetic reserves. In the [`EvolutionaryFlightRecorder`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts), single-bit counterfactual autopsies repeatedly reveal silent non-coding codons mutating into active gates that connect with pre-existing circuitry without causing parent starvation.
+> - **🏛️ Core Principle & Intuitive Summary:** *Duplication Frees the Hands of Evolution.* You cannot remodel a ship's engine while it is running at full throttle unless you have a second backup engine to keep the ship afloat.
 
 ---
 
@@ -43,20 +38,6 @@ When an unguided point mutation flips a bit inside a non-coding intron:
 2. The organism's metabolic energy intake and Landauer costs remain identical ($\Delta W = 0.000$).
 3. The mutation is selectively neutral!
 
-```
-                    WALKING THE NEUTRAL SADDLE MANIFOLD
-                    
-    Fitness W
-        ▲
-    1.0 ┼──────────────────●──────────────●──────────────┐ (Neutral Plateau: ΔW = 0)
-        │                 /              /               │
-        │      Kimura    /   Kimura     /   Ohno         │ Lineage walks across
-        │      Drift 1  /    Drift 2   /    Duplication  │ Hamming space without
-        │              /              /                  │ dropping in fitness!
-    0.0 ┼─────────────●──────────────●───────────────────┴───► Genotype Hamming Distance (dH)
-                    Gen 100        Gen 250        Gen 400
-```
-
 Without neutral drift, an evolving population becomes trapped on the first local fitness hillock it encounters. Neutral mutational drift allows a lineage to **diffuse across the $N$-dimensional Hamming hypercube**, wandering along neutral ridges until it stumbles upon a previously inaccessible adaptive breakthrough.
 
 ---
@@ -68,24 +49,7 @@ In 1970, geneticist Susumu Ohno published *Evolution by Gene Duplication*, decla
 If an organism possesses only one copy of an essential catalytic enzyme, natural selection acts with fierce **purifying selection**: any mutation that alters the active site destroys the enzyme, causing starvation and death. The gene is locked in place.
 
 How can a lineage ever discover a brand-new catalytic function? **Through gene duplication:**
-
-```
-                  SUSUMU OHNO'S NEOFUNCTIONALIZATION
-                  
-            [ Ancestral Essential Gene ] (Catalytic AND)
-                         │
-                         ▼ (Gene Duplication Event)
-            ┌────────────┴────────────┐
-            ▼                         ▼
-    [ Original Copy ]         [ Duplicate Copy ]
-    • Purifying Selection     • Freed from Selective Pressure!
-    • Continues essential     • Accumulates neutral mutations
-      catalytic feeding.      • Discovers novel function:
-            │                   GATE_NOT (Toxin Shield) or
-            │                   GATE_OR (Generalist Diet)!
-            ▼                         ▼
-    Homeostasis Preserved     ★ NOVEL ADAPTATION UNLOCKED!
-```
+As diagrammed in Figure 4.1, duplication releases the secondary copy from purifying selection. While the ancestral copy continues homeostatic catalytic feeding, the redundant paralog is free to accumulate exploratory mutations, eventually discovering novel functions such as toxin shielding or dietary generalism.
 
 In Siliquarium, non-coding introns (`INTRON_SILENT`) act as duplicated genetic reserves. In the [`EvolutionaryFlightRecorder`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts), single-bit autopsies repeatedly reveal a silent intron mutating into a catalytic `GATE_NOT` or `GATE_OR`, pairing with a pre-existing `GATE_AND` to assemble composite motifs (such as the XOR circuit or toxin filter) without disrupting the organism's baseline metabolism.
 
@@ -133,21 +97,14 @@ Two profound macro-evolutionary phenomena emerged from the LTEE:
 1. **Hyperbolic Decelerating Velocity:** Adaptations accumulate rapidly during the initial colonization phase, then decelerate asymptotically as organisms approach biophysical optimality.
 2. **Punctuated Innovation ($Cit^+$):** Around Generation 31,500, one lineage suddenly unlocked the ability to aerobically metabolize citrate ($Cit^+$), causing a massive population explosion. Analyzing frozen ancestors revealed that this breakthrough required a rare, historically contingent genomic rearrangement that occurred thousands of generations earlier.
 
-```
-                  LENSKI LTEE FITNESS TRAJECTORY & CIT+ BREAKTHROUGH
-                  
-    Relative Fitness (ω)
-        ▲
-    2.5 ┼                                              ★ CIT+ INNOVATION JUMP
-        │                                             /  (Population Explodes!)
-    2.0 ┼                                            /
-        │                              ┌────────────┘
-    1.5 ┼          ┌───────────────────┘ (Potentiation Saddle)
-        │    ─────┘ (Asymptotic Deceleration)
-    1.0 ┼───/ (Rapid Initial Adaptation)
-        └─────┼──────────┼──────────┼──────────┼──────────┼──────────► Generations
-              0        5,000      15,000     25,000     31,500
-```
+![Figure 4.2: Richard Lenski's LTEE Dynamics & Homology vs. Homoplasy Phylogeny](assets/diagrams/fig4_2_lenski_and_phylogeny.svg)
+
+> [!ANALYSIS]
+> **Figure 4.2 Architectural Breakdown: Hyperbolic LTEE Velocity & Convergent Homoplasy**
+> - **🔍 Visual Guide & Structural Mechanics:** The left panel portrays Richard Lenski's famous LTEE trajectory: rapid initial adaptive gain during colonization, asymptotic hyperbolic deceleration as organisms approach physical optimality, and rare punctuated breakthrough jumps ($\text{Cit}^+$ innovation). The right panel shows phylogenetic Least Common Ancestor (LCA) trees distinguishing Homology (trait shared through continuous vertical inheritance from an LCA) from Homoplasy / Convergent Evolution (independent discovery of the exact same circuit by isolated clades).
+> - **🔬 Biophysical & Mathematical Reality:** In microbial experimental evolution (Lenski, 1991, 2003), power-law scaling governs fitness gain: $W(t) = (a t + 1)^b$. Innovations requiring multiple epistatic mutations (potentiation, actualization, refinement) cause sudden macroscopic shifts. In phylogeny, homoplasy demonstrates that physical optimality channels evolutionary paths.
+> - **💻 Digital Mapping & Silicon Architecture:** Monitored continuously by [`LteeBenchmark.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts) and [`EvolutionaryFlightRecorder.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts). When two living cells display identical Weisfeiler-Lehman hashes, the flight recorder walks back their parent DAG to find their Least Common Ancestor and definitively renders a verdict: `HOMOLOGY` or `HOMOPLASY`.
+> - **🏛️ Core Principle & Intuitive Summary:** *History Constrains, But Physics Channels.* Lineages inherit genetic baggage from the past, but the uncompromising laws of thermodynamics and Boolean logic repeatedly force separate lineages into identical optimal solutions.
 
 ---
 
@@ -188,24 +145,14 @@ Nature solved this via broadcast spawning: corals, sponges, and marine invertebr
 
 In Siliquarium, when an adult reaches division thresholds ($E \ge 100, M \ge 20$) but all adjacent substrate pores are full, it initiates **Pelagic Spore Synthesis** ([`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts#L127-L141)):
 
-```
-                        THE PELAGIC DISPERSAL CYCLE
-                        
-       WATER COLUMN (Permeable Fluid Hexes, z >= 1)
-   ┌──────┐         ┌──────┐         ┌──────┐
-   │ Pore │ ──────► │ Pore │ ──────► │ Pore │ ──► Drift along plume vector v!
-   │(Fluid)│        │(Fluid)│        │(Fluid)│
-   └──────┘         └──────┘         └──────┘
-      ▲                                 │
-      │ Spore Detachment                │ Spore Lands & Germinates
-      │                                 ▼
-   ════════════════════════════════════════════════════════════════════
-       SOLID BASALT BEDROCK SEABED (z = 0)
-   ┌─────────┐      ┌─────────┐      ┌─────────┐
-   │ BENTHIC │      │ CARCASS │      │ NEW ROCK│
-   │  ADULT  │      │ RUBBLE  │      │ PORE    │ ◄── Trans-Oceanic Colony Founded!
-   └─────────┘      └─────────┘      └─────────┘
-```
+![Figure 4.3: 3D Water Column Stratification & Pelagic Spore Dispersal](assets/diagrams/fig4_3_pelagic_spores.svg)
+
+> [!ANALYSIS]
+> **Figure 4.3 Architectural Breakdown: Stratified 3D Fluid Dynamics & Pelagic Colonization**
+> - **🔍 Visual Guide & Structural Mechanics:** Depicts the vertical z-stratification of the abyssal ecosystem: the solid benthic bedrock floor ($z=0$, where adult silicoids anchor to rock cavities), the intermediate convective thermal updraft zone ($z=1$), and the upper pelagic advection layer ($z=2$). When adult cells crowd all local benthic pores, broadcast spore shedding releases buoyant spores into the water column to drift horizontally along rotational ocean currents ($\vec{v}_{\text{drift}}$).
+> - **🔬 Biophysical & Mathematical Reality:** Solves the spatial crowding bottleneck of benthic ecosystems (such as coral broadcast spawning). Dispersal is governed by discrete advection vectors $\vec{x}_{\text{spore}}(t+1) = \vec{x}(t) + \vec{v}_{\text{plume}} + \vec{v}_{\text{drift}}$ subject to a metabolic decay clock $\tau = 25$ ticks. Spores landing on vacant basalt pores germinate into new trans-ridge founder clades; spores expiring in open water lyse into sinking marine snow.
+> - **💻 Digital Mapping & Silicon Architecture:** Handled in [`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts) and visualized in [`SeafloorRenderer3D.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts). Fluid pores allow non-colliding drift while preserving exact mass and energy conservation laws.
+> - **🏛️ Core Principle & Intuitive Summary:** *Open-Water Drift Evades Local Extinction.* When a volcanic terrace is fully saturated or poisoned by thermal surges, floating spores carry ancestral blueprints across the abyss to colonize distant mineral oases.
 
 ### 7.3 Discrete $O(1)$ Advection Mathematics
 To prevent computational bloat from continuous rigid-body collision solvers, Siliquarium models spore advection discretely in the stacked 3D hexagonal lattice $(q, r, z)$:

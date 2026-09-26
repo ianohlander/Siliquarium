@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" width="880" height="360" class="w-full h-auto font-sans">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#6b21a8" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+
+    <!-- Glow Filters -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-emerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title { font-family: 'Cascadia Code', Consolas, monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: 'Cascadia Code', Consolas, monospace; font-size: 9.5px; font-weight: bold; }
+  </style>
+
+  <!-- Canvas Background -->
+  <rect width="880" height="360" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  
+  <g transform="translate(30, 35)">
+    <text class="title">Figure 2.2: The 64-Entry Prebiotic Degenerate Codon Architecture</text>
+    <text y="20" class="subtitle">Grounded molecular biophysics: 6-bit codes partitioned into catalytic primitives, porins, and neutral introns (CodonTable.ts)</text>
+  </g>
+
+  <!-- Bit Structure Breakdown -->
+  <g transform="translate(40, 75)">
+    <rect width="800" height="75" rx="8" fill="#090d16" stroke="#0284c7" stroke-width="1.5" />
+    <g transform="translate(30, 18)">
+      <rect x="0" y="0" width="70" height="38" rx="6" fill="#0369a1" stroke="#38bdf8" />
+      <text x="35" y="24" class="code" text-anchor="middle" font-size="14" fill="#fff">Bit 5</text>
+      <rect x="80" y="0" width="70" height="38" rx="6" fill="#0369a1" stroke="#38bdf8" />
+      <text x="115" y="24" class="code" text-anchor="middle" font-size="14" fill="#fff">Bit 4</text>
+      <rect x="160" y="0" width="70" height="38" rx="6" fill="#0369a1" stroke="#38bdf8" />
+      <text x="195" y="24" class="code" text-anchor="middle" font-size="14" fill="#fff">Bit 3</text>
+      <rect x="250" y="0" width="70" height="38" rx="6" fill="#047857" stroke="#10b981" />
+      <text x="285" y="24" class="code" text-anchor="middle" font-size="14" fill="#fff">Bit 2</text>
+      <rect x="330" y="0" width="70" height="38" rx="6" fill="#047857" stroke="#10b981" />
+      <text x="365" y="24" class="code" text-anchor="middle" font-size="14" fill="#fff">Bit 1</text>
+      <rect x="410" y="0" width="70" height="38" rx="6" fill="#047857" stroke="#10b981" />
+      <text x="445" y="24" class="code" text-anchor="middle" font-size="14" fill="#fff">Bit 0</text>
+    </g>
+
+    <g transform="translate(530, 20)">
+      <text class="label-bold" fill="#38bdf8">Bits 5-3: Functional Class</text>
+      <text y="18" class="label-bold" fill="#10b981">Bits 2-0: Degenerate Synonymous</text>
+      <text y="34" class="subtitle" font-size="10">Provides neutral Kimura mutational buffer</text>
+    </g>
+  </g>
+
+  <!-- 4 Functional Classes Cards -->
+  <g transform="translate(40, 165)">
+    <!-- Class 1: Catalytic Primitives -->
+    <rect x="0" y="0" width="190" height="155" rx="8" fill="#0c1726" stroke="#38bdf8" stroke-width="1.5" />
+    <rect x="10" y="10" width="170" height="22" rx="4" fill="#0369a1" />
+    <text x="95" y="25" class="badge" text-anchor="middle" fill="#e0f2fe">1. CATALYTIC PRIMITIVES</text>
+    <g transform="translate(15, 45)" class="subtitle" font-size="10.5">
+      <text y="15" fill="#38bdf8">• Codons 00..11: GATE_AND (12)</text>
+      <text y="35" fill="#f43f5e">• Codons 12..21: GATE_NOT (10)</text>
+      <text y="55" fill="#10b981">• Codons 22..31: GATE_OR  (10)</text>
+      <text y="75" fill="#fbbf24">• Note: XOR is NOT primitive</text>
+      <text y="92" fill="#94a3b8" font-size="9.5">Evolved via multi-gate motif</text>
+    </g>
+
+    <!-- Class 2: Porins -->
+    <rect x="203" y="0" width="190" height="155" rx="8" fill="#081e19" stroke="#10b981" stroke-width="1.5" />
+    <rect x="213" y="10" width="170" height="22" rx="4" fill="#065f46" />
+    <text x="298" y="25" class="badge" text-anchor="middle" fill="#d1fae5">2. MEMBRANE PORINS</text>
+    <g transform="translate(218, 45)" class="subtitle" font-size="10.5">
+      <text y="15" fill="#34d399">• Codons 32..37: STREAM_A (6)</text>
+      <text y="35" fill="#34d399">• Codons 38..43: STREAM_B (6)</text>
+      <text y="55" fill="#f43f5e">• Codons 44..47: TOXIN_T   (4)</text>
+      <text y="75" fill="#94a3b8">Binds specific solutes</text>
+      <text y="92" fill="#94a3b8" font-size="9.5">Selective outer channels</text>
+    </g>
+
+    <!-- Class 3: Sinks -->
+    <rect x="406" y="0" width="190" height="155" rx="8" fill="#1f1807" stroke="#f59e0b" stroke-width="1.5" />
+    <rect x="416" y="10" width="170" height="22" rx="4" fill="#78350f" />
+    <text x="501" y="25" class="badge" text-anchor="middle" fill="#fef3c7">3. STRUCTURAL SINKS</text>
+    <g transform="translate(421, 45)" class="subtitle" font-size="10.5">
+      <text y="15" fill="#fbbf24">• Codons 48..51: BATTERY (4)</text>
+      <text y="35" fill="#fbbf24">• Codons 52..55: SEPTUM  (4)</text>
+      <text y="55" fill="#94a3b8">ATP Synthase analogue</text>
+      <text y="75" fill="#94a3b8">FtsZ contractile ring</text>
+      <text y="92" fill="#94a3b8" font-size="9.5">Triggers fission @ 100T</text>
+    </g>
+
+    <!-- Class 4: Introns -->
+    <rect x="610" y="0" width="190" height="155" rx="8" fill="#1b1226" stroke="#a855f7" stroke-width="1.5" />
+    <rect x="620" y="10" width="170" height="22" rx="4" fill="#581c87" />
+    <text x="705" y="25" class="badge" text-anchor="middle" fill="#f3e8ff">4. NEUTRAL INTRONS</text>
+    <g transform="translate(625, 45)" class="subtitle" font-size="10.5">
+      <text y="15" fill="#c084fc">• Codons 56..61: SILENT  (6)</text>
+      <text y="35" fill="#c084fc">• Codons 62..63: OPERATOR (2)</text>
+      <text y="55" fill="#94a3b8">Kimura neutral buffer</text>
+      <text y="75" fill="#94a3b8">Silent mutations absorb noise</text>
+      <text y="92" fill="#94a3b8" font-size="9.5">Total: Exactly 64 entries!</text>
+    </g>
+  </g>
+
+</svg>

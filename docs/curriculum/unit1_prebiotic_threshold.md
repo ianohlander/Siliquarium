@@ -11,18 +11,14 @@ In traditional textbook accounts, the origin of life is often romanticized as Ch
 
 In physical reality, any such open-ocean scenario is destroyed by a relentless physical law: **The Dilution Catastrophe**.
 
-```
-       OPEN OCEAN (The Dilution Catastrophe)          ALKALINE HYDROTHERMAL VENT (Micro-Pores)
-    ┌──────────────────────────────────────┐       ┌──────────────────────────────────────┐
-    │                                      │       │    [Solid Basalt Mineral Matrix]     │
-    │      A                B              │       │    ┌────────────────────────────┐    │
-    │         (Drifts Away)                │       │    │ Reactants A and B trapped  │    │
-    │                *                     │       │    │ in microscopic rock foam!  │    │
-    │        ~                             │       │    │ Concentration increases    │    │
-    │                                      │       │    │ by 1,000,000x!             │    │
-    │   Reactions impossible; density = 0  │       │    └────────────────────────────┘    │
-    └──────────────────────────────────────┘       └──────────────────────────────────────┘
-```
+![Figure 1.1: The Dilution Catastrophe in Open Seawater vs. Micro-Pore Thermophoresis](assets/diagrams/fig1_1_dilution_catastrophe.svg)
+
+> [!ANALYSIS]
+> **Figure 1.1 Architectural Breakdown: Dilution Catastrophe vs. Alkaline Micro-Pore Foam**
+> - **🔍 Visual Guide & Structural Mechanics:** The left panel portrays unbounded 3D oceanic diffusion ($[A] \to 0, [B] \to 0$), where reactant molecules drift endlessly apart into the abyss. The right panel displays the cross-section of an inorganic hydrothermal basalt column whose microscopic cavities ($10\text{--}50\,\mu\text{m}$) concentrate catalytic organic monomers by over $1,000,000\times$ through thermal siphoning.
+> - **🔬 Biophysical & Mathematical Reality:** Governed by the Law of Mass Action ($\text{Rate} = k[A][B]$). In open water, entropy disperses reagents before bi-molecular condensation can occur. In micro-porous cavities, thermophoresis overcomes entropic dissipation, creating a continuous reactive crucible.
+> - **💻 Digital Mapping & Silicon Architecture:** In Siliquarium, this physical reality is represented by the 3D hexagonal lattice. Pores are not abstract numbers; they are discrete mineral chambers (`PoreMedium.ROCK_SUBSTRATE`) with volumetric boundaries holding energy and matter tokens.
+> - **🏛️ Core Principle & Intuitive Summary:** *Nature's First Cell Walls Were Free.* Life did not begin by inventing complex lipid membranes; life took shelter inside the pre-existing mineral foam of deep-sea alkaline hydrothermal vents.
 
 When organic monomers form in open water:
 1. They immediately diffuse in three dimensions into the vast, infinite volume of the ocean.
@@ -44,25 +40,14 @@ In 1997, geochemists Michael J. Russell and Allan J. Hall solved this paradox. N
 
 Deep in the Hadean ocean, serpentinization reactions between seawater and mantle peridotite produced alkaline hydrothermal vents (analogous to the modern Lost City hydrothermal field). Unlike violent black smokers, alkaline vents form gigantic, porous towers of mineral precipitate made of iron-sulfide ($FeS$, mackinawite) and amorphous silica.
 
-```
-                      THE POROUS HYDROTHERMAL CHIMNEY CROSS-SECTION
-                      
-         Acidic Hadean Ocean Water (Cold 2°C, Saturated with Dissolved CO2, pH ~ 5.5)
-     ═════════════════════════════════════════════════════════════════════════════════
-            +     +     +     +     +     +     +     +     +     +     +     +
-           [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  (Acidic Reservoir)
-     ─────────────────────────────────────────────────────────────────────────────────
-        INORGANIC THIN MINERAL WALL (Iron Monosulphide FeS / Amorphous Silica)
-        Thickness: d ≈ 5 to 10 nm  |  Dielectric Capacitance: C = ε · (A / d)
-        Microscopic Cavities: 10 to 50 μm diameter (Nature's First Cell Walls)
-     ─────────────────────────────────────────────────────────────────────────────────
-           [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] (Alkaline Reservoir)
-            -     -     -     -     -     -     -     -     -     -     -     -
-     ═════════════════════════════════════════════════════════════════════════════════
-         Warm Alkaline Vent Fluid (Warm 65°C, Saturated with H2 & CH4, pH ~ 10.0)
-         
-         ★ NATURAL PROTON MOTIVE FORCE: ΔpH = 4.5 units ≈ 200 mV Transmembrane Potential!
-```
+![Figure 1.2: The Russell-Hall Alkaline Hydrothermal Chimney & Natural Proton Motive Force](assets/diagrams/fig1_2_hydrothermal_chimney.svg)
+
+> [!ANALYSIS]
+> **Figure 1.2 Architectural Breakdown: The Abiotic Chemiosmotic Hydroelectric Dam**
+> - **🔍 Visual Guide & Structural Mechanics:** Shows the natural tripartite geobattery: cold, acidic ocean water ($\text{pH } 5.5$, rich in dissolved $\text{CO}_2$ and $\text{H}^+$) on top; warm, alkaline hydrothermal fluid ($\text{pH } 9.5\text{--}10.0$, rich in $\text{H}_2$ and $\text{OH}^-$) on bottom; separated by a $5\text{--}10\text{ nm}$ semi-conductive iron-sulfide ($\text{FeS}$) inorganic mineral wall.
+> - **🔬 Biophysical & Mathematical Reality:** Generates a continuous Mitchell-Russell proton motive force: $\Delta p = \Delta \psi - 59\,\Delta\text{pH} \approx 200\text{ mV}$. Across a $5\text{ nm}$ inorganic membrane, this corresponds to an enormous electric field strength of $40,000,000\text{ V/m}$, powering abiotic redox synthesis before the evolutionary emergence of ATP synthase.
+> - **💻 Digital Mapping & Silicon Architecture:** Reflected in [`PoreBattery.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreBattery.ts) and [`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts). The central caldera nozzle constantly injects fuel pulses ($A$ and $B$), while the mineral capacitor stores up to $100$ tokens of chemical work.
+> - **🏛️ Core Principle & Intuitive Summary:** *Life Did Not Invent Chemiosmosis; Chemiosmosis Invented Life.* The origin of life was an electrical plug connecting a planetary proton gradient to catalytic mineral surfaces.
 
 These inorganic mineral foams possessed two foundational properties:
 1. **Physical Micro-Cavities:** Basalt and iron-sulfide form labyrinthine networks of microscopic chambers ($10\text{ to }50\,\mu\text{m}$). These rock cavities concentrated organic molecules by a factor of over $1,000,000\times$ through thermal siphoning (thermophoresis).
@@ -130,43 +115,14 @@ The system suffers an unavoidable, fatal mathematical trap:
 4. Even worse: any physical defect in the *inspection and copying arm itself* corrupts the replication process.
 5. Within a few generations, the copying machinery degenerates into random noise (**The Lethal Error Catastrophe**).
 
-```
-        THE LETHAL ERROR CATASTROPHE (Direct Self-Inspection)
-        
-    [ Machine M ] ──────► Inspects Damaged Gears ──────► [ Child M' ]
-         ▲                                                    │
-         │ Mutates active copier                              ▼
-         └──────────────── Accumulates Error ◄──────── [ Corrupt M'' ]
-                           LINEAGE COLLAPSES IN 3 GENERATIONS!
-```
+![Figure 1.3: Von Neumann's Self-Replicating Automata & Howard Pattee's Epistemic Cut](assets/diagrams/fig1_3_epistemic_cut.svg)
 
-### 5.2 Von Neumann's Solution: The Separation of Tape and Constructor
-To prevent the error catastrophe, von Neumann deduced that an open-ended evolving system must contain two radically different components:
-1. **An uninterpreted, inert symbolic description ($\phi$):** A passive tape of symbols that conducts no physical work and undergoes no physical execution during the organism's lifetime.
-2. **An active universal constructor ($A$):** Reads the tape to synthesize the physical machine.
-3. **An automated tape copier ($B$):** Blindly copies the symbolic tape into the offspring without interpreting what it means.
-
-Von Neumann published this mathematical architecture in 1948—**five years before Watson and Crick discovered the double-helical structure of DNA in 1953**! Natural biology follows von Neumann's theorem to the letter:
-- DNA is the uninterpreted symbolic tape ($\phi$).
-- The Ribosome and metabolic enzymes are the active constructor ($A$).
-- DNA Polymerase is the blind tape copier ($B$).
-
-```
-                 VON NEUMANN'S THEOREM & HOWARD PATTEE'S EPISTEMIC CUT
-                 
-         [ THE SAFE: Genotype ]                     [ THE WORKSHOP: Phenotype ]
-       (Rate-Independent Symbols)                      (Rate-Dependent Physics)
-      ┌───────────────────────────┐                 ┌─────────────────────────────┐
-      │ 1D Genome Tape:           │   Translation   │ Active 2D Logic Netlist:    │
-      │ [ 0 1 1 0 1 0 0 1 ... ]   │ ──────────────► │ Vent ──► AND ──► NOT ──► Out│
-      │ • Conducts no power       │                 │ • Toggles gates             │
-      │ • Inert against noise     │                 │ • Burns Landauer energy     │
-      └─────────────┬─────────────┘                 └──────────────┬──────────────┘
-                    │                                              │
-                    │ Blind Photocopy                              │ Metabolism
-                    ▼ (Substrate Law)                              ▼
-         [ Child Pore Safe ]                        [ Charges Mineral Battery ]
-```
+> [!ANALYSIS]
+> **Figure 1.3 Architectural Breakdown: The Safe vs. The Workshop (The Epistemic Cut)**
+> - **🔍 Visual Guide & Structural Mechanics:** The left side reveals the fatal feedback loop of direct physical self-inspection: thermal noise and friction corrupt the active machinery ($M \to M' \to M''$), causing exponential degradation and collapse within 3 generations. The right side illustrates von Neumann's and Pattee's decoupling: an inert 1D symbolic genome safe ($\phi$) remains completely unexecuted and cold during life, while an active 2D logic workshop ($A$) conducts rate-dependent metabolism and dynamic Landauer dissipation.
+> - **🔬 Biophysical & Mathematical Reality:** In natural biology, DNA does not catalyze metabolic reactions; it is a quiescent informational tape. The ribosome and metabolic enzymes constitute the active physical constructor. Reproduction occurs by copying the uninterpreted tape via DNA polymerase ($B$), preserving the information from metabolic wear and tear.
+> - **💻 Digital Mapping & Silicon Architecture:** In Siliquarium, this is codified in [`GenomeSafe.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/GenomeSafe.ts) (inert 60-bit array, zero dynamic power) versus [`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts) (active directed graph netlist). When an organism divides, only the 60-bit tape is duplicated and mutated; the running gates and wires are never copied directly.
+> - **🏛️ Core Principle & Intuitive Summary:** *The Epistemic Cut Separates Heredity from Metabolism.* You never chop up a cookbook recipe to cook a meal. Hereditary information must remain rate-independent, insulated from the physical wear of metabolic work.
 
 ### 5.3 Howard Pattee's "Epistemic Cut"
 In 1972, theoretical biophysicist Howard Pattee formalized this boundary:

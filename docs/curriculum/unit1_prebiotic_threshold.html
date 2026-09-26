@@ -561,16 +561,24 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Imagine standing on the dark, barren basalt seabed of the primordial Hadean ocean 4.1 billion years ago. Above you lie kilometers of turbulent, anoxic seawater. The ocean surface is continuously bombarded by sterilizing solar ultraviolet radiation, volcanic lightning, and late-heavy-bombardment asteroid impacts.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In traditional textbook accounts, the origin of life is often romanticized as Charles Darwin's "warm little pond"—a placid surface pool where amino acids and organic monomers drifted together and magically coalesced into a living cell.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In physical reality, any such open-ocean scenario is destroyed by a relentless physical law: <strong class="text-slate-100 font-semibold">The Dilution Catastrophe</strong>.</p>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">       OPEN OCEAN (The Dilution Catastrophe)          ALKALINE HYDROTHERMAL VENT (Micro-Pores)
-    ┌──────────────────────────────────────┐       ┌──────────────────────────────────────┐
-    │                                      │       │    [Solid Basalt Mineral Matrix]     │
-    │      A                B              │       │    ┌────────────────────────────┐    │
-    │         (Drifts Away)                │       │    │ Reactants A and B trapped  │    │
-    │                *                     │       │    │ in microscopic rock foam!  │    │
-    │        ~                             │       │    │ Concentration increases    │    │
-    │                                      │       │    │ by 1,000,000x!             │    │
-    │   Reactions impossible; density = 0  │       │    └────────────────────────────┘    │
-    └──────────────────────────────────────┘       └──────────────────────────────────────┘</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><figure class="my-8 text-center group">
+      <div class="relative inline-block w-full max-w-4xl rounded-2xl p-1 bg-gradient-to-b from-slate-700/40 via-slate-800/20 to-slate-900/60 shadow-2xl border border-slate-800/80 hover:border-cyan-500/50 transition-all duration-300">
+        <img src="../assets/diagrams/fig1_1_dilution_catastrophe.svg" alt="Figure 1.1: The Dilution Catastrophe in Open Seawater vs. Micro-Pore Thermophoresis" loading="eager" class="w-full h-auto rounded-xl mx-auto block" />
+      </div>
+      <figcaption class="mt-3 text-xs font-mono text-slate-400 group-hover:text-cyan-300 transition-colors flex items-center justify-center gap-1.5">
+        <span class="text-cyan-400">📷</span> <span>Figure 1.1: The Dilution Catastrophe in Open Seawater vs. Micro-Pore Thermophoresis</span>
+      </figcaption>
+    </figure></p>
+<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <div class="flex items-center gap-2">
+              <span class="text-cyan-400 text-sm">🔬</span>
+              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis</span>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Deep-Dive Analysis</span>
+          </div>
+          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><br/><strong class="text-slate-100 font-semibold">Figure 1.1 Architectural Breakdown: Dilution Catastrophe vs. Alkaline Micro-Pore Foam</strong><br/>- <strong class="text-slate-100 font-semibold">🔍 Visual Guide & Structural Mechanics:</strong> The left panel portrays unbounded 3D oceanic diffusion ($[A] \to 0, [B] \to 0$), where reactant molecules drift endlessly apart into the abyss. The right panel displays the cross-section of an inorganic hydrothermal basalt column whose microscopic cavities ($10\text{--}50\,\mu\text{m}$) concentrate catalytic organic monomers by over $1,000,000\times$ through thermal siphoning.<br/>- <strong class="text-slate-100 font-semibold">🔬 Biophysical & Mathematical Reality:</strong> Governed by the Law of Mass Action ($\text{Rate} = k[A][B]$). In open water, entropy disperses reagents before bi-molecular condensation can occur. In micro-porous cavities, thermophoresis overcomes entropic dissipation, creating a continuous reactive crucible.<br/>- <strong class="text-slate-100 font-semibold">💻 Digital Mapping & Silicon Architecture:</strong> In Siliquarium, this physical reality is represented by the 3D hexagonal lattice. Pores are not abstract numbers; they are discrete mineral chambers (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreMedium.ROCK_SUBSTRATE</code>) with volumetric boundaries holding energy and matter tokens.<br/>- <strong class="text-slate-100 font-semibold">🏛️ Core Principle & Intuitive Summary:</strong> <em class="text-slate-200 italic">Nature's First Cell Walls Were Free.</em> Life did not begin by inventing complex lipid membranes; life took shelter inside the pre-existing mineral foam of deep-sea alkaline hydrothermal vents.</div>
+        </div>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When organic monomers form in open water:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>They immediately diffuse in three dimensions into the vast, infinite volume of the ocean.</li>
@@ -588,23 +596,24 @@
 <h2 id="2-the-russell-hall-alkaline-hydrothermal-vent" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. The Russell-Hall Alkaline Hydrothermal Vent <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-the-russell-hall-alkaline-hydrothermal-vent" title="Direct link">#</a></h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1997, geochemists Michael J. Russell and Allan J. Hall solved this paradox. Nature did not need to invent cellular membranes to prevent the Dilution Catastrophe. <strong class="text-slate-100 font-semibold">The Earth provided nature's first cell walls for free.</strong></p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Deep in the Hadean ocean, serpentinization reactions between seawater and mantle peridotite produced alkaline hydrothermal vents (analogous to the modern Lost City hydrothermal field). Unlike violent black smokers, alkaline vents form gigantic, porous towers of mineral precipitate made of iron-sulfide ($FeS$, mackinawite) and amorphous silica.</p>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">                      THE POROUS HYDROTHERMAL CHIMNEY CROSS-SECTION
-                      
-         Acidic Hadean Ocean Water (Cold 2°C, Saturated with Dissolved CO2, pH ~ 5.5)
-     ═════════════════════════════════════════════════════════════════════════════════
-            +     +     +     +     +     +     +     +     +     +     +     +
-           [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  [H+]  (Acidic Reservoir)
-     ─────────────────────────────────────────────────────────────────────────────────
-        INORGANIC THIN MINERAL WALL (Iron Monosulphide FeS / Amorphous Silica)
-        Thickness: d ≈ 5 to 10 nm  |  Dielectric Capacitance: C = ε · (A / d)
-        Microscopic Cavities: 10 to 50 μm diameter (Nature&#39;s First Cell Walls)
-     ─────────────────────────────────────────────────────────────────────────────────
-           [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] [OH-] (Alkaline Reservoir)
-            -     -     -     -     -     -     -     -     -     -     -     -
-     ═════════════════════════════════════════════════════════════════════════════════
-         Warm Alkaline Vent Fluid (Warm 65°C, Saturated with H2 &amp; CH4, pH ~ 10.0)
-         
-         ★ NATURAL PROTON MOTIVE FORCE: ΔpH = 4.5 units ≈ 200 mV Transmembrane Potential!</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><figure class="my-8 text-center group">
+      <div class="relative inline-block w-full max-w-4xl rounded-2xl p-1 bg-gradient-to-b from-slate-700/40 via-slate-800/20 to-slate-900/60 shadow-2xl border border-slate-800/80 hover:border-cyan-500/50 transition-all duration-300">
+        <img src="../assets/diagrams/fig1_2_hydrothermal_chimney.svg" alt="Figure 1.2: The Russell-Hall Alkaline Hydrothermal Chimney &amp; Natural Proton Motive Force" loading="eager" class="w-full h-auto rounded-xl mx-auto block" />
+      </div>
+      <figcaption class="mt-3 text-xs font-mono text-slate-400 group-hover:text-cyan-300 transition-colors flex items-center justify-center gap-1.5">
+        <span class="text-cyan-400">📷</span> <span>Figure 1.2: The Russell-Hall Alkaline Hydrothermal Chimney &amp; Natural Proton Motive Force</span>
+      </figcaption>
+    </figure></p>
+<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <div class="flex items-center gap-2">
+              <span class="text-cyan-400 text-sm">🔬</span>
+              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis</span>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Deep-Dive Analysis</span>
+          </div>
+          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><br/><strong class="text-slate-100 font-semibold">Figure 1.2 Architectural Breakdown: The Abiotic Chemiosmotic Hydroelectric Dam</strong><br/>- <strong class="text-slate-100 font-semibold">🔍 Visual Guide & Structural Mechanics:</strong> Shows the natural tripartite geobattery: cold, acidic ocean water ($\text{pH } 5.5$, rich in dissolved $\text{CO}_2$ and $\text{H}^+$) on top; warm, alkaline hydrothermal fluid ($\text{pH } 9.5\text{--}10.0$, rich in $\text{H}_2$ and $\text{OH}^-$) on bottom; separated by a $5\text{--}10\text{ nm}$ semi-conductive iron-sulfide ($\text{FeS}$) inorganic mineral wall.<br/>- <strong class="text-slate-100 font-semibold">🔬 Biophysical & Mathematical Reality:</strong> Generates a continuous Mitchell-Russell proton motive force: $\Delta p = \Delta \psi - 59\,\Delta\text{pH} \approx 200\text{ mV}$. Across a $5\text{ nm}$ inorganic membrane, this corresponds to an enormous electric field strength of $40,000,000\text{ V/m}$, powering abiotic redox synthesis before the evolutionary emergence of ATP synthase.<br/>- <strong class="text-slate-100 font-semibold">💻 Digital Mapping & Silicon Architecture:</strong> Reflected in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreBattery.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreBattery.ts</code></a> and <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationWorld.ts</code></a>. The central caldera nozzle constantly injects fuel pulses ($A$ and $B$), while the mineral capacitor stores up to $100$ tokens of chemical work.<br/>- <strong class="text-slate-100 font-semibold">🏛️ Core Principle & Intuitive Summary:</strong> <em class="text-slate-200 italic">Life Did Not Invent Chemiosmosis; Chemiosmosis Invented Life.</em> The origin of life was an electrical plug connecting a planetary proton gradient to catalytic mineral surfaces.</div>
+        </div>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">These inorganic mineral foams possessed two foundational properties:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Physical Micro-Cavities:</strong> Basalt and iron-sulfide form labyrinthine networks of microscopic chambers ($10\text{ to }50\,\mu\text{m}$). These rock cavities concentrated organic molecules by a factor of over $1,000,000\times$ through thermal siphoning (thermophoresis).</li>
@@ -645,40 +654,24 @@
 <li>Even worse: any physical defect in the <em class="text-slate-200 italic">inspection and copying arm itself</em> corrupts the replication process.</li>
 <li>Within a few generations, the copying machinery degenerates into random noise (<strong class="text-slate-100 font-semibold">The Lethal Error Catastrophe</strong>).</li>
 </ol>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">        THE LETHAL ERROR CATASTROPHE (Direct Self-Inspection)
-        
-    [ Machine M ] ──────► Inspects Damaged Gears ──────► [ Child M&#39; ]
-         ▲                                                    │
-         │ Mutates active copier                              ▼
-         └──────────────── Accumulates Error ◄──────── [ Corrupt M&#39;&#39; ]
-                           LINEAGE COLLAPSES IN 3 GENERATIONS!</code></pre>
-<h3 id="52-von-neumanns-solution-the-separation-of-tape-and-constructor" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.2 Von Neumann's Solution: The Separation of Tape and Constructor <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#52-von-neumanns-solution-the-separation-of-tape-and-constructor" title="Direct link">#</a></h3>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To prevent the error catastrophe, von Neumann deduced that an open-ended evolving system must contain two radically different components:</p>
-<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
-<li><strong class="text-slate-100 font-semibold">An uninterpreted, inert symbolic description ($\phi$):</strong> A passive tape of symbols that conducts no physical work and undergoes no physical execution during the organism's lifetime.</li>
-<li><strong class="text-slate-100 font-semibold">An active universal constructor ($A$):</strong> Reads the tape to synthesize the physical machine.</li>
-<li><strong class="text-slate-100 font-semibold">An automated tape copier ($B$):</strong> Blindly copies the symbolic tape into the offspring without interpreting what it means.</li>
-</ol>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Von Neumann published this mathematical architecture in 1948—<strong class="text-slate-100 font-semibold">five years before Watson and Crick discovered the double-helical structure of DNA in 1953</strong>! Natural biology follows von Neumann's theorem to the letter:</p>
-<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
-<li>DNA is the uninterpreted symbolic tape ($\phi$).</li>
-<li>The Ribosome and metabolic enzymes are the active constructor ($A$).</li>
-<li>DNA Polymerase is the blind tape copier ($B$).</li>
-</ul>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">                 VON NEUMANN&#39;S THEOREM &amp; HOWARD PATTEE&#39;S EPISTEMIC CUT
-                 
-         [ THE SAFE: Genotype ]                     [ THE WORKSHOP: Phenotype ]
-       (Rate-Independent Symbols)                      (Rate-Dependent Physics)
-      ┌───────────────────────────┐                 ┌─────────────────────────────┐
-      │ 1D Genome Tape:           │   Translation   │ Active 2D Logic Netlist:    │
-      │ [ 0 1 1 0 1 0 0 1 ... ]   │ ──────────────► │ Vent ──► AND ──► NOT ──► Out│
-      │ • Conducts no power       │                 │ • Toggles gates             │
-      │ • Inert against noise     │                 │ • Burns Landauer energy     │
-      └─────────────┬─────────────┘                 └──────────────┬──────────────┘
-                    │                                              │
-                    │ Blind Photocopy                              │ Metabolism
-                    ▼ (Substrate Law)                              ▼
-         [ Child Pore Safe ]                        [ Charges Mineral Battery ]</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><figure class="my-8 text-center group">
+      <div class="relative inline-block w-full max-w-4xl rounded-2xl p-1 bg-gradient-to-b from-slate-700/40 via-slate-800/20 to-slate-900/60 shadow-2xl border border-slate-800/80 hover:border-cyan-500/50 transition-all duration-300">
+        <img src="../assets/diagrams/fig1_3_epistemic_cut.svg" alt="Figure 1.3: Von Neumann&#39;s Self-Replicating Automata &amp; Howard Pattee&#39;s Epistemic Cut" loading="eager" class="w-full h-auto rounded-xl mx-auto block" />
+      </div>
+      <figcaption class="mt-3 text-xs font-mono text-slate-400 group-hover:text-cyan-300 transition-colors flex items-center justify-center gap-1.5">
+        <span class="text-cyan-400">📷</span> <span>Figure 1.3: Von Neumann&#39;s Self-Replicating Automata &amp; Howard Pattee&#39;s Epistemic Cut</span>
+      </figcaption>
+    </figure></p>
+<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <div class="flex items-center gap-2">
+              <span class="text-cyan-400 text-sm">🔬</span>
+              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis</span>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Deep-Dive Analysis</span>
+          </div>
+          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><br/><strong class="text-slate-100 font-semibold">Figure 1.3 Architectural Breakdown: The Safe vs. The Workshop (The Epistemic Cut)</strong><br/>- <strong class="text-slate-100 font-semibold">🔍 Visual Guide & Structural Mechanics:</strong> The left side reveals the fatal feedback loop of direct physical self-inspection: thermal noise and friction corrupt the active machinery ($M \to M' \to M''$), causing exponential degradation and collapse within 3 generations. The right side illustrates von Neumann's and Pattee's decoupling: an inert 1D symbolic genome safe ($\phi$) remains completely unexecuted and cold during life, while an active 2D logic workshop ($A$) conducts rate-dependent metabolism and dynamic Landauer dissipation.<br/>- <strong class="text-slate-100 font-semibold">🔬 Biophysical & Mathematical Reality:</strong> In natural biology, DNA does not catalyze metabolic reactions; it is a quiescent informational tape. The ribosome and metabolic enzymes constitute the active physical constructor. Reproduction occurs by copying the uninterpreted tape via DNA polymerase ($B$), preserving the information from metabolic wear and tear.<br/>- <strong class="text-slate-100 font-semibold">💻 Digital Mapping & Silicon Architecture:</strong> In Siliquarium, this is codified in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/GenomeSafe.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GenomeSafe.ts</code></a> (inert 60-bit array, zero dynamic power) versus <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop.ts</code></a> (active directed graph netlist). When an organism divides, only the 60-bit tape is duplicated and mutated; the running gates and wires are never copied directly.<br/>- <strong class="text-slate-100 font-semibold">🏛️ Core Principle & Intuitive Summary:</strong> <em class="text-slate-200 italic">The Epistemic Cut Separates Heredity from Metabolism.</em> You never chop up a cookbook recipe to cook a meal. Hereditary information must remain rate-independent, insulated from the physical wear of metabolic work.</div>
+        </div>
 <h3 id="53-howard-pattees-epistemic-cut" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.3 Howard Pattee's "Epistemic Cut" <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#53-howard-pattees-epistemic-cut" title="Direct link">#</a></h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1972, theoretical biophysicist Howard Pattee formalized this boundary:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
