@@ -19,6 +19,7 @@ const NAV_ITEMS = [
   { id: 'epistemic', title: 'Epistemic Foundations', href: 'EPISTEMIC_FOUNDATIONS.html', icon: '🧬' },
   { id: 'brand', title: 'Brand Identity', href: 'BRAND_IDENTITY.html', icon: '🎨' },
   { id: 'phase3', title: 'Phase 3 Visualizer', href: 'PHASE_3_VISUALIZER_GUIDE.html', icon: '🔬' },
+  { id: 'phase4', title: 'Phase 4 Paleontology', href: 'PHASE_4_PALEONTOLOGY_GUIDE.html', icon: '🦕' },
   { id: 'logos', title: 'Logo Gallery', href: 'logos.html', icon: '🖼️' },
   { id: 'dev', title: 'Dev Standards', href: 'DEVELOPMENT_STANDARDS.html', icon: '🏛️' },
   { id: 'qa', title: 'QA Standards', href: 'QA_AND_TESTING_STANDARDS.html', icon: '🧪' },
@@ -664,6 +665,13 @@ const DOCS_MAP = [
     srcMd: 'docs/PHASE_3_VISUALIZER_GUIDE.md',
     destHtml: 'docs/PHASE_3_VISUALIZER_GUIDE.html',
     title: 'Phase 3 WebGL 3D Seafloor & Circuit Microscope Guide',
+    relativeRoot: ''
+  },
+  {
+    docId: 'phase4',
+    srcMd: 'docs/PHASE_4_PALEONTOLOGY_GUIDE.md',
+    destHtml: 'docs/PHASE_4_PALEONTOLOGY_GUIDE.html',
+    title: 'Phase 4 Digital Paleontologist & Lenski Fossil Freezer Guide',
     relativeRoot: ''
   },
   {

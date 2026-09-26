@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 4 Digital Paleontologist &amp; Lenski Fossil Freezer Guide — Siliquarium</title>
+  <link rel="icon" type="image/jpeg" href="assets/logos/logo.jpg">
+  
+  <!-- Modern Clean Typography & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <style>
+    :root {
+      --bg-ocean: #060911;
+      --bg-card: #0d1322;
+      --bg-surface: #131c31;
+      --border: #1e2c4a;
+      --border-glow: #00e5ff33;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #00e5ff;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-ocean);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    }
+    .brand-logo span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+    .nav-link.active {
+      color: var(--cyan);
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.4);
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.25rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.25rem; color: #e2e8f0; }
+    h4 { font-size: 1.05rem; color: var(--cyan); }
+    
+    p { margin-bottom: 1.25rem; color: #cbd5e1; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { color: var(--text-primary); font-style: italic; }
+
+    .header-anchor {
+      opacity: 0;
+      color: var(--cyan);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      font-weight: 400;
+      transition: opacity 0.2s;
+    }
+    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
+      opacity: 0.6;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #70f3ff;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+      color: #cbd5e1;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    /* Code & Pre */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Blockquotes & Callouts */
+    blockquote.callout {
+      border-left: 4px solid var(--cyan);
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    /* GitHub-style Alerts */
+    .alert {
+      border-left: 4px solid;
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .alert-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .alert-note { border-color: var(--cyan); }
+    .alert-note .alert-title { color: var(--cyan); }
+    .alert-tip { border-color: var(--emerald); }
+    .alert-tip .alert-title { color: var(--emerald); }
+    .alert-important { border-color: var(--purple); }
+    .alert-important .alert-title { color: var(--purple); }
+    .alert-warning { border-color: var(--amber); }
+    .alert-warning .alert-title { color: var(--amber); }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th {
+      background: var(--bg-surface);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Math */
+    .math-block {
+      overflow-x: auto;
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    /* Images */
+    .img-wrapper {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    .img-caption {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logos/logo.jpg" alt="Siliquarium Logo">
+        <span>Siliquarium</span>
+      </a>
+      <nav class="nav-bar">
+        <a href="index.html" class="nav-link ">🐠 Portal / Overview</a>
+<a href="THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
+<a href="BRAND_IDENTITY.html" class="nav-link ">🎨 Brand Identity</a>
+<a href="PHASE_3_VISUALIZER_GUIDE.html" class="nav-link ">🔬 Phase 3 Visualizer</a>
+<a href="PHASE_4_PALEONTOLOGY_GUIDE.html" class="nav-link active">🦕 Phase 4 Paleontology</a>
+<a href="logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<a href="DEVELOPMENT_STANDARDS.html" class="nav-link ">🏛️ Dev Standards</a>
+<a href="QA_AND_TESTING_STANDARDS.html" class="nav-link ">🧪 QA Standards</a>
+<a href="DOCUMENTATION_STANDARDS.html" class="nav-link ">📚 Doc Standards</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 id="phase-4-digital-paleontologist-evolutionary-flight-recorder-lenski-fossil-freezer">🦕 Phase 4: Digital Paleontologist, Evolutionary Flight Recorder & Lenski Fossil Freezer <a class="header-anchor" href="#phase-4-digital-paleontologist-evolutionary-flight-recorder-lenski-fossil-freezer" title="Link to section">#</a></h1>
+<p><em>The Automated Voltmeter of Silicon Abiogenesis: Uri Alon's Network Motifs, Topological Graph Invariants, and Counterfactual Single-Bit Autopsies</em></p>
+<hr class="divider" />
+<h2 id="1-visceral-motivation-the-silent-breakthrough-problem">1. Visceral Motivation: The Silent Breakthrough Problem <a class="header-anchor" href="#1-visceral-motivation-the-silent-breakthrough-problem" title="Link to section">#</a></h2>
+<p>In physical paleontology, an ancient creature dies and leaves behind fossilized bone in stratified shale. Millions of years later, a human geologist digs it up with a chisel and camel-hair brush to reconstruct the evolutionary transition from water to land.</p>
+<p>In computational artificial life, evolution happens at blinding electronic speeds: 10,000 generations can unfold in minutes. If an organism at tick 14,892 stumbles upon a cross-coupled feedback loop that stores 1 bit of memory—the digital equivalent of the biological toggle switch that controls cell fate—how do we know it happened? If the lineage starves fifty ticks later, the breakthrough vanishes forever into thermal noise.</p>
+<p><strong>Phase 4 solves the Silent Breakthrough Problem.</strong> It equips Siliquarium with an automated, non-invasive digital paleontology observatory:</p>
+<ol>
+<li><strong>The Digital Paleontologist (<code>MotifScanner</code>):</strong> An automated voltmeter that continuously audits the dynamical state space and wiring of living pore workshops, recognizing Uri Alon's canonical network motifs (bistable latches, ring oscillators, feed-forward loops, half-adders) without giving the organisms a single hint or bonus token.</li>
+<li><strong>The Evolutionary Flight Recorder (<code>EvolutionaryFlightRecorder</code>):</strong> A phylogenetic flight data recorder that logs the family tree of every organism back to Generation 0, measuring exact Hamming trajectories across genotype space and mathematically distinguishing between familial inheritance (<strong>Homology</strong>) and independent discovery (<strong>Homoplasy / Convergent Evolution</strong>).</li>
+<li><strong>The Lenski <span class="katex-inline math-inline" data-math="-80^\circ\text{C}">\( -80^\circ\text{C} \)</span> Fossil Freezer (<code>FossilFreezer</code>):</strong> Inspired by Richard Lenski's Long-Term Evolution Experiment (LTEE), this module automatically archives complete digital fossils, enabling researchers to thaw ancestors, step clock cycle by clock cycle, and perform <strong>counterfactual single-bit autopsies</strong> to witness the exact mutation that sparked the adaptation.</li>
+</ol>
+<pre><code class="language-text">┌────────────────────────────────────────────────────────────────────────┐
+│                   THE DIGITAL PALEONTOLOGY SUITE                       │
+│                                                                        │
+│   [ MOTIF SCANNER ]             ──►   [ FLIGHT RECORDER ]              │
+│   • Uri Alon Systems Biology          • Phylogenetic Lineage Trees     │
+│   • Weisfeiler-Lehman Graph Hash      • Hamming Distance Trajectories  │
+│   • Pure Descriptive Voltmeter        • Homology vs Homoplasy Audit    │
+│                                               │                        │
+│                                               ▼                        │
+│                                     [ LENSKI FOSSIL FREEZER ]          │
+│                                     • Periodic Snapshots               │
+│                                     • Ancestral Thawing                │
+│                                     • Counterfactual Bit Autopsies     │
+└────────────────────────────────────────────────────────────────────────┘</code></pre>
+<hr class="divider" />
+<h2 id="2-the-gradient-of-abstraction-the-geological-stratigraphy-metaphor">2. The Gradient of Abstraction: The Geological Stratigraphy Metaphor <a class="header-anchor" href="#2-the-gradient-of-abstraction-the-geological-stratigraphy-metaphor" title="Link to section">#</a></h2>
+<h3 id="21-the-voltmeter-on-the-wire">2.1 The Voltmeter on the Wire <a class="header-anchor" href="#21-the-voltmeter-on-the-wire" title="Link to section">#</a></h3>
+<p>Imagine a physicist monitoring an experimental fusion reactor. The voltmeter does not inject electrical charge or tell the plasma which way to spin; it merely measures the potential difference across two terminals.</p>
+<p>The <strong>Digital Paleontologist</strong> is strictly an external voltmeter:</p>
+<ul>
+<li>It is <strong>100% descriptive, never prescriptive</strong>.</li>
+<li>Living cells in the hydrothermal matrix receive <strong>zero bonus points, zero extra energy tokens, and zero evolutionary guidance</strong> when they discover an adder or latch.</li>
+<li>Nature remains completely blind; only the human scientist celebrates the milestone.</li>
+</ul>
+<hr class="divider" />
+<h2 id="3-mathematical-architecture-deconstructive-equation-anatomy">3. Mathematical Architecture & Deconstructive Equation Anatomy <a class="header-anchor" href="#3-mathematical-architecture-deconstructive-equation-anatomy" title="Link to section">#</a></h2>
+<h3 id="31-weisfeiler-lehman-topological-graph-invariant-hashing">3.1 Weisfeiler-Lehman Topological Graph Invariant Hashing <a class="header-anchor" href="#31-weisfeiler-lehman-topological-graph-invariant-hashing" title="Link to section">#</a></h3>
+<p>Digital circuits composed of interconnected gates form directed graphs <span class="katex-inline math-inline" data-math="G = (V, E)">\( G = (V, E) \)</span>. Because a genome tape can order codons in many synonymous permutations that yield identical wiring topologies, the Paleontologist requires a canonical invariant hash independent of node indexing.</p>
+<p>Siliquarium applies multi-round <strong>Weisfeiler-Lehman (WL) Color Refinement</strong>:</p>
+<p><div class="katex-display math-block" data-math="c_v^{(t+1)} = \text{HASH}\left(c_v^{(t)}, \text{SORT}\left(\{c_u^{(t)} : u \in \mathcal{N}(v)\}\right)\right)">\[ c_v^{(t+1)} = \text{HASH}\left(c_v^{(t)}, \text{SORT}\left(\{c_u^{(t)} : u \in \mathcal{N}(v)\}\right)\right) \]</div></p>
+<blockquote class="callout">### 🔍 Equation Decoder<br/>- <strong><span class="katex-inline math-inline" data-math="c_v^{(t)}">\( c_v^{(t)} \)</span> (Current Node Color):</strong> The categorical hash of node <span class="katex-inline math-inline" data-math="v">\( v \)</span> at refinement round <span class="katex-inline math-inline" data-math="t">\( t \)</span> (initialized to gate type: <code>GATE_AND</code>, <code>GATE_XOR</code>, etc.).<br/>- <strong><span class="katex-inline math-inline" data-math="\mathcal{N}(v)">\( \mathcal{N}(v) \)</span> (Neighbor Set):</strong> The adjacent nodes directly connected by incoming and outgoing signal wires.<br/>- <strong><span class="katex-inline math-inline" data-math="\text{SORT}(\dots)">\( \text{SORT}(\dots) \)</span> (Canonical Multiset):</strong> Sorts incoming neighbor colors lexicographically, guaranteeing permutation invariance.<br/>- <strong><span class="katex-inline math-inline" data-math="\text{HASH}(\dots)">\( \text{HASH}(\dots) \)</span> (Deterministic Invariant):</strong> 64-bit non-cryptographic bitwise avalanche hash (<code>0xdeadbeef</code>). Two netlists share an identical WL hash if and only if their wiring graphs are topologically isomorphic.</blockquote>
+<hr class="divider" />
+<h3 id="32-solution-space-hamming-trajectory">3.2 Solution-Space Hamming Trajectory <a class="header-anchor" href="#32-solution-space-hamming-trajectory" title="Link to section">#</a></h3>
+<p>When tracing an organism's evolutionary history back to its primordial ancestor, the Flight Recorder maps its exact trajectory through the <span class="katex-inline math-inline" data-math="N">\( N \)</span>-dimensional hypercube <span class="katex-inline math-inline" data-math="\{0, 1\}^N">\( \{0, 1\}^N \)</span>:</p>
+<p><div class="katex-display math-block" data-math="d_H(\text{Lineage}) = \sum_{i=0}^{k-1} \text{popcount}(G_i \oplus G_{i+1})">\[ d_H(\text{Lineage}) = \sum_{i=0}^{k-1} \text{popcount}(G_i \oplus G_{i+1}) \]</div></p>
+<blockquote class="callout">### 🔍 Equation Decoder<br/>- <strong><span class="katex-inline math-inline" data-math="G_i, G_{i+1}">\( G_i, G_{i+1} \)</span> (Genotype Tapes):</strong> The 60-bit genome bitstrings of parent and daughter organisms at generation step <span class="katex-inline math-inline" data-math="i">\( i \)</span>.<br/>- <strong><span class="katex-inline math-inline" data-math="\oplus">\( \oplus \)</span> (Bitwise XOR):</strong> Evaluates bit differences (<span class="katex-inline math-inline" data-math="1 \oplus 0 = 1">\( 1 \oplus 0 = 1 \)</span>, <span class="katex-inline math-inline" data-math="1 \oplus 1 = 0">\( 1 \oplus 1 = 0 \)</span>).<br/>- <strong><span class="katex-inline math-inline" data-math="\text{popcount}(\dots)">\( \text{popcount}(\dots) \)</span> (Hamming Distance):</strong> Counts the exact number of point mutations accumulated between parent and daughter.<br/>- <strong><span class="katex-inline math-inline" data-math="d_H(\text{Lineage})">\( d_H(\text{Lineage}) \)</span> (Path Length):</strong> Total mutational distance traversed across the ancestral trajectory.</blockquote>
+<hr class="divider" />
+<h2 id="4-the-rosetta-stone-uri-alons-network-motifs">4. The Rosetta Stone: Uri Alon's Network Motifs <a class="header-anchor" href="#4-the-rosetta-stone-uri-alons-network-motifs" title="Link to section">#</a></h2>
+<p>Grounding computational circuits in <strong>Systems Biology</strong> (<em>Uri Alon, 2019</em>), the Paleontologist maps discovered hardware structures to verified biological regulatory networks:</p>
+<div class="table-container"><table><thead><tr><th>Hardware Circuit</th><th>Biological Regulatory Cognate</th><th>Natural Function in Molecular Biology</th><th>Diagnostic Signature</th></tr></thead><tbody><tr><td><strong>Bistable Latch (SR Flip-Flop)</strong></td><td><strong>Bistable Genetic Toggle Switch</strong></td><td>Cell Fate: <span class="katex-inline math-inline" data-math="\lambda">\( \lambda \)</span>-phage lysis vs lysogeny decision (Gardner & Collins, 2000).</td><td><strong>Hysteresis / 1-Bit Memory:</strong> Retains high output after initiating input drops.</td></tr><tr><td><strong>Ring Oscillator (3+ Inverters)</strong></td><td><strong>The Repressilator / Circadian Clock</strong></td><td>Biological Rhythms: Cyanobacteria 24-hr pacemaker (Elowitz & Leibler, 2000).</td><td><strong>Autonomous Limit Cycle:</strong> Sustained oscillation without external pulse.</td></tr><tr><td><strong>Coherent FFL (C-FFL Type 1)</strong></td><td><strong>Sign-Sensitive Delay Filter</strong></td><td>Noise Rejection: <em>E. coli</em> arabinose/<em>lac</em> operon pulse dampener.</td><td><strong>Persistence Filter:</strong> Fires only when input sustains <span class="katex-inline math-inline" data-math="&gt; k">\( &gt; k \)</span> ticks.</td></tr><tr><td><strong>Incoherent FFL (I-FFL Type 1)</strong></td><td><strong>Sensory Adaptation Circuit</strong></td><td>Adaptation: Bacterial chemotaxis reset to step attractant increases.</td><td><strong>Pulse Generator:</strong> Brief burst upon step change, then adapts to baseline.</td></tr><tr><td><strong>Negative Autoregulation</strong></td><td><strong>Homeostatic Clamp</strong></td><td>Stability: Ribosomal protein expression and SOS DNA repair control.</td><td><strong>Fast Response:</strong> Reaches steady-state plateau 5x faster than open loop.</td></tr><tr><td><strong>1-Bit Half-Adder</strong></td><td><strong>Combinatorial Parity Logic</strong></td><td>Signal Integration: Simultaneous sum (XOR) and carry (AND) pathways.</td><td><strong>Binary Arithmetic:</strong> Dual-channel metabolic logic.</td></tr></tbody></table></div>
+<hr class="divider" />
+<h2 id="5-concrete-micro-scaffolding-counterfactual-single-bit-autopsy-trace">5. Concrete Micro-Scaffolding: Counterfactual Single-Bit Autopsy Trace <a class="header-anchor" href="#5-concrete-micro-scaffolding-counterfactual-single-bit-autopsy-trace" title="Link to section">#</a></h2>
+<p>Suppose an organism in Pore <span class="katex-inline math-inline" data-math="(1, 0, 1)">\( (1, 0, 1) \)</span> suddenly demonstrates the <strong>Half-Adder</strong> motif at Generation 2. How does the Fossil Freezer identify the mutation?</p>
+<pre><code class="language-text">Parent Tape (Gen 1):
+Codon 0: 000000 | Codon 1: 001100 (AND) | Codon 2: 111111 (Intron) ...
+
+Child Tape (Gen 2):
+Codon 0: 000000 | Codon 1: 001100 (AND) | Codon 2: 100000 (XOR) ...
+                                                    ^
+                                                Bit 12: Inverted 1 -&gt; 0</code></pre>
+<ol>
+<li><strong>Autopsy Execution:</strong> <code>FossilFreezer.counterfactualAutopsy(parentTape, childTape)</code> compares bitstrings.</li>
+<li><strong>Result Table:</strong></li>
+<li><strong>Bit Index:</strong> <code>12</code></li>
+<li><strong>Codon Index:</strong> <code>2</code> (bits 12–17)</li>
+<li><strong>Parent Codon:</strong> <code>111111</code> <span class="katex-inline math-inline" data-math="\to">\( \to \)</span> Translated as neutral silent intron (<code>INTRON_SILENT</code>).</li>
+<li><strong>Child Codon:</strong> <code>100000</code> <span class="katex-inline math-inline" data-math="\to">\( \to \)</span> Translated as catalytic <code>GATE_XOR</code>.</li>
+<li><strong>Biological Insight:</strong> A neutral non-coding intron mutated into an active <code>XOR</code> gate, pairing with the pre-existing <code>AND</code> gate to assemble the half-adder circuit in a single replication event!</li>
+</ol>
+<hr class="divider" />
+<h2 id="6-homology-vs-homoplasy-convergent-evolution">6. Homology vs Homoplasy (Convergent Evolution) <a class="header-anchor" href="#6-homology-vs-homoplasy-convergent-evolution" title="Link to section">#</a></h2>
+<p>When two living pores contain identical Weisfeiler-Lehman motif hashes, the Paleontologist queries the Evolutionary Flight Recorder:</p>
+<ol>
+<li>Walk back lineages to find the <strong>Least Common Ancestor (LCA)</strong>.</li>
+<li>If the LCA already possessed the motif <span class="katex-inline math-inline" data-math="\to">\( \to \)</span> <strong>Homology</strong> (shared inheritance from an ancestor, like the pentadactyl limb in mammals).</li>
+<li>If the LCA did <strong>not</strong> possess the motif <span class="katex-inline math-inline" data-math="\to">\( \to \)</span> <strong>Homoplasy / Convergent Evolution</strong> (independent evolutionary breakthrough along separate branches, like the evolution of flight in bats and birds!).</li>
+</ol>
+<hr class="divider" />
+<h2 id="7-misconception-immunity-skeptic-faq">7. Misconception Immunity (Skeptic FAQ) <a class="header-anchor" href="#7-misconception-immunity-skeptic-faq" title="Link to section">#</a></h2>
+<h3 id="q1-is-the-digital-paleontologist-smuggling-an-evolutionary-goal">Q1: Is the Digital Paleontologist smuggling an evolutionary goal? <a class="header-anchor" href="#q1-is-the-digital-paleontologist-smuggling-an-evolutionary-goal" title="Link to section">#</a></h3>
+<p><strong>No.</strong> A goal requires a fitness function that selects organisms based on how close they are to the goal. The Paleontologist has <strong>zero write access</strong> to the simulation physics, batteries, or grid. It evaluates circuits purely after the fact as a descriptive observer.</p>
+<h3 id="q2-why-use-weisfeiler-lehman-hashing-instead-of-simple-string-equality">Q2: Why use Weisfeiler-Lehman hashing instead of simple string equality? <a class="header-anchor" href="#q2-why-use-weisfeiler-lehman-hashing-instead-of-simple-string-equality" title="Link to section">#</a></h3>
+<p>Two organisms might possess circuits that perform identical logic with the exact same topological wiring, but their codons may be located in different positions on the genome tape. String equality would falsely claim they are different; Weisfeiler-Lehman proves their phenotypes are isomorphic.</p>
+<hr class="divider" />
+<h2 id="8-academic-citations">8. Academic Citations <a class="header-anchor" href="#8-academic-citations" title="Link to section">#</a></h2>
+<ul>
+<li><strong>Systems Biology & Network Motifs:</strong>  </li>
+</ul>
+<p><em>Alon, U. (2007).</em> "Network motifs: theory and experimental approaches." <em>Nature Reviews Genetics</em>, 8(6), 450–461.</p>
+<p><em>Alon, U. (2019).</em> *An Introduction to Systems Biology: Design Principles of Biological Circuits (2nd ed.)*. CRC Press.</p>
+<ul>
+<li><strong>Synthetic Genetic Switches & Oscillators:</strong>  </li>
+</ul>
+<p><em>Gardner, T. S., Cantor, C. R., & Collins, J. J. (2000).</em> "Construction of a genetic toggle switch in Escherichia coli." <em>Nature</em>, 403(6767), 339–342.</p>
+<p><em>Elowitz, M. B., & Leibler, S. (2000).</em> "A synthetic oscillatory network of transcriptional regulators." <em>Nature</em>, 403(6767), 335–338.</p>
+<ul>
+<li><strong>Graph Isomorphism & Weisfeiler-Lehman Invariants:</strong>  </li>
+</ul>
+<p><em>Weisfeiler, B., & Leman, A. (1968).</em> "A reduction of a graph to a canonical form and an algebra arising during this reduction." <em>Nauchno-Tekhnicheskaya Informatsiya</em>, 2(9), 12–16.</p>
+<p><em>Shervashidze, N., et al. (2011).</em> "Weisfeiler-Lehman graph kernels." <em>Journal of Machine Learning Research</em>, 12, 2539–2561.</p>
+<ul>
+<li><strong>Experimental Evolution & Frozen Fossil Records:</strong>  </li>
+</ul>
+<p><em>Lenski, R. E., et al. (1991).</em> "Long-term experimental evolution in Escherichia coli. I. Adaptation and divergence during 2,000 generations." <em>The American Naturalist</em>, 138(6), 1315–1341.</p>
+  </main>
+
+  <footer>
+    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
+    <p style="margin-top: 0.4rem;">
+      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
+      PolyForm Noncommercial License 1.0.0
+    </p>
+  </footer>
+</body>
+</html>

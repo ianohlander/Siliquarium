@@ -33,37 +33,44 @@
     header {
       background-color: rgba(9, 14, 26, 0.95);
       border-bottom: 1px solid var(--panel-border);
-      height: 56px;
+      height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
+      padding: 0 20px;
       z-index: 20;
     }
 
     .brand-section {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
 
     .brand-logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      border: 1px solid rgba(251, 191, 36, 0.3);
-      box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      border: 2px solid rgba(251, 191, 36, 0.55);
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.35);
+      object-fit: cover;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .brand-logo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 22px rgba(251, 191, 36, 0.55);
     }
 
     .brand-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
       color: #fff;
     }
 
     .brand-subtitle {
-      font-size: 0.72rem;
+      font-size: 0.78rem;
       color: var(--accent-cyan);
       letter-spacing: 0.04em;
     }
@@ -405,6 +412,78 @@
     .btn-danger:hover {
       background: rgba(244, 63, 94, 0.3);
     }
+
+    /* Milestone Toast Notification */
+    .milestone-toast {
+      position: absolute;
+      top: 84px;
+      right: 420px;
+      width: 360px;
+      background: rgba(9, 14, 26, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--accent-gold);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(251, 191, 36, 0.2);
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .milestone-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .milestone-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .milestone-cognate {
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    .milestone-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .milestone-cite {
+      font-size: 0.7rem;
+      font-style: italic;
+      color: #64748b;
+    }
+
+    .milestone-meta {
+      font-size: 0.72rem;
+      color: var(--accent-emerald);
+      font-family: monospace;
+    }
+
+    .milestone-hash {
+      font-size: 0.68rem;
+      color: #818cf8;
+      font-family: monospace;
+    }
+
+    .milestone-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
   </style>
 </head>
 <body>
@@ -516,6 +595,21 @@
       </div>
       <div id="microscope-container">
         <canvas id="canvas-microscope"></canvas>
+      </div>
+    </div>
+
+    <!-- Floating Milestone Notification Card -->
+    <div id="milestone-modal" class="milestone-toast hidden">
+      <div class="milestone-badge">🏆 MILESTONE RECOGNIZED</div>
+      <div id="milestone-title" class="milestone-title">Bistable Memory Latch</div>
+      <div id="milestone-cognate" class="milestone-cognate">Bistable Genetic Toggle Switch</div>
+      <div id="milestone-function" class="milestone-desc">Cell Fate & Memory</div>
+      <div id="milestone-citation" class="milestone-cite">Gardner, T. S. et al. (2000)</div>
+      <div id="milestone-coord" class="milestone-meta">Pore (0, 0, 0)</div>
+      <div id="milestone-hash" class="milestone-hash">WL-7f8a9b</div>
+      <div class="milestone-actions">
+        <button id="milestone-zoom-btn" class="btn-transport btn-play">🔬 Focus Microscope</button>
+        <button id="milestone-close-btn" class="btn-transport">✕ Dismiss</button>
       </div>
     </div>
   </main>

@@ -13,6 +13,7 @@ import { VentPhysics } from '../core/physics/VentPhysics.js';
 import { ThermodynamicLedger } from '../core/physics/ThermodynamicLedger.js';
 import { Mulberry32Prng, IPrng } from '../core/prng/SeedablePrng.js';
 import { ISimulationTelemetry, IPoreTelemetry, IVentTelemetry } from './SimulationTelemetry.js';
+import { DigitalPaleontologist } from './paleontology/DigitalPaleontologist.js';
 
 export interface ISimulationConfig {
   readonly radius?: number;
@@ -28,6 +29,7 @@ export class SimulationWorld {
   private readonly vent: VentPhysics;
   private readonly ledger: ThermodynamicLedger;
   private readonly prng: IPrng;
+  private readonly paleontologist: DigitalPaleontologist;
   private readonly pores: Pore[] = [];
   private readonly poreMap: Map<string, Pore> = new Map();
 
@@ -44,6 +46,7 @@ export class SimulationWorld {
     this.vent = new VentPhysics(new HexCoord3D(0, 0, 0), 500);
     this.ledger = new ThermodynamicLedger();
     this.prng = new Mulberry32Prng(config.seed ?? 42);
+    this.paleontologist = new DigitalPaleontologist();
 
     this.buildTerrain(radius, minZ, maxZ);
     if ((config.soupDensity ?? 0) > 0) {
@@ -87,6 +90,10 @@ export class SimulationWorld {
     this.stepReproduction();
     this.stepLysisAndScavenging();
     this.stepCarcassDecay();
+
+    // Digital Paleontologist audit (pure external voltmeter)
+    const tele = this.exportTelemetry();
+    this.paleontologist.auditPores(this.pores, this.tickCount, tele);
   }
 
   private stepCellMetabolism(rawA: boolean, rawB: boolean, rawT: boolean): void {
@@ -247,8 +254,13 @@ export class SimulationWorld {
       totalEnergyInUniverse: totalStoredEnergy,
       ledger: ledgerReport,
       vent: ventTele,
-      pores: poreTelemetries
+      pores: poreTelemetries,
+      milestones: this.paleontologist.getMilestones()
     };
+  }
+
+  public getPaleontologist(): DigitalPaleontologist {
+    return this.paleontologist;
   }
 
   public getPore(coord: HexCoord3D): Pore | undefined {

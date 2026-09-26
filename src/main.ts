@@ -11,6 +11,7 @@ import { CircuitMicroscopeView } from './visualizers/CircuitMicroscopeView.js';
 import { HUDController } from './ui/HUDController.js';
 import { LabFlyout } from './ui/LabFlyout.js';
 import { InteractiveControls } from './ui/InteractiveControls.js';
+import { MilestoneModal } from './ui/MilestoneModal.js';
 import { HexCoord3D } from './core/spatial/HexCoord3D.js';
 import { IPoreTelemetry } from './engine/SimulationTelemetry.js';
 
@@ -23,6 +24,7 @@ class SiliquariumApp {
   private readonly hud: HUDController;
   private readonly flyout: LabFlyout;
   private readonly controls: InteractiveControls;
+  private readonly milestoneModal: MilestoneModal;
 
   private readonly seafloorCanvas: HTMLCanvasElement;
   private readonly microscopeCanvas: HTMLCanvasElement;
@@ -48,6 +50,18 @@ class SiliquariumApp {
 
     this.controls = new InteractiveControls(this.loop, this.camera);
 
+    this.milestoneModal = new MilestoneModal((coord) => {
+      this.selectedPoreCoord = coord;
+      this.seafloorRenderer.setSelectedCoord(coord);
+      const worldPos = this.seafloorRenderer.axialToWorld(coord);
+      this.camera.target = { x: worldPos.x, y: worldPos.y, z: worldPos.z };
+      this.camera.distance = 14.0;
+    });
+
+    this.world.getPaleontologist().onMilestone((event) => {
+      this.milestoneModal.show(event);
+    });
+
     this.bindCanvasInteractions();
     this.bindResize();
     this.handleResize();
@@ -63,6 +77,10 @@ class SiliquariumApp {
 
   public getControls(): InteractiveControls {
     return this.controls;
+  }
+
+  public getMilestoneModal(): MilestoneModal {
+    return this.milestoneModal;
   }
 
   private resetSimulation(): void {

@@ -7,6 +7,7 @@
 import { HexCoord3D } from '../core/spatial/HexCoord3D.js';
 import { PoreState } from '../core/domain/Pore.js';
 import { ILedgerReport } from '../core/physics/ThermodynamicLedger.js';
+import type { IMilestoneEvent } from './paleontology/DigitalPaleontologist.js';
 
 export interface IPoreTelemetry {
   readonly coord: HexCoord3D;
@@ -40,4 +41,5 @@ export interface ISimulationTelemetry {
   readonly ledger: ILedgerReport;
   readonly vent: IVentTelemetry;
   readonly pores: readonly IPoreTelemetry[];
+  readonly milestones: readonly IMilestoneEvent[];
 }

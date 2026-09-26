@@ -121,12 +121,16 @@ export class SeafloorRenderer3D {
     return results;
   }
 
-  private axialToWorld(coord: HexCoord3D): IVector3 {
+  public static axialToWorld(coord: HexCoord3D): IVector3 {
     const r = SeafloorRenderer3D.HEX_RADIUS;
     const x = r * Math.sqrt(3) * (coord.q + coord.r / 2);
     const z = r * (3 / 2) * coord.r;
     const y = coord.z * SeafloorRenderer3D.Z_LAYER_SPACING;
     return { x, y, z };
+  }
+
+  public axialToWorld(coord: HexCoord3D): IVector3 {
+    return SeafloorRenderer3D.axialToWorld(coord);
   }
 
   private projectWorldToScreen(world: IVector3, vm: Float32Array, pm: Float32Array, w: number, h: number): { x: number; y: number; depth: number } | null {
