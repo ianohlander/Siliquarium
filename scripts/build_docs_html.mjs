@@ -21,9 +21,17 @@ const NAV_CATEGORIES = [
     icon: '🎓',
     items: [
       { id: 'index', title: 'Portal Overview', href: 'index.html', icon: '🐠', desc: 'Curriculum portal & modular index' },
-      { id: 'syllabus', title: 'Curriculum & Labs', href: 'CURRICULUM_AND_SYLLABUS.html', icon: '🎓', desc: '4-unit syllabus & 5 lab practicums' },
-      { id: 'pedagogy', title: 'Companion & Glossary', href: 'PEDAGOGICAL_COMPANION_SUITE.html', icon: '🏛️', desc: '55-term glossary & 14 annotated papers' },
-      { id: 'qa-report', title: 'Student QA Report', href: 'QA/STUDENT_UX_REPORT.html', icon: '🧪', desc: '12th-grade usability audit & screenshots' }
+      { id: 'syllabus', title: 'Course Syllabus', href: 'CURRICULUM_AND_SYLLABUS.html', icon: '📜', desc: 'Syllabus, philosophy & symbol index' },
+      { id: 'unit1', title: 'Unit 1: Prebiotic Vents', href: 'curriculum/unit1_prebiotic_threshold.html', icon: '🌋', desc: "Alkaline vents, chemiosmosis & Pattee's cut" },
+      { id: 'unit2', title: 'Unit 2: Logic of Life', href: 'curriculum/unit2_logic_of_life.html', icon: '⚡', desc: 'Primitive enzymes & XOR impossibility proof' },
+      { id: 'unit3', title: 'Unit 3: Systems Motifs', href: 'curriculum/unit3_systems_biology_motifs.html', icon: '🕸️', desc: 'Uri Alon motifs & Weisfeiler-Lehman hashes' },
+      { id: 'unit4', title: 'Unit 4: Macro-Evolution', href: 'curriculum/unit4_evolutionary_dynamics.html', icon: '🧬', desc: 'Kimura drift, convergent homoplasy & LTEE' },
+      { id: 'practicums', title: 'Student Lab Manual', href: 'curriculum/practicums_lab_manual.html', icon: '🧪', desc: '5 hands-on labs & formative assessments' },
+      { id: 'pedagogy', title: 'Companion Portal', href: 'PEDAGOGICAL_COMPANION_SUITE.html', icon: '🏛️', desc: 'Master portal & assessment rubrics' },
+      { id: 'glossary', title: 'Lexicon & Glossary', href: 'companion/glossary.html', icon: '📖', desc: '55-term systems biology lexicon' },
+      { id: 'study-guides', title: 'Study Guides & Decoders', href: 'companion/study_guides.html', icon: '🧭', desc: '8 equation decoders & derivations' },
+      { id: 'bibliography', title: 'Annotated Bibliography', href: 'companion/bibliography.html', icon: '📚', desc: '14 foundational primary papers' },
+      { id: 'qa-report', title: 'Student QA Report', href: 'QA/STUDENT_UX_REPORT.html', icon: '🔍', desc: '12th-grade usability audit & screenshots' }
     ]
   },
   {
@@ -755,11 +763,67 @@ const DOCS_MAP = [
     relativeRoot: ''
   },
   {
+    docId: 'unit1',
+    srcMd: 'docs/curriculum/unit1_prebiotic_threshold.md',
+    destHtml: 'docs/curriculum/unit1_prebiotic_threshold.html',
+    title: "Unit 1: The Prebiotic Threshold & Howard Pattee's Epistemic Cut",
+    relativeRoot: '../'
+  },
+  {
+    docId: 'unit2',
+    srcMd: 'docs/curriculum/unit2_logic_of_life.md',
+    destHtml: 'docs/curriculum/unit2_logic_of_life.html',
+    title: 'Unit 2: The Logic of Life & Primitive Enzymes',
+    relativeRoot: '../'
+  },
+  {
+    docId: 'unit3',
+    srcMd: 'docs/curriculum/unit3_systems_biology_motifs.md',
+    destHtml: 'docs/curriculum/unit3_systems_biology_motifs.html',
+    title: 'Unit 3: Systems Biology & Uri Alon Motifs',
+    relativeRoot: '../'
+  },
+  {
+    docId: 'unit4',
+    srcMd: 'docs/curriculum/unit4_evolutionary_dynamics.md',
+    destHtml: 'docs/curriculum/unit4_evolutionary_dynamics.html',
+    title: 'Unit 4: Macro-Evolutionary Dynamics & Lenski LTEE',
+    relativeRoot: '../'
+  },
+  {
+    docId: 'practicums',
+    srcMd: 'docs/curriculum/practicums_lab_manual.md',
+    destHtml: 'docs/curriculum/practicums_lab_manual.html',
+    title: 'Practicums 1–5: Hands-On Student Laboratory Manual',
+    relativeRoot: '../'
+  },
+  {
     docId: 'pedagogy',
     srcMd: 'docs/PEDAGOGICAL_COMPANION_SUITE.md',
     destHtml: 'docs/PEDAGOGICAL_COMPANION_SUITE.html',
     title: 'Pedagogical Companion Suite: Systems Biology & Silicon Abiogenesis',
     relativeRoot: ''
+  },
+  {
+    docId: 'glossary',
+    srcMd: 'docs/companion/glossary.md',
+    destHtml: 'docs/companion/glossary.html',
+    title: 'Lexicon of Systems Biology & Silicon Abiogenesis',
+    relativeRoot: '../'
+  },
+  {
+    docId: 'study-guides',
+    srcMd: 'docs/companion/study_guides.md',
+    destHtml: 'docs/companion/study_guides.html',
+    title: 'Student Study Guides & Equation Decoders',
+    relativeRoot: '../'
+  },
+  {
+    docId: 'bibliography',
+    srcMd: 'docs/companion/bibliography.md',
+    destHtml: 'docs/companion/bibliography.html',
+    title: 'Annotated Primary Literature Bibliography',
+    relativeRoot: '../'
   },
   {
     docId: 'theory',

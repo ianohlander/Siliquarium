@@ -1,0 +1,886 @@
+<!-- 🐠 Siliquarium Open-Ended Digital Life & Silicon Abiogenesis Laboratory • Created by & Copyright © 2026 Ian Ohlander. All rights reserved. -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practicums 1–5: Hands-On Student Laboratory Manual — Siliquarium Master Documentation</title>
+  <link rel="icon" type="image/jpeg" href="../assets/logos/logo.jpg">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bio: {
+              bg: '#060911',
+              surface: '#0a0e1a',
+              panel: '#121829',
+              card: '#0f172a',
+              border: '#1e2c4a',
+              cyan: '#00e5ff',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              purple: '#a855f7',
+              sky: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            mono: ['Cascadia Code', 'Fira Code', 'Consolas', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #060911; }
+    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+
+    .card-bio, .card-chemiosmotic {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .card-digital, .card-silicon {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.4);
+    }
+    .card-margin, .card-analogy {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+    .card-experiment, .card-paleo {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+    .svg-container {
+      background: #090e15;
+      border: 1px solid #1e2c4a;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      overflow-x: auto;
+    }
+
+    /* Citation Target Highlighting & Interactive Navigation */
+    html { scroll-behavior: auto; }
+    li[id^="ref-"] {
+      scroll-margin-top: 6rem;
+      position: relative;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    @keyframes refTargetPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.95), 0 0 40px rgba(0, 229, 255, 0.85), inset 0 0 15px rgba(0, 229, 255, 0.35);
+        border-color: #22d3ee;
+        background-color: rgba(8, 51, 68, 0.95);
+        transform: scale(1.02);
+      }
+      30% {
+        box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.45), 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 20px rgba(0, 229, 255, 0.25);
+        border-color: #38bdf8;
+        background-color: rgba(8, 51, 68, 0.92);
+        transform: scale(1.015);
+      }
+      100% {
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 12px rgba(0, 229, 255, 0.15);
+        border-color: #00e5ff;
+        background-color: rgba(8, 51, 68, 0.88);
+        transform: scale(1);
+      }
+    }
+    @keyframes badgePopIn {
+      0% { opacity: 0; transform: translateY(6px) scale(0.8); }
+      60% { opacity: 1; transform: translateY(-2px) scale(1.06); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    li[id^="ref-"]:target,
+    li[id^="ref-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #22d3ee !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
+    }
+    li[id^="ref-"]:target::after,
+    li[id^="ref-"].active-citation-target::after {
+      content: "CITED IN TEXT 🎯";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0891b2, #0284c7);
+      color: #ffffff;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+    sup a[href^="#ref-"] {
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 0 1px;
+    }
+    sup a[href^="#ref-"]:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 8px #22d3ee;
+      transform: translateY(-1px);
+    }
+    section[id], div[id], h2[id], h3[id] {
+      scroll-margin-top: 5.5rem;
+    }
+    @keyframes backlinkTargetFlash {
+      0% { outline: 3px solid rgba(0, 229, 255, 0.9); outline-offset: 4px; }
+      100% { outline: 3px solid transparent; outline-offset: 4px; }
+    }
+    section[id]:target, div[id]:target {
+      animation: backlinkTargetFlash 2.5s ease-out;
+    }
+  </style>
+
+  <script id="citation-navigator">
+    document.addEventListener('DOMContentLoaded', function() {
+      function highlightRefCard(targetId) {
+        if (!targetId || !targetId.startsWith('ref-')) return;
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+          item.classList.remove('active-citation-target');
+        });
+        el.classList.remove('active-citation-target');
+        void el.offsetWidth;
+        el.classList.add('active-citation-target');
+        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }
+      function scrollToTarget(targetId) {
+        if (!targetId) return;
+        if (targetId.startsWith('ref-')) {
+          highlightRefCard(targetId);
+          return;
+        }
+        const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href && href.includes('#')) {
+            const hash = href.substring(href.indexOf('#') + 1);
+            if (hash.startsWith('ref-')) highlightRefCard(hash);
+          }
+        }
+      });
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) scrollToTarget(hash);
+      });
+      function checkInitialHash() {
+        if (window.location.hash) {
+          const hash = window.location.hash.replace('#', '');
+          scrollToTarget(hash);
+        }
+      }
+      checkInitialHash();
+      setTimeout(checkInitialHash, 150);
+      setTimeout(checkInitialHash, 500);
+      window.addEventListener('load', function() {
+        setTimeout(checkInitialHash, 100);
+      });
+      if (window.MathJax && window.MathJax.startup) {
+        window.MathJax.startup.promise = window.MathJax.startup.promise.then(function() {
+          setTimeout(checkInitialHash, 100);
+        });
+      }
+
+      // Sidebar & Dropdown Controller
+      const toggleBtn = document.getElementById('sidebar-toggle-btn');
+      const closeBtn = document.getElementById('sidebar-close-btn');
+      const sidebar = document.getElementById('doc-sidebar');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      const dropdownBtn = document.getElementById('nav-dropdown-btn');
+      const dropdownMenu = document.getElementById('nav-dropdown-menu');
+
+      function openSidebar() {
+        if (sidebar && backdrop) {
+          sidebar.classList.remove('-translate-x-full');
+          backdrop.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+      function closeSidebar() {
+        if (sidebar && backdrop) {
+          sidebar.classList.add('-translate-x-full');
+          backdrop.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      }
+
+      if (toggleBtn) toggleBtn.addEventListener('click', openSidebar);
+      if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+      if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+      if (dropdownBtn && dropdownMenu) {
+        dropdownBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          dropdownMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', function(e) {
+          if (!dropdownMenu.contains(e.target) && e.target !== dropdownBtn) {
+            dropdownMenu.classList.add('hidden');
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
+
+  <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
+  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <!-- Mobile/Drawer Toggle Button -->
+        <button id="sidebar-toggle-btn" class="lg:hidden p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 transition-colors font-mono text-xs flex items-center gap-1.5 shrink-0" aria-label="Toggle Navigation">
+          <span>☰</span>
+          <span class="hidden sm:inline">Docs Menu</span>
+        </button>
+
+        <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
+          <a href="../index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
+            <img src="../assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
+            <span class="hidden sm:inline">Siliquarium</span>
+            <span class="sm:hidden">Portal</span>
+          </a>
+          <span class="text-slate-600">/</span>
+          <span class="text-cyan-400 font-semibold truncate">Practicums 1–5: Hands-On Student Laboratory Manual</span>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- Quick Mega-Menu Dropdown Button -->
+        <div class="relative">
+          <button id="nav-dropdown-btn" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-300 hover:border-cyan-700/60 rounded-lg text-xs font-mono transition-all flex items-center gap-1.5 shadow-sm">
+            <span>🧭</span>
+            <span>Explore Docs</span>
+            <span class="text-[10px] text-slate-500">▾</span>
+          </button>
+          <!-- Mega-Menu Overlay -->
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+            <div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🎓</span>
+        <span>Curriculum & Pedagogy</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../index.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🐠</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Portal Overview</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Curriculum portal & modular index</div>
+        </div>
+      </a><a href="../CURRICULUM_AND_SYLLABUS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📜</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Course Syllabus</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Syllabus, philosophy & symbol index</div>
+        </div>
+      </a><a href="../curriculum/unit1_prebiotic_threshold.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 1: Prebiotic Vents</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Alkaline vents, chemiosmosis & Pattee's cut</div>
+        </div>
+      </a><a href="../curriculum/unit2_logic_of_life.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚡</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 2: Logic of Life</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Primitive enzymes & XOR impossibility proof</div>
+        </div>
+      </a><a href="../curriculum/unit3_systems_biology_motifs.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🕸️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 3: Systems Motifs</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Uri Alon motifs & Weisfeiler-Lehman hashes</div>
+        </div>
+      </a><a href="../curriculum/unit4_evolutionary_dynamics.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 4: Macro-Evolution</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Kimura drift, convergent homoplasy & LTEE</div>
+        </div>
+      </a><a href="../curriculum/practicums_lab_manual.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 bg-cyan-950/80 border border-cyan-700/60 text-cyan-300">
+        <span class="text-sm shrink-0 mt-0.5">🧪</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-cyan-300">Student Lab Manual</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5 hands-on labs & formative assessments</div>
+        </div>
+      </a><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Companion Portal</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Master portal & assessment rubrics</div>
+        </div>
+      </a><a href="../companion/glossary.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Lexicon & Glossary</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">55-term systems biology lexicon</div>
+        </div>
+      </a><a href="../companion/study_guides.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧭</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Study Guides & Decoders</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">8 equation decoders & derivations</div>
+        </div>
+      </a><a href="../companion/bibliography.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Annotated Bibliography</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">14 foundational primary papers</div>
+        </div>
+      </a><a href="../QA/STUDENT_UX_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔍</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Student QA Report</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">12th-grade usability audit & screenshots</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🌊</span>
+        <span>Biophysical Theory</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../THEORETICAL_MODEL.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Theoretical Model</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">21 sealed sections & thermodynamic laws</div>
+        </div>
+      </a><a href="../EPISTEMIC_FOUNDATIONS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Epistemic Foundations</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Howard Pattee's Epistemic Cut & defenses</div>
+        </div>
+      </a><a href="../DOCUMENTATION_DESIGN_PRINCIPLES.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📐</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Design Principles</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Documentation & UI/UX architecture</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🔬</span>
+        <span>Laboratory Guides</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../PHASE_3_VISUALIZER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">3D Seafloor Visualizer</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Bathymetry, orbit camera & circuit microscope</div>
+        </div>
+      </a><a href="../PHASE_4_PALEONTOLOGY_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🦕</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology & Motifs</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Weisfeiler-Lehman hashes & fossil freezer</div>
+        </div>
+      </a><a href="../PHASE_5_PELAGIC_SPORES_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Pelagic Spores & Controls</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Buoyant spore drift & God-suite parameters</div>
+        </div>
+      </a><a href="../PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Phylogeny & Dynamics</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Multi-lineage clades & Lenski benchmarks</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🎨</span>
+        <span>Visuals & Identity</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../BRAND_IDENTITY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎨</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Brand Identity</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Visual philosophy & biomorphic styling</div>
+        </div>
+      </a><a href="../logos.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🖼️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Logo Gallery</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">High-res Fibonacci nautilus asset suite</div>
+        </div>
+      </a></div></div>
+          </div>
+        </div>
+
+        <a href="../../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🚀</span>
+          <span class="hidden md:inline">Live Simulator</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MASTER 2-COLUMN VIEWPORT (Sidebar + Content) -->
+  <div class="max-w-7xl mx-auto flex-1 w-full flex">
+    <!-- LEFT CATEGORIZED SIDEBAR (Desktop Sticky + Mobile Off-Canvas) -->
+    <aside id="doc-sidebar" class="fixed lg:sticky top-0 lg:top-[45px] z-50 lg:z-10 h-screen lg:h-[calc(100vh-45px)] w-72 bg-[#060911]/95 lg:bg-transparent backdrop-blur-xl lg:backdrop-blur-none border-r border-slate-800/80 p-5 space-y-6 overflow-y-auto shrink-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-200">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 lg:hidden">
+        <div class="flex items-center gap-2">
+          <img src="../assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
+          <span class="text-xs font-mono font-bold text-cyan-400">Documentation Index</span>
+        </div>
+        <button id="sidebar-close-btn" class="text-slate-400 hover:text-white text-base font-mono p-1">✕</button>
+      </div>
+      <div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🎓</span>
+        <span>Curriculum & Pedagogy</span>
+      </div>
+      <div class="space-y-0.5"><a href="../index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🐠</span>
+        <span class="truncate">Portal Overview</span>
+      </a><a href="../CURRICULUM_AND_SYLLABUS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📜</span>
+        <span class="truncate">Course Syllabus</span>
+      </a><a href="../curriculum/unit1_prebiotic_threshold.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌋</span>
+        <span class="truncate">Unit 1: Prebiotic Vents</span>
+      </a><a href="../curriculum/unit2_logic_of_life.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚡</span>
+        <span class="truncate">Unit 2: Logic of Life</span>
+      </a><a href="../curriculum/unit3_systems_biology_motifs.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🕸️</span>
+        <span class="truncate">Unit 3: Systems Motifs</span>
+      </a><a href="../curriculum/unit4_evolutionary_dynamics.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Unit 4: Macro-Evolution</span>
+      </a><a href="../curriculum/practicums_lab_manual.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold shadow-sm">
+        <span class="text-xs shrink-0">🧪</span>
+        <span class="truncate">Student Lab Manual</span>
+      </a><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Companion Portal</span>
+      </a><a href="../companion/glossary.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Lexicon & Glossary</span>
+      </a><a href="../companion/study_guides.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧭</span>
+        <span class="truncate">Study Guides & Decoders</span>
+      </a><a href="../companion/bibliography.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Annotated Bibliography</span>
+      </a><a href="../QA/STUDENT_UX_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔍</span>
+        <span class="truncate">Student QA Report</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🌊</span>
+        <span>Biophysical Theory</span>
+      </div>
+      <div class="space-y-0.5"><a href="../THEORETICAL_MODEL.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">Theoretical Model</span>
+      </a><a href="../EPISTEMIC_FOUNDATIONS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Epistemic Foundations</span>
+      </a><a href="../DOCUMENTATION_DESIGN_PRINCIPLES.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📐</span>
+        <span class="truncate">Design Principles</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🔬</span>
+        <span>Laboratory Guides</span>
+      </div>
+      <div class="space-y-0.5"><a href="../PHASE_3_VISUALIZER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔬</span>
+        <span class="truncate">3D Seafloor Visualizer</span>
+      </a><a href="../PHASE_4_PALEONTOLOGY_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🦕</span>
+        <span class="truncate">Paleontology & Motifs</span>
+      </a><a href="../PHASE_5_PELAGIC_SPORES_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">Pelagic Spores & Controls</span>
+      </a><a href="../PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Phylogeny & Dynamics</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🎨</span>
+        <span>Visuals & Identity</span>
+      </div>
+      <div class="space-y-0.5"><a href="../BRAND_IDENTITY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎨</span>
+        <span class="truncate">Brand Identity</span>
+      </a><a href="../logos.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🖼️</span>
+        <span class="truncate">Logo Gallery</span>
+      </a></div></div>
+    </aside>
+
+    <!-- Mobile Drawer Backdrop -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+    <!-- MAIN CONTENT VIEWPORT (Centered, Responsive, Zero Horizontal Scrollbars) -->
+    <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-10 py-8 md:py-10">
+      <div class="max-w-4xl mx-auto space-y-8">
+        <h1 id="practicums-15-hands-on-student-laboratory-manual" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🧪 Practicums 1–5: Hands-On Student Laboratory Manual <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#practicums-15-hands-on-student-laboratory-manual" title="Direct link">#</a></h1>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Interactive In-Silico Biophysics, Paleontology Autopsies, and Formative Senior Assessments</em></p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="laboratory-overview-classroom-instructions" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Laboratory Overview & Classroom Instructions <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#laboratory-overview-classroom-instructions" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This laboratory manual provides five rigorous, step-by-step practicums using the interactive Siliquarium application. Each practicum is designed for a standard 90-minute advanced high school block period or a 3-hour undergraduate laboratory session.</p>
+<h3 id="software-access-prerequisites" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Software Access & Prerequisites <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#software-access-prerequisites" title="Direct link">#</a></h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Application URL:</strong> Open <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/index.html</code> or run the local development server via <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">npm run dev</code> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">http://localhost:3000</code>).</li>
+<li><strong class="text-slate-100 font-semibold">Zero Installation Mandate:</strong> Siliquarium runs 100% in any modern web browser with WebGL enabled.</li>
+<li><strong class="text-slate-100 font-semibold">Required Hardware:</strong> Standard laptop or desktop computer with mouse or trackpad.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="lab-1-exploring-the-hydrothermal-seafloor-circuit-microscope" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">🔬 Lab 1: Exploring the Hydrothermal Seafloor & Circuit Microscope <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#lab-1-exploring-the-hydrothermal-seafloor-circuit-microscope" title="Direct link">#</a></h2>
+<h3 id="1-learning-objectives" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1. Learning Objectives <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-learning-objectives" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Navigate a 3D abyssal seamount and differentiate between basalt rock substrates (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreMedium.ROCK_SUBSTRATE</code>) and the permeable water column (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreMedium.AQUEOUS_FLUID</code>).</li>
+<li>Operate the Circuit Microscope to inspect real-time logic gate toggles, pulsing electron wires, and battery token counters.</li>
+<li>Validate Howard Pattee's Epistemic Cut by verifying that rate-independent genome tapes in the Safe do not mutate during rate-dependent metabolic gate switching in the Workshop.</li>
+</ol>
+<h3 id="2-theoretical-pre-lab-preparation" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2. Theoretical Pre-Lab Preparation <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-theoretical-pre-lab-preparation" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Review Unit 1, Section 5. In your notebook, define Pattee's <strong class="text-slate-100 font-semibold">Epistemic Cut</strong> and explain why living systems must separate rate-independent symbolic hereditary code from rate-dependent physical metabolic execution.</p>
+<h3 id="3-step-by-step-laboratory-procedure" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3. Step-by-Step Laboratory Procedure <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-step-by-step-laboratory-procedure" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Launch Siliquarium. In the top navigation header, verify that the simulation initialized with Seed <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#42</code>.</li>
+<li><strong class="text-slate-100 font-semibold">3D Orbit Camera Practice:</strong></li>
+<li><strong class="text-slate-100 font-semibold">Rotate:</strong> Left-click and drag to orbit around the central hydrothermal caldera.</li>
+<li><strong class="text-slate-100 font-semibold">Pan:</strong> Right-click and drag (or two-finger drag) to move across basalt shelves and volcanic ridges.</li>
+<li><strong class="text-slate-100 font-semibold">Zoom:</strong> Scroll wheel to zoom from a bird's-eye view of the caldera down to an individual hexagonal pore.</li>
+<li>Locate the central hydrothermal caldera nozzle at coordinates $(0, 0, 0)$. Notice the glowing thermal convection plume rising vertically into the water column.</li>
+<li>Click on an occupied hexagonal pore immediately adjacent to the vent nozzle (e.g., coordinates $(1, 0, 0)$ or $(0, 1, 0)$).</li>
+<li>Observe the <strong class="text-slate-100 font-semibold">Electric Neon Targeting Reticle</strong> lock onto the selected pore.</li>
+<li>Open the <strong class="text-slate-100 font-semibold">Circuit Microscope</strong> panel on the right side of the screen. Identify the three core anatomical compartments:</li>
+<li><strong class="text-slate-100 font-semibold">The Genome Safe Ribbon:</strong> The 60-bit inert tape displayed across the top.</li>
+<li><strong class="text-slate-100 font-semibold">The Active Workshop Netlist:</strong> The physical logic gates (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">BUF</code>) and pulsing signal wires.</li>
+<li><strong class="text-slate-100 font-semibold">The Battery Gauge:</strong> Real-time token counter ($0..100$).</li>
+<li>Click the <strong class="text-slate-100 font-semibold">Pause</strong> button (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">❚❚</code>) on the bottom transport bar. Use the <strong class="text-slate-100 font-semibold">Step Forward</strong> button (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Step ►</code>) to advance the simulation clock cycle by clock cycle ($\pm 1$ tick).</li>
+<li>Observe how gate pins light up when vent pulses enter the pore, and track whether the battery charges or discharges.</li>
+</ol>
+<h3 id="4-data-collection-table" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4. Data Collection Table <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-data-collection-table" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Select three distinct occupied pores at varying distances from the vent nozzle and record their physiological metrics:</p>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Specimen Pore $(q, r, z)$</th><th class="p-3.5 font-semibold">Distance from Nozzle</th><th class="p-3.5 font-semibold">Active Gate Types</th><th class="p-3.5 font-semibold">Battery Level ($E$)</th><th class="p-3.5 font-semibold">Matter Reserve ($M$)</th><th class="p-3.5 font-semibold">Generation</th><th class="p-3.5 font-semibold">Age (Ticks)</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">Specimen 1</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">Specimen 2</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">Specimen 3</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr></tbody></table></div>
+<h3 id="5-post-lab-synthesis-questions" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5. Post-Lab Synthesis Questions <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-post-lab-synthesis-questions" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Compare Specimen 1 (near vent) with Specimen 3 (far from vent). How does distance from the hydrothermal nozzle affect energy accumulation and division frequency?</li>
+<li>Did any bits on the 60-bit genome tape change while the cell was toggling gates? Why is this separation essential for evolutionary stability?</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="lab-2-observing-landauer-power-dissipation-metabolic-starvation" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">⚡ Lab 2: Observing Landauer Power Dissipation & Metabolic Starvation <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#lab-2-observing-landauer-power-dissipation-metabolic-starvation" title="Direct link">#</a></h2>
+<h3 id="1-learning-objectives" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1. Learning Objectives <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-learning-objectives" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Quantify dynamic Landauer switching dissipation ($1$ token per gate toggle) versus basal maintenance decay ($1$ token every 10 ticks).</li>
+<li>Demonstrate that computation is not free: show that excessive, uncoordinated gate switching causes rapid metabolic starvation.</li>
+<li>Verify the First Law of Thermodynamics ($\Delta E_{\text{universe}} = 0.000$) using the Thermodynamic Ledger.</li>
+</ol>
+<h3 id="2-theoretical-pre-lab-preparation" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2. Theoretical Pre-Lab Preparation <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-theoretical-pre-lab-preparation" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Review Unit 2, Section 5. Write the algebraic formula for Rolf Landauer's thermodynamic bound of information erasure. Explain why an organism cannot evolve an infinitely large brain in a resource-limited environment.</p>
+<h3 id="3-step-by-step-laboratory-procedure" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3. Step-by-Step Laboratory Procedure <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-step-by-step-laboratory-procedure" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Reset the simulation. Open the <strong class="text-slate-100 font-semibold">Lab Flyout Drawer</strong> by clicking the gear icon (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⚙️</code>) in the top navigation bar.</li>
+<li>In the Lab Flyout, set the <strong class="text-slate-100 font-semibold">Primordial Soup Density</strong> slider to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">10%</code> and click <strong class="text-slate-100 font-semibold">"Seed Soup"</strong>.</li>
+<li>Pause the simulation at Tick 1. Click through several newly seeded pores until you find a cell with 3 or more active logic gates.</li>
+<li>Note its starting battery level (typically $50$ or $60$ tokens).</li>
+<li>Advance the simulation tick-by-tick for 15 ticks. For each tick, record:</li>
+<li>Vent Stream Inputs ($A$, $B$, $T$)</li>
+<li>Number of logic gates that switched state ($0 \to 1$ or $1 \to 0$)</li>
+<li>Catalytic yield added to battery</li>
+<li>Net battery change</li>
+<li>Identify an uncoordinated cell that fails to capture catalytic yield. Watch its battery steadily drain toward zero.</li>
+<li>Observe the moment of <strong class="text-slate-100 font-semibold">lysis</strong>: when the battery reaches $0$, note how the active cell transforms into a <strong class="text-slate-100 font-semibold">Carcass Pore</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreState.CARCASS</code>), retaining unspent tokens and mineral mass for neighboring scavengers.</li>
+<li>Inspect the <strong class="text-slate-100 font-semibold">Thermodynamic Ledger HUD badge</strong> at the top right:</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\Delta E_{\text{universe}} = \sum E_{\text{in}} - \sum E_{\text{stored}} - \sum E_{\text{dissipated}} = 0.000$$</p>
+<h3 id="4-data-collection-table" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4. Data Collection Table <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-data-collection-table" title="Direct link">#</a></h3>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Tick</th><th class="p-3.5 font-semibold">Stream A</th><th class="p-3.5 font-semibold">Stream B</th><th class="p-3.5 font-semibold">Gate Switches</th><th class="p-3.5 font-semibold">Landauer Burn ($E_L$)</th><th class="p-3.5 font-semibold">Catalytic Yield ($E_C$)</th><th class="p-3.5 font-semibold">Basal Leak ($E_{\text{leak}}$)</th><th class="p-3.5 font-semibold">Net Battery ($E$)</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">1</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">2</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">3</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">4</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">5</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr></tbody></table></div>
+<h3 id="5-post-lab-synthesis-questions" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5. Post-Lab Synthesis Questions <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-post-lab-synthesis-questions" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>If an organism mutates 4 additional <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">BUF</code> (buffer) gates that toggle constantly without contributing to catalytic yield, what is the thermodynamic consequence on its reproductive fitness?</li>
+<li>How does the persistence of carcass detritus create an ecological opportunity for detritivores?</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="lab-3-tracking-phenotypic-adaptation-to-vent-chemistry" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">🌊 Lab 3: Tracking Phenotypic Adaptation to Vent Chemistry <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#lab-3-tracking-phenotypic-adaptation-to-vent-chemistry" title="Direct link">#</a></h2>
+<h3 id="1-learning-objectives" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1. Learning Objectives <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-learning-objectives" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Observe natural selection favoring catalytic <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> enzymes that resonate with complementary vent pulses.</li>
+<li>Investigate the selective advantage of allosteric inhibitor <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code> gates during periodic toxin ($T$) pulses.</li>
+<li>Map decoded 6-bit codons from the genome tape to physical circuit netlists using the Codon Table.</li>
+</ol>
+<h3 id="2-theoretical-pre-lab-preparation" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2. Theoretical Pre-Lab Preparation <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-theoretical-pre-lab-preparation" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Review Unit 2, Section 2. Explain why a cell with genotype expressing <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">(A AND B) AND (NOT T)</code> will outcompete a simple <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">A AND B</code> cell in a toxic vent regime.</p>
+<h3 id="3-step-by-step-laboratory-procedure" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3. Step-by-Step Laboratory Procedure <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-step-by-step-laboratory-procedure" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Initialize a fresh simulation with World Seed <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#101</code> and Soup Density <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">25%</code>.</li>
+<li>Let the simulation run uninhibited at normal speed for $500$ ticks.</li>
+<li>Observe the HUD telemetry ticker as the vent cycles through its multi-scale rhythms:</li>
+<li>High-flow fuel bursts (Streams $A=1, B=1$)</li>
+<li>Low-flow resting states</li>
+<li>Acidic poison bursts (Toxin $T=1$, corroding unshielded cells by $-5$ tokens)</li>
+<li>At Tick 500, pause the simulation. Inspect the most densely populated cluster of cells around the caldera.</li>
+<li>Select the oldest living cell (highest Age metric in HUD).</li>
+<li>In the Circuit Microscope, translate its 60-bit genome tape into codons using <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CodonTable.ts</code></a>:</li>
+<li>Group the 60 bits into ten 6-bit codons: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[Bits 0-5]</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[Bits 6-11]</code>, ..., <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[Bits 54-59]</code>.</li>
+<li>Identify whether the cell possesses <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PORIN_TOXIN_T</code> coupled to an inhibitory <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code>.</li>
+<li>Compare this adapted specimen with a peripheral cell that died or has a low battery.</li>
+</ol>
+<h3 id="4-genome-codon-translation-worksheet" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4. Genome Codon Translation Worksheet <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-genome-codon-translation-worksheet" title="Direct link">#</a></h3>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Codon Index</th><th class="p-3.5 font-semibold">6-Bit Bitstring</th><th class="p-3.5 font-semibold">Codon Name</th><th class="p-3.5 font-semibold">Biophysical Functional Class</th><th class="p-3.5 font-semibold">Active in Workshop?</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">0</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">1</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">2</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">3</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">4</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr></tbody></table></div>
+<h3 id="5-post-lab-synthesis-questions" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5. Post-Lab Synthesis Questions <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-post-lab-synthesis-questions" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Why did the toxin pulses purge unshielded organisms even if their <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gates were highly efficient?</li>
+<li>Did the surviving organisms "know" the toxin was coming, or did natural selection act as a blind sieve? Explain using the concept of autopoiesis.</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="lab-4-god-suite-perturbations-thermal-surges-extinction-pulses-lineage-recovery" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">🌋 Lab 4: God-Suite Perturbations: Thermal Surges, Extinction Pulses, & Lineage Recovery <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#lab-4-god-suite-perturbations-thermal-surges-extinction-pulses-lineage-recovery" title="Direct link">#</a></h2>
+<h3 id="1-learning-objectives" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1. Learning Objectives <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-learning-objectives" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Apply ecological disturbances using the interactive God-Suite controls in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/ui/LabFlyout.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LabFlyout.ts</code></a>.</li>
+<li>Measure the impact of catastrophic local extinction pulses on the Shannon Diversity Index ($H$).</li>
+<li>Document secondary ecological succession and trans-ridge colonization via pelagic spore dispersal.</li>
+</ol>
+<h3 id="2-theoretical-pre-lab-preparation" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2. Theoretical Pre-Lab Preparation <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-theoretical-pre-lab-preparation" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Review Unit 4, Section 6. Define the Shannon Diversity Index ($H$). What happens to $H$ when a single dominant clade monopolizes an entire habitat? What happens to $H$ immediately after an extinction pulse?</p>
+<h3 id="3-step-by-step-laboratory-procedure" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3. Step-by-Step Laboratory Procedure <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-step-by-step-laboratory-procedure" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Run a simulation until Tick 1,000, allowing a dominant clade to expand across the lower benthic terrace.</li>
+<li>Note the baseline metrics in the HUD:</li>
+<li>Living Cells Count ($N_{\text{living}}$)</li>
+<li>Active Clades Count ($K$)</li>
+<li>Shannon Diversity Index ($H$)</li>
+<li>Maximum Generation</li>
+<li>Open the Lab Flyout (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⚙️</code>). Locate the <strong class="text-slate-100 font-semibold">"God-Suite Interventions"</strong> section.</li>
+<li><strong class="text-slate-100 font-semibold">Thermal Surge Pulse:</strong></li>
+<li>Click <strong class="text-slate-100 font-semibold">"🔥 Thermal Surge Pulse"</strong> (+200 tokens injected into the central plume).</li>
+<li>Observe the immediate metabolic boom: cells adjacent to the caldera rapidly hit $100$ tokens and trigger a wave of binary fissions.</li>
+<li><strong class="text-slate-100 font-semibold">Catastrophic Extinction Pulse:</strong></li>
+<li>Select the center of the dominant monoculture colony.</li>
+<li>Click <strong class="text-slate-100 font-semibold">"💥 Local Extinction Pulse"</strong> (clearing living cells in radius $r=2$).</li>
+<li>Watch the selected quadrant collapse into carcass rubble.</li>
+<li>Record the immediate collapse of $H$ and $N_{\text{living}}$.</li>
+<li>Do not reset. Let the simulation run for $300$ ticks and watch <strong class="text-slate-100 font-semibold">secondary ecological succession</strong>:</li>
+<li>Observe whether dormant spores drifting in the water column land on the cleared rock cavities.</li>
+<li>Note which clade re-colonizes the empty territory.</li>
+</ol>
+<h3 id="4-disturbance-succession-log" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4. Disturbance & Succession Log <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-disturbance-succession-log" title="Direct link">#</a></h3>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Experimental Phase</th><th class="p-3.5 font-semibold">Tick</th><th class="p-3.5 font-semibold">Living Count</th><th class="p-3.5 font-semibold">Clades Count ($K$)</th><th class="p-3.5 font-semibold">Shannon Diversity ($H$)</th><th class="p-3.5 font-semibold">Dominant Clade ID</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">Pre-Disturbance Baseline</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">Post-Thermal Surge (+50 ticks)</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">Post-Extinction Pulse (+10 ticks)</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">Succession Recovery (+200 ticks)</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr></tbody></table></div>
+<h3 id="5-post-lab-synthesis-questions" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5. Post-Lab Synthesis Questions <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-post-lab-synthesis-questions" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Did the post-extinction habitat return to the exact same genetic state as before the pulse? Why or why not?</li>
+<li>How did pelagic spores drifting in the permeable fluid column prevent total extinction of the lineage?</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="lab-5-lenski-long-term-evolution-experiment-ltee-evolutionary-flight-recorder-autopsy" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">🦕 Lab 5: Lenski Long-Term Evolution Experiment (LTEE) & Evolutionary Flight Recorder Autopsy <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#lab-5-lenski-long-term-evolution-experiment-ltee-evolutionary-flight-recorder-autopsy" title="Direct link">#</a></h2>
+<h3 id="1-learning-objectives" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1. Learning Objectives <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-learning-objectives" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Conduct a digital analogue of Richard Lenski's Long-Term Evolution Experiment (LTEE).</li>
+<li>Trace an organism's ancestral lineage back to Generation 0 using <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">EvolutionaryFlightRecorder.ts</code></a>.</li>
+<li>Perform a counterfactual single-bit autopsy using <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/FossilFreezer.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">FossilFreezer.ts</code></a> to isolate the exact point mutation that assembled a novel network motif.</li>
+<li>Mathematically prove whether two lineages sharing a network motif represent <strong class="text-slate-100 font-semibold">Homology</strong> or <strong class="text-slate-100 font-semibold">Homoplasy / Convergent Evolution</strong>.</li>
+</ol>
+<h3 id="2-theoretical-pre-lab-preparation" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2. Theoretical Pre-Lab Preparation <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-theoretical-pre-lab-preparation" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Review Unit 4, Section 5. Review Richard Lenski's discovery of the $Cit^+$ trait in <em class="text-slate-200 italic">E. coli</em> at Generation 31,500. Explain why frozen fossil ledgers are essential for proving historical contingency.</p>
+<h3 id="3-step-by-step-laboratory-procedure" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3. Step-by-Step Laboratory Procedure <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-step-by-step-laboratory-procedure" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Initialize the simulation with World Seed <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#2026</code> and let it run to Tick 2,000.</li>
+<li>Monitor the <strong class="text-slate-100 font-semibold">Paleontology HUD Alerts</strong>. When a milestone alert triggers (e.g., <em class="text-slate-200 italic">"BISTABLE MEMORY LATCH FORMED"</em> or <em class="text-slate-200 italic">"RING OSCILLATOR DISCOVERED"</em>), immediately pause the simulation.</li>
+<li>Click the notification alert or the glowing neon pore on the seamount.</li>
+<li>Open the <strong class="text-slate-100 font-semibold">Milestone Modal / Evolutionary Autopsy Inspector</strong>:</li>
+<li>Inspect the <strong class="text-slate-100 font-semibold">Solution-Space Hamming Trajectory</strong> graph:</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$d_H(\text{Lineage}) = \sum_{i=0}^{k-1} \text{popcount}(G_i \oplus G_{i+1})$$</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Observe the color-coded edges:</li>
+<li><strong class="text-slate-100 font-semibold">Blue Edges:</strong> Kimura Neutral Drift ($d_H > 0$, fitness invariant).</li>
+<li><strong class="text-slate-100 font-semibold">Green Edges:</strong> Positive Selection (upward jump in metabolic efficiency).</li>
+<li><strong class="text-slate-100 font-semibold">Yellow Edges:</strong> Duplication / Intron Expansion.</li>
+<li>In the <strong class="text-slate-100 font-semibold">Single-Bit Autopsy Panel</strong>, identify:</li>
+<li>Parent Tape (Generation $N-1$)</li>
+<li>Child Tape (Generation $N$)</li>
+<li>The exact inverted bit index ($0..59$)</li>
+<li>The codon change (e.g., <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">INTRON_SILENT</code> $\to$ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code>)</li>
+<li><strong class="text-slate-100 font-semibold">Convergent Evolution Audit:</strong></li>
+<li>Scan the seamount for a second cell in a different clade exhibiting the same motif.</li>
+<li>Run the automated Least Common Ancestor (LCA) query.</li>
+<li>Check the audit verdict: does it declare <strong class="text-slate-100 font-semibold">HOMOLOGY</strong> or <strong class="text-slate-100 font-semibold">HOMOPLASY</strong>?</li>
+</ul>
+<h3 id="4-evolutionary-autopsy-record-sheet" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4. Evolutionary Autopsy Record Sheet <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-evolutionary-autopsy-record-sheet" title="Direct link">#</a></h3>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">Specimen ID: ______________________      Milestone Discovered: ______________________
+Generation:  ______________________      Pore Coordinate:      ( ____, ____, ____ )
+
+1. ANCESTRAL HAMMING TRAJECTORY:
+   Total Ancestral Generations: _____
+   Cumulative Hamming Distance Traversals (dH): _____ bits
+   Number of Neutral Drift Steps (Blue Edges):  _____
+
+2. COUNTERFACTUAL SINGLE-BIT AUTOPSY:
+   Bit Index Inverted: _______ (Bit position 0 to 59)
+   Codon Index:        _______ (Codon 0 to 9)
+   Parent Codon:       [ _ _ _ _ _ _ ] ──► Translation: ______________________
+   Child Codon:        [ _ _ _ _ _ _ ] ──► Translation: ______________________
+   Biophysical Consequence of Mutation: _________________________________________
+
+3. HOMOLOGY VS. HOMOPLASY AUDIT:
+   Comparison Specimen ID:   ______________________
+   Least Common Ancestor ID: ______________________ (Generation: _____)
+   Did LCA possess the motif? [ YES / NO ]
+   FINAL VERDICT:            [ HOMOLOGY / HOMOPLASY (CONVERGENT EVOLUTION) ]</code></pre>
+<h3 id="5-post-lab-synthesis-questions" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5. Post-Lab Synthesis Questions <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-post-lab-synthesis-questions" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>How does the existence of neutral introns facilitate the discovery of complex motifs like the bistable latch or half-adder?</li>
+<li>If your audit returned a verdict of Homoplasy, explain how two completely isolated lineages on opposite sides of the seamount converged on the exact same circuit wiring.</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="9-socratic-discussion-seminar-prompts" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">9. Socratic Discussion Seminar Prompts <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#9-socratic-discussion-seminar-prompts" title="Direct link">#</a></h2>
+<h3 id="seminar-1-the-physics-of-information-the-epistemic-cut" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Seminar 1: The Physics of Information & The Epistemic Cut <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#seminar-1-the-physics-of-information-the-epistemic-cut" title="Direct link">#</a></h3>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><em class="text-slate-200 italic">"Erwin Schrödinger famously stated in 1944 that living organisms feed on 'negative entropy'—they preserve their internal order by continually dissipating entropy into their surroundings. Howard Pattee later argued that life is unique in physical reality because it is governed by symbolic codes. If a genetic code is made of physical matter, why must it be treated as rate-independent? Could life exist without an Epistemic Cut?"</em></blockquote>
+<h3 id="seminar-2-is-evolution-an-optimization-algorithm" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Seminar 2: Is Evolution an Optimization Algorithm? <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#seminar-2-is-evolution-an-optimization-algorithm" title="Direct link">#</a></h3>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><em class="text-slate-200 italic">"In computer science, algorithms are evaluated by how quickly they converge to a global optimum. In natural evolution, is there an optimum? If an organism evolves an extraordinarily complex logic network that burns 50 tokens per tick, why might natural selection favor a 'stupid' organism consisting of a single AND gate? What does this teach us about the difference between engineering and biology?"</em></blockquote>
+<h3 id="seminar-3-historical-contingency-vs-determinism" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Seminar 3: Historical Contingency vs. Determinism <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#seminar-3-historical-contingency-vs-determinism" title="Direct link">#</a></h3>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><em class="text-slate-200 italic">"Stephen Jay Gould famously asked: if we could 'replay the tape of life' from the beginning, would anything look the same? In Richard Lenski's LTEE, only one out of twelve lineages evolved citrate metabolism, requiring a specific pre-adaptation. In Siliquarium, if we run two simulations with the exact same starting seed, but introduce a single bit-flip perturbation at Tick 100, what will happen to the macro-evolutionary trajectory? Is convergence inevitable, or is history hostage to contingency?"</em></blockquote>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="10-formative-diagnostic-assessment-suite" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">10. Formative Diagnostic Assessment Suite <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#10-formative-diagnostic-assessment-suite" title="Direct link">#</a></h2>
+<h3 id="section-a-conceptual-biophysical-foundations-multiple-choice" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Section A: Conceptual & Biophysical Foundations (Multiple Choice) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#section-a-conceptual-biophysical-foundations-multiple-choice" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">1.</strong> Why are microscopic rock pores in alkaline hydrothermal vents considered superior to open surface waters for prebiotic abiogenesis?</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A) Surface waters were too cold for chemical reactions to occur.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">B) Rock pores prevent the Dilution Catastrophe by concentrating catalytic reactants in microscopic volumes.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">C) Surface waters completely lacked hydrogen and carbon dioxide.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">D) Rock pores provided active lipid membranes before enzymes evolved.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Answer:</em> <strong class="text-slate-100 font-semibold">B</strong>. <em class="text-slate-200 italic">Rationale:</em> The Dilution Catastrophe in open water lowers reactant concentrations toward zero. Inorganic basalt cavities act as nature's first compartments.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">2.</strong> According to Rolf Landauer and modern thermodynamics of computation, why must a living digital cell pay an energy penalty when switching a logic gate?</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A) Gate transitions change electrical potential, dissipating a minimum of $k_B T \ln 2$ heat into the thermal sink.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">B) The simulation engine penalizes complex organisms to keep frame rates high.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">C) Logic gates physically degrade and must be rebuilt each tick.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">D) Energy is only consumed when an arithmetic addition is performed.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Answer:</em> <strong class="text-slate-100 font-semibold">A</strong>. <em class="text-slate-200 italic">Rationale:</em> Landauer's principle proves that information erasure and physical switching incur an irreversible entropic dissipation of at least $k_B T \ln 2$.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">3.</strong> In the Siliquarium codon table, what biological regulatory mechanism is represented by a <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code> logic gate?</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A) Co-substrate redox catalysis.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">B) An allosteric competitive inhibitor or transcriptional repressor protein.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">C) A passive ion channel allowing unregulated nutrient entry.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">D) A cleavage furrow splitting the cell membrane.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Answer:</em> <strong class="text-slate-100 font-semibold">B</strong>. <em class="text-slate-200 italic">Rationale:</em> In molecular biology, a repressor inverts transcription: when the repressor is present ($1$), gene expression is blocked ($0$).</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">4.</strong> Two organisms on opposite sides of the seamount possess isomorphic Bistable Memory Latches with identical Weisfeiler-Lehman hashes. The Evolutionary Flight Recorder traces their ancestry to a Least Common Ancestor that possessed only combinational <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gates. What is the formal evolutionary classification of this shared trait?</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A) Homology</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">B) Synapomorphy</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">C) Homoplasy (Convergent Evolution)</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">D) Artificial Selection</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Answer:</em> <strong class="text-slate-100 font-semibold">C</strong>. <em class="text-slate-200 italic">Rationale:</em> Because the Least Common Ancestor lacked the motif, both lineages discovered the circuit independently, which defines homoplasy / convergent evolution.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="section-b-quantitative-free-response-problems" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Section B: Quantitative Free-Response Problems <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#section-b-quantitative-free-response-problems" title="Direct link">#</a></h3>
+<h4 id="problem-1-metabolic-energy-budgeting-starvation-thresholds" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Problem 1: Metabolic Energy Budgeting & Starvation Thresholds <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#problem-1-metabolic-energy-budgeting-starvation-thresholds" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A protocell in Pore $(2, -1, 0)$ contains 3 active logic gates:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Gate 1: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_AND</code> wired to Stream A and Stream B (Reaction Yield: $+3$ tokens).</li>
+<li>Gate 2: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_BUF</code> wired to Gate 1 output.</li>
+<li>Gate 3: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code> wired to Gate 2 output.</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The hydrothermal vent pulses Stream A and Stream B synchronously ($A=1, B=1$) once every 5 ticks. On all other ticks, $A=0$ and $B=0$. Toxin $T$ is inactive ($T=0$).</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Toggle switching cost: $\kappa = 1$ token per gate transition.</li>
+<li>Basal maintenance leak: $E_{\text{leak}} = 1$ token dissipated every 10 ticks.</li>
+<li>Starting battery: $E_0 = 40$ tokens. Maximum capacity: $E_{\text{cap}} = 100$ tokens.</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Questions:</em></p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Calculate the total Landauer toggle energy dissipated by this circuit over a complete 5-tick vent cycle (Ticks 0 through 4).</li>
+<li>Calculate the net battery balance $\Delta E_{\text{cycle}}$ across the 5-tick cycle.</li>
+<li>Will this organism reach the division threshold ($100$ tokens), maintain homeostasis, or starve to death? Show all calculations.</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Worked Solution:</em></p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Tick 0 (Pulse arrives: $A=1, B=1$):</strong></li>
+<li>Gate 1 switches $0 \to 1$ ($1$ toggle). Yields $+3$ tokens.</li>
+<li>Gate 2 switches $0 \to 1$ ($1$ toggle).</li>
+<li>Gate 3 switches $1 \to 0$ ($1$ toggle).</li>
+<li>Landauer burn $= 3$ tokens. Yield $= +3$ tokens. Net change $= 0$.</li>
+<li><strong class="text-slate-100 font-semibold">Tick 1 (Pulse drops: $A=0, B=0$):</strong></li>
+<li>Gate 1 switches $1 \to 0$ ($1$ toggle). Yield $= 0$.</li>
+<li>Gate 2 switches $1 \to 0$ ($1$ toggle).</li>
+<li>Gate 3 switches $0 \to 1$ ($1$ toggle).</li>
+<li>Landauer burn $= 3$ tokens. Yield $= 0$. Net change $= -3$ tokens.</li>
+<li><strong class="text-slate-100 font-semibold">Ticks 2, 3, 4 (Idle ticks: inputs remain $0$):</strong></li>
+<li>Gates remain static ($0$ toggles). Landauer burn $= 0$.</li>
+<li><strong class="text-slate-100 font-semibold">Basal leak:</strong> $1$ token every 10 ticks $\implies 0.5$ tokens / 5 ticks.</li>
+<li><strong class="text-slate-100 font-semibold">Cycle Net Balance:</strong></li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\Delta E_{\text{cycle}} = \Delta E_{\text{yield}} - E_{\text{Landauer}} - E_{\text{leak}} = +3 - (3 + 3) - 0.5 = -3.5 \text{ tokens per 5 ticks}$$</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Conclusion:</strong> The organism operates at a persistent net deficit of $-3.5$ tokens every 5 ticks. It will exhaust its 40-token battery within approximately $57$ ticks and undergo starvation lysis!</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h4 id="problem-2-weisfeiler-lehman-topological-invariant-calculation" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Problem 2: Weisfeiler-Lehman Topological Invariant Calculation <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#problem-2-weisfeiler-lehman-topological-invariant-calculation" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Given a 3-gate circuit:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Node 1: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_AND</code></li>
+<li>Node 2: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code></li>
+<li>Node 3: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_OR</code></li>
+<li>Directed wires: $(1 \to 2)$, $(2 \to 3)$, $(3 \to 1)$ (A directed 3-node loop).</li>
+</ul>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Perform Round 0 color initialization.</li>
+<li>Perform Round 1 Weisfeiler-Lehman color refinement, showing the neighbor multiset and signature string for each node.</li>
+<li>Explain why this invariant remains identical even if Node 1 and Node 3 swap positions in the physical array.</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Worked Solution:</em></p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Round 0 Colors:</strong> $c_1^{(0)} = \text{AND}$, $c_2^{(0)} = \text{NOT}$, $c_3^{(0)} = \text{OR}$.</li>
+<li><strong class="text-slate-100 font-semibold">Directed Neighborhoods:</strong></li>
+<li>$\mathcal{N}(1) = \{2\}$, $\mathcal{N}(2) = \{3\}$, $\mathcal{N}(3) = \{1\}$.</li>
+<li><strong class="text-slate-100 font-semibold">Round 1 Signatures:</strong></li>
+<li>Node 1: $\text{AND}:[\text{NOT}]$</li>
+<li>Node 2: $\text{NOT}:[\text{OR}]$</li>
+<li>Node 3: $\text{OR}:[\text{AND}]$</li>
+<li>Applying deterministic hash produces updated color multiset.</li>
+<li><strong class="text-slate-100 font-semibold">Permutation Invariance:</strong> If the gates are re-indexed such that Node 3 is placed first, the neighbor multiset is lexicographically sorted prior to hashing (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SORT(...)</code>). The resulting collection of color hashes across the graph remains identical, yielding the exact same canonical invariant hash.</li>
+</ul>
+      </div>
+    </main>
+  </div>
+
+  <!-- MASTER FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
+      <p>
+        <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
+        PolyForm Noncommercial License 1.0.0 •
+        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -52,7 +52,7 @@
         In natural biophysics, life does not compute an external score; it extracts free energy from non-equilibrium chemical and thermal gradients, maintains its internal state against Rolf Landauer's thermodynamic dissipation ($k_B T \ln 2$), and reproduces before its battery runs dry. Information is not a floating number in memory; it is a physical, rate-independent polymer governed by quantum chemistry and enzyme kinetics.
       </p>
       <p class="text-sm text-slate-300 leading-relaxed font-sans">
-        <strong>Siliquarium</strong> is a standalone autopoietic computational laboratory. Here, digital circuits are freed from engineering truth tables and placed into a deep-sea hydrothermal vent matrix. Logic gates (`AND`, `OR`, `NOT`, `XOR`) function as catalytic enzymes converting chemical plumes into metabolic battery tokens. This documentation suite is your comprehensive companion: master the biophysical foundations, explore the interactive 3D seafloor, and witness the spontaneous genesis of living silicon circuits.
+        <strong>Siliquarium</strong> is a standalone autopoietic computational laboratory. Here, digital circuits are freed from engineering truth tables and placed into a deep-sea hydrothermal vent matrix. Primitive catalytic enzymes (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1 py-0.5 rounded text-cyan-300">NOT</code>) and emergent composite circuits (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1 py-0.5 rounded text-cyan-300">XOR</code>) convert chemical plumes into metabolic battery tokens. This documentation suite is your comprehensive companion: master the biophysical foundations, explore the interactive 3D seafloor, and witness the spontaneous genesis of living silicon circuits.
       </p>
     </div>
   </section>
@@ -107,7 +107,7 @@
 
         <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
           <span class="text-[11px] font-mono text-slate-500">Standalone Module</span>
-          <a href="CURRICULUM_AND_SYLLABUS.html#unit-1-the-prebiotic-threshold--howard-pattees-epistemic-cut" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-cyan-950 border border-cyan-700 hover:bg-cyan-900 text-cyan-300 font-mono font-bold text-xs transition-colors shadow-sm">
+          <a href="curriculum/unit1_prebiotic_threshold.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-cyan-950 border border-cyan-700 hover:bg-cyan-900 text-cyan-300 font-mono font-bold text-xs transition-colors shadow-sm">
             <span>Open Unit 01</span>
             <span>&rarr;</span>
           </a>
@@ -150,7 +150,7 @@
 
         <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
           <span class="text-[11px] font-mono text-slate-500">Standalone Module</span>
-          <a href="CURRICULUM_AND_SYLLABUS.html#unit-2-the-logic-of-life--logic-gates-as-catalytic-enzymes" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-950 border border-emerald-700 hover:bg-emerald-900 text-emerald-300 font-mono font-bold text-xs transition-colors shadow-sm">
+          <a href="curriculum/unit2_logic_of_life.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-950 border border-emerald-700 hover:bg-emerald-900 text-emerald-300 font-mono font-bold text-xs transition-colors shadow-sm">
             <span>Open Unit 02</span>
             <span>&rarr;</span>
           </a>
@@ -193,7 +193,7 @@
 
         <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
           <span class="text-[11px] font-mono text-slate-500">Standalone Module</span>
-          <a href="CURRICULUM_AND_SYLLABUS.html#unit-3-systems-biology--network-motifs" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-purple-950 border border-purple-700 hover:bg-purple-900 text-purple-300 font-mono font-bold text-xs transition-colors shadow-sm">
+          <a href="curriculum/unit3_systems_biology_motifs.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-purple-950 border border-purple-700 hover:bg-purple-900 text-purple-300 font-mono font-bold text-xs transition-colors shadow-sm">
             <span>Open Unit 03</span>
             <span>&rarr;</span>
           </a>
@@ -237,7 +237,7 @@
 
         <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
           <span class="text-[11px] font-mono text-slate-500">Standalone Module</span>
-          <a href="CURRICULUM_AND_SYLLABUS.html#unit-4-macro-evolutionary-dynamics--the-lenski-ltee" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-amber-950 border border-amber-700 hover:bg-amber-900 text-amber-300 font-mono font-bold text-xs transition-colors shadow-sm">
+          <a href="curriculum/unit4_evolutionary_dynamics.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-amber-950 border border-amber-700 hover:bg-amber-900 text-amber-300 font-mono font-bold text-xs transition-colors shadow-sm">
             <span>Open Unit 04</span>
             <span>&rarr;</span>
           </a>
@@ -342,7 +342,7 @@
             Rigorous cross-disciplinary definitions spanning Biophysics, Information Theory, Computer Science, Evolutionary Genetics, and Systems Biology. Every entry includes an Everyday Analogy and a Siliquarium Digital Mapping.
           </p>
         </div>
-        <a href="PEDAGOGICAL_COMPANION_SUITE.html#1-exhaustive-glossary-of-systems-biology--silicon-abiogenesis" class="text-cyan-400 hover:text-cyan-300 font-mono text-xs font-semibold flex items-center gap-1">
+        <a href="companion/glossary.html" class="text-cyan-400 hover:text-cyan-300 font-mono text-xs font-semibold flex items-center gap-1">
           <span>Explore 55-Term Glossary</span> <span>&rarr;</span>
         </a>
       </div>
@@ -359,7 +359,7 @@
             Comprehensive annotations of seminal landmark papers: Mitchell (1961), Russell &amp; Hall (1997), Lane &amp; Martin (2012), Pattee (1972, 2001), Von Neumann (1966), Landauer (1961), Alon (2007), Lenski (1991), Kimura (1968), and Ohno (1970).
           </p>
         </div>
-        <a href="PEDAGOGICAL_COMPANION_SUITE.html#3-critical-academic-endnotes--annotated-primary-literature-bibliography" class="text-purple-400 hover:text-purple-300 font-mono text-xs font-semibold flex items-center gap-1">
+        <a href="companion/bibliography.html" class="text-purple-400 hover:text-purple-300 font-mono text-xs font-semibold flex items-center gap-1">
           <span>View Annotated Bibliography</span> <span>&rarr;</span>
         </a>
       </div>
@@ -376,7 +376,7 @@
             Structured experiential labs executed directly inside the live application: Micro-Survey &amp; Circuit Inspection, Landauer Power Dissipation, Phenotypic Redox Adaptation, God-Suite Perturbations, and Lenski LTEE Flight Recorder Autopsies.
           </p>
         </div>
-        <a href="CURRICULUM_AND_SYLLABUS.html#part-ii-step-by-step-hands-on-student-lab-practicums" class="text-emerald-400 hover:text-emerald-300 font-mono text-xs font-semibold flex items-center gap-1">
+        <a href="curriculum/practicums_lab_manual.html" class="text-emerald-400 hover:text-emerald-300 font-mono text-xs font-semibold flex items-center gap-1">
           <span>Launch Laboratory Manual</span> <span>&rarr;</span>
         </a>
       </div>

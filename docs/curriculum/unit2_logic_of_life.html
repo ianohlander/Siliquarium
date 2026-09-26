@@ -1,0 +1,747 @@
+<!-- 🐠 Siliquarium Open-Ended Digital Life & Silicon Abiogenesis Laboratory • Created by & Copyright © 2026 Ian Ohlander. All rights reserved. -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 2: The Logic of Life &amp; Primitive Enzymes — Siliquarium Master Documentation</title>
+  <link rel="icon" type="image/jpeg" href="../assets/logos/logo.jpg">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bio: {
+              bg: '#060911',
+              surface: '#0a0e1a',
+              panel: '#121829',
+              card: '#0f172a',
+              border: '#1e2c4a',
+              cyan: '#00e5ff',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              purple: '#a855f7',
+              sky: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            mono: ['Cascadia Code', 'Fira Code', 'Consolas', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #060911; }
+    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+
+    .card-bio, .card-chemiosmotic {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .card-digital, .card-silicon {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.4);
+    }
+    .card-margin, .card-analogy {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+    .card-experiment, .card-paleo {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+    .svg-container {
+      background: #090e15;
+      border: 1px solid #1e2c4a;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      overflow-x: auto;
+    }
+
+    /* Citation Target Highlighting & Interactive Navigation */
+    html { scroll-behavior: auto; }
+    li[id^="ref-"] {
+      scroll-margin-top: 6rem;
+      position: relative;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    @keyframes refTargetPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.95), 0 0 40px rgba(0, 229, 255, 0.85), inset 0 0 15px rgba(0, 229, 255, 0.35);
+        border-color: #22d3ee;
+        background-color: rgba(8, 51, 68, 0.95);
+        transform: scale(1.02);
+      }
+      30% {
+        box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.45), 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 20px rgba(0, 229, 255, 0.25);
+        border-color: #38bdf8;
+        background-color: rgba(8, 51, 68, 0.92);
+        transform: scale(1.015);
+      }
+      100% {
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 12px rgba(0, 229, 255, 0.15);
+        border-color: #00e5ff;
+        background-color: rgba(8, 51, 68, 0.88);
+        transform: scale(1);
+      }
+    }
+    @keyframes badgePopIn {
+      0% { opacity: 0; transform: translateY(6px) scale(0.8); }
+      60% { opacity: 1; transform: translateY(-2px) scale(1.06); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    li[id^="ref-"]:target,
+    li[id^="ref-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #22d3ee !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
+    }
+    li[id^="ref-"]:target::after,
+    li[id^="ref-"].active-citation-target::after {
+      content: "CITED IN TEXT 🎯";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0891b2, #0284c7);
+      color: #ffffff;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+    sup a[href^="#ref-"] {
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 0 1px;
+    }
+    sup a[href^="#ref-"]:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 8px #22d3ee;
+      transform: translateY(-1px);
+    }
+    section[id], div[id], h2[id], h3[id] {
+      scroll-margin-top: 5.5rem;
+    }
+    @keyframes backlinkTargetFlash {
+      0% { outline: 3px solid rgba(0, 229, 255, 0.9); outline-offset: 4px; }
+      100% { outline: 3px solid transparent; outline-offset: 4px; }
+    }
+    section[id]:target, div[id]:target {
+      animation: backlinkTargetFlash 2.5s ease-out;
+    }
+  </style>
+
+  <script id="citation-navigator">
+    document.addEventListener('DOMContentLoaded', function() {
+      function highlightRefCard(targetId) {
+        if (!targetId || !targetId.startsWith('ref-')) return;
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+          item.classList.remove('active-citation-target');
+        });
+        el.classList.remove('active-citation-target');
+        void el.offsetWidth;
+        el.classList.add('active-citation-target');
+        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }
+      function scrollToTarget(targetId) {
+        if (!targetId) return;
+        if (targetId.startsWith('ref-')) {
+          highlightRefCard(targetId);
+          return;
+        }
+        const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href && href.includes('#')) {
+            const hash = href.substring(href.indexOf('#') + 1);
+            if (hash.startsWith('ref-')) highlightRefCard(hash);
+          }
+        }
+      });
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) scrollToTarget(hash);
+      });
+      function checkInitialHash() {
+        if (window.location.hash) {
+          const hash = window.location.hash.replace('#', '');
+          scrollToTarget(hash);
+        }
+      }
+      checkInitialHash();
+      setTimeout(checkInitialHash, 150);
+      setTimeout(checkInitialHash, 500);
+      window.addEventListener('load', function() {
+        setTimeout(checkInitialHash, 100);
+      });
+      if (window.MathJax && window.MathJax.startup) {
+        window.MathJax.startup.promise = window.MathJax.startup.promise.then(function() {
+          setTimeout(checkInitialHash, 100);
+        });
+      }
+
+      // Sidebar & Dropdown Controller
+      const toggleBtn = document.getElementById('sidebar-toggle-btn');
+      const closeBtn = document.getElementById('sidebar-close-btn');
+      const sidebar = document.getElementById('doc-sidebar');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      const dropdownBtn = document.getElementById('nav-dropdown-btn');
+      const dropdownMenu = document.getElementById('nav-dropdown-menu');
+
+      function openSidebar() {
+        if (sidebar && backdrop) {
+          sidebar.classList.remove('-translate-x-full');
+          backdrop.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+      function closeSidebar() {
+        if (sidebar && backdrop) {
+          sidebar.classList.add('-translate-x-full');
+          backdrop.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      }
+
+      if (toggleBtn) toggleBtn.addEventListener('click', openSidebar);
+      if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+      if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+      if (dropdownBtn && dropdownMenu) {
+        dropdownBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          dropdownMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', function(e) {
+          if (!dropdownMenu.contains(e.target) && e.target !== dropdownBtn) {
+            dropdownMenu.classList.add('hidden');
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
+
+  <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
+  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <!-- Mobile/Drawer Toggle Button -->
+        <button id="sidebar-toggle-btn" class="lg:hidden p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 transition-colors font-mono text-xs flex items-center gap-1.5 shrink-0" aria-label="Toggle Navigation">
+          <span>☰</span>
+          <span class="hidden sm:inline">Docs Menu</span>
+        </button>
+
+        <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
+          <a href="../index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
+            <img src="../assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
+            <span class="hidden sm:inline">Siliquarium</span>
+            <span class="sm:hidden">Portal</span>
+          </a>
+          <span class="text-slate-600">/</span>
+          <span class="text-cyan-400 font-semibold truncate">Unit 2: The Logic of Life &amp; Primitive Enzymes</span>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- Quick Mega-Menu Dropdown Button -->
+        <div class="relative">
+          <button id="nav-dropdown-btn" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-300 hover:border-cyan-700/60 rounded-lg text-xs font-mono transition-all flex items-center gap-1.5 shadow-sm">
+            <span>🧭</span>
+            <span>Explore Docs</span>
+            <span class="text-[10px] text-slate-500">▾</span>
+          </button>
+          <!-- Mega-Menu Overlay -->
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+            <div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🎓</span>
+        <span>Curriculum & Pedagogy</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../index.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🐠</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Portal Overview</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Curriculum portal & modular index</div>
+        </div>
+      </a><a href="../CURRICULUM_AND_SYLLABUS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📜</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Course Syllabus</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Syllabus, philosophy & symbol index</div>
+        </div>
+      </a><a href="../curriculum/unit1_prebiotic_threshold.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 1: Prebiotic Vents</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Alkaline vents, chemiosmosis & Pattee's cut</div>
+        </div>
+      </a><a href="../curriculum/unit2_logic_of_life.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 bg-cyan-950/80 border border-cyan-700/60 text-cyan-300">
+        <span class="text-sm shrink-0 mt-0.5">⚡</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-cyan-300">Unit 2: Logic of Life</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Primitive enzymes & XOR impossibility proof</div>
+        </div>
+      </a><a href="../curriculum/unit3_systems_biology_motifs.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🕸️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 3: Systems Motifs</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Uri Alon motifs & Weisfeiler-Lehman hashes</div>
+        </div>
+      </a><a href="../curriculum/unit4_evolutionary_dynamics.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 4: Macro-Evolution</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Kimura drift, convergent homoplasy & LTEE</div>
+        </div>
+      </a><a href="../curriculum/practicums_lab_manual.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧪</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Student Lab Manual</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5 hands-on labs & formative assessments</div>
+        </div>
+      </a><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Companion Portal</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Master portal & assessment rubrics</div>
+        </div>
+      </a><a href="../companion/glossary.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Lexicon & Glossary</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">55-term systems biology lexicon</div>
+        </div>
+      </a><a href="../companion/study_guides.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧭</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Study Guides & Decoders</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">8 equation decoders & derivations</div>
+        </div>
+      </a><a href="../companion/bibliography.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Annotated Bibliography</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">14 foundational primary papers</div>
+        </div>
+      </a><a href="../QA/STUDENT_UX_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔍</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Student QA Report</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">12th-grade usability audit & screenshots</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🌊</span>
+        <span>Biophysical Theory</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../THEORETICAL_MODEL.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Theoretical Model</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">21 sealed sections & thermodynamic laws</div>
+        </div>
+      </a><a href="../EPISTEMIC_FOUNDATIONS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Epistemic Foundations</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Howard Pattee's Epistemic Cut & defenses</div>
+        </div>
+      </a><a href="../DOCUMENTATION_DESIGN_PRINCIPLES.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📐</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Design Principles</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Documentation & UI/UX architecture</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🔬</span>
+        <span>Laboratory Guides</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../PHASE_3_VISUALIZER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">3D Seafloor Visualizer</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Bathymetry, orbit camera & circuit microscope</div>
+        </div>
+      </a><a href="../PHASE_4_PALEONTOLOGY_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🦕</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology & Motifs</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Weisfeiler-Lehman hashes & fossil freezer</div>
+        </div>
+      </a><a href="../PHASE_5_PELAGIC_SPORES_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Pelagic Spores & Controls</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Buoyant spore drift & God-suite parameters</div>
+        </div>
+      </a><a href="../PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Phylogeny & Dynamics</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Multi-lineage clades & Lenski benchmarks</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🎨</span>
+        <span>Visuals & Identity</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../BRAND_IDENTITY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎨</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Brand Identity</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Visual philosophy & biomorphic styling</div>
+        </div>
+      </a><a href="../logos.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🖼️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Logo Gallery</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">High-res Fibonacci nautilus asset suite</div>
+        </div>
+      </a></div></div>
+          </div>
+        </div>
+
+        <a href="../../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🚀</span>
+          <span class="hidden md:inline">Live Simulator</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MASTER 2-COLUMN VIEWPORT (Sidebar + Content) -->
+  <div class="max-w-7xl mx-auto flex-1 w-full flex">
+    <!-- LEFT CATEGORIZED SIDEBAR (Desktop Sticky + Mobile Off-Canvas) -->
+    <aside id="doc-sidebar" class="fixed lg:sticky top-0 lg:top-[45px] z-50 lg:z-10 h-screen lg:h-[calc(100vh-45px)] w-72 bg-[#060911]/95 lg:bg-transparent backdrop-blur-xl lg:backdrop-blur-none border-r border-slate-800/80 p-5 space-y-6 overflow-y-auto shrink-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-200">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 lg:hidden">
+        <div class="flex items-center gap-2">
+          <img src="../assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
+          <span class="text-xs font-mono font-bold text-cyan-400">Documentation Index</span>
+        </div>
+        <button id="sidebar-close-btn" class="text-slate-400 hover:text-white text-base font-mono p-1">✕</button>
+      </div>
+      <div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🎓</span>
+        <span>Curriculum & Pedagogy</span>
+      </div>
+      <div class="space-y-0.5"><a href="../index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🐠</span>
+        <span class="truncate">Portal Overview</span>
+      </a><a href="../CURRICULUM_AND_SYLLABUS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📜</span>
+        <span class="truncate">Course Syllabus</span>
+      </a><a href="../curriculum/unit1_prebiotic_threshold.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌋</span>
+        <span class="truncate">Unit 1: Prebiotic Vents</span>
+      </a><a href="../curriculum/unit2_logic_of_life.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold shadow-sm">
+        <span class="text-xs shrink-0">⚡</span>
+        <span class="truncate">Unit 2: Logic of Life</span>
+      </a><a href="../curriculum/unit3_systems_biology_motifs.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🕸️</span>
+        <span class="truncate">Unit 3: Systems Motifs</span>
+      </a><a href="../curriculum/unit4_evolutionary_dynamics.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Unit 4: Macro-Evolution</span>
+      </a><a href="../curriculum/practicums_lab_manual.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧪</span>
+        <span class="truncate">Student Lab Manual</span>
+      </a><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Companion Portal</span>
+      </a><a href="../companion/glossary.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Lexicon & Glossary</span>
+      </a><a href="../companion/study_guides.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧭</span>
+        <span class="truncate">Study Guides & Decoders</span>
+      </a><a href="../companion/bibliography.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Annotated Bibliography</span>
+      </a><a href="../QA/STUDENT_UX_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔍</span>
+        <span class="truncate">Student QA Report</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🌊</span>
+        <span>Biophysical Theory</span>
+      </div>
+      <div class="space-y-0.5"><a href="../THEORETICAL_MODEL.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">Theoretical Model</span>
+      </a><a href="../EPISTEMIC_FOUNDATIONS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Epistemic Foundations</span>
+      </a><a href="../DOCUMENTATION_DESIGN_PRINCIPLES.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📐</span>
+        <span class="truncate">Design Principles</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🔬</span>
+        <span>Laboratory Guides</span>
+      </div>
+      <div class="space-y-0.5"><a href="../PHASE_3_VISUALIZER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔬</span>
+        <span class="truncate">3D Seafloor Visualizer</span>
+      </a><a href="../PHASE_4_PALEONTOLOGY_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🦕</span>
+        <span class="truncate">Paleontology & Motifs</span>
+      </a><a href="../PHASE_5_PELAGIC_SPORES_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">Pelagic Spores & Controls</span>
+      </a><a href="../PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Phylogeny & Dynamics</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🎨</span>
+        <span>Visuals & Identity</span>
+      </div>
+      <div class="space-y-0.5"><a href="../BRAND_IDENTITY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎨</span>
+        <span class="truncate">Brand Identity</span>
+      </a><a href="../logos.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🖼️</span>
+        <span class="truncate">Logo Gallery</span>
+      </a></div></div>
+    </aside>
+
+    <!-- Mobile Drawer Backdrop -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+    <!-- MAIN CONTENT VIEWPORT (Centered, Responsive, Zero Horizontal Scrollbars) -->
+    <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-10 py-8 md:py-10">
+      <div class="max-w-4xl mx-auto space-y-8">
+        <h1 id="unit-2-the-logic-of-life-primitive-enzymes" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">⚡ Unit 2: The Logic of Life & Primitive Enzymes <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#unit-2-the-logic-of-life-primitive-enzymes" title="Direct link">#</a></h1>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Enzymatic Kinetics as Boolean Algebra, The XOR Impossibility Proof, and Rolf Landauer's Thermodynamic Bound</em></p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="1-visceral-intuition-the-living-breadboard" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Visceral Intuition: The Living Breadboard <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-visceral-intuition-the-living-breadboard" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When students study digital logic in computer science, they picture flat silicon chips etched with copper traces, computing abstract zeros and ones. When they study biochemistry in biology, they picture floppy, three-dimensional protein globules folding in liquid water.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In biophysics and synthetic biology, these two views are <strong class="text-slate-100 font-semibold">mathematical isomorphisms</strong>:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>An electrical wire conducting electrons is functionally equivalent to a diffusion channel carrying solute molecules.</li>
+<li>An electronic logic gate switching from low voltage to high voltage is functionally equivalent to an enzyme transitioning from an inactive conformation to an active catalytic state.</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Life does not calculate arithmetic for its own sake. In living cells, <strong class="text-slate-100 font-semibold">computation is metabolism, and metabolism is computation</strong>.</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">       CONVENTIONAL DIGITAL LOGIC                     PREBIOTIC BIOCHEMICAL LOGIC
+  ┌───────────────────────────────────┐              ┌───────────────────────────────────┐
+  │ • Copper Wire (5 Volts / 0 Volts) │  ════════►   │ • Solute Stream (High / Low Conc) │
+  │ • Silicon Transistor (CMOS Gate)  │  ISOMORPHISM │ • Enzymatic Active Site (Protein) │
+  │ • Power Supply (Wall Outlet)      │  ════════►   │ • Redox Potential (Vent Battery)  │
+  └───────────────────────────────────┘              └───────────────────────────────────┘</code></pre>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="2-the-three-primitive-enzymes-active-site-biophysics" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. The Three Primitive Enzymes: Active Site Biophysics <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-the-three-primitive-enzymes-active-site-biophysics" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In prebiotic chemistry, catalytic molecules (whether ribozymes or iron-sulfur peptide clusters) interact with substrates through physical binding pockets. Siliquarium models how <strong class="text-slate-100 font-semibold">real enzymes operate before complex organs existed</strong> through three fundamental catalytic primitives:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">  1. CO-SUBSTRATE CATALYST (AND)      2. PROMISCUOUS CATALYST (OR)      3. ALLOSTERIC INHIBITOR (NOT)
+  
+       Substrate A   Substrate B             Substrate A   Substrate B             Substrate A   Inhibitor T
+            │             │                       \       /                             │             │
+            ▼             ▼                        ▼     ▼                              ▼             ▼
+       ┌─────────┬─────────┐                      ┌─────────┐                      ┌─────────┬─────────┐
+       │ Pocket  │ Pocket  │                      │ P-Site  │                      │ Active  │ Allost. │
+       │    A    │    B    │                      │ (Either)│                      │  Site   │  Site   │
+       └────┬────┴────┬────┘                      └────┬────┘                      └────┬────┴────┬────┘
+            └────┬────┘                                │                                │     (Blocks)
+                 ▼                                     ▼                                ▼         ▲
+           CATALYSIS!                             CATALYSIS!                       CATALYSIS! ────┘
+         (Both Required)                        (Either Reacts)                  (Inhibitor Quenches)</code></pre>
+<h3 id="21-the-gate-and-primitive-co-substrate-catalysis" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_AND</code> Primitive: Co-Substrate Catalysis <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#21-the-gate-and-primitive-co-substrate-catalysis" title="Direct link">#</a></h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Biochemical Reality:</strong> Many fundamental metabolic reactions are bi-molecular: they cannot proceed unless two distinct substrate molecules bind simultaneously in adjacent catalytic pockets.</li>
+<li><strong class="text-slate-100 font-semibold">Natural Cognate:</strong> Alcohol Dehydrogenase. The enzyme cannot oxidize ethanol without simultaneously binding the oxidized cofactor $\text{NAD}^+$. If ethanol is present alone ($A=1, B=0$), nothing happens. If $\text{NAD}^+$ is present alone ($A=0, B=1$), nothing happens. Only when both are bound ($1 \land 1$) does hydride transfer occur, charging the cellular energy pool.</li>
+<li><strong class="text-slate-100 font-semibold">In Siliquarium:</strong> An organism possessing a single <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate wired to Stream A (proton fuel) and Stream B (alkaline oxidizer) conducts electricity if and only if both substrates arrive simultaneously, depositing <strong class="text-slate-100 font-semibold">$+2$ to $+3$ energy tokens</strong> into its battery (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop.ts</code></a>).</li>
+</ul>
+<h3 id="22-the-gate-or-primitive-promiscuous-isozymes-dual-affinities" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_OR</code> Primitive: Promiscuous Isozymes & Dual Affinities <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#22-the-gate-or-primitive-promiscuous-isozymes-dual-affinities" title="Direct link">#</a></h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Biochemical Reality:</strong> In prebiotic environments, food sources fluctuate wildly. An enzyme with a flexible active site can bind either of two homologous chemical substrates (e.g., hexokinase phosphorylating either glucose or fructose).</li>
+<li><strong class="text-slate-100 font-semibold">Natural Cognate:</strong> Promiscuous ancestral enzymes. The catalytic pocket accommodates Substrate A or Substrate B.</li>
+<li><strong class="text-slate-100 font-semibold">In Siliquarium:</strong> An <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code> gate allows an organism to harvest energy whenever <em class="text-slate-200 italic">either</em> Stream A or Stream B is flowing ($A \lor B$), serving as a dietary generalist during lean periods.</li>
+</ul>
+<h3 id="23-the-gate-not-primitive-allosteric-competitive-inhibition" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.3 The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code> Primitive: Allosteric Competitive Inhibition <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#23-the-gate-not-primitive-allosteric-competitive-inhibition" title="Direct link">#</a></h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Biochemical Reality:</strong> Hydrothermal vent fluids are not pure nutrient broths; they periodically belch poisonous heavy-metal precipitates and sulfuric acids (Stream T). If an unshielded enzyme binds toxin, its active site is poisoned, corroding cellular reserves.</li>
+<li><strong class="text-slate-100 font-semibold">Natural Cognate:</strong> Transcriptional repressors (<em class="text-slate-200 italic">lac</em> or <em class="text-slate-200 italic">trp</em> repressor) or allosteric feedback inhibition. Binding of an effector molecule to an allosteric regulatory site induces a conformational shift that physically closes the active catalytic site.</li>
+<li><strong class="text-slate-100 font-semibold">In Siliquarium:</strong> A <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code> gate inverts an incoming signal ($1 \to 0, 0 \to 1$). When coupled to a toxin sensor (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PORIN_TOXIN_T</code>), it shuts off the intake gate during acidic poison bursts, preventing a devastating <strong class="text-slate-100 font-semibold">$-5$ token battery corrosion penalty</strong>.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="3-the-xor-impossibility-proof-why-xor-cannot-be-a-primitive-catalyst" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. The XOR Impossibility Proof: Why XOR Cannot Be a Primitive Catalyst <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-the-xor-impossibility-proof-why-xor-cannot-be-a-primitive-catalyst" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Students frequently ask: <em class="text-slate-200 italic">"If AND, OR, and NOT are primitive gates, why isn't XOR (Exclusive OR) also a primitive gate?"</em></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The answer is a foundational principle of biophysics, neurobiology, and machine learning: <strong class="text-slate-100 font-semibold">The Principle of Linear Non-Separability</strong>.</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">             LINEAR SEPARABILITY OF PRIMITIVE LOGIC GATES
+             
+         AND GATE (Linearly Separable)           XOR GATE (NON-SEPARABLE!)
+     B                                       B
+     ▲                                       ▲
+   1 ┼─── ○ (0)      ● (1)                 1 ┼─── ● (1)      ○ (0)
+     │         \                             │       \     /
+     │          \ Separating                 │        \   /  CANNOT BE SEPARATED
+     │           \ Hyperplane                │         \ /   BY A SINGLE LINE!
+   0 ┼─── ○ (0)    \ ○ (0)                 0 ┼─── ○ (0) X    ● (1)
+     └─────┼─────────┼───► A                 └─────┼─────────┼───► A
+           0         1                             0         1</code></pre>
+<h3 id="31-the-minsky-papert-perceptron-barrier-1969" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.1 The Minsky-Papert Perceptron Barrier (1969) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#31-the-minsky-papert-perceptron-barrier-1969" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1969, Marvin Minsky and Seymour Papert proved that a single computational node (a single-layer perceptron or a single physical active site) can only classify patterns that are <strong class="text-slate-100 font-semibold">linearly separable</strong> by a single linear hyperplane:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\sum_{i=1}^n w_i x_i - \theta \ge 0$$</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> is linearly separable:</strong> $w_1 = 1, w_2 = 1, \theta = 1.5$.</li>
+<li>$(0, 0) \to 0$</li>
+<li>$(1, 0) \to 0$</li>
+<li>$(0, 1) \to 0$</li>
+<li>$(1, 1) \to 1$ (Passes threshold)</li>
+<li><strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code> is linearly separable:</strong> $w_1 = 1, w_2 = 1, \theta = 0.5$.</li>
+<li>$(0, 0) \to 0$</li>
+<li>$(1, 0) \to 1$</li>
+<li>$(0, 1) \to 1$</li>
+<li>$(1, 1) \to 1$ (Passes threshold)</li>
+<li><strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code> is strictly non-separable:</strong> </li>
+<li>$(0, 0) \to 0$</li>
+<li>$(1, 0) \to 1$</li>
+<li>$(0, 1) \to 1$</li>
+<li>$(1, 1) \to 0$!</li>
+</ul>
+<h3 id="32-the-biophysical-impossibility-in-a-single-protein-pocket" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.2 The Biophysical Impossibility in a Single Protein Pocket <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#32-the-biophysical-impossibility-in-a-single-protein-pocket" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Consider what a single <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code> enzyme would physically have to do:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>If Substrate A enters alone, the enzyme must fire.</li>
+<li>If Substrate B enters alone, the enzyme must fire.</li>
+<li>But if <em class="text-slate-200 italic">both</em> Substrate A and Substrate B enter together, the enzyme must suddenly quench itself and produce zero output!</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">No single physical catalytic pocket can achieve this behavior with simple binding kinetics. To produce an XOR response, nature must assemble a <strong class="text-slate-100 font-semibold">multi-enzyme regulatory network motif</strong>:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$(A \oplus B) \equiv (A \lor B) \land \neg(A \land B)$$</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">                     THE COMPOSITE XOR NETWORK MOTIF
+                     (Requires 3+ Primitive Gates!)
+                     
+   Stream A ────┬──────────────────► ┌─────────┐
+                │                    │   OR    │ ──────┐
+   Stream B ────┼──────────┬───────► └─────────┘       │
+                │          │                           ▼
+                │          │                     ┌───────────┐
+                │          │                     │    AND    │ ──► Output (A XOR B)
+                ▼          ▼                     └─────▲─────┘
+              ┌──────────────┐                         │
+              │     AND      │ ──► ┌─────────┐         │
+              └──────────────┘     │   NOT   │ ────────┘
+                                   └─────────┘</code></pre>
+<div class="p-4 rounded-xl bg-purple-950/30 border-l-4 border-purple-400 my-4 text-sm text-slate-300"><div class="font-mono text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">IMPORTANT</div><div class="leading-relaxed font-sans"><br/><strong class="text-slate-100 font-semibold">Evolutionary Consequence:</strong> In Siliquarium, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code> does not exist as a single codon in the degenerate codon table. An organism cannot "spawn" with an XOR gate. It must evolve an XOR circuit de novo by accumulating multiple gene duplications, linking an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code> gate, an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate, and an inhibitory <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code> gate into a coherent multi-gene regulatory network!</div></div>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="4-the-64-entry-codon-table-grounded-molecular-biophysics" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. The 64-Entry Codon Table: Grounded Molecular Biophysics <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-the-64-entry-codon-table-grounded-molecular-biophysics" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To prevent smuggled teleology (e.g. artificial opcodes like <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">MOVE</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">EAT</code>, or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">FIGHT</code>), every 6-bit codon in Siliquarium's degenerate table (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CodonTable.ts</code></a>) corresponds strictly to physical biomolecular primitives:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">[ Bit 5 | Bit 4 | Bit 3 | Bit 2 | Bit 1 | Bit 0 ]
+  ▲                     ▲
+  │                     └─ Synonymous degenerate bits (Kimura neutral drift)
+  └─ Functional class selector</code></pre>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Codon Range (Decimal)</th><th class="p-3.5 font-semibold">Binary Prefix</th><th class="p-3.5 font-semibold">Codon Type</th><th class="p-3.5 font-semibold">Biophysical Equivalent</th><th class="p-3.5 font-semibold">Natural Function</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">0 .. 11</strong> (12 entries)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">00xxxx</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_AND</code></td><td class="p-3.5 leading-relaxed">Co-Substrate Catalyst</td><td class="p-3.5 leading-relaxed">Dehydrogenase co-enzyme binding ($A \land B$).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">12 .. 21</strong> (10 entries)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">010xxx</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code></td><td class="p-3.5 leading-relaxed">Allosteric Inhibitor</td><td class="p-3.5 leading-relaxed">Competitive transcriptional repressor ($\neg T$).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">22 .. 31</strong> (10 entries)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">011xxx</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_OR</code></td><td class="p-3.5 leading-relaxed">Promiscuous Isozyme</td><td class="p-3.5 leading-relaxed">Dual-affinity broad-spectrum catalyst ($A \lor B$).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">32 .. 37</strong> (6 entries)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1000xx</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PORIN_STREAM_A</code></td><td class="p-3.5 leading-relaxed">Substrate Channel A</td><td class="p-3.5 leading-relaxed">Acidic proton fuel membrane porin ($H^+$).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">38 .. 43</strong> (6 entries)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1001xx</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PORIN_STREAM_B</code></td><td class="p-3.5 leading-relaxed">Substrate Channel B</td><td class="p-3.5 leading-relaxed">Alkaline oxidizer membrane porin ($OH^-$).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">44 .. 47</strong> (4 entries)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1010xx</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PORIN_TOXIN_T</code></td><td class="p-3.5 leading-relaxed">Toxin Channel T</td><td class="p-3.5 leading-relaxed">Heavy-metal waste precipitate channel.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">48 .. 51</strong> (4 entries)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1100xx</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SINK_BATTERY</code></td><td class="p-3.5 leading-relaxed">Rotary Translocator</td><td class="p-3.5 leading-relaxed">ATP Synthase charge pump analogue.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">52 .. 55</strong> (4 entries)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1101xx</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SINK_SEPTUM</code></td><td class="p-3.5 leading-relaxed">Cleavage Furrow Trigger</td><td class="p-3.5 leading-relaxed">FtsZ contractile ring for cell division.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">56 .. 61</strong> (6 entries)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1110xx</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">INTRON_SILENT</code></td><td class="p-3.5 leading-relaxed">Non-Coding Intron</td><td class="p-3.5 leading-relaxed">Selectively neutral mutational buffer.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">62 .. 63</strong> (2 entries)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1111xx</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">REGULATORY_OPERATOR</code></td><td class="p-3.5 leading-relaxed">Domain Delimiter</td><td class="p-3.5 leading-relaxed">Marks catalytic cluster boundary.</td></tr></tbody></table></div>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="5-rolf-landauers-thermodynamic-bound-cmos-dynamic-power" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Rolf Landauer's Thermodynamic Bound & CMOS Dynamic Power <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-rolf-landauers-thermodynamic-bound-cmos-dynamic-power" title="Direct link">#</a></h2>
+<h3 id="51-landauers-principle-1961" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.1 Landauer's Principle (1961) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#51-landauers-principle-1961" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1961, IBM physicist Rolf Landauer proved that information processing is inextricably bound to the laws of thermodynamics:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>When a logical operation is reversible (no information is destroyed), it can theoretically occur with zero heat dissipation.</li>
+<li>But whenever a logic gate performs an <strong class="text-slate-100 font-semibold">irreversible operation</strong> (such as an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate taking two inputs and producing one output, erasing one bit of input history), the physical entropy of the universe must increase:</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$Q_{\text{Landauer}} \ge k_B T \ln 2$$</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">At room temperature ($300\text{ K}$), $k_B T \ln 2 \approx 2.87 \times 10^{-21}\text{ Joules}$.</p>
+<h3 id="52-dynamic-cmos-power-in-physical-circuits" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.2 Dynamic CMOS Power in Physical Circuits <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#52-dynamic-cmos-power-in-physical-circuits" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In actual physical semiconductor gates (CMOS transistors) and biological regulatory networks, the physical energy consumed during a clock tick is dominated by <strong class="text-slate-100 font-semibold">dynamic switching dissipation</strong>:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$P_{\text{dynamic}} = \alpha \cdot C \cdot V^2 \cdot f$$</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Charging and discharging the gate's parasitic capacitance burns energy on every transition ($0 \to 1$ and $1 \to 0$).</li>
+<li>If a gate holds its state ($0 \to 0$ or $1 \to 1$), dynamic dissipation is zero.</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Siliquarium, every time a logic gate switches state, it incurs a non-negotiable Landauer penalty of <strong class="text-slate-100 font-semibold">$1$ Energy Token</strong> (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop.ts</code></a>).</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="6-deconstructive-equation-anatomy-dynamic-cmos-toggle-dissipation" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. Deconstructive Equation Anatomy: Dynamic CMOS Toggle Dissipation <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#6-deconstructive-equation-anatomy-dynamic-cmos-toggle-dissipation" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\color{#f87171}{\Delta E_{\text{metabolic}}} = \sum_{g=1}^{\color{#38bdf8}{N_{\text{gates}}}} \color{#fbbf24}{\mathbb{I}\left(y_g(t) \ne y_g(t-1)\right)} \cdot \color{#4ade80}{\kappa_{\text{toggle}}}$$</p>
+<h3 id="term-by-term-component-breakdown" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Term-by-Term Component Breakdown <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#term-by-term-component-breakdown" title="Direct link">#</a></h3>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Symbol</th><th class="p-3.5 font-semibold">Mathematical Term</th><th class="p-3.5 font-semibold">Biophysical Reality in Siliquarium</th><th class="p-3.5 font-semibold">Physical Biological Consequence</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\color{#f87171}{\Delta E_{\text{metabolic}}}$</td><td class="p-3.5 leading-relaxed">Total Landauer Burn</td><td class="p-3.5 leading-relaxed">Total energy tokens subtracted from battery due to circuit activity.</td><td class="p-3.5 leading-relaxed">Burns battery reserves; if higher than catalytic yield, causes starvation.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\color{#38bdf8}{N_{\text{gates}}}$</td><td class="p-3.5 leading-relaxed">Active Gate Count</td><td class="p-3.5 leading-relaxed">Number of translated logic gates in the workshop ($N \le 16$).</td><td class="p-3.5 leading-relaxed">Haldane's constraint: large circuits have more opportunities to dissipate power.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\color{#fbbf24}{\mathbb{I}(\dots)}$</td><td class="p-3.5 leading-relaxed">Indicator Function</td><td class="p-3.5 leading-relaxed">Evaluates to $1$ if gate $g$ switched state; evaluates to $0$ if state was held.</td><td class="p-3.5 leading-relaxed">Resting circuits burn zero Landauer energy; vibrating circuits burn maximum energy.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\color{#4ade80}{\kappa_{\text{toggle}}}$</td><td class="p-3.5 leading-relaxed">Dynamic Switching Cost</td><td class="p-3.5 leading-relaxed">Fundamental Landauer cost per bit transition ($1$ token/toggle).</td><td class="p-3.5 leading-relaxed">The non-negotiable thermodynamic tax of living computation.</td></tr></tbody></table></div>
+<h3 id="the-intuitive-truth-behind-the-architecture" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">💡 The Intuitive Truth Behind the Architecture <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#the-intuitive-truth-behind-the-architecture" title="Direct link">#</a></h3>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">Computation is not free. Every time a living cell changes its mind—every time an enzyme switches from inactive to active—it must physically rearrange its atoms and burn energy. An organism with a massive, hyperactive brain that switches wildly will starve to death long before an organism with a tiny, quiet brain that only fires when food is actually present.</blockquote>
+<h3 id="everyday-analogy-the-ticking-pendulum-vs-the-resting-block" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">🌍 Everyday Analogy: The Ticking Pendulum vs. The Resting Block <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#everyday-analogy-the-ticking-pendulum-vs-the-resting-block" title="Direct link">#</a></h3>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">Imagine pushing a heavy pendulum back and forth. Every time you reverse its direction, your muscles burn calories against inertia and air friction ($\kappa_{\text{toggle}}$). If you leave the pendulum resting in place, you burn zero calories. An organism that vibrates its logic gates back and forth without catching food is like a person frantically running on a treadmill in a famine: they collapse from exhaustion.</blockquote>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="7-worked-concrete-toy-trace-resonant-catalyst-vs-hyperactive-starvation" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">7. Worked Concrete Toy Trace: Resonant Catalyst vs. Hyperactive Starvation <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#7-worked-concrete-toy-trace-resonant-catalyst-vs-hyperactive-starvation" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Consider two organisms living side-by-side in identical pores under a vent that pulses Stream A and Stream B simultaneously once every 4 ticks ($t=0, 4, 8, \dots$):</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Cell Alpha (Resonant Catalyst):</strong> Possesses 1 single <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate wired to Stream A and Stream B.</li>
+<li><strong class="text-slate-100 font-semibold">Cell Beta (Hyperactive Loop):</strong> Possesses 2 cross-coupled <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code> gates forming an uninhibited ring oscillator that toggles every single tick.</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Both start at $E_0 = 50$ tokens. Catalytic yield $= +3$ tokens. Toggle cost $= 1$ token. Basal leak $= 1$ token every 10 ticks.</p>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Tick</th><th class="p-3.5 font-semibold">Vent Influx ($A \land B$)</th><th class="p-3.5 font-semibold">Alpha Output</th><th class="p-3.5 font-semibold">Alpha Toggles</th><th class="p-3.5 font-semibold">Alpha Net Energy</th><th class="p-3.5 font-semibold">Beta Outputs</th><th class="p-3.5 font-semibold">Beta Toggles</th><th class="p-3.5 font-semibold">Beta Net Energy</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">0</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code> (+3)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed">1</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$52$</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed">2</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$51$</strong></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">1</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed">1</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$51$</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed">2</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$49$</strong></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">2</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed">0</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$51$</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed">2</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$47$</strong></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">3</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed">0</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$51$</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed">2</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$45$</strong></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">4</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code> (+3)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed">1</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$53$</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed">2</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$46$</strong></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">8</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code> (+3)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed">1</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$55$</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed">2</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$38$</strong></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">12</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code> (+3)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed">1</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$57$</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed">2</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$30$</strong></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">25</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed">0</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$62$</strong></td><td class="p-3.5 leading-relaxed">—</td><td class="p-3.5 leading-relaxed">—</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$0$ (STARVED & LYSED)</strong></td></tr></tbody></table></div>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Key Takeaways:</strong></p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Cell Beta burns 2 tokens <em class="text-slate-200 italic">every single tick</em> ($2 \times 4 = 8$ tokens per cycle) while only capturing $3$ tokens from the vent. It operates at a chronic deficit of $-5$ tokens per cycle and starves by Tick 25.</li>
+<li>Cell Alpha only toggles when the food pulse arrives and departs ($2$ toggles per cycle $= -2$ tokens), earning $+3$ tokens from catalysis. It gains $+1$ token per cycle and steadily advances toward division!</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="8-conceptual-misconception-immunity-skeptic-faq" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">8. Conceptual Misconception Immunity (Skeptic FAQ) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#8-conceptual-misconception-immunity-skeptic-faq" title="Direct link">#</a></h2>
+<h3 id="q1-why-cant-an-organism-have-50-logic-gates-in-its-pore-to-compute-complex-things" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q1: "Why can't an organism have 50 logic gates in its pore to compute complex things?" <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#q1-why-cant-an-organism-have-50-logic-gates-in-its-pore-to-compute-complex-things" title="Direct link">#</a></h3>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><strong class="text-slate-100 font-semibold">Biophysical Answer:</strong> Haldane's Principle of Scale and Landauer costs prevent this. In a microscopic mineral pore ($10\,\mu\text{m}$), volume and substrate availability are strictly limited. In Siliquarium, the workshop canvas is constrained to an $8 \times 8$ grid ($\le 16$ gates). More importantly, if an organism evolved 50 gates, its dynamic switching dissipation would consume 30 to 50 tokens every tick, instantly starving the cell. Complex circuits only survive if their regulatory motifs save more energy than they burn.</blockquote>
+<h3 id="q2-is-the-simulation-programmed-to-reward-cells-that-discover-and-gates" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q2: "Is the simulation programmed to reward cells that discover AND gates?" <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#q2-is-the-simulation-programmed-to-reward-cells-that-discover-and-gates" title="Direct link">#</a></h3>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><strong class="text-slate-100 font-semibold">Biophysical Answer:</strong> No. The simulation kernel has zero fitness goals. The vent simply injects streams of chemical pulses ($A$ and $B$). If an organism has an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate, physical electrical continuity is completed, and charge flows into the capacitor. If it does not, charge does not flow. The universe does not "reward" the cell; the cell simply tapped a real physical energy gradient.</blockquote>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="9-socratic-discussion-study-questions" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">9. Socratic Discussion & Study Questions <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#9-socratic-discussion-study-questions" title="Direct link">#</a></h2>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Enzyme Kinetics as Logic:</strong> How does an allosteric inhibitor enzyme physically perform the Boolean operation <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">(A AND B) AND (NOT T)</code>? What happens to the enzyme's active site when toxin $T$ binds?</li>
+<li><strong class="text-slate-100 font-semibold">The XOR Barrier:</strong> Why is it physically impossible for a single catalytic binding pocket to execute an XOR operation? What is the minimum number of primitive gates required to construct an XOR network motif?</li>
+<li><strong class="text-slate-100 font-semibold">Landauer's Principle:</strong> Why does an uninhibited, freely running oscillator circuit cause rapid cell death in a nutrient-poor environment?</li>
+<li><strong class="text-slate-100 font-semibold">Haldane's Parsimony:</strong> In evolutionary biology, why are bacteria with streamlined, minimal genomes often able to outcompete bacteria with bloated genomes in stable environments?</li>
+</ol>
+      </div>
+    </main>
+  </div>
+
+  <!-- MASTER FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
+      <p>
+        <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
+        PolyForm Noncommercial License 1.0.0 •
+        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

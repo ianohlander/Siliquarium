@@ -1,0 +1,714 @@
+<!-- 🐠 Siliquarium Open-Ended Digital Life & Silicon Abiogenesis Laboratory • Created by & Copyright © 2026 Ian Ohlander. All rights reserved. -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annotated Primary Literature Bibliography — Siliquarium Master Documentation</title>
+  <link rel="icon" type="image/jpeg" href="../assets/logos/logo.jpg">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bio: {
+              bg: '#060911',
+              surface: '#0a0e1a',
+              panel: '#121829',
+              card: '#0f172a',
+              border: '#1e2c4a',
+              cyan: '#00e5ff',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              purple: '#a855f7',
+              sky: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            mono: ['Cascadia Code', 'Fira Code', 'Consolas', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #060911; }
+    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+
+    .card-bio, .card-chemiosmotic {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .card-digital, .card-silicon {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.4);
+    }
+    .card-margin, .card-analogy {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+    .card-experiment, .card-paleo {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+    .svg-container {
+      background: #090e15;
+      border: 1px solid #1e2c4a;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      overflow-x: auto;
+    }
+
+    /* Citation Target Highlighting & Interactive Navigation */
+    html { scroll-behavior: auto; }
+    li[id^="ref-"] {
+      scroll-margin-top: 6rem;
+      position: relative;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    @keyframes refTargetPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.95), 0 0 40px rgba(0, 229, 255, 0.85), inset 0 0 15px rgba(0, 229, 255, 0.35);
+        border-color: #22d3ee;
+        background-color: rgba(8, 51, 68, 0.95);
+        transform: scale(1.02);
+      }
+      30% {
+        box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.45), 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 20px rgba(0, 229, 255, 0.25);
+        border-color: #38bdf8;
+        background-color: rgba(8, 51, 68, 0.92);
+        transform: scale(1.015);
+      }
+      100% {
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 12px rgba(0, 229, 255, 0.15);
+        border-color: #00e5ff;
+        background-color: rgba(8, 51, 68, 0.88);
+        transform: scale(1);
+      }
+    }
+    @keyframes badgePopIn {
+      0% { opacity: 0; transform: translateY(6px) scale(0.8); }
+      60% { opacity: 1; transform: translateY(-2px) scale(1.06); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    li[id^="ref-"]:target,
+    li[id^="ref-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #22d3ee !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
+    }
+    li[id^="ref-"]:target::after,
+    li[id^="ref-"].active-citation-target::after {
+      content: "CITED IN TEXT 🎯";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0891b2, #0284c7);
+      color: #ffffff;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+    sup a[href^="#ref-"] {
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 0 1px;
+    }
+    sup a[href^="#ref-"]:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 8px #22d3ee;
+      transform: translateY(-1px);
+    }
+    section[id], div[id], h2[id], h3[id] {
+      scroll-margin-top: 5.5rem;
+    }
+    @keyframes backlinkTargetFlash {
+      0% { outline: 3px solid rgba(0, 229, 255, 0.9); outline-offset: 4px; }
+      100% { outline: 3px solid transparent; outline-offset: 4px; }
+    }
+    section[id]:target, div[id]:target {
+      animation: backlinkTargetFlash 2.5s ease-out;
+    }
+  </style>
+
+  <script id="citation-navigator">
+    document.addEventListener('DOMContentLoaded', function() {
+      function highlightRefCard(targetId) {
+        if (!targetId || !targetId.startsWith('ref-')) return;
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+          item.classList.remove('active-citation-target');
+        });
+        el.classList.remove('active-citation-target');
+        void el.offsetWidth;
+        el.classList.add('active-citation-target');
+        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }
+      function scrollToTarget(targetId) {
+        if (!targetId) return;
+        if (targetId.startsWith('ref-')) {
+          highlightRefCard(targetId);
+          return;
+        }
+        const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href && href.includes('#')) {
+            const hash = href.substring(href.indexOf('#') + 1);
+            if (hash.startsWith('ref-')) highlightRefCard(hash);
+          }
+        }
+      });
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) scrollToTarget(hash);
+      });
+      function checkInitialHash() {
+        if (window.location.hash) {
+          const hash = window.location.hash.replace('#', '');
+          scrollToTarget(hash);
+        }
+      }
+      checkInitialHash();
+      setTimeout(checkInitialHash, 150);
+      setTimeout(checkInitialHash, 500);
+      window.addEventListener('load', function() {
+        setTimeout(checkInitialHash, 100);
+      });
+      if (window.MathJax && window.MathJax.startup) {
+        window.MathJax.startup.promise = window.MathJax.startup.promise.then(function() {
+          setTimeout(checkInitialHash, 100);
+        });
+      }
+
+      // Sidebar & Dropdown Controller
+      const toggleBtn = document.getElementById('sidebar-toggle-btn');
+      const closeBtn = document.getElementById('sidebar-close-btn');
+      const sidebar = document.getElementById('doc-sidebar');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      const dropdownBtn = document.getElementById('nav-dropdown-btn');
+      const dropdownMenu = document.getElementById('nav-dropdown-menu');
+
+      function openSidebar() {
+        if (sidebar && backdrop) {
+          sidebar.classList.remove('-translate-x-full');
+          backdrop.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+      function closeSidebar() {
+        if (sidebar && backdrop) {
+          sidebar.classList.add('-translate-x-full');
+          backdrop.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      }
+
+      if (toggleBtn) toggleBtn.addEventListener('click', openSidebar);
+      if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+      if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+      if (dropdownBtn && dropdownMenu) {
+        dropdownBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          dropdownMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', function(e) {
+          if (!dropdownMenu.contains(e.target) && e.target !== dropdownBtn) {
+            dropdownMenu.classList.add('hidden');
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
+
+  <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
+  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <!-- Mobile/Drawer Toggle Button -->
+        <button id="sidebar-toggle-btn" class="lg:hidden p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 transition-colors font-mono text-xs flex items-center gap-1.5 shrink-0" aria-label="Toggle Navigation">
+          <span>☰</span>
+          <span class="hidden sm:inline">Docs Menu</span>
+        </button>
+
+        <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
+          <a href="../index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
+            <img src="../assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
+            <span class="hidden sm:inline">Siliquarium</span>
+            <span class="sm:hidden">Portal</span>
+          </a>
+          <span class="text-slate-600">/</span>
+          <span class="text-cyan-400 font-semibold truncate">Annotated Primary Literature Bibliography</span>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- Quick Mega-Menu Dropdown Button -->
+        <div class="relative">
+          <button id="nav-dropdown-btn" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-300 hover:border-cyan-700/60 rounded-lg text-xs font-mono transition-all flex items-center gap-1.5 shadow-sm">
+            <span>🧭</span>
+            <span>Explore Docs</span>
+            <span class="text-[10px] text-slate-500">▾</span>
+          </button>
+          <!-- Mega-Menu Overlay -->
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+            <div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🎓</span>
+        <span>Curriculum & Pedagogy</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../index.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🐠</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Portal Overview</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Curriculum portal & modular index</div>
+        </div>
+      </a><a href="../CURRICULUM_AND_SYLLABUS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📜</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Course Syllabus</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Syllabus, philosophy & symbol index</div>
+        </div>
+      </a><a href="../curriculum/unit1_prebiotic_threshold.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 1: Prebiotic Vents</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Alkaline vents, chemiosmosis & Pattee's cut</div>
+        </div>
+      </a><a href="../curriculum/unit2_logic_of_life.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚡</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 2: Logic of Life</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Primitive enzymes & XOR impossibility proof</div>
+        </div>
+      </a><a href="../curriculum/unit3_systems_biology_motifs.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🕸️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 3: Systems Motifs</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Uri Alon motifs & Weisfeiler-Lehman hashes</div>
+        </div>
+      </a><a href="../curriculum/unit4_evolutionary_dynamics.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 4: Macro-Evolution</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Kimura drift, convergent homoplasy & LTEE</div>
+        </div>
+      </a><a href="../curriculum/practicums_lab_manual.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧪</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Student Lab Manual</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5 hands-on labs & formative assessments</div>
+        </div>
+      </a><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Companion Portal</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Master portal & assessment rubrics</div>
+        </div>
+      </a><a href="../companion/glossary.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Lexicon & Glossary</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">55-term systems biology lexicon</div>
+        </div>
+      </a><a href="../companion/study_guides.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧭</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Study Guides & Decoders</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">8 equation decoders & derivations</div>
+        </div>
+      </a><a href="../companion/bibliography.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 bg-cyan-950/80 border border-cyan-700/60 text-cyan-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-cyan-300">Annotated Bibliography</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">14 foundational primary papers</div>
+        </div>
+      </a><a href="../QA/STUDENT_UX_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔍</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Student QA Report</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">12th-grade usability audit & screenshots</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🌊</span>
+        <span>Biophysical Theory</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../THEORETICAL_MODEL.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Theoretical Model</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">21 sealed sections & thermodynamic laws</div>
+        </div>
+      </a><a href="../EPISTEMIC_FOUNDATIONS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Epistemic Foundations</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Howard Pattee's Epistemic Cut & defenses</div>
+        </div>
+      </a><a href="../DOCUMENTATION_DESIGN_PRINCIPLES.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📐</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Design Principles</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Documentation & UI/UX architecture</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🔬</span>
+        <span>Laboratory Guides</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../PHASE_3_VISUALIZER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">3D Seafloor Visualizer</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Bathymetry, orbit camera & circuit microscope</div>
+        </div>
+      </a><a href="../PHASE_4_PALEONTOLOGY_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🦕</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology & Motifs</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Weisfeiler-Lehman hashes & fossil freezer</div>
+        </div>
+      </a><a href="../PHASE_5_PELAGIC_SPORES_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Pelagic Spores & Controls</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Buoyant spore drift & God-suite parameters</div>
+        </div>
+      </a><a href="../PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Phylogeny & Dynamics</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Multi-lineage clades & Lenski benchmarks</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🎨</span>
+        <span>Visuals & Identity</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../BRAND_IDENTITY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎨</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Brand Identity</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Visual philosophy & biomorphic styling</div>
+        </div>
+      </a><a href="../logos.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🖼️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Logo Gallery</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">High-res Fibonacci nautilus asset suite</div>
+        </div>
+      </a></div></div>
+          </div>
+        </div>
+
+        <a href="../../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🚀</span>
+          <span class="hidden md:inline">Live Simulator</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MASTER 2-COLUMN VIEWPORT (Sidebar + Content) -->
+  <div class="max-w-7xl mx-auto flex-1 w-full flex">
+    <!-- LEFT CATEGORIZED SIDEBAR (Desktop Sticky + Mobile Off-Canvas) -->
+    <aside id="doc-sidebar" class="fixed lg:sticky top-0 lg:top-[45px] z-50 lg:z-10 h-screen lg:h-[calc(100vh-45px)] w-72 bg-[#060911]/95 lg:bg-transparent backdrop-blur-xl lg:backdrop-blur-none border-r border-slate-800/80 p-5 space-y-6 overflow-y-auto shrink-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-200">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 lg:hidden">
+        <div class="flex items-center gap-2">
+          <img src="../assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
+          <span class="text-xs font-mono font-bold text-cyan-400">Documentation Index</span>
+        </div>
+        <button id="sidebar-close-btn" class="text-slate-400 hover:text-white text-base font-mono p-1">✕</button>
+      </div>
+      <div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🎓</span>
+        <span>Curriculum & Pedagogy</span>
+      </div>
+      <div class="space-y-0.5"><a href="../index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🐠</span>
+        <span class="truncate">Portal Overview</span>
+      </a><a href="../CURRICULUM_AND_SYLLABUS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📜</span>
+        <span class="truncate">Course Syllabus</span>
+      </a><a href="../curriculum/unit1_prebiotic_threshold.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌋</span>
+        <span class="truncate">Unit 1: Prebiotic Vents</span>
+      </a><a href="../curriculum/unit2_logic_of_life.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚡</span>
+        <span class="truncate">Unit 2: Logic of Life</span>
+      </a><a href="../curriculum/unit3_systems_biology_motifs.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🕸️</span>
+        <span class="truncate">Unit 3: Systems Motifs</span>
+      </a><a href="../curriculum/unit4_evolutionary_dynamics.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Unit 4: Macro-Evolution</span>
+      </a><a href="../curriculum/practicums_lab_manual.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧪</span>
+        <span class="truncate">Student Lab Manual</span>
+      </a><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Companion Portal</span>
+      </a><a href="../companion/glossary.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Lexicon & Glossary</span>
+      </a><a href="../companion/study_guides.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧭</span>
+        <span class="truncate">Study Guides & Decoders</span>
+      </a><a href="../companion/bibliography.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold shadow-sm">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Annotated Bibliography</span>
+      </a><a href="../QA/STUDENT_UX_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔍</span>
+        <span class="truncate">Student QA Report</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🌊</span>
+        <span>Biophysical Theory</span>
+      </div>
+      <div class="space-y-0.5"><a href="../THEORETICAL_MODEL.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">Theoretical Model</span>
+      </a><a href="../EPISTEMIC_FOUNDATIONS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Epistemic Foundations</span>
+      </a><a href="../DOCUMENTATION_DESIGN_PRINCIPLES.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📐</span>
+        <span class="truncate">Design Principles</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🔬</span>
+        <span>Laboratory Guides</span>
+      </div>
+      <div class="space-y-0.5"><a href="../PHASE_3_VISUALIZER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔬</span>
+        <span class="truncate">3D Seafloor Visualizer</span>
+      </a><a href="../PHASE_4_PALEONTOLOGY_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🦕</span>
+        <span class="truncate">Paleontology & Motifs</span>
+      </a><a href="../PHASE_5_PELAGIC_SPORES_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">Pelagic Spores & Controls</span>
+      </a><a href="../PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Phylogeny & Dynamics</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🎨</span>
+        <span>Visuals & Identity</span>
+      </div>
+      <div class="space-y-0.5"><a href="../BRAND_IDENTITY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎨</span>
+        <span class="truncate">Brand Identity</span>
+      </a><a href="../logos.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🖼️</span>
+        <span class="truncate">Logo Gallery</span>
+      </a></div></div>
+    </aside>
+
+    <!-- Mobile Drawer Backdrop -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+    <!-- MAIN CONTENT VIEWPORT (Centered, Responsive, Zero Horizontal Scrollbars) -->
+    <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-10 py-8 md:py-10">
+      <div class="max-w-4xl mx-auto space-y-8">
+        <h1 id="critical-academic-endnotes-exhaustive-annotated-primary-literature-bibliography" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">📚 Critical Academic Endnotes & Exhaustive Annotated Primary Literature Bibliography <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#critical-academic-endnotes-exhaustive-annotated-primary-literature-bibliography" title="Direct link">#</a></h1>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Authoritative Contextualization of 14 Landmark Peer-Reviewed Publications in Biophysics, Cybernetics, Synthetic Biology, and Evolutionary Genetics</em></p>
+<hr class="border-t border-slate-800 my-8" />
+<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><br/><strong class="text-slate-100 font-semibold">Modular Companion Suite Navigation:</strong><br/><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Companion Portal</a> | <a href="glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Lexicon & Glossary</a> | <a href="study_guides.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🧭 Study Guides & Equation Decoders</a> | <a href="../CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🎓 Curriculum & Syllabus</a></div></div>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="1-peter-mitchell-1961" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Peter Mitchell (1961) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-peter-mitchell-1961" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citation:</strong> Mitchell, P. (1961). "Coupling of phosphorylation to electron and hydrogen transfer by a chemi-osmotic type of mechanism." <em class="text-slate-200 italic">Nature</em>, 191(4784), 144–148. DOI: 10.1038/191144a0.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Biological energy transduction does not proceed via hypothetical high-energy chemical intermediates, but via a transmembrane electrochemical potential difference of protons (chemiosmosis).</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Mitchell established that biological membranes must be fundamentally impermeable to ions. Enzymes embedded in the membrane pump protons outward during electron transport, storing free energy electrostatically and chemically ($\Delta p = \Delta \psi - \frac{2.303 RT}{F} \Delta \text{pH}$). The return flux of protons through a reversible ATPase motor drives ATP synthesis from ADP and $P_i$.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Embodied in the pore boundary bioenergetics of <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/physics/VentPhysics.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">VentPhysics.ts</code></a> and <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreBattery.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreBattery.ts</code></a>. Organisms do not receive energy from an abstract score; they extract free energy from the potential difference between incoming hydrothermal bit streams and the ocean sink.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Disabuses students of the misconception that ATP is a "magic fuel tablet." Replaces chemical mystique with physical circuit analysis: the membrane is a capacitor, the proton gradient is a voltage source, and metabolism is current flow.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="2-michael-j-russell-allan-j-hall-1997" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Michael J. Russell & Allan J. Hall (1997) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-michael-j-russell-allan-j-hall-1997" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citation:</strong> Russell, M. J., & Hall, A. J. (1997). "The emergence of life from iron monosulphide bubbles at a submarine hydrothermal spring." <em class="text-slate-200 italic">Journal of the Geological Society</em>, 154(3), 377–402. DOI: 10.1144/gsjgs.154.3.0377.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Life did not originate in open surface waters or warm ponds, but within inorganic iron monosulfide ($FeS$) micro-compartments at submarine alkaline hydrothermal springs.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Prebiotic Hadean oceans were acidic ($pH \sim 5.5$) and rich in dissolved $CO_2$ and $Fe^{2+}$, whereas hydrothermal vent fluids were warm ($60\text{–}90^\circ\text{C}$), alkaline ($pH \sim 10.0$), and rich in $H_2$ and $HS^-$. The spontaneous precipitation of colloidal $FeS$ membranes created natural micro-porous foams that provided physical compartmentation and an abiotic proton motive force ($\Delta \text{pH} \approx 4.5 \implies \sim 200 \text{ mV}$) prior to the origin of organic lipids or enzymes.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> The 3D hexagonal basalt honeycomb grid (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/grid/HexGrid3D.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">HexGrid3D.ts</code></a>) and the <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreBattery.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreBattery</code></a> capacitance model. The pore is not an evolved lipid bilayer; it is an inorganic rock cavity.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Resolves the chicken-and-egg paradox of cellular membranes: life did not have to synthesize lipids to create its first cell wall; the Earth provided the first cell walls as porous stone cavities.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="3-nick-lane-william-f-martin-2012" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Nick Lane & William F. Martin (2012) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-nick-lane-william-f-martin-2012" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citation:</strong> Lane, N., & Martin, W. F. (2012). "The origin of membrane bioenergetics." <em class="text-slate-200 italic">Cell</em>, 151(7), 1406–1416. DOI: 10.1016/j.cell.2012.11.050.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Chemiosmotic coupling across inorganic mineral walls is universally conserved because it was the singular bioenergetic mechanism present in the Last Universal Common Ancestor (LUCA); cellular lipid membranes evolved independently in Archaea and Bacteria to prevent charge dissipation upon leaving the vent.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Explains why the lipid membrane chemistries of Archaea (ether-linked isoprenoids) and Bacteria (ester-linked fatty acids) are completely non-homologous: LUCA was physically bound to the inorganic hydrothermal vent mound. Only after evolving active ion pumps (such as the $Na^+/H^+$ antiporter) could proto-cells close their membranes with lipids and escape the vent into the open sea.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> The transition from sessile pore-bound existence to pelagic spore dispersal (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts#L125-L145" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationWorld.ts</code></a>). Spores can only disperse once they accumulate sufficient internal matter and energy tokens to survive temporary detachment from the benthic rock capacitor.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Demonstrates the power of comparative genomics and biophysical constraints in reconstructing the deep evolutionary transition from geochemical proto-life to autonomous prokaryotic cells.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="4-howard-h-pattee-1972-2001" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. Howard H. Pattee (1972 & 2001) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-howard-h-pattee-1972-2001" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citations:</strong>  </li>
+<li>Pattee, H. H. (1972). "The nature of hierarchical controls in living matter." <em class="text-slate-200 italic">Foundations of Mathematical Biology</em>, Vol. 1, 1–22. Academic Press.</li>
+<li>Pattee, H. H. (2001). "The physics of symbols: bridging the epistemic cut." <em class="text-slate-200 italic">Biosystems</em>, 60(1-3), 5–21. DOI: 10.1016/S0303-2647(01)00104-6.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Life is uniquely defined in the physical universe by the <strong class="text-slate-100 font-semibold">Epistemic Cut</strong>—the non-reducible complementarity between rate-independent symbolic informational descriptions and rate-dependent continuous physical laws.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Physical laws are inexorable, time-dependent, and governed by differential equations. A symbolic code (e.g., DNA or formal computer language) is rate-independent: its instructional meaning does not depend on the velocity of physical transcription. Physical dynamics cannot generate symbolic constraints without a measurement/reading apparatus, and symbolic codes cannot alter the world without rate-dependent physical actuators.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> The architectural partition between <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/GenomeSafe.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GenomeSafe.ts</code></a> (inert, time-invariant 60-bit strings) and <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop.ts</code></a> (active, power-consuming, rate-dependent logic gate evaluations).</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Serves as the antidote to naive reductionism. Teaches students that life cannot be understood purely as chemistry (which ignores symbolic code) or purely as software (which ignores thermodynamic constraints).</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="5-john-von-neumann-1966" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. John von Neumann (1966) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-john-von-neumann-1966" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citation:</strong> Von Neumann, J. (1966). <em class="text-slate-200 italic">Theory of Self-Reproducing Automata</em> (Edited and completed by A. W. Burks). University of Illinois Press, Urbana and London.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> To reproduce indefinitely without suffering mutational degeneration (error catastrophe), a self-reproducing automaton must employ an uninterpreted symbolic description of itself that is duplicated blindly rather than physically inspecting its active hardware.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> If machine $M$ replicates by having its active parts physically inspect themselves, any operational defect in $M$ alters the inspecting mechanism, compounding errors across generations. By dividing the system into: (1) an inert symbolic description $\phi(M)$, (2) an active universal constructor $A$, (3) a tape copier $B$, and (4) a control supervisor $C$, mutations in $\phi(M)$ produce modified constructors without inherently corrupting the fidelity of copier $B$.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Reproduction occurs by blindly copying the 60-bit genome tape from parent safe to child safe (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/GenomeSafe.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GenomeSafe.ts</code></a>), while constructor translation occurs independently inside the workshop (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop.ts</code></a>).</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Demonstrates that the central architecture of molecular biology (DNA replication separate from protein synthesis) was deduced as a mathematical necessity years before Watson and Crick solved the structure of DNA.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="6-rolf-landauer-1961" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. Rolf Landauer (1961) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#6-rolf-landauer-1961" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citation:</strong> Landauer, R. (1961). "Irreversibility and heat generation in the computing process." <em class="text-slate-200 italic">IBM Journal of Research and Development</em>, 5(3), 183–191. DOI: 10.1147/rd.53.0183.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Information is physical. Logical irreversibility in information processing (such as the erasure of a bit or merging of computation paths) dissipates a fundamental minimum amount of thermodynamic heat into the environment.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> By connecting information entropy ($H = -\sum p \log p$) to thermodynamic Boltzmann entropy ($S = k_B \ln \Omega$), Landauer proved that resetting an unknown binary bit to a known reference state compresses the system's phase space, necessitating an entropic dissipation into the heat sink of $\Delta Q \ge k_B T \ln 2$.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Implemented in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts#L65-L85" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop.ts</code></a>: every logic gate state transition ($0 \to 1$ or $1 \to 0$) consumes 1 Energy Token from the pore's internal battery, enforcing metabolic parsimony.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Bridges computer science, statistical mechanics, and cellular physiology, disproving the myth that digital logic is an abstract, costless mathematical game.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="7-uri-alon-2007-2019" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">7. Uri Alon (2007 & 2019) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#7-uri-alon-2007-2019" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citations:</strong>  </li>
+<li>Alon, U. (2007). "Network motifs: theory and experimental approaches." <em class="text-slate-200 italic">Nature Reviews Genetics</em>, 8(6), 450–461. DOI: 10.1038/nrg2102.</li>
+<li>Alon, U. (2019). <em class="text-slate-200 italic">An Introduction to Systems Biology: Design Principles of Biological Circuits</em> (2nd ed.). CRC Press, Boca Raton.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Biological networks are not random hairballs; they are constructed from small, recurring structural wiring patterns ("network motifs") that appear far more frequently than expected by chance because they perform fundamental, robust information processing tasks.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Using graph comparison against randomized degree-preserved networks ($Z$-score analysis), Alon identified recurring subgraphs: negative autoregulation (accelerating response times), positive feedback (bistability and epigenetic memory), and feed-forward loops (sign-sensitive delays and pulse generators).</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> The core paleontology scanning engine in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">MotifScanner.ts</code></a>, which scans living and fossilized gate netlists for bistable toggle switches, ring oscillators, and feed-forward loops.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Provides students with a systematic framework for reverse-engineering complex biological systems into understandable functional building blocks.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="8-timothy-s-gardner-charles-r-cantor-james-j-collins-2000" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">8. Timothy S. Gardner, Charles R. Cantor, & James J. Collins (2000) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#8-timothy-s-gardner-charles-r-cantor-james-j-collins-2000" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citation:</strong> Gardner, T. S., Cantor, C. R., & Collins, J. J. (2000). "Construction of a genetic toggle switch in Escherichia coli." <em class="text-slate-200 italic">Nature</em>, 403(6767), 339–342. DOI: 10.1038/35002131.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Synthetic, robust, bistable gene circuits can be engineered <em class="text-slate-200 italic">de novo</em> in living bacteria using two mutually repressing transcriptional repressors, establishing the foundation of modern synthetic biology.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Two genes ($lacI$ and $tetR$) were configured such that the protein product of each represses the promoter of the other. The resulting non-linear dynamical system possesses two stable steady states and a single unstable saddle node. Transient thermal or chemical inducer pulses flip the circuit between states with clear hysteresis.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Detected as the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">BISTABLE_LATCH</code> motif in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts#L70-L95" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">MotifScanner.ts</code></a>. Circuits that evolve mutual cross-coupled negation store 1-bit memory of transient hydrothermal pulses.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Demonstrates that cellular memory does not require a central microprocessor; simple reciprocal negative feedback creates persistent epigenetic state.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="9-michael-b-elowitz-stanislas-leibler-2000" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">9. Michael B. Elowitz & Stanislas Leibler (2000) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#9-michael-b-elowitz-stanislas-leibler-2000" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citation:</strong> Elowitz, M. B., & Leibler, S. (2000). "A synthetic oscillatory network of transcriptional regulators." <em class="text-slate-200 italic">Nature</em>, 403(6767), 335–338. DOI: 10.1038/35002125.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> An autonomous limit-cycle genetic clock (the "Repressilator") can be constructed in <em class="text-slate-200 italic">E. coli</em> using a cyclical negative feedback loop composed of three transcriptional repressors.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> By arranging three repressors ($lacI$, $tetR$, and $cI$) in a directed ring where $lacI$ represses $tetR$, $tetR$ represses $cI$, and $cI$ represses $lacI$, the odd number of inversions combined with transcription-translation delays destabilizes steady-state equilibrium, forcing the system into an autonomous limit-cycle oscillation.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">RING_OSCILLATOR</code> motif in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts#L100-L135" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">MotifScanner.ts</code></a>, where three inverters arranged in a closed cycle generate periodic clock pulses.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Teaches how biological pacemakers, circadian rhythms, and metabolic cycles emerge from simple dynamical feedback structures.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="10-richard-e-lenski-et-al-1991-2003-zachary-d-blount-et-al-2008" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">10. Richard E. Lenski et al. (1991, 2003) & Zachary D. Blount et al. (2008) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#10-richard-e-lenski-et-al-1991-2003-zachary-d-blount-et-al-2008" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citations:</strong>  </li>
+<li>Lenski, R. E., Rose, M. R., Simpson, S. C., & Tadler, S. C. (1991). "Long-term experimental evolution in Escherichia coli. I. Adaptation and divergence during 2,000 generations." <em class="text-slate-200 italic">The American Naturalist</em>, 138(6), 1315–1341.</li>
+<li>Lenski, R. E., Ofria, C., Pennock, R. T., & Adami, C. (2003). "The evolutionary origin of complex features." <em class="text-slate-200 italic">Nature</em>, 423(6936), 139–144.</li>
+<li>Blount, Z. D., Borland, C. Z., & Lenski, R. E. (2008). "Historical contingency and the evolution of a key innovation in an experimental population of Escherichia coli." <em class="text-slate-200 italic">PNAS</em>, 105(23), 7899–7906.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Macro-evolutionary adaptation decelerates asymptotically over generational time; complex novel features (such as citrate aerobic metabolism, $Cit^+$) depend strictly upon antecedent historical contingency and genetic potentiation.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> By propagating 12 asexual populations of <em class="text-slate-200 italic">E. coli</em> since 1988 with periodic cryopreservation ("frozen fossil records"), Lenski proved that adaptation follows a power-law trajectory. Furthermore, replaying frozen ancestral strains from before Generation 31,500 proved that the evolution of citrate metabolism was historically contingent upon prior neutral or non-adaptive mutations that potentiated the genome.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Directly instantiated in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LteeBenchmark.ts</code></a> and <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/FossilFreezer.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">FossilFreezer.ts</code></a>. The simulator maintains frozen snapshots of ancestral genomes, allowing counterfactual replays and single-bit autopsies.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Replaces abstract evolutionary debates with empirical experimental data, showing students that evolution is an open-ended, empirically testable physical process.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="11-motoo-kimura-1968-1983" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">11. Motoo Kimura (1968 & 1983) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#11-motoo-kimura-1968-1983" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citations:</strong>  </li>
+<li>Kimura, M. (1968). "Evolutionary rate at the molecular level." <em class="text-slate-200 italic">Nature</em>, 217(5129), 624–626. DOI: 10.1038/217624a0.</li>
+<li>Kimura, M. (1983). <em class="text-slate-200 italic">The Neutral Theory of Molecular Evolution.</em> Cambridge University Press, Cambridge.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> The vast majority of evolutionary substitutions at the molecular sequence level are selectively neutral or nearly neutral, governed by stochastic genetic drift rather than positive Darwinian selection.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Kimura calculated that the molecular rate of amino acid substitution across mammalian lineages was extraordinarily rapid and constant across time. Under classical selectionism, this rate would impose an intolerable "cost of selection" (Haldane's dilemma). By proving that the neutral substitution rate $k = u$, Kimura demonstrated that molecular evolution is driven by random drift acting on neutral mutations.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Implemented via non-coding introns (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">INTRON_SILENT</code>) and synonymous degenerate codons in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CodonTable.ts</code></a>. Lineages drift across neutral Hamming paths (blue edges in the fossil trajectory) without metabolic penalty.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Inoculates students against vulgar pan-selectionism, emphasizing that molecular diversity is largely the signature of neutral drift.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="12-susumu-ohno-1970" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">12. Susumu Ohno (1970) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#12-susumu-ohno-1970" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citation:</strong> Ohno, S. (1970). <em class="text-slate-200 italic">Evolution by Gene Duplication.</em> Springer-Verlag, Berlin, Heidelberg, New York. DOI: 10.1007/978-3-642-86659-3.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Natural selection alone is a conservative force that purges defects; the creation of genuinely novel gene functions requires <strong class="text-slate-100 font-semibold">gene duplication</strong>, which provides redundant genetic material freed from selective constraints.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> When a single-copy gene performs an essential metabolic task, every deleterious mutation is purged by purifying selection. Duplication creates a redundant paralog. While one copy sustains essential function, the duplicate copy can accumulate mutations across neutral and deleterious valleys until discovering a novel functional catalytic activity (neofunctionalization).</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Codon duplication and intron expansion observed in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">EvolutionaryFlightRecorder.ts</code></a>. Ancestral lineages repeatedly duplicate existing codons, mutating the extra copy into specialized logic gates to form composite network motifs.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Explains how complex biological novelty emerges without requiring miraculous multi-base simultaneous mutations.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="13-boris-weisfeiler-andrei-lehman-1968" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">13. Boris Weisfeiler & Andrei Lehman (1968) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#13-boris-weisfeiler-andrei-lehman-1968" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citation:</strong> Weisfeiler, B., & Lehman, A. (1968). "A reduction of a graph to a canonical form and an algebra arising during this reduction." <em class="text-slate-200 italic">Nauchno-Tekhnicheskaya Informatsiya</em>, Seriya 2(9), 12–16.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Graph isomorphism can be efficiently determined for broad classes of directed graphs using iterative 1-dimensional color refinement and partition hashing of neighborhood multisets.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Direct graph matching requires evaluating $N!$ vertex permutations (an NP-hard problem). Weisfeiler and Lehman proved that iteratively assigning each vertex a hash of its own label concatenated with the sorted multiset of its neighbor labels refines the graph into canonical topological color classes within $O(N^2)$ steps.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> The core graph hashing engine in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/WeisfeilerLehmanHasher.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">WeisfeilerLehmanHasher.ts</code></a>. The Digital Paleontologist uses 1-WL hashing to track lineage morphotypes across thousands of ticks.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Demonstrates how abstract graph theory provides practical algorithms for categorizing biological networks.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="14-claude-e-shannon-1948" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">14. Claude E. Shannon (1948) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#14-claude-e-shannon-1948" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Primary Citation:</strong> Shannon, C. E. (1948). "A Mathematical Theory of Communication." <em class="text-slate-200 italic">Bell System Technical Journal</em>, 27(3), 379–423 & 27(4), 623–656.</li>
+<li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Information can be quantified objectively as the reduction of uncertainty across a discrete probability distribution, establishing the theoretical bounds of data compression and noisy channel transmission.</li>
+<li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Shannon defined entropy as $H(X) = -\sum p(x) \log_2 p(x)$ and proved the Noisy-Channel Coding Theorem: reliable communication is possible across a noisy channel up to channel capacity $C = B \log_2(1 + S/N)$ using appropriate error-correcting codes.</li>
+<li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Used in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LteeBenchmark.ts</code></a> to compute the ecological Shannon Diversity Index $H = -\sum p_i \ln p_i$, tracking population diversity collapse and recovery.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Unifies communications engineering, statistical mechanics, and population ecology under a shared mathematical language.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><br/><strong class="text-slate-100 font-semibold">Modular Companion Suite Navigation:</strong><br/><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Return to Master Companion Portal</a> | <a href="glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Advance to Lexicon & Glossary</a> | <a href="study_guides.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🧭 Advance to Study Guides & Equation Decoders</a></div></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- MASTER FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
+      <p>
+        <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
+        PolyForm Noncommercial License 1.0.0 •
+        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
