@@ -14,20 +14,17 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
 const NAV_ITEMS = [
-  { id: 'index', title: 'Portal / Overview', href: 'index.html', icon: '🐠' },
+  { id: 'index', title: 'Portal Home', href: 'index.html', icon: '🐠' },
+  { id: 'syllabus', title: 'Curriculum & Labs', href: 'CURRICULUM_AND_SYLLABUS.html', icon: '🎓' },
+  { id: 'pedagogy', title: 'Pedagogical Companion', href: 'PEDAGOGICAL_COMPANION_SUITE.html', icon: '🏛️' },
   { id: 'theory', title: 'Theoretical Model', href: 'THEORETICAL_MODEL.html', icon: '🌊' },
   { id: 'epistemic', title: 'Epistemic Foundations', href: 'EPISTEMIC_FOUNDATIONS.html', icon: '🧬' },
+  { id: 'phase3', title: '3D Visualizer', href: 'PHASE_3_VISUALIZER_GUIDE.html', icon: '🔬' },
+  { id: 'phase4', title: 'Paleontology & Motifs', href: 'PHASE_4_PALEONTOLOGY_GUIDE.html', icon: '🦕' },
+  { id: 'phase5', title: 'Spores & Controls', href: 'PHASE_5_PELAGIC_SPORES_GUIDE.html', icon: '🌊' },
+  { id: 'phase6', title: 'Phylogeny & Dynamics', href: 'PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html', icon: '🧬' },
   { id: 'brand', title: 'Brand Identity', href: 'BRAND_IDENTITY.html', icon: '🎨' },
-  { id: 'phase3', title: 'Phase 3 Visualizer', href: 'PHASE_3_VISUALIZER_GUIDE.html', icon: '🔬' },
-  { id: 'phase4', title: 'Phase 4 Paleontology', href: 'PHASE_4_PALEONTOLOGY_GUIDE.html', icon: '🦕' },
-  { id: 'phase5', title: 'Phase 5 Spores', href: 'PHASE_5_PELAGIC_SPORES_GUIDE.html', icon: '🌊' },
-  { id: 'phase6', title: 'Phase 6 Phylogeny', href: 'PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html', icon: '🧬' },
-  { id: 'syllabus', title: 'Curriculum & Lab Manual', href: 'CURRICULUM_AND_SYLLABUS.html', icon: '🎓' },
-  { id: 'pedagogy', title: 'Pedagogical Companion', href: 'PEDAGOGICAL_COMPANION_SUITE.html', icon: '🏛️' },
-  { id: 'logos', title: 'Logo Gallery', href: 'logos.html', icon: '🖼️' },
-  { id: 'dev', title: 'Dev Standards', href: 'DEVELOPMENT_STANDARDS.html', icon: '🏛️' },
-  { id: 'qa', title: 'QA Standards', href: 'QA_AND_TESTING_STANDARDS.html', icon: '🧪' },
-  { id: 'docs', title: 'Doc Standards', href: 'DOCUMENTATION_STANDARDS.html', icon: '📚' }
+  { id: 'logos', title: 'Logo Gallery', href: 'logos.html', icon: '🖼️' }
 ];
 
 function escapeHtml(str) {
@@ -638,9 +635,23 @@ function renderHtmlTemplate({ title, content, currentDocId, relativeRoot = '' })
 const DOCS_MAP = [
   {
     docId: 'index',
-    srcMd: 'README.md',
+    srcMd: 'docs/PORTAL.md',
     destHtml: 'docs/index.html',
-    title: 'Siliquarium: Open-Ended Digital Life',
+    title: 'Siliquarium Documentation Portal',
+    relativeRoot: ''
+  },
+  {
+    docId: 'syllabus',
+    srcMd: 'docs/CURRICULUM_AND_SYLLABUS.md',
+    destHtml: 'docs/CURRICULUM_AND_SYLLABUS.html',
+    title: 'Curriculum & Lab Manual: Systems Biology & Silicon Abiogenesis',
+    relativeRoot: ''
+  },
+  {
+    docId: 'pedagogy',
+    srcMd: 'docs/PEDAGOGICAL_COMPANION_SUITE.md',
+    destHtml: 'docs/PEDAGOGICAL_COMPANION_SUITE.html',
+    title: 'Pedagogical Companion Suite: Systems Biology & Silicon Abiogenesis',
     relativeRoot: ''
   },
   {
@@ -655,13 +666,6 @@ const DOCS_MAP = [
     srcMd: 'docs/EPISTEMIC_FOUNDATIONS.md',
     destHtml: 'docs/EPISTEMIC_FOUNDATIONS.html',
     title: 'Epistemic Foundations & Prebiotic Justifications',
-    relativeRoot: ''
-  },
-  {
-    docId: 'brand',
-    srcMd: 'docs/BRAND_IDENTITY.md',
-    destHtml: 'docs/BRAND_IDENTITY.html',
-    title: 'Brand Identity & Visual Philosophy',
     relativeRoot: ''
   },
   {
@@ -693,24 +697,10 @@ const DOCS_MAP = [
     relativeRoot: ''
   },
   {
-    docId: 'syllabus',
-    srcMd: 'docs/CURRICULUM_AND_SYLLABUS.md',
-    destHtml: 'docs/CURRICULUM_AND_SYLLABUS.html',
-    title: 'Curriculum & Lab Manual: Systems Biology & Silicon Abiogenesis',
-    relativeRoot: ''
-  },
-  {
-    docId: 'pedagogy',
-    srcMd: 'docs/PEDAGOGICAL_COMPANION_SUITE.md',
-    destHtml: 'docs/PEDAGOGICAL_COMPANION_SUITE.html',
-    title: 'Pedagogical Companion Suite: Systems Biology & Silicon Abiogenesis',
-    relativeRoot: ''
-  },
-  {
-    docId: 'dev',
-    srcMd: 'standards/DEVELOPMENT_STANDARDS.md',
-    destHtml: 'docs/DEVELOPMENT_STANDARDS.html',
-    title: 'Engineering & Software Architecture Standards',
+    docId: 'brand',
+    srcMd: 'docs/BRAND_IDENTITY.md',
+    destHtml: 'docs/BRAND_IDENTITY.html',
+    title: 'Brand Identity & Visual Philosophy',
     relativeRoot: ''
   },
   {
@@ -721,25 +711,11 @@ const DOCS_MAP = [
     relativeRoot: '../docs/'
   },
   {
-    docId: 'qa',
-    srcMd: 'standards/QA_AND_TESTING_STANDARDS.md',
-    destHtml: 'docs/QA_AND_TESTING_STANDARDS.html',
-    title: 'QA & Testing Standards',
-    relativeRoot: ''
-  },
-  {
     docId: 'qa-standards',
     srcMd: 'standards/QA_AND_TESTING_STANDARDS.md',
     destHtml: 'standards/QA_AND_TESTING_STANDARDS.html',
     title: 'QA & Testing Standards',
     relativeRoot: '../docs/'
-  },
-  {
-    docId: 'docs',
-    srcMd: 'standards/DOCUMENTATION_STANDARDS.md',
-    destHtml: 'docs/DOCUMENTATION_STANDARDS.html',
-    title: 'Documentation & Pedagogical Standards',
-    relativeRoot: ''
   },
   {
     docId: 'docs-standards',

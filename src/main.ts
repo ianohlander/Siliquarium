@@ -74,6 +74,51 @@ class SiliquariumApp {
     // Start simulation loop at 1x
     this.loop.start();
     this.startRenderLoop();
+    this.handleQaUrlParams();
+  }
+
+  private handleQaUrlParams(): void {
+    const params = new URLSearchParams(window.location.search);
+    const qaStep = params.get('qa_step');
+    if (!qaStep) return;
+
+    if (qaStep === 'overview') {
+      // Default initial state
+    } else if (qaStep === 'zoomed_drift') {
+      // Student tries to zoom into a peripheral silicoid without selecting it
+      this.camera.distance = 11.0;
+    } else if (qaStep === 'selected') {
+      // Student clicks on an occupied pore
+      const tele = this.world.exportTelemetry();
+      const occ = tele.pores.find(p => p.state === 'OCCUPIED' && !p.isAqueous);
+      if (occ) {
+        this.selectedPoreCoord = occ.coord;
+        this.seafloorRenderer.setSelectedCoord(occ.coord);
+        const worldPos = this.seafloorRenderer.axialToWorld(occ.coord);
+        this.camera.setTarget(worldPos.x, worldPos.y, worldPos.z);
+        this.camera.distance = 16.0;
+      }
+    } else if (qaStep === 'deep_zoom') {
+      // Student zooms in close to inspect in-situ logic gates on seafloor
+      const tele = this.world.exportTelemetry();
+      const occ = tele.pores.find(p => p.state === 'OCCUPIED' && !p.isAqueous);
+      if (occ) {
+        this.selectedPoreCoord = occ.coord;
+        this.seafloorRenderer.setSelectedCoord(occ.coord);
+        const worldPos = this.seafloorRenderer.axialToWorld(occ.coord);
+        this.camera.setTarget(worldPos.x, worldPos.y, worldPos.z);
+        this.camera.distance = 7.5;
+        this.camera.elevation = 0.85;
+      }
+    } else if (qaStep === 'lab') {
+      // Student opens the God-suite Lab drawer
+      const labBtn = document.getElementById('lab-toggle-btn');
+      if (labBtn) labBtn.click();
+    } else if (qaStep === 'surge') {
+      // Student triggers a thermal surge and advances simulation
+      this.world.triggerThermalSurge();
+      this.loop.step(15);
+    }
   }
 
   public getFlyout(): LabFlyout {
