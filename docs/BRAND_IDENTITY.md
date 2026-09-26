@@ -27,8 +27,8 @@ The Nautilus series synthesizes biological morphology with integrated circuit ar
 | **Variation 1: Minimalist Hex Shell** | Clean Flat Vector Line Art | Discrete mathematical boundaries and minimal cell wall geometry. | [`docs/assets/logos/nautilus_var1_minimal.jpg`](assets/logos/nautilus_var1_minimal.jpg) |
 | **Variation 2: Hydrothermal Thermal Core** | Dual-Temperature Radiant Glow | The Mitchell proton motive force: hot volcanic vent fluid venting through cold seawater. | [`docs/assets/logos/nautilus_var2_thermal.jpg`](assets/logos/nautilus_var2_thermal.jpg) |
 | **Variation 3: Fibonacci Circuit Ribbon** | Layered PCB Micro-Architecture | Physical hardware implementation; continuous intercellular data buses and microprocessor die core. | [`docs/assets/logos/nautilus_var3_circuit.jpg`](assets/logos/nautilus_var3_circuit.jpg) |
-| **Variation 4: 3D Benthic Basalt Columns** 🏆 *(Official Logo)* | Isometric Hexagonal Prisms | Direct visualization of the 3D $(q, r, z)$ stacked hexagonal prism seabed topography. | [`docs/assets/logos/nautilus_var4_isometric.jpg`](assets/logos/nautilus_var4_isometric.jpg) |
-| **Variation 5: The Living Silicon Embryo** | Epistemic Cut & Genetic Tape | Pattee's Epistemic Cut: inert 1D symbolic code ribbon (The Safe) feeding active 2D logic gates (The Workshop). | [`docs/assets/logos/nautilus_var5_embryo.jpg`](assets/logos/nautilus_var5_embryo.jpg) |
+| **Variation 4: 3D Benthic Basalt Columns** | Isometric Hexagonal Prisms | Direct visualization of the 3D $(q, r, z)$ stacked hexagonal prism seabed topography. | [`docs/assets/logos/nautilus_var4_isometric.jpg`](assets/logos/nautilus_var4_isometric.jpg) |
+| **Variation 5: The Living Silicon Embryo** 🏆 *(Official Application Logo)* | Epistemic Cut & Genetic Tape | Pattee's Epistemic Cut: inert 1D symbolic code ribbon (The Safe) feeding active 2D logic gates (The Workshop). | [`docs/assets/logos/nautilus_var5_embryo.jpg`](assets/logos/nautilus_var5_embryo.jpg) |
 
 ---
 

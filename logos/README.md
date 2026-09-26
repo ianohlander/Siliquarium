@@ -9,9 +9,9 @@ Open [`index.html`](index.html) in your browser to view the interactive visual g
 
 | Filename | Description | Status |
 | :--- | :--- | :--- |
-| **`logo.jpg`** | Canonical Project Logo (Variation 4) | **Active Official** |
-| `nautilus_var4_isometric.jpg` | Variation 4: The 3D Benthic Basalt Columns $(q, r, z)$ | Official Selected Variation |
-| `nautilus_var5_embryo.jpg` | Variation 5: The Living Silicon Embryo (Epistemic Cut) | High-Concept Candidate |
+| **`logo.jpg`** | Canonical Application Logo (Variation 5: The Living Silicon Embryo) | **Active Official** |
+| `nautilus_var5_embryo.jpg` | Variation 5: The Living Silicon Embryo (Epistemic Cut) | **Selected Official Variation** |
+| `nautilus_var4_isometric.jpg` | Variation 4: The 3D Benthic Basalt Columns $(q, r, z)$ | 3D Topography Candidate |
 | `nautilus_var2_thermal.jpg` | Variation 2: The Hydrothermal Thermal Core | Thermal Glow Candidate |
 | `nautilus_var1_minimal.jpg` | Variation 1: The Pure Minimalist Hex Shell | Flat Vector Candidate |
 | `nautilus_var3_circuit.jpg` | Variation 3: The Fibonacci Circuit Ribbon | PCB Die Candidate |

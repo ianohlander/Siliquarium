@@ -724,9 +724,9 @@ function buildDoc(doc) {
 
 function buildLogoGallery() {
   const logos = [
-    { file: 'logo.jpg', name: 'Official Canonical Logo', badge: 'Official', desc: 'Variation 4: The 3D Benthic Basalt Columns (q, r, z)' },
-    { file: 'nautilus_var4_isometric.jpg', name: 'Variation 4: 3D Benthic Basalt Columns', badge: 'Selected', desc: 'Isometric 3D hexagonal basalt columns with etched (q, r, z) foundation.' },
-    { file: 'nautilus_var5_embryo.jpg', name: 'Variation 5: The Living Silicon Embryo', badge: 'Epistemic Cut', desc: 'Coiled 1D genome tape at center radiating into logic gate chambers.' },
+    { file: 'logo.jpg', name: 'Official Canonical Logo', badge: 'Official', desc: 'Variation 5: The Living Silicon Embryo (Epistemic Cut)' },
+    { file: 'nautilus_var5_embryo.jpg', name: 'Variation 5: The Living Silicon Embryo', badge: 'Selected', desc: 'Coiled 1D genome tape at center radiating into logic gate chambers (The Epistemic Cut).' },
+    { file: 'nautilus_var4_isometric.jpg', name: 'Variation 4: 3D Benthic Basalt Columns', badge: '3D Matrix', desc: 'Isometric 3D hexagonal basalt columns with etched (q, r, z) foundation.' },
     { file: 'nautilus_var2_thermal.jpg', name: 'Variation 2: Hydrothermal Thermal Core', badge: 'Thermal Glow', desc: 'Volcanic amber thermal glow at center venting into cyan outer chambers.' },
     { file: 'nautilus_var1_minimal.jpg', name: 'Variation 1: Minimalist Hex Shell', badge: 'Minimalist', desc: 'Clean high-contrast flat vector line art on dark obsidian.' },
     { file: 'nautilus_var3_circuit.jpg', name: 'Variation 3: Fibonacci Circuit Ribbon', badge: 'PCB Die', desc: 'Layered golden microchip ribbon with central microprocessor die.' },
