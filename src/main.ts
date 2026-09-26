@@ -111,12 +111,16 @@ class SiliquariumApp {
     let dragMode: 'orbit' | 'pan' = 'orbit';
     let lastX = 0;
     let lastY = 0;
+    let downX = 0;
+    let downY = 0;
 
     this.seafloorCanvas.addEventListener('mousedown', (e) => {
       isDragging = true;
       dragMode = (e.button === 2 || e.shiftKey) ? 'pan' : 'orbit';
       lastX = e.clientX;
       lastY = e.clientY;
+      downX = e.clientX;
+      downY = e.clientY;
     });
 
     window.addEventListener('mousemove', (e) => {
@@ -153,6 +157,9 @@ class SiliquariumApp {
     }, { passive: false });
 
     this.seafloorCanvas.addEventListener('click', (e) => {
+      if (Math.hypot(e.clientX - downX, e.clientY - downY) > 5) {
+        return; // Suppress selection click when user was dragging/orbiting the camera
+      }
       const rect = this.seafloorCanvas.getBoundingClientRect();
       const sx = e.clientX - rect.left;
       const sy = e.clientY - rect.top;

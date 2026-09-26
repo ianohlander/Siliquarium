@@ -13,6 +13,11 @@ export enum PoreState {
   CARCASS = 'CARCASS'
 }
 
+export enum PoreMedium {
+  ROCK_SUBSTRATE = 'ROCK_SUBSTRATE',
+  AQUEOUS_FLUID = 'AQUEOUS_FLUID'
+}
+
 export interface ICarcassData {
   energy: number;
   matter: number;
@@ -23,11 +28,17 @@ export class Pore {
   public static readonly DEFAULT_CARCASS_DECAY_TICKS = 50;
 
   public readonly coord: HexCoord3D;
+  public readonly medium: PoreMedium;
   private resident: PoreCell | null = null;
   private carcass: ICarcassData | null = null;
 
-  constructor(coord: HexCoord3D) {
+  constructor(coord: HexCoord3D, medium: PoreMedium = PoreMedium.ROCK_SUBSTRATE) {
     this.coord = coord;
+    this.medium = medium;
+  }
+
+  public isAqueous(): boolean {
+    return this.medium === PoreMedium.AQUEOUS_FLUID;
   }
 
   public getState(): PoreState {

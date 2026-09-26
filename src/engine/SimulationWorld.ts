@@ -6,7 +6,7 @@
 
 import { HexCoord3D } from '../core/spatial/HexCoord3D.js';
 import { HexGrid3D } from '../core/spatial/HexGrid3D.js';
-import { Pore, PoreState } from '../core/domain/Pore.js';
+import { Pore, PoreState, PoreMedium } from '../core/domain/Pore.js';
 import { PoreCell } from '../core/domain/PoreCell.js';
 import { GenomeSafe } from '../core/domain/GenomeSafe.js';
 import { VentPhysics } from '../core/physics/VentPhysics.js';
@@ -60,7 +60,11 @@ export class SimulationWorld {
         for (let z = minZ; z <= maxZ; z++) {
           const coord = new HexCoord3D(q, r, z);
           if (this.grid.isInBounds(coord)) {
-            const pore = new Pore(coord);
+            const isChimney = (z === 1 && coord.distanceTo(new HexCoord3D(0, 0, 1)) <= 1) || (z === 2 && q === 0 && r === 0);
+            const isBedrock = z === 0;
+            const medium = (isBedrock || isChimney) ? PoreMedium.ROCK_SUBSTRATE : PoreMedium.AQUEOUS_FLUID;
+
+            const pore = new Pore(coord, medium);
             this.grid.setItem(coord, pore);
             this.pores.push(pore);
             this.poreMap.set(coord.toKey(), pore);
@@ -72,7 +76,7 @@ export class SimulationWorld {
 
   public seedPrimordialSoup(density: number): void {
     for (const pore of this.pores) {
-      if (pore.getState() === PoreState.EMPTY && this.prng.nextFloat() < density) {
+      if (!pore.isAqueous() && pore.getState() === PoreState.EMPTY && this.prng.nextFloat() < density) {
         const safe = GenomeSafe.createRandom(this.prng);
         const cell = new PoreCell(safe, 60, 20, 0);
         pore.setResident(cell);
@@ -223,6 +227,7 @@ export class SimulationWorld {
         coord: pore.coord,
         state,
         isBasalt,
+        isAqueous: pore.isAqueous(),
         energy,
         matter,
         age,

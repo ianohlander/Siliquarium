@@ -13,6 +13,7 @@ export interface IPoreTelemetry {
   readonly coord: HexCoord3D;
   readonly state: PoreState;
   readonly isBasalt: boolean;
+  readonly isAqueous: boolean;
   readonly energy: number;
   readonly matter: number;
   readonly age: number;

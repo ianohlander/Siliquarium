@@ -21,7 +21,6 @@ export class SeafloorRenderer3D {
   private readonly canvas: HTMLCanvasElement;
   private readonly ctx: CanvasRenderingContext2D;
   private readonly camera: OrbitCamera;
-
   private selectedCoord: HexCoord3D | null = null;
   private hoveredCoord: HexCoord3D | null = null;
   private plumeTime: number = 0;
@@ -38,17 +37,11 @@ export class SeafloorRenderer3D {
     this.camera = camera;
   }
 
-  public setSelectedCoord(coord: HexCoord3D | null): void {
-    this.selectedCoord = coord;
-  }
-
-  public setHoveredCoord(coord: HexCoord3D | null): void {
-    this.hoveredCoord = coord;
-  }
+  public setSelectedCoord(coord: HexCoord3D | null): void { this.selectedCoord = coord; }
+  public setHoveredCoord(coord: HexCoord3D | null): void { this.hoveredCoord = coord; }
 
   public render(telemetry: ISimulationTelemetry): void {
-    const w = this.canvas.width;
-    const h = this.canvas.height;
+    const w = this.canvas.width, h = this.canvas.height;
     if (w <= 0 || h <= 0) return;
 
     this.camera.updateMatrices(w / h);
@@ -68,17 +61,16 @@ export class SeafloorRenderer3D {
 
   private drawAbyssalBackground(w: number, h: number): void {
     const grad = this.ctx.createRadialGradient(w / 2, h / 2, 20, w / 2, h / 2, Math.max(w, h));
-    grad.addColorStop(0, '#061325'); // Hydrothermal water glow
-    grad.addColorStop(0.6, '#020914'); // Deep abyssal navy
-    grad.addColorStop(1, '#01040a'); // Midnight trench black
+    grad.addColorStop(0, '#061325');
+    grad.addColorStop(0.6, '#020914');
+    grad.addColorStop(1, '#01040a');
     this.ctx.fillStyle = grad;
     this.ctx.fillRect(0, 0, w, h);
   }
 
   private projectPores(pores: readonly IPoreTelemetry[], w: number, h: number): IProjectedHex[] {
     const results: IProjectedHex[] = [];
-    const vm = this.camera.getViewMatrix();
-    const pm = this.camera.getProjectionMatrix();
+    const vm = this.camera.getViewMatrix(), pm = this.camera.getProjectionMatrix();
 
     for (const pore of pores) {
       const worldPos = this.axialToWorld(pore.coord);
@@ -90,32 +82,18 @@ export class SeafloorRenderer3D {
       let valid = true;
 
       for (let i = 0; i < 6; i++) {
-        const angle = (Math.PI / 3) * i + Math.PI / 6;
-        const dx = SeafloorRenderer3D.HEX_RADIUS * Math.cos(angle);
-        const dz = SeafloorRenderer3D.HEX_RADIUS * Math.sin(angle);
-
-        const topPt = this.projectWorldToScreen(
-          { x: worldPos.x + dx, y: worldPos.y + SeafloorRenderer3D.HEX_HEIGHT, z: worldPos.z + dz },
-          vm, pm, w, h
-        );
-        const basePt = this.projectWorldToScreen(
-          { x: worldPos.x + dx, y: worldPos.y, z: worldPos.z + dz },
-          vm, pm, w, h
-        );
-
+        const ang = (Math.PI / 3) * i + Math.PI / 6;
+        const dx = SeafloorRenderer3D.HEX_RADIUS * Math.cos(ang);
+        const dz = SeafloorRenderer3D.HEX_RADIUS * Math.sin(ang);
+        const topPt = this.projectWorldToScreen({ x: worldPos.x + dx, y: worldPos.y + SeafloorRenderer3D.HEX_HEIGHT, z: worldPos.z + dz }, vm, pm, w, h);
+        const basePt = this.projectWorldToScreen({ x: worldPos.x + dx, y: worldPos.y, z: worldPos.z + dz }, vm, pm, w, h);
         if (!topPt || !basePt) { valid = false; break; }
         topVerts.push(topPt);
         baseVerts.push(basePt);
       }
 
       if (valid) {
-        results.push({
-          pore,
-          centerScreen,
-          topScreenVertices: topVerts,
-          baseScreenVertices: baseVerts,
-          depth: centerScreen.depth
-        });
+        results.push({ pore, centerScreen, topScreenVertices: topVerts, baseScreenVertices: baseVerts, depth: centerScreen.depth });
       }
     }
     return results;
@@ -123,10 +101,11 @@ export class SeafloorRenderer3D {
 
   public static axialToWorld(coord: HexCoord3D): IVector3 {
     const r = SeafloorRenderer3D.HEX_RADIUS;
-    const x = r * Math.sqrt(3) * (coord.q + coord.r / 2);
-    const z = r * (3 / 2) * coord.r;
-    const y = coord.z * SeafloorRenderer3D.Z_LAYER_SPACING;
-    return { x, y, z };
+    return {
+      x: r * Math.sqrt(3) * (coord.q + coord.r / 2),
+      y: coord.z * SeafloorRenderer3D.Z_LAYER_SPACING,
+      z: r * 1.5 * coord.r
+    };
   }
 
   public axialToWorld(coord: HexCoord3D): IVector3 {
@@ -134,85 +113,141 @@ export class SeafloorRenderer3D {
   }
 
   private projectWorldToScreen(world: IVector3, vm: Float32Array, pm: Float32Array, w: number, h: number): { x: number; y: number; depth: number } | null {
-    // View transform
     const vx = world.x * vm[0] + world.y * vm[4] + world.z * vm[8]  + vm[12];
     const vy = world.x * vm[1] + world.y * vm[5] + world.z * vm[9]  + vm[13];
     const vz = world.x * vm[2] + world.y * vm[6] + world.z * vm[10] + vm[14];
     const vw = world.x * vm[3] + world.y * vm[7] + world.z * vm[11] + vm[15] || 1;
+    if (vw <= 0.1) return null;
 
-    // Proj transform
     const cx = vx * pm[0] + vy * pm[4] + vz * pm[8]  + vw * pm[12];
     const cy = vx * pm[1] + vy * pm[5] + vz * pm[9]  + vw * pm[13];
     const cz = vx * pm[2] + vy * pm[6] + vz * pm[10] + vw * pm[14];
     const cw = vx * pm[3] + vy * pm[7] + vz * pm[11] + vw * pm[15];
-
     if (cw <= 0.1) return null;
-    const ndcX = cx / cw;
-    const ndcY = cy / cw;
-    const screenX = (ndcX * 0.5 + 0.5) * w;
-    const screenY = (1.0 - (ndcY * 0.5 + 0.5)) * h;
 
-    return { x: screenX, y: screenY, depth: cz / cw };
+    return { x: ((cx / cw) * 0.5 + 0.5) * w, y: (1.0 - ((cy / cw) * 0.5 + 0.5)) * h, depth: cz / cw };
   }
 
   private drawHexPrism(hex: IProjectedHex): void {
+    const eye = this.camera.getEyePosition();
+    const isAqueous = hex.pore.isAqueous;
+    if (isAqueous && eye.y < hex.pore.coord.z * SeafloorRenderer3D.Z_LAYER_SPACING) return;
+
     const isSelected = this.selectedCoord?.equals(hex.pore.coord) ?? false;
     const isHovered = this.hoveredCoord?.equals(hex.pore.coord) ?? false;
+    const isEmpty = hex.pore.state === PoreState.EMPTY;
 
-    // Draw side panels
-    this.ctx.fillStyle = '#0f172a';
-    for (let i = 0; i < 6; i++) {
-      const next = (i + 1) % 6;
-      this.ctx.beginPath();
-      this.ctx.moveTo(hex.baseScreenVertices[i].x, hex.baseScreenVertices[i].y);
-      this.ctx.lineTo(hex.baseScreenVertices[next].x, hex.baseScreenVertices[next].y);
-      this.ctx.lineTo(hex.topScreenVertices[next].x, hex.topScreenVertices[next].y);
-      this.ctx.lineTo(hex.topScreenVertices[i].x, hex.topScreenVertices[i].y);
-      this.ctx.closePath();
-      this.ctx.fill();
+    // Prism side walls
+    if (!isAqueous || !isEmpty) {
+      this.ctx.fillStyle = isAqueous ? 'rgba(6, 44, 76, 0.22)' : '#0f172a';
+      for (let i = 0; i < 6; i++) {
+        const next = (i + 1) % 6;
+        this.ctx.beginPath();
+        this.ctx.moveTo(hex.baseScreenVertices[i].x, hex.baseScreenVertices[i].y);
+        this.ctx.lineTo(hex.baseScreenVertices[next].x, hex.baseScreenVertices[next].y);
+        this.ctx.lineTo(hex.topScreenVertices[next].x, hex.topScreenVertices[next].y);
+        this.ctx.lineTo(hex.topScreenVertices[i].x, hex.topScreenVertices[i].y);
+        this.ctx.closePath();
+        this.ctx.fill();
+      }
     }
 
-    // Top cap styling
+    // Top cap polygon
     this.ctx.beginPath();
     this.ctx.moveTo(hex.topScreenVertices[0].x, hex.topScreenVertices[0].y);
-    for (let i = 1; i < 6; i++) {
-      this.ctx.lineTo(hex.topScreenVertices[i].x, hex.topScreenVertices[i].y);
-    }
+    for (let i = 1; i < 6; i++) this.ctx.lineTo(hex.topScreenVertices[i].x, hex.topScreenVertices[i].y);
     this.ctx.closePath();
-
     this.ctx.fillStyle = this.getPoreColor(hex.pore);
     this.ctx.fill();
 
     // Border highlights
-    if (isSelected) {
-      this.ctx.strokeStyle = '#38bdf8'; // Electric neon sky
-      this.ctx.lineWidth = 3.0;
-      this.ctx.stroke();
-    } else if (isHovered) {
-      this.ctx.strokeStyle = '#fbbf24'; // Golden highlight
-      this.ctx.lineWidth = 2.0;
-      this.ctx.stroke();
-    } else {
-      this.ctx.strokeStyle = '#1e293b';
-      this.ctx.lineWidth = 1.0;
-      this.ctx.stroke();
+    this.ctx.strokeStyle = isSelected ? '#38bdf8' : (isHovered ? '#fbbf24' : (isAqueous ? 'rgba(56, 189, 248, 0.22)' : '#1e293b'));
+    this.ctx.lineWidth = isSelected ? 3.0 : (isHovered ? 2.0 : 1.0);
+    this.ctx.stroke();
+
+    // In-situ 3D microscopic circuit rendering
+    const projRadius = Math.hypot(hex.topScreenVertices[0].x - hex.centerScreen.x, hex.topScreenVertices[0].y - hex.centerScreen.y);
+    if (hex.pore.state === PoreState.OCCUPIED && (isSelected || projRadius >= 24)) {
+      this.drawInSituCircuit(hex, projRadius, isSelected);
+    }
+  }
+
+  private drawInSituCircuit(hex: IProjectedHex, radius: number, isSelected: boolean): void {
+    const cx = hex.centerScreen.x, cy = hex.centerScreen.y;
+
+    // Silicon wafer micro-chamber
+    this.ctx.beginPath();
+    this.ctx.arc(cx, cy, radius * 0.72, 0, Math.PI * 2);
+    this.ctx.fillStyle = '#060a14';
+    this.ctx.fill();
+    this.ctx.strokeStyle = isSelected ? '#38bdf8' : '#eab308';
+    this.ctx.lineWidth = 1.2;
+    this.ctx.stroke();
+
+    // Pulsing golden Fibonacci spiral embryo tape
+    this.ctx.strokeStyle = '#fbbf24';
+    this.ctx.lineWidth = Math.max(1, radius * 0.04);
+    this.ctx.beginPath();
+    const spiralRadius = radius * 0.32;
+    for (let a = 0; a < Math.PI * 4; a += 0.2) {
+      const r = (a / (Math.PI * 4)) * spiralRadius;
+      const px = cx + r * Math.cos(a + this.plumeTime);
+      const py = cy + r * Math.sin(a + this.plumeTime);
+      if (a === 0) this.ctx.moveTo(px, py); else this.ctx.lineTo(px, py);
+    }
+    this.ctx.stroke();
+
+    // Microscopic logic gate IC chips and connecting wires
+    if (radius >= 32) {
+      const gateCount = Math.min(4, hex.pore.gateCount || 2);
+      const chipW = Math.max(8, radius * 0.22);
+      const chipH = Math.max(6, radius * 0.14);
+      const labels = ['AND', 'OR', 'NOT', 'XOR'];
+
+      for (let i = 0; i < gateCount; i++) {
+        const ang = (Math.PI * 2 / gateCount) * i + Math.PI / 4;
+        const gx = cx + Math.cos(ang) * (radius * 0.52) - chipW / 2;
+        const gy = cy + Math.sin(ang) * (radius * 0.52) - chipH / 2;
+
+        this.ctx.fillStyle = '#0f172a';
+        this.ctx.fillRect(gx, gy, chipW, chipH);
+        this.ctx.strokeStyle = hex.pore.primaryActive ? '#38bdf8' : '#334155';
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeRect(gx, gy, chipW, chipH);
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(gx + chipW / 2, gy + chipH / 2);
+        this.ctx.lineTo(cx, cy);
+        this.ctx.strokeStyle = hex.pore.primaryActive ? 'rgba(56, 189, 248, 0.4)' : 'rgba(51, 65, 85, 0.3)';
+        this.ctx.stroke();
+
+        if (radius >= 44) {
+          this.ctx.fillStyle = '#38bdf8';
+          this.ctx.font = `${Math.floor(chipH * 0.7)}px monospace`;
+          this.ctx.textAlign = 'center';
+          this.ctx.textBaseline = 'middle';
+          this.ctx.fillText(labels[i % labels.length], gx + chipW / 2, gy + chipH / 2);
+        }
+      }
     }
   }
 
   private getPoreColor(pore: IPoreTelemetry): string {
+    if (pore.isAqueous) {
+      return pore.state === PoreState.OCCUPIED ? 'rgba(16, 185, 129, 0.65)' : 'rgba(6, 182, 212, 0.08)';
+    }
     if (pore.isBasalt) return '#090d16';
     if (pore.state === PoreState.OCCUPIED) {
       const charge = Math.min(1.0, pore.energy / 100);
       return charge > 0.6 ? '#10b981' : (charge > 0.3 ? '#06b6d4' : '#eab308');
     }
     if (pore.state === PoreState.CARCASS) return '#64748b';
-    return '#172033'; // Empty porous basalt
+    return '#172033';
   }
 
   private drawThermalPlume(nozzleCoord: HexCoord3D, flux: number, w: number, h: number): void {
     const nozzleWorld = this.axialToWorld(nozzleCoord);
-    const vm = this.camera.getViewMatrix();
-    const pm = this.camera.getProjectionMatrix();
+    const vm = this.camera.getViewMatrix(), pm = this.camera.getProjectionMatrix();
 
     for (let i = 0; i < 12; i++) {
       const offset = (this.plumeTime * 1.5 + i * 0.4) % 6.0;
@@ -220,31 +255,42 @@ export class SeafloorRenderer3D {
         { x: nozzleWorld.x + Math.sin(offset * 2 + i) * 0.3, y: nozzleWorld.y + offset * 0.8, z: nozzleWorld.z + Math.cos(offset * 2 + i) * 0.3 },
         vm, pm, w, h
       );
-      if (pt) {
-        const radius = Math.max(2, 6 - offset);
-        const alpha = Math.max(0, 0.6 * (1.0 - offset / 6.0) * (flux / 500));
-        this.ctx.fillStyle = `rgba(245, 158, 11, ${alpha})`;
-        this.ctx.beginPath();
-        this.ctx.arc(pt.x, pt.y, radius, 0, Math.PI * 2);
-        this.ctx.fill();
-      }
+      if (!pt) continue;
+      const radius = Math.max(2, 6 - offset);
+      const alpha = Math.max(0, 0.6 * (1.0 - offset / 6.0) * (flux / 500));
+      this.ctx.fillStyle = `rgba(245, 158, 11, ${alpha})`;
+      this.ctx.beginPath();
+      this.ctx.arc(pt.x, pt.y, radius, 0, Math.PI * 2);
+      this.ctx.fill();
     }
   }
 
   public findPoreAtScreenCoord(screenX: number, screenY: number, telemetry: ISimulationTelemetry): HexCoord3D | null {
-    const w = this.canvas.width;
-    const h = this.canvas.height;
+    const w = this.canvas.width, h = this.canvas.height;
     const projected = this.projectPores(telemetry.pores, w, h);
-    projected.sort((a, b) => a.depth - b.depth); // Closest first
+    projected.sort((a, b) => a.depth - b.depth);
 
     for (const item of projected) {
-      const dx = screenX - item.centerScreen.x;
-      const dy = screenY - item.centerScreen.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist <= 18) {
+      if (this.isPointInPolygon(screenX, screenY, item.topScreenVertices)) {
+        return item.pore.coord;
+      }
+      const dx = screenX - item.centerScreen.x, dy = screenY - item.centerScreen.y;
+      const projRadius = Math.hypot(item.topScreenVertices[0].x - item.centerScreen.x, item.topScreenVertices[0].y - item.centerScreen.y);
+      if (Math.hypot(dx, dy) <= projRadius * 0.88) {
         return item.pore.coord;
       }
     }
     return null;
+  }
+
+  private isPointInPolygon(px: number, py: number, vertices: readonly { x: number; y: number }[]): boolean {
+    let inside = false;
+    for (let i = 0, j = vertices.length - 1; i < vertices.length; j = i++) {
+      const xi = vertices[i].x, yi = vertices[i].y;
+      const xj = vertices[j].x, yj = vertices[j].y;
+      const intersect = ((yi > py) !== (yj > py)) && (px < (xj - xi) * (py - yi) / (yj - yi) + xi);
+      if (intersect) inside = !inside;
+    }
+    return inside;
   }
 }

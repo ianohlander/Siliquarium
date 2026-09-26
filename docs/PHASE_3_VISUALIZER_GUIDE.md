@@ -20,8 +20,9 @@ Before Phase 3, Siliquarium's digital ecosystem was locked inside numerical arra
 │   [ MACROSCOPE: 3D Seafloor ]       ──►   [ MICROSCOPE: 2D Pore ]      │
 │   • 3D Stacked Hex Lattice (q,r,z)        • Real-Time Logic Gates      │
 │   • Buoyant Hydrothermal Plumes           • Pulsing Binary Wires (0/1) │
-│   • Population Colony Geography           • Battery Token Gauge        │
-│   • Detritus Carcass Sediment             • 1D Decoded Genome Tape     │
+│   • Substrate vs Aqueous Mediums          • Battery Token Gauge        │
+│   • In-Situ 3D Circuit Magnification      • 1D Decoded Genome Tape     │
+│   • Pixel-Perfect Polygon Picking         • Single-Bit Autopsy Trace   │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -74,18 +75,35 @@ $$\mathbf{P}_{\text{screen}} = \mathbf{M}_{\text{proj}} \cdot \mathbf{M}_{\text{
 
 ---
 
-## 4. Concrete Micro-Scaffolding: The Click-to-Inspect Raycast Trace
+### 3.3 Benthic Rock Substrate vs. Translucent Aqueous Fluid Column
+In prebiotic hydrothermal systems, sessile protocells ("silicoids") do not float in empty vacuum; they reside anchored to mineral substrates where thermal and electrochemical gradients are steepest:
+- **Bedrock & Chimney Substrate (`PoreMedium.ROCK_SUBSTRATE`):** The solid $z=0$ benthic floor and the rising volcanic chimney spire ($q^2 + r^2 + qr \le 1, z \ge 1$) are opaque basalt structures rendered in solid dark titanium (`#0f172a`, `#172033`). Primordial silicoids exclusively spawn on this substrate.
+- **Aqueous Water Column (`PoreMedium.AQUEOUS_FLUID`):** Surrounding the chimney at $z \ge 1$ is the deep-sea water column. Aqueous cells are rendered with high optical transparency: subtle cyan caps (`rgba(6, 182, 212, 0.08)`) with bioluminescent borders (`rgba(56, 189, 248, 0.22)`). When the camera descends beneath an aqueous layer, upper water layers naturally become invisible, ensuring unobstructed observation of benthic life below.
 
-When a researcher clicks on an individual pore in the 3D seafloor canvas, what happens under the hood?
+---
+
+### 3.4 In-Situ 3D Microscopic Circuit Rendering & Level-of-Detail (LOD)
+Can we see the microscopic silicoids in all their circuit glory directly on the 3D seafloor, and is that a heavy computational ask?
+- **Computational Cost: Zero Overhead ($< 0.05\text{ms}$/frame).** Drawing full logic schematics across all 127 cells at 60 FPS would cause excessive canvas draw calls. However, by employing a **Level-of-Detail (LOD) Gate**, internal circuits are only drawn when a cell is actively selected or when perspective zoom enlarges its projected radius on screen ($\text{Radius}_{\text{proj}} \ge 24\text{px}$).
+- **In-Situ Visual Architecture:**
+  1. **Silicon Micro-Chamber:** A circular dark substrate wafer etched into the hex cap.
+  2. **Genome Spiral Embryo:** A golden Fibonacci spiral tape pulsing dynamically with hydrothermal convection time.
+  3. **Logic Gate IC Chips:** When zoomed close ($\ge 32\text{px}$), miniature IC chip packages (`AND`, `OR`, `NOT`, `XOR`) appear around the chamber perimeter, tethered by electrical signal bus wires illuminated by living logic state.
+
+---
+
+## 4. Concrete Micro-Scaffolding: Click Disambiguation & Polygon Picking
+
+When a researcher clicks on an individual pore in the 3D seafloor canvas:
 
 | Step | Operation | Mathematical / Computational Action |
 | :---: | :--- | :--- |
-| **1** | User Click | Mouse event captures screen coordinates $(s_x, s_y) = (482, 310)$ px. |
-| **2** | NDC Conversion | Converts pixels to Normalized Device Coordinates $x_{\text{ndc}} \in [-1, +1]$, $y_{\text{ndc}} \in [-1, +1]$. |
-| **3** | Ray Unprojection | Multiplies near and far plane coordinates by $(\mathbf{M}_{\text{proj}} \cdot \mathbf{M}_{\text{view}})^{-1}$, generating 3D ray $(\vec{O}, \vec{D})$. |
-| **4** | Hex Hit Test | Finds the nearest pore center $(q, r, z)$ within spatial tolerance threshold. |
-| **5** | Microscope Lock | High-visibility neon sky bracket (`#38bdf8`) locks onto selected pore. |
-| **6** | Phenotype Decoding | `CircuitMicroscopeView` translates 60-bit genome tape into gate netlist and renders animated schematic. |
+| **1** | Mouse Drag Filter | Tracks down coordinate $(x_0, y_0)$. If drag distance $\sqrt{\Delta x^2 + \Delta y^2} > 5\text{px}$, the click event is suppressed, ensuring camera orbits never cause accidental selection. |
+| **2** | Screen Coordinates | Captures pixel click $(s_x, s_y)$. |
+| **3** | Convex Ray-Casting | Executes Jordan Curve ray-crossing polygon test against each projected hexagonal cap in depth order (closest first). |
+| **4** | Radial Fallback | Validates hit within projected hex radius ($\le 0.88 \cdot R_{\text{proj}}$). |
+| **5** | Selection Lock | Electric neon sky bracket (`#38bdf8`) locks onto the selected pore. |
+| **6** | Telemetry HUD | Top-left inspection badge updates coordinates, state, and thermodynamic properties without obscuring transport controls. |
 
 ---
 
