@@ -24,6 +24,10 @@ export interface ICellTickResult {
 }
 
 export class PoreCell {
+  private static cellSequence: number = 1;
+  private readonly id: string;
+  private readonly parentId: string | null;
+  private readonly cladeId: string;
   private readonly safe: GenomeSafe;
   private readonly battery: PoreBattery;
   private readonly workshop: PoreWorkshop;
@@ -34,10 +38,16 @@ export class PoreCell {
     safe: GenomeSafe,
     initialEnergy: number = 50,
     initialMatter: number = 20,
-    generation: number = 0
+    generation: number = 0,
+    id?: string,
+    parentId: string | null = null,
+    cladeId?: string
   ) {
     this.safe = safe;
     this.generation = generation;
+    this.id = id ?? `org-${PoreCell.cellSequence++}`;
+    this.parentId = parentId;
+    this.cladeId = cladeId ?? this.id;
     this.battery = new PoreBattery(initialEnergy, initialMatter);
     this.workshop = new PoreWorkshop();
 
@@ -96,10 +106,22 @@ export class PoreCell {
     return this.battery.isDivisionReady();
   }
 
-  public reproduce(prng: IPrng, mutationRate: number = GenomeSafe.DEFAULT_MUTATION_RATE): PoreCell {
+  public reproduce(prng: IPrng, mutationRate: number = GenomeSafe.DEFAULT_MUTATION_RATE, childId?: string): PoreCell {
     const { childEnergy, childMatter } = this.battery.splitForReproduction();
     const childSafe = this.safe.photocopy(prng, mutationRate);
-    return new PoreCell(childSafe, childEnergy, childMatter, this.generation + 1);
+    return new PoreCell(childSafe, childEnergy, childMatter, this.generation + 1, childId, this.id, this.cladeId);
+  }
+
+  public getId(): string {
+    return this.id;
+  }
+
+  public getParentId(): string | null {
+    return this.parentId;
+  }
+
+  public getCladeId(): string {
+    return this.cladeId;
   }
 
   public getSafe(): GenomeSafe {

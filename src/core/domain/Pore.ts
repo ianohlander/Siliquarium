@@ -28,6 +28,9 @@ export interface ICarcassData {
 export interface IPelagicSpore {
   readonly safe: GenomeSafe;
   readonly generation: number;
+  readonly id?: string;
+  readonly parentId?: string | null;
+  readonly cladeId?: string;
   energy: number;
   matter: number;
   ticksRemaining: number;

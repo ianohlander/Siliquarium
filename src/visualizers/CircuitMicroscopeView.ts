@@ -91,16 +91,27 @@ export class CircuitMicroscopeView {
   }
 
   private drawEmptyPoreState(_w: number, _h: number, pore: IPoreTelemetry): void {
-    const mediumStr = pore.isAqueous ? 'AQUEOUS FLUID PARCEL' : 'VACANT BENTHIC CAVITY';
+    const isChimney = (pore.coord.q === 0 && pore.coord.r === 0 && (pore.coord.z === 1 || pore.coord.z === 2));
+    let mediumStr = 'VACANT BENTHIC PORE';
+    let subStr = 'Porous mineral cavity ready for colonization.';
+    if (isChimney) {
+      mediumStr = 'HYDROTHERMAL VENT NOZZLE';
+      subStr = 'Emits Stream A (fuel) & Stream B (oxidizer) redox flow.';
+    } else if (pore.isBasalt) {
+      mediumStr = 'BASALT BEDROCK';
+      subStr = 'Dense volcanic bedrock providing structural mineral matrix.';
+    } else if (pore.isAqueous) {
+      mediumStr = 'AQUEOUS WATER COLUMN';
+      subStr = 'Permeable fluid parcel for pelagic spore advection drift.';
+    }
     this.ctx.fillStyle = '#38bdf8';
     this.ctx.font = 'bold 14px monospace';
     this.ctx.textAlign = 'left';
     this.ctx.fillText(`PORE [${pore.coord.q}, ${pore.coord.r}, ${pore.coord.z}]`, 20, 30);
-
     this.ctx.fillStyle = '#94a3b8';
     this.ctx.font = '12px monospace';
     this.ctx.fillText(`STATUS: ${mediumStr}`, 20, 52);
-    this.ctx.fillText(pore.isAqueous ? 'Open water column awaiting pelagic spores...' : 'Awaiting primordial soup colonizer...', 20, 80);
+    this.ctx.fillText(subStr, 20, 80);
   }
 
   private drawCarcassState(_w: number, _h: number, pore: IPoreTelemetry): void {

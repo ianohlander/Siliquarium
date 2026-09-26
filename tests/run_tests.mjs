@@ -33,6 +33,7 @@ import { runStage9 } from './stage9_visualizers.mjs';
 import { runStage10 } from './stage10_paleontologist.mjs';
 import { runStage11 } from './stage11_fossil_freezer.mjs';
 import { runStage12 } from './stage12_pelagic_spores.mjs';
+import { runStage13 } from './stage13_phylogeny_ltee.mjs';
 
 console.log('=========================================');
 console.log('🐠 Siliquarium Comprehensive Test Suite');
@@ -40,7 +41,7 @@ console.log(`   Version: ${SILIQUARIUM_VERSION}`);
 console.log('=========================================');
 
 const startTime = performance.now();
-const totalStages = 13;
+const totalStages = 14;
 let passedStages = 0;
 
 function runStage(stageNum, name, testFn) {
@@ -79,6 +80,8 @@ runStage(0, 'Testing Architecture, HTML Docs & Theoretical Specification Complet
     'docs/PHASE_4_PALEONTOLOGY_GUIDE.html',
     'docs/PHASE_5_PELAGIC_SPORES_GUIDE.md',
     'docs/PHASE_5_PELAGIC_SPORES_GUIDE.html',
+    'docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.md',
+    'docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html',
     'docs/logos.html',
     'logos/index.html',
     'logos/logo.jpg',
@@ -283,6 +286,11 @@ runStage(11, 'Testing Evolutionary Flight Recorder, Fossil Freezer & Single-Bit 
 // Stage 12: Phase 5 Pelagic Spores, Advection Drift & God-Suite Controls
 runStage(12, 'Testing Pelagic Spore Dispersal, Advection, Settlement & God-Suite Controls', () => {
   runStage12();
+});
+
+// Stage 13: Phase 6 Multi-Lineage Phylogeny, LTEE Benchmarks & Convergent Evolution
+runStage(13, 'Testing Multi-Lineage Phylogeny, LTEE Benchmarks & Convergent Evolution', () => {
+  runStage13();
 });
 
 const elapsed = (performance.now() - startTime).toFixed(1);

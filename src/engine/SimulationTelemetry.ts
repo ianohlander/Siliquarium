@@ -25,6 +25,9 @@ export interface IPoreTelemetry {
   readonly catalyticYield: number;
   readonly toggleCount: number;
   readonly primaryActive: boolean;
+  readonly id?: string;
+  readonly parentId?: string | null;
+  readonly cladeId?: string;
 }
 
 export interface IVentTelemetry {
@@ -42,6 +45,10 @@ export interface ISimulationTelemetry {
   readonly emptyCount: number;
   readonly sporeCount: number;
   readonly totalEnergyInUniverse: number;
+  readonly maxGeneration: number;
+  readonly activeCladesCount: number;
+  readonly shannonDiversity: number;
+  readonly totalBirths: number;
   readonly ledger: ILedgerReport;
   readonly vent: IVentTelemetry;
   readonly pores: readonly IPoreTelemetry[];

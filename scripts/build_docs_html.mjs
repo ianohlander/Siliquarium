@@ -21,6 +21,7 @@ const NAV_ITEMS = [
   { id: 'phase3', title: 'Phase 3 Visualizer', href: 'PHASE_3_VISUALIZER_GUIDE.html', icon: '🔬' },
   { id: 'phase4', title: 'Phase 4 Paleontology', href: 'PHASE_4_PALEONTOLOGY_GUIDE.html', icon: '🦕' },
   { id: 'phase5', title: 'Phase 5 Spores', href: 'PHASE_5_PELAGIC_SPORES_GUIDE.html', icon: '🌊' },
+  { id: 'phase6', title: 'Phase 6 Phylogeny', href: 'PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html', icon: '🧬' },
   { id: 'logos', title: 'Logo Gallery', href: 'logos.html', icon: '🖼️' },
   { id: 'dev', title: 'Dev Standards', href: 'DEVELOPMENT_STANDARDS.html', icon: '🏛️' },
   { id: 'qa', title: 'QA Standards', href: 'QA_AND_TESTING_STANDARDS.html', icon: '🧪' },
@@ -680,6 +681,13 @@ const DOCS_MAP = [
     srcMd: 'docs/PHASE_5_PELAGIC_SPORES_GUIDE.md',
     destHtml: 'docs/PHASE_5_PELAGIC_SPORES_GUIDE.html',
     title: 'Phase 5 Pelagic Spore Dispersal & God-Suite Guide',
+    relativeRoot: ''
+  },
+  {
+    docId: 'phase6',
+    srcMd: 'docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.md',
+    destHtml: 'docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html',
+    title: 'Phase 6 Multi-Lineage Phylogeny & LTEE Dynamics Guide',
     relativeRoot: ''
   },
   {

@@ -198,6 +198,60 @@
       z-index: 5;
     }
 
+    /* Lattice Key & Color Legend Card */
+    .legend-card {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.72rem;
+      color: var(--text-main);
+      font-family: monospace;
+      z-index: 8;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      max-width: 230px;
+    }
+
+    .legend-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      letter-spacing: 0.04em;
+      user-select: none;
+    }
+
+    .legend-body {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .legend-body.collapsed {
+      display: none;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.2;
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
     /* Docked Microscope Panel */
     #microscope-panel {
       width: 400px;
@@ -512,6 +566,10 @@
         <span class="telemetry-val" id="hud-spores" style="color: var(--accent-gold);">0</span>
       </div>
       <div class="telemetry-item">
+        <span class="telemetry-label">Phylogeny & Clades</span>
+        <span class="telemetry-val" id="hud-phylogeny" style="color: var(--accent-cyan);">Gen 0 • 0 Clades</span>
+      </div>
+      <div class="telemetry-item">
         <span class="telemetry-label">Carcasses</span>
         <span class="telemetry-val" id="hud-carcass" style="color: #94a3b8;">0</span>
       </div>
@@ -572,6 +630,25 @@
       </div>
       <div class="selected-pore-badge" id="hud-selected-pore">
         Selected: None (Click any hexagonal pore)
+      </div>
+
+      <!-- Lattice Key & Color Legend Card -->
+      <div class="legend-card" id="hud-legend-card">
+        <div class="legend-header" id="legend-toggle-btn">
+          <span>🗺️ LATTICE KEY</span>
+          <span id="legend-chevron">▾</span>
+        </div>
+        <div class="legend-body" id="legend-body">
+          <div class="legend-item"><span class="legend-swatch" style="background: #10b981;"></span><span>Living Silicoid (&gt;60% Batt)</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background: #06b6d4;"></span><span>Living Silicoid (30-60%)</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background: #eab308;"></span><span>Living Silicoid (&lt;30%)</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background: #facc15; box-shadow: 0 0 6px #eab308; border-radius: 50%;"></span><span>Pelagic Spore (Water)</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background: #f97316; box-shadow: 0 0 6px #f97316;"></span><span>Hydrothermal Vent</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background: #172033; border: 1px solid #334155;"></span><span>Vacant Mineral Pore</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background: #090d16; border: 1px solid #1e293b;"></span><span>Basalt Bedrock (Solid)</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background: #64748b;"></span><span>Carcass (Scavengeable)</span></div>
+          <div class="legend-item"><span class="legend-swatch" style="background: rgba(6, 182, 212, 0.15); border: 1px dashed rgba(56, 189, 248, 0.4);"></span><span>Aqueous Water Column</span></div>
+        </div>
       </div>
 
       <!-- Floating Transport Controls -->

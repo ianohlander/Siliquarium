@@ -147,25 +147,42 @@ export class SeafloorRenderer3D {
     this.ctx.stroke();
 
     const projRadius = Math.hypot(hex.topScreenVertices[0].x - hex.centerScreen.x, hex.topScreenVertices[0].y - hex.centerScreen.y);
-    if (isSelected) this.drawBeacon(hex.centerScreen.x, hex.centerScreen.y, projRadius);
+    if (isSelected) this.drawSelectionIndicator(hex, projRadius);
     if (hex.pore.hasSpore) this.drawPelagicSpore(hex.centerScreen.x, hex.centerScreen.y, projRadius);
     if (hex.pore.state === PoreState.OCCUPIED && (isSelected || projRadius >= 24)) {
       this.drawInSituCircuit(hex, projRadius, isSelected);
     }
   }
 
-  private drawBeacon(cx: number, cy: number, radius: number): void {
-    const beamH = Math.max(50, radius * 3.2);
-    const grad = this.ctx.createLinearGradient(cx, cy, cx, cy - beamH);
-    grad.addColorStop(0, 'rgba(56, 189, 248, 0.45)'); grad.addColorStop(1, 'rgba(56, 189, 248, 0.0)');
-    this.ctx.fillStyle = grad; this.ctx.beginPath();
-    this.ctx.moveTo(cx - radius * 0.4, cy); this.ctx.lineTo(cx + radius * 0.4, cy);
-    this.ctx.lineTo(cx + radius * 0.15, cy - beamH); this.ctx.lineTo(cx - radius * 0.15, cy - beamH);
-    this.ctx.closePath(); this.ctx.fill();
-    this.ctx.strokeStyle = '#38bdf8'; this.ctx.lineWidth = 1.8;
+  private drawSelectionIndicator(hex: IProjectedHex, radius: number): void {
+    const pulse = 1.15 + 0.1 * Math.sin(this.plumeTime * 4);
     this.ctx.beginPath();
-    this.ctx.arc(cx, cy, radius * 1.15 * (1.0 + 0.15 * Math.sin(this.plumeTime * 3)), 0, Math.PI * 2);
-    this.ctx.stroke();
+    for (let i = 0; i < 6; i++) {
+      const px = hex.centerScreen.x + (hex.topScreenVertices[i].x - hex.centerScreen.x) * pulse;
+      const py = hex.centerScreen.y + (hex.topScreenVertices[i].y - hex.centerScreen.y) * pulse;
+      if (i === 0) this.ctx.moveTo(px, py); else this.ctx.lineTo(px, py);
+    }
+    this.ctx.closePath();
+    this.ctx.strokeStyle = 'rgba(56, 189, 248, 0.85)';
+    this.ctx.lineWidth = 2.0; this.ctx.stroke();
+
+    const bw = this.axialToWorld(hex.pore.coord); bw.y += 0.3;
+    const tw = { x: bw.x, y: bw.y + 1.8, z: bw.z };
+    const vm = this.camera.getViewMatrix(), pm = this.camera.getProjectionMatrix();
+    const pBase = this.projectWorldToScreen(bw, vm, pm, this.canvas.width, this.canvas.height);
+    const pTip = this.projectWorldToScreen(tw, vm, pm, this.canvas.width, this.canvas.height);
+    if (pBase && pTip) {
+      const w = Math.max(3, radius * 0.35);
+      const grad = this.ctx.createLinearGradient(pBase.x, pBase.y, pTip.x, pTip.y);
+      grad.addColorStop(0, 'rgba(56, 189, 248, 0.6)');
+      grad.addColorStop(1, 'rgba(56, 189, 248, 0.0)');
+      this.ctx.fillStyle = grad; this.ctx.beginPath();
+      this.ctx.moveTo(pBase.x - w, pBase.y); this.ctx.lineTo(pBase.x + w, pBase.y);
+      this.ctx.lineTo(pTip.x + 1, pTip.y); this.ctx.lineTo(pTip.x - 1, pTip.y);
+      this.ctx.closePath(); this.ctx.fill();
+      this.ctx.fillStyle = '#38bdf8'; this.ctx.beginPath();
+      this.ctx.arc(pTip.x, pTip.y, 3, 0, Math.PI * 2); this.ctx.fill();
+    }
   }
 
   private drawPelagicSpore(cx: number, cy: number, radius: number): void {

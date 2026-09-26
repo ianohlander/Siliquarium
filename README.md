@@ -45,6 +45,7 @@ While BooleanGA explores **heteropoietic engineering synthesis** (evolving ALUs,
 - **[`docs/PHASE_3_VISUALIZER_GUIDE.md`](docs/PHASE_3_VISUALIZER_GUIDE.md):** 3D Seafloor rendering, hex math, and interactive circuit microscope.
 - **[`docs/PHASE_4_PALEONTOLOGY_GUIDE.md`](docs/PHASE_4_PALEONTOLOGY_GUIDE.md):** Digital Paleontologist, Weisfeiler-Lehman topological graph hashing, and Uri Alon motifs.
 - **[`docs/PHASE_5_PELAGIC_SPORES_GUIDE.md`](docs/PHASE_5_PELAGIC_SPORES_GUIDE.md):** Pelagic planktonic detachment, advection drift, transparent aqueous water columns, and God-suite interactive controls.
+- **[`docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.md`](docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.md):** Multi-lineage phylogeny, Lenski LTEE dynamics, Shannon diversity index, and convergent evolution classification.
 - **[`standards/DEVELOPMENT_STANDARDS.md`](standards/DEVELOPMENT_STANDARDS.md):** Strict OOP/SOLID architecture, complexity budgets ($\le 7$), branded types, Web Worker threading, and anti-monolith file structure.
 - **[`standards/QA_AND_TESTING_STANDARDS.md`](standards/QA_AND_TESTING_STANDARDS.md):** Native zero-dependency Node.js test harness, progressive test pipeline, and physical conservation audits.
 - **[`standards/DOCUMENTATION_STANDARDS.md`](standards/DOCUMENTATION_STANDARDS.md):** 5-Dimension Conceptual Rubric (50/50 target), the 4 Sacred Everyday Analogies, and academic provenance.
@@ -59,6 +60,7 @@ While BooleanGA explores **heteropoietic engineering synthesis** (evolving ALUs,
 - [x] **Phase 3:** WebGL 3D Seafloor & Interactive Circuit Microscope Visualizer (`OrbitCamera`, `SeafloorRenderer3D`, `CircuitMicroscopeView`, `HUDController`, `SimulationLoop`).
 - [x] **Phase 4:** Digital Paleontologist Motif Scanner, Evolutionary Flight Recorder & Lenski Fossil Freezer (`MotifScanner`, `WeisfeilerLehmanHasher`, `EvolutionaryFlightRecorder`, `FossilFreezer`).
 - [x] **Phase 5:** Pelagic Planktonic Detachment, Spore Dispersal, Transparent Aqueous Water Columns, and God-Suite Interactive Controls.
+- [x] **Phase 6:** Multi-Lineage Phylogeny, Lenski LTEE Dynamics, Convergent Evolution Manifold, and Full Ecological Synthesis.
 
 ---
 
@@ -70,7 +72,7 @@ Siliquarium features a native zero-dependency local development server:
 # 1. Compile TypeScript to dist/
 npm run build
 
-# 2. Run the 13-Stage Comprehensive Test Suite
+# 2. Run the 14-Stage Comprehensive Test Suite
 npm test
 
 # 3. Launch the 3D Seafloor & Circuit Microscope Visualizer

@@ -14,6 +14,7 @@ import { ThermodynamicLedger } from '../core/physics/ThermodynamicLedger.js';
 import { Mulberry32Prng, IPrng } from '../core/prng/SeedablePrng.js';
 import { ISimulationTelemetry, IPoreTelemetry } from './SimulationTelemetry.js';
 import { DigitalPaleontologist } from './paleontology/DigitalPaleontologist.js';
+import { LteeBenchmark } from './paleontology/LteeBenchmark.js';
 
 export interface ISimulationConfig {
   readonly radius?: number;
@@ -30,6 +31,7 @@ export class SimulationWorld {
   private readonly ledger: ThermodynamicLedger;
   private readonly prng: IPrng;
   private readonly paleontologist: DigitalPaleontologist;
+  private readonly ltee: LteeBenchmark = new LteeBenchmark();
   private readonly pores: Pore[] = [];
   private readonly poreMap: Map<string, Pore> = new Map();
 
@@ -57,14 +59,12 @@ export class SimulationWorld {
       for (let r = -radius; r <= radius; r++) {
         for (let z = minZ; z <= maxZ; z++) {
           const coord = new HexCoord3D(q, r, z);
-          if (this.grid.isInBounds(coord)) {
-            const isChimney = (z === 1 && coord.distanceTo(new HexCoord3D(0, 0, 1)) <= 1) || (z === 2 && q === 0 && r === 0);
-            const medium = (z === 0 || isChimney) ? PoreMedium.ROCK_SUBSTRATE : PoreMedium.AQUEOUS_FLUID;
-            const pore = new Pore(coord, medium);
-            this.grid.setItem(coord, pore);
-            this.pores.push(pore);
-            this.poreMap.set(coord.toKey(), pore);
-          }
+          if (!this.grid.isInBounds(coord)) continue;
+          const isChimney = (z === 1 && coord.distanceTo(new HexCoord3D(0, 0, 1)) <= 1) || (z === 2 && q === 0 && r === 0);
+          const pore = new Pore(coord, (z === 0 || isChimney) ? PoreMedium.ROCK_SUBSTRATE : PoreMedium.AQUEOUS_FLUID);
+          this.grid.setItem(coord, pore);
+          this.pores.push(pore);
+          this.poreMap.set(coord.toKey(), pore);
         }
       }
     }
@@ -98,7 +98,10 @@ export class SimulationWorld {
       if (!cell) continue;
       const v = this.vent.evaluateAt(pore.coord, this.tickCount);
       const res = cell.tick(v.streamA && rawA, v.streamB && rawB, v.toxinT && rawT);
-      if (res.telemetry.catalyticYield > 0) this.ledger.recordEnergyInjection(res.telemetry.catalyticYield);
+      if (res.telemetry.catalyticYield > 0) {
+        this.ledger.recordEnergyInjection(res.telemetry.catalyticYield);
+        if (cell.getBattery().getMatter() < 20) { cell.getBattery().addMatter(1); this.ledger.recordMatterInjection(1); }
+      }
       if (res.energyOverflow > 0) this.ledger.recordHeatDissipation(res.energyOverflow);
       if (res.landauerBurned > 0) this.ledger.recordLandauerBurn(res.landauerBurned);
       if (res.basalLeak > 0) this.ledger.recordHeatDissipation(res.basalLeak);
@@ -110,23 +113,29 @@ export class SimulationWorld {
       const cell = pore.getResident();
       if (!cell || !cell.isDivisionReady()) continue;
 
-      const emptySubstrates = this.grid.getEmptyPlanarNeighbors(pore.coord)
+      const neighbors = this.grid.getValidPlanarNeighbors(pore.coord)
         .map(c => this.poreMap.get(c.toKey()))
-        .filter((p): p is Pore => p !== undefined && !p.isAqueous() && p.getState() === PoreState.EMPTY);
+        .filter((p): p is Pore => p !== undefined);
 
+      const emptySubstrates = neighbors.filter(p => !p.isAqueous() && p.getState() === PoreState.EMPTY);
       if (emptySubstrates.length > 0) {
         const target = emptySubstrates[Math.floor(this.prng.nextFloat() * emptySubstrates.length)];
-        target.setResident(cell.reproduce(this.prng, this.mutationRate));
+        const daughter = cell.reproduce(this.prng, this.mutationRate);
+        target.setResident(daughter);
+        this.ltee.recordBirth(daughter.getGeneration());
       } else {
-        const aqueous = this.grid.getEmptyPlanarNeighbors(pore.coord)
-          .map(c => this.poreMap.get(c.toKey()))
-          .filter((p): p is Pore => p !== undefined && p.isAqueous() && !p.hasSpore());
+        const upPore = this.poreMap.get(`${pore.coord.q},${pore.coord.r},${pore.coord.z + 1}`);
+        const aqueous = (upPore && upPore.isAqueous() && !upPore.hasSpore())
+          ? [upPore]
+          : neighbors.filter(p => p.isAqueous() && !p.hasSpore());
         if (aqueous.length > 0) {
           const daughter = cell.reproduce(this.prng, this.mutationRate);
+          this.ltee.recordBirth(daughter.getGeneration());
           const snap = daughter.getBattery().getSnapshot();
-          aqueous[Math.floor(this.prng.nextFloat() * aqueous.length)].setSpore({
+          aqueous[0].setSpore({
             safe: daughter.getSafe(), generation: daughter.getGeneration(),
-            energy: snap.energy, matter: snap.matter, ticksRemaining: Pore.DEFAULT_SPORE_LIFESPAN
+            energy: snap.energy, matter: snap.matter, ticksRemaining: Pore.DEFAULT_SPORE_LIFESPAN,
+            id: daughter.getId(), parentId: daughter.getParentId(), cladeId: daughter.getCladeId()
           });
         }
       }
@@ -150,24 +159,17 @@ export class SimulationWorld {
       const settleCandidates = [
         new HexCoord3D(pore.coord.q, pore.coord.r, Math.max(0, pore.coord.z - 1)),
         ...pore.coord.getPlanarNeighbors()
-      ].map(c => this.poreMap.get(c.toKey()))
-       .filter((p): p is Pore => p !== undefined && !p.isAqueous() && p.getState() === PoreState.EMPTY);
+      ].map(c => this.poreMap.get(c.toKey())).filter((p): p is Pore => p !== undefined && !p.isAqueous() && p.getState() === PoreState.EMPTY);
 
-      if (settleCandidates.length > 0) {
-        const dest = settleCandidates[0];
-        if (dest.setResident(new PoreCell(spore.safe, spore.energy, spore.matter, spore.generation))) {
-          pore.setSpore(null);
-          continue;
-        }
+      if (settleCandidates.length > 0 && settleCandidates[0].setResident(new PoreCell(spore.safe, spore.energy, spore.matter, spore.generation, spore.id, spore.parentId, spore.cladeId))) {
+        pore.setSpore(null);
+        continue;
       }
 
-      const driftCandidates = pore.coord.getPlanarNeighbors()
-        .map(c => this.poreMap.get(c.toKey()))
+      const driftCandidates = pore.coord.getPlanarNeighbors().map(c => this.poreMap.get(c.toKey()))
         .filter((p): p is Pore => p !== undefined && p.isAqueous() && !p.hasSpore());
-
       if (driftCandidates.length > 0) {
-        const dest = driftCandidates[Math.floor(this.prng.nextFloat() * driftCandidates.length)];
-        dest.setSpore(spore);
+        driftCandidates[Math.floor(this.prng.nextFloat() * driftCandidates.length)].setSpore(spore);
         pore.setSpore(null);
       }
     }
@@ -179,14 +181,14 @@ export class SimulationWorld {
       if (cell && cell.isDead()) {
         const snap = cell.getBattery().getSnapshot();
         this.ledger.recordHeatDissipation(snap.energy - Math.floor(snap.energy * 0.5));
+        this.ltee.recordDeath();
         pore.triggerLysis();
       }
     }
     for (const pore of this.pores) {
       const cell = pore.getResident();
       if (!cell) continue;
-      const carcasses = pore.coord.getPlanarNeighbors()
-        .map(c => this.poreMap.get(c.toKey()))
+      const carcasses = pore.coord.getPlanarNeighbors().map(c => this.poreMap.get(c.toKey()))
         .filter((p): p is Pore => p !== undefined && p.getState() === PoreState.CARCASS);
       if (carcasses.length > 0) {
         const unharvested = carcasses[0].scavenge(cell);
@@ -212,11 +214,11 @@ export class SimulationWorld {
     let living = 0, carcass = 0, empty = 0, sporeCount = 0;
     let storedEnergy = 0, livingMatter = 0, carcassMatter = 0;
     const poreTelemetries: IPoreTelemetry[] = [];
+    const cladeData: { generation: number; cladeFounderId: string }[] = [];
 
     for (const pore of this.pores) {
       const isBasalt = (pore.coord.q === 0 && pore.coord.r === 0 && pore.coord.z === 0);
-      const state = pore.getState();
-      const cell = pore.getResident();
+      const state = pore.getState(), cell = pore.getResident();
       let energy = 0, matter = 0, age = 0, gen = 0, catYield = 0, toggles = 0, active = false;
       let gateTypes: string[] = [], tape = '';
 
@@ -224,11 +226,11 @@ export class SimulationWorld {
         living++;
         const snap = cell.getBattery().getSnapshot();
         energy = snap.energy; matter = snap.matter; age = cell.getAge(); gen = cell.getGeneration();
-        const ws = cell.getWorkshop();
-        const gates = ws.getGates();
+        const gates = cell.getWorkshop().getGates();
         gateTypes = gates.map(g => g.type.replace('GATE_', ''));
         active = gates.length > 0 ? gates[gates.length - 1].output : false;
         tape = cell.getSafe().getTape(); storedEnergy += energy; livingMatter += matter;
+        cladeData.push({ generation: gen, cladeFounderId: cell.getCladeId() });
       } else if (state === PoreState.CARCASS) {
         carcass++;
         const c = pore.getCarcass();
@@ -236,25 +238,29 @@ export class SimulationWorld {
       } else {
         empty++;
       }
-
-      if (pore.hasSpore()) {
+      const sp = pore.getSpore();
+      if (sp) {
         sporeCount++;
-        const sp = pore.getSpore()!;
         storedEnergy += sp.energy; livingMatter += sp.matter;
+        if (sp.cladeId) cladeData.push({ generation: sp.generation, cladeFounderId: sp.cladeId });
       }
-
       poreTelemetries.push({
         coord: pore.coord, state, isBasalt, isAqueous: pore.isAqueous(),
         energy, matter, age, generation: gen, gateCount: gateTypes.length, gateTypes,
         hasSpore: pore.hasSpore(), tapeBitstring: tape, catalyticYield: catYield,
-        toggleCount: toggles, primaryActive: active
+        toggleCount: toggles, primaryActive: active,
+        id: cell?.getId() ?? sp?.id, parentId: cell?.getParentId() ?? sp?.parentId ?? null,
+        cladeId: cell?.getCladeId() ?? sp?.cladeId
       });
     }
 
+    const lteeReport = this.ltee.computeMetrics(this.tickCount, living, sporeCount, cladeData);
     const vState = this.vent.evaluateAt(this.vent.nozzleCoord, this.tickCount);
     return {
       tick: this.tickCount, livingCount: living, carcassCount: carcass, emptyCount: empty,
       sporeCount, totalEnergyInUniverse: storedEnergy,
+      maxGeneration: lteeReport.maxGeneration, activeCladesCount: lteeReport.activeCladesCount,
+      shannonDiversity: lteeReport.shannonDiversity, totalBirths: lteeReport.totalBirths,
       ledger: this.ledger.auditBalance(storedEnergy, livingMatter, carcassMatter),
       vent: { nozzleCoord: this.vent.nozzleCoord, streamA: vState.streamA, streamB: vState.streamB, toxinT: vState.toxinT, thermalFlux: vState.thermalFlux },
       pores: poreTelemetries, milestones: this.paleontologist.getMilestones()
@@ -263,13 +269,9 @@ export class SimulationWorld {
 
   public triggerThermalSurge(amount: number = 200): void {
     this.ledger.recordEnergyInjection(amount);
-    let charged = 0;
-    const origin = this.poreMap.get(new HexCoord3D(0, 0, 0).toKey());
-    if (origin && origin.getResident()) {
-      charged = origin.getResident()!.getBattery().chargeEnergy(Math.min(50, amount));
-    }
-    const uncharged = amount - charged;
-    if (uncharged > 0) this.ledger.recordHeatDissipation(uncharged);
+    const origin = this.poreMap.get('0,0,0');
+    const charged = origin?.getResident()?.getBattery().chargeEnergy(Math.min(50, amount)) ?? 0;
+    if (amount - charged > 0) this.ledger.recordHeatDissipation(amount - charged);
   }
 
   public triggerExtinctionEvent(center: HexCoord3D, radius: number = 2): void {
@@ -277,12 +279,14 @@ export class SimulationWorld {
       if (pore.coord.distanceTo(center) <= radius && pore.getResident()) {
         const snap = pore.getResident()!.getBattery().getSnapshot();
         this.ledger.recordHeatDissipation(snap.energy - Math.floor(snap.energy * 0.5));
+        this.ltee.recordDeath();
         pore.triggerLysis();
       }
     }
   }
 
   public getPaleontologist(): DigitalPaleontologist { return this.paleontologist; }
+  public getLtee(): LteeBenchmark { return this.ltee; }
   public getPore(coord: HexCoord3D): Pore | undefined { return this.poreMap.get(coord.toKey()); }
   public getAllPores(): readonly Pore[] { return this.pores; }
   public getTickCount(): number { return this.tickCount; }

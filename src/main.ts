@@ -69,6 +69,7 @@ class SiliquariumApp {
     this.bindCanvasInteractions();
     this.bindResize();
     this.handleResize();
+    this.setupLegendToggle();
 
     // Start simulation loop at 1x
     this.loop.start();
@@ -107,6 +108,18 @@ class SiliquariumApp {
     if (microBox) {
       this.microscopeCanvas.width = microBox.clientWidth;
       this.microscopeCanvas.height = 420;
+    }
+  }
+
+  private setupLegendToggle(): void {
+    const btn = document.getElementById('legend-toggle-btn');
+    const body = document.getElementById('legend-body');
+    const chevron = document.getElementById('legend-chevron');
+    if (btn && body) {
+      btn.addEventListener('click', () => {
+        const isCollapsed = body.classList.toggle('collapsed');
+        if (chevron) chevron.textContent = isCollapsed ? '▸' : '▾';
+      });
     }
   }
 
