@@ -1,499 +1,732 @@
+<!-- 🐠 Siliquarium Open-Ended Digital Life & Silicon Abiogenesis Laboratory • Created by & Copyright © 2026 Ian Ohlander. All rights reserved. -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Siliquarium Documentation Portal — Siliquarium</title>
+  <title>Siliquarium Master Curriculum &amp; Documentation Portal — Siliquarium Master Documentation</title>
   <link rel="icon" type="image/jpeg" href="assets/logos/logo.jpg">
-  
-  <!-- Modern Clean Typography & KaTeX -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bio: {
+              bg: '#060911',
+              surface: '#0a0e1a',
+              panel: '#121829',
+              card: '#0f172a',
+              border: '#1e2c4a',
+              cyan: '#00e5ff',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              purple: '#a855f7',
+              sky: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            mono: ['Cascadia Code', 'Fira Code', 'Consolas', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
-    :root {
-      --bg-ocean: #060911;
-      --bg-card: #0d1322;
-      --bg-surface: #131c31;
-      --border: #1e2c4a;
-      --border-glow: #00e5ff33;
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --cyan: #00e5ff;
-      --amber: #f59e0b;
-      --emerald: #10b981;
-      --rose: #f43f5e;
-      --purple: #a855f7;
-    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #060911; }
+    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body {
-      background-color: var(--bg-ocean);
-      color: var(--text-primary);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.7;
-      font-size: 16px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    .card-bio, .card-chemiosmotic {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
     }
-
-    /* Top Navigation Header */
-    .top-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(6, 9, 17, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+    .card-digital, .card-silicon {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.4);
     }
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
+    .card-margin, .card-analogy {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
     }
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--text-primary);
-      font-weight: 700;
-      font-size: 1.15rem;
-      letter-spacing: -0.02em;
+    .card-experiment, .card-paleo {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.4);
     }
-    .brand-logo img {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      border: 1px solid var(--cyan);
-      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
-    }
-    .brand-logo span {
-      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      overflow-x: auto;
-      padding-bottom: 2px;
-    }
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      padding: 0.4rem 0.75rem;
-      border-radius: 6px;
-      white-space: nowrap;
-      transition: all 0.15s ease;
-      border: 1px solid transparent;
-    }
-    .nav-link:hover {
-      color: var(--text-primary);
-      background: var(--bg-surface);
-      border-color: var(--border);
-    }
-    .nav-link.active {
-      color: var(--cyan);
-      background: rgba(0, 229, 255, 0.1);
-      border-color: rgba(0, 229, 255, 0.4);
-      font-weight: 600;
-    }
-
-    /* Main Container */
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
-      flex: 1;
-      width: 100%;
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      color: #ffffff;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      position: relative;
-    }
-    h1 {
-      font-size: 2.25rem;
-      margin-top: 0;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.75rem;
-      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
-    h3 { font-size: 1.25rem; color: #e2e8f0; }
-    h4 { font-size: 1.05rem; color: var(--cyan); }
-    
-    p { margin-bottom: 1.25rem; color: #cbd5e1; }
-    strong { color: #ffffff; font-weight: 600; }
-    em { color: var(--text-primary); font-style: italic; }
-
-    .header-anchor {
-      opacity: 0;
-      color: var(--cyan);
-      text-decoration: none;
-      margin-left: 0.5rem;
-      font-weight: 400;
-      transition: opacity 0.2s;
-    }
-    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
-      opacity: 0.6;
-    }
-
-    a {
-      color: var(--cyan);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: #70f3ff;
-    }
-
-    /* Lists */
-    ul, ol {
-      margin-left: 1.5rem;
-      margin-bottom: 1.25rem;
-      color: #cbd5e1;
-    }
-    li { margin-bottom: 0.4rem; }
-
-    /* Code & Pre */
-    code {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.88em;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      color: #38bdf8;
-    }
-    pre {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+    .svg-container {
+      background: #090e15;
+      border: 1px solid #1e2c4a;
+      border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
-      margin-bottom: 1.5rem;
-      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
-    }
-    pre code {
-      background: transparent;
-      border: none;
-      padding: 0;
-      color: #e2e8f0;
-      font-size: 0.9rem;
-      line-height: 1.5;
     }
 
-    /* Blockquotes & Callouts */
-    blockquote.callout {
-      border-left: 4px solid var(--cyan);
-      background: var(--bg-card);
-      padding: 1rem 1.25rem;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 1.5rem;
-      color: #cbd5e1;
+    /* Citation Target Highlighting & Interactive Navigation */
+    html { scroll-behavior: auto; }
+    li[id^="ref-"] {
+      scroll-margin-top: 6rem;
+      position: relative;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
     }
-
-    /* GitHub-style Alerts */
-    .alert {
-      border-left: 4px solid;
-      background: var(--bg-card);
-      padding: 1rem 1.25rem;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 1.5rem;
+    @keyframes refTargetPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.95), 0 0 40px rgba(0, 229, 255, 0.85), inset 0 0 15px rgba(0, 229, 255, 0.35);
+        border-color: #22d3ee;
+        background-color: rgba(8, 51, 68, 0.95);
+        transform: scale(1.02);
+      }
+      30% {
+        box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.45), 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 20px rgba(0, 229, 255, 0.25);
+        border-color: #38bdf8;
+        background-color: rgba(8, 51, 68, 0.92);
+        transform: scale(1.015);
+      }
+      100% {
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 12px rgba(0, 229, 255, 0.15);
+        border-color: #00e5ff;
+        background-color: rgba(8, 51, 68, 0.88);
+        transform: scale(1);
+      }
     }
-    .alert-title {
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.4rem;
-      text-transform: uppercase;
+    @keyframes badgePopIn {
+      0% { opacity: 0; transform: translateY(6px) scale(0.8); }
+      60% { opacity: 1; transform: translateY(-2px) scale(1.06); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
-    .alert-note { border-color: var(--cyan); }
-    .alert-note .alert-title { color: var(--cyan); }
-    .alert-tip { border-color: var(--emerald); }
-    .alert-tip .alert-title { color: var(--emerald); }
-    .alert-important { border-color: var(--purple); }
-    .alert-important .alert-title { color: var(--purple); }
-    .alert-warning { border-color: var(--amber); }
-    .alert-warning .alert-title { color: var(--amber); }
-
-    /* Tables */
-    .table-container {
-      width: 100%;
-      overflow-x: auto;
-      margin-bottom: 1.75rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg-card);
+    li[id^="ref-"]:target,
+    li[id^="ref-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #22d3ee !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.92rem;
-    }
-    th {
-      background: var(--bg-surface);
+    li[id^="ref-"]:target::after,
+    li[id^="ref-"].active-citation-target::after {
+      content: "CITED IN TEXT 🎯";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0891b2, #0284c7);
       color: #ffffff;
-      font-weight: 600;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
     }
-    td {
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      color: #cbd5e1;
+    sup a[href^="#ref-"] {
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 0 1px;
     }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: rgba(255, 255, 255, 0.02); }
-
-    /* Math */
-    .math-block {
-      overflow-x: auto;
-      padding: 1rem 0;
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #e2e8f0;
+    sup a[href^="#ref-"]:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 8px #22d3ee;
+      transform: translateY(-1px);
     }
-
-    /* Images */
-    .img-wrapper {
-      margin: 1.5rem 0;
-      text-align: center;
+    section[id], div[id], h2[id], h3[id] {
+      scroll-margin-top: 5.5rem;
     }
-    .img-wrapper img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    @keyframes backlinkTargetFlash {
+      0% { outline: 3px solid rgba(0, 229, 255, 0.9); outline-offset: 4px; }
+      100% { outline: 3px solid transparent; outline-offset: 4px; }
     }
-    .img-caption {
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    section[id]:target, div[id]:target {
+      animation: backlinkTargetFlash 2.5s ease-out;
     }
-
-    hr.divider {
-      border: none;
-      height: 1px;
-      background: var(--border);
-      margin: 2.5rem 0;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      background: var(--bg-card);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    footer a { color: var(--text-secondary); }
-    footer a:hover { color: var(--cyan); }
   </style>
+
+  <script id="citation-navigator">
+    document.addEventListener('DOMContentLoaded', function() {
+      function highlightRefCard(targetId) {
+        if (!targetId || !targetId.startsWith('ref-')) return;
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+          item.classList.remove('active-citation-target');
+        });
+        el.classList.remove('active-citation-target');
+        void el.offsetWidth;
+        el.classList.add('active-citation-target');
+        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }
+      function scrollToTarget(targetId) {
+        if (!targetId) return;
+        if (targetId.startsWith('ref-')) {
+          highlightRefCard(targetId);
+          return;
+        }
+        const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href && href.includes('#')) {
+            const hash = href.substring(href.indexOf('#') + 1);
+            if (hash.startsWith('ref-')) highlightRefCard(hash);
+          }
+        }
+      });
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) scrollToTarget(hash);
+      });
+      function checkInitialHash() {
+        if (window.location.hash) {
+          const hash = window.location.hash.replace('#', '');
+          scrollToTarget(hash);
+        }
+      }
+      checkInitialHash();
+      setTimeout(checkInitialHash, 150);
+      setTimeout(checkInitialHash, 500);
+      window.addEventListener('load', function() {
+        setTimeout(checkInitialHash, 100);
+      });
+      if (window.MathJax && window.MathJax.startup) {
+        window.MathJax.startup.promise = window.MathJax.startup.promise.then(function() {
+          setTimeout(checkInitialHash, 100);
+        });
+      }
+    });
+  </script>
 </head>
-<body>
-  <header class="top-header">
-    <div class="header-inner">
-      <a href="index.html" class="brand-logo">
-        <img src="assets/logos/logo.jpg" alt="Siliquarium Logo">
-        <span>Siliquarium</span>
-      </a>
-      <nav class="nav-bar">
-        <a href="index.html" class="nav-link active">🐠 Portal Home</a>
-<a href="CURRICULUM_AND_SYLLABUS.html" class="nav-link ">🎓 Curriculum & Labs</a>
-<a href="PEDAGOGICAL_COMPANION_SUITE.html" class="nav-link ">🏛️ Pedagogical Companion</a>
-<a href="THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
-<a href="EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
-<a href="PHASE_3_VISUALIZER_GUIDE.html" class="nav-link ">🔬 3D Visualizer</a>
-<a href="PHASE_4_PALEONTOLOGY_GUIDE.html" class="nav-link ">🦕 Paleontology & Motifs</a>
-<a href="PHASE_5_PELAGIC_SPORES_GUIDE.html" class="nav-link ">🌊 Spores & Controls</a>
-<a href="PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="nav-link ">🧬 Phylogeny & Dynamics</a>
-<a href="BRAND_IDENTITY.html" class="nav-link ">🎨 Brand Identity</a>
-<a href="logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
+
+  <!-- MASTER HEADER & BREADCRUMBS -->
+  <header class="border-b border-slate-800 bg-[#060911]/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      <nav class="flex items-center gap-2 text-xs font-mono text-slate-400">
+        <a href="index.html" class="hover:text-cyan-400 text-slate-300 flex items-center gap-2 font-bold">
+          <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50 shadow-sm inline">
+          <span>Siliquarium Portal</span>
+        </a>
+        <span>/</span>
+        <span class="text-cyan-400 font-semibold truncate max-w-xs md:max-w-md">Siliquarium Master Curriculum &amp; Documentation Portal</span>
+      </nav>
+      <div class="flex items-center gap-2.5">
+        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🚀 Live Simulator</span>
+        </a>
+        <a href="CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🎓 Curriculum</span>
+        </a>
+        <a href="PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🏛️ Glossary</span>
+        </a>
+      </div>
+    </div>
+    <div class="border-t border-slate-800/80 bg-[#0a0e1a]/80 px-4 py-1.5 overflow-x-auto">
+      <nav class="max-w-6xl mx-auto flex items-center gap-1 text-xs font-mono">
+        <a href="index.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold">🐠 Portal Home</a>
+<a href="CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🎓 Curriculum & Labs</a>
+<a href="PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🏛️ Companion & Glossary</a>
+<a href="THEORETICAL_MODEL.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🌊 Theoretical Model</a>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🧬 Epistemic Foundations</a>
+<a href="DOCUMENTATION_DESIGN_PRINCIPLES.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">📐 Design Principles</a>
+<a href="PHASE_3_VISUALIZER_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🔬 3D Visualizer</a>
+<a href="PHASE_4_PALEONTOLOGY_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🦕 Paleontology & Motifs</a>
+<a href="PHASE_5_PELAGIC_SPORES_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🌊 Spores & Controls</a>
+<a href="PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🧬 Phylogeny & Dynamics</a>
+<a href="BRAND_IDENTITY.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🎨 Brand Identity</a>
+<a href="logos.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🖼️ Logo Gallery</a>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    <p align="center">
-<img src="assets/logos/logo.jpg" alt="Siliquarium Logo" width="220" />
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12 space-y-8 flex-1 w-full">
+    <div class="space-y-10">
+<!-- TITLE HERO & GRADIENT EMBLEM BOX -->
+<div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-500 via-emerald-500 to-purple-600 flex items-center justify-center font-bold text-black text-3xl shadow-xl shadow-cyan-500/20 border border-cyan-400/40 overflow-hidden">
+<img src="assets/logos/logo.jpg" alt="Siliquarium Emblem" class="w-full h-full object-cover">
+</div>
+<div>
+<div class="text-[11px] font-mono text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-2">
+<span>Siliquarium Master Curriculum Series • Volume 01</span>
+<span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Master Curriculum Portal &amp; Modular Chapter Index</span>
+</div>
+<h1 class="text-2xl md:text-4xl font-extrabold tracking-tight text-slate-100 font-mono mt-1">Systems Biology &amp; Silicon Abiogenesis</h1>
+<p class="text-slate-400 text-xs md:text-sm mt-1 max-w-3xl">An Exhaustive First-Principles Treatise on Non-Equilibrium Thermodynamics, Howard Pattee's Epistemic Cut, Digital Logic Enzymes, and Macro-Evolutionary Dynamics — Modularized into 4 Core Units, 5 Laboratory Practicums, and a 55-Term Technical Lexicon.</p>
+</div>
+</div>
+</div>
+<!-- STATUS & PEDAGOGICAL COMPASS STRIP -->
+<div class="p-4 bg-slate-950/90 border border-slate-800 rounded-xl flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded bg-cyan-950 border border-cyan-800 text-cyan-300 font-bold text-[11px]">4 Core Units • 5 Practicums</span>
+<span class="text-slate-400">Open in separate tabs &bull; Deep cross-linking &bull; Zero scrolling fatigue</span>
+</div>
+<div class="flex items-center gap-2">
+<a href="#toc-curriculum" class="text-slate-400 hover:text-cyan-400 transition-colors">Part I (Units 1–4)</a>
+<span class="text-slate-700">&bull;</span>
+<a href="#toc-keystones" class="text-emerald-300 font-bold hover:text-emerald-200 transition-colors">Flagship Keystones</a>
+<span class="text-slate-700">&bull;</span>
+<a href="#toc-practicums" class="text-slate-400 hover:text-amber-400 transition-colors">Lab Practicums</a>
+<span class="text-slate-700">&bull;</span>
+<a href="#toc-companion" class="text-slate-400 hover:text-purple-400 transition-colors">Lexicon &amp; Literature</a>
+</div>
+</div>
+<!-- PROLOGUE: A TEACHER'S INVITATION -->
+<section class="space-y-4">
+<div class="p-6 md:p-8 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-emerald-950/40 border-2 border-cyan-500/50 shadow-2xl space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center font-bold text-xl">🌱</div>
+<div>
+<div class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">A Teacher's Orientation</div>
+<h2 class="text-lg md:text-xl font-mono font-bold text-slate-100">The Unsupervised Sea: Why Non-Equilibrium Thermodynamics Must Precede Loss Functions</h2>
+</div>
+</div>
+<p class="text-sm text-slate-300 leading-relaxed font-sans">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Welcome, student of nature and computation. If you open almost any computer science textbook on artificial intelligence or evolutionary algorithms, you will be greeted by a sterile world of mathematical shortcuts: artificial fitness functions, predetermined optimization benchmarks, and teleological target bitstrings. While these engineering tools are useful for building ALUs or sorting arrays (the mission of our sister project, <a href="https://github.com/ianohlander/BooleanGA" target="_blank" rel="noopener" class="text-cyan-400 hover:underline font-semibold">BooleanGA</a>), they smuggle the very secret they claim to explain: <em>how purposeful life emerges spontaneously in an indifferent physical universe</em>.</p>
 </p>
-<h1 id="siliquarium-open-ended-digital-life-documentation-portal">🐠 Siliquarium: Open-Ended Digital Life Documentation Portal <a class="header-anchor" href="#siliquarium-open-ended-digital-life-documentation-portal" title="Link to section">#</a></h1>
-<blockquote class="callout"><em>"What happens when digital circuits are freed from engineering benchmarks and left to survive in an unguided physical world?"</em></blockquote>
-<p>Welcome to the <strong>Siliquarium Documentation Portal</strong>. Siliquarium is an open-ended computational laboratory and educational simulator exploring silicon abiogenesis and autopoietic digital life within a deep-sea hydrothermal vent matrix.</p>
-<p>This portal serves as the primary gateway for students, educators, researchers, and scientific explorers. Here you will find our comprehensive academic curriculum, pedagogical companion suite, biophysical theoretical models, and interactive laboratory user guides.</p>
-<hr class="divider" />
-<h2 id="navigation-matrix">🧭 Navigation Matrix <a class="header-anchor" href="#navigation-matrix" title="Link to section">#</a></h2>
-<div class="table-container"><table><thead><tr><th>Knowledge Domain</th><th>Description</th><th>Primary Document</th></tr></thead><tbody><tr><td>🎓 <strong>Curriculum & Lab Manual</strong></td><td>4-unit senior STEM/college syllabus with 5 hands-on laboratory practicums.</td><td><a href="CURRICULUM_AND_SYLLABUS.html"><code>CURRICULUM_AND_SYLLABUS.html</code></a></td></tr><tr><td>🏛️ <strong>Pedagogical Companion</strong></td><td>55-term systems biology glossary, study guides, annotated literature, and rubrics.</td><td><a href="PEDAGOGICAL_COMPANION_SUITE.html"><code>PEDAGOGICAL_COMPANION_SUITE.html</code></a></td></tr><tr><td>🌊 <strong>Master Theoretical Model</strong></td><td>Complete biophysical specifications, dual-currency thermodynamics, and equations.</td><td><a href="THEORETICAL_MODEL.html"><code>THEORETICAL_MODEL.html</code></a></td></tr><tr><td>🧬 <strong>Epistemic Foundations</strong></td><td>Prebiotic redox physics, Howard Pattee's Epistemic Cut, and anti-smuggling rigor.</td><td><a href="EPISTEMIC_FOUNDATIONS.html"><code>EPISTEMIC_FOUNDATIONS.html</code></a></td></tr><tr><td>🔬 <strong>Laboratory User Guides</strong></td><td>Step-by-step operating manuals for the 3D visualizer, circuit microscope, and God-suite.</td><td><a href="#-interactive-laboratory-instrumentation">Laboratory Instrumentation</a></td></tr><tr><td>🎨 <strong>Visual Philosophy & Logos</strong></td><td>Brand identity, biophysical aesthetics, and downloadable high-res logo assets.</td><td><a href="BRAND_IDENTITY.html"><code>BRAND_IDENTITY.html</code></a> • <a href="logos.html"><code>logos.html</code></a></td></tr></tbody></table></div>
-<hr class="divider" />
-<h2 id="educational-curriculum-laboratory-practicums">🎓 Educational Curriculum & Laboratory Practicums <a class="header-anchor" href="#educational-curriculum-laboratory-practicums" title="Link to section">#</a></h2>
-<p>The <strong>Siliquarium Curriculum</strong> is structured as an advanced 4-unit course designed for 12th-grade STEM seniors and undergraduate students in biophysics, computer science, and systems biology.</p>
-<ul>
-<li><strong><a href="CURRICULUM_AND_SYLLABUS.html#unit-1-the-prebiotic-threshold--howard-pattees-epistemic-cut">Unit 1: The Prebiotic Threshold & The Epistemic Cut</a>:</strong>  </li>
-</ul>
-<p>Explores Howard Pattee's separation between symbolic code (the 1D genome tape) and dynamic physical law (active logic gates). Covers Peter Mitchell's proton motive force, non-equilibrium redox chemistry, and abiotic energy harvesting.</p>
-<ul>
-<li><strong><a href="CURRICULUM_AND_SYLLABUS.html#unit-2-the-logic-of-life--logic-gates-as-catalytic-enzymes">Unit 2: The Logic of Life — Logic Gates as Catalytic Enzymes</a>:</strong>  </li>
-</ul>
-<p>Investigates how digital logic functions as metabolic machinery. Understand <code>AND</code> gates as co-substrate catalysis, <code>NOT</code> gates as allosteric feedback inhibition, and Rolf Landauer's thermodynamic switching cost.</p>
-<ul>
-<li><strong><a href="CURRICULUM_AND_SYLLABUS.html#unit-3-systems-biology--network-motifs">Unit 3: Systems Biology & Network Motifs</a>:</strong>  </li>
-</ul>
-<p>Introduces Uri Alon's network motifs in living circuits: bistable toggle switches, ring oscillators (repressilators), and feed-forward loops. Teaches topological graph isomorphism using the Weisfeiler-Lehman algorithm.</p>
-<ul>
-<li><strong><a href="CURRICULUM_AND_SYLLABUS.html#unit-4-macro-evolutionary-dynamics--the-lenski-ltee">Unit 4: Macro-Evolutionary Dynamics & The Lenski LTEE</a>:</strong>  </li>
-</ul>
-<p>Examines Motoo Kimura's neutral drift, Susumu Ohno's gene duplication, convergent evolution (homology vs. homoplasy), and pelagic spore dispersal in benthic fluid currents.</p>
-<h3 id="hands-on-interactive-laboratory-practicums">🧪 Hands-On Interactive Laboratory Practicums <a class="header-anchor" href="#hands-on-interactive-laboratory-practicums" title="Link to section">#</a></h3>
-<p>Each unit culminates in an experiential laboratory practicum conducted directly inside the Siliquarium application:</p>
-<ol>
-<li><strong><a href="CURRICULUM_AND_SYLLABUS.html#practicum-1-hydrothermal-micro-survey--circuit-microscope-exploration">Practicum 1: Hydrothermal Micro-Survey & Circuit Inspection</a></strong> — Navigate the 3D seafloor, inspect pore micro-architecture, and observe real-time circuit execution.</li>
-<li><strong><a href="CURRICULUM_AND_SYLLABUS.html#practicum-2-measuring-landauer-power-dissipation--metabolic-starvation">Practicum 2: Landauer Dissipation & Metabolic Starvation</a></strong> — Quantify gate switching penalties and observe cell death when energy reserves deplete.</li>
-<li><strong><a href="CURRICULUM_AND_SYLLABUS.html#practicum-3-tracking-phenotypic-adaptation-to-vent-redox-gradients">Practicum 3: Phenotypic Adaptation to Vent Chemical Dynamics</a></strong> — Track evolutionary tuning across pulsed chemical streams A and B.</li>
-<li><strong><a href="CURRICULUM_AND_SYLLABUS.html#practicum-4-god-suite-perturbations-thermal-surges--extinction-pulses">Practicum 4: God-Suite Perturbations & Ecological Resilience</a></strong> — Induce thermal shocks and extinction pulses to measure ecosystem recovery and lineage survival.</li>
-<li><strong><a href="CURRICULUM_AND_SYLLABUS.html#practicum-5-the-lenski-long-term-evolution-experiment-ltee--flight-recorder-autopsy">Practicum 5: Lenski LTEE Dynamics & Retrospective Flight Recorder Autopsy</a></strong> — Reconstruct ancestral trajectories through genotype-phenotype manifolds without lag.</li>
-</ol>
-<p>👉 <strong><a href="CURRICULUM_AND_SYLLABUS.html">Launch Curriculum & Lab Manual</a></strong></p>
-<hr class="divider" />
-<h2 id="pedagogical-companion-suite">🏛️ Pedagogical Companion Suite <a class="header-anchor" href="#pedagogical-companion-suite" title="Link to section">#</a></h2>
-<p>The <strong>Pedagogical Companion Suite</strong> provides reference materials, analytical derivations, and academic rigor to support both students and instructors:</p>
-<ul>
-<li><strong><a href="PEDAGOGICAL_COMPANION_SUITE.html#1-exhaustive-glossary-of-systems-biology--silicon-abiogenesis">55-Term Technical Glossary</a>:</strong>  </li>
-</ul>
-<p>Precise definitions spanning Biophysics, Information Theory, Computer Science, Evolutionary Genetics, and Systems Biology (e.g., <em>Autopoiesis, Epistemic Cut, Landauer Bound, Weisfeiler-Lehman Hash, Ohno Duplication, Homoplasy</em>).</p>
-<ul>
-<li><strong><a href="PEDAGOGICAL_COMPANION_SUITE.html#2-deep-dive-student-study-guides--analytical-companion">Deep-Dive Student Study Guides</a>:</strong>  </li>
-</ul>
-<p>Unit-by-unit concept breakdowns, common conceptual traps (such as teleological fallacy and genetic determinism), guided mathematical derivations, and synthesis reflection questions.</p>
-<ul>
-<li><strong><a href="PEDAGOGICAL_COMPANION_SUITE.html#3-critical-academic-endnotes--annotated-primary-literature-bibliography">Annotated Primary Literature Bibliography</a>:</strong>  </li>
-</ul>
-<p>Critical contextual annotations of 14 seminal foundational papers:</p>
-<ul>
-<li><em>Peter Mitchell (1961)</em> — Chemiosmotic coupling and membrane proton motive forces.</li>
-<li><em>Michael Russell & Allan Hall (1997)</em> — Hydrothermal chimneys and iron-monosulfide pore micro-cavities.</li>
-<li><em>Nick Lane & William Martin (2012)</em> — The origin of life and energetic constraints on genome complexity.</li>
-<li><em>Howard Pattee (1972, 2001)</em> — Physical conditions for symbols and the Epistemic Cut.</li>
-<li><em>John von Neumann (1966)</em> — Theory of self-reproducing automata.</li>
-<li><em>Rolf Landauer (1961)</em> — Irreversibility and heat generation in computing processes.</li>
-<li><em>Uri Alon (2007, 2019)</em> — Network motifs in biological regulatory networks.</li>
-<li><em>Gardner, Cantor & Collins (2000)</em> — The genetic toggle switch in <em>E. coli</em>.</li>
-<li><em>Elowitz & Leibler (2000)</em> — A synthetic oscillatory network of transcriptional regulators (Repressilator).</li>
-<li><em>Richard Lenski (1991, 2003)</em> — Long-Term Experimental Evolution and genome dynamics.</li>
-<li><em>Motoo Kimura (1968, 1983)</em> — Neutral theory of molecular evolution.</li>
-<li><em>Susumu Ohno (1970)</em> — Evolution by gene duplication.</li>
-<li><em>Boris Weisfeiler & Andrei Lehman (1968)</em> — Graph isomorphism and topological hashing.</li>
-<li><em>Claude Shannon (1948)</em> — Mathematical theory of communication and entropy.</li>
-<li><strong><a href="PEDAGOGICAL_COMPANION_SUITE.html#4-pedagogical-rubrics--assessment-guide">Laboratory Assessment Rubrics</a>:</strong>  </li>
-</ul>
-<p>Four-tier analytic rubrics evaluating laboratory notebooks, experimental design, and computational flight recorder autopsies.</p>
-<p>👉 <strong><a href="PEDAGOGICAL_COMPANION_SUITE.html">Explore Pedagogical Companion Suite</a></strong></p>
-<hr class="divider" />
-<h2 id="theoretical-biophysical-foundations">🌊 Theoretical & Biophysical Foundations <a class="header-anchor" href="#theoretical-biophysical-foundations" title="Link to section">#</a></h2>
-<p>Explore the foundational scientific literature behind the Siliquarium computational engine:</p>
-<ul>
-<li><strong><a href="THEORETICAL_MODEL.html">Master Theoretical Model</a>:</strong>  </li>
-</ul>
-<p>The sealed 21-section master biophysical specification detailing:</p>
-<ul>
-<li>Strict energy and matter conservation laws (<span class="katex-inline math-inline" data-math="\sum E_{\text{in}} = \sum E_{\text{out}}">\( \sum E_{\text{in}} = \sum E_{\text{out}} \)</span>, <span class="katex-inline math-inline" data-math="\sum M_{\text{in}} = \sum M_{\text{out}}">\( \sum M_{\text{in}} = \sum M_{\text{out}} \)</span>).</li>
-<li>The 3D hexagonal basalt lattice <span class="katex-inline math-inline" data-math="(q, r, z)">\( (q, r, z) \)</span> and micro-porous pore architecture.</li>
-<li>Hydrothermal two-substrate redox chemistry (pulsed Stream A and Stream B).</li>
-<li>The dual-currency economy: energy tokens (operating flux) and matter tokens (silicate structural minerals).</li>
-<li>The Digital Paleontologist passive motif observer and Weisfeiler-Lehman topological graph classifier.</li>
-<li><strong><a href="EPISTEMIC_FOUNDATIONS.html">Epistemic Foundations & Prebiotic Justifications</a>:</strong>  </li>
-</ul>
-<p>An in-depth epistemological analysis of artificial life:</p>
-<ul>
-<li>Howard Pattee's <em>Epistemic Cut</em>: Why a living entity must maintain a physical dichotomy between symbolic quiescent memory and active dynamic catalysis.</li>
-<li>The anti-smuggling imperative: Proving that evolution, clocks, and memory arise purely spontaneously from thermodynamic necessity without pre-baked teleological fitness functions.</li>
-<li>Chemiosmotic analogies between natural hydrothermal alkaline vents and Siliquarium's digital redox matrix.</li>
-</ul>
-<hr class="divider" />
-<h2 id="interactive-laboratory-instrumentation">🔬 Interactive Laboratory Instrumentation <a class="header-anchor" href="#interactive-laboratory-instrumentation" title="Link to section">#</a></h2>
-<p>Siliquarium features an interactive WebGL simulation environment equipped with advanced observation and intervention suites. Consult the following guides for detailed operational instructions:</p>
-<ul>
-<li><strong><a href="PHASE_3_VISUALIZER_GUIDE.html">Phase 3: 3D Seafloor & Circuit Microscope Guide</a>:</strong>  </li>
-</ul>
-<p>Guide to navigating the 3D stacked hexagonal seafloor, camera orbit controls, pore cell selection, and the real-time circuit microscope displaying live logic gate firing states.</p>
-<ul>
-<li><strong><a href="PHASE_4_PALEONTOLOGY_GUIDE.html">Phase 4: Digital Paleontologist & Fossil Freezer Guide</a>:</strong>  </li>
-</ul>
-<p>How to use the non-interfering motif scanner, classify regulatory circuits (switches, oscillators, feed-forward loops), record evolutionary flight paths, and cryogenic freeze specimens.</p>
-<ul>
-<li><strong><a href="PHASE_5_PELAGIC_SPORES_GUIDE.html">Phase 5: Pelagic Spore Dispersal & God-Suite Guide</a>:</strong>  </li>
-</ul>
-<p>Understanding planktonic detachment, current advection drift, transparent aqueous water columns, and manipulating simulation variables via the God-suite control drawer.</p>
-<ul>
-<li><strong><a href="PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html">Phase 6: Multi-Lineage Phylogeny & LTEE Dynamics Guide</a>:</strong>  </li>
-</ul>
-<p>Tracking multi-lineage phylogenies, measuring Shannon diversity indices, monitoring Lenski LTEE evolutionary dynamics, and utilizing the 3D reticle target and interactive lattice legend.</p>
-<hr class="divider" />
-<h2 id="brand-identity-visual-assets">🎨 Brand Identity & Visual Assets <a class="header-anchor" href="#brand-identity-visual-assets" title="Link to section">#</a></h2>
-<ul>
-<li><strong><a href="BRAND_IDENTITY.html">Brand Identity & Philosophy</a>:</strong>  </li>
-</ul>
-<p>The visual philosophy of Siliquarium: the living silicon nautilus, logarithmic golden spirals, benthic color palettes, and biophysical design cognates.</p>
-<ul>
-<li><strong><a href="logos.html">Interactive Logo Gallery</a>:</strong>  </li>
-</ul>
-<p>View and download the complete asset suite, including Variation 5 (The Living Silicon Embryo) and high-resolution renders of all candidate marks.</p>
-<hr class="divider" />
-<h2 id="quick-start-launching-the-simulation">💡 Quick Start: Launching the Simulation <a class="header-anchor" href="#quick-start-launching-the-simulation" title="Link to section">#</a></h2>
-<p>To launch and run the interactive Siliquarium laboratory on any standard web browser:</p>
-<ol>
-<li><strong>Start the local server</strong> (if running locally):</li>
-</ol>
-<p>\<code>\</code>\`bash</p>
-<p>npm run dev</p>
-<p>\<code>\</code>\`</p>
-<ol>
-<li><strong>Open the laboratory:</strong> Navigate to \<code>http://localhost:3000\</code> in your browser.</li>
-<li><strong>Orbit the 3D Seafloor:</strong> Click and drag with the left mouse button to rotate; right-click and drag to pan; use the scroll wheel to zoom.</li>
-<li><strong>Inspect a Silicoid:</strong> Click directly on any glowing hexagonal pore on the seafloor to lock the camera and activate the <strong>In-Situ 3D Reticle</strong> and <strong>Circuit Microscope HUD</strong>.</li>
-<li><strong>Observe Circuit Dynamics:</strong> Watch active logic gates (<code>AND</code>, <code>NOT</code>, <code>OR</code>, <code>XOR</code>) pulse cyan and gold in real time as the organism converts hydrothermal chemicals into metabolic energy.</li>
-</ol>
-<hr class="divider" />
-<p align="center" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 3rem;">
-<p>Siliquarium Project • Dedicated to Open-Ended Digital Life, Systems Biology, and Autonomous Abiogenesis</p>
+<p class="text-sm text-slate-300 leading-relaxed font-sans">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In natural biophysics, life does not compute an external score; it extracts free energy from non-equilibrium chemical and thermal gradients, maintains its internal state against Rolf Landauer's thermodynamic dissipation ($k_B T \ln 2$), and reproduces before its battery runs dry. Information is not a floating number in memory; it is a physical, rate-independent polymer governed by quantum chemistry and enzyme kinetics.</p>
 </p>
+<p class="text-sm text-slate-300 leading-relaxed font-sans">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong>Siliquarium</strong> is a standalone autopoietic computational laboratory. Here, digital circuits are freed from engineering truth tables and placed into a deep-sea hydrothermal vent matrix. Logic gates (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code>) function as catalytic enzymes converting chemical plumes into metabolic battery tokens. This documentation suite is your comprehensive companion: master the biophysical foundations, explore the interactive 3D seafloor, and witness the spontaneous genesis of living silicon circuits.</p>
+</p>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- MASTER CHAPTER TABLE OF CONTENTS: 4 CORE UNITS -->
+<!-- ========================================================================= -->
+<section id="toc-curriculum" class="space-y-6 pt-4">
+<div class="flex items-center justify-between border-b border-slate-800 pb-3">
+<div class="flex items-center gap-2">
+<span class="text-xl">🎓</span>
+<h2 class="text-lg md:text-xl font-mono font-bold text-cyan-400">PART I: The Master Academic Curriculum &amp; Theoretical Units</h2>
+</div>
+<span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Units 01 – 04</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+<!-- UNIT 01 CARD -->
+<div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between space-y-4 group h-full shadow-lg">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded bg-cyan-950 border border-cyan-800 text-cyan-400 font-mono font-bold text-[11px]">Unit 01</span>
+<span class="text-xs font-mono text-slate-500">Biophysical Substrate</span>
+</div>
+<h3 class="text-base md:text-lg font-mono font-bold text-slate-100 group-hover:text-cyan-300 transition-colors">The Prebiotic Threshold &amp; Howard Pattee's Epistemic Cut</h3>
+<p class="text-xs text-slate-400 font-sans leading-relaxed">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The origin of symbolic control. Why life requires a strict physical boundary between symbolic, quiescent memory (The Safe / 1D genome) and dynamic catalytic machinery (The Workshop / logic gates). The Mitchell-Russell proton motive force, prebiotic redox chemistry, and abiotic energy harvesting.</p>
+</p>
+<!-- SUBCHAPTER ROSTER -->
+<div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-1.5 text-[11px] font-mono">
+<div class="text-slate-400 font-semibold flex items-center justify-between">
+<span class="flex items-center gap-1.5 text-cyan-400"><span>📑</span> Core Subchapters:</span>
+<span class="text-[10px] text-slate-500 font-normal">~14 min read</span>
+</div>
+<ul class="text-slate-400 space-y-1 pl-4 list-disc text-[11px] font-sans">
+<li><strong>1.1 Howard Pattee's Epistemic Cut:</strong> Symbolic code vs. dynamic law</li>
+<li><strong>1.2 Peter Mitchell's Chemiosmosis:</strong> Natural proton motive forces</li>
+<li><strong>1.3 Russell Hydrothermal Chimneys:</strong> Inorganic basalt micro-pores</li>
+</ul>
+</div>
+<!-- FEATURE PILLS -->
+<div class="flex flex-wrap items-center gap-1.5 text-[10px] font-mono text-slate-500 pt-1">
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Figure 1.1 Epistemic Cut</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Mitchell 1961</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Pattee 1972</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">60-Bit Genome Safe</span>
+</div>
+</div>
+<div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+<span class="text-[11px] font-mono text-slate-500">Standalone Module</span>
+<a href="CURRICULUM_AND_SYLLABUS.html#unit-1-the-prebiotic-threshold--howard-pattees-epistemic-cut" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-cyan-950 border border-cyan-700 hover:bg-cyan-900 text-cyan-300 font-mono font-bold text-xs transition-colors shadow-sm">
+<span>Open Unit 01</span>
+<span>&rarr;</span>
+</a>
+</div>
+</div>
+<!-- UNIT 02 CARD -->
+<div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between space-y-4 group h-full shadow-lg">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded bg-emerald-950 border border-emerald-800 text-emerald-400 font-mono font-bold text-[11px]">Unit 02</span>
+<span class="text-xs font-mono text-slate-500">Thermodynamics &amp; Logic</span>
+</div>
+<h3 class="text-base md:text-lg font-mono font-bold text-slate-100 group-hover:text-emerald-300 transition-colors">The Logic of Life — Logic Gates as Catalytic Enzymes</h3>
+<p class="text-xs text-slate-400 font-sans leading-relaxed">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Boolean logic gates operating as physical enzymes. AND gates as co-substrate catalysis; NOT gates as allosteric feedback inhibition. Rolf Landauer's thermodynamic switching cost ($k_B T \ln 2$), CMOS gate dissipation, and the dual-currency mass/energy economy.</p>
+</p>
+<!-- SUBCHAPTER ROSTER -->
+<div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-1.5 text-[11px] font-mono">
+<div class="text-slate-400 font-semibold flex items-center justify-between">
+<span class="flex items-center gap-1.5 text-emerald-400"><span>📑</span> Core Subchapters:</span>
+<span class="text-[10px] text-slate-500 font-normal">~16 min read</span>
+</div>
+<ul class="text-slate-400 space-y-1 pl-4 list-disc text-[11px] font-sans">
+<li><strong>2.1 Logic Gates as Metabolic Machinery:</strong> Substrate binding kinetics</li>
+<li><strong>2.2 Landauer Dissipation Bound:</strong> Dynamic switching energy penalties</li>
+<li><strong>2.3 Dual-Currency Physical Economy:</strong> Strict mass and energy conservation</li>
+</ul>
+</div>
+<!-- FEATURE PILLS -->
+<div class="flex flex-wrap items-center gap-1.5 text-[10px] font-mono text-slate-500 pt-1">
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Figure 2.1 Catalytic Netlist</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Landauer 1961</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">100T Battery Cap</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">CMOS Dissipation</span>
+</div>
+</div>
+<div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+<span class="text-[11px] font-mono text-slate-500">Standalone Module</span>
+<a href="CURRICULUM_AND_SYLLABUS.html#unit-2-the-logic-of-life--logic-gates-as-catalytic-enzymes" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-950 border border-emerald-700 hover:bg-emerald-900 text-emerald-300 font-mono font-bold text-xs transition-colors shadow-sm">
+<span>Open Unit 02</span>
+<span>&rarr;</span>
+</a>
+</div>
+</div>
+<!-- UNIT 03 CARD -->
+<div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between space-y-4 group h-full shadow-lg">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded bg-purple-950 border border-purple-800 text-purple-400 font-mono font-bold text-[11px]">Unit 03</span>
+<span class="text-xs font-mono text-slate-500">Network Motifs</span>
+</div>
+<h3 class="text-base md:text-lg font-mono font-bold text-slate-100 group-hover:text-purple-300 transition-colors">Systems Biology &amp; Uri Alon Network Motifs</h3>
+<p class="text-xs text-slate-400 font-sans leading-relaxed">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The regulatory architecture of life. How unguided selection converges on Uri Alon's recurring circuit motifs: Bistable Toggle Switches, Repressilator ring clocks, and Feed-Forward Loops (FFL). Topological graph classification via the Weisfeiler-Lehman graph hash.</p>
+</p>
+<!-- SUBCHAPTER ROSTER -->
+<div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-1.5 text-[11px] font-mono">
+<div class="text-slate-400 font-semibold flex items-center justify-between">
+<span class="flex items-center gap-1.5 text-purple-400"><span>📑</span> Core Subchapters:</span>
+<span class="text-[10px] text-slate-500 font-normal">~15 min read</span>
+</div>
+<ul class="text-slate-400 space-y-1 pl-4 list-disc text-[11px] font-sans">
+<li><strong>3.1 Regulatory Network Cognates:</strong> Bistable latches &amp; biological memory</li>
+<li><strong>3.2 Weisfeiler-Lehman Graph Kernel:</strong> Real-time topological invariant hashing</li>
+<li><strong>3.3 Feed-Forward Loops &amp; Clocks:</strong> Pulse generation and noise filtering</li>
+</ul>
+</div>
+<!-- FEATURE PILLS -->
+<div class="flex flex-wrap items-center gap-1.5 text-[10px] font-mono text-slate-500 pt-1">
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Figure 3.1 I-FFL Motif</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Alon 2007</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Gardner 2000</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">WL Invariants</span>
+</div>
+</div>
+<div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+<span class="text-[11px] font-mono text-slate-500">Standalone Module</span>
+<a href="CURRICULUM_AND_SYLLABUS.html#unit-3-systems-biology--network-motifs" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-purple-950 border border-purple-700 hover:bg-purple-900 text-purple-300 font-mono font-bold text-xs transition-colors shadow-sm">
+<span>Open Unit 03</span>
+<span>&rarr;</span>
+</a>
+</div>
+</div>
+<!-- UNIT 04 CARD -->
+<div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between space-y-4 group h-full shadow-lg">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded bg-amber-950 border border-amber-800 text-amber-400 font-mono font-bold text-[11px]">Unit 04</span>
+<span class="text-xs font-mono text-slate-500">Evolutionary Dynamics</span>
+</div>
+<h3 class="text-base md:text-lg font-mono font-bold text-slate-100 group-hover:text-amber-300 transition-colors">Macro-Evolutionary Dynamics &amp; The Lenski LTEE</h3>
+<p class="text-xs text-slate-400 font-sans leading-relaxed">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Long-term evolutionary trajectories. Motoo Kimura's neutral drift along flat fitness saddles, Susumu Ohno's gene duplication, convergent evolution (Homology vs. Homoplasy), and buoyant pelagic spore dispersal in benthic ocean currents.</p>
+</p>
+<!-- SUBCHAPTER ROSTER -->
+<div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-1.5 text-[11px] font-mono">
+<div class="text-slate-400 font-semibold flex items-center justify-between">
+<span class="flex items-center gap-1.5 text-amber-400"><span>📑</span> Core Subchapters:</span>
+<span class="text-[10px] text-slate-500 font-normal">~18 min read</span>
+</div>
+<ul class="text-slate-400 space-y-1 pl-4 list-disc text-[11px] font-sans">
+<li><strong>4.1 Kimura Neutral Theory:</strong> Non-coding introns &amp; degenerate codons</li>
+<li><strong>4.2 Ohno Gene Duplication:</strong> Neofunctionalization in logic circuits</li>
+<li><strong>4.3 Homology vs. Homoplasy:</strong> Evolutionary Flight Recorder autopsy</li>
+<li><strong>4.4 Pelagic Spore Advection:</strong> Fluid transport across 3D seamounts</li>
+</ul>
+</div>
+<!-- FEATURE PILLS -->
+<div class="flex flex-wrap items-center gap-1.5 text-[10px] font-mono text-slate-500 pt-1">
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Figure 4.1 Hamming Manifold</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Lenski 1991</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Kimura 1968</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">Ohno 1970</span>
+</div>
+</div>
+<div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+<span class="text-[11px] font-mono text-slate-500">Standalone Module</span>
+<a href="CURRICULUM_AND_SYLLABUS.html#unit-4-macro-evolutionary-dynamics--the-lenski-ltee" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-amber-950 border border-amber-700 hover:bg-amber-900 text-amber-300 font-mono font-bold text-xs transition-colors shadow-sm">
+<span>Open Unit 04</span>
+<span>&rarr;</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- FLAGSHIP KEYSTONES: EPISTEMIC CUT & MASTER THEORETICAL MODEL -->
+<!-- ========================================================================= -->
+<section id="toc-keystones" class="space-y-6 pt-6">
+<div class="flex items-center justify-between border-b border-slate-800 pb-3">
+<div class="flex items-center gap-2">
+<span class="text-xl">🏛️</span>
+<h2 class="text-lg md:text-xl font-mono font-bold text-emerald-400">Flagship Keystones: Epistemology &amp; Mathematical Specifications</h2>
+</div>
+<span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Foundational Treatises</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+<!-- KEYSTONE 1: EPISTEMIC FOUNDATIONS -->
+<div class="card-silicon p-6 rounded-2xl flex flex-col justify-between space-y-4 shadow-xl">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono font-bold text-[11px]">Keystone Treatise I</span>
+<span class="text-xs font-mono text-slate-400">Philosophy of Biology</span>
+</div>
+<h3 class="text-lg font-mono font-bold text-slate-100">Epistemic Foundations &amp; Prebiotic Justifications</h3>
+<p class="text-xs text-slate-300 font-sans leading-relaxed">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The philosophical bedrock of Siliquarium. An exhaustive examination of Howard Pattee's <em>Epistemic Cut</em>, John von Neumann's threshold of self-reproducing automata, and the anti-smuggling mandate: proving that digital life can emerge without hardcoded clocks, predetermined fitness scores, or teleological guidance.</p>
+</p>
+<div class="flex flex-wrap items-center gap-2 text-[10px] font-mono text-slate-400 pt-1">
+<span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">Howard Pattee (1972)</span>
+<span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">Von Neumann (1966)</span>
+<span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">Anti-Smuggling Imperative</span>
+</div>
+</div>
+<div class="pt-3 border-t border-cyan-800/40 flex items-center justify-between">
+<span class="text-[11px] font-mono text-slate-400">Theoretical Defense</span>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-cyan-950 border border-cyan-600 hover:bg-cyan-900 text-cyan-200 font-mono font-bold text-xs transition-colors">
+<span>Read Treatise</span>
+<span>&rarr;</span>
+</a>
+</div>
+</div>
+<!-- KEYSTONE 2: MASTER THEORETICAL MODEL -->
+<div class="card-chemiosmotic p-6 rounded-2xl flex flex-col justify-between space-y-4 shadow-xl">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 font-mono font-bold text-[11px]">Keystone Treatise II</span>
+<span class="text-xs font-mono text-slate-400">Biophysical Equations</span>
+</div>
+<h3 class="text-lg font-mono font-bold text-slate-100">The Master Theoretical Model (21 Sealed Sections)</h3>
+<p class="text-xs text-slate-300 font-sans leading-relaxed">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The mathematical and biophysical blueprint of the simulation engine. Formal specifications for closed-universe energy and mass conservation ($\sum E_{\text{in}} = \sum E_{\text{out}}$), Mitchell proton motive force equations, 3D hexagonal bathymetry $(q, r, z)$, and Weisfeiler-Lehman motif graph hashes.</p>
+</p>
+<div class="flex flex-wrap items-center gap-2 text-[10px] font-mono text-slate-400 pt-1">
+<span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">21 Sealed Sections</span>
+<span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">Invariant Tolerance = 0.000</span>
+<span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">Dual-Currency Economy</span>
+</div>
+</div>
+<div class="pt-3 border-t border-emerald-800/40 flex items-center justify-between">
+<span class="text-[11px] font-mono text-slate-400">Master Specification</span>
+<a href="THEORETICAL_MODEL.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-950 border border-emerald-600 hover:bg-emerald-900 text-emerald-200 font-mono font-bold text-xs transition-colors">
+<span>Read Master Model</span>
+<span>&rarr;</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- REFERENCE & LABORATORY COMPANION MATRIX (4 CARDS) -->
+<!-- ========================================================================= -->
+<section id="toc-companion" class="space-y-6 pt-6">
+<div class="flex items-center justify-between border-b border-slate-800 pb-3">
+<div class="flex items-center gap-2">
+<span class="text-xl">🔬</span>
+<h2 class="text-lg md:text-xl font-mono font-bold text-purple-400">Pedagogical Companion Suite &amp; Systems Biology Reference</h2>
+</div>
+<span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Companion Resources</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+<!-- GLOSSARY CARD -->
+<div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 transition-all flex flex-col justify-between space-y-3">
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono font-bold text-[10px]">Reference Lexicon</span>
+<span class="text-[11px] font-mono text-slate-500">55 Technical Terms</span>
+</div>
+<h3 class="text-base font-mono font-bold text-slate-100">Exhaustive Glossary of Systems Biology &amp; Silicon Abiogenesis</h3>
+<p class="text-xs text-slate-400 leading-relaxed font-sans">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Rigorous cross-disciplinary definitions spanning Biophysics, Information Theory, Computer Science, Evolutionary Genetics, and Systems Biology. Every entry includes an Everyday Analogy and a Siliquarium Digital Mapping.</p>
+</p>
+</div>
+<a href="PEDAGOGICAL_COMPANION_SUITE.html#1-exhaustive-glossary-of-systems-biology--silicon-abiogenesis" class="text-cyan-400 hover:text-cyan-300 font-mono text-xs font-semibold flex items-center gap-1">
+<span>Explore 55-Term Glossary</span> <span>&rarr;</span>
+</a>
+</div>
+<!-- PRIMARY LITERATURE CARD -->
+<div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/50 transition-all flex flex-col justify-between space-y-3">
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-purple-950 text-purple-400 border border-purple-800 font-mono font-bold text-[10px]">Academic Bibliography</span>
+<span class="text-[11px] font-mono text-slate-500">14 Landmark Papers</span>
+</div>
+<h3 class="text-base font-mono font-bold text-slate-100">Annotated Primary Literature &amp; Critical Endnotes</h3>
+<p class="text-xs text-slate-400 leading-relaxed font-sans">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Comprehensive annotations of seminal landmark papers: Mitchell (1961), Russell &amp; Hall (1997), Lane &amp; Martin (2012), Pattee (1972, 2001), Von Neumann (1966), Landauer (1961), Alon (2007), Lenski (1991), Kimura (1968), and Ohno (1970).</p>
+</p>
+</div>
+<a href="PEDAGOGICAL_COMPANION_SUITE.html#3-critical-academic-endnotes--annotated-primary-literature-bibliography" class="text-purple-400 hover:text-purple-300 font-mono text-xs font-semibold flex items-center gap-1">
+<span>View Annotated Bibliography</span> <span>&rarr;</span>
+</a>
+</div>
+<!-- LAB PRACTICUMS CARD -->
+<div id="toc-practicums" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 transition-all flex flex-col justify-between space-y-3">
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono font-bold text-[10px]">Experiential Labs</span>
+<span class="text-[11px] font-mono text-slate-500">5 Student Practicums</span>
+</div>
+<h3 class="text-base font-mono font-bold text-slate-100">Hands-On Interactive Student Laboratory Practicums</h3>
+<p class="text-xs text-slate-400 leading-relaxed font-sans">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Structured experiential labs executed directly inside the live application: Micro-Survey &amp; Circuit Inspection, Landauer Power Dissipation, Phenotypic Redox Adaptation, God-Suite Perturbations, and Lenski LTEE Flight Recorder Autopsies.</p>
+</p>
+</div>
+<a href="CURRICULUM_AND_SYLLABUS.html#part-ii-step-by-step-hands-on-student-lab-practicums" class="text-emerald-400 hover:text-emerald-300 font-mono text-xs font-semibold flex items-center gap-1">
+<span>Launch Laboratory Manual</span> <span>&rarr;</span>
+</a>
+</div>
+<!-- RUBRICS CARD -->
+<div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-500/50 transition-all flex flex-col justify-between space-y-3">
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800 font-mono font-bold text-[10px]">Assessment Standards</span>
+<span class="text-[11px] font-mono text-slate-500">4-Tier Scoring Rubrics</span>
+</div>
+<h3 class="text-base font-mono font-bold text-slate-100">Pedagogical Rubrics &amp; Formative Assessment Guide</h3>
+<p class="text-xs text-slate-400 leading-relaxed font-sans">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Analytic scoring rubrics evaluating laboratory notebooks, experimental hypothesis design, and computational flight recorder autopsies across Exemplary, Proficient, Developing, and Novice performance bands.</p>
+</p>
+</div>
+<a href="PEDAGOGICAL_COMPANION_SUITE.html#4-pedagogical-rubrics--assessment-guide" class="text-amber-400 hover:text-amber-300 font-mono text-xs font-semibold flex items-center gap-1">
+<span>View Grading Rubrics</span> <span>&rarr;</span>
+</a>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- INTERACTIVE LABORATORY INSTRUMENTATION GUIDES -->
+<!-- ========================================================================= -->
+<section class="space-y-6 pt-6">
+<div class="flex items-center justify-between border-b border-slate-800 pb-3">
+<div class="flex items-center gap-2">
+<span class="text-xl">🕹️</span>
+<h2 class="text-lg md:text-xl font-mono font-bold text-slate-100">Interactive Laboratory Instrumentation &amp; Visualizer Guides</h2>
+</div>
+<span class="text-xs font-mono text-slate-500 uppercase tracking-wider">User Operating Manuals</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 items-stretch">
+<div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-all flex flex-col justify-between space-y-3">
+<div class="space-y-1">
+<span class="text-[10px] font-mono text-cyan-400 font-bold uppercase">Phase 3 Guide</span>
+<h4 class="text-sm font-mono font-bold text-slate-200">3D Seafloor &amp; Microscope</h4>
+<p class="text-xs text-slate-400 font-sans">Orbit controls, pore selection, reticle locking, and real-time gate firings.</p>
+</div>
+<a href="PHASE_3_VISUALIZER_GUIDE.html" class="text-cyan-400 hover:underline text-xs font-mono font-semibold">Open Guide &rarr;</a>
+</div>
+<div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-purple-500/40 transition-all flex flex-col justify-between space-y-3">
+<div class="space-y-1">
+<span class="text-[10px] font-mono text-purple-400 font-bold uppercase">Phase 4 Guide</span>
+<h4 class="text-sm font-mono font-bold text-slate-200">Paleontology &amp; Fossils</h4>
+<p class="text-xs text-slate-400 font-sans">Weisfeiler-Lehman motif scanning, flight recorder trajectories, and cryo-freezing.</p>
+</div>
+<a href="PHASE_4_PALEONTOLOGY_GUIDE.html" class="text-purple-400 hover:underline text-xs font-mono font-semibold">Open Guide &rarr;</a>
+</div>
+<div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between space-y-3">
+<div class="space-y-1">
+<span class="text-[10px] font-mono text-emerald-400 font-bold uppercase">Phase 5 Guide</span>
+<h4 class="text-sm font-mono font-bold text-slate-200">Spores &amp; God-Suite</h4>
+<p class="text-xs text-slate-400 font-sans">Pelagic spore detachment, fluid advection drift, transparent water columns, and sliders.</p>
+</div>
+<a href="PHASE_5_PELAGIC_SPORES_GUIDE.html" class="text-emerald-400 hover:underline text-xs font-mono font-semibold">Open Guide &rarr;</a>
+</div>
+<div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-amber-500/40 transition-all flex flex-col justify-between space-y-3">
+<div class="space-y-1">
+<span class="text-[10px] font-mono text-amber-400 font-bold uppercase">Phase 6 Guide</span>
+<h4 class="text-sm font-mono font-bold text-slate-200">Phylogeny &amp; Dynamics</h4>
+<p class="text-xs text-slate-400 font-sans">Multi-lineage phylogenetic trees, Lenski benchmarks, and convergent evolution.</p>
+</div>
+<a href="PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="text-amber-400 hover:underline text-xs font-mono font-semibold">Open Guide &rarr;</a>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- BRAND IDENTITY & QA AUDIT FOOTER CARDS -->
+<!-- ========================================================================= -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+<div class="p-6 rounded-2xl bg-gradient-to-r from-slate-950 to-cyan-950/30 border border-slate-800 flex items-center justify-between gap-4 shadow-lg">
+<div class="space-y-2">
+<span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px] font-mono font-bold uppercase">Visual Philosophy</span>
+<h3 class="text-base font-mono font-bold text-slate-100">Brand Identity &amp; Logo Gallery</h3>
+<p class="text-xs text-slate-400 font-sans leading-relaxed">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The Fibonacci living nautilus mark, biophysical color systems, and high-resolution downloadable assets.</p>
+</p>
+<div class="pt-2 flex items-center gap-3">
+<a href="BRAND_IDENTITY.html" class="text-cyan-400 hover:underline text-xs font-mono font-semibold">Brand Philosophy &rarr;</a>
+<span class="text-slate-700">&bull;</span>
+<a href="logos.html" class="text-cyan-400 hover:underline text-xs font-mono font-semibold">Logo Gallery &rarr;</a>
+</div>
+</div>
+<img src="assets/logos/logo.jpg" alt="Logo" class="w-20 h-20 rounded-xl border border-cyan-400/40 shadow-xl hidden sm:block">
+</div>
+<div class="p-6 rounded-2xl bg-gradient-to-r from-slate-950 to-purple-950/30 border border-slate-800 flex items-center justify-between gap-4 shadow-lg">
+<div class="space-y-2">
+<span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800 text-[10px] font-mono font-bold uppercase">Authentic Testing</span>
+<h3 class="text-base font-mono font-bold text-slate-100">12th Grade Student QA Audit Report</h3>
+<p class="text-xs text-slate-400 font-sans leading-relaxed">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Alex Rivera's 90-minute hands-on usability testing report across Practicums 1–4, featuring 6 real browser screenshots and friction analyses.</p>
+</p>
+<div class="pt-2">
+<a href="../QA/STUDENT_UX_REPORT.html" class="text-purple-400 hover:underline text-xs font-mono font-semibold">Read Student QA Report &rarr;</a>
+</div>
+</div>
+<div class="w-20 h-20 rounded-xl bg-purple-950/50 border border-purple-800/60 flex items-center justify-center text-3xl font-mono text-purple-300 hidden sm:flex">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">🔬</p>
+</div>
+</div>
+</section>
+</div>
   </main>
 
-  <footer>
-    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
-    <p style="margin-top: 0.4rem;">
-      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
-      PolyForm Noncommercial License 1.0.0
-    </p>
+  <!-- MASTER FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
+      <p>
+        <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
+        PolyForm Noncommercial License 1.0.0 •
+        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+      </p>
+    </div>
   </footer>
 </body>
 </html>

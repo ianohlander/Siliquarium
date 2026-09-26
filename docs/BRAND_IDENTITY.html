@@ -1,396 +1,322 @@
+<!-- 🐠 Siliquarium Open-Ended Digital Life & Silicon Abiogenesis Laboratory • Created by & Copyright © 2026 Ian Ohlander. All rights reserved. -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brand Identity &amp; Visual Philosophy — Siliquarium</title>
+  <title>Brand Identity &amp; Visual Philosophy — Siliquarium Master Documentation</title>
   <link rel="icon" type="image/jpeg" href="assets/logos/logo.jpg">
-  
-  <!-- Modern Clean Typography & KaTeX -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bio: {
+              bg: '#060911',
+              surface: '#0a0e1a',
+              panel: '#121829',
+              card: '#0f172a',
+              border: '#1e2c4a',
+              cyan: '#00e5ff',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              purple: '#a855f7',
+              sky: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            mono: ['Cascadia Code', 'Fira Code', 'Consolas', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
-    :root {
-      --bg-ocean: #060911;
-      --bg-card: #0d1322;
-      --bg-surface: #131c31;
-      --border: #1e2c4a;
-      --border-glow: #00e5ff33;
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --cyan: #00e5ff;
-      --amber: #f59e0b;
-      --emerald: #10b981;
-      --rose: #f43f5e;
-      --purple: #a855f7;
-    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #060911; }
+    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body {
-      background-color: var(--bg-ocean);
-      color: var(--text-primary);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.7;
-      font-size: 16px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    .card-bio, .card-chemiosmotic {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
     }
-
-    /* Top Navigation Header */
-    .top-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(6, 9, 17, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+    .card-digital, .card-silicon {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.4);
     }
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
+    .card-margin, .card-analogy {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
     }
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--text-primary);
-      font-weight: 700;
-      font-size: 1.15rem;
-      letter-spacing: -0.02em;
+    .card-experiment, .card-paleo {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.4);
     }
-    .brand-logo img {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      border: 1px solid var(--cyan);
-      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
-    }
-    .brand-logo span {
-      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      overflow-x: auto;
-      padding-bottom: 2px;
-    }
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      padding: 0.4rem 0.75rem;
-      border-radius: 6px;
-      white-space: nowrap;
-      transition: all 0.15s ease;
-      border: 1px solid transparent;
-    }
-    .nav-link:hover {
-      color: var(--text-primary);
-      background: var(--bg-surface);
-      border-color: var(--border);
-    }
-    .nav-link.active {
-      color: var(--cyan);
-      background: rgba(0, 229, 255, 0.1);
-      border-color: rgba(0, 229, 255, 0.4);
-      font-weight: 600;
-    }
-
-    /* Main Container */
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
-      flex: 1;
-      width: 100%;
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      color: #ffffff;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      position: relative;
-    }
-    h1 {
-      font-size: 2.25rem;
-      margin-top: 0;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.75rem;
-      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
-    h3 { font-size: 1.25rem; color: #e2e8f0; }
-    h4 { font-size: 1.05rem; color: var(--cyan); }
-    
-    p { margin-bottom: 1.25rem; color: #cbd5e1; }
-    strong { color: #ffffff; font-weight: 600; }
-    em { color: var(--text-primary); font-style: italic; }
-
-    .header-anchor {
-      opacity: 0;
-      color: var(--cyan);
-      text-decoration: none;
-      margin-left: 0.5rem;
-      font-weight: 400;
-      transition: opacity 0.2s;
-    }
-    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
-      opacity: 0.6;
-    }
-
-    a {
-      color: var(--cyan);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: #70f3ff;
-    }
-
-    /* Lists */
-    ul, ol {
-      margin-left: 1.5rem;
-      margin-bottom: 1.25rem;
-      color: #cbd5e1;
-    }
-    li { margin-bottom: 0.4rem; }
-
-    /* Code & Pre */
-    code {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.88em;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      color: #38bdf8;
-    }
-    pre {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+    .svg-container {
+      background: #090e15;
+      border: 1px solid #1e2c4a;
+      border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
-      margin-bottom: 1.5rem;
-      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
-    }
-    pre code {
-      background: transparent;
-      border: none;
-      padding: 0;
-      color: #e2e8f0;
-      font-size: 0.9rem;
-      line-height: 1.5;
     }
 
-    /* Blockquotes & Callouts */
-    blockquote.callout {
-      border-left: 4px solid var(--cyan);
-      background: var(--bg-card);
-      padding: 1rem 1.25rem;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 1.5rem;
-      color: #cbd5e1;
+    /* Citation Target Highlighting & Interactive Navigation */
+    html { scroll-behavior: auto; }
+    li[id^="ref-"] {
+      scroll-margin-top: 6rem;
+      position: relative;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
     }
-
-    /* GitHub-style Alerts */
-    .alert {
-      border-left: 4px solid;
-      background: var(--bg-card);
-      padding: 1rem 1.25rem;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 1.5rem;
+    @keyframes refTargetPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.95), 0 0 40px rgba(0, 229, 255, 0.85), inset 0 0 15px rgba(0, 229, 255, 0.35);
+        border-color: #22d3ee;
+        background-color: rgba(8, 51, 68, 0.95);
+        transform: scale(1.02);
+      }
+      30% {
+        box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.45), 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 20px rgba(0, 229, 255, 0.25);
+        border-color: #38bdf8;
+        background-color: rgba(8, 51, 68, 0.92);
+        transform: scale(1.015);
+      }
+      100% {
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 12px rgba(0, 229, 255, 0.15);
+        border-color: #00e5ff;
+        background-color: rgba(8, 51, 68, 0.88);
+        transform: scale(1);
+      }
     }
-    .alert-title {
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.4rem;
-      text-transform: uppercase;
+    @keyframes badgePopIn {
+      0% { opacity: 0; transform: translateY(6px) scale(0.8); }
+      60% { opacity: 1; transform: translateY(-2px) scale(1.06); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
-    .alert-note { border-color: var(--cyan); }
-    .alert-note .alert-title { color: var(--cyan); }
-    .alert-tip { border-color: var(--emerald); }
-    .alert-tip .alert-title { color: var(--emerald); }
-    .alert-important { border-color: var(--purple); }
-    .alert-important .alert-title { color: var(--purple); }
-    .alert-warning { border-color: var(--amber); }
-    .alert-warning .alert-title { color: var(--amber); }
-
-    /* Tables */
-    .table-container {
-      width: 100%;
-      overflow-x: auto;
-      margin-bottom: 1.75rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg-card);
+    li[id^="ref-"]:target,
+    li[id^="ref-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #22d3ee !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.92rem;
-    }
-    th {
-      background: var(--bg-surface);
+    li[id^="ref-"]:target::after,
+    li[id^="ref-"].active-citation-target::after {
+      content: "CITED IN TEXT 🎯";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0891b2, #0284c7);
       color: #ffffff;
-      font-weight: 600;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
     }
-    td {
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      color: #cbd5e1;
+    sup a[href^="#ref-"] {
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 0 1px;
     }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: rgba(255, 255, 255, 0.02); }
-
-    /* Math */
-    .math-block {
-      overflow-x: auto;
-      padding: 1rem 0;
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #e2e8f0;
+    sup a[href^="#ref-"]:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 8px #22d3ee;
+      transform: translateY(-1px);
     }
-
-    /* Images */
-    .img-wrapper {
-      margin: 1.5rem 0;
-      text-align: center;
+    section[id], div[id], h2[id], h3[id] {
+      scroll-margin-top: 5.5rem;
     }
-    .img-wrapper img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    @keyframes backlinkTargetFlash {
+      0% { outline: 3px solid rgba(0, 229, 255, 0.9); outline-offset: 4px; }
+      100% { outline: 3px solid transparent; outline-offset: 4px; }
     }
-    .img-caption {
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    section[id]:target, div[id]:target {
+      animation: backlinkTargetFlash 2.5s ease-out;
     }
-
-    hr.divider {
-      border: none;
-      height: 1px;
-      background: var(--border);
-      margin: 2.5rem 0;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      background: var(--bg-card);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    footer a { color: var(--text-secondary); }
-    footer a:hover { color: var(--cyan); }
   </style>
+
+  <script id="citation-navigator">
+    document.addEventListener('DOMContentLoaded', function() {
+      function highlightRefCard(targetId) {
+        if (!targetId || !targetId.startsWith('ref-')) return;
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+          item.classList.remove('active-citation-target');
+        });
+        el.classList.remove('active-citation-target');
+        void el.offsetWidth;
+        el.classList.add('active-citation-target');
+        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }
+      function scrollToTarget(targetId) {
+        if (!targetId) return;
+        if (targetId.startsWith('ref-')) {
+          highlightRefCard(targetId);
+          return;
+        }
+        const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href && href.includes('#')) {
+            const hash = href.substring(href.indexOf('#') + 1);
+            if (hash.startsWith('ref-')) highlightRefCard(hash);
+          }
+        }
+      });
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) scrollToTarget(hash);
+      });
+      function checkInitialHash() {
+        if (window.location.hash) {
+          const hash = window.location.hash.replace('#', '');
+          scrollToTarget(hash);
+        }
+      }
+      checkInitialHash();
+      setTimeout(checkInitialHash, 150);
+      setTimeout(checkInitialHash, 500);
+      window.addEventListener('load', function() {
+        setTimeout(checkInitialHash, 100);
+      });
+      if (window.MathJax && window.MathJax.startup) {
+        window.MathJax.startup.promise = window.MathJax.startup.promise.then(function() {
+          setTimeout(checkInitialHash, 100);
+        });
+      }
+    });
+  </script>
 </head>
-<body>
-  <header class="top-header">
-    <div class="header-inner">
-      <a href="index.html" class="brand-logo">
-        <img src="assets/logos/logo.jpg" alt="Siliquarium Logo">
-        <span>Siliquarium</span>
-      </a>
-      <nav class="nav-bar">
-        <a href="index.html" class="nav-link ">🐠 Portal Home</a>
-<a href="CURRICULUM_AND_SYLLABUS.html" class="nav-link ">🎓 Curriculum & Labs</a>
-<a href="PEDAGOGICAL_COMPANION_SUITE.html" class="nav-link ">🏛️ Pedagogical Companion</a>
-<a href="THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
-<a href="EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
-<a href="PHASE_3_VISUALIZER_GUIDE.html" class="nav-link ">🔬 3D Visualizer</a>
-<a href="PHASE_4_PALEONTOLOGY_GUIDE.html" class="nav-link ">🦕 Paleontology & Motifs</a>
-<a href="PHASE_5_PELAGIC_SPORES_GUIDE.html" class="nav-link ">🌊 Spores & Controls</a>
-<a href="PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="nav-link ">🧬 Phylogeny & Dynamics</a>
-<a href="BRAND_IDENTITY.html" class="nav-link active">🎨 Brand Identity</a>
-<a href="logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
+
+  <!-- MASTER HEADER & BREADCRUMBS -->
+  <header class="border-b border-slate-800 bg-[#060911]/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      <nav class="flex items-center gap-2 text-xs font-mono text-slate-400">
+        <a href="index.html" class="hover:text-cyan-400 text-slate-300 flex items-center gap-2 font-bold">
+          <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50 shadow-sm inline">
+          <span>Siliquarium Portal</span>
+        </a>
+        <span>/</span>
+        <span class="text-cyan-400 font-semibold truncate max-w-xs md:max-w-md">Brand Identity &amp; Visual Philosophy</span>
+      </nav>
+      <div class="flex items-center gap-2.5">
+        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🚀 Live Simulator</span>
+        </a>
+        <a href="CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🎓 Curriculum</span>
+        </a>
+        <a href="PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🏛️ Glossary</span>
+        </a>
+      </div>
+    </div>
+    <div class="border-t border-slate-800/80 bg-[#0a0e1a]/80 px-4 py-1.5 overflow-x-auto">
+      <nav class="max-w-6xl mx-auto flex items-center gap-1 text-xs font-mono">
+        <a href="index.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🐠 Portal Home</a>
+<a href="CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🎓 Curriculum & Labs</a>
+<a href="PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🏛️ Companion & Glossary</a>
+<a href="THEORETICAL_MODEL.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🌊 Theoretical Model</a>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🧬 Epistemic Foundations</a>
+<a href="DOCUMENTATION_DESIGN_PRINCIPLES.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">📐 Design Principles</a>
+<a href="PHASE_3_VISUALIZER_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🔬 3D Visualizer</a>
+<a href="PHASE_4_PALEONTOLOGY_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🦕 Paleontology & Motifs</a>
+<a href="PHASE_5_PELAGIC_SPORES_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🌊 Spores & Controls</a>
+<a href="PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🧬 Phylogeny & Dynamics</a>
+<a href="BRAND_IDENTITY.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold">🎨 Brand Identity</a>
+<a href="logos.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🖼️ Logo Gallery</a>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    <h1 id="siliquarium-brand-identity-design-systems">🎨 Siliquarium Brand Identity & Design Systems <a class="header-anchor" href="#siliquarium-brand-identity-design-systems" title="Link to section">#</a></h1>
-<p><em>Biophysical Symbolism, Geometric Morphology, and Visual Assets</em></p>
-<hr class="divider" />
-<h2 id="1-visual-philosophy-the-convergence-of-nature-and-silicon">1. Visual Philosophy: The Convergence of Nature and Silicon <a class="header-anchor" href="#1-visual-philosophy-the-convergence-of-nature-and-silicon" title="Link to section">#</a></h2>
-<p>The visual identity of <strong>Siliquarium</strong> reflects the central scientific thesis of the laboratory:</p>
-<blockquote class="callout"><em>"What happens when digital circuits are freed from engineering benchmarks and left to survive in an unguided physical world?"</em></blockquote>
-<p>Every brand asset is constructed around three foundational biophysical anchors:</p>
-<ol>
-<li><strong>The Logarithmic Golden Spiral (<span class="katex-inline math-inline" data-math="r = a e^{b\theta}">\( r = a e^{b\theta} \)</span>):</strong>  </li>
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12 space-y-8 flex-1 w-full">
+    <h1 id="siliquarium-brand-identity-design-systems" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-10 mb-4 pb-2 border-b border-slate-800">🎨 Siliquarium Brand Identity & Design Systems <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#siliquarium-brand-identity-design-systems" title="Direct link">#</a></h1>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Biophysical Symbolism, Geometric Morphology, and Visual Assets</em></p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="1-visual-philosophy-the-convergence-of-nature-and-silicon" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Visual Philosophy: The Convergence of Nature and Silicon <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-visual-philosophy-the-convergence-of-nature-and-silicon" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The visual identity of <strong class="text-slate-100 font-semibold">Siliquarium</strong> reflects the central scientific thesis of the laboratory:</p>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><em class="text-slate-200 italic">"What happens when digital circuits are freed from engineering benchmarks and left to survive in an unguided physical world?"</em></blockquote>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Every brand asset is constructed around three foundational biophysical anchors:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">The Logarithmic Golden Spiral ($r = a e^{b\theta}$):</strong>  </li>
 </ol>
-<p>The universal mathematical signature of biological accretion and growth (from the chambers of <em>Nautilus pompilius</em> to spiraling benthic plumes). In Siliquarium, it symbolizes open-ended self-organization.</p>
-<ol>
-<li><strong>The Hexagonal Honeycomb (<span class="katex-inline math-inline" data-math="q, r, z">\( q, r, z \)</span>):</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The universal mathematical signature of biological accretion and growth (from the chambers of <em class="text-slate-200 italic">Nautilus pompilius</em> to spiraling benthic plumes). In Siliquarium, it symbolizes open-ended self-organization.</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">The Hexagonal Honeycomb ($q, r, z$):</strong>  </li>
 </ol>
-<p>The natural geometry of minimal surface tension (Kelvin conjecture) and the discrete coordinate system of the benthic rock pores.</p>
-<ol>
-<li><strong>The Abyssal Gradient (Thermal Amber to Oceanic Cyan):</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The natural geometry of minimal surface tension (Kelvin conjecture) and the discrete coordinate system of the benthic rock pores.</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">The Abyssal Gradient (Thermal Amber to Oceanic Cyan):</strong>  </li>
 </ol>
-<p>The thermal non-equilibrium energy gradient: warm volcanic alkaline vents (<span class="katex-inline math-inline" data-math="40–90^\circ\text{C}">\( 40–90^\circ\text{C} \)</span>, amber/gold) meeting the cold acidic ocean sink (<span class="katex-inline math-inline" data-math="2^\circ\text{C}">\( 2^\circ\text{C} \)</span>, bioluminescent cyan/teal).</p>
-<hr class="divider" />
-<h2 id="2-the-golden-spiral-nautilus-suite-option-4-variations">2. The Golden Spiral Nautilus Suite (Option 4 Variations) <a class="header-anchor" href="#2-the-golden-spiral-nautilus-suite-option-4-variations" title="Link to section">#</a></h2>
-<p>The Nautilus series synthesizes biological morphology with integrated circuit architecture across five distinct design languages:</p>
-<div class="table-container"><table><thead><tr><th>Variation</th><th>Design Language</th><th>Biophysical & Architectural Cognate</th><th>File Location</th></tr></thead><tbody><tr><td><strong>Variation 1: Minimalist Hex Shell</strong></td><td>Clean Flat Vector Line Art</td><td>Discrete mathematical boundaries and minimal cell wall geometry.</td><td><a href="assets/logos/nautilus_var1_minimal.jpg"><code>docs/assets/logos/nautilus_var1_minimal.jpg</code></a></td></tr><tr><td><strong>Variation 2: Hydrothermal Thermal Core</strong></td><td>Dual-Temperature Radiant Glow</td><td>The Mitchell proton motive force: hot volcanic vent fluid venting through cold seawater.</td><td><a href="assets/logos/nautilus_var2_thermal.jpg"><code>docs/assets/logos/nautilus_var2_thermal.jpg</code></a></td></tr><tr><td><strong>Variation 3: Fibonacci Circuit Ribbon</strong></td><td>Layered PCB Micro-Architecture</td><td>Physical hardware implementation; continuous intercellular data buses and microprocessor die core.</td><td><a href="assets/logos/nautilus_var3_circuit.jpg"><code>docs/assets/logos/nautilus_var3_circuit.jpg</code></a></td></tr><tr><td><strong>Variation 4: 3D Benthic Basalt Columns</strong></td><td>Isometric Hexagonal Prisms</td><td>Direct visualization of the 3D <span class="katex-inline math-inline" data-math="(q, r, z)">\( (q, r, z) \)</span> stacked hexagonal prism seabed topography.</td><td><a href="assets/logos/nautilus_var4_isometric.jpg"><code>docs/assets/logos/nautilus_var4_isometric.jpg</code></a></td></tr><tr><td><strong>Variation 5: The Living Silicon Embryo</strong> 🏆 <em>(Official Application Logo)</em></td><td>Epistemic Cut & Genetic Tape</td><td>Pattee's Epistemic Cut: inert 1D symbolic code ribbon (The Safe) feeding active 2D logic gates (The Workshop).</td><td><a href="assets/logos/nautilus_var5_embryo.jpg"><code>docs/assets/logos/nautilus_var5_embryo.jpg</code></a></td></tr></tbody></table></div>
-<hr class="divider" />
-<h2 id="3-asset-directory-reference">3. Asset Directory Reference <a class="header-anchor" href="#3-asset-directory-reference" title="Link to section">#</a></h2>
-<p>All high-resolution production assets are maintained in <a href="assets/logos/"><code>docs/assets/logos/</code></a>:</p>
-<ul>
-<li><code>logo.jpg</code>: Active primary repository logo.</li>
-<li><code>logo_option_1_hex_gate.jpg</code>: The Hydrothermal Hex Gate.</li>
-<li><code>logo_option_2_silicon_diatom.jpg</code>: The Silicon Diatom.</li>
-<li><code>logo_option_3_vent_spire.jpg</code>: The Abyssal Vent Spire.</li>
-<li><code>logo_option_4_silicon_nautilus.jpg</code>: The Silicon Nautilus (Original).</li>
-<li><code>logo_option_5_silicon_fish.jpg</code>: The Benthic Circuit Fish.</li>
-<li><code>nautilus_var1_minimal.jpg</code>: Nautilus Variation 1 (Minimalist Line Art).</li>
-<li><code>nautilus_var2_thermal.jpg</code>: Nautilus Variation 2 (Thermal Gradient).</li>
-<li><code>nautilus_var3_circuit.jpg</code>: Nautilus Variation 3 (PCB Ribbon & Core Die).</li>
-<li><code>nautilus_var4_isometric.jpg</code>: Nautilus Variation 4 (3D Basalt Columns).</li>
-<li><code>nautilus_var5_embryo.jpg</code>: Nautilus Variation 5 (The Living Silicon Embryo).</li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The thermal non-equilibrium energy gradient: warm volcanic alkaline vents ($40–90^\circ\text{C}$, amber/gold) meeting the cold acidic ocean sink ($2^\circ\text{C}$, bioluminescent cyan/teal).</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="2-the-golden-spiral-nautilus-suite-option-4-variations" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. The Golden Spiral Nautilus Suite (Option 4 Variations) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-the-golden-spiral-nautilus-suite-option-4-variations" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The Nautilus series synthesizes biological morphology with integrated circuit architecture across five distinct design languages:</p>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Variation</th><th class="p-3.5 font-semibold">Design Language</th><th class="p-3.5 font-semibold">Biophysical & Architectural Cognate</th><th class="p-3.5 font-semibold">File Location</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Variation 1: Minimalist Hex Shell</strong></td><td class="p-3.5 leading-relaxed">Clean Flat Vector Line Art</td><td class="p-3.5 leading-relaxed">Discrete mathematical boundaries and minimal cell wall geometry.</td><td class="p-3.5 leading-relaxed"><a href="assets/logos/nautilus_var1_minimal.jpg" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/assets/logos/nautilus_var1_minimal.jpg</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Variation 2: Hydrothermal Thermal Core</strong></td><td class="p-3.5 leading-relaxed">Dual-Temperature Radiant Glow</td><td class="p-3.5 leading-relaxed">The Mitchell proton motive force: hot volcanic vent fluid venting through cold seawater.</td><td class="p-3.5 leading-relaxed"><a href="assets/logos/nautilus_var2_thermal.jpg" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/assets/logos/nautilus_var2_thermal.jpg</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Variation 3: Fibonacci Circuit Ribbon</strong></td><td class="p-3.5 leading-relaxed">Layered PCB Micro-Architecture</td><td class="p-3.5 leading-relaxed">Physical hardware implementation; continuous intercellular data buses and microprocessor die core.</td><td class="p-3.5 leading-relaxed"><a href="assets/logos/nautilus_var3_circuit.jpg" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/assets/logos/nautilus_var3_circuit.jpg</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Variation 4: 3D Benthic Basalt Columns</strong></td><td class="p-3.5 leading-relaxed">Isometric Hexagonal Prisms</td><td class="p-3.5 leading-relaxed">Direct visualization of the 3D $(q, r, z)$ stacked hexagonal prism seabed topography.</td><td class="p-3.5 leading-relaxed"><a href="assets/logos/nautilus_var4_isometric.jpg" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/assets/logos/nautilus_var4_isometric.jpg</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Variation 5: The Living Silicon Embryo</strong> 🏆 <em class="text-slate-200 italic">(Official Application Logo)</em></td><td class="p-3.5 leading-relaxed">Epistemic Cut & Genetic Tape</td><td class="p-3.5 leading-relaxed">Pattee's Epistemic Cut: inert 1D symbolic code ribbon (The Safe) feeding active 2D logic gates (The Workshop).</td><td class="p-3.5 leading-relaxed"><a href="assets/logos/nautilus_var5_embryo.jpg" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/assets/logos/nautilus_var5_embryo.jpg</code></a></td></tr></tbody></table></div>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="3-asset-directory-reference" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Asset Directory Reference <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-asset-directory-reference" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">All high-resolution production assets are maintained in <a href="assets/logos/" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/assets/logos/</code></a>:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">logo.jpg</code>: Active primary repository logo.</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">logo_option_1_hex_gate.jpg</code>: The Hydrothermal Hex Gate.</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">logo_option_2_silicon_diatom.jpg</code>: The Silicon Diatom.</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">logo_option_3_vent_spire.jpg</code>: The Abyssal Vent Spire.</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">logo_option_4_silicon_nautilus.jpg</code>: The Silicon Nautilus (Original).</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">logo_option_5_silicon_fish.jpg</code>: The Benthic Circuit Fish.</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">nautilus_var1_minimal.jpg</code>: Nautilus Variation 1 (Minimalist Line Art).</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">nautilus_var2_thermal.jpg</code>: Nautilus Variation 2 (Thermal Gradient).</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">nautilus_var3_circuit.jpg</code>: Nautilus Variation 3 (PCB Ribbon & Core Die).</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">nautilus_var4_isometric.jpg</code>: Nautilus Variation 4 (3D Basalt Columns).</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">nautilus_var5_embryo.jpg</code>: Nautilus Variation 5 (The Living Silicon Embryo).</li>
 </ul>
   </main>
 
-  <footer>
-    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
-    <p style="margin-top: 0.4rem;">
-      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
-      PolyForm Noncommercial License 1.0.0
-    </p>
+  <!-- MASTER FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
+      <p>
+        <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
+        PolyForm Noncommercial License 1.0.0 •
+        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+      </p>
+    </div>
   </footer>
 </body>
 </html>

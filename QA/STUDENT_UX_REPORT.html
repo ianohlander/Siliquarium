@@ -1,0 +1,810 @@
+<!-- 🐠 Siliquarium Open-Ended Digital Life & Silicon Abiogenesis Laboratory • Created by & Copyright © 2026 Ian Ohlander. All rights reserved. -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>12th Grade Student QA &amp; Usability Audit Report — Siliquarium Master Documentation</title>
+  <link rel="icon" type="image/jpeg" href="../docs/assets/logos/logo.jpg">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bio: {
+              bg: '#060911',
+              surface: '#0a0e1a',
+              panel: '#121829',
+              card: '#0f172a',
+              border: '#1e2c4a',
+              cyan: '#00e5ff',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              purple: '#a855f7',
+              sky: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            mono: ['Cascadia Code', 'Fira Code', 'Consolas', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #060911; }
+    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+
+    .card-bio, .card-chemiosmotic {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .card-digital, .card-silicon {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.4);
+    }
+    .card-margin, .card-analogy {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+    .card-experiment, .card-paleo {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+    .svg-container {
+      background: #090e15;
+      border: 1px solid #1e2c4a;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      overflow-x: auto;
+    }
+
+    /* Citation Target Highlighting & Interactive Navigation */
+    html { scroll-behavior: auto; }
+    li[id^="ref-"] {
+      scroll-margin-top: 6rem;
+      position: relative;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    @keyframes refTargetPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.95), 0 0 40px rgba(0, 229, 255, 0.85), inset 0 0 15px rgba(0, 229, 255, 0.35);
+        border-color: #22d3ee;
+        background-color: rgba(8, 51, 68, 0.95);
+        transform: scale(1.02);
+      }
+      30% {
+        box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.45), 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 20px rgba(0, 229, 255, 0.25);
+        border-color: #38bdf8;
+        background-color: rgba(8, 51, 68, 0.92);
+        transform: scale(1.015);
+      }
+      100% {
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 12px rgba(0, 229, 255, 0.15);
+        border-color: #00e5ff;
+        background-color: rgba(8, 51, 68, 0.88);
+        transform: scale(1);
+      }
+    }
+    @keyframes badgePopIn {
+      0% { opacity: 0; transform: translateY(6px) scale(0.8); }
+      60% { opacity: 1; transform: translateY(-2px) scale(1.06); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    li[id^="ref-"]:target,
+    li[id^="ref-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #22d3ee !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
+    }
+    li[id^="ref-"]:target::after,
+    li[id^="ref-"].active-citation-target::after {
+      content: "CITED IN TEXT 🎯";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0891b2, #0284c7);
+      color: #ffffff;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+    sup a[href^="#ref-"] {
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 0 1px;
+    }
+    sup a[href^="#ref-"]:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 8px #22d3ee;
+      transform: translateY(-1px);
+    }
+    section[id], div[id], h2[id], h3[id] {
+      scroll-margin-top: 5.5rem;
+    }
+    @keyframes backlinkTargetFlash {
+      0% { outline: 3px solid rgba(0, 229, 255, 0.9); outline-offset: 4px; }
+      100% { outline: 3px solid transparent; outline-offset: 4px; }
+    }
+    section[id]:target, div[id]:target {
+      animation: backlinkTargetFlash 2.5s ease-out;
+    }
+  </style>
+
+  <script id="citation-navigator">
+    document.addEventListener('DOMContentLoaded', function() {
+      function highlightRefCard(targetId) {
+        if (!targetId || !targetId.startsWith('ref-')) return;
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+          item.classList.remove('active-citation-target');
+        });
+        el.classList.remove('active-citation-target');
+        void el.offsetWidth;
+        el.classList.add('active-citation-target');
+        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }
+      function scrollToTarget(targetId) {
+        if (!targetId) return;
+        if (targetId.startsWith('ref-')) {
+          highlightRefCard(targetId);
+          return;
+        }
+        const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href && href.includes('#')) {
+            const hash = href.substring(href.indexOf('#') + 1);
+            if (hash.startsWith('ref-')) highlightRefCard(hash);
+          }
+        }
+      });
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) scrollToTarget(hash);
+      });
+      function checkInitialHash() {
+        if (window.location.hash) {
+          const hash = window.location.hash.replace('#', '');
+          scrollToTarget(hash);
+        }
+      }
+      checkInitialHash();
+      setTimeout(checkInitialHash, 150);
+      setTimeout(checkInitialHash, 500);
+      window.addEventListener('load', function() {
+        setTimeout(checkInitialHash, 100);
+      });
+      if (window.MathJax && window.MathJax.startup) {
+        window.MathJax.startup.promise = window.MathJax.startup.promise.then(function() {
+          setTimeout(checkInitialHash, 100);
+        });
+      }
+    });
+  </script>
+</head>
+<body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
+
+  <!-- MASTER HEADER & BREADCRUMBS -->
+  <header class="border-b border-slate-800 bg-[#060911]/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      <nav class="flex items-center gap-2 text-xs font-mono text-slate-400">
+        <a href="../docs/index.html" class="hover:text-cyan-400 text-slate-300 flex items-center gap-2 font-bold">
+          <img src="../docs/assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50 shadow-sm inline">
+          <span>Siliquarium Portal</span>
+        </a>
+        <span>/</span>
+        <span class="text-cyan-400 font-semibold truncate max-w-xs md:max-w-md">12th Grade Student QA &amp; Usability Audit Report</span>
+      </nav>
+      <div class="flex items-center gap-2.5">
+        <a href="../docs/../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🚀 Live Simulator</span>
+        </a>
+        <a href="../docs/CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🎓 Curriculum</span>
+        </a>
+        <a href="../docs/PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🏛️ Glossary</span>
+        </a>
+      </div>
+    </div>
+    <div class="border-t border-slate-800/80 bg-[#0a0e1a]/80 px-4 py-1.5 overflow-x-auto">
+      <nav class="max-w-6xl mx-auto flex items-center gap-1 text-xs font-mono">
+        <a href="../docs/index.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🐠 Portal Home</a>
+<a href="../docs/CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🎓 Curriculum & Labs</a>
+<a href="../docs/PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🏛️ Companion & Glossary</a>
+<a href="../docs/THEORETICAL_MODEL.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🌊 Theoretical Model</a>
+<a href="../docs/EPISTEMIC_FOUNDATIONS.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🧬 Epistemic Foundations</a>
+<a href="../docs/DOCUMENTATION_DESIGN_PRINCIPLES.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">📐 Design Principles</a>
+<a href="../docs/PHASE_3_VISUALIZER_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🔬 3D Visualizer</a>
+<a href="../docs/PHASE_4_PALEONTOLOGY_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🦕 Paleontology & Motifs</a>
+<a href="../docs/PHASE_5_PELAGIC_SPORES_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🌊 Spores & Controls</a>
+<a href="../docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🧬 Phylogeny & Dynamics</a>
+<a href="../docs/BRAND_IDENTITY.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🎨 Brand Identity</a>
+<a href="../docs/logos.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🖼️ Logo Gallery</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12 space-y-8 flex-1 w-full">
+    <h1 id="siliquarium-student-qa-usability-report" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-10 mb-4 pb-2 border-b border-slate-800">🔬 Siliquarium Student QA & Usability Report <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#siliquarium-student-qa-usability-report" title="Direct link">#</a></h1>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Document ID:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">QA/STUDENT_UX_REPORT.md</code></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Date:</strong> September 25, 2026</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Investigator:</strong> Alex Rivera (12th Grade Senior, AP Biology & AP Computer Science A / Systems Track)</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Academic Institution:</strong> STEM Magnet Academy for Advanced Science & Technology</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Instructor:</strong> Dr. Evelyn Vance, Department of Biophysics & Computational Life Sciences</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Curricular Reference:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/docs/CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/CURRICULUM_AND_SYLLABUS.md</code></a> (Practicums 1, 2, 3, & 4)</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Test Surface:</strong> Real browser interaction on Microsoft Edge (Chromium Engine v128, 1920×1080 display, DOM event dispatch at human input cadence)</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Live Target:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">http://localhost:3000</code> (Local Vite/TypeScript Build)</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="table-of-contents" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">📋 Table of Contents <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#table-of-contents" title="Direct link">#</a></h2>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><a href="#1-student-profile--curriculum-objectives" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Student Profile & Curriculum Objectives</a></li>
+<li><a href="#2-features-explored--observed-across-practicums-14" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Features Explored & Observed Across Practicums 1–4</a></li>
+<li><a href="#21-hydrothermal-seafloor--geological-substrate-practicum-1" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">2.1 Hydrothermal Seafloor & Geological Substrate (Practicum 1)</a></li>
+<li><a href="#22-the-interactive-lattice-key--visual-taxonomy" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">2.2 The Interactive Lattice Key & Visual Taxonomy</a></li>
+<li><a href="#23-holographic-3d-reticle--cell-selection" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">2.3 Holographic 3D Reticle & Cell Selection</a></li>
+<li><a href="#24-live-circuit-microscope-verifying-pattees-epistemic-cut" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">2.4 Live Circuit Microscope: Verifying Pattee's Epistemic Cut</a></li>
+<li><a href="#25-landauer-power-dissipation--metabolic-starvation-practicum-2" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">2.5 Landauer Power Dissipation & Metabolic Starvation (Practicum 2)</a></li>
+<li><a href="#26-phenotypic-adaptation-to-vent-chemical-dynamics-practicum-3" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">2.6 Phenotypic Adaptation to Vent Chemical Dynamics (Practicum 3)</a></li>
+<li><a href="#27-god-suite-perturbations--ecological-resilience-practicum-4" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">2.7 God-Suite Perturbations & Ecological Resilience (Practicum 4)</a></li>
+<li><a href="#28-real-time-paleontology--uri-alon-network-motifs" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">2.8 Real-Time Paleontology & Uri Alon Network Motifs</a></li>
+<li><a href="#3-deep-dive-ux-troubles--friction-analysis" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Deep-Dive UX Troubles & Friction Analysis</a></li>
+<li><a href="#trouble-1-the-disorienting-zoom-drift-center-locked-spherical-scaling" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Trouble 1: The Disorienting Zoom Drift (Center-Locked Spherical Scaling)</a></li>
+<li><a href="#trouble-2-click-targeting-precision--invisible-aqueous-raycast-shielding" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Trouble 2: Click Targeting Precision & Invisible Aqueous Raycast Shielding</a></li>
+<li><a href="#trouble-3-the-deep-zoom-barrier--in-situ-circuit-unreadability" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Trouble 3: The Deep-Zoom Barrier & In-Situ Circuit Unreadability</a></li>
+<li><a href="#trouble-4-ui-drawer-collisions--obscured-hud-telemetry" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Trouble 4: UI Drawer Collisions & Obscured HUD Telemetry</a></li>
+<li><a href="#trouble-5-jarring-target-snap--loss-of-spatial-anchoring" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Trouble 5: Jarring Target Snap & Loss of Spatial Anchoring</a></li>
+<li><a href="#4-field-visual-evidence--annotated-artifacts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Field Visual Evidence & Annotated Artifacts</a></li>
+<li><a href="#5-actionable-student-recommendations-for-developers" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Actionable Student Recommendations for Developers</a></li>
+<li><a href="#6-conclusion--academic-reflection" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Conclusion & Academic Reflection</a></li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="1-student-profile-curriculum-objectives" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Student Profile & Curriculum Objectives <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-student-profile-curriculum-objectives" title="Direct link">#</a></h2>
+<h3 id="11-student-persona-technical-context" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.1 Student Persona & Technical Context <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#11-student-persona-technical-context" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">My name is Alex Rivera. I am a 12th-grade senior concurrently taking <strong class="text-slate-100 font-semibold">AP Biology</strong> and <strong class="text-slate-100 font-semibold">AP Computer Science A</strong> (with an independent study in Systems & Graph Algorithms). I have spent the last three weeks working through our assigned textbook curriculum, the <em class="text-slate-200 italic">Siliquarium Curriculum & Lab Manual</em> (<a href="file:///h:/My%20Drive/Repos/Siliquarium/docs/CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/CURRICULUM_AND_SYLLABUS.md</code></a>), investigating the biophysical foundations of non-equilibrium thermodynamics, silicon-based autopoiesis, and digital macro-evolution.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In AP Bio, we spent months memorizing oxidative phosphorylation, the Krebs cycle, and Peter Mitchell's chemiosmotic hypothesis. In AP CS, we built binary trees, Boolean logic gates, and graph traversals. But until running Siliquarium, those two disciplines felt like completely disconnected worlds. Siliquarium is the first tool I have used where <strong class="text-slate-100 font-semibold">enzymes are literally Boolean logic gates</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code>) and where <strong class="text-slate-100 font-semibold">fitness is not a cheat score or external loss function</strong>, but simple physical persistence governed by Rolf Landauer's thermodynamic limit ($k_B T \ln 2$).</p>
+<h3 id="12-laboratory-practicum-mandates" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.2 Laboratory Practicum Mandates <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#12-laboratory-practicum-mandates" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">For this formal testing session, Dr. Vance tasked me with executing four core laboratory practicums outlined in Section 7 of the manual:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Practicum 1 (Hydrothermal Seafloor & Circuit Microscope):</strong> Navigate the 3D seamount, inspect inorganic mineral pores versus fluid parcels, test the 3D reticle lock, and verify Howard Pattee's <em class="text-slate-200 italic">Epistemic Cut</em> by juxtaposing the rate-independent 60-bit 1D genome tape against the rate-dependent 2D workshop logic gates.</li>
+<li><strong class="text-slate-100 font-semibold">Practicum 2 (Landauer Dissipation & Metabolic Starvation):</strong> Track dynamic switching power dissipation ($1\text{ token per gate toggle}$) against basal membrane leakage ($1\text{ token per 10 ticks}$), witness an uncoordinated circuit starve to death into a mineralizing carcass, and verify the first law of thermodynamics ($\Delta E_{\text{universe}} = 0.000$).</li>
+<li><strong class="text-slate-100 font-semibold">Practicum 3 (Redox Gradient Adaptation):</strong> Observe populations under multi-scale cyclic vent flows (Stream A fuel, Stream B oxidizer, and intermittent Toxin T corrosive pulses), noting how natural selection sieves for coordinated <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> co-catalysts and inhibitory <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code> gates.</li>
+<li><strong class="text-slate-100 font-semibold">Practicum 4 (God-Suite Perturbations):</strong> Execute interactive environmental stresses using the Lab Flyout—injecting a $+200\text{ token}$ thermal surge to trigger exponential fission, deploying catastrophic localized extinction pulses ($r=2$), measuring Shannon Diversity Index ($H$) collapses, and logging secondary succession driven by buoyant pelagic spore advection.</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Over a 90-minute testing session, I interacted with the live web application on Microsoft Edge at <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">http://localhost:3000</code> using standard mouse and keyboard inputs at realistic student speeds. Below is my candid, comprehensive evaluation of what works brilliantly, where the interface actively fights the student, and how the developers can elevate this platform from a fascinating prototype to an effortless learning instrument.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="2-features-explored-observed-across-practicums-14" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Features Explored & Observed Across Practicums 1–4 <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-features-explored-observed-across-practicums-14" title="Direct link">#</a></h2>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">                                  SILIQUARIUM TESTBENCH TOPOLOGY
+  ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+  │                                    TOP TELEMETRY HEADER                                      │
+  │ [Epoch Ticks: 21] [Living: 26] [Spores: 0] [Clades: 26 (H=3.258)] [Stored: 1248 T] [ΔE=0]   │
+  ├─────────────────────────────────────────────────────────────┬────────────────────────────────┤
+  │                                                             │    LIVE CIRCUIT MICROSCOPE     │
+  │                  3D HEXAGONAL SEAFLOOR                      │         (Pore Workshop)        │
+  │                                                             │ ┌────────────────────────────┐ │
+  │    • Central Caldera Nozzle at (0,0,0)                      │ │ PORE [-5,4,0] • ROCK • GEN 0│ │
+  │    • Convective Amber Thermal Plume Particle System        │ │ Battery: 53/100 [██████░░░░] │ │
+  │    • Basalt Bedrock Substrate &amp; Porous Cavities             │ │ Matter:  20/40  [████░░░░░░] │ │
+  │    • Holographic Reticle with Zenith Beam Indicator         │ ├────────────────────────────┤ │
+  │    • In-Situ Logic Gate Chips on Cell Surfaces              │ │ SUBSTRATE PORIN BUS:       │ │
+  │                                                             │ │ (A: 0) (B: 1) (T: 0)       │ │
+  │  ┌──────────────────────────┐                               │ ├────────────────────────────┤ │
+  │  │  ⚙️ LAB FLYOUT (Drawer)   │                               │ │ PHENOTYPIC NETLIST:        │ │
+  │  │  • Point Mutation Slider │                               │ │ [  OR  ]    [  NOT  ]      │ │
+  │  │  • Soup Density Slider   │                               │ ├────────────────────────────┤ │
+  │  │  • Thermal Surge Button  │                               │ │ 1D GENOME TAPE (60 Bits):  │ │
+  │  │  • Extinction Pulse      │                               │ │ [101][110][110][010]...    │ │
+  │  └──────────────────────────┘                               │ └────────────────────────────┘ │
+  ├─────────────────────────────────────────────────────────────┴────────────────────────────────┤
+  │             [⚙ Lab]  [⏸ Pause]  [⏭ +1 Tick]  [1x 2x 5x 10x]  [Caldera | Top-Down | Reset]      │
+  │                                FLOATING TRANSPORT BAR                                        │
+  └──────────────────────────────────────────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="21-hydrothermal-seafloor-geological-substrate-practicum-1" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 Hydrothermal Seafloor & Geological Substrate (Practicum 1) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#21-hydrothermal-seafloor-geological-substrate-practicum-1" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Upon launch, Siliquarium renders an immersive 3D bathymetric environment representing an abyssal hydrothermal mound:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Caldera Vent Chimney:</strong> Located at coordinate <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">(0, 0, 0)</code>, the mineral chimney emits animated glowing amber thermal fluid particles that drift upward through the water column. The plume particles pulse dynamically according to the underlying vent thermodynamic flux, visually communicating that this is an open, non-equilibrium dissipative system.</li>
+<li><strong class="text-slate-100 font-semibold">Basaltic Substrate:</strong> Surrounding the caldera is an expansive honeycomb lattice of hexagonal prisms generated via <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts#L93-L98" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SeafloorRenderer3D.axialToWorld()</code></a>. Dark solid basalt bedrock (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#090d16</code>) provides the impermeable foundation, interspersed with open mineral cavities (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#172033</code>) that serve as abiotic incubation pores.</li>
+<li><strong class="text-slate-100 font-semibold">Fluid Water Column ($z=1, 2$):</strong> Above the rock floor, the lattice extends into the vertical dimension. Fluid parcels remain transparent or faintly translucent (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(6, 182, 212, 0.015)</code>), allowing students to look down through the ocean column directly onto the benthic floor.</li>
+</ul>
+<h3 id="22-the-interactive-lattice-key-visual-taxonomy" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 The Interactive Lattice Key & Visual Taxonomy <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#22-the-interactive-lattice-key-visual-taxonomy" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Anchored at the top-right corner of the 3D canvas is the <strong class="text-slate-100 font-semibold">Lattice Key</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#hud-legend-card</code>), an interactive reference card providing immediate visual grounding for the simulation's color palette:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Living Silicoid (>60% Battery):</strong> Bioluminescent emerald (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#10b981</code>), indicating energetic prosperity and readiness for binary fission.</li>
+<li><strong class="text-slate-100 font-semibold">Living Silicoid (30–60% Battery):</strong> Cyan (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#06b6d4</code>), indicating steady-state metabolic maintenance.</li>
+<li><strong class="text-slate-100 font-semibold">Living Silicoid (<30% Battery):</strong> Warning amber (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#eab308</code>), signaling near-starvation where Landauer dissipation is outpacing catalytic capture.</li>
+<li><strong class="text-slate-100 font-semibold">Pelagic Spore (Water):</strong> Glowing yellow circle with radial aura (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#facc15</code>), representing stage-A reproductive capsules adrift in the $z \ge 1$ fluid layer.</li>
+<li><strong class="text-slate-100 font-semibold">Hydrothermal Vent:</strong> High-energy orange (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#f97316</code>), marking the thermodynamic engine of the mound.</li>
+<li><strong class="text-slate-100 font-semibold">Vacant Mineral Pore:</strong> Deep navy slate (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#172033</code>), available for spore settlement or lateral fission.</li>
+<li><strong class="text-slate-100 font-semibold">Basalt Bedrock (Solid):</strong> Jet black basalt (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#090d16</code>), impassable volcanic rock.</li>
+<li><strong class="text-slate-100 font-semibold">Carcass (Scavengeable):</strong> Dull grey-slate (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#64748b</code>), representing lysed cellular detritus rich in recyclable pyrophosphate and catalytic matter.</li>
+<li><strong class="text-slate-100 font-semibold">Aqueous Water Column:</strong> Dashed cyan boundary (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(6, 182, 212, 0.15)</code>), denoting permeable fluid space.</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The Lattice Key features a collapsible header (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#legend-toggle-btn</code>) with a chevron indicator (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">▾</code> / <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">▸</code>), allowing students to fold the legend away when inspecting unobstructed seafloor geometry.</p>
+<h3 id="23-holographic-3d-reticle-cell-selection" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.3 Holographic 3D Reticle & Cell Selection <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#23-holographic-3d-reticle-cell-selection" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Clicking on any hexagonal pore activates the 3D targeting system:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>A pulsing cyan hexagonal wireframe bounds the chosen cell, expanding and contracting with a harmonic sine pulse:</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\text{pulse} = 1.15 + 0.1 \cdot \sin(\text{plumeTime} \cdot 4)$$</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>A vertical holographic beacon beam rises $1.8\text{ units}$ above the pore floor, terminating in a glowing cyan zenith pin (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#38bdf8</code>). This beam is critical for maintaining visual tracking of the specimen when tilting the camera to shallow grazing angles.</li>
+<li>In the top-left HUD, the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#hud-selected-pore</code> badge dynamically updates with specimen coordinates, metabolic state, stored battery, matter reserves, generation index, and active gate counts (e.g., <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Pore [-5, 4, 0] • ACTIVE SILICOID • Batt: 53T • Matter: 20M • Gen 0 • Gates: 2</code>).</li>
+</ul>
+<h3 id="24-live-circuit-microscope-verifying-pattees-epistemic-cut" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.4 Live Circuit Microscope: Verifying Pattee's Epistemic Cut <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#24-live-circuit-microscope-verifying-pattees-epistemic-cut" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The right-hand docked drawer houses the <strong class="text-slate-100 font-semibold">Live Circuit Microscope</strong> (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/CircuitMicroscopeView.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CircuitMicroscopeView.ts</code></a>), which provides a direct experimental verification of theoretical biophysicist Howard Pattee's <em class="text-slate-200 italic">Epistemic Cut</em>:</p>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Domain</th><th class="p-3.5 font-semibold">Biophysical Component</th><th class="p-3.5 font-semibold">Siliquarium Implementation</th><th class="p-3.5 font-semibold">Dynamical Behavior</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Genotype (The Safe)</strong></td><td class="p-3.5 leading-relaxed">Rate-Independent Symbolic Tape</td><td class="p-3.5 leading-relaxed">60-bit 1D genome ribbon at bottom of microscope panel</td><td class="p-3.5 leading-relaxed">Inert bitstring; conducts no electricity; consumes zero Landauer power; immutable during lifetime.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Phenotype (The Workshop)</strong></td><td class="p-3.5 leading-relaxed">Rate-Dependent Physical Dynamics</td><td class="p-3.5 leading-relaxed">Active Boolean netlist (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code>) in center</td><td class="p-3.5 leading-relaxed">Conducts physical currents; switches on clock ticks; consumes dynamic switching energy ($1\text{ T/toggle}$).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Pantry (The Capacitor)</strong></td><td class="p-3.5 leading-relaxed">Prebiotic Energy/Mass Reservoir</td><td class="p-3.5 leading-relaxed">Battery ($0..100\text{ T}$) & Matter ($0..40\text{ M}$) meters</td><td class="p-3.5 leading-relaxed">Mitchell proton motive force analogue; drains continuously via basal leak and Landauer switching.</td></tr></tbody></table></div>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In our lab exercise, stepping the simulation forward by $+1\text{ tick}$ demonstrated that while the gates in the workshop lit up cyan and toggled outputs as vent substrate pins pulsed (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream A</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream B</code>), <strong class="text-slate-100 font-semibold">not a single bit on the 60-bit genome tape altered</strong>. This visual proof made von Neumann's theorem immediately clear: mutating active machinery during execution causes lethal error catastrophes; evolution requires an uninterpreted symbolic blueprint.</p>
+<h3 id="25-landauer-power-dissipation-metabolic-starvation-practicum-2" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.5 Landauer Power Dissipation & Metabolic Starvation (Practicum 2) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#25-landauer-power-dissipation-metabolic-starvation-practicum-2" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Practicum 2, I tracked a newly seeded silicoid with three active gates (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">BUF</code>) located four hexes away from the vent plume:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Starting Battery:</strong> $50\text{ tokens}$ at Tick 1.</li>
+<li><strong class="text-slate-100 font-semibold">Tick-by-Tick Depletion:</strong> Because the cell was situated outside the immediate reach of synchronized <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream A</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream B</code> pulses, its catalytic yield was zero ($\Delta E_C = +0$).</li>
+<li><strong class="text-slate-100 font-semibold">Dissipation Burns:</strong> At each tick, the uncoordinated inverter loop continued toggling, burning $2$ to $3\text{ tokens}$ per tick in dynamic Landauer switching costs ($\Delta E_{\text{Landauer}} = \sum \kappa_{\text{toggle}}$), while losing $1\text{ token}$ every 10 ticks to basal membrane leakage ($E_{\text{leak}}$).</li>
+<li><strong class="text-slate-100 font-semibold">Lysis & Carcass Formation:</strong> By Tick 23, its battery hit exactly $0\text{ tokens}$. Instantly, the cell underwent irreversible lysis. The visualizer updated its state to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreState.CARCASS</code>: its emerald cytoplasm dissolved into inert grey mineral rubble (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#64748b</code>), while preserving its remaining matter tokens for adjacent scavengers.</li>
+<li><strong class="text-slate-100 font-semibold">Thermodynamic Ledger Verification:</strong> Throughout the starvation event, the HUD badge in the header confirmed strict physical conservation:</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\Delta E_{\text{universe}} = \sum E_{\text{in}} - \sum E_{\text{stored}} - \sum E_{\text{dissipated}} = 0.000\text{ (Exact)}$$</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This is zero-cheat modeling at its finest: no energy vanishes into ether; every token burned in a gate flip is accounted for in environmental heat dissipation.</p>
+<h3 id="26-phenotypic-adaptation-to-vent-chemical-dynamics-practicum-3" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.6 Phenotypic Adaptation to Vent Chemical Dynamics (Practicum 3) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#26-phenotypic-adaptation-to-vent-chemical-dynamics-practicum-3" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">During a 500-tick extended run, the hydrothermal plume cycled between three chemical regimes:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Redox Fuel Bursts:</strong> Simultaneous <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream A = 1</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream B = 1</code>.</li>
+<li><strong class="text-slate-100 font-semibold">Resting Famine:</strong> Both streams low (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code>).</li>
+<li><strong class="text-slate-100 font-semibold">Toxic Acid Bursts:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Toxin T = 1</code>, which corrodes unshielded cells by $-5\text{ tokens/tick}$.</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">By pausing at Tick 500 and inspecting the oldest living clade near the caldera rim, I translated its 60-bit genome tape using <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CodonTable.ts</code></a>. The dominant organism had evolved a defensive filter: a <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PORIN_TOXIN_T</code> sensor wired into an inhibitory <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code>, effectively gating its catalytic intake and isolating its internal battery during toxin pulses. Lineages lacking this inhibitory logic had starved or dissolved during early acid spikes, vividly illustrating how natural selection acts as an unguided sieve.</p>
+<h3 id="27-god-suite-perturbations-ecological-resilience-practicum-4" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.7 God-Suite Perturbations & Ecological Resilience (Practicum 4) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#27-god-suite-perturbations-ecological-resilience-practicum-4" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Opening the <strong class="text-slate-100 font-semibold">Lab Flyout Drawer</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#lab-drawer</code>) allowed me to manipulate global parameters in real time:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Mutation Rate Tuning:</strong> Adjusting the Point Mutation Slider from $0.10\%$ up to $2.50\%$ dramatically accelerated sequence exploration, causing high generational turnover at the expense of metabolic stability.</li>
+<li><strong class="text-slate-100 font-semibold">Hydrothermal Surge Pulse:</strong> Clicking <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🔥 Hydrothermal Surge Pulse</code> injected $+200\text{ tokens}$ directly into the vent nozzle. Cells flanking the chimney immediately saturated their $100\text{ T}$ capacitance ceiling and initiated a burst of lateral binary fissions, sending emerald daughter cells spreading across adjacent basalt terraces.</li>
+<li><strong class="text-slate-100 font-semibold">Catastrophic Local Extinction Pulse:</strong> Selecting a dense monoculture clade and clicking <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">💥 Local Extinction Pulse</code> wiped every living cell within radius $r=2$. The living cluster collapsed into a field of grey carcasses.</li>
+<li><strong class="text-slate-100 font-semibold">Secondary Ecological Succession & Pelagic Dispersal:</strong> Rather than the entire system collapsing, dormant yellow pelagic spores drifting in layer $z=1$ settled onto the cleared vacant cavities within 40 ticks, germinating into new founder colonies and restoring ecological diversity.</li>
+</ul>
+<h3 id="28-real-time-paleontology-uri-alon-network-motifs" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.8 Real-Time Paleontology & Uri Alon Network Motifs <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#28-real-time-paleontology-uri-alon-network-motifs" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">At Tick 31, the application triggered a major paleontology toast alert:</p>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><strong class="text-slate-100 font-semibold">🏆 MILESTONE RECOGNIZED: Incoherent Feed-Forward Loop (I-FFL Type 1)</strong><br/><em class="text-slate-200 italic">Fold-Change Pulse / Sensory Adaptation</em><br/><em class="text-slate-200 italic">Biological Cognate: Bacterial chemotaxis response to step attractant increase (Alon, U., 2007)</em><br/><em class="text-slate-200 italic">Pore (-2, -2, 0) • Graph Invariant: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">WL-1a9ca7404d8869</code></em></blockquote>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The integration of the <strong class="text-slate-100 font-semibold">Weisfeiler-Lehman (WL) graph isomorphism kernel</strong> (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/WeisfeilerLehmanHasher.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">WeisfeilerLehmanHasher.ts</code></a>) to classify topological circuit motifs in real time is a masterstroke. It connects abstract graph theory directly to living functional biology.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="3-deep-dive-ux-troubles-friction-analysis" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Deep-Dive UX Troubles & Friction Analysis <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-deep-dive-ux-troubles-friction-analysis" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">While the underlying biophysical engine is exceptional, my testing session revealed five major user-experience friction points that consistently hindered workflow and student engagement. Below is a detailed technical autopsy of each issue.</p>
+<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart TD
+    subgraph UX_Pain_Points[&quot;High School Student UX Friction Points&quot;]
+        T1[&quot;Trouble 1: Zoom Drift&lt;br/&gt;Camera zooms to (0,0,0)&lt;br/&gt;Specimens fly off-screen&quot;]
+        T2[&quot;Trouble 2: Aqueous Click Interception&lt;br/&gt;Empty z=1,2 water hexes&lt;br/&gt;block clicks on benthic cells&quot;]
+        T3[&quot;Trouble 3: In-Situ Unreadability&lt;br/&gt;Min distance 3.0 + 4px font&lt;br/&gt;renders seafloor chips unreadable&quot;]
+        T4[&quot;Trouble 4: UI Drawer Overlaps&lt;br/&gt;Lab Drawer covers Pause/Transport&lt;br/&gt;Milestone Toast covers Lattice Key&quot;]
+        T5[&quot;Trouble 5: Jarring Target Snap&lt;br/&gt;Zero interpolation camera jump&lt;br/&gt;destroys student spatial orientation&quot;]
+    end</div>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="trouble-1-the-disorienting-zoom-drift-center-locked-spherical-scaling" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Trouble 1: The Disorienting Zoom Drift (Center-Locked Spherical Scaling) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#trouble-1-the-disorienting-zoom-drift-center-locked-spherical-scaling" title="Direct link">#</a></h3>
+<h4 id="the-student-experience" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">The Student Experience: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#the-student-experience" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When a student spots an interesting yellow or green silicoid out on the periphery of the seafloor (e.g., at coordinate $(q=-5, r=4)$) and naturally scrolls the mouse wheel backward/forward while hovering the cursor directly over that cell, <strong class="text-slate-100 font-semibold">the cell rapidly accelerates sideways and disappears off the edge of the screen!</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In my testing session, this happened repeatedly. Every time I tried to zoom in to inspect an organism, I had to stop scrolling, switch to right-click dragging to pan the camera back, re-center the cell, scroll a few notches, lose the cell again, and repeat. It turns what should be an intuitive Google Maps-style inspection into an exhausting game of spatial tag.</p>
+<h4 id="root-cause-code-inspection" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Root-Cause Code Inspection: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#root-cause-code-inspection" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Looking into <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/OrbitCamera.ts#L54-L68" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/visualizers/OrbitCamera.ts</code></a>:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-typescript">// OrbitCamera.ts
+public zoom(deltaDistance: number): void {
+  this.distance = Math.max(this.minDistance, Math.min(this.maxDistance, this.distance + deltaDistance));
+}
+
+public getEyePosition(): IVector3 {
+  const cosElev = Math.cos(this.elevation);
+  const sinElev = Math.sin(this.elevation);
+  const cosAzim = Math.cos(this.azimuth);
+  const sinAzim = Math.sin(this.azimuth);
+
+  return {
+    x: this.target.x + this.distance * cosElev * sinAzim,
+    y: this.target.y + this.distance * sinElev,
+    z: this.target.z + this.distance * cosElev * cosAzim
+  };
+}</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">And in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/main.ts#L216-L219" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/main.ts</code></a>:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-typescript">this.seafloorCanvas.addEventListener(&#39;wheel&#39;, (e) =&gt; {
+  e.preventDefault();
+  this.camera.zoom(e.deltaY * 0.02);
+}, { passive: false });</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The Mathematical Flaw:</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OrbitCamera.zoom()</code> operates purely by scaling <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">this.distance</code> along the spherical vector pointing directly toward <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">this.target</code>. By default, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">this.target</code> is initialized to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">{ x: 0, y: 0, z: 0 }</code> (the central vent caldera). Unless a student has <em class="text-slate-200 italic">already</em> successfully clicked and selected a cell, zooming in moves the camera strictly toward the center caldera nozzle.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Because perspective projection magnifies angular displacement as camera distance decreases:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\text{Screen Offset} \propto \frac{\Delta X_{\text{world}}}{Z_{\text{camera}}}$$</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Any cell whose world coordinates deviate from <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">(0, 0, 0)</code> is pushed radially outward away from the center of the viewport as $Z_{\text{camera}}$ shrinks. If the cell is near the margin, it is pushed entirely outside the screen boundaries within 3–4 notches of the scroll wheel.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="trouble-2-click-targeting-precision-invisible-aqueous-raycast-shielding" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Trouble 2: Click Targeting Precision & Invisible Aqueous Raycast Shielding <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#trouble-2-click-targeting-precision-invisible-aqueous-raycast-shielding" title="Direct link">#</a></h3>
+<h4 id="the-student-experience" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">The Student Experience: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#the-student-experience" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Clicking on individual cells on the 3D seafloor is extraordinarily frustrating, especially when viewing the seamount at standard oblique angles ($30^\circ\text{ to }45^\circ$). A student clearly clicks right on the bright green hexagonal face of an occupied benthic cell, but:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>The holographic reticle does not appear, OR</li>
+<li>The HUD updates with <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AQUEOUS WATER COLUMN</code>, OR</li>
+<li>An adjacent empty basalt hex gets selected instead.</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">During Practicum 2, I had to click a starving cell five or six times before the reticle finally locked onto it. Several times I thought the click handler was broken, until I realized the camera angle had to be rotated directly overhead to get reliable clicks.</p>
+<h4 id="root-cause-code-inspection" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Root-Cause Code Inspection: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#root-cause-code-inspection" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Looking into <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts#L271-L283" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/visualizers/SeafloorRenderer3D.ts</code></a>:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-typescript">// SeafloorRenderer3D.ts
+public findPoreAtScreenCoord(screenX: number, screenY: number, telemetry: ISimulationTelemetry): HexCoord3D | null {
+  const w = this.canvas.width, h = this.canvas.height;
+  const projected = this.projectPores(telemetry.pores, w, h);
+  projected.sort((a, b) =&gt; a.depth - b.depth); // Closest to camera first!
+
+  for (const item of projected) {
+    if (this.isPointInPolygon(screenX, screenY, item.topScreenVertices)) return item.pore.coord;
+    const dx = screenX - item.centerScreen.x, dy = screenY - item.centerScreen.y;
+    const projRadius = Math.hypot(item.topScreenVertices[0].x - item.centerScreen.x, item.topScreenVertices[0].y - item.centerScreen.y);
+    if (Math.hypot(dx, dy) &lt;= projRadius * 0.88) return item.pore.coord;
+  }
+  return null;
+}</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">And how <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">telemetry.pores</code> is rendered:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-typescript">// SeafloorRenderer3D.ts
+private getPoreColor(pore: IPoreTelemetry): string {
+  if (pore.isAqueous) {
+    if (pore.hasSpore) return &#39;rgba(234, 179, 8, 0.7)&#39;;
+    if (pore.state === PoreState.OCCUPIED) return &#39;rgba(16, 185, 129, 0.65)&#39;;
+    return &#39;rgba(6, 182, 212, 0.015)&#39;; // &lt;--- ALMOST 100% INVISIBLE!
+  }
+  // ...
+}</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The Mechanical Flaw:</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The simulation world has three vertical layers ($z=0$ rock floor, $z=1$ lower pelagic, $z=2$ upper pelagic). The array <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">telemetry.pores</code> contains <strong class="text-slate-100 font-semibold">all</strong> cells across all three layers.</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>When <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">findPoreAtScreenCoord()</code> runs, it sorts all projected hexes by depth (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">a.depth - b.depth</code>), testing the hexes closest to the camera first.</li>
+<li>Because the camera looks downward from an elevated viewpoint ($y > 0$), aqueous cells at $z=1$ and $z=2$ sit physically <strong class="text-slate-100 font-semibold">between</strong> the camera and the benthic rock cells at $z=0$.</li>
+<li>Empty aqueous cells are virtually invisible on screen (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">alpha = 0.015</code>), but their 2D screen polygons are fully active hit-test targets!</li>
+<li>When the student clicks on a benthic silicoid at $z=0$, the ray hits the invisible aqueous hex floating at $z=1$ or $z=2$ first. The function immediately returns that empty water coordinate, completely shielding the benthic silicoid resting underneath!</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="trouble-3-the-deep-zoom-barrier-in-situ-circuit-unreadability" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Trouble 3: The Deep-Zoom Barrier & In-Situ Circuit Unreadability <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#trouble-3-the-deep-zoom-barrier-in-situ-circuit-unreadability" title="Direct link">#</a></h3>
+<h4 id="the-student-experience" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">The Student Experience: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#the-student-experience" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">One of the most exciting theoretical promises in the lab manual is the ability to see <strong class="text-slate-100 font-semibold">"In-Situ Logic Gates"</strong> operating directly on the physical seafloor—watching micro-breadboard chips light up on the hexagonal rock floor like a living computer motherboard.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">However, when you attempt to zoom close enough to read these gates in 3D:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>The camera hits a hard stop at <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">minDistance = 3.0</code> (or effectively <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">7.5</code> before near-plane clipping occurs).</li>
+<li>The logic gate chips drawn on the seafloor pore are minuscule.</li>
+<li>The gate labels (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>) are tiny microscopic text specks (about 4 pixels tall). You literally have to lean your face 4 inches from the monitor and squint to tell an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> from an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>.</li>
+<li>As a result, students completely give up on inspecting circuits in the 3D world, treating the 3D canvas merely as a coarse cell selector and relying 100% on the 2D side panel microscope. This destroys the spatial immersion that makes Siliquarium unique.</li>
+</ul>
+<h4 id="root-cause-code-inspection" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Root-Cause Code Inspection: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#root-cause-code-inspection" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Looking into <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts#L214-L236" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/visualizers/SeafloorRenderer3D.ts</code></a>:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-typescript">// SeafloorRenderer3D.ts
+const gateTypes = hex.pore.gateTypes;
+if (radius &gt;= 32 &amp;&amp; gateTypes.length &gt; 0) {
+  const gateCount = Math.min(4, gateTypes.length);
+  const chipW = Math.max(8, radius * 0.22), chipH = Math.max(6, radius * 0.14);
+
+  for (let i = 0; i &lt; gateCount; i++) {
+    // ...
+    this.ctx.fillRect(gx, gy, chipW, chipH);
+    // ...
+    if (radius &gt;= 40) {
+      this.ctx.fillStyle = &#39;#38bdf8&#39;; 
+      this.ctx.font = `${Math.floor(chipH * 0.75)}px monospace`; // &lt;--- 4px to 6px FONT!
+      this.ctx.textAlign = &#39;center&#39;; 
+      this.ctx.textBaseline = &#39;middle&#39;;
+      this.ctx.fillText(gateTypes[i], gx + chipW / 2, gy + chipH / 2);
+    }
+  }
+}</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The Typography & Projection Flaw:</strong></p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">radius</code> is the projected screen radius of the hex in pixels. At default zoom (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">distance = 24.0</code>), <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">radius</code> is only $\sim 18\text{px}$. At that zoom, chips are not drawn at all.</li>
+<li>Even at extreme zoom (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">distance = 7.5</code>, as seen in Screenshot 04), <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">radius</code> reaches $\sim 42\text{px}$.</li>
+<li>At <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">radius = 42\text{px}</code>, the chip height is calculated as:</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\text{chipH} = 42 \times 0.14 = 5.88\text{px}$$</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>The font size is then calculated as:</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\text{fontSize} = \lfloor 5.88 \times 0.75 \rfloor = 4\text{px}$$</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Attempting to render 3-character strings like <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;AND&quot;</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;NOT&quot;</code> in a <strong class="text-slate-100 font-semibold">4-pixel monospace canvas font</strong> on a standard 1080p monitor produces an unreadable bitmap blur. Without vector billboard scaling or clamped minimum font sizes, in-situ circuit inspection is practically non-functional.</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="trouble-4-ui-drawer-collisions-obscured-hud-telemetry" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Trouble 4: UI Drawer Collisions & Obscured HUD Telemetry <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#trouble-4-ui-drawer-collisions-obscured-hud-telemetry" title="Direct link">#</a></h3>
+<h4 id="the-student-experience" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">The Student Experience: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#the-student-experience" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">During Practicum 4, when I clicked the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⚙️ Lab</code> button on the transport bar to open the parameter tuning drawer:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>The drawer slid out from the left (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">width: 320px</code>), but it landed directly on top of the bottom transport controls.</li>
+<li>Specifically, the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⚙️ Lab</code> toggle button and the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⏸ Pause</code> button were <strong class="text-slate-100 font-semibold">completely covered by the bottom of the drawer panel!</strong></li>
+<li>Once the drawer was open, I could not pause the simulation, nor could I easily close the drawer without finding its tiny edge or reloading.</li>
+<li>Furthermore, the drawer completely obscured the top-left <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#hud-selected-pore</code> inspection badge and the navigation helper text. While adjusting mutation sliders, I could not see the real-time energy or generation of my selected cell!</li>
+<li>Later, when an evolutionary milestone triggered (Screenshot 06), the milestone notification toast (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.milestone-toast</code>) spawned directly over the Lattice Key card (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.legend-card</code>), covering up the color legend while I was trying to read what an I-FFL motif was.</li>
+</ul>
+<h4 id="root-cause-code-inspection" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Root-Cause Code Inspection: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#root-cause-code-inspection" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Looking into <a href="file:///h:/My%20Drive/Repos/Siliquarium/index.html#L386-L407" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code></a>:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-css">/* index.html */
+#lab-drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 320px;
+  background: rgba(9, 14, 26, 0.95);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid var(--panel-border);
+  padding: 20px;
+  z-index: 25; /* &lt;--- Overlays seafloor and transport controls */
+  transform: translateX(-100%);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transport-bar {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* ... */
+  z-index: 15; /* &lt;--- LOWER z-index than #lab-drawer (25)! */
+}</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">And the milestone toast positioning in <a href="file:///h:/My%20Drive/Repos/Siliquarium/index.html#L472-L485" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code></a>:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-css">.milestone-toast {
+  position: absolute;
+  top: 84px;
+  right: 420px; /* &lt;--- Placed right in front of the 230px wide Lattice Key at right: 12px + 400px panel! */
+  width: 360px;
+  z-index: 30;
+}</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The Layout Flaw:</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Because <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#lab-drawer</code> is styled as a full-height absolute overlay with <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">z-index: 25</code> spanning <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">top: 0</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">bottom: 0</code>, and the canvas transport bar is centered at <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">left: 50%</code> with <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">z-index: 15</code>, on screens under 1400px or when the viewport is constrained, the left half of the transport bar is occluded.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Worse, because the drawer is not a docked flex item but a floating absolute overlay, it creates visual chaos by covering the primary HUD inspection badges.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="trouble-5-jarring-target-snap-loss-of-spatial-anchoring" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Trouble 5: Jarring Target Snap & Loss of Spatial Anchoring <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#trouble-5-jarring-target-snap-loss-of-spatial-anchoring" title="Direct link">#</a></h3>
+<h4 id="the-student-experience" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">The Student Experience: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#the-student-experience" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When clicking a cell on the seafloor, the application attempts to center that cell by updating <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">camera.target</code>. However, the camera snaps to the new position <strong class="text-slate-100 font-semibold">instantaneously in a single frame</strong>.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">There is zero easing or smooth translation. The entire seamount jerks violently across the screen. If you click a cell on a distant volcanic ridge, you instantly lose all spatial awareness: Which direction are we looking? Where is the caldera vent nozzle now? Did the seamount rotate? Students often have to click the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Reset</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Caldera</code> camera button just to re-orient themselves.</p>
+<h4 id="root-cause-code-inspection" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Root-Cause Code Inspection: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#root-cause-code-inspection" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Looking into <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/main.ts#L231-L237" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/main.ts</code></a>:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-typescript">// main.ts
+if (clicked) {
+  this.selectedPoreCoord = clicked;
+  this.seafloorRenderer.setSelectedCoord(clicked);
+  const worldPos = this.seafloorRenderer.axialToWorld(clicked);
+  this.camera.setTarget(worldPos.x, worldPos.y, worldPos.z); // &lt;--- HARD SNAP!
+}</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">And in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OrbitCamera.ts</code>:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-typescript">public setTarget(x: number, y: number, z: number): void {
+  this.target.x = x;
+  this.target.y = y;
+  this.target.z = z;
+}</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">No interpolation, no tween, no lerp. A single-frame step makes the 3D space feel jarring and brittle rather than cinematic and physical.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="4-field-visual-evidence-annotated-artifacts" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. Field Visual Evidence & Annotated Artifacts <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-field-visual-evidence-annotated-artifacts" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">During the live testing session on Microsoft Edge, I captured six real browser screenshots documenting my workflow, successful telemetry verifications, and user-experience friction points.</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">+----------------------------------------------------------------------------------------------------+
+|                                    STUDENT FIELD ARTIFACT INDEX                                    |
++----+----------------------------------------------+----------+-------------------------------------+
+| ID | Artifact Filename                            | Epoch    | Primary Evaluative Focus            |
++----+----------------------------------------------+----------+-------------------------------------+
+| 01 | 01_overview_and_lattice_key.png              | Tick 20  | Seamount Overview &amp; Lattice Key     |
+| 02 | 02_zooming_difficulty_drift.png              | Tick 21  | Zoom Drift &amp; Peripheral Loss        |
+| 03 | 03_selected_silicoid_and_microscope.png      | Tick 21  | Reticle Lock &amp; Live Microscope      |
+| 04 | 04_deep_zoom_and_insitu_circuit.png          | Tick 21  | In-Situ 3D Breadboard Font Crisis   |
+| 05 | 05_god_suite_lab_controls.png                | Tick 21  | Lab Drawer Overlay Collisions       |
+| 06 | 06_thermal_surge_and_extinction.png          | Tick 36  | Milestone Toast &amp; Lattice Overlap   |
++----+----------------------------------------------+----------+-------------------------------------+</code></pre>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="screenshot-1-overview-seafloor-perspective-lattice-key" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Screenshot 1: Overview, Seafloor Perspective & Lattice Key <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#screenshot-1-overview-seafloor-perspective-lattice-key" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">File Reference:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/QA/screenshots/01_overview_and_lattice_key.png" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">QA/screenshots/01_overview_and_lattice_key.png</code></a></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Relative Link:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">screenshots/01_overview_and_lattice_key.png</code></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Timestamp / Telemetry:</strong> Epoch Tick 20 | Living Cells: 26 | Pelagic Spores: 0 | Phylogeny: Gen 0 • 26 Clades ($H=3.258$) | Stored Energy: 1258 T | $\Delta E = 0.000\text{ (Exact)}$</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><div class="my-6 text-center"><img src="screenshots/01_overview_and_lattice_key.png" alt="Screenshot 01: Overview, Seafloor Perspective &amp; Lattice Key" loading="lazy" class="max-w-full h-auto rounded-xl border border-slate-800 shadow-2xl mx-auto" /><div class="mt-2 text-xs font-mono text-slate-500">Screenshot 01: Overview, Seafloor Perspective &amp; Lattice Key</div></div></p>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">#### 🔬 Student Field Notes & Analytical Observations:<br/>- <strong class="text-slate-100 font-semibold">Visual Atmosphere:</strong> The abyssal color palette (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#020713</code> background with radial gradient) looks stunning. The glowing amber particles drifting from the central caldera nozzle immediately convey an active hydrothermal vent environment.<br/>- <strong class="text-slate-100 font-semibold">Lattice Key Integration:</strong> The floating card at top-right clearly distinguishes emerald high-battery cells (>60%) from cyan steady-state cells (30–60%) and yellow depleted cells (<30%). The dark basalt bedrock prisms and vacant mineral cavities create a believable geological landscape.<br/>- <strong class="text-slate-100 font-semibold">Telemetry Bar:</strong> The top header is exceptionally clear. Showing both Shannon diversity ($H=3.258$) and the strict first-law thermodynamic balance ($\Delta E = 0.000$) gives students confidence in the scientific honesty of the simulation.<br/>- <strong class="text-slate-100 font-semibold">First UX Impression:</strong> Empty state prompt on the right panel (<em class="text-slate-200 italic">"Click any seafloor pore to focus microscope"</em>) is clear and invites immediate interaction.</blockquote>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="screenshot-2-the-disorienting-zoom-drift-target-centering-failure" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Screenshot 2: The Disorienting Zoom Drift (Target Centering Failure) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#screenshot-2-the-disorienting-zoom-drift-target-centering-failure" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">File Reference:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/QA/screenshots/02_zooming_difficulty_drift.png" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">QA/screenshots/02_zooming_difficulty_drift.png</code></a></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Relative Link:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">screenshots/02_zooming_difficulty_drift.png</code></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Timestamp / Telemetry:</strong> Epoch Tick 21 | Living Cells: 26 | Camera Distance: 11.0 (Zoomed in from 24.0)</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><div class="my-6 text-center"><img src="screenshots/02_zooming_difficulty_drift.png" alt="Screenshot 02: Zoom Drift" loading="lazy" class="max-w-full h-auto rounded-xl border border-slate-800 shadow-2xl mx-auto" /><div class="mt-2 text-xs font-mono text-slate-500">Screenshot 02: Zoom Drift</div></div></p>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">#### 🔬 Student Field Notes & Analytical Observations:<br/>- <strong class="text-slate-100 font-semibold">The Defect in Action:</strong> Here, I hovered my mouse over the peripheral silicoids on the lower rim and scrolled the wheel forward to inspect them.<br/>- <strong class="text-slate-100 font-semibold">Radial Divergence:</strong> Because the camera zooms toward target <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">(0, 0, 0)</code> (the caldera nozzle), the peripheral cells accelerated radially outward.<br/>- <strong class="text-slate-100 font-semibold">Viewport Clipping:</strong> In this frame, the bottom silicoid has been pushed partially behind the floating transport bar, and the top-right cells have drifted far up toward the header.<br/>- <strong class="text-slate-100 font-semibold">Student Frustration:</strong> To keep a specimen in view, you cannot simply scroll where you are looking. You are forced to stop scrolling, switch to right-click dragging to pan the target back to center, scroll slightly, and pan again.</blockquote>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="screenshot-3-holographic-reticle-lock-live-circuit-microscope" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Screenshot 3: Holographic Reticle Lock & Live Circuit Microscope <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#screenshot-3-holographic-reticle-lock-live-circuit-microscope" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">File Reference:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/QA/screenshots/03_selected_silicoid_and_microscope.png" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">QA/screenshots/03_selected_silicoid_and_microscope.png</code></a></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Relative Link:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">screenshots/03_selected_silicoid_and_microscope.png</code></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Timestamp / Telemetry:</strong> Epoch Tick 21 | Selected Pore: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[-5, 4, 0]</code> | State: ACTIVE SILICOID | Batt: 53T | Matter: 20M | Gen 0 | Gates: 2</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><div class="my-6 text-center"><img src="screenshots/03_selected_silicoid_and_microscope.png" alt="Screenshot 03: Selected Silicoid &amp; Microscope" loading="lazy" class="max-w-full h-auto rounded-xl border border-slate-800 shadow-2xl mx-auto" /><div class="mt-2 text-xs font-mono text-slate-500">Screenshot 03: Selected Silicoid &amp; Microscope</div></div></p>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">#### 🔬 Student Field Notes & Analytical Observations:<br/>- <strong class="text-slate-100 font-semibold">Targeting Confirmation:</strong> Clicking on Pore <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[-5, 4, 0]</code> locked the holographic cyan hexagonal wireframe and raised the glowing vertical reticle beacon pin. The top-left badge updated with exact coordinates and vital metrics.<br/>- <strong class="text-slate-100 font-semibold">Microscope Panel Activation:</strong> The 2D docked microscope panel immediately came to life:<br/>  - <strong class="text-slate-100 font-semibold">Battery Gauge:</strong> Displaying <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">53/100</code> with an emerald progress bar.<br/>  - <strong class="text-slate-100 font-semibold">Matter & Age:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">20/40</code> matter with purple bar; Age <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">21 ticks</code>.<br/>  - <strong class="text-slate-100 font-semibold">Substrate Porin Bus:</strong> Stream B (Oxidizer) pin illuminated cyan, confirming local hydrothermal fluid presence.<br/>  - <strong class="text-slate-100 font-semibold">Phenotypic Netlist:</strong> Two active gates rendered (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[ OR ]</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[ NOT ]</code>).<br/>  - <strong class="text-slate-100 font-semibold">1D Genome Tape Ribbon:</strong> All 10 6-bit codons displayed in color-coded blocks (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">101</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">110</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">110</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">010</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">101</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">100</code>, etc.), verifying Howard Pattee's Epistemic Cut.<br/>- <strong class="text-slate-100 font-semibold">Educational Impact:</strong> This view is pedagogically brilliant. It allows a student to connect the macroscopic organism on the seafloor directly to its microscopic molecular hardware.</blockquote>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="screenshot-4-the-deep-zoom-barrier-in-situ-circuit-unreadability" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Screenshot 4: The Deep-Zoom Barrier & In-Situ Circuit Unreadability <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#screenshot-4-the-deep-zoom-barrier-in-situ-circuit-unreadability" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">File Reference:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/QA/screenshots/04_deep_zoom_and_insitu_circuit.png" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">QA/screenshots/04_deep_zoom_and_insitu_circuit.png</code></a></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Relative Link:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">screenshots/04_deep_zoom_and_insitu_circuit.png</code></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Timestamp / Telemetry:</strong> Epoch Tick 21 | Camera Distance: 7.5 | Elevation: 0.85 radians (Steep tilt)</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><div class="my-6 text-center"><img src="screenshots/04_deep_zoom_and_insitu_circuit.png" alt="Screenshot 04: Deep Zoom &amp; In-Situ Circuit Unreadability" loading="lazy" class="max-w-full h-auto rounded-xl border border-slate-800 shadow-2xl mx-auto" /><div class="mt-2 text-xs font-mono text-slate-500">Screenshot 04: Deep Zoom &amp; In-Situ Circuit Unreadability</div></div></p>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">#### 🔬 Student Field Notes & Analytical Observations:<br/>- <strong class="text-slate-100 font-semibold">The Readability Crisis:</strong> Here, I zoomed the camera down to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">distance = 7.5</code> and tilted the pitch down to inspect the physical logic gates directly on the hexagonal cell surface.<br/>- <strong class="text-slate-100 font-semibold">Microscopic Typography:</strong> Look at the small black disc on the selected cyan cell. Two chip rectangles are visible around the golden spiral, but the text labels <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;NOT&quot;</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;OR&quot;</code> are drawn in an illegible 4-pixel font!<br/>- <strong class="text-slate-100 font-semibold">Occlusion & Clipping:</strong> The front edge of an adjacent dark basalt prism rises upward and occludes the lower half of the cell floor.<br/>- <strong class="text-slate-100 font-semibold">Missed Immersion:</strong> The developers clearly wrote custom logic in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SeafloorRenderer3D.ts</code> to draw physical gate chips on the seafloor, but because the text is unreadable without squinting, students are forced to ignore the 3D terrarium and look only at the 2D side panel.</blockquote>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="screenshot-5-god-suite-lab-flyout-drawer-overlap-collisions" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Screenshot 5: God-Suite Lab Flyout Drawer Overlap Collisions <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#screenshot-5-god-suite-lab-flyout-drawer-overlap-collisions" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">File Reference:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/QA/screenshots/05_god_suite_lab_controls.png" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">QA/screenshots/05_god_suite_lab_controls.png</code></a></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Relative Link:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">screenshots/05_god_suite_lab_controls.png</code></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Timestamp / Telemetry:</strong> Epoch Tick 21 | Lab Flyout Opened (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#lab-drawer</code>)</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><div class="my-6 text-center"><img src="screenshots/05_god_suite_lab_controls.png" alt="Screenshot 05: God-Suite Lab Controls Overlap" loading="lazy" class="max-w-full h-auto rounded-xl border border-slate-800 shadow-2xl mx-auto" /><div class="mt-2 text-xs font-mono text-slate-500">Screenshot 05: God-Suite Lab Controls Overlap</div></div></p>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">#### 🔬 Student Field Notes & Analytical Observations:<br/>- <strong class="text-slate-100 font-semibold">UI Occlusion Hazard:</strong> Clicking <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⚙️ Lab</code> opens the left-hand drawer. Look closely at what happened to the bottom transport bar:<br/>  - The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⚙️ Lab</code> button and the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⏸ Pause</code> button are <strong class="text-slate-100 font-semibold">completely hidden behind the solid panel of the drawer!</strong><br/>  - A student attempting to pause the simulation while tweaking mutation sliders has no way to click Pause!<br/>- <strong class="text-slate-100 font-semibold">HUD Truncation:</strong> In the upper left, the camera hint (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Left-Drag: Orbit...</code>) and the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#hud-selected-pore</code> badge are sliced in half by the drawer boundary (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">inspect)</code> is all that remains visible).<br/>- <strong class="text-slate-100 font-semibold">Ergonomic Verdict:</strong> The drawer should either push the viewport or dock cleanly into a dedicated layout grid column rather than floating over active controls.</blockquote>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="screenshot-6-paleontology-milestone-toast-collision-lattice-occlusion" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Screenshot 6: Paleontology Milestone Toast Collision & Lattice Occlusion <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#screenshot-6-paleontology-milestone-toast-collision-lattice-occlusion" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">File Reference:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/QA/screenshots/06_thermal_surge_and_extinction.png" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">QA/screenshots/06_thermal_surge_and_extinction.png</code></a></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Relative Link:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">screenshots/06_thermal_surge_and_extinction.png</code></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Timestamp / Telemetry:</strong> Epoch Tick 36 | Living Cells: 25 | Clades: 24 ($H=3.163$) | Carcasses: 1 | Stored Energy: 1067 T | Milestone Triggered: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">I-FFL Type 1</code></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><div class="my-6 text-center"><img src="screenshots/06_thermal_surge_and_extinction.png" alt="Screenshot 06: Thermal Surge, Extinction &amp; Milestone Toast" loading="lazy" class="max-w-full h-auto rounded-xl border border-slate-800 shadow-2xl mx-auto" /><div class="mt-2 text-xs font-mono text-slate-500">Screenshot 06: Thermal Surge, Extinction &amp; Milestone Toast</div></div></p>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">#### 🔬 Student Field Notes & Analytical Observations:<br/>- <strong class="text-slate-100 font-semibold">Scientific Triumph:</strong> The engine autonomously recognized an Incoherent Feed-Forward Loop (I-FFL Type 1), citing Uri Alon's 2007 paper and computing the exact topological invariant <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">WL-1a9ca7404d8869</code>.<br/>- <strong class="text-slate-100 font-semibold">Ecological Succession Visible:</strong> In the background, the seamount reflects the aftermath of a thermal surge and local carcass turnover (note <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Carcasses: 1</code> in HUD).<br/>- <strong class="text-slate-100 font-semibold">Modal Collision Glitch:</strong> Look at the top right of the 3D viewport. The milestone notification modal (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#milestone-modal</code>) spawns directly across the bottom half of the <strong class="text-slate-100 font-semibold">Lattice Key card</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#hud-legend-card</code>), completely obscuring the color swatches for carcasses, spores, and vents!<br/>- <strong class="text-slate-100 font-semibold">Student Experience:</strong> When a milestone triggers, a student wants to check the Lattice Key to understand what the glowing cell on the seafloor is doing. Having one card cover the other makes the interface feel crowded and unpolished.</blockquote>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="5-actionable-student-recommendations-for-developers" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Actionable Student Recommendations for Developers <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-actionable-student-recommendations-for-developers" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">As a high school student who loves both biology and programming, I want Siliquarium to succeed and be adopted in AP science classrooms nationwide. Based on my hands-on testing session, here are five prioritized, concrete engineering recommendations to resolve these friction points.</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">+----------------------------------------------------------------------------------------------------+
+|                               STUDENT ENGINEERING RECOMMENDATION MATRIX                            |
++-----+-------------------------------+--------------------------+----------+------------------------+
+| Rec | Proposed Feature / Fix        | Target File(s)           | Priority | Estimated Impact       |
++-----+-------------------------------+--------------------------+----------+------------------------+
+| 01  | Cursor-Centric Raycast Zoom   | OrbitCamera.ts, main.ts  | CRITICAL | Eliminates zoom drift  |
+| 02  | Double-Click Smooth Ease-In   | OrbitCamera.ts, main.ts  | HIGH     | Cinematic orientation  |
+| 03  | Aqueous Hit-Test Filter       | SeafloorRenderer3D.ts    | HIGH     | Reliable pore clicking |
+| 04  | Billboarded In-Situ Text LOD  | SeafloorRenderer3D.ts    | MEDIUM   | Readable 3D chips      |
+| 05  | Non-Overlapping HUD Layout    | index.html, main.ts      | MEDIUM   | No control occlusion   |
++-----+-------------------------------+--------------------------+----------+------------------------+</code></pre>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="recommendation-1-cursor-centric-raycast-zooming-fix-for-trouble-1" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Recommendation 1: Cursor-Centric Raycast Zooming (Fix for Trouble 1) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#recommendation-1-cursor-centric-raycast-zooming-fix-for-trouble-1" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Target:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/OrbitCamera.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/visualizers/OrbitCamera.ts</code></a>, <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/main.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/main.ts</code></a></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Priority:</strong> <strong class="text-slate-100 font-semibold">CRITICAL</strong></p>
+<h4 id="proposed-solution" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Proposed Solution: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#proposed-solution" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Instead of only scaling <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">camera.distance</code> toward fixed <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">this.target</code>, implement cursor-directed raycast zooming similar to modern mapping software (Google Maps, Figma, Blender):</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>On <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">wheel</code> event, construct a 3D ray from the screen cursor coordinates using <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">camera.screenToRay(screenX, screenY, width, height)</code>.</li>
+<li>Compute the intersection of this ray with the seafloor plane ($y=0$):</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$t = \frac{-P_{\text{ray.origin}.y}}{D_{\text{ray.direction}.y}}, \qquad P_{\text{ground}} = P_{\text{ray.origin}} + t \cdot D_{\text{ray.direction}}$$</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Shift <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">camera.target</code> toward $P_{\text{ground}}$ by an amount proportional to the zoom factor:</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\text{target}_{\text{new}} = \text{target}_{\text{old}} + (P_{\text{ground}} - \text{target}_{\text{old}}) \cdot \left(1.0 - \frac{\text{distance}_{\text{new}}}{\text{distance}_{\text{old}}}\right)$$</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>This guarantees that whatever point on the seafloor is resting beneath the student's cursor remains pinned in place under the cursor as the camera zooms in! No more losing specimens into the margins!</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="recommendation-2-double-click-to-smooth-ease-in-focus-fix-for-trouble-5" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Recommendation 2: Double-Click to Smooth Ease-In Focus (Fix for Trouble 5) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#recommendation-2-double-click-to-smooth-ease-in-focus-fix-for-trouble-5" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Target:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/OrbitCamera.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/visualizers/OrbitCamera.ts</code></a>, <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/main.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/main.ts</code></a></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Priority:</strong> <strong class="text-slate-100 font-semibold">HIGH</strong></p>
+<h4 id="proposed-solution" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Proposed Solution: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#proposed-solution" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Replace the single-frame instantaneous snap in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">main.ts</code> with a smooth easing interpolation:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Listen for <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">dblclick</code> events on the seafloor canvas.</li>
+<li>When a pore is double-clicked (or when clicking <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;🔬 Focus Microscope&quot;</code> in the milestone modal), initiate an animated camera transition over 300–400ms.</li>
+<li>Use a standard cubic ease-out curve ($f(t) = 1 - (1-t)^3$) to smoothly lerp both <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">camera.target</code> toward the pore's world coordinates and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">camera.distance</code> toward $12.0\text{ units}$.</li>
+<li>A smooth camera glide preserves the student's cognitive map of the seafloor, allowing them to track the spatial relationship between the caldera vent and the newly selected specimen.</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="recommendation-3-transparent-aqueous-cell-raycast-filter-fix-for-trouble-2" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Recommendation 3: Transparent Aqueous Cell Raycast Filter (Fix for Trouble 2) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#recommendation-3-transparent-aqueous-cell-raycast-filter-fix-for-trouble-2" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Target:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts#L271-L283" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/visualizers/SeafloorRenderer3D.ts</code></a></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Priority:</strong> <strong class="text-slate-100 font-semibold">HIGH</strong></p>
+<h4 id="proposed-solution" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Proposed Solution: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#proposed-solution" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Modify <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">findPoreAtScreenCoord()</code> to ignore empty aqueous cells during raycast hit testing:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-typescript">// Proposed fix in SeafloorRenderer3D.ts
+public findPoreAtScreenCoord(screenX: number, screenY: number, telemetry: ISimulationTelemetry): HexCoord3D | null {
+  const w = this.canvas.width, h = this.canvas.height;
+  const projected = this.projectPores(telemetry.pores, w, h);
+  projected.sort((a, b) =&gt; a.depth - b.depth);
+
+  for (const item of projected) {
+    // IGNORE empty aqueous fluid parcels so clicks penetrate down to benthic rock cells!
+    if (item.pore.isAqueous &amp;&amp; item.pore.state === PoreState.EMPTY &amp;&amp; !item.pore.hasSpore) {
+      continue;
+    }
+
+    if (this.isPointInPolygon(screenX, screenY, item.topScreenVertices)) return item.pore.coord;
+    const dx = screenX - item.centerScreen.x, dy = screenY - item.centerScreen.y;
+    const projRadius = Math.hypot(item.topScreenVertices[0].x - item.centerScreen.x, item.topScreenVertices[0].y - item.centerScreen.y);
+    if (Math.hypot(dx, dy) &lt;= projRadius * 0.88) return item.pore.coord;
+  }
+  return null;
+}</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If an aqueous hex contains a pelagic spore (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">hasSpore === true</code>) or a dividing cell, it remains clickable. But if it is simply empty ocean water, the cursor click passes cleanly through to the solid rock silicoid beneath it.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="recommendation-4-in-situ-circuit-billboard-lod-clamped-typography-fix-for-trouble-3" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Recommendation 4: In-Situ Circuit Billboard LOD & Clamped Typography (Fix for Trouble 3) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#recommendation-4-in-situ-circuit-billboard-lod-clamped-typography-fix-for-trouble-3" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Target:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts#L214-L236" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/visualizers/SeafloorRenderer3D.ts</code></a></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Priority:</strong> <strong class="text-slate-100 font-semibold">MEDIUM</strong></p>
+<h4 id="proposed-solution" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Proposed Solution: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#proposed-solution" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To make in-situ seafloor breadboards actually usable in 3D:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Dynamic Font Clamping:</strong> When drawing gate labels in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">drawInSituCircuit()</code>, clamp the font size to a readable minimum:</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\text{fontSize} = \max(11, \; \lfloor\text{chipH} \cdot 0.85\rfloor)\text{px}$$</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">High-Contrast Pill Badging:</strong> Instead of drawing tiny dark rectangles directly against the dark cell face, render logic gates as floating high-contrast pills with a subtle glow or dark border:</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>: Green pill badge with bold white text.</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>: Coral-rose pill badge with bold white text.</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>: Cyan pill badge with bold white text.</li>
+<li><strong class="text-slate-100 font-semibold">Camera-Facing Billboards:</strong> Rather than skewing the chips across the angled hex plane where steep perspective compresses them into thin slits, render the gate badges as 2.5D screen-aligned billboards floating $0.4\text{ units}$ above the cell floor. This allows instant reading from any camera orbit angle.</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="recommendation-5-non-destructive-hud-layout-collision-avoidance-fix-for-trouble-4" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Recommendation 5: Non-Destructive HUD Layout & Collision Avoidance (Fix for Trouble 4) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#recommendation-5-non-destructive-hud-layout-collision-avoidance-fix-for-trouble-4" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Target:</strong> <a href="file:///h:/My%20Drive/Repos/Siliquarium/index.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code></a></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Priority:</strong> <strong class="text-slate-100 font-semibold">MEDIUM</strong></p>
+<h4 id="proposed-solution" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Proposed Solution: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#proposed-solution" title="Direct link">#</a></h4>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Elevate Transport Bar z-index:</strong> Set <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.transport-bar { z-index: 40; }</code> so that transport buttons (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⚙️ Lab</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⏸ Pause</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⏭ Step</code>) remain accessible and clickable above the flyout drawer at all times.</li>
+<li><strong class="text-slate-100 font-semibold">Flyout Drawer Layout:</strong> Rather than an absolute full-height overlay spanning from <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">top: 0</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">bottom: 0</code>, position <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#lab-drawer</code> between <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">top: 72px</code> (below header) and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">bottom: 70px</code> (above transport bar). This ensures the bottom controls and top telemetry badges are never covered.</li>
+<li><strong class="text-slate-100 font-semibold">Milestone Toast Positioning:</strong> Anchor <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.milestone-toast</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">top: 84px; left: 24px;</code> (left side of canvas) or stagger it below the Lattice Key (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">top: 240px; right: 12px;</code>) so the two information cards never collide.</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="6-conclusion-academic-reflection" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. Conclusion & Academic Reflection <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#6-conclusion-academic-reflection" title="Direct link">#</a></h2>
+<h3 id="61-scientific-modeling-assessment-grade-a" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">6.1 Scientific Modeling Assessment: <strong class="text-slate-100 font-semibold">Grade: A+</strong> <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#61-scientific-modeling-assessment-grade-a" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium is an extraordinary pedagogical achievement. By grounding digital life in:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Non-equilibrium chemiosmotic thermodynamics (Mitchell proton gradients),</li>
+<li>Rolf Landauer's physical power dissipation ($1\text{ token/toggle}$),</li>
+<li>Howard Pattee's Epistemic Cut (rate-independent 60-bit genome vs. rate-dependent Boolean netlists), and</li>
+<li>Rigorous graph-theoretic paleontology (Uri Alon motifs and Weisfeiler-Lehman topological invariant hashing),</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">the platform completely avoids the "smuggled teleology" and artificial score-chasing that plague traditional genetic algorithm demonstrations. As an AP Biology student, this tool made me understand <em class="text-slate-200 italic">why</em> life is an autopoietic dissipative structure far better than any diagram in our Campbell Biology textbook.</p>
+<h3 id="62-visual-aesthetics-atmosphere-grade-a" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">6.2 Visual Aesthetics & Atmosphere: <strong class="text-slate-100 font-semibold">Grade: A</strong> <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#62-visual-aesthetics-atmosphere-grade-a" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The bioluminescent abyssal aesthetic, glowing hydrothermal plume particle physics, and clean dark-mode typography create a compelling, authentic laboratory atmosphere. The juxtaposition of the 3D bathymetric caldera alongside the real-time 2D Circuit Microscope is visually striking.</p>
+<h3 id="63-interface-ergonomics-usability-grade-c" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">6.3 Interface Ergonomics & Usability: <strong class="text-slate-100 font-semibold">Grade: C+</strong> <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#63-interface-ergonomics-usability-grade-c" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">As documented in this report, the current interaction surface suffers from classic engineering-first oversights:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Center-locked zooming makes cell inspection frustratingly slow.</li>
+<li>Transparent water layers intercept mouse clicks intended for benthic silicoids.</li>
+<li>In-situ 3D logic gate labels are unreadably small (4px monospace font).</li>
+<li>Floating drawers and notification toasts collide and cover essential transport controls.</li>
+<li>Hard camera snaps disorient students exploring the volcanic terrain.</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Implementing the five concrete engineering recommendations detailed above—especially <strong class="text-slate-100 font-semibold">cursor-centric raycast zooming</strong>, <strong class="text-slate-100 font-semibold">transparent aqueous raycast pass-through</strong>, and <strong class="text-slate-100 font-semibold">elevating the transport bar z-index</strong>—will eliminate this friction entirely. Once these ergonomics are in place, Siliquarium will be an unbeatable, world-class teaching platform for university and high school STEM education.</p>
+<hr class="border-t border-slate-800 my-8" />
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Report Filed By:</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Alex Rivera</em></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Senior Candidate, STEM Honors Diploma</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Thomas Jefferson High School for Science and Technology</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Contact: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">alex.rivera@stem-siliquarium-lab.org</code></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">GitHub Committer Ref: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">siliquarium-qa-student-eval-2026</code></p>
+  </main>
+
+  <!-- MASTER FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
+      <p>
+        <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
+        PolyForm Noncommercial License 1.0.0 •
+        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

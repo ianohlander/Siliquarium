@@ -1,408 +1,330 @@
+<!-- 🐠 Siliquarium Open-Ended Digital Life & Silicon Abiogenesis Laboratory • Created by & Copyright © 2026 Ian Ohlander. All rights reserved. -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Engineering &amp; Software Architecture Standards — Siliquarium</title>
+  <title>Engineering &amp; Software Architecture Standards — Siliquarium Master Documentation</title>
   <link rel="icon" type="image/jpeg" href="../docs/assets/logos/logo.jpg">
-  
-  <!-- Modern Clean Typography & KaTeX -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bio: {
+              bg: '#060911',
+              surface: '#0a0e1a',
+              panel: '#121829',
+              card: '#0f172a',
+              border: '#1e2c4a',
+              cyan: '#00e5ff',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              purple: '#a855f7',
+              sky: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            mono: ['Cascadia Code', 'Fira Code', 'Consolas', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
-    :root {
-      --bg-ocean: #060911;
-      --bg-card: #0d1322;
-      --bg-surface: #131c31;
-      --border: #1e2c4a;
-      --border-glow: #00e5ff33;
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --cyan: #00e5ff;
-      --amber: #f59e0b;
-      --emerald: #10b981;
-      --rose: #f43f5e;
-      --purple: #a855f7;
-    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #060911; }
+    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body {
-      background-color: var(--bg-ocean);
-      color: var(--text-primary);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.7;
-      font-size: 16px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    .card-bio, .card-chemiosmotic {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
     }
-
-    /* Top Navigation Header */
-    .top-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(6, 9, 17, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+    .card-digital, .card-silicon {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.4);
     }
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
+    .card-margin, .card-analogy {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
     }
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--text-primary);
-      font-weight: 700;
-      font-size: 1.15rem;
-      letter-spacing: -0.02em;
+    .card-experiment, .card-paleo {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.4);
     }
-    .brand-logo img {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      border: 1px solid var(--cyan);
-      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
-    }
-    .brand-logo span {
-      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      overflow-x: auto;
-      padding-bottom: 2px;
-    }
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      padding: 0.4rem 0.75rem;
-      border-radius: 6px;
-      white-space: nowrap;
-      transition: all 0.15s ease;
-      border: 1px solid transparent;
-    }
-    .nav-link:hover {
-      color: var(--text-primary);
-      background: var(--bg-surface);
-      border-color: var(--border);
-    }
-    .nav-link.active {
-      color: var(--cyan);
-      background: rgba(0, 229, 255, 0.1);
-      border-color: rgba(0, 229, 255, 0.4);
-      font-weight: 600;
-    }
-
-    /* Main Container */
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
-      flex: 1;
-      width: 100%;
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      color: #ffffff;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      position: relative;
-    }
-    h1 {
-      font-size: 2.25rem;
-      margin-top: 0;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.75rem;
-      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
-    h3 { font-size: 1.25rem; color: #e2e8f0; }
-    h4 { font-size: 1.05rem; color: var(--cyan); }
-    
-    p { margin-bottom: 1.25rem; color: #cbd5e1; }
-    strong { color: #ffffff; font-weight: 600; }
-    em { color: var(--text-primary); font-style: italic; }
-
-    .header-anchor {
-      opacity: 0;
-      color: var(--cyan);
-      text-decoration: none;
-      margin-left: 0.5rem;
-      font-weight: 400;
-      transition: opacity 0.2s;
-    }
-    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
-      opacity: 0.6;
-    }
-
-    a {
-      color: var(--cyan);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: #70f3ff;
-    }
-
-    /* Lists */
-    ul, ol {
-      margin-left: 1.5rem;
-      margin-bottom: 1.25rem;
-      color: #cbd5e1;
-    }
-    li { margin-bottom: 0.4rem; }
-
-    /* Code & Pre */
-    code {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.88em;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      color: #38bdf8;
-    }
-    pre {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+    .svg-container {
+      background: #090e15;
+      border: 1px solid #1e2c4a;
+      border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
-      margin-bottom: 1.5rem;
-      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
-    }
-    pre code {
-      background: transparent;
-      border: none;
-      padding: 0;
-      color: #e2e8f0;
-      font-size: 0.9rem;
-      line-height: 1.5;
     }
 
-    /* Blockquotes & Callouts */
-    blockquote.callout {
-      border-left: 4px solid var(--cyan);
-      background: var(--bg-card);
-      padding: 1rem 1.25rem;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 1.5rem;
-      color: #cbd5e1;
+    /* Citation Target Highlighting & Interactive Navigation */
+    html { scroll-behavior: auto; }
+    li[id^="ref-"] {
+      scroll-margin-top: 6rem;
+      position: relative;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
     }
-
-    /* GitHub-style Alerts */
-    .alert {
-      border-left: 4px solid;
-      background: var(--bg-card);
-      padding: 1rem 1.25rem;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 1.5rem;
+    @keyframes refTargetPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.95), 0 0 40px rgba(0, 229, 255, 0.85), inset 0 0 15px rgba(0, 229, 255, 0.35);
+        border-color: #22d3ee;
+        background-color: rgba(8, 51, 68, 0.95);
+        transform: scale(1.02);
+      }
+      30% {
+        box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.45), 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 20px rgba(0, 229, 255, 0.25);
+        border-color: #38bdf8;
+        background-color: rgba(8, 51, 68, 0.92);
+        transform: scale(1.015);
+      }
+      100% {
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 12px rgba(0, 229, 255, 0.15);
+        border-color: #00e5ff;
+        background-color: rgba(8, 51, 68, 0.88);
+        transform: scale(1);
+      }
     }
-    .alert-title {
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.4rem;
-      text-transform: uppercase;
+    @keyframes badgePopIn {
+      0% { opacity: 0; transform: translateY(6px) scale(0.8); }
+      60% { opacity: 1; transform: translateY(-2px) scale(1.06); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
-    .alert-note { border-color: var(--cyan); }
-    .alert-note .alert-title { color: var(--cyan); }
-    .alert-tip { border-color: var(--emerald); }
-    .alert-tip .alert-title { color: var(--emerald); }
-    .alert-important { border-color: var(--purple); }
-    .alert-important .alert-title { color: var(--purple); }
-    .alert-warning { border-color: var(--amber); }
-    .alert-warning .alert-title { color: var(--amber); }
-
-    /* Tables */
-    .table-container {
-      width: 100%;
-      overflow-x: auto;
-      margin-bottom: 1.75rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg-card);
+    li[id^="ref-"]:target,
+    li[id^="ref-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #22d3ee !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.92rem;
-    }
-    th {
-      background: var(--bg-surface);
+    li[id^="ref-"]:target::after,
+    li[id^="ref-"].active-citation-target::after {
+      content: "CITED IN TEXT 🎯";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0891b2, #0284c7);
       color: #ffffff;
-      font-weight: 600;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
     }
-    td {
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      color: #cbd5e1;
+    sup a[href^="#ref-"] {
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 0 1px;
     }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: rgba(255, 255, 255, 0.02); }
-
-    /* Math */
-    .math-block {
-      overflow-x: auto;
-      padding: 1rem 0;
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #e2e8f0;
+    sup a[href^="#ref-"]:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 8px #22d3ee;
+      transform: translateY(-1px);
     }
-
-    /* Images */
-    .img-wrapper {
-      margin: 1.5rem 0;
-      text-align: center;
+    section[id], div[id], h2[id], h3[id] {
+      scroll-margin-top: 5.5rem;
     }
-    .img-wrapper img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    @keyframes backlinkTargetFlash {
+      0% { outline: 3px solid rgba(0, 229, 255, 0.9); outline-offset: 4px; }
+      100% { outline: 3px solid transparent; outline-offset: 4px; }
     }
-    .img-caption {
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    section[id]:target, div[id]:target {
+      animation: backlinkTargetFlash 2.5s ease-out;
     }
-
-    hr.divider {
-      border: none;
-      height: 1px;
-      background: var(--border);
-      margin: 2.5rem 0;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      background: var(--bg-card);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    footer a { color: var(--text-secondary); }
-    footer a:hover { color: var(--cyan); }
   </style>
+
+  <script id="citation-navigator">
+    document.addEventListener('DOMContentLoaded', function() {
+      function highlightRefCard(targetId) {
+        if (!targetId || !targetId.startsWith('ref-')) return;
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+          item.classList.remove('active-citation-target');
+        });
+        el.classList.remove('active-citation-target');
+        void el.offsetWidth;
+        el.classList.add('active-citation-target');
+        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }
+      function scrollToTarget(targetId) {
+        if (!targetId) return;
+        if (targetId.startsWith('ref-')) {
+          highlightRefCard(targetId);
+          return;
+        }
+        const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href && href.includes('#')) {
+            const hash = href.substring(href.indexOf('#') + 1);
+            if (hash.startsWith('ref-')) highlightRefCard(hash);
+          }
+        }
+      });
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) scrollToTarget(hash);
+      });
+      function checkInitialHash() {
+        if (window.location.hash) {
+          const hash = window.location.hash.replace('#', '');
+          scrollToTarget(hash);
+        }
+      }
+      checkInitialHash();
+      setTimeout(checkInitialHash, 150);
+      setTimeout(checkInitialHash, 500);
+      window.addEventListener('load', function() {
+        setTimeout(checkInitialHash, 100);
+      });
+      if (window.MathJax && window.MathJax.startup) {
+        window.MathJax.startup.promise = window.MathJax.startup.promise.then(function() {
+          setTimeout(checkInitialHash, 100);
+        });
+      }
+    });
+  </script>
 </head>
-<body>
-  <header class="top-header">
-    <div class="header-inner">
-      <a href="../docs/index.html" class="brand-logo">
-        <img src="../docs/assets/logos/logo.jpg" alt="Siliquarium Logo">
-        <span>Siliquarium</span>
-      </a>
-      <nav class="nav-bar">
-        <a href="../docs/index.html" class="nav-link ">🐠 Portal Home</a>
-<a href="../docs/CURRICULUM_AND_SYLLABUS.html" class="nav-link ">🎓 Curriculum & Labs</a>
-<a href="../docs/PEDAGOGICAL_COMPANION_SUITE.html" class="nav-link ">🏛️ Pedagogical Companion</a>
-<a href="../docs/THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
-<a href="../docs/EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
-<a href="../docs/PHASE_3_VISUALIZER_GUIDE.html" class="nav-link ">🔬 3D Visualizer</a>
-<a href="../docs/PHASE_4_PALEONTOLOGY_GUIDE.html" class="nav-link ">🦕 Paleontology & Motifs</a>
-<a href="../docs/PHASE_5_PELAGIC_SPORES_GUIDE.html" class="nav-link ">🌊 Spores & Controls</a>
-<a href="../docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="nav-link ">🧬 Phylogeny & Dynamics</a>
-<a href="../docs/BRAND_IDENTITY.html" class="nav-link ">🎨 Brand Identity</a>
-<a href="../docs/logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
+
+  <!-- MASTER HEADER & BREADCRUMBS -->
+  <header class="border-b border-slate-800 bg-[#060911]/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      <nav class="flex items-center gap-2 text-xs font-mono text-slate-400">
+        <a href="../docs/index.html" class="hover:text-cyan-400 text-slate-300 flex items-center gap-2 font-bold">
+          <img src="../docs/assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50 shadow-sm inline">
+          <span>Siliquarium Portal</span>
+        </a>
+        <span>/</span>
+        <span class="text-cyan-400 font-semibold truncate max-w-xs md:max-w-md">Engineering &amp; Software Architecture Standards</span>
+      </nav>
+      <div class="flex items-center gap-2.5">
+        <a href="../docs/../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🚀 Live Simulator</span>
+        </a>
+        <a href="../docs/CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🎓 Curriculum</span>
+        </a>
+        <a href="../docs/PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🏛️ Glossary</span>
+        </a>
+      </div>
+    </div>
+    <div class="border-t border-slate-800/80 bg-[#0a0e1a]/80 px-4 py-1.5 overflow-x-auto">
+      <nav class="max-w-6xl mx-auto flex items-center gap-1 text-xs font-mono">
+        <a href="../docs/index.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🐠 Portal Home</a>
+<a href="../docs/CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🎓 Curriculum & Labs</a>
+<a href="../docs/PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🏛️ Companion & Glossary</a>
+<a href="../docs/THEORETICAL_MODEL.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🌊 Theoretical Model</a>
+<a href="../docs/EPISTEMIC_FOUNDATIONS.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🧬 Epistemic Foundations</a>
+<a href="../docs/DOCUMENTATION_DESIGN_PRINCIPLES.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">📐 Design Principles</a>
+<a href="../docs/PHASE_3_VISUALIZER_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🔬 3D Visualizer</a>
+<a href="../docs/PHASE_4_PALEONTOLOGY_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🦕 Paleontology & Motifs</a>
+<a href="../docs/PHASE_5_PELAGIC_SPORES_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🌊 Spores & Controls</a>
+<a href="../docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🧬 Phylogeny & Dynamics</a>
+<a href="../docs/BRAND_IDENTITY.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🎨 Brand Identity</a>
+<a href="../docs/logos.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🖼️ Logo Gallery</a>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    <h1 id="siliquarium-engineering-software-architecture-standards">🏛️ Siliquarium Engineering & Software Architecture Standards <a class="header-anchor" href="#siliquarium-engineering-software-architecture-standards" title="Link to section">#</a></h1>
-<p><em>The Master Specification: OOP, SOLID, DRY, KISS, YAGNI, Complexity Budgets, Anti-Monolith, Clean Architecture, and Anti-Smuggling Mandates</em></p>
-<blockquote class="callout"><strong>Mandate for All Engineers & AI Agents:</strong><br/>This document is the absolute engineering contract for Siliquarium. Every module, class, interface, and test authored for this project must strictly comply with every section below. No shortcuts, no legacy anti-patterns, and no technical debt.</blockquote>
-<hr class="divider" />
-<h2 id="1-core-architectural-paradigms-object-oriented-design">1. Core Architectural Paradigms & Object-Oriented Design <a class="header-anchor" href="#1-core-architectural-paradigms-object-oriented-design" title="Link to section">#</a></h2>
-<h3 id="11-object-oriented-programming-oop-domain-driven-design-ddd">1.1 Object-Oriented Programming (OOP) & Domain-Driven Design (DDD) <a class="header-anchor" href="#11-object-oriented-programming-oop-domain-driven-design-ddd" title="Link to section">#</a></h3>
-<ul>
-<li><strong>Rich Domain Entities (Anti-Anemic Model):</strong>  </li>
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12 space-y-8 flex-1 w-full">
+    <h1 id="siliquarium-engineering-software-architecture-standards" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-10 mb-4 pb-2 border-b border-slate-800">🏛️ Siliquarium Engineering & Software Architecture Standards <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#siliquarium-engineering-software-architecture-standards" title="Direct link">#</a></h1>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">The Master Specification: OOP, SOLID, DRY, KISS, YAGNI, Complexity Budgets, Anti-Monolith, Clean Architecture, and Anti-Smuggling Mandates</em></p>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><strong class="text-slate-100 font-semibold">Mandate for All Engineers & AI Agents:</strong><br/>This document is the absolute engineering contract for Siliquarium. Every module, class, interface, and test authored for this project must strictly comply with every section below. No shortcuts, no legacy anti-patterns, and no technical debt.</blockquote>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="1-core-architectural-paradigms-object-oriented-design" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Core Architectural Paradigms & Object-Oriented Design <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-core-architectural-paradigms-object-oriented-design" title="Direct link">#</a></h2>
+<h3 id="11-object-oriented-programming-oop-domain-driven-design-ddd" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.1 Object-Oriented Programming (OOP) & Domain-Driven Design (DDD) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#11-object-oriented-programming-oop-domain-driven-design-ddd" title="Direct link">#</a></h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Rich Domain Entities (Anti-Anemic Model):</strong>  </li>
 </ul>
-<p>Domain classes (e.g., <code>Pore</code>, <code>PoreCell</code>, <code>GenomeSafe</code>, <code>PoreWorkshop</code>, <code>PoreBattery</code>) must encapsulate both state and behavior. Never create "dumb" data structures that are manipulated by external, bloated procedural service classes. The entity itself must enforce its internal business and physical rules.</p>
-<ul>
-<li><strong>Strict Encapsulation & Information Hiding:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Domain classes (e.g., <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Pore</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreCell</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GenomeSafe</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreBattery</code>) must encapsulate both state and behavior. Never create "dumb" data structures that are manipulated by external, bloated procedural service classes. The entity itself must enforce its internal business and physical rules.</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Strict Encapsulation & Information Hiding:</strong>  </li>
 </ul>
-<p>All state fields must be <code>private</code> or <code>protected</code>. State transitions must occur exclusively through explicit, well-named domain methods (e.g., <code>battery.drainTokens(count)</code>, <code>safe.photocopy(mutationRate)</code>). External consumers must never directly modify an entity's internal properties.</p>
-<ul>
-<li><strong>Favor Composition Over Inheritance:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">All state fields must be <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">private</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">protected</code>. State transitions must occur exclusively through explicit, well-named domain methods (e.g., <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">battery.drainTokens(count)</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">safe.photocopy(mutationRate)</code>). External consumers must never directly modify an entity's internal properties.</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Favor Composition Over Inheritance:</strong>  </li>
 </ul>
-<p>Avoid deep class inheritance hierarchies (maximum inheritance depth: 1 level). Assemble complex behavior by composing small, focused components (e.g., a <code>Pore</code> <em>has a</em> <code>PoreBattery</code> and <em>has a</em> <code>PoreWorkshop</code>, rather than inheriting from an abstract <code>LivingContainer</code>).</p>
-<ul>
-<li><strong>Polymorphism Over Conditionals:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Avoid deep class inheritance hierarchies (maximum inheritance depth: 1 level). Assemble complex behavior by composing small, focused components (e.g., a <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Pore</code> <em class="text-slate-200 italic">has a</em> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreBattery</code> and <em class="text-slate-200 italic">has a</em> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop</code>, rather than inheriting from an abstract <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LivingContainer</code>).</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Polymorphism Over Conditionals:</strong>  </li>
 </ul>
-<p>Never use sprawling <code>switch</code> statements or <code>if/else</code> ladders to branch on object types. Use polymorphic interfaces (e.g., <code>ILogicNode</code>, <code>IVentEmitter</code>, <code>IEcologicalInteraction</code>) with specialized class implementations.</p>
-<ul>
-<li><strong>Avoid Primitive Obsession:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Never use sprawling <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">switch</code> statements or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">if/else</code> ladders to branch on object types. Use polymorphic interfaces (e.g., <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">ILogicNode</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">IVentEmitter</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">IEcologicalInteraction</code>) with specialized class implementations.</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Avoid Primitive Obsession:</strong>  </li>
 </ul>
-<p>Do not represent domain concepts with generic primitives (e.g., raw <code>number</code> or <code>string</code>). Use branded/nominal types, value objects, and enums:</p>
-<pre><code class="language-typescript">  // ❌ Primitive Obsession
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Do not represent domain concepts with generic primitives (e.g., raw <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">number</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">string</code>). Use branded/nominal types, value objects, and enums:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-typescript">  // ❌ Primitive Obsession
   function setPore(x: number, y: number, state: string, energy: number): void;
 
   // ✅ Rich Domain Types
   type PoreCoord = { readonly x: number; readonly y: number };
   enum CellState { Dormant, Active, Lysis, Empty }
   type EnergyTokens = number &amp; { readonly __brand: unique symbol };</code></pre>
-<hr class="divider" />
-<h3 id="12-the-solid-principles-exhaustively-enforced">1.2 The SOLID Principles (Exhaustively Enforced) <a class="header-anchor" href="#12-the-solid-principles-exhaustively-enforced" title="Link to section">#</a></h3>
-<h4 id="s-single-responsibility-principle-srp">S — Single Responsibility Principle (SRP) <a class="header-anchor" href="#s-single-responsibility-principle-srp" title="Link to section">#</a></h4>
-<p>Every class and module must have <strong>exactly one reason to change</strong>.</p>
-<ul>
-<li><code>PoreGrid.ts</code> manages 2D spatial indexing and neighbor lookups; it does <strong>not</strong> evaluate logic gates or track batteries.</li>
-<li><code>CodonTranslator.ts</code> translates 6-bit strings to tokens; it does <strong>not</strong> manage genome replication.</li>
-<li><code>PoreBattery.ts</code> tracks energy balances; it does <strong>not</strong> emit vent waveforms.</li>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="12-the-solid-principles-exhaustively-enforced" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.2 The SOLID Principles (Exhaustively Enforced) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#12-the-solid-principles-exhaustively-enforced" title="Direct link">#</a></h3>
+<h4 id="s-single-responsibility-principle-srp" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">S — Single Responsibility Principle (SRP) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#s-single-responsibility-principle-srp" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Every class and module must have <strong class="text-slate-100 font-semibold">exactly one reason to change</strong>.</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreGrid.ts</code> manages 2D spatial indexing and neighbor lookups; it does <strong class="text-slate-100 font-semibold">not</strong> evaluate logic gates or track batteries.</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CodonTranslator.ts</code> translates 6-bit strings to tokens; it does <strong class="text-slate-100 font-semibold">not</strong> manage genome replication.</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreBattery.ts</code> tracks energy balances; it does <strong class="text-slate-100 font-semibold">not</strong> emit vent waveforms.</li>
 </ul>
-<h4 id="o-openclosed-principle-ocp">O — Open/Closed Principle (OCP) <a class="header-anchor" href="#o-openclosed-principle-ocp" title="Link to section">#</a></h4>
-<p>Modules must be <strong>open for extension, but closed for modification</strong>.</p>
-<ul>
+<h4 id="o-openclosed-principle-ocp" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">O — Open/Closed Principle (OCP) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#o-openclosed-principle-ocp" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Modules must be <strong class="text-slate-100 font-semibold">open for extension, but closed for modification</strong>.</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>The core simulation engine must not be edited to add a new gate type, new environmental waveform, or new ecological behavior. </li>
-<li>New features are introduced by implementing open interfaces (<code>ILogicNode</code>, <code>IVentWaveform</code>, <code>IEnergySink</code>).</li>
+<li>New features are introduced by implementing open interfaces (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">ILogicNode</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">IVentWaveform</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">IEnergySink</code>).</li>
 </ul>
-<h4 id="l-liskov-substitution-principle-lsp">L — Liskov Substitution Principle (LSP) <a class="header-anchor" href="#l-liskov-substitution-principle-lsp" title="Link to section">#</a></h4>
-<p>Subtypes must be <strong>completely substitutable for their base types</strong> without altering correctness or breaking contract assumptions.</p>
-<ul>
-<li>An <code>InsulatorGate</code> or a <code>MajorityFilterGate</code> must implement <code>ILogicNode</code> identically to an <code>AndGate</code>, accepting the same input bus and returning boolean outputs without throwing unexpected exceptions or requiring special-case branching by callers.</li>
+<h4 id="l-liskov-substitution-principle-lsp" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">L — Liskov Substitution Principle (LSP) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#l-liskov-substitution-principle-lsp" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Subtypes must be <strong class="text-slate-100 font-semibold">completely substitutable for their base types</strong> without altering correctness or breaking contract assumptions.</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>An <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">InsulatorGate</code> or a <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">MajorityFilterGate</code> must implement <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">ILogicNode</code> identically to an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AndGate</code>, accepting the same input bus and returning boolean outputs without throwing unexpected exceptions or requiring special-case branching by callers.</li>
 </ul>
-<h4 id="i-interface-segregation-principle-isp">I — Interface Segregation Principle (ISP) <a class="header-anchor" href="#i-interface-segregation-principle-isp" title="Link to section">#</a></h4>
-<p>Clients must <strong>never be forced to depend on interfaces they do not use</strong>.</p>
-<ul>
+<h4 id="i-interface-segregation-principle-isp" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">I — Interface Segregation Principle (ISP) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#i-interface-segregation-principle-isp" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Clients must <strong class="text-slate-100 font-semibold">never be forced to depend on interfaces they do not use</strong>.</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>Favor granular, role-specific interfaces over fat monolithic contracts:</li>
 </ul>
-<pre><code class="language-typescript">  // ❌ Fat monolithic interface
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-typescript">  // ❌ Fat monolithic interface
   interface IPore {
     readVoltage(): boolean;
     drainBattery(): void;
@@ -415,31 +337,31 @@
   interface IWritablePin { writeState(val: boolean): void; }
   interface IEnergySink { consumeTokens(amount: number): boolean; }
   interface IGenomeHolder { getGenome(): string; }</code></pre>
-<ul>
-<li>An adjacent neighbor pore only sees exposed <code>IReadablePin</code> border connections—it never has access to the internal <code>IEnergySink</code> or <code>IGenomeHolder</code>.</li>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>An adjacent neighbor pore only sees exposed <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">IReadablePin</code> border connections—it never has access to the internal <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">IEnergySink</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">IGenomeHolder</code>.</li>
 </ul>
-<h4 id="d-dependency-inversion-principle-dip">D — Dependency Inversion Principle (DIP) <a class="header-anchor" href="#d-dependency-inversion-principle-dip" title="Link to section">#</a></h4>
-<p>High-level modules must <strong>depend on abstractions (interfaces), never on low-level concrete details</strong>.</p>
-<ul>
-<li>The <code>SimulationEngine</code> depends on <code>ISubstratePhysics</code> and <code>IEnvironmentSource</code>, never on concrete implementations. This enables standalone headless unit testing, test doubles, and alternate environmental rules.</li>
+<h4 id="d-dependency-inversion-principle-dip" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">D — Dependency Inversion Principle (DIP) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#d-dependency-inversion-principle-dip" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">High-level modules must <strong class="text-slate-100 font-semibold">depend on abstractions (interfaces), never on low-level concrete details</strong>.</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationEngine</code> depends on <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">ISubstratePhysics</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">IEnvironmentSource</code>, never on concrete implementations. This enables standalone headless unit testing, test doubles, and alternate environmental rules.</li>
 </ul>
-<hr class="divider" />
-<h3 id="13-dry-dont-repeat-yourself-single-source-of-truth-ssot">1.3 DRY (Don't Repeat Yourself) & Single Source of Truth (SSOT) <a class="header-anchor" href="#13-dry-dont-repeat-yourself-single-source-of-truth-ssot" title="Link to section">#</a></h3>
-<ul>
-<li><strong>Single Source of Truth:</strong> Every constant, codon mapping, mathematical conversion, and physical rule must reside in exactly one canonical file (e.g., <code>CodonTable.ts</code>, <code>PhysicalConstants.ts</code>).</li>
-<li><strong>No Duplicated Bitwise Logic:</strong> Low-level bit-twiddling, Gray code conversions, and word-level parallel operations must be centralized in thoroughly tested math modules (<code>BitwiseMath.ts</code>).</li>
-<li><strong>The Rule of Three:</strong> Do not introduce premature abstractions for code that appears twice. When a pattern appears a third time, extract it into a clean, reusable component.</li>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="13-dry-dont-repeat-yourself-single-source-of-truth-ssot" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.3 DRY (Don't Repeat Yourself) & Single Source of Truth (SSOT) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#13-dry-dont-repeat-yourself-single-source-of-truth-ssot" title="Direct link">#</a></h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Single Source of Truth:</strong> Every constant, codon mapping, mathematical conversion, and physical rule must reside in exactly one canonical file (e.g., <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CodonTable.ts</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PhysicalConstants.ts</code>).</li>
+<li><strong class="text-slate-100 font-semibold">No Duplicated Bitwise Logic:</strong> Low-level bit-twiddling, Gray code conversions, and word-level parallel operations must be centralized in thoroughly tested math modules (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">BitwiseMath.ts</code>).</li>
+<li><strong class="text-slate-100 font-semibold">The Rule of Three:</strong> Do not introduce premature abstractions for code that appears twice. When a pattern appears a third time, extract it into a clean, reusable component.</li>
 </ul>
-<hr class="divider" />
-<h3 id="14-kiss-keep-it-simple-stupid-yagni-you-arent-gonna-need-it">1.4 KISS (Keep It Simple, Stupid) & YAGNI (You Aren't Gonna Need It) <a class="header-anchor" href="#14-kiss-keep-it-simple-stupid-yagni-you-arent-gonna-need-it" title="Link to section">#</a></h3>
-<ul>
-<li><strong>No Speculative Architecture:</strong> Do not build abstract factory generators, multi-tiered plugin registries, or reflection frameworks for hypothetical future needs.</li>
-<li><strong>Direct, Transparent Logic:</strong> Prefer straightforward, readable code over clever, opaque tricks. The codebase is an open-source educational laboratory; readability is paramount.</li>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="14-kiss-keep-it-simple-stupid-yagni-you-arent-gonna-need-it" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.4 KISS (Keep It Simple, Stupid) & YAGNI (You Aren't Gonna Need It) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#14-kiss-keep-it-simple-stupid-yagni-you-arent-gonna-need-it" title="Direct link">#</a></h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">No Speculative Architecture:</strong> Do not build abstract factory generators, multi-tiered plugin registries, or reflection frameworks for hypothetical future needs.</li>
+<li><strong class="text-slate-100 font-semibold">Direct, Transparent Logic:</strong> Prefer straightforward, readable code over clever, opaque tricks. The codebase is an open-source educational laboratory; readability is paramount.</li>
 </ul>
-<hr class="divider" />
-<h2 id="2-complexity-budgets-code-size-metrics">2. Complexity Budgets & Code Size Metrics <a class="header-anchor" href="#2-complexity-budgets-code-size-metrics" title="Link to section">#</a></h2>
-<p>To ensure maintainability and eliminate cognitive overhead, all code must satisfy strict numerical budgets:</p>
-<pre><code class="language-text">┌───────────────────────────────────────────────────────────────┐
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="2-complexity-budgets-code-size-metrics" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Complexity Budgets & Code Size Metrics <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-complexity-budgets-code-size-metrics" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To ensure maintainability and eliminate cognitive overhead, all code must satisfy strict numerical budgets:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">┌───────────────────────────────────────────────────────────────┐
 │                      STRICT CODE BUDGETS                      │
 │                                                               │
 │  • Cyclomatic Complexity per Function:  MAX 7 (ESLint Error)  │
@@ -448,49 +370,49 @@
 │  • Parameter Count per Function:        MAX 3–4 Parameters    │
 │  • Maximum Nesting Depth:               MAX 3 Levels          │
 └───────────────────────────────────────────────────────────────┘</code></pre>
-<h3 id="21-cyclomatic-complexity-maximum-le-7">2.1 Cyclomatic Complexity Maximum <span class="katex-inline math-inline" data-math="\le 7">\( \le 7 \)</span> <a class="header-anchor" href="#21-cyclomatic-complexity-maximum-le-7" title="Link to section">#</a></h3>
-<ul>
-<li><strong>Enforcement:</strong> Enforced via automated linting (<code>complexity: [&quot;error&quot;, 7]</code>).</li>
-<li><strong>Remediation Techniques:</strong></li>
-<li><em>Guard Clauses / Early Returns (Bouncer Pattern):</em> Exit early on invalid conditions to eliminate nested <code>if/else</code> pyramids (the Arrow Anti-Pattern).</li>
-<li><em>Lookup Tables & Dispatch Maps:</em> Replace multi-case switch statements with <code>Map&lt;Key, Handler&gt;</code> or object dispatchers.</li>
-<li><em>Subroutine Decomposition:</em> Break multi-stage procedures into atomic, well-named private helper functions.</li>
-<li><em>Polymorphism:</em> Delegate variant behavior to specialized strategy objects.</li>
+<h3 id="21-cyclomatic-complexity-maximum-le-7" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 Cyclomatic Complexity Maximum $\le 7$ <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#21-cyclomatic-complexity-maximum-le-7" title="Direct link">#</a></h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Enforcement:</strong> Enforced via automated linting (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">complexity: [&quot;error&quot;, 7]</code>).</li>
+<li><strong class="text-slate-100 font-semibold">Remediation Techniques:</strong></li>
+<li><em class="text-slate-200 italic">Guard Clauses / Early Returns (Bouncer Pattern):</em> Exit early on invalid conditions to eliminate nested <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">if/else</code> pyramids (the Arrow Anti-Pattern).</li>
+<li><em class="text-slate-200 italic">Lookup Tables & Dispatch Maps:</em> Replace multi-case switch statements with <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Map&lt;Key, Handler&gt;</code> or object dispatchers.</li>
+<li><em class="text-slate-200 italic">Subroutine Decomposition:</em> Break multi-stage procedures into atomic, well-named private helper functions.</li>
+<li><em class="text-slate-200 italic">Polymorphism:</em> Delegate variant behavior to specialized strategy objects.</li>
 </ul>
-<h3 id="22-maximum-function-file-length">2.2 Maximum Function & File Length <a class="header-anchor" href="#22-maximum-function-file-length" title="Link to section">#</a></h3>
-<ul>
-<li><strong>Function Length (<span class="katex-inline math-inline" data-math="\le 50-60">\( \le 50-60 \)</span> lines):</strong> Every function must fit on a single screen without vertical scrolling. If a routine exceeds 60 lines, it is violating SRP and must be split.</li>
-<li><strong>File Length (<span class="katex-inline math-inline" data-math="\le 250-300">\( \le 250-300 \)</span> lines):</strong> No file should exceed 300 lines. Larger files indicate mixed responsibilities and must be decomposed into cohesive sub-modules.</li>
-<li><strong>Parameter Count (<span class="katex-inline math-inline" data-math="\le 3-4">\( \le 3-4 \)</span> params):</strong> If a function requires more than 3 parameters, bundle them into a strongly-typed options/config object.</li>
+<h3 id="22-maximum-function-file-length" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 Maximum Function & File Length <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#22-maximum-function-file-length" title="Direct link">#</a></h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Function Length ($\le 50-60$ lines):</strong> Every function must fit on a single screen without vertical scrolling. If a routine exceeds 60 lines, it is violating SRP and must be split.</li>
+<li><strong class="text-slate-100 font-semibold">File Length ($\le 250-300$ lines):</strong> No file should exceed 300 lines. Larger files indicate mixed responsibilities and must be decomposed into cohesive sub-modules.</li>
+<li><strong class="text-slate-100 font-semibold">Parameter Count ($\le 3-4$ params):</strong> If a function requires more than 3 parameters, bundle them into a strongly-typed options/config object.</li>
 </ul>
-<hr class="divider" />
-<h2 id="3-anti-monolith-mandate-no-kitchen-sink-files">3. Anti-Monolith Mandate ("No Kitchen Sink Files") <a class="header-anchor" href="#3-anti-monolith-mandate-no-kitchen-sink-files" title="Link to section">#</a></h2>
-<p>One of the most destructive anti-patterns is the "Kitchen Sink" file: dumping miscellaneous helpers into a catch-all file or creating a massive, God-object <code>GameManager.ts</code>.</p>
-<h3 id="strict-anti-monolith-rules">Strict Anti-Monolith Rules: <a class="header-anchor" href="#strict-anti-monolith-rules" title="Link to section">#</a></h3>
-<ol>
-<li><strong>Forbidden Catch-All File Names:</strong>  </li>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="3-anti-monolith-mandate-no-kitchen-sink-files" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Anti-Monolith Mandate ("No Kitchen Sink Files") <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-anti-monolith-mandate-no-kitchen-sink-files" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">One of the most destructive anti-patterns is the "Kitchen Sink" file: dumping miscellaneous helpers into a catch-all file or creating a massive, God-object <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GameManager.ts</code>.</p>
+<h3 id="strict-anti-monolith-rules" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Strict Anti-Monolith Rules: <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#strict-anti-monolith-rules" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Forbidden Catch-All File Names:</strong>  </li>
 </ol>
-<p>The creation of any of the following files is <strong>strictly banned</strong>:</p>
-<ul>
-<li>❌ <code>utils.ts</code> / <code>utils.js</code></li>
-<li>❌ <code>helpers.ts</code> / <code>helpers.js</code></li>
-<li>❌ <code>common.ts</code> / <code>common.js</code></li>
-<li>❌ <code>misc.ts</code> / <code>misc.js</code></li>
-<li>❌ <code>manager.ts</code> / <code>shared.ts</code></li>
-<li><strong>Cohesive, Domain-Specific Naming:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The creation of any of the following files is <strong class="text-slate-100 font-semibold">strictly banned</strong>:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>❌ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">utils.ts</code> / <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">utils.js</code></li>
+<li>❌ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">helpers.ts</code> / <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">helpers.js</code></li>
+<li>❌ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">common.ts</code> / <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">common.js</code></li>
+<li>❌ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">misc.ts</code> / <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">misc.js</code></li>
+<li>❌ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">manager.ts</code> / <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">shared.ts</code></li>
+<li><strong class="text-slate-100 font-semibold">Cohesive, Domain-Specific Naming:</strong>  </li>
 </ul>
-<p>Every utility must be explicitly named after its bounded domain:</p>
-<ul>
-<li>❌ <code>utils.ts</code> <span class="katex-inline math-inline" data-math="\longrightarrow">\( \longrightarrow \)</span> ✅ <code>BitwiseMath.ts</code>, <code>ManhattanDistance.ts</code>, <code>SeedablePrng.ts</code></li>
-<li>❌ <code>helpers.ts</code> <span class="katex-inline math-inline" data-math="\longrightarrow">\( \longrightarrow \)</span> ✅ <code>CodonFormatter.ts</code>, <code>WaveformGenerator.ts</code></li>
-<li><strong>One Primary Class Per File:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Every utility must be explicitly named after its bounded domain:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>❌ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">utils.ts</code> $\longrightarrow$ ✅ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">BitwiseMath.ts</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">ManhattanDistance.ts</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SeedablePrng.ts</code></li>
+<li>❌ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">helpers.ts</code> $\longrightarrow$ ✅ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CodonFormatter.ts</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">WaveformGenerator.ts</code></li>
+<li><strong class="text-slate-100 font-semibold">One Primary Class Per File:</strong>  </li>
 </ul>
-<p>Each source file must declare exactly one primary class or interface. Supporting types/enums may live in the same file only if they are private to that module.</p>
-<ol>
-<li><strong>Strict Directory Taxonomy:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Each source file must declare exactly one primary class or interface. Supporting types/enums may live in the same file only if they are private to that module.</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Strict Directory Taxonomy:</strong>  </li>
 </ol>
-<p>Organize files into cohesive domain packages:</p>
-<pre><code class="language-text">   src/
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Organize files into cohesive domain packages:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">   src/
    ├── core/
    │   ├── domain/        # Pore, Cell, GenomeSafe, PoreWorkshop, PoreBattery
    │   ├── physics/       # Vent emission, thermodynamics, Landauer power
@@ -499,74 +421,78 @@
    │   └── prng/          # Mulberry32 seedable generator
    ├── engine/            # Simulation loop, scheduler, Web Worker dispatch
    └── presentation/      # Canvas/WebGL renderer, UI components, HUD telemetry</code></pre>
-<hr class="divider" />
-<h2 id="4-separation-of-concerns-clean-layered-architecture">4. Separation of Concerns & Clean Layered Architecture <a class="header-anchor" href="#4-separation-of-concerns-clean-layered-architecture" title="Link to section">#</a></h2>
-<p>Siliquarium enforces a strict unidirectional dependency rule:</p>
-<pre><code class="language-text">  [Presentation Layer]   (React, HTML5 Canvas, WebGL, UI Controls)
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="4-separation-of-concerns-clean-layered-architecture" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. Separation of Concerns & Clean Layered Architecture <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-separation-of-concerns-clean-layered-architecture" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium enforces a strict unidirectional dependency rule:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">  [Presentation Layer]   (React, HTML5 Canvas, WebGL, UI Controls)
            │
            ▼ (Reads telemetry packets)
   [Engine / Application] (Web Worker Dispatch, Tick Loop, Scheduler)
            │
            ▼ (Executes domain physics)
   [Core Domain Layer]    (Pores, Cells, Gates, Codons, Thermodynamics)</code></pre>
-<ul>
-<li><strong>The Zero-DOM Mandate in Core:</strong>  </li>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">The Zero-DOM Mandate in Core:</strong>  </li>
 </ul>
-<p>The core simulation kernel (<code>src/core/</code> and <code>src/engine/</code>) must have <strong>zero imports or dependencies on browser APIs</strong>:</p>
-<ul>
-<li>❌ No <code>document</code>, <code>window</code>, <code>HTMLElement</code>, <code>localStorage</code>, or <code>CanvasRenderingContext2D</code>.</li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The core simulation kernel (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/core/</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/engine/</code>) must have <strong class="text-slate-100 font-semibold">zero imports or dependencies on browser APIs</strong>:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>❌ No <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">document</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">window</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">HTMLElement</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">localStorage</code>, or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CanvasRenderingContext2D</code>.</li>
 <li>The simulation must be 100% executable inside Node.js CLI test runners and headless Web Workers.</li>
-<li><strong>Decoupled Telemetry:</strong>  </li>
+<li><strong class="text-slate-100 font-semibold">Decoupled Telemetry:</strong>  </li>
 </ul>
-<p>The core engine communicates with the UI thread strictly via flat, compressed binary buffers (<code>Float32Array</code>, <code>Uint8Array</code>) or typed messaging ports, preventing GC lag on the 60 FPS render thread.</p>
-<hr class="divider" />
-<h2 id="5-type-safety-immutability-defensive-programming">5. Type Safety, Immutability, & Defensive Programming <a class="header-anchor" href="#5-type-safety-immutability-defensive-programming" title="Link to section">#</a></h2>
-<ol>
-<li><strong>Strict TypeScript Compiler Settings:</strong></li>
-<li><code>&quot;strict&quot;: true</code></li>
-<li><code>&quot;noImplicitAny&quot;: true</code></li>
-<li><code>&quot;strictNullChecks&quot;: true</code></li>
-<li><code>&quot;strictFunctionTypes&quot;: true</code></li>
-<li><code>&quot;noUnusedLocals&quot;: true</code></li>
-<li><code>&quot;noUnusedParameters&quot;: true</code></li>
-<li><code>&quot;noImplicitReturns&quot;: true</code></li>
-<li><strong>Zero <code>any</code> Types:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The core engine communicates with the UI thread strictly via flat, compressed binary buffers (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Float32Array</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Uint8Array</code>) or typed messaging ports, preventing GC lag on the 60 FPS render thread.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="5-type-safety-immutability-defensive-programming" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Type Safety, Immutability, & Defensive Programming <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-type-safety-immutability-defensive-programming" title="Direct link">#</a></h2>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Strict TypeScript Compiler Settings:</strong></li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;strict&quot;: true</code></li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;noImplicitAny&quot;: true</code></li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;strictNullChecks&quot;: true</code></li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;strictFunctionTypes&quot;: true</code></li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;noUnusedLocals&quot;: true</code></li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;noUnusedParameters&quot;: true</code></li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;noImplicitReturns&quot;: true</code></li>
+<li><strong class="text-slate-100 font-semibold">Zero <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">any</code> Types:</strong>  </li>
 </ol>
-<p>Use of <code>any</code> is strictly prohibited. Use <code>unknown</code> with type narrowing guards, generic parameters, or discriminated unions.</p>
-<ol>
-<li><strong>Immutability & Pure Functions:</strong>  </li>
-<li>Declare properties as <code>readonly</code> wherever possible.</li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Use of <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">any</code> is strictly prohibited. Use <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">unknown</code> with type narrowing guards, generic parameters, or discriminated unions.</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Immutability & Pure Functions:</strong>  </li>
+<li>Declare properties as <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">readonly</code> wherever possible.</li>
 <li>Core mathematical evaluations (AST evaluation, codon parsing, metric distances) must be pure functions with zero hidden side effects.</li>
-<li><strong>Fail-Fast Boundary Validation:</strong>  </li>
+<li><strong class="text-slate-100 font-semibold">Fail-Fast Boundary Validation:</strong>  </li>
 </ol>
-<p>Public methods must validate preconditions immediately (e.g., verifying grid coordinate bounds, non-negative energy tokens, valid 6-bit strings). Throw descriptive, custom domain errors rather than letting corrupt state silently propagate.</p>
-<hr class="divider" />
-<h2 id="6-scientific-algorithmic-integrity-the-zero-smuggling-mandate">6. Scientific & Algorithmic Integrity (The Zero-Smuggling Mandate) <a class="header-anchor" href="#6-scientific-algorithmic-integrity-the-zero-smuggling-mandate" title="Link to section">#</a></h2>
-<p>Siliquarium is an authentic artificial life simulator, not an engineering CAD tool with smuggled answers:</p>
-<ol>
-<li><strong>Strict Operator Blindness:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Public methods must validate preconditions immediately (e.g., verifying grid coordinate bounds, non-negative energy tokens, valid 6-bit strings). Throw descriptive, custom domain errors rather than letting corrupt state silently propagate.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="6-scientific-algorithmic-integrity-the-zero-smuggling-mandate" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. Scientific & Algorithmic Integrity (The Zero-Smuggling Mandate) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#6-scientific-algorithmic-integrity-the-zero-smuggling-mandate" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium is an authentic artificial life simulator, not an engineering CAD tool with smuggled answers:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Strict Operator Blindness:</strong>  </li>
 </ol>
-<p>The replication and mutation operators must operate completely blind to the environment. They cannot inspect vent rhythms, cell energy levels, or neighbor circuits to guide mutation targets.</p>
-<ol>
-<li><strong>Zero Hidden Gradients:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The replication and mutation operators must operate completely blind to the environment. They cannot inspect vent rhythms, cell energy levels, or neighbor circuits to guide mutation targets.</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Zero Hidden Gradients:</strong>  </li>
 </ol>
-<p>No external cost functions or artificial directional beacons are permitted.</p>
-<ol>
-<li><strong>The Epistemic Cut:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">No external cost functions or artificial directional beacons are permitted.</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">The Epistemic Cut:</strong>  </li>
 </ol>
-<p>Active gates in a pore's workshop must never be mutated during their operational lifetime. Mutation occurs exclusively on the inert symbolic bitstring during replication into a child pore.</p>
-<ol>
-<li><strong>Thermodynamic Energy Conservation:</strong>  </li>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Active gates in a pore's workshop must never be mutated during their operational lifetime. Mutation occurs exclusively on the inert symbolic bitstring during replication into a child pore.</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Thermodynamic Energy Conservation:</strong>  </li>
 </ol>
-<p>Energy is strictly conserved: <span class="katex-inline math-inline" data-math="\sum E_{\text{in}} = \sum E_{\text{stored}} + \sum E_{\text{dissipated}}">\( \sum E_{\text{in}} = \sum E_{\text{stored}} + \sum E_{\text{dissipated}} \)</span>. No energy tokens may appear or disappear without accounting.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Energy is strictly conserved: $\sum E_{\text{in}} = \sum E_{\text{stored}} + \sum E_{\text{dissipated}}$. No energy tokens may appear or disappear without accounting.</p>
   </main>
 
-  <footer>
-    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
-    <p style="margin-top: 0.4rem;">
-      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
-      PolyForm Noncommercial License 1.0.0
-    </p>
+  <!-- MASTER FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
+      <p>
+        <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
+        PolyForm Noncommercial License 1.0.0 •
+        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+      </p>
+    </div>
   </footer>
 </body>
 </html>

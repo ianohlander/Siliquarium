@@ -1,0 +1,849 @@
+<!-- 🐠 Siliquarium Open-Ended Digital Life & Silicon Abiogenesis Laboratory • Created by & Copyright © 2026 Ian Ohlander. All rights reserved. -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation Architecture &amp; Design Principles — Siliquarium Master Documentation</title>
+  <link rel="icon" type="image/jpeg" href="assets/logos/logo.jpg">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bio: {
+              bg: '#060911',
+              surface: '#0a0e1a',
+              panel: '#121829',
+              card: '#0f172a',
+              border: '#1e2c4a',
+              cyan: '#00e5ff',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              purple: '#a855f7',
+              sky: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            mono: ['Cascadia Code', 'Fira Code', 'Consolas', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #060911; }
+    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+
+    .card-bio, .card-chemiosmotic {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .card-digital, .card-silicon {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.4);
+    }
+    .card-margin, .card-analogy {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+    .card-experiment, .card-paleo {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+    .svg-container {
+      background: #090e15;
+      border: 1px solid #1e2c4a;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      overflow-x: auto;
+    }
+
+    /* Citation Target Highlighting & Interactive Navigation */
+    html { scroll-behavior: auto; }
+    li[id^="ref-"] {
+      scroll-margin-top: 6rem;
+      position: relative;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    @keyframes refTargetPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.95), 0 0 40px rgba(0, 229, 255, 0.85), inset 0 0 15px rgba(0, 229, 255, 0.35);
+        border-color: #22d3ee;
+        background-color: rgba(8, 51, 68, 0.95);
+        transform: scale(1.02);
+      }
+      30% {
+        box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.45), 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 20px rgba(0, 229, 255, 0.25);
+        border-color: #38bdf8;
+        background-color: rgba(8, 51, 68, 0.92);
+        transform: scale(1.015);
+      }
+      100% {
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 12px rgba(0, 229, 255, 0.15);
+        border-color: #00e5ff;
+        background-color: rgba(8, 51, 68, 0.88);
+        transform: scale(1);
+      }
+    }
+    @keyframes badgePopIn {
+      0% { opacity: 0; transform: translateY(6px) scale(0.8); }
+      60% { opacity: 1; transform: translateY(-2px) scale(1.06); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    li[id^="ref-"]:target,
+    li[id^="ref-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #22d3ee !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
+    }
+    li[id^="ref-"]:target::after,
+    li[id^="ref-"].active-citation-target::after {
+      content: "CITED IN TEXT 🎯";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0891b2, #0284c7);
+      color: #ffffff;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+    sup a[href^="#ref-"] {
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 0 1px;
+    }
+    sup a[href^="#ref-"]:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 8px #22d3ee;
+      transform: translateY(-1px);
+    }
+    section[id], div[id], h2[id], h3[id] {
+      scroll-margin-top: 5.5rem;
+    }
+    @keyframes backlinkTargetFlash {
+      0% { outline: 3px solid rgba(0, 229, 255, 0.9); outline-offset: 4px; }
+      100% { outline: 3px solid transparent; outline-offset: 4px; }
+    }
+    section[id]:target, div[id]:target {
+      animation: backlinkTargetFlash 2.5s ease-out;
+    }
+  </style>
+
+  <script id="citation-navigator">
+    document.addEventListener('DOMContentLoaded', function() {
+      function highlightRefCard(targetId) {
+        if (!targetId || !targetId.startsWith('ref-')) return;
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+          item.classList.remove('active-citation-target');
+        });
+        el.classList.remove('active-citation-target');
+        void el.offsetWidth;
+        el.classList.add('active-citation-target');
+        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }
+      function scrollToTarget(targetId) {
+        if (!targetId) return;
+        if (targetId.startsWith('ref-')) {
+          highlightRefCard(targetId);
+          return;
+        }
+        const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href && href.includes('#')) {
+            const hash = href.substring(href.indexOf('#') + 1);
+            if (hash.startsWith('ref-')) highlightRefCard(hash);
+          }
+        }
+      });
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) scrollToTarget(hash);
+      });
+      function checkInitialHash() {
+        if (window.location.hash) {
+          const hash = window.location.hash.replace('#', '');
+          scrollToTarget(hash);
+        }
+      }
+      checkInitialHash();
+      setTimeout(checkInitialHash, 150);
+      setTimeout(checkInitialHash, 500);
+      window.addEventListener('load', function() {
+        setTimeout(checkInitialHash, 100);
+      });
+      if (window.MathJax && window.MathJax.startup) {
+        window.MathJax.startup.promise = window.MathJax.startup.promise.then(function() {
+          setTimeout(checkInitialHash, 100);
+        });
+      }
+    });
+  </script>
+</head>
+<body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
+
+  <!-- MASTER HEADER & BREADCRUMBS -->
+  <header class="border-b border-slate-800 bg-[#060911]/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      <nav class="flex items-center gap-2 text-xs font-mono text-slate-400">
+        <a href="index.html" class="hover:text-cyan-400 text-slate-300 flex items-center gap-2 font-bold">
+          <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50 shadow-sm inline">
+          <span>Siliquarium Portal</span>
+        </a>
+        <span>/</span>
+        <span class="text-cyan-400 font-semibold truncate max-w-xs md:max-w-md">Documentation Architecture &amp; Design Principles</span>
+      </nav>
+      <div class="flex items-center gap-2.5">
+        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🚀 Live Simulator</span>
+        </a>
+        <a href="CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🎓 Curriculum</span>
+        </a>
+        <a href="PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🏛️ Glossary</span>
+        </a>
+      </div>
+    </div>
+    <div class="border-t border-slate-800/80 bg-[#0a0e1a]/80 px-4 py-1.5 overflow-x-auto">
+      <nav class="max-w-6xl mx-auto flex items-center gap-1 text-xs font-mono">
+        <a href="index.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🐠 Portal Home</a>
+<a href="CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🎓 Curriculum & Labs</a>
+<a href="PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🏛️ Companion & Glossary</a>
+<a href="THEORETICAL_MODEL.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🌊 Theoretical Model</a>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🧬 Epistemic Foundations</a>
+<a href="DOCUMENTATION_DESIGN_PRINCIPLES.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold">📐 Design Principles</a>
+<a href="PHASE_3_VISUALIZER_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🔬 3D Visualizer</a>
+<a href="PHASE_4_PALEONTOLOGY_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🦕 Paleontology & Motifs</a>
+<a href="PHASE_5_PELAGIC_SPORES_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🌊 Spores & Controls</a>
+<a href="PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🧬 Phylogeny & Dynamics</a>
+<a href="BRAND_IDENTITY.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🎨 Brand Identity</a>
+<a href="logos.html" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono text-slate-400 hover:text-slate-200 hover:bg-slate-800/60">🖼️ Logo Gallery</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12 space-y-8 flex-1 w-full">
+    <h1 id="siliquarium-documentation-design-principles-architectural-blueprint" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-10 mb-4 pb-2 border-b border-slate-800">🏛️ Siliquarium Documentation Design Principles & Architectural Blueprint <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#siliquarium-documentation-design-principles-architectural-blueprint" title="Direct link">#</a></h1>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Distilled from BooleanGA's Flagship Curriculum Architecture for Enterprise-Grade Biophysical Pedagogy</em></p>
+<hr class="border-t border-slate-800 my-8" />
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><em class="text-slate-200 italic">"If a student cannot feel the physical stakes before encountering the mathematics, the documentation has failed. If an engineer cannot trace the formal derivation directly to a data structure in code, the architecture has failed. World-class technical documentation must be simultaneously a scientific treatise, an interactive museum exhibit, and an unambiguous software blueprint."</em></blockquote>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="1-executive-summary-comparative-architectural-audit" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Executive Summary & Comparative Architectural Audit <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-executive-summary-comparative-architectural-audit" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A rigorous analytical dissection of <strong class="text-slate-100 font-semibold">BooleanGA's</strong> flagship documentation (specifically <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">BIOLOGICAL_FOUNDATIONS_OF_GENETIC_ALGORITHMS.html</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">INDEX.html</code>, and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">vol1/ch01_molecular_architecture_of_heredity.html</code>) reveals an educational publishing architecture that operates at the highest tier of modern scientific exposition.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Rather than treating documentation as static text or a generic developer wiki, BooleanGA treats documentation as a <strong class="text-slate-100 font-semibold">living, hyper-scaffolded cognitive instrument</strong>. It achieves parity with elite scientific publications and interactive computational portals (such as <em class="text-slate-200 italic">Distill.pub</em>, <em class="text-slate-200 italic">Stripe Press</em>, and <em class="text-slate-200 italic">Nature Methods</em>) while maintaining 100% standalone, zero-server offline utility (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">file:///</code> protocol compatibility).</p>
+<h3 id="comparative-audit-booleanga-vs-current-siliquarium-documentation" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Comparative Audit: BooleanGA vs. Current Siliquarium Documentation <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#comparative-audit-booleanga-vs-current-siliquarium-documentation" title="Direct link">#</a></h3>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Architectural Dimension</th><th class="p-3.5 font-semibold">BooleanGA Flagship Standard</th><th class="p-3.5 font-semibold">Current Siliquarium Implementation</th><th class="p-3.5 font-semibold">Gap & Required Transformation</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">CSS & Design Engine</strong></td><td class="p-3.5 leading-relaxed">Modern <strong class="text-slate-100 font-semibold">Tailwind CSS</strong> CDN runtime with <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">class=&quot;dark&quot;</code>, extended biomorphic color tokens, and custom scrollbars.</td><td class="p-3.5 leading-relaxed">Custom inline CSS stylesheet (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">:root</code> variables) in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">build_docs_html.mjs</code> without utility classes or responsive grid utilities.</td><td class="p-3.5 leading-relaxed">Upgrade compiler to inject Tailwind CDN with customized abyssal theme configuration, frosted glass filters, and responsive typography scales.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Visual Hierarchy & Depth</strong></td><td class="p-3.5 leading-relaxed">Semantic gradient cards (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-bio</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-digital</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-margin</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-experiment</code>), glowing borders, and backdrop blurs.</td><td class="p-3.5 leading-relaxed">Flat solid-color container cards (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">--bg-card: #0d1322</code>) with single-pixel border strokes and no semantic hue-differentiation.</td><td class="p-3.5 leading-relaxed">Implement 4 semantic gradient card classes with glowing borders matching Siliquarium's biophysical domains.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Header & Navigation UX</strong></td><td class="p-3.5 leading-relaxed">Breadcrumb hierarchy (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Portal / Vol / Ch</code>), glowing 14-16rem gradient logo badge, Title Hero, and <strong class="text-slate-100 font-semibold">Status & Pedagogical Compass Strip</strong>.</td><td class="p-3.5 leading-relaxed">Basic sticky header bar with flat horizontal text link row; no breadcrumbs, no chapter metrics, no compass quick-jump links.</td><td class="p-3.5 leading-relaxed">Construct a standardized Master Header with breadcrumb navigation trail, gradient logo box, title hero, and interactive Compass Strip.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Portal Information Architecture</strong></td><td class="p-3.5 leading-relaxed">2-column modular chapter cards featuring subchapter rosters, reading times (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">~12 min read</code>), feature pills, and glowing action buttons.</td><td class="p-3.5 leading-relaxed">Markdown tables with raw text links and bulleted lists in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PORTAL.md</code>.</td><td class="p-3.5 leading-relaxed">Rebuild <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/PORTAL.md</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/index.html</code> as a modular, responsive 2-column curriculum card grid with subchapters and feature pills.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Mathematical Typesetting</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">MathJax 3</strong> with single-dollar inline math (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">$</code>), color-coded TeX tokens (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#...}</code>), and post-render anchor coordination.</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">KaTeX</strong> auto-render with standard white typesetting; equations lack color breakdown or interactive alignment.</td><td class="p-3.5 leading-relaxed">Migrate to color-coordinated MathJax 3 with single-dollar delimiter support and DOM lifecycle synchronization.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Didactic Scaffolding</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Teacher's Orientation prologue</strong>, <strong class="text-slate-100 font-semibold">4-Pillar SVG diagram cards</strong>, <strong class="text-slate-100 font-semibold">3-part color-coded equation decoders</strong>, and <strong class="text-slate-100 font-semibold">active-retrieval checkpoints</strong>.</td><td class="p-3.5 leading-relaxed">Markdown blockquotes and text alerts (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[!NOTE]</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[!TIP]</code>); equations lack variable breakdowns; no diagram analysis cards.</td><td class="p-3.5 leading-relaxed">Institutionalize the 5-Dimension Conceptual Rubric with formal Equation Decoders, 4-Pillar Diagram Cards, and Concept Checkpoints.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Interactive Citations</strong></td><td class="p-3.5 leading-relaxed">Instant fragment targeting with <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">@keyframes refTargetPulse</code>, floating <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;CITED IN TEXT 🎯&quot;</code> beacon pill, and backlink target flashes.</td><td class="p-3.5 leading-relaxed">Standard anchor jumps (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#ref-1</code>) without visual feedback, glow pulses, or targeted highlighting.</td><td class="p-3.5 leading-relaxed">Inject BooleanGA's interactive citation stylesheet and zero-dependency citation navigation JavaScript engine into all pages.</td></tr></tbody></table></div>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="2-visual-hierarchy-theme-systems" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Visual Hierarchy & Theme Systems <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-visual-hierarchy-theme-systems" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">BooleanGA's aesthetic power stems from a carefully balanced juxtaposition: <strong class="text-slate-100 font-semibold">deep, non-fatiguing dark abyssal backgrounds</strong> paired with <strong class="text-slate-100 font-semibold">high-contrast, bioluminescent neon accents</strong> that mirror the physical reality of the systems being described.</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">┌────────────────────────────────────────────────────────────────────────┐
+│  DEEP ABYSSAL OBSIDIAN BASE (#060911 / #080d11)                        │
+│                                                                        │
+│   ┌──────────────────────────────────────────────────────────────┐    │
+│   │ .card-bio / .card-chemiosmotic (135° Emerald Gradient Glow)  │    │
+│   │ border: 1px solid rgba(16, 185, 129, 0.40)                   │    │
+│   └──────────────────────────────────────────────────────────────┘    │
+│                                                                        │
+│   ┌──────────────────────────────────────────────────────────────┐    │
+│   │ .card-digital / .card-silicon (135° Cyan Gradient Glow)      │    │
+│   │ border: 1px solid rgba(6, 182, 212, 0.40)                    │    │
+│   └──────────────────────────────────────────────────────────────┘    │
+│                                                                        │
+│   ┌──────────────────────────────────────────────────────────────┐    │
+│   │ .card-margin / .card-analogy (135° Amber Gradient Glow)      │    │
+│   │ border: 1px solid rgba(245, 158, 11, 0.35)                   │    │
+│   └──────────────────────────────────────────────────────────────┘    │
+│                                                                        │
+│   ┌──────────────────────────────────────────────────────────────┐    │
+│   │ .card-experiment / .card-paleo (135° Purple Gradient Glow)   │    │
+│   │ border: 1px solid rgba(168, 85, 247, 0.40)                   │    │
+│   └──────────────────────────────────────────────────────────────┘    │
+└────────────────────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="21-the-deep-sea-abyssal-palette" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 The Deep-Sea Abyssal Palette <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#21-the-deep-sea-abyssal-palette" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium's documentation palette adapts BooleanGA's palette to evoke the deep oceanic trenches where alkaline hydrothermal chimneys vent into freezing Hadean seawater:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-javascript">tailwind.config = {
+  darkMode: &#39;class&#39;,
+  theme: {
+    extend: {
+      colors: {
+        abyssal: {
+          bg: &#39;#060911&#39;,        // Deepest trench obsidian
+          surface: &#39;#0a0e1a&#39;,   // Basalt chamber floor
+          panel: &#39;#121829&#39;,     // Porous mineral rock wall
+          border: &#39;#1e2c4a&#39;,    // Cold ocean waterline
+          cyan: &#39;#00e5ff&#39;,      // Bioluminescent Stream A flux (energy)
+          amber: &#39;#f59e0b&#39;,     // Volcanic hydrothermal thermal glow
+          emerald: &#39;#10b981&#39;,   // Silicate mineral structural tokens (matter)
+          rose: &#39;#f43f5e&#39;,      // Thermal shock &amp; Landauer dissipation
+          purple: &#39;#a855f7&#39;,    // Historical phylogenies &amp; Weisfeiler-Lehman hashes
+          sky: &#39;#38bdf8&#39;        // Informational rate-independent symbolic code
+        }
+      },
+      fontFamily: {
+        mono: [&#39;Cascadia Code&#39;, &#39;Fira Code&#39;, &#39;Consolas&#39;, &#39;monospace&#39;],
+        sans: [&#39;Inter&#39;, &#39;-apple-system&#39;, &#39;BlinkMacSystemFont&#39;, &#39;Segoe UI&#39;, &#39;Roboto&#39;, &#39;sans-serif&#39;],
+        serif: [&#39;Georgia&#39;, &#39;Cambria&#39;, &#39;serif&#39;]
+      }
+    }
+  }
+};</code></pre>
+<h3 id="22-semantic-card-gradients" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 Semantic Card Gradients <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#22-semantic-card-gradients" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Instead of generic grey cards, BooleanGA assigns <strong class="text-slate-100 font-semibold">strict epistemological roles</strong> to specific gradient and border treatments. Siliquarium maps these directly to its core biophysical concepts:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-chemiosmotic</code> (formerly <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-bio</code>):</strong>  </li>
+<li><em class="text-slate-200 italic">Colors:</em> Emerald gradient (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(16, 185, 129, 0.08)</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(15, 23, 42, 0.7)</code>), 1px border <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(16, 185, 129, 0.4)</code>.  </li>
+<li><em class="text-slate-200 italic">Role:</em> Mitchell proton motive force, prebiotic redox chemistry, autopoietic self-maintenance, and inorganic mineral catalysis.</li>
+<li><strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-silicon</code> (formerly <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-digital</code>):</strong>  </li>
+<li><em class="text-slate-200 italic">Colors:</em> Cyan gradient (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(6, 182, 212, 0.08)</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(15, 23, 42, 0.7)</code>), 1px border <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(6, 182, 212, 0.4)</code>.  </li>
+<li><em class="text-slate-200 italic">Role:</em> Digital logic gates, Landauer CMOS power switching, bytecode chromosomes, and internal latch state machines.</li>
+<li><strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-analogy</code> (formerly <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-margin</code>):</strong>  </li>
+<li><em class="text-slate-200 italic">Colors:</em> Amber gradient (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(245, 158, 11, 0.08)</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(15, 23, 42, 0.7)</code>), 1px border <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(245, 158, 11, 0.35)</code>.  </li>
+<li><em class="text-slate-200 italic">Role:</em> The 4 Sacred Everyday Analogies, intuitive conceptual anchors, and non-engineer plain-English explanations.</li>
+<li><strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-paleo</code> (formerly <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-experiment</code>):</strong>  </li>
+<li><em class="text-slate-200 italic">Colors:</em> Purple gradient (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(168, 85, 247, 0.08)</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(15, 23, 42, 0.7)</code>), 1px border <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(168, 85, 247, 0.4)</code>.  </li>
+<li><em class="text-slate-200 italic">Role:</em> Historical landmark experiments (Mitchell 1961, Russell 1997, Lenski LTEE 1988), Weisfeiler-Lehman topological hashes, and evolutionary flight recorder autopsies.</li>
+</ol>
+<h3 id="23-typography-readability-constraints" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.3 Typography & Readability Constraints <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#23-typography-readability-constraints" title="Direct link">#</a></h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Body Copy:</strong> Set in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">font-sans</code> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Inter</code>), line-height <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1.75</code> (relaxed), text color <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#cbd5e1</code> (slate-300) to minimize eye strain across long reading sessions.</li>
+<li><strong class="text-slate-100 font-semibold">Titles & Headings:</strong> Set in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">font-mono</code> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Cascadia Code</code>), uppercase tracking (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">tracking-tight</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">tracking-wider</code> on subheadings), crisp <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#f8fafc</code> (slate-100).</li>
+<li><strong class="text-slate-100 font-semibold">Inline Code:</strong> Rendered in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">font-mono</code> with subtle rounded background <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#0a0e1a</code>, single-pixel border <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#1e2c4a</code>, and cyan text <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#38bdf8</code>.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="3-layout-information-architecture" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Layout & Information Architecture <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-layout-information-architecture" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">BooleanGA structures its textbook volumes and portal pages using an unmistakable architectural hierarchy:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">┌────────────────────────────────────────────────────────────────────────┐
+│ 1. MASTER HEADER &amp; INTERACTIVE BREADCRUMBS                             │
+│    📚 Master Portal  /  Volume 01  /  Chapter 01                       │
+├────────────────────────────────────────────────────────────────────────┤
+│ 2. TITLE HERO &amp; GRADIENT EMBLEM BOX                                    │
+│    [ 🧬 Logo ]  CHAPTER 01: MOLECULAR ARCHITECTURE OF HEREDITY        │
+│                 Physical DNA, Watson-Crick Base Pairing &amp; Density      │
+├────────────────────────────────────────────────────────────────────────┤
+│ 3. STATUS &amp; PEDAGOGICAL COMPASS STRIP                                  │
+│    [ 15 Modules ]  Part I (Ch 1-5) • Keystones • Part II • Matrix      │
+├────────────────────────────────────────────────────────────────────────┤
+│ 4. TEACHER&#39;S ORIENTATION PROLOGUE (Existential Stakes)                 │
+├────────────────────────────────────────────────────────────────────────┤
+│ 5. MODULAR CHAPTER CARDS GRID (2-Column Responsive Layout)             │
+│    ┌──────────────────────────────┐  ┌──────────────────────────────┐  │
+│    │ Chapter 01                   │  │ Chapter 02                   │  │
+│    │ Core Subchapters (Roster)    │  │ Core Subchapters (Roster)    │  │
+│    │ Feature Pills (Figures/Data) │  │ Feature Pills (Figures/Data) │  │
+│    │ [ Open Chapter 01 → ]        │  │ [ Open Chapter 02 → ]        │  │
+│    └──────────────────────────────┘  └──────────────────────────────┘  │
+├────────────────────────────────────────────────────────────────────────┤
+│ 6. FLAGSHIP KEYSTONES (Epistemic Cut &amp; Mathematical Bridges)           │
+├────────────────────────────────────────────────────────────────────────┤
+│ 7. ACADEMIC REFERENCES &amp; CITATIONS (Interactive Pulsing Engine)        │
+└────────────────────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="31-the-standardized-master-header" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.1 The Standardized Master Header <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#31-the-standardized-master-header" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Every page features a top breadcrumb navigation row anchored to the master portal, accompanied by quick-action simulator links:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Left: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">📚 Master Portal / [Domain] / [Current Document]</code></li>
+<li>Right: Direct action pills (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🚀 Live Seafloor Simulator</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🔬 Lab Practicums</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">📚 Master Library</code>)</li>
+</ul>
+<h3 id="32-the-status-pedagogical-compass-strip" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.2 The Status & Pedagogical Compass Strip <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#32-the-status-pedagogical-compass-strip" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Immediately below the title hero, a high-density, single-line compass bar provides readers with situational awareness and instant jump anchors:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;div class=&quot;p-4 bg-slate-950/90 border border-slate-800 rounded-xl flex flex-wrap items-center justify-between gap-3 text-xs font-mono&quot;&gt;
+  &lt;div class=&quot;flex items-center gap-3&quot;&gt;
+    &lt;span class=&quot;px-2.5 py-1 rounded bg-emerald-950 border border-emerald-800 text-emerald-300 font-bold text-[11px]&quot;&gt;4 Core Units • 5 Practicums&lt;/span&gt;
+    &lt;span class=&quot;text-slate-400&quot;&gt;Open in separate tabs &amp;bull; Deep cross-linking &amp;bull; Zero scrolling fatigue&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;flex items-center gap-2&quot;&gt;
+    &lt;a href=&quot;#unit-1&quot; class=&quot;text-slate-400 hover:text-emerald-400 transition-colors&quot;&gt;Unit 1 (Prebiotic)&lt;/a&gt;
+    &lt;span class=&quot;text-slate-700&quot;&gt;&amp;bull;&lt;/span&gt;
+    &lt;a href=&quot;#keystones&quot; class=&quot;text-cyan-300 font-bold hover:text-cyan-200 transition-colors&quot;&gt;Keystones&lt;/a&gt;
+    &lt;span class=&quot;text-slate-700&quot;&gt;&amp;bull;&lt;/span&gt;
+    &lt;a href=&quot;#unit-2&quot; class=&quot;text-slate-400 hover:text-amber-400 transition-colors&quot;&gt;Unit 2 (Thermodynamics)&lt;/a&gt;
+    &lt;span class=&quot;text-slate-700&quot;&gt;&amp;bull;&lt;/span&gt;
+    &lt;a href=&quot;#practicums&quot; class=&quot;text-slate-400 hover:text-purple-400 transition-colors&quot;&gt;Lab Practicums&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h3 id="33-the-modular-chapter-card-grid" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.3 The Modular Chapter Card Grid <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#33-the-modular-chapter-card-grid" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Chapters and modules are presented not as bullet points, but as <strong class="text-slate-100 font-semibold">rich cards</strong> with five essential components:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Chapter Badge & Domain Pill:</strong> (e.g., <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Unit 01</code> + <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Prebiotic Physics</code>).</li>
+<li><strong class="text-slate-100 font-semibold">Title & Synopsis:</strong> High-contrast title linked with hover transition, followed by a 2-3 sentence teaser.</li>
+<li><strong class="text-slate-100 font-semibold">Core Subchapter Roster:</strong> An inset card (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">bg-slate-950/70 border border-slate-800/80</code>) displaying the estimated reading time (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">~14 min read</code>) and 3-4 bulleted subchapters with bold titles.</li>
+<li><strong class="text-slate-100 font-semibold">Feature Pills:</strong> Discrete metadata tags highlighting figures, equations, and historical papers (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Figure 1.1 Basalt Honeycomb</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Mitchell 1961</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Landauer Bound</code>).</li>
+<li><strong class="text-slate-100 font-semibold">Card Footer & Action Button:</strong> Left side denotes module type (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Standalone Module</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Interactive Lab</code>); right side features a styled button (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Open Unit 01 →</code>) with arrow hover translation.</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="4-didactic-pedagogical-architecture" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. Didactic & Pedagogical Architecture <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-didactic-pedagogical-architecture" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">BooleanGA achieves pedagogical mastery by following a strict epistemological philosophy: <strong class="text-slate-100 font-semibold">abstract mathematics must never be taught without physical grounding, and physical mechanisms must never be taught without everyday analogies.</strong></p>
+<h3 id="41-a-teachers-orientation-prologue" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.1 A Teacher's Orientation Prologue <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#41-a-teachers-orientation-prologue" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Every major document opens with a dedicated section entitled <em class="text-slate-200 italic">"A Teacher's Orientation: [Existential Theme]"</em>.</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">The Core Rule:</strong> Frame the entire volume as an existential crisis that physical nature had to overcome (e.g., the <em class="text-slate-200 italic">Dilution Catastrophe</em> in prebiotic chemistry, or <em class="text-slate-200 italic">Levinthal's Paradox</em> in protein folding).</li>
+<li><strong class="text-slate-100 font-semibold">Tone:</strong> Welcoming, authoritative, philosophically grounded, inviting the reader to think as an experimental scientist rather than a passive student.</li>
+</ul>
+<h3 id="42-the-four-sacred-everyday-analogies" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.2 The Four Sacred Everyday Analogies <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#42-the-four-sacred-everyday-analogies" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">As codified in Siliquarium's documentation standards, abstract biophysical dynamics must be anchored to the <strong class="text-slate-100 font-semibold">Four Sacred Analogies</strong>:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;!-- THE 4 SACRED EVERYDAY ANALOGIES PATTERN --&gt;
+&lt;div class=&quot;p-4 rounded-xl bg-slate-900/90 border border-amber-500/30 space-y-2 text-xs font-sans text-slate-300 leading-relaxed my-3 shadow-lg&quot;&gt;
+  &lt;div class=&quot;font-mono text-amber-300 font-bold flex items-center gap-1.5 border-b border-slate-800 pb-1.5&quot;&gt;
+    &lt;span&gt;🌍&lt;/span&gt; Everyday Analogy — The Safe and the Workshop (The Epistemic Cut):
+  &lt;/div&gt;
+  &lt;p class=&quot;pl-5 text-slate-300&quot;&gt;
+    Think of an organism&#39;s digital genome like a &lt;strong class=&quot;text-slate-100 font-semibold&quot;&gt;master cookbook stored inside a fireproof safe&lt;/strong&gt;. The active logic circuit running on the hydrothermal seafloor is the bustling &lt;strong class=&quot;text-slate-100 font-semibold&quot;&gt;kitchen workshop&lt;/strong&gt;. While preparing dinner, hot grease might splatter, pans might dent, and steam fills the air (rate-dependent thermodynamic wear and tear). But you &lt;strong class=&quot;text-amber-300 font-semibold&quot;&gt;never chop up the cookbook recipe&lt;/strong&gt; to cook a meal! The recipe remains inert, protected, and rate-independent. Only when opening a brand-new restaurant in the next town do you open the safe, photocopy the recipe, and carry it across the street (reproduction with mutation). That is why digital organisms can suffer metabolic starvation without corrupting their inherited genome!
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The four canonical metaphors:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">The Safe and the Workshop (The Epistemic Cut):</strong> The genome is an inert recipe in a safe; the active circuit is the kitchen.</li>
+<li><strong class="text-slate-100 font-semibold">The Hydrothermal Vent (The Digital Drumbeat):</strong> Digital food is a musical rhythm or drumbeat passing by; an organism "eats" by catching the beat with its internal pendulum.</li>
+<li><strong class="text-slate-100 font-semibold">The Rock Pores (Nature's First Walls):</strong> Microscopic rock cavities in deep-sea basalt act as free stone houses protecting proto-life before lipid membranes evolved.</li>
+<li><strong class="text-slate-100 font-semibold">The Battery (The Local Pantry):</strong> A dynamic CMOS calorie counter. Toggling logic gates burns energy; matching vent rhythms stores energy; reaching 100 tokens triggers division.</li>
+</ol>
+<h3 id="43-color-coordinated-mathematical-decoders" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.3 Color-Coordinated Mathematical Decoders <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#43-color-coordinated-mathematical-decoders" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Whenever a mathematical equation appears, it is forbidden to simply print the equation and walk away. BooleanGA introduces the <strong class="text-slate-100 font-semibold">Color-Coordinated Mathematical Decoder</strong>:</p>
+<h4 id="step-1-tex-equation-with-color-coding" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Step 1: TeX Equation with Color Coding <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#step-1-tex-equation-with-color-coding" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Each algebraic symbol is wrapped in a distinct hex color macro:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\color{#38bdf8}{\Delta p} = \color{#34d399}{\Delta \psi} - \color{#fbbf24}{\frac{2.303 R T}{F}} \color{#f43f5e}{\Delta \text{pH}}$$</p>
+<h4 id="step-2-the-color-legend-row" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Step 2: The Color Legend Row <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#step-2-the-color-legend-row" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Directly beneath the formula, legend pills indicate the variable mappings:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>🔵 <strong class="text-slate-100 font-semibold">Proton Motive Force ($\Delta p$)</strong></li>
+<li>🟢 <strong class="text-slate-100 font-semibold">Membrane Electrical Potential ($\Delta \psi$)</strong></li>
+<li>🟡 <strong class="text-slate-100 font-semibold">Nernst Thermodynamic Factor ($\frac{2.303 R T}{F}$)</strong></li>
+<li>🔴 <strong class="text-slate-100 font-semibold">Chemical pH Gradient ($\Delta \text{pH}$)</strong></li>
+</ul>
+<h4 id="step-3-the-3-part-variable-grid-intuitive-truth-card" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Step 3: The 3-Part Variable Grid & Intuitive Truth Card <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#step-3-the-3-part-variable-grid-intuitive-truth-card" title="Direct link">#</a></h4>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;div class=&quot;p-4 rounded-xl bg-slate-900/90 border border-emerald-500/30 space-y-3 text-xs leading-relaxed my-3 font-sans shadow-lg&quot;&gt;
+  &lt;div class=&quot;flex items-center gap-2 font-mono text-emerald-300 font-bold text-sm pb-1 border-b border-slate-800&quot;&gt;
+    &lt;span&gt;🧭&lt;/span&gt; Color-Coordinated Equation Decoder: Mitchell Chemiosmotic Potential
+  &lt;/div&gt;
+  &lt;div class=&quot;grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 text-[11px]&quot;&gt;
+    
+    &lt;div class=&quot;p-2.5 rounded-lg bg-slate-950 border border-sky-500/40 space-y-1&quot;&gt;
+      &lt;div class=&quot;font-mono font-bold text-sky-400 flex items-center gap-1.5&quot;&gt;
+        &lt;span class=&quot;px-1.5 py-0.5 rounded bg-sky-950 border border-sky-700 text-[10px]&quot;&gt;&amp;Delta;p&lt;/span&gt;
+        Total PMF
+      &lt;/div&gt;
+      &lt;p class=&quot;text-slate-300 text-[10.5px]&quot;&gt;The net electrochemical driving force (in millivolts) pushing protons across the mineral pore wall.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;p-2.5 rounded-lg bg-slate-950 border border-emerald-500/40 space-y-1&quot;&gt;
+      &lt;div class=&quot;font-mono font-bold text-emerald-400 flex items-center gap-1.5&quot;&gt;
+        &lt;span class=&quot;px-1.5 py-0.5 rounded bg-emerald-950 border border-emerald-700 text-[10px]&quot;&gt;&amp;Delta;&amp;psi;&lt;/span&gt;
+        Electrical Gradient
+      &lt;/div&gt;
+      &lt;p class=&quot;text-slate-300 text-[10.5px]&quot;&gt;The physical electrostatic charge differential across the semi-conductive iron-sulfide membrane barrier.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;p-2.5 rounded-lg bg-slate-950 border border-amber-500/40 space-y-1&quot;&gt;
+      &lt;div class=&quot;font-mono font-bold text-amber-400 flex items-center gap-1.5&quot;&gt;
+        &lt;span class=&quot;px-1.5 py-0.5 rounded bg-amber-950 border border-amber-700 text-[10px]&quot;&gt;Factor&lt;/span&gt;
+        Thermal Conversion
+      &lt;/div&gt;
+      &lt;p class=&quot;text-slate-300 text-[10.5px]&quot;&gt;The Nernst conversion coefficient (~59 mV per pH unit at 298 K) converting chemical activity to voltage.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;p-2.5 rounded-lg bg-slate-950 border border-rose-500/40 space-y-1&quot;&gt;
+      &lt;div class=&quot;font-mono font-bold text-rose-400 flex items-center gap-1.5&quot;&gt;
+        &lt;span class=&quot;px-1.5 py-0.5 rounded bg-rose-950 border border-rose-700 text-[10px]&quot;&gt;&amp;Delta;pH&lt;/span&gt;
+        Chemical Gradient
+      &lt;/div&gt;
+      &lt;p class=&quot;text-slate-300 text-[10.5px]&quot;&gt;The difference in proton concentration between acidic ocean water (pH 5.5) and alkaline vent fluid (pH 9.5).&lt;/p&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+  &lt;div class=&quot;pt-2 border-t border-slate-800 text-[10.5px] text-slate-300 space-y-1.5&quot;&gt;
+    &lt;p&gt;
+      &lt;strong class=&quot;text-emerald-400 font-semibold font-mono&quot;&gt;💡 The Intuitive Truth Behind the Architecture:&lt;/strong&gt; Life does not burn fuel like a campfire; life is an electrical capacitor. By maintaining an inorganic mineral wall between alkaline vent fluid (low protons) and acidic ocean water (high protons), nature constructed a continuous, abiotic hydroelectric dam generating ~200 mV across a 5-nanometer boundary.
+    &lt;/p&gt;
+    &lt;p class=&quot;text-amber-300&quot;&gt;
+      🌍 &lt;strong&gt;Everyday Analogy:&lt;/strong&gt; &lt;em&gt;The Hydroelectric Hoover Dam.&lt;/em&gt; The water level difference behind the dam is $\Delta\text{pH}$. The height of the spillway is $\Delta\psi$. The electrical power humming through the generators is $\Delta p$. Life began in the natural spillway.
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h3 id="44-svg-diagram-pedagogical-breakdown-cards-the-4-pillars" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.4 SVG Diagram Pedagogical Breakdown Cards (The 4 Pillars) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#44-svg-diagram-pedagogical-breakdown-cards-the-4-pillars" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Beneath every schematic diagram or data visualization, BooleanGA embeds a <strong class="text-slate-100 font-semibold">Comprehensive Pedagogical Analysis Card</strong> divided into four immutable pillars:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;div class=&quot;p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 mt-4 shadow-inner&quot;&gt;
+  &lt;div class=&quot;flex items-center justify-between border-b border-slate-800 pb-2&quot;&gt;
+    &lt;div class=&quot;flex items-center gap-2&quot;&gt;
+      &lt;span class=&quot;text-emerald-400 text-sm&quot;&gt;🔬&lt;/span&gt;
+      &lt;span class=&quot;font-bold text-slate-100 uppercase tracking-wider text-[11px]&quot;&gt;Comprehensive Pedagogical Analysis &amp;bull; Figure Breakdown&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;span class=&quot;px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 text-[10px]&quot;&gt;Thermodynamic Architecture&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;space-y-2.5 text-slate-300 font-sans leading-relaxed text-xs&quot;&gt;
+    &lt;p&gt;
+      &lt;strong class=&quot;text-cyan-400 font-mono&quot;&gt;🔍 Visual Guide &amp;amp; Structural Mechanics:&lt;/strong&gt; 
+      Tours the graphic layout: axes, color codings, direction of fluid flux, and structural pore boundaries.
+    &lt;/p&gt;
+    &lt;p&gt;
+      &lt;strong class=&quot;text-emerald-400 font-mono&quot;&gt;🔬 Biophysical &amp;amp; Mathematical Reality:&lt;/strong&gt; 
+      Explains the underlying physical laws: Gibbs free energy, Landauer erasure limits, or Nernst potentials.
+    &lt;/p&gt;
+    &lt;p&gt;
+      &lt;strong class=&quot;text-amber-400 font-mono&quot;&gt;💻 Digital Mapping in Siliquarium:&lt;/strong&gt; 
+      Maps the diagram directly to the codebase: data structures (e.g. `Uint8Array` pore grids, logic gate matrices, Landauer power counters).
+    &lt;/p&gt;
+    &lt;p&gt;
+      &lt;strong class=&quot;text-purple-400 font-mono&quot;&gt;💡 Core Conceptual Principle:&lt;/strong&gt; 
+      Synthesizes the big-picture takeaway, dismantling common student misconceptions.
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h3 id="45-foundational-concept-checkpoints" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.5 Foundational Concept Checkpoints <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#45-foundational-concept-checkpoints" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To enforce active learning and self-assessment, chapters include interactive checkpoints:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">🎯 Diagnostic Challenge:</strong> A targeted thought experiment testing conceptual limits.</li>
+<li><strong class="text-slate-100 font-semibold">⚠️ Common Conceptual Misconception / Cognitive Trapdoor:</strong> Proactively identifies teleological errors, "smuggled intelligence" fallacies, or false assumptions.</li>
+<li><strong class="text-slate-100 font-semibold">💡 Model Analytical Solution & Derivation:</strong> Expandable <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&lt;details&gt;</code> block with full derivation and the mandatory <strong class="text-slate-100 font-semibold">Nature-to-Silicon Anchor</strong>.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="5-interactive-micro-interactions-citation-mechanics" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Interactive Micro-Interactions & Citation Mechanics <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-interactive-micro-interactions-citation-mechanics" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">BooleanGA's interactive citation engine represents the gold standard in scholarly digital navigation. Clicking an inline superscript citation (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1]</code>) does not merely snap the page downwards; it engages an <strong class="text-slate-100 font-semibold">orchestrated multi-sensory feedback loop</strong>.</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">[Reader clicks sup [1] in text]
+               │
+               ▼
+[Citation Navigator smooth-centers #ref-1 card in viewport]
+               │
+               ├────────────────────────────────────────────────┐
+               ▼                                                ▼
+[@keyframes refTargetPulse triggers]               [@keyframes badgePopIn triggers]
+- Border flares into luminous cyan (#22d3ee)       - Floating badge pops in at top right:
+- Box-shadow surges (0 0 50px rgba(6,182,212))       &quot;CITED IN TEXT 🎯&quot;
+- Card background pulses to rgba(8,51,68,0.92)     - Gradient: cyan-600 to blue-600
+- Reference number [1] scales up (scale 1.2)       - Pill shadow with glow
+               │
+               ▼
+[Reader clicks &quot;↑ Back to text&quot; link]
+               │
+               ▼
+[@keyframes backlinkTargetFlash triggers on origin section]
+- Glowing cyan outline pulse fades gently over 2.5 seconds</code></pre>
+<h3 id="51-the-citation-target-keyframes-stylesheet" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.1 The Citation Target Keyframes & Stylesheet <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#51-the-citation-target-keyframes-stylesheet" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To mirror BooleanGA, Siliquarium's documentation compiler must inject the following complete CSS block into every generated HTML page:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-css">/* ========================================================================= */
+/* CITATION TARGET HIGHLIGHTING &amp; INTERACTIVE NAVIGATION                     */
+/* ========================================================================= */
+html {
+  scroll-behavior: auto; /* Managed by JS citation navigator */
+}
+
+/* Reference Cards - Default Unselected State */
+li[id^=&quot;ref-&quot;] {
+  scroll-margin-top: 6rem;
+  position: relative;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+/* Keyframe animation for targeted citation pulse */
+@keyframes refTargetPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.95), 0 0 40px rgba(0, 229, 255, 0.85), inset 0 0 15px rgba(0, 229, 255, 0.35);
+    border-color: #22d3ee;
+    background-color: rgba(8, 51, 68, 0.95);
+    transform: scale(1.02);
+  }
+  30% {
+    box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.45), 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 20px rgba(0, 229, 255, 0.25);
+    border-color: #38bdf8;
+    background-color: rgba(8, 51, 68, 0.92);
+    transform: scale(1.015);
+  }
+  100% {
+    box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 12px rgba(0, 229, 255, 0.15);
+    border-color: #00e5ff;
+    background-color: rgba(8, 51, 68, 0.88);
+    transform: scale(1);
+  }
+}
+
+@keyframes badgePopIn {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Active targeted reference card via URL fragment (:target) or JS click (.active-citation-target) */
+li[id^=&quot;ref-&quot;]:target,
+li[id^=&quot;ref-&quot;].active-citation-target {
+  animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  border-color: #22d3ee !important;
+  background-color: rgba(8, 51, 68, 0.88) !important;
+  z-index: 20;
+}
+
+/* Active Beacon Pill Badge */
+li[id^=&quot;ref-&quot;]:target::after,
+li[id^=&quot;ref-&quot;].active-citation-target::after {
+  content: &quot;CITED IN TEXT 🎯&quot;;
+  position: absolute;
+  top: -12px;
+  right: 14px;
+  font-family: &#39;Cascadia Code&#39;, &#39;Fira Code&#39;, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  background: linear-gradient(135deg, #0891b2, #0284c7);
+  color: #ffffff;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1px solid #38bdf8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+  animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: none;
+}
+
+/* Highlight reference number [n] */
+li[id^=&quot;ref-&quot;]:target &gt; span:first-child,
+li[id^=&quot;ref-&quot;].active-citation-target &gt; span:first-child {
+  color: #38bdf8 !important;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 1);
+  transform: scale(1.2);
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* Inline Citation Superscript interactive feedback */
+sup a[href^=&quot;#ref-&quot;] {
+  transition: all 0.2s ease;
+  display: inline-block;
+  padding: 0 1px;
+}
+sup a[href^=&quot;#ref-&quot;]:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px #00e5ff;
+  transform: translateY(-1px);
+}
+sup a[href^=&quot;#ref-&quot;]:active {
+  transform: scale(0.9);
+}
+
+/* Backlink Section Target Visual Return Pulse */
+section[id], div[id^=&quot;unit-&quot;], div[id^=&quot;practicum-&quot;], h2[id], h3[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+@keyframes backlinkTargetFlash {
+  0% {
+    outline: 3px solid rgba(0, 229, 255, 0.9);
+    outline-offset: 4px;
+  }
+  100% {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+  }
+}
+
+section[id]:target, div[id]:target {
+  animation: backlinkTargetFlash 2.5s ease-out;
+}</code></pre>
+<h3 id="52-the-client-side-citation-navigator-engine" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.2 The Client-Side Citation Navigator Engine <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#52-the-client-side-citation-navigator-engine" title="Direct link">#</a></h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This companion JavaScript block intercepts inline link clicks, manages hash navigation, centers targeted cards without disorientation, and coordinates with asynchronous MathJax typesetting:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-javascript">&lt;script id=&quot;citation-navigator&quot;&gt;
+  document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+    function highlightRefCard(targetId) {
+      if (!targetId || !targetId.startsWith(&#39;ref-&#39;)) return;
+      const el = document.getElementById(targetId);
+      if (!el) return;
+
+      // Clear existing active highlights
+      document.querySelectorAll(&#39;li[id^=&quot;ref-&quot;].active-citation-target&#39;).forEach(function(item) {
+        item.classList.remove(&#39;active-citation-target&#39;);
+      });
+
+      // Trigger animation reflow
+      el.classList.remove(&#39;active-citation-target&#39;);
+      void el.offsetWidth;
+      el.classList.add(&#39;active-citation-target&#39;);
+
+      // Immediately center card in viewport without disorienting jump
+      el.scrollIntoView({ behavior: &#39;auto&#39;, block: &#39;center&#39; });
+    }
+
+    function scrollToTarget(targetId) {
+      if (!targetId) return;
+      if (targetId.startsWith(&#39;ref-&#39;)) {
+        highlightRefCard(targetId);
+        return;
+      }
+      const el = document.getElementById(targetId) || document.querySelector(`[name=&quot;${targetId}&quot;]`);
+      if (el) {
+        el.scrollIntoView({ behavior: &#39;smooth&#39;, block: &#39;start&#39; });
+      }
+    }
+
+    // Handle clicks on inline reference links
+    document.addEventListener(&#39;click&#39;, function(e) {
+      const link = e.target.closest(&#39;a[href*=&quot;#&quot;]&#39;);
+      if (link) {
+        const href = link.getAttribute(&#39;href&#39;);
+        if (href &amp;&amp; href.includes(&#39;#&#39;)) {
+          const hash = href.substring(href.indexOf(&#39;#&#39;) + 1);
+          if (hash.startsWith(&#39;ref-&#39;)) {
+            highlightRefCard(hash);
+          }
+        }
+      }
+    });
+
+    // Handle direct hash changes
+    window.addEventListener(&#39;hashchange&#39;, function() {
+      const hash = window.location.hash.replace(&#39;#&#39;, &#39;&#39;);
+      if (hash) scrollToTarget(hash);
+    });
+
+    // Initial check if opened with hash (coordinated across render intervals)
+    function checkInitialHash() {
+      if (window.location.hash) {
+        const hash = window.location.hash.replace(&#39;#&#39;, &#39;&#39;);
+        scrollToTarget(hash);
+      }
+    }
+
+    checkInitialHash();
+    setTimeout(checkInitialHash, 150);
+    setTimeout(checkInitialHash, 500);
+
+    window.addEventListener(&#39;load&#39;, function() {
+      setTimeout(checkInitialHash, 100);
+      setTimeout(checkInitialHash, 600);
+    });
+
+    // Coordinate with MathJax 3 typesetting completion
+    if (window.MathJax &amp;&amp; window.MathJax.startup) {
+      window.MathJax.startup.promise = window.MathJax.startup.promise.then(function() {
+        setTimeout(checkInitialHash, 100);
+      });
+    }
+  });
+&lt;/script&gt;</code></pre>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="6-concrete-engineering-roadmap-for-siliquarium" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. Concrete Engineering Roadmap for Siliquarium <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#6-concrete-engineering-roadmap-for-siliquarium" title="Direct link">#</a></h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To elevate Siliquarium's documentation to BooleanGA's benchmark, execution will proceed across four synchronized engineering phases.</p>
+<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart TD
+    P1[&quot;Phase 1: Compiler Pipeline Overhaul&lt;br/&gt;(scripts/build_docs_html.mjs)&quot;]
+    P2[&quot;Phase 2: Master Portal Transformation&lt;br/&gt;(docs/PORTAL.md &amp; docs/index.html)&quot;]
+    P3[&quot;Phase 3: Curriculum &amp; Syllabus Upgrade&lt;br/&gt;(docs/CURRICULUM_AND_SYLLABUS.html)&quot;]
+    P4[&quot;Phase 4: Pedagogical Companion Suite Upgrade&lt;br/&gt;(docs/PEDAGOGICAL_COMPANION_SUITE.html)&quot;]
+
+    P1 --&gt; P2
+    P1 --&gt; P3
+    P1 --&gt; P4
+    P2 --&gt; Integration[&quot;Harmonized Standalone Documentation Portal&quot;]
+    P3 --&gt; Integration
+    P4 --&gt; Integration</div>
+<h3 id="phase-1-compiler-pipeline-overhaul-scriptsbuild-docs-htmlmjs" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 1: Compiler Pipeline Overhaul (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">scripts/build_docs_html.mjs</code>) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#phase-1-compiler-pipeline-overhaul-scriptsbuild-docs-htmlmjs" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Engine Modernization:</strong></li>
+<li>Replace the legacy CSS stylesheet in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">renderHtmlTemplate</code> with <strong class="text-slate-100 font-semibold">Tailwind CSS CDN</strong> configured with the Abyssal color tokens (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">abyssal-bg: #060911</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">abyssal-cyan: #00e5ff</code>, etc.).</li>
+<li>Replace standard KaTeX script tags with <strong class="text-slate-100 font-semibold">MathJax 3</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">tex-mml-chtml.js</code>) configured for single-dollar inline math (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[&#39;$&#39;, &#39;$&#39;]</code>), display math (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[&#39;$$&#39;, &#39;$$&#39;]</code>), and HTML tag skipping (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;]</code>).</li>
+<li>Inject the complete <strong class="text-slate-100 font-semibold">Citation Keyframes Stylesheet</strong> and <strong class="text-slate-100 font-semibold">Client-Side Citation Navigator</strong> into the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&lt;head&gt;</code> of every generated document.</li>
+<li><strong class="text-slate-100 font-semibold">Markdown Parsing Extensions:</strong></li>
+<li><strong class="text-slate-100 font-semibold">Analogy Callouts:</strong> Detect <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&gt; [!ANALOGY]</code> and format as the amber-bordered Sacred Analogy container.</li>
+<li><strong class="text-slate-100 font-semibold">Equation Decoders:</strong> Detect <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&gt; [!DECODER]</code> and render multi-column color-coordinated variable cards.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Breakdown Cards:</strong> Detect <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&gt; [!PILLARS]</code> and generate the 4-pillar analysis box (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🔍 Visual Guide</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🔬 Biophysical Reality</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">💻 Digital Mapping</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">💡 Core Principle</code>).</li>
+<li><strong class="text-slate-100 font-semibold">Checkpoints:</strong> Detect <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&gt; [!CHECKPOINT]</code> and format into diagnostic challenges with misconception warnings and expandable derivations.</li>
+</ol>
+<h3 id="phase-2-master-portal-transformation-docsportalmd-docsindexhtml" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 2: Master Portal Transformation (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/PORTAL.md</code> & <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/index.html</code>) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#phase-2-master-portal-transformation-docsportalmd-docsindexhtml" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Master Header & Hero:</strong></li>
+<li>Embed the official canonical Siliquarium Logo (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">assets/logos/logo.jpg</code>) inside a glowing 16rem gradient badge (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">border border-cyan-400/40 drop-shadow-[0_0_15px_rgba(0,229,255,0.45)]</code>).</li>
+<li>Add the Status & Compass Strip with anchors to Unit 1, Unit 2, Keystones, and Practicums.</li>
+<li><strong class="text-slate-100 font-semibold">Teacher's Orientation:</strong></li>
+<li>Open with <em class="text-slate-200 italic">"The Unsupervised Sea: Why Non-Equilibrium Thermodynamics Must Precede Loss Functions"</em>, setting the philosophical stakes of silicon abiogenesis.</li>
+<li><strong class="text-slate-100 font-semibold">2-Column Responsive Curriculum Grid:</strong></li>
+<li>Transform the four units into modular chapter cards with subchapter rosters, estimated reading times (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">~15 min read</code>), feature pills (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Mitchell PMF</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Landauer Bound</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Uri Alon Motifs</code>), and glowing action buttons (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Open Unit →</code>).</li>
+<li><strong class="text-slate-100 font-semibold">Flagship Keystone Cards:</strong></li>
+<li>Prominently feature Keystone 01 (<strong class="text-slate-100 font-semibold">The Grand Epistemological Bridge: Howard Pattee's Epistemic Cut</strong>) and Keystone 02 (<strong class="text-slate-100 font-semibold">The Master Biophysical Model: Dual-Currency Thermodynamics</strong>).</li>
+</ol>
+<h3 id="phase-3-curriculum-syllabus-upgrade-docscurriculum-and-syllabushtml" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 3: Curriculum & Syllabus Upgrade (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/CURRICULUM_AND_SYLLABUS.html</code>) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#phase-3-curriculum-syllabus-upgrade-docscurriculum-and-syllabushtml" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Integrate color-coordinated equation decoders for:</li>
+<li>Mitchell Chemiosmotic Potential ($\Delta p = \Delta \psi - 59 \Delta\text{pH}$).</li>
+<li>Landauer Dynamic Switching Dissipation ($P_{\text{diss}} = \sum f_{\text{gate}} \cdot k_B T \ln 2$).</li>
+<li>Dual-Currency Energy-Matter Partitioning ($E_{\text{net}} = E_{\text{harvest}} - \sum \Delta E_i - E_{\text{leak}}$).</li>
+<li>Weisfeiler-Lehman Topological Graph Coloring ($c_v^{(k+1)} = \text{Hash}\big(c_v^{(k)}, \{\!\{ c_u^{(k)} \mid u \in \mathcal{N}(v) \}\!\}\big)$).</li>
+<li>Attach 4-Pillar Pedagogical Breakdown Cards to all ASCII/SVG architecture diagrams (the basalt pore grid, the CMOS gate catalyst, the repressilator motif).</li>
+<li>Embed Foundational Concept Checkpoints targeting the <strong class="text-slate-100 font-semibold">Teleological Fallacy</strong> and the <strong class="text-slate-100 font-semibold">Smuggled Intelligence Trapdoor</strong>.</li>
+</ol>
+<h3 id="phase-4-pedagogical-companion-suite-upgrade-docspedagogical-companion-suitehtml" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 4: Pedagogical Companion Suite Upgrade (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/PEDAGOGICAL_COMPANION_SUITE.html</code>) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#phase-4-pedagogical-companion-suite-upgrade-docspedagogical-companion-suitehtml" title="Direct link">#</a></h3>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Interactive Bibliography:</strong> Convert all 14 annotated papers into targeted reference items (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&lt;li id=&quot;ref-1&quot;&gt;</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&lt;li id=&quot;ref-14&quot;&gt;</code>) with DOI badges and back-to-text links, wired to the pulse animation engine.</li>
+<li><strong class="text-slate-100 font-semibold">Glossary Enhancement:</strong> Ensure all 55 terms feature an Everyday Analogy callout and a Siliquarium Digital Simulator mapping.</li>
+<li><strong class="text-slate-100 font-semibold">Assessment Rubrics:</strong> Format the 4-tier laboratory rubrics with high-contrast responsive tables.</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="7-actionable-implementation-checklist" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">7. Actionable Implementation Checklist <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#7-actionable-implementation-checklist" title="Direct link">#</a></h2>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>[x] <strong class="text-slate-100 font-semibold">Audit & Principle Distillation:</strong> Completed exhaustive analytical review of BooleanGA's visual system, information architecture, pedagogical patterns, and interactive micro-interactions.</li>
+<li>[ ] <strong class="text-slate-100 font-semibold">Compiler Script Upgrade:</strong> Update <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">scripts/build_docs_html.mjs</code> to inject Tailwind CSS CDN, MathJax 3 configuration, citation keyframes, and the citation navigator script.</li>
+<li>[ ] <strong class="text-slate-100 font-semibold">Portal Overhaul:</strong> Rebuild <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/PORTAL.md</code> and compile <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/index.html</code> with the Master Header, gradient logo box, compass strip, 2-column curriculum grid, and keystones.</li>
+<li>[ ] <strong class="text-slate-100 font-semibold">Curriculum Enhancement:</strong> Equip <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/CURRICULUM_AND_SYLLABUS.md</code> with the 4 Sacred Analogies, 3-part equation decoders, and 4-pillar diagram breakdown cards.</li>
+<li>[ ] <strong class="text-slate-100 font-semibold">Companion Suite Polish:</strong> Equip <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/PEDAGOGICAL_COMPANION_SUITE.md</code> with interactive reference cards, pulse targets, and backlink return flashes.</li>
+<li>[ ] <strong class="text-slate-100 font-semibold">Test & Verify:</strong> Run <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">node scripts/build_docs_html.mjs</code> and verify zero-server <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">file:///</code> protocol rendering across desktop and mobile viewports.</li>
+</ul>
+  </main>
+
+  <!-- MASTER FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
+      <p>
+        <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
+        PolyForm Noncommercial License 1.0.0 •
+        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

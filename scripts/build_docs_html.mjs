@@ -2,7 +2,8 @@
 
 /**
  * 🐠 Siliquarium Native Zero-Dependency Markdown to HTML Documentation Compiler
- * Generates self-contained, responsive, abyssal-themed HTML documents for human viewing.
+ * Generates self-contained, responsive, enterprise-grade abyssal-themed HTML documents
+ * built on Tailwind CSS, MathJax 3, and Interactive Citation Navigation (matching BooleanGA standard).
  */
 
 import fs from 'node:fs';
@@ -16,9 +17,10 @@ const rootDir = path.resolve(__dirname, '..');
 const NAV_ITEMS = [
   { id: 'index', title: 'Portal Home', href: 'index.html', icon: '🐠' },
   { id: 'syllabus', title: 'Curriculum & Labs', href: 'CURRICULUM_AND_SYLLABUS.html', icon: '🎓' },
-  { id: 'pedagogy', title: 'Pedagogical Companion', href: 'PEDAGOGICAL_COMPANION_SUITE.html', icon: '🏛️' },
+  { id: 'pedagogy', title: 'Companion & Glossary', href: 'PEDAGOGICAL_COMPANION_SUITE.html', icon: '🏛️' },
   { id: 'theory', title: 'Theoretical Model', href: 'THEORETICAL_MODEL.html', icon: '🌊' },
   { id: 'epistemic', title: 'Epistemic Foundations', href: 'EPISTEMIC_FOUNDATIONS.html', icon: '🧬' },
+  { id: 'design-principles', title: 'Design Principles', href: 'DOCUMENTATION_DESIGN_PRINCIPLES.html', icon: '📐' },
   { id: 'phase3', title: '3D Visualizer', href: 'PHASE_3_VISUALIZER_GUIDE.html', icon: '🔬' },
   { id: 'phase4', title: 'Paleontology & Motifs', href: 'PHASE_4_PALEONTOLOGY_GUIDE.html', icon: '🦕' },
   { id: 'phase5', title: 'Spores & Controls', href: 'PHASE_5_PELAGIC_SPORES_GUIDE.html', icon: '🌊' },
@@ -65,15 +67,15 @@ function parseMarkdown(md, currentDocId) {
 
   function closeTable() {
     if (inTable) {
-      let tHtml = '<div class="table-container"><table><thead><tr>';
+      let tHtml = '<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider">';
       for (const th of tableHeader) {
-        tHtml += `<th>${inlineFormat(th.trim(), currentDocId)}</th>`;
+        tHtml += `<th class="p-3.5 font-semibold">${inlineFormat(th.trim(), currentDocId)}</th>`;
       }
-      tHtml += '</tr></thead><tbody>';
+      tHtml += '</tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300">';
       for (const row of tableRows) {
-        tHtml += '<tr>';
+        tHtml += '<tr class="hover:bg-slate-800/30 transition-colors">';
         for (const td of row) {
-          tHtml += `<td>${inlineFormat(td.trim(), currentDocId)}</td>`;
+          tHtml += `<td class="p-3.5 leading-relaxed">${inlineFormat(td.trim(), currentDocId)}</td>`;
         }
         tHtml += '</tr>';
       }
@@ -92,7 +94,11 @@ function parseMarkdown(md, currentDocId) {
     // Code blocks
     if (trimmed.startsWith('```')) {
       if (inCodeBlock) {
-        out.push(`<pre><code class="language-${codeLang}">${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+        if (codeLang === 'mermaid') {
+          out.push(`<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">${escapeHtml(codeLines.join('\n'))}</div>`);
+        } else {
+          out.push(`<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-${codeLang}">${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+        }
         inCodeBlock = false;
         codeLines = [];
       } else {
@@ -113,7 +119,7 @@ function parseMarkdown(md, currentDocId) {
     if (/^(-{3,}|\*{3,}|_{3,})$/.test(trimmed)) {
       closeList();
       closeTable();
-      out.push('<hr class="divider" />');
+      out.push('<hr class="border-t border-slate-800 my-8" />');
       continue;
     }
 
@@ -141,32 +147,35 @@ function parseMarkdown(md, currentDocId) {
       closeTable();
     }
 
-    // Blockquotes & Alerts
+    // Blockquotes & Semantic Alerts
     if (trimmed.startsWith('>')) {
       closeList();
       let quoteText = trimmed.replace(/^>\s?/, '');
-      let alertClass = 'quote';
-      let title = '';
+      let alertType = 'default';
 
-      if (quoteText.startsWith('[!NOTE]')) {
-        alertClass = 'alert alert-note';
-        title = 'NOTE';
+      if (quoteText.startsWith('[!ANALOGY]') || quoteText.startsWith('[!EVERYDAY ANALOGY]')) {
+        alertType = 'analogy';
+        quoteText = quoteText.replace(/\[!(ANALOGY|EVERYDAY ANALOGY)\]\s?/, '');
+      } else if (quoteText.startsWith('[!CHECKPOINT]') || quoteText.startsWith('[!CONCEPT CHECKPOINT]')) {
+        alertType = 'checkpoint';
+        quoteText = quoteText.replace(/\[!(CHECKPOINT|CONCEPT CHECKPOINT)\]\s?/, '');
+      } else if (quoteText.startsWith('[!ANALYSIS]') || quoteText.startsWith('[!PILLARS]')) {
+        alertType = 'analysis';
+        quoteText = quoteText.replace(/\[!(ANALYSIS|PILLARS)\]\s?/, '');
+      } else if (quoteText.startsWith('[!NOTE]')) {
+        alertType = 'note';
         quoteText = quoteText.replace(/\[!NOTE\]\s?/, '');
       } else if (quoteText.startsWith('[!TIP]')) {
-        alertClass = 'alert alert-tip';
-        title = 'TIP';
+        alertType = 'tip';
         quoteText = quoteText.replace(/\[!TIP\]\s?/, '');
       } else if (quoteText.startsWith('[!IMPORTANT]')) {
-        alertClass = 'alert alert-important';
-        title = 'IMPORTANT';
+        alertType = 'important';
         quoteText = quoteText.replace(/\[!IMPORTANT\]\s?/, '');
       } else if (quoteText.startsWith('[!WARNING]')) {
-        alertClass = 'alert alert-warning';
-        title = 'WARNING';
+        alertType = 'warning';
         quoteText = quoteText.replace(/\[!WARNING\]\s?/, '');
       }
 
-      // Collect multiline blockquote if any
       const bqLines = [quoteText];
       while (i + 1 < lines.length && lines[i + 1].trim().startsWith('>')) {
         i++;
@@ -174,10 +183,42 @@ function parseMarkdown(md, currentDocId) {
       }
 
       const formattedBq = bqLines.map(l => inlineFormat(l, currentDocId)).join('<br/>');
-      if (title) {
-        out.push(`<div class="${alertClass}"><div class="alert-title">${title}</div><div>${formattedBq}</div></div>`);
+
+      if (alertType === 'analogy') {
+        out.push(`<div class="card-analogy p-5 rounded-2xl border border-amber-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
+          <div class="font-mono text-amber-400 font-bold flex items-center gap-2 text-xs uppercase tracking-wider">
+            <span>🌍</span> Everyday Analogy
+          </div>
+          <div class="leading-relaxed font-sans">${formattedBq}</div>
+        </div>`);
+      } else if (alertType === 'checkpoint') {
+        out.push(`<div class="card-experiment p-5 rounded-2xl border border-purple-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
+          <div class="font-mono text-purple-400 font-bold flex items-center gap-2 text-xs uppercase tracking-wider">
+            <span>🎯</span> Concept Checkpoint
+          </div>
+          <div class="leading-relaxed font-sans">${formattedBq}</div>
+        </div>`);
+      } else if (alertType === 'analysis') {
+        out.push(`<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <div class="flex items-center gap-2">
+              <span class="text-cyan-400 text-sm">🔬</span>
+              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis</span>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Deep-Dive Analysis</span>
+          </div>
+          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs">${formattedBq}</div>
+        </div>`);
+      } else if (alertType === 'note') {
+        out.push(`<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans">${formattedBq}</div></div>`);
+      } else if (alertType === 'tip') {
+        out.push(`<div class="p-4 rounded-xl bg-emerald-950/30 border-l-4 border-emerald-400 my-4 text-sm text-slate-300"><div class="font-mono text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">TIP</div><div class="leading-relaxed font-sans">${formattedBq}</div></div>`);
+      } else if (alertType === 'important') {
+        out.push(`<div class="p-4 rounded-xl bg-purple-950/30 border-l-4 border-purple-400 my-4 text-sm text-slate-300"><div class="font-mono text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">IMPORTANT</div><div class="leading-relaxed font-sans">${formattedBq}</div></div>`);
+      } else if (alertType === 'warning') {
+        out.push(`<div class="p-4 rounded-xl bg-amber-950/30 border-l-4 border-amber-400 my-4 text-sm text-slate-300"><div class="font-mono text-amber-400 font-bold text-xs uppercase tracking-wider mb-1">WARNING</div><div class="leading-relaxed font-sans">${formattedBq}</div></div>`);
       } else {
-        out.push(`<blockquote class="callout">${formattedBq}</blockquote>`);
+        out.push(`<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">${formattedBq}</blockquote>`);
       }
       continue;
     }
@@ -189,7 +230,14 @@ function parseMarkdown(md, currentDocId) {
       const level = headingMatch[1].length;
       const text = headingMatch[2];
       const id = slugify(text.replace(/<[^>]+>/g, ''));
-      out.push(`<h${level} id="${id}">${inlineFormat(text, currentDocId)} <a class="header-anchor" href="#${id}" title="Link to section">#</a></h${level}>`);
+
+      let sizeClasses = 'text-xl font-bold font-mono text-slate-100 mt-8 mb-4';
+      if (level === 1) sizeClasses = 'text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-10 mb-4 pb-2 border-b border-slate-800';
+      if (level === 2) sizeClasses = 'text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80';
+      if (level === 3) sizeClasses = 'text-lg font-bold font-mono text-cyan-400 mt-6 mb-2';
+      if (level === 4) sizeClasses = 'text-base font-semibold font-mono text-amber-400 mt-4 mb-2';
+
+      out.push(`<h${level} id="${id}" class="${sizeClasses}">${inlineFormat(text, currentDocId)} <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#${id}" title="Direct link">#</a></h${level}>`);
       continue;
     }
 
@@ -202,7 +250,8 @@ function parseMarkdown(md, currentDocId) {
       if (!inList) {
         inList = true;
         listType = curType;
-        out.push(`<${listType}>`);
+        const listClasses = curType === 'ul' ? 'list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed' : 'list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed';
+        out.push(`<${listType} class="${listClasses}">`);
       }
       out.push(`<li>${inlineFormat(match[2], currentDocId)}</li>`);
       continue;
@@ -210,14 +259,14 @@ function parseMarkdown(md, currentDocId) {
       closeList();
     }
 
-    // Raw HTML lines (e.g. <p align="center">, <img ...>)
+    // Raw HTML lines
     if (trimmed.startsWith('<') && trimmed.endsWith('>')) {
       out.push(trimmed);
       continue;
     }
 
     // Paragraph
-    out.push(`<p>${inlineFormat(trimmed, currentDocId)}</p>`);
+    out.push(`<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">${inlineFormat(trimmed, currentDocId)}</p>`);
   }
 
   closeList();
@@ -226,50 +275,41 @@ function parseMarkdown(md, currentDocId) {
 }
 
 function inlineFormat(text, currentDocId) {
-  // LaTeX Display Math: $$...$$
-  text = text.replace(/\$\$([\s\S]+?)\$\$/g, (_, math) => {
-    return `<div class="katex-display math-block" data-math="${escapeHtml(math)}">\\[ ${escapeHtml(math)} \\]</div>`;
-  });
-
-  // LaTeX Inline Math: $...$
-  text = text.replace(/\$([^\$\n]+?)\$/g, (_, math) => {
-    return `<span class="katex-inline math-inline" data-math="${escapeHtml(math)}">\\( ${escapeHtml(math)} \\)</span>`;
-  });
+  // Inline citations: [n](#ref-n)
+  text = text.replace(/\[(\d+)\]\(#ref-(\d+)\)/g, '<sup class="text-cyan-400 font-mono text-[10px]"><a href="#ref-$2">[$1]</a></sup>');
 
   // Inline images: ![alt](src)
   text = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, src) => {
     let cleanSrc = src;
     if (cleanSrc.startsWith('/')) cleanSrc = cleanSrc.slice(1);
     cleanSrc = cleanSrc.replace(/^[A-Za-z]:[\\/]/, '');
-    return `<div class="img-wrapper"><img src="${cleanSrc}" alt="${escapeHtml(alt)}" loading="lazy" /><div class="img-caption">${escapeHtml(alt)}</div></div>`;
+    return `<div class="my-6 text-center"><img src="${cleanSrc}" alt="${escapeHtml(alt)}" loading="lazy" class="max-w-full h-auto rounded-xl border border-slate-800 shadow-2xl mx-auto" /><div class="mt-2 text-xs font-mono text-slate-500">${escapeHtml(alt)}</div></div>`;
   });
 
   // Inline links: [text](href)
   text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, href) => {
     let targetHref = href;
-    // Map .md to .html for local docs
     if (targetHref.endsWith('.md')) {
       targetHref = targetHref.replace(/\.md$/, '.html');
-      // normalize path
       if (targetHref.startsWith('standards/')) targetHref = path.basename(targetHref);
       if (targetHref.startsWith('docs/')) targetHref = path.basename(targetHref);
     }
     const isExternal = /^https?:\/\//.test(targetHref);
     const extAttrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
-    return `<a href="${targetHref}"${extAttrs}>${label}</a>`;
+    return `<a href="${targetHref}"${extAttrs} class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">${label}</a>`;
   });
 
   // Inline code: `...`
-  text = text.replace(/`([^`]+)`/g, (_, code) => `<code>${escapeHtml(code)}</code>`);
+  text = text.replace(/`([^`]+)`/g, (_, code) => `<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">${escapeHtml(code)}</code>`);
 
   // Bold + Italic: ***text***
-  text = text.replace(/\*\*\*([^*]+)\*\*\*/g, '<strong><em>$1</em></strong>');
+  text = text.replace(/\*\*\*([^*]+)\*\*\*/g, '<strong class="text-slate-100 font-bold"><em>$1</em></strong>');
 
   // Bold: **text**
-  text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-slate-100 font-semibold">$1</strong>');
 
   // Italic: *text*
-  text = text.replace(/(^|[^\*])\*([^\*]+)\*([^\*]|$)/g, '$1<em>$2</em>$3');
+  text = text.replace(/(^|[^\*])\*([^\*]+)\*([^\*]|$)/g, '$1<em class="text-slate-200 italic">$2</em>$3');
 
   return text;
 }
@@ -278,354 +318,279 @@ function renderHtmlTemplate({ title, content, currentDocId, relativeRoot = '' })
   const navHtml = NAV_ITEMS.map(item => {
     const isActive = item.id === currentDocId;
     const target = relativeRoot + item.href;
-    return `<a href="${target}" class="nav-link ${isActive ? 'active' : ''}">${item.icon} ${item.title}</a>`;
+    return `<a href="${target}" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono ${isActive ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'}">${item.icon} ${item.title}</a>`;
   }).join('\n');
 
-  return `<!DOCTYPE html>
-<html lang="en">
+  return `<!-- 🐠 Siliquarium Open-Ended Digital Life & Silicon Abiogenesis Laboratory • Created by & Copyright © 2026 Ian Ohlander. All rights reserved. -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escapeHtml(title)} — Siliquarium</title>
+  <title>${escapeHtml(title)} — Siliquarium Master Documentation</title>
   <link rel="icon" type="image/jpeg" href="${relativeRoot}assets/logos/logo.jpg">
-  
-  <!-- Modern Clean Typography & KaTeX -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\\\[', right: '\\\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\\\(', right: '\\\\)', display: false}]});"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bio: {
+              bg: '#060911',
+              surface: '#0a0e1a',
+              panel: '#121829',
+              card: '#0f172a',
+              border: '#1e2c4a',
+              cyan: '#00e5ff',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              purple: '#a855f7',
+              sky: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            mono: ['Cascadia Code', 'Fira Code', 'Consolas', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+        displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
-    :root {
-      --bg-ocean: #060911;
-      --bg-card: #0d1322;
-      --bg-surface: #131c31;
-      --border: #1e2c4a;
-      --border-glow: #00e5ff33;
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --cyan: #00e5ff;
-      --amber: #f59e0b;
-      --emerald: #10b981;
-      --rose: #f43f5e;
-      --purple: #a855f7;
-    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #060911; }
+    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body {
-      background-color: var(--bg-ocean);
-      color: var(--text-primary);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.7;
-      font-size: 16px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    .card-bio, .card-chemiosmotic {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
     }
-
-    /* Top Navigation Header */
-    .top-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(6, 9, 17, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+    .card-digital, .card-silicon {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.4);
     }
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
+    .card-margin, .card-analogy {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
     }
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--text-primary);
-      font-weight: 700;
-      font-size: 1.15rem;
-      letter-spacing: -0.02em;
+    .card-experiment, .card-paleo {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.4);
     }
-    .brand-logo img {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      border: 1px solid var(--cyan);
-      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
-    }
-    .brand-logo span {
-      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      overflow-x: auto;
-      padding-bottom: 2px;
-    }
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      padding: 0.4rem 0.75rem;
-      border-radius: 6px;
-      white-space: nowrap;
-      transition: all 0.15s ease;
-      border: 1px solid transparent;
-    }
-    .nav-link:hover {
-      color: var(--text-primary);
-      background: var(--bg-surface);
-      border-color: var(--border);
-    }
-    .nav-link.active {
-      color: var(--cyan);
-      background: rgba(0, 229, 255, 0.1);
-      border-color: rgba(0, 229, 255, 0.4);
-      font-weight: 600;
-    }
-
-    /* Main Container */
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
-      flex: 1;
-      width: 100%;
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      color: #ffffff;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      position: relative;
-    }
-    h1 {
-      font-size: 2.25rem;
-      margin-top: 0;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.75rem;
-      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
-    h3 { font-size: 1.25rem; color: #e2e8f0; }
-    h4 { font-size: 1.05rem; color: var(--cyan); }
-    
-    p { margin-bottom: 1.25rem; color: #cbd5e1; }
-    strong { color: #ffffff; font-weight: 600; }
-    em { color: var(--text-primary); font-style: italic; }
-
-    .header-anchor {
-      opacity: 0;
-      color: var(--cyan);
-      text-decoration: none;
-      margin-left: 0.5rem;
-      font-weight: 400;
-      transition: opacity 0.2s;
-    }
-    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
-      opacity: 0.6;
-    }
-
-    a {
-      color: var(--cyan);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: #70f3ff;
-    }
-
-    /* Lists */
-    ul, ol {
-      margin-left: 1.5rem;
-      margin-bottom: 1.25rem;
-      color: #cbd5e1;
-    }
-    li { margin-bottom: 0.4rem; }
-
-    /* Code & Pre */
-    code {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.88em;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      color: #38bdf8;
-    }
-    pre {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+    .svg-container {
+      background: #090e15;
+      border: 1px solid #1e2c4a;
+      border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
-      margin-bottom: 1.5rem;
-      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
-    }
-    pre code {
-      background: transparent;
-      border: none;
-      padding: 0;
-      color: #e2e8f0;
-      font-size: 0.9rem;
-      line-height: 1.5;
     }
 
-    /* Blockquotes & Callouts */
-    blockquote.callout {
-      border-left: 4px solid var(--cyan);
-      background: var(--bg-card);
-      padding: 1rem 1.25rem;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 1.5rem;
-      color: #cbd5e1;
+    /* Citation Target Highlighting & Interactive Navigation */
+    html { scroll-behavior: auto; }
+    li[id^="ref-"] {
+      scroll-margin-top: 6rem;
+      position: relative;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
     }
-
-    /* GitHub-style Alerts */
-    .alert {
-      border-left: 4px solid;
-      background: var(--bg-card);
-      padding: 1rem 1.25rem;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 1.5rem;
+    @keyframes refTargetPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.95), 0 0 40px rgba(0, 229, 255, 0.85), inset 0 0 15px rgba(0, 229, 255, 0.35);
+        border-color: #22d3ee;
+        background-color: rgba(8, 51, 68, 0.95);
+        transform: scale(1.02);
+      }
+      30% {
+        box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.45), 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 20px rgba(0, 229, 255, 0.25);
+        border-color: #38bdf8;
+        background-color: rgba(8, 51, 68, 0.92);
+        transform: scale(1.015);
+      }
+      100% {
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 12px rgba(0, 229, 255, 0.15);
+        border-color: #00e5ff;
+        background-color: rgba(8, 51, 68, 0.88);
+        transform: scale(1);
+      }
     }
-    .alert-title {
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.4rem;
-      text-transform: uppercase;
+    @keyframes badgePopIn {
+      0% { opacity: 0; transform: translateY(6px) scale(0.8); }
+      60% { opacity: 1; transform: translateY(-2px) scale(1.06); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
-    .alert-note { border-color: var(--cyan); }
-    .alert-note .alert-title { color: var(--cyan); }
-    .alert-tip { border-color: var(--emerald); }
-    .alert-tip .alert-title { color: var(--emerald); }
-    .alert-important { border-color: var(--purple); }
-    .alert-important .alert-title { color: var(--purple); }
-    .alert-warning { border-color: var(--amber); }
-    .alert-warning .alert-title { color: var(--amber); }
-
-    /* Tables */
-    .table-container {
-      width: 100%;
-      overflow-x: auto;
-      margin-bottom: 1.75rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg-card);
+    li[id^="ref-"]:target,
+    li[id^="ref-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #22d3ee !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.92rem;
-    }
-    th {
-      background: var(--bg-surface);
+    li[id^="ref-"]:target::after,
+    li[id^="ref-"].active-citation-target::after {
+      content: "CITED IN TEXT 🎯";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0891b2, #0284c7);
       color: #ffffff;
-      font-weight: 600;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
     }
-    td {
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      color: #cbd5e1;
+    sup a[href^="#ref-"] {
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 0 1px;
     }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: rgba(255, 255, 255, 0.02); }
-
-    /* Math */
-    .math-block {
-      overflow-x: auto;
-      padding: 1rem 0;
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #e2e8f0;
+    sup a[href^="#ref-"]:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 8px #22d3ee;
+      transform: translateY(-1px);
     }
-
-    /* Images */
-    .img-wrapper {
-      margin: 1.5rem 0;
-      text-align: center;
+    section[id], div[id], h2[id], h3[id] {
+      scroll-margin-top: 5.5rem;
     }
-    .img-wrapper img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    @keyframes backlinkTargetFlash {
+      0% { outline: 3px solid rgba(0, 229, 255, 0.9); outline-offset: 4px; }
+      100% { outline: 3px solid transparent; outline-offset: 4px; }
     }
-    .img-caption {
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
+    section[id]:target, div[id]:target {
+      animation: backlinkTargetFlash 2.5s ease-out;
     }
-
-    hr.divider {
-      border: none;
-      height: 1px;
-      background: var(--border);
-      margin: 2.5rem 0;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      background: var(--bg-card);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    footer a { color: var(--text-secondary); }
-    footer a:hover { color: var(--cyan); }
   </style>
+
+  <script id="citation-navigator">
+    document.addEventListener('DOMContentLoaded', function() {
+      function highlightRefCard(targetId) {
+        if (!targetId || !targetId.startsWith('ref-')) return;
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+          item.classList.remove('active-citation-target');
+        });
+        el.classList.remove('active-citation-target');
+        void el.offsetWidth;
+        el.classList.add('active-citation-target');
+        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }
+      function scrollToTarget(targetId) {
+        if (!targetId) return;
+        if (targetId.startsWith('ref-')) {
+          highlightRefCard(targetId);
+          return;
+        }
+        const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href && href.includes('#')) {
+            const hash = href.substring(href.indexOf('#') + 1);
+            if (hash.startsWith('ref-')) highlightRefCard(hash);
+          }
+        }
+      });
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) scrollToTarget(hash);
+      });
+      function checkInitialHash() {
+        if (window.location.hash) {
+          const hash = window.location.hash.replace('#', '');
+          scrollToTarget(hash);
+        }
+      }
+      checkInitialHash();
+      setTimeout(checkInitialHash, 150);
+      setTimeout(checkInitialHash, 500);
+      window.addEventListener('load', function() {
+        setTimeout(checkInitialHash, 100);
+      });
+      if (window.MathJax && window.MathJax.startup) {
+        window.MathJax.startup.promise = window.MathJax.startup.promise.then(function() {
+          setTimeout(checkInitialHash, 100);
+        });
+      }
+    });
+  </script>
 </head>
-<body>
-  <header class="top-header">
-    <div class="header-inner">
-      <a href="${relativeRoot}index.html" class="brand-logo">
-        <img src="${relativeRoot}assets/logos/logo.jpg" alt="Siliquarium Logo">
-        <span>Siliquarium</span>
-      </a>
-      <nav class="nav-bar">
+<body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
+
+  <!-- MASTER HEADER & BREADCRUMBS -->
+  <header class="border-b border-slate-800 bg-[#060911]/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      <nav class="flex items-center gap-2 text-xs font-mono text-slate-400">
+        <a href="${relativeRoot}index.html" class="hover:text-cyan-400 text-slate-300 flex items-center gap-2 font-bold">
+          <img src="${relativeRoot}assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50 shadow-sm inline">
+          <span>Siliquarium Portal</span>
+        </a>
+        <span>/</span>
+        <span class="text-cyan-400 font-semibold truncate max-w-xs md:max-w-md">${escapeHtml(title)}</span>
+      </nav>
+      <div class="flex items-center gap-2.5">
+        <a href="${relativeRoot}../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🚀 Live Simulator</span>
+        </a>
+        <a href="${relativeRoot}CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🎓 Curriculum</span>
+        </a>
+        <a href="${relativeRoot}PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
+          <span>🏛️ Glossary</span>
+        </a>
+      </div>
+    </div>
+    <div class="border-t border-slate-800/80 bg-[#0a0e1a]/80 px-4 py-1.5 overflow-x-auto">
+      <nav class="max-w-6xl mx-auto flex items-center gap-1 text-xs font-mono">
         ${navHtml}
       </nav>
     </div>
   </header>
 
-  <main class="container">
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12 space-y-8 flex-1 w-full">
     ${content}
   </main>
 
-  <footer>
-    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
-    <p style="margin-top: 0.4rem;">
-      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
-      PolyForm Noncommercial License 1.0.0
-    </p>
+  <!-- MASTER FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
+      <p>
+        <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
+        PolyForm Noncommercial License 1.0.0 •
+        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+      </p>
+    </div>
   </footer>
 </body>
 </html>`;
@@ -637,7 +602,7 @@ const DOCS_MAP = [
     docId: 'index',
     srcMd: 'docs/PORTAL.md',
     destHtml: 'docs/index.html',
-    title: 'Siliquarium Documentation Portal',
+    title: 'Siliquarium Master Curriculum & Documentation Portal',
     relativeRoot: ''
   },
   {
@@ -666,6 +631,13 @@ const DOCS_MAP = [
     srcMd: 'docs/EPISTEMIC_FOUNDATIONS.md',
     destHtml: 'docs/EPISTEMIC_FOUNDATIONS.html',
     title: 'Epistemic Foundations & Prebiotic Justifications',
+    relativeRoot: ''
+  },
+  {
+    docId: 'design-principles',
+    srcMd: 'docs/DOCUMENTATION_DESIGN_PRINCIPLES.md',
+    destHtml: 'docs/DOCUMENTATION_DESIGN_PRINCIPLES.html',
+    title: 'Documentation Architecture & Design Principles',
     relativeRoot: ''
   },
   {
@@ -702,6 +674,13 @@ const DOCS_MAP = [
     destHtml: 'docs/BRAND_IDENTITY.html',
     title: 'Brand Identity & Visual Philosophy',
     relativeRoot: ''
+  },
+  {
+    docId: 'qa-report',
+    srcMd: 'QA/STUDENT_UX_REPORT.md',
+    destHtml: 'QA/STUDENT_UX_REPORT.html',
+    title: '12th Grade Student QA & Usability Audit Report',
+    relativeRoot: '../docs/'
   },
   {
     docId: 'dev-standards',
@@ -761,23 +740,25 @@ function buildLogoGallery() {
     { file: 'logo_option_5_silicon_fish.jpg', name: 'Option 5: The Benthic Circuit Fish', badge: 'Candidate', desc: 'Minimalist geometric fish silhouette formed of circuit traces & logic core.' }
   ];
 
-  let galleryCards = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">';
+  let galleryCards = '<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-8">';
   for (const l of logos) {
     galleryCards += `
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
-        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-          <a href="assets/logos/${l.file}" target="_blank">
-            <img src="assets/logos/${l.file}" alt="${escapeHtml(l.name)}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+      <div class="rounded-2xl bg-slate-900/90 border border-slate-800 overflow-hidden flex flex-col justify-between hover:border-cyan-500/50 transition-all shadow-xl group">
+        <div class="aspect-square bg-black overflow-hidden flex items-center justify-center p-2">
+          <a href="assets/logos/${l.file}" target="_blank" class="w-full h-full block">
+            <img src="assets/logos/${l.file}" alt="${escapeHtml(l.name)}" class="w-full h-full object-cover rounded-xl transition-transform duration-300 group-hover:scale-105" loading="lazy">
           </a>
         </div>
-        <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-            <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--cyan); background: rgba(0,229,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">${escapeHtml(l.badge)}</span>
-            <code style="font-size: 0.75rem;">${escapeHtml(l.file)}</code>
+        <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+          <div class="space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px] font-mono font-bold uppercase">${escapeHtml(l.badge)}</span>
+              <code class="text-[10px] font-mono text-slate-500">${escapeHtml(l.file)}</code>
+            </div>
+            <h3 class="text-sm font-mono font-bold text-slate-100 group-hover:text-cyan-300 transition-colors">${escapeHtml(l.name)}</h3>
+            <p class="text-xs text-slate-400 font-sans leading-relaxed">${escapeHtml(l.desc)}</p>
           </div>
-          <h3 style="font-size: 1rem; margin: 0.25rem 0 0.5rem; color: #fff;">${escapeHtml(l.name)}</h3>
-          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; flex: 1;">${escapeHtml(l.desc)}</p>
-          <a href="assets/logos/${l.file}" download="${l.file}" style="display: inline-block; text-align: center; background: var(--bg-surface); border: 1px solid var(--border); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; color: var(--text-primary); text-decoration: none;">⬇ Download Asset</a>
+          <a href="assets/logos/${l.file}" download="${l.file}" class="w-full text-center px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-cyan-950 hover:border-cyan-700 border border-slate-700 text-xs font-mono text-slate-300 hover:text-cyan-300 transition-all block">⬇ Download Asset</a>
         </div>
       </div>
     `;
@@ -785,8 +766,18 @@ function buildLogoGallery() {
   galleryCards += '</div>';
 
   const content = `
-    <h1>🖼️ Siliquarium Brand & Logo Gallery</h1>
-    <p>Complete production asset gallery featuring the official canonical brand mark, the 5 Golden Spiral Nautilus variations, and the original prebiotic candidate suite.</p>
+    <div class="space-y-4">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🖼️</span>
+        <div>
+          <span class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">Brand Identity Asset Repository</span>
+          <h1 class="text-2xl md:text-3xl font-mono font-extrabold text-slate-100">Siliquarium Brand &amp; Logo Gallery</h1>
+        </div>
+      </div>
+      <p class="text-sm text-slate-400 leading-relaxed font-sans max-w-3xl">
+        Complete production asset gallery featuring the official canonical brand mark, the 5 Golden Spiral Nautilus variations, and the original prebiotic candidate suite.
+      </p>
+    </div>
     ${galleryCards}
   `;
 
@@ -800,14 +791,13 @@ function buildLogoGallery() {
   fs.writeFileSync(path.join(rootDir, 'docs/logos.html'), html, 'utf8');
   console.log(`  ✓ Compiled: docs/logos.html (Interactive Logo Gallery)`);
 
-  // Also build logos/index.html
   const rootLogosHtml = html.replace(/assets\/logos\//g, '');
   fs.writeFileSync(path.join(rootDir, 'logos/index.html'), rootLogosHtml, 'utf8');
   console.log(`  ✓ Compiled: logos/index.html`);
 }
 
 console.log('=========================================');
-console.log('🐠 Siliquarium HTML Documentation Compiler');
+console.log('🐠 Siliquarium Enterprise HTML Docs Compiler');
 console.log('=========================================');
 
 for (const doc of DOCS_MAP) {
@@ -816,4 +806,4 @@ for (const doc of DOCS_MAP) {
 
 buildLogoGallery();
 
-console.log('\n🎉 ALL DOCUMENTATION COMPILED TO HTML SUCCESSFULLY!');
+console.log('\n🎉 ALL DOCUMENTATION COMPILED WITH TAILWIND & MATHJAX 3 SUCCESSFULLY!');
