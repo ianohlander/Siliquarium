@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "description": "Open-Ended Digital Life & Silicon Abiogenesis in a Hydrothermal Vent Matrix",
   "type": "module",
-  "main": "src/core/index.ts",
+  "main": "dist/core/index.js",
+  "types": "dist/core/index.d.ts",
   "scripts": {
-    "test": "node tests/run_tests.mjs",
+    "build": "node scripts/tsc.mjs",
+    "compile": "node scripts/tsc.mjs",
+    "typecheck": "node scripts/tsc.mjs --noEmit",
+    "test": "node scripts/tsc.mjs && node tests/run_tests.mjs",
     "build:docs": "node scripts/build_docs_html.mjs",
-    "typecheck": "tsc --noEmit",
     "lint": "eslint src/ --ext .ts",
     "dev": "vite",
-    "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "keywords": [

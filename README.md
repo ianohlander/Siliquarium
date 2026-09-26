@@ -51,8 +51,8 @@ While BooleanGA explores **heteropoietic engineering synthesis** (evolving ALUs,
 ## 🚀 Repository Roadmap (Phased Bootstrap)
 
 - [x] **Phase 0:** Sealed Theoretical Model, Development Standards, QA & Testing Protocols, and GitHub Repository Bootstrap.
-- [ ] **Phase 1:** Core Kernel (`Mulberry32`, `CodonTable`, `HexGrid3D`, `PoreCell`, `VentPhysics`, `Thermodynamics`).
-- [ ] **Phase 2:** Progressive 8-Stage Zero-Dependency Test Suite & Energy/Mass Invariant Audits.
+- [x] **Phase 1:** Core Kernel (`Mulberry32`, `CodonTable`, `HexGrid3D`, `PoreCell`, `VentPhysics`, `Thermodynamics`).
+- [x] **Phase 2:** Progressive 8-Stage Zero-Dependency Test Suite & Energy/Mass Invariant Audits.
 - [ ] **Phase 3:** WebGL 3D Seafloor & Interactive Circuit Microscope Visualizer.
 - [ ] **Phase 4:** Digital Paleontologist Motif Scanner, Evolutionary Flight Recorder & Lenski Fossil Freezer.
 - [ ] **Phase 5:** Pelagic Planktonic Detachment, Spore Dispersal, and God-Suite Interactive Controls.
