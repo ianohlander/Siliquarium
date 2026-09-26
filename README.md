@@ -46,6 +46,8 @@ While BooleanGA explores **heteropoietic engineering synthesis** (evolving ALUs,
 - **[`docs/PHASE_4_PALEONTOLOGY_GUIDE.md`](docs/PHASE_4_PALEONTOLOGY_GUIDE.md):** Digital Paleontologist, Weisfeiler-Lehman topological graph hashing, and Uri Alon motifs.
 - **[`docs/PHASE_5_PELAGIC_SPORES_GUIDE.md`](docs/PHASE_5_PELAGIC_SPORES_GUIDE.md):** Pelagic planktonic detachment, advection drift, transparent aqueous water columns, and God-suite interactive controls.
 - **[`docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.md`](docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.md):** Multi-lineage phylogeny, Lenski LTEE dynamics, Shannon diversity index, and convergent evolution classification.
+- **[`docs/CURRICULUM_AND_SYLLABUS.md`](docs/CURRICULUM_AND_SYLLABUS.md):** Comprehensive multi-vector syllabus, 5 hands-on laboratory practicums, and Socratic seminars.
+- **[`docs/PEDAGOGICAL_COMPANION_SUITE.md`](docs/PEDAGOGICAL_COMPANION_SUITE.md):** 55-term technical glossary, deep-dive study guides, analytical derivations, grading rubrics, and annotated primary literature bibliography.
 - **[`standards/DEVELOPMENT_STANDARDS.md`](standards/DEVELOPMENT_STANDARDS.md):** Strict OOP/SOLID architecture, complexity budgets ($\le 7$), branded types, Web Worker threading, and anti-monolith file structure.
 - **[`standards/QA_AND_TESTING_STANDARDS.md`](standards/QA_AND_TESTING_STANDARDS.md):** Native zero-dependency Node.js test harness, progressive test pipeline, and physical conservation audits.
 - **[`standards/DOCUMENTATION_STANDARDS.md`](standards/DOCUMENTATION_STANDARDS.md):** 5-Dimension Conceptual Rubric (50/50 target), the 4 Sacred Everyday Analogies, and academic provenance.
