@@ -18,6 +18,7 @@ const NAV_ITEMS = [
   { id: 'theory', title: 'Theoretical Model', href: 'THEORETICAL_MODEL.html', icon: '🌊' },
   { id: 'epistemic', title: 'Epistemic Foundations', href: 'EPISTEMIC_FOUNDATIONS.html', icon: '🧬' },
   { id: 'brand', title: 'Brand Identity', href: 'BRAND_IDENTITY.html', icon: '🎨' },
+  { id: 'phase3', title: 'Phase 3 Visualizer', href: 'PHASE_3_VISUALIZER_GUIDE.html', icon: '🔬' },
   { id: 'logos', title: 'Logo Gallery', href: 'logos.html', icon: '🖼️' },
   { id: 'dev', title: 'Dev Standards', href: 'DEVELOPMENT_STANDARDS.html', icon: '🏛️' },
   { id: 'qa', title: 'QA Standards', href: 'QA_AND_TESTING_STANDARDS.html', icon: '🧪' },
@@ -656,6 +657,13 @@ const DOCS_MAP = [
     srcMd: 'docs/BRAND_IDENTITY.md',
     destHtml: 'docs/BRAND_IDENTITY.html',
     title: 'Brand Identity & Visual Philosophy',
+    relativeRoot: ''
+  },
+  {
+    docId: 'phase3',
+    srcMd: 'docs/PHASE_3_VISUALIZER_GUIDE.md',
+    destHtml: 'docs/PHASE_3_VISUALIZER_GUIDE.html',
+    title: 'Phase 3 WebGL 3D Seafloor & Circuit Microscope Guide',
     relativeRoot: ''
   },
   {

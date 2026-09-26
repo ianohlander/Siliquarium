@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 3 WebGL 3D Seafloor &amp; Circuit Microscope Guide — Siliquarium</title>
+  <link rel="icon" type="image/jpeg" href="assets/logos/logo.jpg">
+  
+  <!-- Modern Clean Typography & KaTeX -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+  <style>
+    :root {
+      --bg-ocean: #060911;
+      --bg-card: #0d1322;
+      --bg-surface: #131c31;
+      --border: #1e2c4a;
+      --border-glow: #00e5ff33;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #00e5ff;
+      --amber: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --purple: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-ocean);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    }
+    .brand-logo span {
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border-color: var(--border);
+    }
+    .nav-link.active {
+      color: var(--cyan);
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.4);
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.25rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 60%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.25rem; color: #e2e8f0; }
+    h4 { font-size: 1.05rem; color: var(--cyan); }
+    
+    p { margin-bottom: 1.25rem; color: #cbd5e1; }
+    strong { color: #ffffff; font-weight: 600; }
+    em { color: var(--text-primary); font-style: italic; }
+
+    .header-anchor {
+      opacity: 0;
+      color: var(--cyan);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      font-weight: 400;
+      transition: opacity 0.2s;
+    }
+    h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor {
+      opacity: 0.6;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #70f3ff;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+      color: #cbd5e1;
+    }
+    li { margin-bottom: 0.4rem; }
+
+    /* Code & Pre */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: #38bdf8;
+    }
+    pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Blockquotes & Callouts */
+    blockquote.callout {
+      border-left: 4px solid var(--cyan);
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    /* GitHub-style Alerts */
+    .alert {
+      border-left: 4px solid;
+      background: var(--bg-card);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.5rem;
+    }
+    .alert-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .alert-note { border-color: var(--cyan); }
+    .alert-note .alert-title { color: var(--cyan); }
+    .alert-tip { border-color: var(--emerald); }
+    .alert-tip .alert-title { color: var(--emerald); }
+    .alert-important { border-color: var(--purple); }
+    .alert-important .alert-title { color: var(--purple); }
+    .alert-warning { border-color: var(--amber); }
+    .alert-warning .alert-title { color: var(--amber); }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th {
+      background: var(--bg-surface);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    /* Math */
+    .math-block {
+      overflow-x: auto;
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    /* Images */
+    .img-wrapper {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .img-wrapper img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    .img-caption {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logos/logo.jpg" alt="Siliquarium Logo">
+        <span>Siliquarium</span>
+      </a>
+      <nav class="nav-bar">
+        <a href="index.html" class="nav-link ">🐠 Portal / Overview</a>
+<a href="THEORETICAL_MODEL.html" class="nav-link ">🌊 Theoretical Model</a>
+<a href="EPISTEMIC_FOUNDATIONS.html" class="nav-link ">🧬 Epistemic Foundations</a>
+<a href="BRAND_IDENTITY.html" class="nav-link ">🎨 Brand Identity</a>
+<a href="PHASE_3_VISUALIZER_GUIDE.html" class="nav-link active">🔬 Phase 3 Visualizer</a>
+<a href="logos.html" class="nav-link ">🖼️ Logo Gallery</a>
+<a href="DEVELOPMENT_STANDARDS.html" class="nav-link ">🏛️ Dev Standards</a>
+<a href="QA_AND_TESTING_STANDARDS.html" class="nav-link ">🧪 QA Standards</a>
+<a href="DOCUMENTATION_STANDARDS.html" class="nav-link ">📚 Doc Standards</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 id="phase-3-webgl-3d-seafloor-interactive-circuit-microscope-guide">🔬 Phase 3: WebGL 3D Seafloor & Interactive Circuit Microscope Guide <a class="header-anchor" href="#phase-3-webgl-3d-seafloor-interactive-circuit-microscope-guide" title="Link to section">#</a></h1>
+<p><em>The Visual Window into Digital Abiogenesis: From 3D Deep-Sea Caldera to Nanoscale Logic Netlists</em></p>
+<hr class="divider" />
+<h2 id="1-visceral-motivation-the-antonie-van-leeuwenhoek-moment">1. Visceral Motivation: The Antonie van Leeuwenhoek Moment <a class="header-anchor" href="#1-visceral-motivation-the-antonie-van-leeuwenhoek-moment" title="Link to section">#</a></h2>
+<p>In 1674, Dutch draper Antonie van Leeuwenhoek placed a droplet of murky lake water beneath a brass microscope with a single polished glass bead. Expecting inanimate sediment, he was stunned to discover thousands of tiny, pulsating creatures swimming, twisting, and devouring organic detritus—the first observation of microscopic life ("animalcules").</p>
+<p>Before Phase 3, Siliquarium's digital ecosystem was locked inside numerical arrays, bitwise registers, and terminal logs. While our Stage 0–7 test suites proved that energy is strictly conserved (<span class="katex-inline math-inline" data-math="\Delta E = 0.000">\( \Delta E = 0.000 \)</span>) and that blind photocopy replication preserves the Epistemic Cut, human researchers had no direct window into this emerging biosphere.</p>
+<p><strong>Phase 3 changes everything.</strong> It provides two complementary observational lenses:</p>
+<ol>
+<li><strong>The Macroscope (3D WebGL Seafloor Caldera):</strong> A volumetric perspective of the abyssal hydrothermal vent field, rendering basalt terraces, buoyant thermal plumes rising against gravity, and glowing colonies of living silicon cells.</li>
+<li><strong>The Microscope (2D Logic Workshop Inspector):</strong> A nanoscopic schematic window into an individual pore's <code>PoreWorkshop</code>, displaying real-time logic gate toggles (<code>AND</code>, <code>OR</code>, <code>NOT</code>, <code>BUF</code>), pulsing electron wires, battery token reserves (<span class="katex-inline math-inline" data-math="0..100">\( 0..100 \)</span>), and the 60-bit genome tape.</li>
+</ol>
+<pre><code class="language-text">┌────────────────────────────────────────────────────────────────────────┐
+│                   THE TWO OBSERVATIONAL LENSES                         │
+│                                                                        │
+│   [ MACROSCOPE: 3D Seafloor ]       ──►   [ MICROSCOPE: 2D Pore ]      │
+│   • 3D Stacked Hex Lattice (q,r,z)        • Real-Time Logic Gates      │
+│   • Buoyant Hydrothermal Plumes           • Pulsing Binary Wires (0/1) │
+│   • Population Colony Geography           • Battery Token Gauge        │
+│   • Detritus Carcass Sediment             • 1D Decoded Genome Tape     │
+└────────────────────────────────────────────────────────────────────────┘</code></pre>
+<hr class="divider" />
+<h2 id="2-the-gradient-of-abstraction-how-the-visualizer-works">2. The Gradient of Abstraction: How the Visualizer Works <a class="header-anchor" href="#2-the-gradient-of-abstraction-how-the-visualizer-works" title="Link to section">#</a></h2>
+<h3 id="21-the-apartment-analogy">2.1 The Apartment Analogy <a class="header-anchor" href="#21-the-apartment-analogy" title="Link to section">#</a></h3>
+<p>Think of the 3D Seafloor as a terraced high-rise apartment complex carved into a volcanic cliff:</p>
+<ul>
+<li>Each <strong>hexagonal pore</strong> is an individual apartment unit <span class="katex-inline math-inline" data-math="(q, r, z)">\( (q, r, z) \)</span>.</li>
+<li>The <strong>hydrothermal vent chimney</strong> at the ground floor is a central boiler furnace, sending hot water and nutrients drifting upward through the courtyards.</li>
+<li>Clicking on an apartment window zooms your camera in, opening the door into that cell's <strong>kitchen workshop</strong>. Inside, you can see which appliances (logic gates) are running, whether the pantry (battery) is full, and what cookbook (genome safe) rests on the shelf.</li>
+</ul>
+<hr class="divider" />
+<h2 id="3-mathematical-architecture-deconstructive-equation-anatomy">3. Mathematical Architecture & Deconstructive Equation Anatomy <a class="header-anchor" href="#3-mathematical-architecture-deconstructive-equation-anatomy" title="Link to section">#</a></h2>
+<h3 id="31-hexagonal-axial-to-3d-cartesian-coordinate-projection">3.1 Hexagonal Axial to 3D Cartesian Coordinate Projection <a class="header-anchor" href="#31-hexagonal-axial-to-3d-cartesian-coordinate-projection" title="Link to section">#</a></h3>
+<p>Siliquarium arranges pores in stacked 3D hexagonal prisms with axial coordinates <span class="katex-inline math-inline" data-math="(q, r, z)">\( (q, r, z) \)</span>. To render these in 3D space, we project axial coordinates onto Cartesian coordinates <span class="katex-inline math-inline" data-math="(x, y, z)">\( (x, y, z) \)</span>:</p>
+<p><div class="katex-display math-block" data-math="x = R \sqrt{3} \left(q + \frac{r}{2}\right), \quad z = R \frac{3}{2} r, \quad y = z_{\text{elev}} \cdot \Delta z">\[ x = R \sqrt{3} \left(q + \frac{r}{2}\right), \quad z = R \frac{3}{2} r, \quad y = z_{\text{elev}} \cdot \Delta z \]</div></p>
+<blockquote class="callout">### 🔍 Equation Decoder<br/>- <strong><span class="katex-inline math-inline" data-math="R">\( R \)</span> (Hex Radius):</strong> The circumradius of an individual hexagonal pore (<span class="katex-inline math-inline" data-math="R = 1.0">\( R = 1.0 \)</span>).<br/>- <strong><span class="katex-inline math-inline" data-math="q, r">\( q, r \)</span> (Axial Coordinates):</strong> The 2D planar hex coordinates on the basalt terrace.<br/>- <strong><span class="katex-inline math-inline" data-math="\sqrt{3} (q + r/2)">\( \sqrt{3} (q + r/2) \)</span> (Equidistant X):</strong> Projects the <span class="katex-inline math-inline" data-math="60^\circ">\( 60^\circ \)</span> slanted axial axis onto orthogonal Euclidean <span class="katex-inline math-inline" data-math="X">\( X \)</span>, guaranteeing that all 6 planar neighbors are strictly equidistant at <span class="katex-inline math-inline" data-math="\sqrt{3} R \approx 1.732">\( \sqrt{3} R \approx 1.732 \)</span>.<br/>- <strong><span class="katex-inline math-inline" data-math="\frac{3}{2} r">\( \frac{3}{2} r \)</span> (Cartesian Z):</strong> The row height spacing between adjacent hexagonal rows.<br/>- <strong><span class="katex-inline math-inline" data-math="z_{\text{elev}}">\( z_{\text{elev}} \)</span> (Vertical Layer):</strong> The discrete vertical shelf index (<span class="katex-inline math-inline" data-math="z \in [0, 1, 2]">\( z \in [0, 1, 2] \)</span>).<br/>- <strong><span class="katex-inline math-inline" data-math="\Delta z">\( \Delta z \)</span> (Vertical Spacing):</strong> Physical vertical clearance between benthic shelves (<span class="katex-inline math-inline" data-math="\Delta z = 1.4">\( \Delta z = 1.4 \)</span>).</blockquote>
+<hr class="divider" />
+<h3 id="32-the-3d-spherical-orbit-camera-pipeline">3.2 The 3D Spherical Orbit Camera Pipeline <a class="header-anchor" href="#32-the-3d-spherical-orbit-camera-pipeline" title="Link to section">#</a></h3>
+<p>Navigating the abyssal seamount requires smooth, intuitive 3D rotation, panning, and zooming. Rather than depending on heavy external graphics frameworks, Siliquarium implements a pure mathematical spherical orbit camera:</p>
+<p>$$\begin{aligned}</p>
+<p>x_{\text{eye}} &= x_{\text{target}} + R_{\text{cam}} \cos(\theta) \sin(\phi) \\</p>
+<p>y_{\text{eye}} &= y_{\text{target}} + R_{\text{cam}} \sin(\theta) \\</p>
+<p>z_{\text{eye}} &= z_{\text{target}} + R_{\text{cam}} \cos(\theta) \cos(\phi)</p>
+<p>\end{aligned}$$</p>
+<p><div class="katex-display math-block" data-math="\mathbf{P}_{\text{screen}} = \mathbf{M}_{\text{proj}} \cdot \mathbf{M}_{\text{view}} \cdot \mathbf{P}_{\text{world}}">\[ \mathbf{P}_{\text{screen}} = \mathbf{M}_{\text{proj}} \cdot \mathbf{M}_{\text{view}} \cdot \mathbf{P}_{\text{world}} \]</div></p>
+<blockquote class="callout">### 🔍 Equation Decoder<br/>- <strong><span class="katex-inline math-inline" data-math="R_{\text{cam}}">\( R_{\text{cam}} \)</span> (Camera Distance):</strong> Radial distance from the focal center (<span class="katex-inline math-inline" data-math="3.0 \le R_{\text{cam}} \le 80.0">\( 3.0 \le R_{\text{cam}} \le 80.0 \)</span>).<br/>- <strong><span class="katex-inline math-inline" data-math="\theta">\( \theta \)</span> (Elevation / Pitch):</strong> Vertical viewing angle (<span class="katex-inline math-inline" data-math="0.1 \le \theta \le \pi/2 - 0.05">\( 0.1 \le \theta \le \pi/2 - 0.05 \)</span>). Clamped to prevent gimbal lock.<br/>- <strong><span class="katex-inline math-inline" data-math="\phi">\( \phi \)</span> (Azimuth / Yaw):</strong> Horizontal rotation angle around the caldera (<span class="katex-inline math-inline" data-math="0 \le \phi \le 2\pi">\( 0 \le \phi \le 2\pi \)</span>).<br/>- <strong><span class="katex-inline math-inline" data-math="\mathbf{M}_{\text{view}}">\( \mathbf{M}_{\text{view}} \)</span> (View Matrix):</strong> Transforms 3D world space into camera coordinate space via Gram-Schmidt orthonormalization.<br/>- <strong><span class="katex-inline math-inline" data-math="\mathbf{M}_{\text{proj}}">\( \mathbf{M}_{\text{proj}} \)</span> (Perspective Projection):</strong> 4x4 frustum transformation matrix encoding field-of-view (<span class="katex-inline math-inline" data-math="\text{FOV} = 45^\circ">\( \text{FOV} = 45^\circ \)</span>) and perspective foreshortening.</blockquote>
+<hr class="divider" />
+<h2 id="4-concrete-micro-scaffolding-the-click-to-inspect-raycast-trace">4. Concrete Micro-Scaffolding: The Click-to-Inspect Raycast Trace <a class="header-anchor" href="#4-concrete-micro-scaffolding-the-click-to-inspect-raycast-trace" title="Link to section">#</a></h2>
+<p>When a researcher clicks on an individual pore in the 3D seafloor canvas, what happens under the hood?</p>
+<div class="table-container"><table><thead><tr><th>Step</th><th>Operation</th><th>Mathematical / Computational Action</th></tr></thead><tbody><tr><td><strong>1</strong></td><td>User Click</td><td>Mouse event captures screen coordinates <span class="katex-inline math-inline" data-math="(s_x, s_y) = (482, 310)">\( (s_x, s_y) = (482, 310) \)</span> px.</td></tr><tr><td><strong>2</strong></td><td>NDC Conversion</td><td>Converts pixels to Normalized Device Coordinates <span class="katex-inline math-inline" data-math="x_{\text{ndc}} \in [-1, +1]">\( x_{\text{ndc}} \in [-1, +1] \)</span>, <span class="katex-inline math-inline" data-math="y_{\text{ndc}} \in [-1, +1]">\( y_{\text{ndc}} \in [-1, +1] \)</span>.</td></tr><tr><td><strong>3</strong></td><td>Ray Unprojection</td><td>Multiplies near and far plane coordinates by <span class="katex-inline math-inline" data-math="(\mathbf{M}_{\text{proj}} \cdot \mathbf{M}_{\text{view}})^{-1}">\( (\mathbf{M}_{\text{proj}} \cdot \mathbf{M}_{\text{view}})^{-1} \)</span>, generating 3D ray <span class="katex-inline math-inline" data-math="(\vec{O}, \vec{D})">\( (\vec{O}, \vec{D}) \)</span>.</td></tr><tr><td><strong>4</strong></td><td>Hex Hit Test</td><td>Finds the nearest pore center <span class="katex-inline math-inline" data-math="(q, r, z)">\( (q, r, z) \)</span> within spatial tolerance threshold.</td></tr><tr><td><strong>5</strong></td><td>Microscope Lock</td><td>High-visibility neon sky bracket (<code>#38bdf8</code>) locks onto selected pore.</td></tr><tr><td><strong>6</strong></td><td>Phenotype Decoding</td><td><code>CircuitMicroscopeView</code> translates 60-bit genome tape into gate netlist and renders animated schematic.</td></tr></tbody></table></div>
+<hr class="divider" />
+<h2 id="5-misconception-immunity-skeptic-faq">5. Misconception Immunity (Skeptic FAQ) <a class="header-anchor" href="#5-misconception-immunity-skeptic-faq" title="Link to section">#</a></h2>
+<h3 id="q1-does-the-3d-visualizer-slow-down-evolutionary-simulations">Q1: Does the 3D visualizer slow down evolutionary simulations? <a class="header-anchor" href="#q1-does-the-3d-visualizer-slow-down-evolutionary-simulations" title="Link to section">#</a></h3>
+<p><strong>No.</strong> The core simulation kernel (<code>src/core/</code> and <code>src/engine/</code>) adheres strictly to the <strong>Zero-DOM Mandate</strong>. It has zero browser dependencies and runs at maximum speed in headless Node.js CLI test runners or background Web Workers. The presentation visualizer merely consumes lightweight flat snapshots (<code>SimulationTelemetry</code>) at 60 FPS without creating garbage-collection spikes or blocking the simulation engine.</p>
+<h3 id="q2-are-the-3d-physics-continuous-or-discrete">Q2: Are the 3D physics continuous or discrete? <a class="header-anchor" href="#q2-are-the-3d-physics-continuous-or-discrete" title="Link to section">#</a></h3>
+<p><strong>Discrete <span class="katex-inline math-inline" data-math="O(1)">\( O(1) \)</span>.</strong> As established in Section 20 of <code>THEORETICAL_MODEL.md</code>, continuous 3D rigid-body engines (like Havok or PhysX) introduce massive computational bloat. Siliquarium's 3D environment is a discrete stacked hexagonal lattice <span class="katex-inline math-inline" data-math="(q, r, z)">\( (q, r, z) \)</span>. Movement and placement are instantaneous pointer operations taking <span class="katex-inline math-inline" data-math="O(1)">\( O(1) \)</span> time per tick.</p>
+<h3 id="q3-why-use-an-interactive-html5-canvas-microscope-instead-of-static-charts">Q3: Why use an interactive HTML5 canvas microscope instead of static charts? <a class="header-anchor" href="#q3-why-use-an-interactive-html5-canvas-microscope-instead-of-static-charts" title="Link to section">#</a></h3>
+<p>Because life is dynamic. Static truth tables cannot show whether a circuit is oscillating, whether an electron pulse arrived in time to catch an incoming substrate wave, or how Landauer heat accumulates. The interactive microscope lets educators and students watch <strong>computation as a living metabolism</strong>.</p>
+<hr class="divider" />
+<h2 id="6-academic-citations">6. Academic Citations <a class="header-anchor" href="#6-academic-citations" title="Link to section">#</a></h2>
+<ul>
+<li><strong>Gram-Schmidt Orthonormalization & Camera View Transforms:</strong>  </li>
+</ul>
+<p><em>Hughes, J. F., et al. (2014).</em> *Computer Graphics: Principles and Practice (3rd ed.)*. Addison-Wesley.</p>
+<ul>
+<li><strong>Axial Hexagonal Grid Geometry & Metric Invariants:</strong>  </li>
+</ul>
+<p><em>Patel, A. (2013).</em> "Hexagonal Grids: Coordinate Systems, Distance, and Pathfinding." <em>Red Blob Games</em>.</p>
+<ul>
+<li><strong>The Epistemic Cut in Visualized Artificial Life:</strong>  </li>
+</ul>
+<p><em>Pattee, H. H. (2001).</em> "The physics of symbols: bridging the epistemic cut." <em>Biosystems</em>, 60(1-3), 5–21.</p>
+  </main>
+
+  <footer>
+    <p>Siliquarium: Open-Ended Digital Life & Silicon Abiogenesis Laboratory</p>
+    <p style="margin-top: 0.4rem;">
+      <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener">GitHub Repository</a> •
+      PolyForm Noncommercial License 1.0.0
+    </p>
+  </footer>
+</body>
+</html>

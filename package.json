@@ -12,8 +12,9 @@
     "test": "node scripts/tsc.mjs && node tests/run_tests.mjs",
     "build:docs": "node scripts/build_docs_html.mjs",
     "lint": "eslint src/ --ext .ts",
-    "dev": "vite",
-    "preview": "vite preview"
+    "dev": "node scripts/serve.mjs",
+    "serve": "node scripts/serve.mjs",
+    "preview": "node scripts/serve.mjs"
   },
   "keywords": [
     "artificial-life",

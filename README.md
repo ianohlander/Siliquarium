@@ -53,6 +53,24 @@ While BooleanGA explores **heteropoietic engineering synthesis** (evolving ALUs,
 - [x] **Phase 0:** Sealed Theoretical Model, Development Standards, QA & Testing Protocols, and GitHub Repository Bootstrap.
 - [x] **Phase 1:** Core Kernel (`Mulberry32`, `CodonTable`, `HexGrid3D`, `PoreCell`, `VentPhysics`, `Thermodynamics`).
 - [x] **Phase 2:** Progressive 8-Stage Zero-Dependency Test Suite & Energy/Mass Invariant Audits.
-- [ ] **Phase 3:** WebGL 3D Seafloor & Interactive Circuit Microscope Visualizer.
+- [x] **Phase 3:** WebGL 3D Seafloor & Interactive Circuit Microscope Visualizer (`OrbitCamera`, `SeafloorRenderer3D`, `CircuitMicroscopeView`, `HUDController`, `SimulationLoop`).
 - [ ] **Phase 4:** Digital Paleontologist Motif Scanner, Evolutionary Flight Recorder & Lenski Fossil Freezer.
 - [ ] **Phase 5:** Pelagic Planktonic Detachment, Spore Dispersal, and God-Suite Interactive Controls.
+
+---
+
+## 🎮 Launching the Interactive Visualizer
+
+Siliquarium features a native zero-dependency local development server:
+
+```bash
+# 1. Compile TypeScript to dist/
+npm run build
+
+# 2. Run the 10-Stage Comprehensive Test Suite
+npm test
+
+# 3. Launch the 3D Seafloor & Circuit Microscope Visualizer
+npm run dev
+# Open http://localhost:3000 in your browser!
+```

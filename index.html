@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siliquarium — Open-Ended Digital Life & Silicon Abiogenesis</title>
+  <link rel="icon" type="image/jpeg" href="logos/logo.jpg">
+  <style>
+    :root {
+      --bg-dark: #020617;
+      --panel-bg: #090e1a;
+      --panel-border: #1e293b;
+      --accent-cyan: #38bdf8;
+      --accent-gold: #fbbf24;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", monospace;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Bar */
+    header {
+      background-color: rgba(9, 14, 26, 0.95);
+      border-bottom: 1px solid var(--panel-border);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 20;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #fff;
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.04em;
+    }
+
+    .telemetry-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .telemetry-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-family: monospace;
+    }
+
+    .telemetry-label {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .telemetry-val {
+      font-size: 0.88rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .pill-active-amber {
+      background-color: rgba(245, 158, 11, 0.2);
+      border: 1px solid #f59e0b;
+      color: #fbbf24;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-family: monospace;
+    }
+
+    .pill-active-cyan {
+      background-color: rgba(6, 182, 212, 0.2);
+      border: 1px solid #06b6d4;
+      color: #22d3ee;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-family: monospace;
+    }
+
+    .pill-active-rose {
+      background-color: rgba(244, 63, 94, 0.2);
+      border: 1px solid #f43f5e;
+      color: #fb7185;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-family: monospace;
+    }
+
+    .pill-inactive {
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      color: #64748b;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-family: monospace;
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Seafloor Viewport */
+    #seafloor-container {
+      flex: 1;
+      position: relative;
+      background-color: #020713;
+    }
+
+    #canvas-seafloor {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+    }
+
+    #canvas-seafloor:active {
+      cursor: grabbing;
+    }
+
+    .camera-hint {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--panel-border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      pointer-events: none;
+      font-family: monospace;
+    }
+
+    .selected-pore-badge {
+      position: absolute;
+      bottom: 68px;
+      left: 16px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--panel-border);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: var(--accent-cyan);
+      font-family: monospace;
+      pointer-events: none;
+    }
+
+    /* Docked Microscope Panel */
+    #microscope-panel {
+      width: 400px;
+      background-color: var(--panel-bg);
+      border-left: 1px solid var(--panel-border);
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    .panel-header {
+      padding: 12px 16px;
+      background-color: rgba(15, 23, 42, 0.8);
+      border-bottom: 1px solid var(--panel-border);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #microscope-container {
+      flex: 1;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #canvas-microscope {
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      border: 1px solid #1e293b;
+    }
+
+    /* Floating Transport Bar */
+    .transport-bar {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--panel-border);
+      border-radius: 30px;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 15;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-transport {
+      background: #1e293b;
+      color: #fff;
+      border: 1px solid #334155;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-transport:hover {
+      background: #334155;
+      border-color: #64748b;
+    }
+
+    .btn-play {
+      background: #0284c7;
+      border-color: #0ea5e9;
+    }
+
+    .btn-play:hover {
+      background: #0369a1;
+    }
+
+    .btn-pause {
+      background: #f59e0b;
+      border-color: #fbbf24;
+      color: #000;
+    }
+
+    .speed-group {
+      display: flex;
+      background: #0f172a;
+      border-radius: 16px;
+      padding: 2px;
+      border: 1px solid #1e293b;
+    }
+
+    .speed-pill {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 4px 8px;
+      font-size: 0.72rem;
+      font-family: monospace;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+
+    .speed-active {
+      background: var(--accent-cyan);
+      color: #000;
+      font-weight: bold;
+    }
+
+    .cam-btn {
+      background: transparent;
+      border: 1px solid #334155;
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 14px;
+      font-size: 0.72rem;
+      cursor: pointer;
+    }
+
+    .cam-btn:hover {
+      color: #fff;
+      border-color: var(--accent-cyan);
+    }
+
+    /* Lab Flyout Drawer */
+    #lab-drawer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 320px;
+      background: rgba(9, 14, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border-right: 1px solid var(--panel-border);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 25;
+      transform: translateX(-100%);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #lab-drawer:not(.-translate-x-full) {
+      transform: translateX(0);
+    }
+
+    .drawer-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 8px;
+    }
+
+    .slider-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+
+    .slider-val {
+      color: var(--accent-gold);
+      font-weight: bold;
+    }
+
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--accent-cyan);
+      cursor: pointer;
+    }
+
+    .drawer-btn {
+      background: #1e293b;
+      color: #fff;
+      border: 1px solid #334155;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+
+    .drawer-btn:hover {
+      background: #334155;
+      border-color: var(--accent-cyan);
+    }
+
+    .btn-danger {
+      background: rgba(244, 63, 94, 0.15);
+      border-color: #f43f5e;
+      color: #fda4af;
+    }
+
+    .btn-danger:hover {
+      background: rgba(244, 63, 94, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation & Telemetry Header -->
+  <header>
+    <div class="brand-section">
+      <img src="logos/logo.jpg" alt="Siliquarium Logo" class="brand-logo">
+      <div>
+        <div class="brand-title">SILIQUARIUM</div>
+        <div class="brand-subtitle">Autopoietic Silicon Abiogenesis Lab</div>
+      </div>
+    </div>
+
+    <div class="telemetry-row">
+      <div class="telemetry-item">
+        <span class="telemetry-label">Epoch Ticks</span>
+        <span class="telemetry-val" id="hud-ticks">0</span>
+      </div>
+      <div class="telemetry-item">
+        <span class="telemetry-label">Living Cells</span>
+        <span class="telemetry-val" id="hud-living" style="color: var(--accent-emerald);">0</span>
+      </div>
+      <div class="telemetry-item">
+        <span class="telemetry-label">Carcasses</span>
+        <span class="telemetry-val" id="hud-carcass" style="color: var(--accent-gold);">0</span>
+      </div>
+      <div class="telemetry-item">
+        <span class="telemetry-label">Stored Energy</span>
+        <span class="telemetry-val" id="hud-energy">0 T</span>
+      </div>
+      <div class="telemetry-item">
+        <span class="telemetry-label">Conservation</span>
+        <span class="telemetry-val" id="hud-delta" style="color: var(--accent-emerald);">ΔE = 0.000</span>
+      </div>
+      <div class="telemetry-item">
+        <span class="telemetry-label">Vent Plumes</span>
+        <div style="display: flex; gap: 6px; margin-top: 2px;">
+          <span id="hud-vent-a" class="pill-inactive">Stream A</span>
+          <span id="hud-vent-b" class="pill-inactive">Stream B</span>
+          <span id="hud-vent-t" class="pill-inactive">Toxin</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Viewports -->
+  <main>
+    <!-- Left Parameter Flyout Drawer -->
+    <div id="lab-drawer" class="-translate-x-full">
+      <div class="drawer-title">
+        <span>🔬 Physical Parameters</span>
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-header">
+          <span>Point Mutation Rate</span>
+          <span id="label-mutation-val" class="slider-val">0.10%</span>
+        </div>
+        <input type="range" id="slider-mutation" min="0.0005" max="0.05" step="0.0005" value="0.001">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-header">
+          <span>Soup Seeding Density</span>
+          <span id="label-soup-val" class="slider-val">20%</span>
+        </div>
+        <input type="range" id="slider-soup" min="0.05" max="0.60" step="0.05" value="0.20">
+      </div>
+
+      <button id="btn-seed-soup" class="drawer-btn">⚡ Seed Primordial Soup</button>
+      <button id="btn-reset-sim" class="drawer-btn btn-danger">⚠️ Reset Simulation</button>
+    </div>
+
+    <!-- 3D Seafloor Viewport -->
+    <div id="seafloor-container">
+      <canvas id="canvas-seafloor"></canvas>
+      <div class="camera-hint">
+        Left-Drag: Orbit | Right-Drag: Pan | Scroll: Zoom | Click: Inspect Pore
+      </div>
+      <div class="selected-pore-badge" id="hud-selected-pore">
+        Selected: None (Click any hexagonal pore)
+      </div>
+
+      <!-- Floating Transport Controls -->
+      <div class="transport-bar">
+        <button id="lab-toggle-btn" class="btn-transport">⚙️ Lab</button>
+        <button id="btn-play-pause" class="btn-transport btn-play">⏸ Pause</button>
+        <button id="btn-step-forward" class="btn-transport">⏭ +1 Tick</button>
+
+        <div class="speed-group">
+          <button class="speed-pill speed-active" data-speed="1">1x</button>
+          <button class="speed-pill" data-speed="2">2x</button>
+          <button class="speed-pill" data-speed="5">5x</button>
+          <button class="speed-pill" data-speed="10">10x</button>
+        </div>
+
+        <div style="display: flex; gap: 6px;">
+          <button id="cam-caldera" class="cam-btn">Caldera</button>
+          <button id="cam-topdown" class="cam-btn">Top-Down</button>
+          <button id="cam-reset" class="cam-btn">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Docked Circuit Microscope Panel -->
+    <div id="microscope-panel">
+      <div class="panel-header">
+        <span>🔬 LIVE CIRCUIT MICROSCOPE (Pore Workshop)</span>
+      </div>
+      <div id="microscope-container">
+        <canvas id="canvas-microscope"></canvas>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="./dist/main.js"></script>
+</body>
+</html>

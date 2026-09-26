@@ -28,6 +28,8 @@ import {
   VentPhysics,
   ThermodynamicLedger
 } from '../dist/core/index.js';
+import { runStage8 } from './stage8_engine.mjs';
+import { runStage9 } from './stage9_visualizers.mjs';
 
 console.log('=========================================');
 console.log('🐠 Siliquarium Comprehensive Test Suite');
@@ -35,7 +37,7 @@ console.log(`   Version: ${SILIQUARIUM_VERSION}`);
 console.log('=========================================');
 
 const startTime = performance.now();
-const totalStages = 8;
+const totalStages = 10;
 let passedStages = 0;
 
 function runStage(stageNum, name, testFn) {
@@ -68,6 +70,8 @@ runStage(0, 'Testing Architecture, HTML Docs & Theoretical Specification Complet
     'docs/THEORETICAL_MODEL.html',
     'docs/EPISTEMIC_FOUNDATIONS.html',
     'docs/BRAND_IDENTITY.html',
+    'docs/PHASE_3_VISUALIZER_GUIDE.md',
+    'docs/PHASE_3_VISUALIZER_GUIDE.html',
     'docs/logos.html',
     'logos/index.html',
     'logos/logo.jpg',
@@ -235,18 +239,15 @@ runStage(5, 'Testing Howard Pattee Epistemic Cut & Blind Template Replication', 
   assert.strictEqual(cell.getSafe().getTape(), safe.getTape(), 'Safe must NEVER mutate during cell lifetime');
 
   // Blind photocopy replication
-  const childCell = cell.reproduce(prng, 0.05); // High mutation rate for testing
+  const childCell = cell.reproduce(prng, 0.05);
   assert.strictEqual(childCell.getGeneration(), 1, 'Child generation must be parent + 1');
   assert.strictEqual(childCell.getSafe().length(), 60, 'Child safe must be 60 bits');
-  assert.strictEqual(cell.getSafe().getTape(), safe.getTape(), 'Parent tape must remain uncorrupted after division');
+  assert.strictEqual(cell.getSafe().getTape(), safe.getTape(), 'Parent tape uncorrupted after division');
 
-  // Inorganic Pore & Detritus scavenger cycle
   const pore = new Pore(new HexCoord3D(0, 0, 0));
   assert.strictEqual(pore.getState(), PoreState.EMPTY, 'Initial pore must be EMPTY');
   pore.setResident(childCell);
   assert.strictEqual(pore.getState(), PoreState.OCCUPIED, 'Pore must be OCCUPIED');
-
-  // Lysis leaves behind a carcass
   pore.triggerLysis();
   assert.strictEqual(pore.getState(), PoreState.CARCASS, 'Lysed pore must become CARCASS');
   assert.ok(pore.getCarcass() !== null, 'Carcass data must exist');
@@ -256,12 +257,8 @@ runStage(5, 'Testing Howard Pattee Epistemic Cut & Blind Template Replication', 
 runStage(6, 'Testing Hydrothermal Vent Waveforms & Multi-Scale Chemistry', () => {
   const vent = new VentPhysics(new HexCoord3D(0, 0, 0), 500);
   assert.strictEqual(vent.getEnergyCap(), 500, 'Vent energy cap mismatch');
-
-  // Test at nozzle: high thermal flux and alternating substrate pulses
   const stateNozzle = vent.evaluateAt(new HexCoord3D(0, 0, 0), 6);
   assert.ok(stateNozzle.thermalFlux > 0, 'Nozzle thermal flux must be positive');
-
-  // Test distance dissipation: flux falls quadratically with distance
   const stateDistant = vent.evaluateAt(new HexCoord3D(4, 0, 0), 6);
   assert.ok(stateNozzle.thermalFlux > stateDistant.thermalFlux, 'Thermal flux must dissipate with distance');
 });
@@ -269,28 +266,26 @@ runStage(6, 'Testing Hydrothermal Vent Waveforms & Multi-Scale Chemistry', () =>
 // Stage 7: Closed-Universe Thermodynamic Conservation Invariant Audit
 runStage(7, 'Testing Closed-Universe Energy & Mass Conservation Invariant (Tolerance = 0.000)', () => {
   const ledger = new ThermodynamicLedger();
-
-  // Inject energy and matter into closed universe
   ledger.recordEnergyInjection(100);
   ledger.recordMatterInjection(50);
-
-  // Simulate internal work: Landauer switching and basal leak
-  const currentStoredEnergy = 60;
   ledger.recordLandauerBurn(30);
   ledger.recordHeatDissipation(10);
-
-  // Simulate mass distribution: living bodies, carcasses, sediment
-  const livingMatter = 30;
-  const carcassMatter = 15;
   ledger.recordMatterSedimentation(5);
-
-  const audit = ledger.auditBalance(currentStoredEnergy, livingMatter, carcassMatter);
-
+  const audit = ledger.auditBalance(60, 30, 15);
   assert.strictEqual(audit.energyBalanceDelta, 0, 'Energy conservation leak detected! Delta != 0');
   assert.ok(audit.isEnergyConserved, 'Conservation of Energy invariant violated');
-
   assert.strictEqual(audit.matterBalanceDelta, 0, 'Mass conservation leak detected! Delta != 0');
   assert.ok(audit.isMatterConserved, 'Conservation of Matter invariant violated');
+});
+
+// Stage 8: Simulation Engine, Stepping Loop & Closed-Universe Telemetry
+runStage(8, 'Testing Simulation Engine, Loop & Closed-Universe Telemetry', () => {
+  runStage8();
+});
+
+// Stage 9: OrbitCamera 3D Matrix Math, Screen-to-Ray Projections & Hex Grid
+runStage(9, 'Testing OrbitCamera 3D Math, Raycast Unprojection & Hex Geometry', () => {
+  runStage9();
 });
 
 const elapsed = (performance.now() - startTime).toFixed(1);
