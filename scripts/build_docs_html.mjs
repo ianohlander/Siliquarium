@@ -3,7 +3,8 @@
 /**
  * 🐠 Siliquarium Native Zero-Dependency Markdown to HTML Documentation Compiler
  * Generates self-contained, responsive, enterprise-grade abyssal-themed HTML documents
- * built on Tailwind CSS, MathJax 3, and Interactive Citation Navigation (matching BooleanGA standard).
+ * built on Tailwind CSS, MathJax 3, and a Two-Column Categorized Sidebar + Top Dropdown layout.
+ * Eliminates all horizontal scrollbars in favor of clean, categorized vertical navigation.
  */
 
 import fs from 'node:fs';
@@ -14,19 +15,44 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
-const NAV_ITEMS = [
-  { id: 'index', title: 'Portal Home', href: 'index.html', icon: '🐠' },
-  { id: 'syllabus', title: 'Curriculum & Labs', href: 'CURRICULUM_AND_SYLLABUS.html', icon: '🎓' },
-  { id: 'pedagogy', title: 'Companion & Glossary', href: 'PEDAGOGICAL_COMPANION_SUITE.html', icon: '🏛️' },
-  { id: 'theory', title: 'Theoretical Model', href: 'THEORETICAL_MODEL.html', icon: '🌊' },
-  { id: 'epistemic', title: 'Epistemic Foundations', href: 'EPISTEMIC_FOUNDATIONS.html', icon: '🧬' },
-  { id: 'design-principles', title: 'Design Principles', href: 'DOCUMENTATION_DESIGN_PRINCIPLES.html', icon: '📐' },
-  { id: 'phase3', title: '3D Visualizer', href: 'PHASE_3_VISUALIZER_GUIDE.html', icon: '🔬' },
-  { id: 'phase4', title: 'Paleontology & Motifs', href: 'PHASE_4_PALEONTOLOGY_GUIDE.html', icon: '🦕' },
-  { id: 'phase5', title: 'Spores & Controls', href: 'PHASE_5_PELAGIC_SPORES_GUIDE.html', icon: '🌊' },
-  { id: 'phase6', title: 'Phylogeny & Dynamics', href: 'PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html', icon: '🧬' },
-  { id: 'brand', title: 'Brand Identity', href: 'BRAND_IDENTITY.html', icon: '🎨' },
-  { id: 'logos', title: 'Logo Gallery', href: 'logos.html', icon: '🖼️' }
+const NAV_CATEGORIES = [
+  {
+    name: 'Curriculum & Pedagogy',
+    icon: '🎓',
+    items: [
+      { id: 'index', title: 'Portal Overview', href: 'index.html', icon: '🐠', desc: 'Curriculum portal & modular index' },
+      { id: 'syllabus', title: 'Curriculum & Labs', href: 'CURRICULUM_AND_SYLLABUS.html', icon: '🎓', desc: '4-unit syllabus & 5 lab practicums' },
+      { id: 'pedagogy', title: 'Companion & Glossary', href: 'PEDAGOGICAL_COMPANION_SUITE.html', icon: '🏛️', desc: '55-term glossary & 14 annotated papers' },
+      { id: 'qa-report', title: 'Student QA Report', href: 'QA/STUDENT_UX_REPORT.html', icon: '🧪', desc: '12th-grade usability audit & screenshots' }
+    ]
+  },
+  {
+    name: 'Biophysical Theory',
+    icon: '🌊',
+    items: [
+      { id: 'theory', title: 'Theoretical Model', href: 'THEORETICAL_MODEL.html', icon: '🌊', desc: '21 sealed sections & thermodynamic laws' },
+      { id: 'epistemic', title: 'Epistemic Foundations', href: 'EPISTEMIC_FOUNDATIONS.html', icon: '🧬', desc: "Howard Pattee's Epistemic Cut & defenses" },
+      { id: 'design-principles', title: 'Design Principles', href: 'DOCUMENTATION_DESIGN_PRINCIPLES.html', icon: '📐', desc: 'Documentation & UI/UX architecture' }
+    ]
+  },
+  {
+    name: 'Laboratory Guides',
+    icon: '🔬',
+    items: [
+      { id: 'phase3', title: '3D Seafloor Visualizer', href: 'PHASE_3_VISUALIZER_GUIDE.html', icon: '🔬', desc: 'Bathymetry, orbit camera & circuit microscope' },
+      { id: 'phase4', title: 'Paleontology & Motifs', href: 'PHASE_4_PALEONTOLOGY_GUIDE.html', icon: '🦕', desc: 'Weisfeiler-Lehman hashes & fossil freezer' },
+      { id: 'phase5', title: 'Pelagic Spores & Controls', href: 'PHASE_5_PELAGIC_SPORES_GUIDE.html', icon: '🌊', desc: 'Buoyant spore drift & God-suite parameters' },
+      { id: 'phase6', title: 'Phylogeny & Dynamics', href: 'PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html', icon: '🧬', desc: 'Multi-lineage clades & Lenski benchmarks' }
+    ]
+  },
+  {
+    name: 'Visuals & Identity',
+    icon: '🎨',
+    items: [
+      { id: 'brand', title: 'Brand Identity', href: 'BRAND_IDENTITY.html', icon: '🎨', desc: 'Visual philosophy & biomorphic styling' },
+      { id: 'logos', title: 'Logo Gallery', href: 'logos.html', icon: '🖼️', desc: 'High-res Fibonacci nautilus asset suite' }
+    ]
+  }
 ];
 
 function escapeHtml(str) {
@@ -232,7 +258,7 @@ function parseMarkdown(md, currentDocId) {
       const id = slugify(text.replace(/<[^>]+>/g, ''));
 
       let sizeClasses = 'text-xl font-bold font-mono text-slate-100 mt-8 mb-4';
-      if (level === 1) sizeClasses = 'text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-10 mb-4 pb-2 border-b border-slate-800';
+      if (level === 1) sizeClasses = 'text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800';
       if (level === 2) sizeClasses = 'text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80';
       if (level === 3) sizeClasses = 'text-lg font-bold font-mono text-cyan-400 mt-6 mb-2';
       if (level === 4) sizeClasses = 'text-base font-semibold font-mono text-amber-400 mt-4 mb-2';
@@ -314,12 +340,56 @@ function inlineFormat(text, currentDocId) {
   return text;
 }
 
+function generateSidebar(currentDocId, relativeRoot) {
+  let html = '';
+  for (const cat of NAV_CATEGORIES) {
+    html += `<div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>${cat.icon}</span>
+        <span>${cat.name}</span>
+      </div>
+      <div class="space-y-0.5">`;
+    for (const item of cat.items) {
+      const isActive = item.id === currentDocId;
+      const target = relativeRoot + item.href;
+      html += `<a href="${target}" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${isActive ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-850/60'}">
+        <span class="text-xs shrink-0">${item.icon}</span>
+        <span class="truncate">${item.title}</span>
+      </a>`;
+    }
+    html += `</div></div>`;
+  }
+  return html;
+}
+
+function generateDropdownMenu(currentDocId, relativeRoot) {
+  let html = '';
+  for (const cat of NAV_CATEGORIES) {
+    html += `<div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>${cat.icon}</span>
+        <span>${cat.name}</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1">`;
+    for (const item of cat.items) {
+      const isActive = item.id === currentDocId;
+      const target = relativeRoot + item.href;
+      html += `<a href="${target}" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 ${isActive ? 'bg-cyan-950/80 border border-cyan-700/60 text-cyan-300' : 'hover:bg-slate-900 text-slate-300'}">
+        <span class="text-sm shrink-0 mt-0.5">${item.icon}</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs ${isActive ? 'text-cyan-300' : 'text-slate-200'}">${item.title}</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">${item.desc}</div>
+        </div>
+      </a>`;
+    }
+    html += `</div></div>`;
+  }
+  return html;
+}
+
 function renderHtmlTemplate({ title, content, currentDocId, relativeRoot = '' }) {
-  const navHtml = NAV_ITEMS.map(item => {
-    const isActive = item.id === currentDocId;
-    const target = relativeRoot + item.href;
-    return `<a href="${target}" class="px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap font-mono ${isActive ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'}">${item.icon} ${item.title}</a>`;
-  }).join('\n');
+  const sidebarHtml = generateSidebar(currentDocId, relativeRoot);
+  const dropdownHtml = generateDropdownMenu(currentDocId, relativeRoot);
 
   return `<!-- 🐠 Siliquarium Open-Ended Digital Life & Silicon Abiogenesis Laboratory • Created by & Copyright © 2026 Ian Ohlander. All rights reserved. -->
 <!DOCTYPE html>
@@ -378,7 +448,7 @@ function renderHtmlTemplate({ title, content, currentDocId, relativeRoot = '' })
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #060911; }
     ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
@@ -541,45 +611,117 @@ function renderHtmlTemplate({ title, content, currentDocId, relativeRoot = '' })
           setTimeout(checkInitialHash, 100);
         });
       }
+
+      // Sidebar & Dropdown Controller
+      const toggleBtn = document.getElementById('sidebar-toggle-btn');
+      const closeBtn = document.getElementById('sidebar-close-btn');
+      const sidebar = document.getElementById('doc-sidebar');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      const dropdownBtn = document.getElementById('nav-dropdown-btn');
+      const dropdownMenu = document.getElementById('nav-dropdown-menu');
+
+      function openSidebar() {
+        if (sidebar && backdrop) {
+          sidebar.classList.remove('-translate-x-full');
+          backdrop.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+      function closeSidebar() {
+        if (sidebar && backdrop) {
+          sidebar.classList.add('-translate-x-full');
+          backdrop.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      }
+
+      if (toggleBtn) toggleBtn.addEventListener('click', openSidebar);
+      if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+      if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+      if (dropdownBtn && dropdownMenu) {
+        dropdownBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          dropdownMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', function(e) {
+          if (!dropdownMenu.contains(e.target) && e.target !== dropdownBtn) {
+            dropdownMenu.classList.add('hidden');
+          }
+        });
+      }
     });
   </script>
 </head>
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
-  <!-- MASTER HEADER & BREADCRUMBS -->
-  <header class="border-b border-slate-800 bg-[#060911]/90 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
-      <nav class="flex items-center gap-2 text-xs font-mono text-slate-400">
-        <a href="${relativeRoot}index.html" class="hover:text-cyan-400 text-slate-300 flex items-center gap-2 font-bold">
-          <img src="${relativeRoot}assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50 shadow-sm inline">
-          <span>Siliquarium Portal</span>
-        </a>
-        <span>/</span>
-        <span class="text-cyan-400 font-semibold truncate max-w-xs md:max-w-md">${escapeHtml(title)}</span>
-      </nav>
-      <div class="flex items-center gap-2.5">
-        <a href="${relativeRoot}../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
-          <span>🚀 Live Simulator</span>
-        </a>
-        <a href="${relativeRoot}CURRICULUM_AND_SYLLABUS.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
-          <span>🎓 Curriculum</span>
-        </a>
-        <a href="${relativeRoot}PEDAGOGICAL_COMPANION_SUITE.html" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded text-xs hover:bg-slate-800 transition-colors font-mono">
-          <span>🏛️ Glossary</span>
+  <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
+  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <!-- Mobile/Drawer Toggle Button -->
+        <button id="sidebar-toggle-btn" class="lg:hidden p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 transition-colors font-mono text-xs flex items-center gap-1.5 shrink-0" aria-label="Toggle Navigation">
+          <span>☰</span>
+          <span class="hidden sm:inline">Docs Menu</span>
+        </button>
+
+        <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
+          <a href="${relativeRoot}index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
+            <img src="${relativeRoot}assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
+            <span class="hidden sm:inline">Siliquarium</span>
+            <span class="sm:hidden">Portal</span>
+          </a>
+          <span class="text-slate-600">/</span>
+          <span class="text-cyan-400 font-semibold truncate">${escapeHtml(title)}</span>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- Quick Mega-Menu Dropdown Button -->
+        <div class="relative">
+          <button id="nav-dropdown-btn" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-300 hover:border-cyan-700/60 rounded-lg text-xs font-mono transition-all flex items-center gap-1.5 shadow-sm">
+            <span>🧭</span>
+            <span>Explore Docs</span>
+            <span class="text-[10px] text-slate-500">▾</span>
+          </button>
+          <!-- Mega-Menu Overlay -->
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+            ${dropdownHtml}
+          </div>
+        </div>
+
+        <a href="${relativeRoot}../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🚀</span>
+          <span class="hidden md:inline">Live Simulator</span>
         </a>
       </div>
     </div>
-    <div class="border-t border-slate-800/80 bg-[#0a0e1a]/80 px-4 py-1.5 overflow-x-auto">
-      <nav class="max-w-6xl mx-auto flex items-center gap-1 text-xs font-mono">
-        ${navHtml}
-      </nav>
-    </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
-  <main class="max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12 space-y-8 flex-1 w-full">
-    ${content}
-  </main>
+  <!-- MASTER 2-COLUMN VIEWPORT (Sidebar + Content) -->
+  <div class="max-w-7xl mx-auto flex-1 w-full flex">
+    <!-- LEFT CATEGORIZED SIDEBAR (Desktop Sticky + Mobile Off-Canvas) -->
+    <aside id="doc-sidebar" class="fixed lg:sticky top-0 lg:top-[45px] z-50 lg:z-10 h-screen lg:h-[calc(100vh-45px)] w-72 bg-[#060911]/95 lg:bg-transparent backdrop-blur-xl lg:backdrop-blur-none border-r border-slate-800/80 p-5 space-y-6 overflow-y-auto shrink-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-200">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 lg:hidden">
+        <div class="flex items-center gap-2">
+          <img src="${relativeRoot}assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
+          <span class="text-xs font-mono font-bold text-cyan-400">Documentation Index</span>
+        </div>
+        <button id="sidebar-close-btn" class="text-slate-400 hover:text-white text-base font-mono p-1">✕</button>
+      </div>
+      ${sidebarHtml}
+    </aside>
+
+    <!-- Mobile Drawer Backdrop -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+    <!-- MAIN CONTENT VIEWPORT (Centered, Responsive, Zero Horizontal Scrollbars) -->
+    <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-10 py-8 md:py-10">
+      <div class="max-w-4xl mx-auto space-y-8">
+        ${content}
+      </div>
+    </main>
+  </div>
 
   <!-- MASTER FOOTER -->
   <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
@@ -806,4 +948,4 @@ for (const doc of DOCS_MAP) {
 
 buildLogoGallery();
 
-console.log('\n🎉 ALL DOCUMENTATION COMPILED WITH TAILWIND & MATHJAX 3 SUCCESSFULLY!');
+console.log('\n🎉 ALL DOCUMENTATION COMPILED WITH SIDEBAR & DROPDOWN LAYOUT SUCCESSFULLY!');
