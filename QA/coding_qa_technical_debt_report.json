@@ -1716,7 +1716,7 @@
     {
       "file": "src/core/domain/Pore.ts",
       "function": "stepMetaboliteDiffusionAndDecay",
-      "line": 197,
+      "line": 201,
       "complexity": 11,
       "overBudget": 4
     },
@@ -2664,7 +2664,7 @@
     {
       "file": "src/core/domain/Pore.ts",
       "function": "stepMetaboliteDiffusionAndDecay",
-      "line": 197,
+      "line": 201,
       "depth": 4,
       "overBudget": 1
     },
@@ -3139,21 +3139,7 @@
     }
   ],
   "forbiddenFileViolations": [],
-  "zeroDomViolations": [
-    {
-      "file": "src/engine/storage/SiliquariumDB.ts",
-      "line": 122,
-      "token": "window.",
-      "snippet": "const req = window.indexedDB.open('SiliquariumDB', 3);"
-    }
-  ],
+  "zeroDomViolations": [],
   "anyTypeViolations": [],
-  "encapsulationViolations": [
-    {
-      "file": "src/core/domain/Pore.ts",
-      "line": 45,
-      "property": "medium",
-      "snippet": "public medium: PoreMedium;"
-    }
-  ]
+  "encapsulationViolations": []
 }

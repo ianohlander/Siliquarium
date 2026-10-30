@@ -102,7 +102,7 @@ export class SiliquariumDB {
   private readonly MAX_FALLBACK_CAPACITY = 200;
 
   private constructor() {
-    this.isSupported = typeof window !== 'undefined' && typeof window.indexedDB !== 'undefined';
+    this.isSupported = typeof indexedDB !== 'undefined';
   }
 
   public static getInstance(): SiliquariumDB {
@@ -119,7 +119,7 @@ export class SiliquariumDB {
 
     this.initPromise = new Promise<void>((resolve) => {
       try {
-        const req = window.indexedDB.open('SiliquariumDB', 3);
+        const req = indexedDB.open('SiliquariumDB', 3);
 
         req.onupgradeneeded = (event) => {
           const db = (event.target as IDBOpenDBRequest).result;

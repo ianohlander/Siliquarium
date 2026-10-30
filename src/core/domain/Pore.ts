@@ -42,7 +42,7 @@ export class Pore {
   public static readonly DEFAULT_SPORE_LIFESPAN = 25;
 
   public readonly coord: HexCoord3D;
-  public medium: PoreMedium;
+  private _medium: PoreMedium;
   private resident: PoreCell | null = null;
   private carcass: ICarcassData | null = null;
   private spore: IPelagicSpore | null = null;
@@ -52,11 +52,15 @@ export class Pore {
 
   constructor(coord: HexCoord3D, medium: PoreMedium = PoreMedium.ROCK_SUBSTRATE) {
     this.coord = coord;
-    this.medium = medium;
+    this._medium = medium;
+  }
+
+  public get medium(): PoreMedium {
+    return this._medium;
   }
 
   public setMedium(medium: PoreMedium): void {
-    this.medium = medium;
+    this._medium = medium;
   }
 
   public isBasalt(): boolean {
@@ -67,7 +71,7 @@ export class Pore {
     this.basalt = basalt;
     if (basalt) {
       this.clear();
-      this.medium = PoreMedium.ROCK_SUBSTRATE;
+      this._medium = PoreMedium.ROCK_SUBSTRATE;
     }
   }
 
