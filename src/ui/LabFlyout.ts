@@ -1850,9 +1850,10 @@ export class LabFlyout {
       elLandauer.textContent = `${telemetry.ledger.totalEnergyBurnedLandauer.toFixed(1)} kT ln 2`;
     }
 
-    const elEntropy = document.getElementById('studio-tele-entropy');
-    if (elEntropy && telemetry.ledger) {
-      elEntropy.textContent = `${telemetry.ledger.totalEnergyDissipatedHeat.toFixed(1)} eu`;
+    // Thermal Heat Dissipation Q (in energy units eu)
+    const elHeat = document.getElementById('studio-tele-heat-dissipation') || document.getElementById('studio-tele-entropy');
+    if (elHeat && telemetry.ledger) {
+      elHeat.textContent = `${telemetry.ledger.totalEnergyDissipatedHeat.toFixed(1)} eu`;
     }
 
     const elGen = document.getElementById('studio-tele-generation');

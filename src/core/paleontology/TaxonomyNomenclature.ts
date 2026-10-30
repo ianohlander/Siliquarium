@@ -502,9 +502,12 @@ export class TaxonomyNomenclature {
       return this.TAXA.MITCHELLII;
     }
 
-    // 16. Dense genome with high information content (Shannon homage)
+    // 16. Dense genome with high information content (Shannon homage: genuine H >= 0.85 bits/bit)
     if (tapeBitstring && tapeBitstring.length >= 24 && gateCount >= 2) {
-      return this.TAXA.SHANNONII;
+      const entropy = TaxonomyNomenclature.computeShannonBitEntropy(tapeBitstring);
+      if (entropy >= 0.85) {
+        return this.TAXA.SHANNONII;
+      }
     }
 
     // 17. Deep basalt substrate dweller (Lane homage)
@@ -527,5 +530,17 @@ export class TaxonomyNomenclature {
 
   public static getAllTaxa(): readonly ISpeciesTaxon[] {
     return Object.values(this.TAXA);
+  }
+
+  public static computeShannonBitEntropy(bitstring: string): number {
+    if (!bitstring || bitstring.length === 0) return 0;
+    let ones = 0;
+    for (let i = 0; i < bitstring.length; i++) {
+      if (bitstring.charAt(i) === '1') ones++;
+    }
+    const p1 = ones / bitstring.length;
+    const p0 = 1 - p1;
+    if (p0 <= 0 || p1 <= 0) return 0;
+    return -(p0 * Math.log2(p0) + p1 * Math.log2(p1));
   }
 }

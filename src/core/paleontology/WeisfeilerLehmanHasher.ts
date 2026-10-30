@@ -23,6 +23,7 @@ export class WeisfeilerLehmanHasher {
     // Round 0: Initialize colors with gate types and terminal bindings
     const colors: Map<number, string> = new Map();
     const adj: Map<number, string[]> = new Map();
+    const revAdj: Map<number, string[]> = new Map();
 
     for (let i = 0; i < gates.length; i++) {
       const g = gates[i];
@@ -31,11 +32,13 @@ export class WeisfeilerLehmanHasher {
         : '';
       colors.set(g.id, `${g.type}${termSig}`);
       adj.set(g.id, []);
+      revAdj.set(g.id, []);
     }
 
     if (astEdges && astEdges.length > 0) {
       for (const edge of astEdges) {
         adj.get(edge.fromGateId)?.push(`${edge.inputPin}->${edge.toGateId}`);
+        revAdj.get(edge.toGateId)?.push(`IN-${edge.inputPin}<-${edge.fromGateId}`);
       }
     } else {
       // Infer directed AST edges from gate child pointers or canonical Stack-AST structure
@@ -43,10 +46,12 @@ export class WeisfeilerLehmanHasher {
       for (const g of gates) {
         if (g.leftChildGateId != null) {
           adj.get(g.leftChildGateId)?.push(`A->${g.id}`);
+          revAdj.get(g.id)?.push(`IN-A<-${g.leftChildGateId}`);
           hasExplicitPointers = true;
         }
         if (g.rightChildGateId != null) {
           adj.get(g.rightChildGateId)?.push(`B->${g.id}`);
+          revAdj.get(g.id)?.push(`IN-B<-${g.rightChildGateId}`);
           hasExplicitPointers = true;
         }
       }
@@ -61,7 +66,9 @@ export class WeisfeilerLehmanHasher {
             (gates[i - 3].type === CodonType.GATE_AND || gates[i - 3].type === CodonType.GATE_OR)
           ) {
             adj.get(gates[i - 3].id)?.push(`A->${g.id}`);
+            revAdj.get(g.id)?.push(`IN-A<-${gates[i - 3].id}`);
             adj.get(gates[i - 1].id)?.push(`B->${g.id}`);
+            revAdj.get(g.id)?.push(`IN-B<-${gates[i - 1].id}`);
           } else if (
             i === 1 &&
             gates.length >= 4 &&
@@ -71,6 +78,7 @@ export class WeisfeilerLehmanHasher {
             // Parallel leaf branch in >=4-gate AST
           } else {
             adj.get(gates[i - 1].id)?.push(`A->${g.id}`);
+            revAdj.get(g.id)?.push(`IN-A<-${gates[i - 1].id}`);
           }
         }
       }
@@ -81,11 +89,19 @@ export class WeisfeilerLehmanHasher {
       const nextColors: Map<number, string> = new Map();
       for (const [id, color] of colors.entries()) {
         const outLinks = adj.get(id) ?? [];
-        const neighborColors = outLinks.map(link => {
-          const [pin, targetStr] = link.split('->');
-          const targetId = Number(targetStr);
-          return `${pin}:${colors.get(targetId) ?? ''}`;
-        }).sort();
+        const inLinks = revAdj.get(id) ?? [];
+        const neighborColors = [
+          ...outLinks.map(link => {
+            const [pin, targetStr] = link.split('->');
+            const targetId = Number(targetStr);
+            return `OUT_${pin}:${colors.get(targetId) ?? ''}`;
+          }),
+          ...inLinks.map(link => {
+            const [pin, srcStr] = link.split('<-');
+            const srcId = Number(srcStr);
+            return `IN_${pin}:${colors.get(srcId) ?? ''}`;
+          })
+        ].sort();
         const signature = `${color}:[${neighborColors.join(',')}]`;
         nextColors.set(id, WeisfeilerLehmanHasher.simpleHash(signature));
       }

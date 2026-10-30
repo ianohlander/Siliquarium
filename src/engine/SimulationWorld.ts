@@ -974,8 +974,20 @@ export class SimulationWorld {
           const probeCoord = pore.coord.add(dq * dist, dr * dist, 0);
           const p = this.poreMap.get(probeCoord.toKey());
           if (p && !p.isAqueous() && !p.isBasalt() && p.getState() === PoreState.EMPTY) {
-            emptySubstrates = [p];
-            break;
+            // Verify physical tissue continuity: intervening pores must be occupied sister cells
+            let isContinuous = true;
+            for (let step = 1; step < dist; step++) {
+              const interCoord = pore.coord.add(dq * step, dr * step, 0);
+              const interPore = this.poreMap.get(interCoord.toKey());
+              if (!interPore || interPore.isAqueous() || interPore.isBasalt() || interPore.getState() !== PoreState.OCCUPIED) {
+                isContinuous = false;
+                break;
+              }
+            }
+            if (isContinuous) {
+              emptySubstrates = [p];
+              break;
+            }
           }
         }
       }

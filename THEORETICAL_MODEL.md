@@ -74,6 +74,10 @@ The answer forms the philosophical and theoretical backbone of Siliquarium: **Th
 
 *(For the complete mathematical treatise, derivations, and specimen-by-specimen mapping, see [The Genetic Book of the Dead: Environmental Information Injection](THE_GENETIC_BOOK_OF_THE_DEAD.html).)*
 
+> [!NOTE]
+> **Theoretical Informational Grounding & Runtime Implementation:**
+> The Adami Mutual Information formulation $C(X) = I(X; E)$ and Kimura Transmission Velocity $\Delta I$ define the overarching theoretical and evolutionary biology framework of Siliquarium. In the computational engine, these principles are operationalized through discrete individual mortality, Landauer dissipation, and generational phylogenetic lineage recording. Furthermore, under Howard Pattee's Epistemic Cut, the cellular metabolic circuit operates as a high-dimensional Deterministic Finite Automaton (DFA) whose symbolic tape is read-only during cellular life, with state transitions bounded by the cytoplasmic metabolite register. Continuous Hill-Langmuir cooperative binding ($n = 4, K_d = 0.5$) provides the continuous biophysical canalization from which discrete CMOS Boolean logic cleanly abstracts.
+
 ---
 
 ### 1.3 The Reality-to-Simulation Translation Matrix: Grounding Theory in Computational Components

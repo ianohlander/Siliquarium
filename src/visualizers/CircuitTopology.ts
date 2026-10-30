@@ -73,7 +73,7 @@ export class CircuitTopology {
             if (ch === 0) expressed = vent.streamA;
             else if (ch === 1) expressed = vent.streamB;
             else if (ch === 2) expressed = vent.toxinT;
-            else if (ch === 3) expressed = false;
+            else if (ch === 3) expressed = !vent.streamA && !vent.streamB; // Chemiosmotic starvation potential (M_3)
             activeOperonStates.push(expressed);
           }
         }
@@ -162,7 +162,18 @@ export class CircuitTopology {
       return activeOperonStates[op.id] ?? true;
     });
     const ws = PoreWorkshop.fromBitstring(tape);
-    ws.stepTick(vent.streamA, vent.streamB, vent.toxinT);
+    ws.stepTick({
+      streamA: vent.streamA,
+      streamB: vent.streamB,
+      toxinT: vent.toxinT,
+      batteryVoltage: (!vent.streamA && !vent.streamB) ? 15 : 50,
+      streamC: Boolean(vent.streamC),
+      streamD: Boolean(vent.streamD),
+      photonIr: Boolean(vent.photonIr),
+      baroAcoustic: Boolean(vent.baroAcoustic),
+      mechanoTouch: false,
+      electroRedox: Boolean(vent.electroRedox)
+    });
     const wsGates = ws.getGates();
     const astEdges = ws.getAstEdges();
     const wsGateIdToNodeId = new Map<number, string>();

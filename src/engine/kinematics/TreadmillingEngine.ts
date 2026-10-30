@@ -77,13 +77,18 @@ export class TreadmillingEngine {
     const plan = cell.getMorphogeneticPlan();
     const workshop = cell.getWorkshop();
     const gates = workshop.getBuiltGates();
+    const hasTactileOrRedoxSensing = workshop.hasMechanoTouch() || workshop.hasElectroRedox();
     const hasCompositePredation = gates.length >= 2 &&
+      hasTactileOrRedoxSensing &&
       workshop.hasAllostericRegulationCapability() &&
       workshop.hasForwardProcessingCapability();
 
     const cellTape = cell.getSafe().getTape();
     const ventNozzle = vent.nozzleCoord;
     const parentDistToVent = parentPore.coord.distanceTo(ventNozzle);
+    const parentLocalToxin = Boolean(vent.toxinT && parentDistToVent <= 4);
+    const parentConcA = vent.streamA ? Math.max(0, 1 - parentDistToVent / 6) : 0;
+    const parentConcB = vent.streamB ? Math.max(0, 1 - parentDistToVent / 6) : 0;
 
     const scores: number[] = [];
     let bestIdx = 0;
@@ -128,22 +133,37 @@ export class TreadmillingEngine {
       const netFreeEnergy = probeTele.catalyticYield * 8 - probeTele.toggleCount * 2 - (probeTele.toxinIngested ? 25 : 0);
       score += netFreeEnergy;
 
-      // Local physical gradient coupling strictly when cell's AST fires (primaryActive)
+      // Continuous physical diffusion plume concentrations
+      const candConcA = vent.streamA ? Math.max(0, 1 - distToVent / 6) : 0;
+      const candConcB = vent.streamB ? Math.max(0, 1 - distToVent / 6) : 0;
+      const candThermal = vent.thermalFlux / (1 + distToVent);
+      const parentThermal = vent.thermalFlux / (1 + parentDistToVent);
+
+      // Local physical substrate concentration gradient detected by membrane porins
       if (probeTele.primaryActive) {
-        score += (parentDistToVent - distToVent) * 12;
+        let substrateGradient = 0;
+        if (workshop.hasPorinA()) substrateGradient += (candConcA - parentConcA);
+        if (workshop.hasPorinB()) substrateGradient += (candConcB - parentConcB);
+        if (workshop.hasPhotonIr()) substrateGradient += (candThermal - parentThermal) / 50;
+        if (!workshop.hasPorinA() && !workshop.hasPorinB() && !workshop.hasPhotonIr()) {
+          substrateGradient += (candConcA + candConcB) - (parentConcA + parentConcB);
+        }
+        score += substrateGradient * 30;
       }
 
       // Allosteric toxin/thermal avoidance when counter-gradient regulation inhibits firing under stress
-      if (localToxin || localBaro) {
+      if (localToxin || localBaro || vent.thermalFlux > 350) {
         if (probeWorkshop.hasAllostericRegulationCapability() && !probeTele.toxinIngested) {
-          if (distToVent >= 2) score += 10;
+          score += 10;
         } else {
-          score += (distToVent - parentDistToVent) * 18;
+          const candStress = (candThermal / 40) + (localToxin ? 3 : 0);
+          const parentStress = (parentThermal / 40) + (parentLocalToxin ? 3 : 0);
+          score -= (candStress - parentStress) * 18;
         }
       }
 
-      // Trophic contact pursuit via evolved composite NOT + AND/OR circuitry
-      if (hasCompositePredation && adjacentPrey.length > 0) {
+      // Trophic contact pursuit via evolved tactile/redox porins & functional circuitry
+      if (hasCompositePredation && adjacentPrey.length > 0 && probeTele.primaryActive) {
         score += adjacentPrey.length * 22;
       }
 

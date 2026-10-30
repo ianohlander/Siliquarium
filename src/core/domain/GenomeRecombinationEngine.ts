@@ -58,8 +58,10 @@ export class GenomeRecombinationEngine {
     // Exon shuffling: accrete novel functional codons (gates, porins, or sinks) strictly from donor safeB
     for (const bCodon of codonsB) {
       const idx = parseInt(bCodon, 2);
-      const isCodingExon = idx < 56; // Catalytic gates, porins, secretions, or energy/septum sinks
-      if (isCodingExon && !resultCodons.includes(bCodon)) {
+      // Functional exons: catalytic gates, porins, secretions, sinks (0..55) and regulatory operators (60..63).
+      // Silent introns (56..59) are excluded from exon accretion.
+      const isFunctionalExon = idx < 56 || idx >= 60;
+      if (isFunctionalExon && !resultCodons.includes(bCodon)) {
         // Replace a silent intron (56..59) if available, otherwise append exon cassette
         const intronIdx = resultCodons.findIndex(c => {
           const n = parseInt(c, 2);

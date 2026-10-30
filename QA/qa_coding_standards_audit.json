@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-30T07:40:49.152Z",
+  "timestamp": "2026-10-30T08:19:02.175Z",
   "totalFiles": 99,
   "forbiddenFileViolations": [],
   "zeroDomViolations": [],
@@ -12,8 +12,8 @@
     },
     {
       "file": "src/engine/SimulationWorld.ts",
-      "lineCount": 2926,
-      "overBudget": 2626
+      "lineCount": 2938,
+      "overBudget": 2638
     },
     {
       "file": "src/main.ts",
@@ -27,8 +27,8 @@
     },
     {
       "file": "src/ui/LabFlyout.ts",
-      "lineCount": 2323,
-      "overBudget": 2023
+      "lineCount": 2324,
+      "overBudget": 2024
     },
     {
       "file": "src/ui/NaturalistAssistant.ts",
@@ -87,8 +87,8 @@
     },
     {
       "file": "src/core/paleontology/TaxonomyNomenclature.ts",
-      "lineCount": 532,
-      "overBudget": 232
+      "lineCount": 547,
+      "overBudget": 247
     },
     {
       "file": "src/engine/storage/EnvironmentPresetRegistry.ts",
@@ -109,6 +109,11 @@
       "file": "src/ui/HUDController.ts",
       "lineCount": 479,
       "overBudget": 179
+    },
+    {
+      "file": "src/visualizers/CircuitTopology.ts",
+      "lineCount": 303,
+      "overBudget": 3
     }
   ],
   "highParameterFunctions": [],
