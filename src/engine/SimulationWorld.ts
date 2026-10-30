@@ -1,3 +1,4 @@
+import { PelagicSporeEngine, EndosymbiosisEngine, ScavengingEngine } from './ecology/index.js';
 /**
  * 🐠 Siliquarium Engine Subsystem
  * SimulationWorld: Coordinates 3D HexGrid, VentPhysics, Organisms, and Conservation Ledger.
@@ -1066,104 +1067,11 @@ export class SimulationWorld {
    * equalizing battery stores and forming resilient multi-pore macro-silicoids.
    */
   private stepEndosymbiosis(): void {
-    const processedPairs = new Set<string>();
-
-    for (const pore of this.pores) {
-      const cellA = pore.getResident();
-      if (!cellA || cellA.getAge() < 25 || cellA.getGeneration() < 12) continue;
-
-      const neighbors = pore.getNeighbors().filter(p => p.getState() === PoreState.OCCUPIED);
-
-      for (const neighborPore of neighbors) {
-        const cellB = neighborPore.getResident();
-        if (!cellB || cellB.getAge() < 25 || cellB.getGeneration() < 12) continue;
-
-        // If either cell already has an organelle, they cannot undergo endosymbiosis again
-        if (cellA.hasOrganelle() || cellB.hasOrganelle()) continue;
-
-        // Must be distinct clades that have genuinely diverged genetically (>= 8 bit Hamming difference)
-        const isDistinctClade = cellA.getCladeId() !== cellB.getCladeId();
-        const tapeA = cellA.getSafe().getTape();
-        const tapeB = cellB.getSafe().getTape();
-        let diff = Math.abs(tapeA.length - tapeB.length);
-        const minLen = Math.min(tapeA.length, tapeB.length);
-        for (let i = 0; i < minLen; i++) {
-          if (tapeA.charAt(i) !== tapeB.charAt(i)) diff++;
-        }
-        if (!isDistinctClade || diff < 8) continue;
-
-        const pairKey = pore.coord.toKey() < neighborPore.coord.toKey()
-          ? `${pore.coord.toKey()}|${neighborPore.coord.toKey()}`
-          : `${neighborPore.coord.toKey()}|${pore.coord.toKey()}`;
-        if (processedPairs.has(pairKey)) continue;
-        processedPairs.add(pairKey);
-
-        const snapA = cellA.getBattery().getSnapshot();
-        const snapB = cellB.getBattery().getSnapshot();
-
-        // Symbiosis trigger: Both healthy and established
-        if (snapA.energy < 60 || snapB.energy < 60) continue;
-
-        // STRICT Syntrophic Complementarity (Lane & Martin 2010; Sagan 1967):
-        // Both cells must possess active logic gates, with genuine functional division of labor:
-        // One cell provides forward processing while the other provides allosteric regulation
-        const wsA = cellA.getWorkshop();
-        const wsB = cellB.getWorkshop();
-
-        if (wsA.getBuiltGates().length === 0 || wsB.getBuiltGates().length === 0) continue;
-
-        const aHasProcessing = wsA.hasForwardProcessingCapability();
-        const bHasProcessing = wsB.hasForwardProcessingCapability();
-        const aHasRegulation = wsA.hasAllostericRegulationCapability();
-        const bHasRegulation = wsB.hasAllostericRegulationCapability();
-
-        const isSyntrophic = (aHasProcessing && !aHasRegulation && bHasRegulation && !bHasProcessing) ||
-                             (bHasProcessing && !bHasRegulation && aHasRegulation && !aHasProcessing);
-
-        if (!isSyntrophic) {
-          // Bacterial Conjugation / Horizontal Gene Transfer (Lederberg & Tatum 1946):
-          // Adjacent divergent clades can exchange a Modulo-6 reading-frame aligned plasmid segment
-          if (this.prng.nextFloat() < 0.0005) {
-            const conjugatedSafe = GenomeSafe.crossoverModulo6(cellA.getSafe(), cellB.getSafe(), this.prng);
-            cellA.adoptChimericGenome(conjugatedSafe, cellA.getCladeId());
-          }
-          continue;
-        }
-
-        // Rare Major Evolutionary Transition (Szathmáry & Maynard Smith 1995):
-        // Calibrated to 0.1% per syntrophic encounter to represent an extraordinary macro-evolutionary milestone
-        if (this.prng.nextFloat() < 0.001) {
-          // Capture original partner donor genomes BEFORE adoptChimericGenome overwrites this.safe
-          const donorSafeA = cellA.getSafe();
-          const donorSafeB = cellB.getSafe();
-          const chimericSafe = GenomeSafe.createChimeric(donorSafeA, donorSafeB);
-          const chimericCladeId = `chimeric-${cellA.getCladeId().slice(-4)}-${cellB.getCladeId().slice(-4)}`;
-
-          // Equalize battery reserves across the syncytial pair (strictly energy neutral: Delta E = 0)
-          const totalEnergy = snapA.energy + snapB.energy;
-          const halfE_A = Math.floor(totalEnergy / 2);
-          const halfE_B = totalEnergy - halfE_A;
-
-          cellA.getBattery().drainEnergy(snapA.energy);
-          cellA.getBattery().chargeEnergy(halfE_A);
-          cellB.getBattery().drainEnergy(snapB.energy);
-          cellB.getBattery().chargeEnergy(halfE_B);
-
-          // Adopt fused genome and install mutual partner donor organelle cassette
-          cellA.adoptChimericGenome(chimericSafe, chimericCladeId);
-          cellB.adoptChimericGenome(chimericSafe, chimericCladeId);
-          cellA.installOrganelle(donorSafeB);
-          cellB.installOrganelle(donorSafeA);
-
-          this.activeEndosymbiosisEvents.push({
-            coordA: pore.coord,
-            coordB: neighborPore.coord,
-            chimericCladeId
-          });
-          break;
-        }
-      }
-    }
+    EndosymbiosisEngine.step({
+      pores: this.pores,
+      prng: this.prng,
+      activeEndosymbiosisEvents: this.activeEndosymbiosisEvents
+    });
   }
 
   private stepSyncytialHomeostasis(): void {
@@ -1254,113 +1162,26 @@ export class SimulationWorld {
   }
 
   private stepSpores(): void {
-    const activeSporePores = this.pores.filter(p => p.hasSpore());
-    for (const pore of activeSporePores) {
-      const spore = pore.getSpore();
-      if (!spore) continue;
-
-      spore.ticksRemaining--;
-      if (spore.ticksRemaining <= 0) {
-        this.ledger.recordHeatDissipation(spore.energy);
-        this.ledger.recordMatterSedimentation(spore.matter);
-        pore.setSpore(null);
-        continue;
-      }
-
-      // Settle candidates must NOT be basalt!
-      const settleCandidates = [
-        new HexCoord3D(pore.coord.q, pore.coord.r, Math.max(this.currentMinZ, pore.coord.z - 1)),
-        ...pore.coord.getPlanarNeighbors()
-      ].map(c => this.poreMap.get(c.toKey())).filter((p): p is Pore =>
-        p !== undefined && !p.isAqueous() && !p.isBasalt() && p.getState() === PoreState.EMPTY
-      );
-
-      if (settleCandidates.length > 0 && settleCandidates[0].setResident(new PoreCell(spore.safe, spore.energy, spore.matter, spore.generation, spore.id, spore.parentId, spore.cladeId, spore.organelleSafe ?? null))) {
-        this.registerActivePore(settleCandidates[0]);
-        pore.setSpore(null);
-        continue;
-      }
-
-      const tidal = this.geologicalEngine.currentTidalVector;
-      const driftCandidates = pore.coord.getPlanarNeighbors().map(c => this.poreMap.get(c.toKey()))
-        .filter((p): p is Pore => p !== undefined && p.isAqueous() && !p.hasSpore());
-      if (driftCandidates.length > 0) {
-        // Bias drift along planetary tidal vector (semi-diurnal oscillation)
-        const alignedCandidate = driftCandidates.find(p => (p.coord.q - pore.coord.q === tidal.dq) && (p.coord.r - pore.coord.r === tidal.dr));
-        const chosen = (alignedCandidate && this.prng.nextFloat() < 0.60)
-          ? alignedCandidate
-          : driftCandidates[Math.floor(this.prng.nextFloat() * driftCandidates.length)];
-        chosen.setSpore(spore);
-        pore.setSpore(null);
-      }
-    }
+    PelagicSporeEngine.step({
+      pores: this.pores,
+      poreMap: this.poreMap,
+      minZ: this.currentMinZ,
+      ledger: this.ledger,
+      geologicalEngine: this.geologicalEngine,
+      prng: this.prng,
+      onSporeSettled: (pore) => this.registerActivePore(pore)
+    });
   }
 
   private stepLysisAndScavenging(): void {
-    for (const pore of this.pores) {
-      const cell = pore.getResident();
-      if (!cell) continue;
-
-      // Natural senescence / Hayflick turnover:
-      // Cells that live past age 120 undergo gentle background apoptosis/lysis,
-      // freeing mineral pores for new generations and feeding benthic scavengers.
-      const age = cell.getAge();
-      const isSenescent = age >= 250 || (age >= 120 && this.prng.nextFloat() < (age - 100) / 4000);
-      const isDead = cell.isDead() || isSenescent;
-
-      if (isDead) {
-        const snap = cell.getBattery().getSnapshot();
-        this.ledger.recordHeatDissipation(snap.energy - Math.floor(snap.energy * 0.5));
-        this.ltee.recordDeath();
-        pore.triggerLysis();
-      }
-    }
-
-    // Active Scavenging: Catabolic logic unlocks detrital nutrition
-    for (const pore of this.pores) {
-      const cell = pore.getResident();
-      if (!cell) continue;
-
-      const carcasses = pore.coord.getNeighbors3D().map(c => this.poreMap.get(c.toKey()))
-        .filter((p): p is Pore => p !== undefined && p.getState() === PoreState.CARCASS);
-
-      if (carcasses.length > 0) {
-        const targetCarcass = carcasses[0];
-        const isCatabolicScavenger = cell.getWorkshop().hasActiveNonConjunctiveCatalysis();
-
-        if (isCatabolicScavenger) {
-          // Full catabolic digestion yield
-          const unharvested = targetCarcass.scavenge(cell);
-          if (unharvested > 0) this.ledger.recordHeatDissipation(unharvested);
-          this.activeScavengeEvents.push({
-            scavengerCoord: pore.coord,
-            carcassCoord: targetCarcass.coord,
-            energyHarvested: 20
-          });
-        } else {
-          // Unspecialized autotroph: only partial opportunistic seepage
-          const cData = targetCarcass.getCarcass();
-          if (cData) {
-            const partialEnergy = Math.floor(cData[0] * 0.35);
-            const wastedEnergy = cData[0] - partialEnergy;
-            const charged = cell.getBattery().chargeEnergy(partialEnergy);
-            this.ledger.recordHeatDissipation(wastedEnergy + (partialEnergy - charged));
-
-            const partialMatter = Math.floor(cData[1] * 0.5);
-            cell.getBattery().addMatter(partialMatter);
-            this.ledger.recordMatterSedimentation(cData[1] - partialMatter);
-
-            this.activeScavengeEvents.push({
-              scavengerCoord: pore.coord,
-              carcassCoord: targetCarcass.coord,
-              energyHarvested: partialEnergy
-            });
-
-            targetCarcass.clearCarcass();
-          }
-        }
-      }
-    }
+    ScavengingEngine.step({
+      pores: this.pores,
+      poreMap: this.poreMap,
+      ledger: this.ledger,
+      ltee: this.ltee,
+      prng: this.prng,
+      activeScavengeEvents: this.activeScavengeEvents
+    });
   }
 
   private stepCarcassDecay(): void {
