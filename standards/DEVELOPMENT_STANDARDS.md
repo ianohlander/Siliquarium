@@ -1,8 +1,16 @@
 # 🏛️ Siliquarium Engineering & Software Architecture Standards
 *The Master Specification: OOP, SOLID, DRY, KISS, YAGNI, Complexity Budgets, Anti-Monolith, Clean Architecture, and Anti-Smuggling Mandates*
 
-> **Mandate for All Engineers & AI Agents:**  
-> This document is the absolute engineering contract for Siliquarium. Every module, class, interface, and test authored for this project must strictly comply with every section below. No shortcuts, no legacy anti-patterns, and no technical debt.
+> **Inviolable Standing Mandate for All Sessions & AI Agents:**  
+> 1. This document is the absolute engineering contract for Siliquarium. Every module, class, interface, and test authored for this project must strictly comply with every section below. No shortcuts, no legacy anti-patterns, and no technical debt.
+> 2. **Mandatory Verification & Remote Sync:** Regardless of the session, all QA requirements must be met, all 25 test stages must pass (`npm test`), and all builds must be committed to git and pushed to the remote repository (`git push origin main`). No work may ever be left uncommitted or unpushed across sessions.
+
+---
+
+## 0. The Inviolable Session & QA Mandate
+1. **Universal Applicability:** Every change—whether a new biological feature, UI widget, refactoring, or bugfix—must adhere to all complexity budgets, architectural layers, and typing mandates.
+2. **Build Gate:** `npm test` must be executed and verify 25/25 stages passing before any session task is completed.
+3. **Repository Sync:** All changes must be cleanly committed and pushed to `origin/main` via `git push origin main`. Leaving uncommitted or unpushed code in the working tree is strictly prohibited.
 
 ---
 

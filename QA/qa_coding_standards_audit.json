@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-30T05:33:28.247Z",
+  "timestamp": "2026-10-30T05:58:04.120Z",
   "totalFiles": 92,
   "forbiddenFileViolations": [],
   "zeroDomViolations": [],
@@ -109,11 +109,6 @@
       "file": "src/ui/HUDController.ts",
       "lineCount": 479,
       "overBudget": 179
-    },
-    {
-      "file": "src/ui/ChronicleAnalysisLabModal.ts",
-      "lineCount": 453,
-      "overBudget": 153
     }
   ],
   "highParameterFunctions": [],

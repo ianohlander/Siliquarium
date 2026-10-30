@@ -1,0 +1,3159 @@
+{
+  "totalFiles": 91,
+  "filesBySubsystem": {
+    "core": 23,
+    "engine": 28,
+    "server": 3,
+    "ui": 28,
+    "visualizers": 8
+  },
+  "fileLengthViolations": [
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "lines": 3121,
+      "overBudget": 2821
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "lines": 3105,
+      "overBudget": 2805
+    },
+    {
+      "file": "src/main.ts",
+      "lines": 2719,
+      "overBudget": 2419
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "lines": 2607,
+      "overBudget": 2307
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "lines": 2355,
+      "overBudget": 2055
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "lines": 2138,
+      "overBudget": 1838
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "lines": 1079,
+      "overBudget": 779
+    },
+    {
+      "file": "src/visualizers/KinematicsOverlay.ts",
+      "lines": 1037,
+      "overBudget": 737
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "lines": 954,
+      "overBudget": 654
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "lines": 922,
+      "overBudget": 622
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "lines": 894,
+      "overBudget": 594
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "lines": 812,
+      "overBudget": 512
+    },
+    {
+      "file": "src/engine/kinematics/ColonyKinematicsRecorder.ts",
+      "lines": 705,
+      "overBudget": 405
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "lines": 685,
+      "overBudget": 385
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "lines": 642,
+      "overBudget": 342
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "lines": 578,
+      "overBudget": 278
+    },
+    {
+      "file": "src/core/paleontology/TaxonomyNomenclature.ts",
+      "lines": 532,
+      "overBudget": 232
+    },
+    {
+      "file": "src/engine/storage/EnvironmentPresetRegistry.ts",
+      "lines": 527,
+      "overBudget": 227
+    },
+    {
+      "file": "src/core/domain/PoreCell.ts",
+      "lines": 519,
+      "overBudget": 219
+    },
+    {
+      "file": "src/ui/AbyssalArenaController.ts",
+      "lines": 486,
+      "overBudget": 186
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "lines": 479,
+      "overBudget": 179
+    }
+  ],
+  "functionLengthViolations": [
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "discoverTourStops",
+      "line": 694,
+      "lines": 1912,
+      "overBudget": 1852
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "bindEvents",
+      "line": 468,
+      "lines": 1173,
+      "overBudget": 1113
+    },
+    {
+      "file": "src/main.ts",
+      "function": "constructor",
+      "line": 148,
+      "lines": 535,
+      "overBudget": 475
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "scanExemplars",
+      "line": 762,
+      "lines": 530,
+      "overBudget": 470
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawSilicoidOrganism",
+      "line": 2081,
+      "lines": 428,
+      "overBudget": 368
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "function": "ensureStyles",
+      "line": 47,
+      "lines": 407,
+      "overBudget": 347
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawEcologicalDramaBeams",
+      "line": 1747,
+      "lines": 333,
+      "overBudget": 273
+    },
+    {
+      "file": "src/visualizers/KinematicsOverlay.ts",
+      "function": "if",
+      "line": 253,
+      "lines": 324,
+      "overBudget": 264
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "for",
+      "line": 2733,
+      "lines": 303,
+      "overBudget": 243
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "bindEvents",
+      "line": 316,
+      "lines": 301,
+      "overBudget": 241
+    },
+    {
+      "file": "src/engine/storage/EnvironmentPresetRegistry.ts",
+      "function": "registerBuiltInPresets",
+      "line": 233,
+      "lines": 293,
+      "overBudget": 233
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "exportTelemetry",
+      "line": 1379,
+      "lines": 292,
+      "overBudget": 232
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawTargetLockOverlay",
+      "line": 1267,
+      "lines": 291,
+      "overBudget": 231
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "drawOscilloscope",
+      "line": 623,
+      "lines": 270,
+      "overBudget": 210
+    },
+    {
+      "file": "src/ui/HistologicalInspectorModalHtmlTemplate.ts",
+      "function": "buildHistologicalModalMarkup",
+      "line": 14,
+      "lines": 243,
+      "overBudget": 183
+    },
+    {
+      "file": "src/main.ts",
+      "function": "bindCanvasInteractions",
+      "line": 2229,
+      "lines": 241,
+      "overBudget": 181
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "function": "bindEvents",
+      "line": 318,
+      "lines": 232,
+      "overBudget": 172
+    },
+    {
+      "file": "src/ui/ChronicleAnalysisLabHtmlTemplate.ts",
+      "function": "buildChronicleLabTabContent",
+      "line": 23,
+      "lines": 211,
+      "overBudget": 151
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "render",
+      "line": 183,
+      "lines": 209,
+      "overBudget": 149
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "function": "renderHTML",
+      "line": 113,
+      "lines": 204,
+      "overBudget": 144
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 2537,
+      "lines": 201,
+      "overBudget": 141
+    },
+    {
+      "file": "src/main.ts",
+      "function": "setWorkspaceMode",
+      "line": 1987,
+      "lines": 198,
+      "overBudget": 138
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawHexPrism",
+      "line": 977,
+      "lines": 188,
+      "overBudget": 128
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "updateSafariCoPilotDOM",
+      "line": 1530,
+      "lines": 181,
+      "overBudget": 121
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawDynamicActionBorders",
+      "line": 1567,
+      "lines": 179,
+      "overBudget": 119
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "function": "evaluateGateInAstContext",
+      "line": 610,
+      "lines": 172,
+      "overBudget": 112
+    },
+    {
+      "file": "src/ui/VisualKeyModalHtmlTemplate.ts",
+      "function": "buildVisualKeyMarkup",
+      "line": 16,
+      "lines": 171,
+      "overBudget": 111
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "function": "if",
+      "line": 340,
+      "lines": 158,
+      "overBudget": 98
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "function": "renderTimeline",
+      "line": 648,
+      "lines": 158,
+      "overBudget": 98
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "loadEnvironmentPreset",
+      "line": 2319,
+      "lines": 157,
+      "overBudget": 97
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawLithosphericCrustMantle",
+      "line": 607,
+      "lines": 153,
+      "overBudget": 93
+    },
+    {
+      "file": "src/visualizers/CircuitWireRouter.ts",
+      "function": "routeWires",
+      "line": 36,
+      "lines": 151,
+      "overBudget": 91
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "function": "renderForkWizard",
+      "line": 807,
+      "lines": 147,
+      "overBudget": 87
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initWorkspaceModes",
+      "line": 1807,
+      "lines": 146,
+      "overBudget": 86
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "initElements",
+      "line": 233,
+      "lines": 143,
+      "overBudget": 83
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "getProximityAlpha",
+      "line": 833,
+      "lines": 143,
+      "overBudget": 83
+    },
+    {
+      "file": "src/engine/paleontology/DigitalPaleontologist.ts",
+      "function": "auditPores",
+      "line": 36,
+      "lines": 143,
+      "overBudget": 83
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepCellMetabolism",
+      "line": 815,
+      "lines": 140,
+      "overBudget": 80
+    },
+    {
+      "file": "src/main.ts",
+      "function": "handleQaUrlParams",
+      "line": 1452,
+      "lines": 137,
+      "overBudget": 77
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 279,
+      "lines": 135,
+      "overBudget": 75
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "renderTourHUD",
+      "line": 501,
+      "lines": 134,
+      "overBudget": 74
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "function": "rebuildEventPips",
+      "line": 697,
+      "lines": 132,
+      "overBudget": 72
+    },
+    {
+      "file": "src/main.ts",
+      "function": "showObservatorySpecimenCard",
+      "line": 869,
+      "lines": 128,
+      "overBudget": 68
+    },
+    {
+      "file": "src/core/analysis/CircuitAdvantageAnalyzer.ts",
+      "function": "analyze",
+      "line": 31,
+      "lines": 119,
+      "overBudget": 59
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawStudioBrushReticle",
+      "line": 393,
+      "lines": 119,
+      "overBudget": 59
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateStagedSpecimen",
+      "line": 1956,
+      "lines": 114,
+      "overBudget": 54
+    },
+    {
+      "file": "src/main.ts",
+      "function": "applyBrushStroke",
+      "line": 2507,
+      "lines": 113,
+      "overBudget": 53
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "bindEvents",
+      "line": 205,
+      "lines": 112,
+      "overBudget": 52
+    },
+    {
+      "file": "src/ui/PhylogenyModal.ts",
+      "function": "updateContent",
+      "line": 124,
+      "lines": 111,
+      "overBudget": 51
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepEndosymbiosis",
+      "line": 1068,
+      "lines": 100,
+      "overBudget": 40
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "ensureElements",
+      "line": 216,
+      "lines": 99,
+      "overBudget": 39
+    },
+    {
+      "file": "src/core/physics/VentPhysics.ts",
+      "function": "evaluateAt",
+      "line": 119,
+      "lines": 97,
+      "overBudget": 37
+    },
+    {
+      "file": "src/engine/paleontology/EvolutionaryBarrierAuditor.ts",
+      "function": "auditBarriers",
+      "line": 20,
+      "lines": 95,
+      "overBudget": 35
+    },
+    {
+      "file": "src/core/codons/CodonTranslator.ts",
+      "function": "translateTape",
+      "line": 55,
+      "lines": 94,
+      "overBudget": 34
+    },
+    {
+      "file": "src/ui/ChronicleAnalysisLabModal.ts",
+      "function": "bindEvents",
+      "line": 102,
+      "lines": 92,
+      "overBudget": 32
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepReproduction",
+      "line": 956,
+      "lines": 92,
+      "overBudget": 32
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "function": "assembleFromTranslation",
+      "line": 131,
+      "lines": 90,
+      "overBudget": 30
+    },
+    {
+      "file": "src/ui/PhylogenyModalHtmlTemplate.ts",
+      "function": "buildPhylogenyModalMarkup",
+      "line": 6,
+      "lines": 88,
+      "overBudget": 28
+    },
+    {
+      "file": "src/main.ts",
+      "function": "updateAdvantageCard",
+      "line": 1066,
+      "lines": 88,
+      "overBudget": 28
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "updateSelectedInfo",
+      "line": 391,
+      "lines": 87,
+      "overBudget": 27
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateBioBankUI",
+      "line": 2267,
+      "lines": 87,
+      "overBudget": 27
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "rebuildMantleFacets",
+      "line": 519,
+      "lines": 87,
+      "overBudget": 27
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "findPoreAtScreenCoord",
+      "line": 2621,
+      "lines": 86,
+      "overBudget": 26
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepSyncytialHomeostasis",
+      "line": 1169,
+      "lines": 86,
+      "overBudget": 26
+    },
+    {
+      "file": "src/core/paleontology/MotifScanner.ts",
+      "function": "scanWorkshop",
+      "line": 29,
+      "lines": 85,
+      "overBudget": 25
+    },
+    {
+      "file": "src/ui/GeologicalEventModal.ts",
+      "function": "getEventDetails",
+      "line": 128,
+      "lines": 83,
+      "overBudget": 23
+    },
+    {
+      "file": "src/ui/VisualKeyModal.ts",
+      "function": "bindEvents",
+      "line": 52,
+      "lines": 82,
+      "overBudget": 22
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "updateAll",
+      "line": 339,
+      "lines": 82,
+      "overBudget": 22
+    },
+    {
+      "file": "src/engine/remote/RemoteSimulationClient.ts",
+      "function": "connect",
+      "line": 55,
+      "lines": 79,
+      "overBudget": 19
+    },
+    {
+      "file": "src/main.ts",
+      "function": "bindMicroscopeZoomControls",
+      "line": 1164,
+      "lines": 79,
+      "overBudget": 19
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "function": "executePillowLavaFlow",
+      "line": 298,
+      "lines": 77,
+      "overBudget": 17
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "function": "drawLivingCellMicroscope",
+      "line": 234,
+      "lines": 76,
+      "overBudget": 16
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initMicroscopeDrawer",
+      "line": 1659,
+      "lines": 74,
+      "overBudget": 14
+    },
+    {
+      "file": "src/engine/kinematics/TreadmillingEngine.ts",
+      "function": "for",
+      "line": 92,
+      "lines": 72,
+      "overBudget": 12
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "syncUIWithPreset",
+      "line": 396,
+      "lines": 71,
+      "overBudget": 11
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "function": "bindEvents",
+      "line": 526,
+      "lines": 71,
+      "overBudget": 11
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "function": "executeChimneySpalling",
+      "line": 377,
+      "lines": 71,
+      "overBudget": 11
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateGeologicalTicker",
+      "line": 1885,
+      "lines": 70,
+      "overBudget": 10
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "update",
+      "line": 387,
+      "lines": 70,
+      "overBudget": 10
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "function": "ensureElements",
+      "line": 455,
+      "lines": 70,
+      "overBudget": 10
+    },
+    {
+      "file": "src/ui/AudioSynthesizer.ts",
+      "function": "startAmbientHydrophone",
+      "line": 71,
+      "lines": 69,
+      "overBudget": 9
+    },
+    {
+      "file": "src/main.ts",
+      "function": "startRenderLoop",
+      "line": 2642,
+      "lines": 67,
+      "overBudget": 7
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepLysisAndScavenging",
+      "line": 1299,
+      "lines": 66,
+      "overBudget": 6
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initMicroscopeTabsAndFont",
+      "line": 1244,
+      "lines": 66,
+      "overBudget": 6
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateBrushIndicator",
+      "line": 2201,
+      "lines": 65,
+      "overBudget": 5
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "function": "for",
+      "line": 475,
+      "lines": 65,
+      "overBudget": 5
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "step",
+      "line": 734,
+      "lines": 65,
+      "overBudget": 5
+    },
+    {
+      "file": "src/ui/DiscoveryHistoryModalHtmlTemplate.ts",
+      "function": "buildDiscoveryModalSkeleton",
+      "line": 9,
+      "lines": 64,
+      "overBudget": 4
+    },
+    {
+      "file": "src/visualizers/KinematicsOverlay.ts",
+      "function": "if",
+      "line": 926,
+      "lines": 64,
+      "overBudget": 4
+    },
+    {
+      "file": "src/engine/paleontology/EvolutionaryHistoryExporter.ts",
+      "function": "recordTick",
+      "line": 97,
+      "lines": 64,
+      "overBudget": 4
+    },
+    {
+      "file": "src/engine/kinematics/ColonyKinematicsRecorder.ts",
+      "function": "loadFrames",
+      "line": 640,
+      "lines": 64,
+      "overBudget": 4
+    },
+    {
+      "file": "src/ui/ChronicleAnalysisLabHtmlTemplate.ts",
+      "function": "buildChronicleLabDialog",
+      "line": 235,
+      "lines": 63,
+      "overBudget": 3
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 480,
+      "lines": 62,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "function": "init",
+      "line": 115,
+      "lines": 62,
+      "overBudget": 2
+    },
+    {
+      "file": "src/server/RemoteCommandDispatcher.ts",
+      "function": "switch",
+      "line": 66,
+      "lines": 62,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "openFieldScope",
+      "line": 1310,
+      "lines": 61,
+      "overBudget": 1
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "function": "if",
+      "line": 620,
+      "lines": 61,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/paleontology/FossilFreezer.ts",
+      "function": "freeze",
+      "line": 45,
+      "lines": 61,
+      "overBudget": 1
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initServerModeToggle",
+      "line": 779,
+      "lines": 61,
+      "overBudget": 1
+    }
+  ],
+  "cyclomaticComplexityViolations": [
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "bindEvents",
+      "line": 468,
+      "complexity": 274,
+      "overBudget": 267
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "discoverTourStops",
+      "line": 694,
+      "complexity": 205,
+      "overBudget": 198
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "scanExemplars",
+      "line": 762,
+      "complexity": 120,
+      "overBudget": 113
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initWorkspaceModes",
+      "line": 1807,
+      "complexity": 96,
+      "overBudget": 89
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawEcologicalDramaBeams",
+      "line": 1747,
+      "complexity": 86,
+      "overBudget": 79
+    },
+    {
+      "file": "src/main.ts",
+      "function": "showObservatorySpecimenCard",
+      "line": 869,
+      "complexity": 81,
+      "overBudget": 74
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawHexPrism",
+      "line": 977,
+      "complexity": 79,
+      "overBudget": 72
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "render",
+      "line": 183,
+      "complexity": 71,
+      "overBudget": 64
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "function": "evaluateGateInAstContext",
+      "line": 610,
+      "complexity": 70,
+      "overBudget": 63
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "bindEvents",
+      "line": 316,
+      "complexity": 70,
+      "overBudget": 63
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "function": "if",
+      "line": 340,
+      "complexity": 64,
+      "overBudget": 57
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawSilicoidOrganism",
+      "line": 2081,
+      "complexity": 60,
+      "overBudget": 53
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "getProximityAlpha",
+      "line": 833,
+      "complexity": 59,
+      "overBudget": 52
+    },
+    {
+      "file": "src/main.ts",
+      "function": "bindCanvasInteractions",
+      "line": 2229,
+      "complexity": 55,
+      "overBudget": 48
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawTargetLockOverlay",
+      "line": 1267,
+      "complexity": 54,
+      "overBudget": 47
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawDynamicActionBorders",
+      "line": 1567,
+      "complexity": 53,
+      "overBudget": 46
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "loadEnvironmentPreset",
+      "line": 2319,
+      "complexity": 53,
+      "overBudget": 46
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepCellMetabolism",
+      "line": 815,
+      "complexity": 51,
+      "overBudget": 44
+    },
+    {
+      "file": "src/main.ts",
+      "function": "updateAdvantageCard",
+      "line": 1066,
+      "complexity": 50,
+      "overBudget": 43
+    },
+    {
+      "file": "src/visualizers/KinematicsOverlay.ts",
+      "function": "if",
+      "line": 253,
+      "complexity": 49,
+      "overBudget": 42
+    },
+    {
+      "file": "src/main.ts",
+      "function": "constructor",
+      "line": 148,
+      "complexity": 49,
+      "overBudget": 42
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "updateSafariCoPilotDOM",
+      "line": 1530,
+      "complexity": 47,
+      "overBudget": 40
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "for",
+      "line": 2733,
+      "complexity": 47,
+      "overBudget": 40
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 279,
+      "complexity": 47,
+      "overBudget": 40
+    },
+    {
+      "file": "src/main.ts",
+      "function": "applyBrushStroke",
+      "line": 2507,
+      "complexity": 47,
+      "overBudget": 40
+    },
+    {
+      "file": "src/main.ts",
+      "function": "handleQaUrlParams",
+      "line": 1452,
+      "complexity": 46,
+      "overBudget": 39
+    },
+    {
+      "file": "src/ui/DiscoveryHistoryModal.ts",
+      "function": "getSpecimenUrl",
+      "line": 212,
+      "complexity": 44,
+      "overBudget": 37
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "exportTelemetry",
+      "line": 1379,
+      "complexity": 44,
+      "overBudget": 37
+    },
+    {
+      "file": "src/engine/paleontology/DigitalPaleontologist.ts",
+      "function": "auditPores",
+      "line": 36,
+      "complexity": 41,
+      "overBudget": 34
+    },
+    {
+      "file": "src/core/analysis/CircuitAdvantageAnalyzer.ts",
+      "function": "analyze",
+      "line": 31,
+      "complexity": 38,
+      "overBudget": 31
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateStagedSpecimen",
+      "line": 1956,
+      "complexity": 38,
+      "overBudget": 31
+    },
+    {
+      "file": "src/ui/MilestoneModal.ts",
+      "function": "getGuideUrl",
+      "line": 96,
+      "complexity": 38,
+      "overBudget": 31
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "updateSelectedInfo",
+      "line": 391,
+      "complexity": 37,
+      "overBudget": 30
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "constructor",
+      "line": 86,
+      "complexity": 37,
+      "overBudget": 30
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawLithosphericCrustMantle",
+      "line": 607,
+      "complexity": 37,
+      "overBudget": 30
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "findPoreAtScreenCoord",
+      "line": 2621,
+      "complexity": 35,
+      "overBudget": 28
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "updateAll",
+      "line": 339,
+      "complexity": 33,
+      "overBudget": 26
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "resolveCircuitGuideUrl",
+      "line": 422,
+      "complexity": 33,
+      "overBudget": 26
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "function": "rebuildEventPips",
+      "line": 697,
+      "complexity": 33,
+      "overBudget": 26
+    },
+    {
+      "file": "src/ui/ChronicleAnalysisLabHtmlTemplate.ts",
+      "function": "buildChronicleLabTabContent",
+      "line": 23,
+      "complexity": 31,
+      "overBudget": 24
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "function": "if",
+      "line": 620,
+      "complexity": 31,
+      "overBudget": 24
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "projectPores",
+      "line": 761,
+      "complexity": 30,
+      "overBudget": 23
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepEndosymbiosis",
+      "line": 1068,
+      "complexity": 30,
+      "overBudget": 23
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "bindKeyboardShortcuts",
+      "line": 214,
+      "complexity": 29,
+      "overBudget": 22
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "update",
+      "line": 387,
+      "complexity": 28,
+      "overBudget": 21
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "update",
+      "line": 100,
+      "complexity": 27,
+      "overBudget": 20
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "setTargetZLayer",
+      "line": 2156,
+      "complexity": 27,
+      "overBudget": 20
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "bindEvents",
+      "line": 205,
+      "complexity": 27,
+      "overBudget": 20
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "drawOscilloscope",
+      "line": 623,
+      "complexity": 27,
+      "overBudget": 20
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "syncUIWithPreset",
+      "line": 396,
+      "complexity": 26,
+      "overBudget": 19
+    },
+    {
+      "file": "src/ui/PhylogenyModal.ts",
+      "function": "updateContent",
+      "line": 124,
+      "complexity": 26,
+      "overBudget": 19
+    },
+    {
+      "file": "src/engine/storage/EnvironmentPresetRegistry.ts",
+      "function": "importFromJson",
+      "line": 156,
+      "complexity": 25,
+      "overBudget": 18
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "function": "switch",
+      "line": 251,
+      "complexity": 24,
+      "overBudget": 17
+    },
+    {
+      "file": "src/main.ts",
+      "function": "startRenderLoop",
+      "line": 2642,
+      "complexity": 24,
+      "overBudget": 17
+    },
+    {
+      "file": "src/core/paleontology/MotifScanner.ts",
+      "function": "scanWorkshop",
+      "line": 29,
+      "complexity": 23,
+      "overBudget": 16
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepReproduction",
+      "line": 956,
+      "complexity": 23,
+      "overBudget": 16
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepSyncytialHomeostasis",
+      "line": 1169,
+      "complexity": 23,
+      "overBudget": 16
+    },
+    {
+      "file": "src/core/physics/VentPhysics.ts",
+      "function": "evaluateAt",
+      "line": 119,
+      "complexity": 22,
+      "overBudget": 15
+    },
+    {
+      "file": "src/ui/HistologicalInspectorModalHtmlTemplate.ts",
+      "function": "buildHistologicalModalMarkup",
+      "line": 14,
+      "complexity": 22,
+      "overBudget": 15
+    },
+    {
+      "file": "src/visualizers/KinematicsOverlay.ts",
+      "function": "for",
+      "line": 129,
+      "complexity": 22,
+      "overBudget": 15
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 2537,
+      "complexity": 22,
+      "overBudget": 15
+    },
+    {
+      "file": "src/engine/kinematics/TreadmillingEngine.ts",
+      "function": "for",
+      "line": 92,
+      "complexity": 22,
+      "overBudget": 15
+    },
+    {
+      "file": "src/main.ts",
+      "function": "setWorkspaceMode",
+      "line": 1987,
+      "complexity": 22,
+      "overBudget": 15
+    },
+    {
+      "file": "src/core/paleontology/WeisfeilerLehmanHasher.ts",
+      "function": "if",
+      "line": 36,
+      "complexity": 21,
+      "overBudget": 14
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateBioBankUI",
+      "line": 2267,
+      "complexity": 21,
+      "overBudget": 14
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "function": "bindEvents",
+      "line": 318,
+      "complexity": 21,
+      "overBudget": 14
+    },
+    {
+      "file": "src/engine/kinematics/ColonyKinematicsRecorder.ts",
+      "function": "for",
+      "line": 269,
+      "complexity": 21,
+      "overBudget": 14
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 480,
+      "complexity": 20,
+      "overBudget": 13
+    },
+    {
+      "file": "src/visualizers/CircuitWireRouter.ts",
+      "function": "routeWires",
+      "line": 36,
+      "complexity": 19,
+      "overBudget": 12
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "setPoreBasalt",
+      "line": 1722,
+      "complexity": 19,
+      "overBudget": 12
+    },
+    {
+      "file": "src/engine/paleontology/EvolutionaryHistoryExporter.ts",
+      "function": "recordTick",
+      "line": 97,
+      "complexity": 19,
+      "overBudget": 12
+    },
+    {
+      "file": "src/ui/VisualKeyModal.ts",
+      "function": "bindEvents",
+      "line": 52,
+      "complexity": 18,
+      "overBudget": 11
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "renderTourHUD",
+      "line": 501,
+      "complexity": 18,
+      "overBudget": 11
+    },
+    {
+      "file": "src/ui/ChronicleAnalysisLabModal.ts",
+      "function": "bindEvents",
+      "line": 102,
+      "complexity": 18,
+      "overBudget": 11
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 428,
+      "complexity": 18,
+      "overBudget": 11
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "function": "executePillowLavaFlow",
+      "line": 298,
+      "complexity": 18,
+      "overBudget": 11
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initMicroscopeDrawer",
+      "line": 1659,
+      "complexity": 18,
+      "overBudget": 11
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "function": "assembleFromTranslation",
+      "line": 131,
+      "complexity": 17,
+      "overBudget": 10
+    },
+    {
+      "file": "src/ui/GeologicalEventModal.ts",
+      "function": "show",
+      "line": 72,
+      "complexity": 17,
+      "overBudget": 10
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "initDOM",
+      "line": 161,
+      "complexity": 17,
+      "overBudget": 10
+    },
+    {
+      "file": "src/visualizers/OrbitCamera.ts",
+      "function": "if",
+      "line": 85,
+      "complexity": 17,
+      "overBudget": 10
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawStudioBrushReticle",
+      "line": 393,
+      "complexity": 17,
+      "overBudget": 10
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "restoreWorldSnapshot",
+      "line": 2962,
+      "complexity": 17,
+      "overBudget": 10
+    },
+    {
+      "file": "src/engine/kinematics/ColonyMorphologyClassifier.ts",
+      "function": "classify",
+      "line": 29,
+      "complexity": 17,
+      "overBudget": 10
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "bindEvents",
+      "line": 87,
+      "complexity": 16,
+      "overBudget": 9
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "function": "update",
+      "line": 645,
+      "complexity": 16,
+      "overBudget": 9
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "goToStop",
+      "line": 301,
+      "complexity": 16,
+      "overBudget": 9
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "function": "renderTimeline",
+      "line": 648,
+      "complexity": 16,
+      "overBudget": 9
+    },
+    {
+      "file": "src/ui/VisualKeyModalHtmlTemplate.ts",
+      "function": "buildVisualKeyMarkup",
+      "line": 16,
+      "complexity": 16,
+      "overBudget": 9
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "constructor",
+      "line": 134,
+      "complexity": 16,
+      "overBudget": 9
+    },
+    {
+      "file": "src/main.ts",
+      "function": "bindMicroscopeZoomControls",
+      "line": 1164,
+      "complexity": 16,
+      "overBudget": 9
+    },
+    {
+      "file": "src/main.ts",
+      "function": "updateMicroscopeFooter",
+      "line": 1370,
+      "complexity": 16,
+      "overBudget": 9
+    },
+    {
+      "file": "src/main.ts",
+      "function": "handleResize",
+      "line": 1611,
+      "complexity": 16,
+      "overBudget": 9
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateTelemetryPane",
+      "line": 1830,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/ui/DiscoveryHistoryModal.ts",
+      "function": "renderCards",
+      "line": 155,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "syncSimulationRunningUI",
+      "line": 662,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/ui/GeologicalEventModal.ts",
+      "function": "getEventDetails",
+      "line": 128,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "function": "bindEvents",
+      "line": 526,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "getPoreColor",
+      "line": 2578,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepSpores",
+      "line": 1256,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/engine/paleontology/EvolutionaryFlightRecorder.ts",
+      "function": "if",
+      "line": 53,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "function": "executeMagmaticTremor",
+      "line": 240,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/main.ts",
+      "function": "bindSafariNetlistControls",
+      "line": 1311,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/server/RemoteCommandDispatcher.ts",
+      "function": "switch",
+      "line": 66,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/ui/PhylogenyModal.ts",
+      "function": "bindEvents",
+      "line": 41,
+      "complexity": 14,
+      "overBudget": 7
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "updateTelemetry",
+      "line": 692,
+      "complexity": 14,
+      "overBudget": 7
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "function": "for",
+      "line": 475,
+      "complexity": 14,
+      "overBudget": 7
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "for",
+      "line": 546,
+      "complexity": 14,
+      "overBudget": 7
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepLysisAndScavenging",
+      "line": 1299,
+      "complexity": 14,
+      "overBudget": 7
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "restartWithConfig",
+      "line": 2011,
+      "complexity": 14,
+      "overBudget": 7
+    },
+    {
+      "file": "src/engine/paleontology/EvolutionaryBarrierAuditor.ts",
+      "function": "auditBarriers",
+      "line": 20,
+      "complexity": 14,
+      "overBudget": 7
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initServerModeToggle",
+      "line": 779,
+      "complexity": 14,
+      "overBudget": 7
+    },
+    {
+      "file": "src/main.ts",
+      "function": "renderSync",
+      "line": 1636,
+      "complexity": 14,
+      "overBudget": 7
+    },
+    {
+      "file": "src/server/HeadlessSimulationHost.ts",
+      "function": "constructor",
+      "line": 59,
+      "complexity": 14,
+      "overBudget": 7
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "updateEnvironmentalStatus",
+      "line": 337,
+      "complexity": 13,
+      "overBudget": 6
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "freezeCurrentSpecimen",
+      "line": 461,
+      "complexity": 13,
+      "overBudget": 6
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "function": "renderForkWizard",
+      "line": 807,
+      "complexity": 13,
+      "overBudget": 6
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "function": "render",
+      "line": 90,
+      "complexity": 13,
+      "overBudget": 6
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "step",
+      "line": 734,
+      "complexity": 13,
+      "overBudget": 6
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 2505,
+      "complexity": 13,
+      "overBudget": 6
+    },
+    {
+      "file": "src/main.ts",
+      "function": "openMicroscope",
+      "line": 1734,
+      "complexity": 13,
+      "overBudget": 6
+    },
+    {
+      "file": "src/core/paleontology/AdaptiveMotifDetector.ts",
+      "function": "if",
+      "line": 22,
+      "complexity": 12,
+      "overBudget": 5
+    },
+    {
+      "file": "src/ui/DiscoveryHistoryModal.ts",
+      "function": "updatePopupButtons",
+      "line": 111,
+      "complexity": 12,
+      "overBudget": 5
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "resolveDossierUrl",
+      "line": 459,
+      "complexity": 12,
+      "overBudget": 5
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "function": "drawLivingCellMicroscope",
+      "line": 234,
+      "complexity": 12,
+      "overBudget": 5
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "gougeTrench",
+      "line": 2109,
+      "complexity": 12,
+      "overBudget": 5
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "placeVent",
+      "line": 2234,
+      "complexity": 12,
+      "overBudget": 5
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "function": "step",
+      "line": 121,
+      "complexity": 12,
+      "overBudget": 5
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initMicroscopeTabsAndFont",
+      "line": 1244,
+      "complexity": 12,
+      "overBudget": 5
+    },
+    {
+      "file": "src/core/domain/Pore.ts",
+      "function": "stepMetaboliteDiffusionAndDecay",
+      "line": 197,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/core/paleontology/TaxonomyNomenclature.ts",
+      "function": "if",
+      "line": 375,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "bindStatsDropdown",
+      "line": 177,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "bindDocsDropdown",
+      "line": 247,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "switchTab",
+      "line": 1722,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "syncFilterUI",
+      "line": 326,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "syncSafariCoPilotVitals",
+      "line": 724,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "renderTruthTable",
+      "line": 537,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "bindHUDEvents",
+      "line": 636,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/visualizers/CircuitTopology.ts",
+      "function": "if",
+      "line": 64,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "triggerEnvironmentalAction",
+      "line": 692,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "buildBasaltWall",
+      "line": 2175,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "function": "init",
+      "line": 115,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/engine/storage/BioBank.ts",
+      "function": "importJSON",
+      "line": 169,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/engine/storage/EnvironmentPresetRegistry.ts",
+      "function": "registerBuiltInPresets",
+      "line": 233,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/engine/remote/RemoteSimulationClient.ts",
+      "function": "connect",
+      "line": 55,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/core/paleontology/AdaptiveMotifDetector.ts",
+      "function": "if",
+      "line": 107,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "toggleStatsPanel",
+      "line": 208,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "toggleDocsPanel",
+      "line": 278,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "refreshPresetDropdown",
+      "line": 377,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "syncClarityCheckboxes",
+      "line": 1868,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateGeologicalTicker",
+      "line": 1885,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "syncSpinUI",
+      "line": 420,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/MilestoneModal.ts",
+      "function": "show",
+      "line": 68,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/GeologicalEventModal.ts",
+      "function": "bindEvents",
+      "line": 35,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "show",
+      "line": 145,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "syncTestbenchUI",
+      "line": 318,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/HistologicalInspectorModal.ts",
+      "function": "bindEvents",
+      "line": 73,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/AbyssalArenaController.ts",
+      "function": "updateTugOfWarBar",
+      "line": 296,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/visualizers/OrbitCamera.ts",
+      "function": "update",
+      "line": 107,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "rebuildMantleFacets",
+      "line": 519,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "function": "if",
+      "line": 744,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "function": "if",
+      "line": 783,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/visualizers/KinematicsOverlay.ts",
+      "function": "for",
+      "line": 826,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/engine/paleontology/FossilFreezer.ts",
+      "function": "freeze",
+      "line": 45,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "function": "switch",
+      "line": 216,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "function": "executeChimneySpalling",
+      "line": 377,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/engine/storage/SimulationSnapshotManager.ts",
+      "function": "if",
+      "line": 140,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/main.ts",
+      "function": "setupLegendToggle",
+      "line": 2190,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/core/domain/PoreCell.ts",
+      "function": "getMorphogeneticPlan",
+      "line": 339,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/core/domain/GenomeRecombinationEngine.ts",
+      "function": "createChimeric",
+      "line": 40,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/core/paleontology/TaxonomyNomenclature.ts",
+      "function": "if",
+      "line": 396,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateBrushIndicator",
+      "line": 2201,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "function": "drawEmptyPoreState",
+      "line": 178,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/visualizers/CircuitTopology.ts",
+      "function": "for",
+      "line": 171,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/SimulationLoop.ts",
+      "function": "scheduleNextTick",
+      "line": 88,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/storage/SimulationSnapshotManager.ts",
+      "function": "deserialize",
+      "line": 182,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/kinematics/TreadmillingEngine.ts",
+      "function": "if",
+      "line": 223,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/kinematics/ColonyKinematicsRecorder.ts",
+      "function": "if",
+      "line": 334,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/kinematics/ColonyKinematicsRecorder.ts",
+      "function": "loadFrames",
+      "line": 640,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/server/RemoteCommandDispatcher.ts",
+      "function": "mapGeologicalEvent",
+      "line": 20,
+      "complexity": 9,
+      "overBudget": 2
+    },
+    {
+      "file": "src/core/codons/CodonTranslator.ts",
+      "function": "translateTape",
+      "line": 55,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "syncStudioPanelToggleUI",
+      "line": 1703,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateCursorStatus",
+      "line": 1786,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "setBrushMode",
+      "line": 2079,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "bindCameraPresets",
+      "line": 136,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "syncLayerUI",
+      "line": 259,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "setFullscreen",
+      "line": 501,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "syncFullscreenUI",
+      "line": 526,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/GlossaryModal.ts",
+      "function": "open",
+      "line": 104,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "selectRoleHighlight",
+      "line": 148,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "cycleRoleHighlight",
+      "line": 184,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "function": "if",
+      "line": 855,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/AbyssalArenaController.ts",
+      "function": "inspectRecentCombatEvents",
+      "line": 315,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/AbyssalArenaController.ts",
+      "function": "checkWinConditions",
+      "line": 425,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/AbyssalArenaController.ts",
+      "function": "finishMatch",
+      "line": 435,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/visualizers/KinematicsOverlay.ts",
+      "function": "for",
+      "line": 93,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/visualizers/KinematicsOverlay.ts",
+      "function": "if",
+      "line": 626,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/visualizers/KinematicsOverlay.ts",
+      "function": "if",
+      "line": 926,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "for",
+      "line": 1832,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 1854,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "function": "getMilestones",
+      "line": 202,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/storage/EnvironmentPresetRegistry.ts",
+      "function": "loadFromStorage",
+      "line": 207,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/main.ts",
+      "function": "focusOnSelected",
+      "line": 2621,
+      "complexity": 8,
+      "overBudget": 1
+    },
+    {
+      "file": "src/server/RemoteCommandDispatcher.ts",
+      "function": "for",
+      "line": 44,
+      "complexity": 8,
+      "overBudget": 1
+    }
+  ],
+  "highParameterViolations": [],
+  "nestingDepthViolations": [
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawEcologicalDramaBeams",
+      "line": 1747,
+      "depth": 9,
+      "overBudget": 6
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "discoverTourStops",
+      "line": 694,
+      "depth": 8,
+      "overBudget": 5
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepCellMetabolism",
+      "line": 815,
+      "depth": 8,
+      "overBudget": 5
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "exportTelemetry",
+      "line": 1379,
+      "depth": 7,
+      "overBudget": 4
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "function": "executePillowLavaFlow",
+      "line": 298,
+      "depth": 7,
+      "overBudget": 4
+    },
+    {
+      "file": "src/main.ts",
+      "function": "bindCanvasInteractions",
+      "line": 2229,
+      "depth": 7,
+      "overBudget": 4
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "bindEvents",
+      "line": 468,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/PhylogenyModal.ts",
+      "function": "updateContent",
+      "line": 124,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "bindEvents",
+      "line": 316,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "updateSafariCoPilotDOM",
+      "line": 1530,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "render",
+      "line": 183,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawLithosphericCrustMantle",
+      "line": 607,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "for",
+      "line": 2733,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 279,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 480,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "for",
+      "line": 546,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepReproduction",
+      "line": 956,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepSyncytialHomeostasis",
+      "line": 1169,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepLysisAndScavenging",
+      "line": 1299,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/main.ts",
+      "function": "setWorkspaceMode",
+      "line": 1987,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/main.ts",
+      "function": "applyBrushStroke",
+      "line": 2507,
+      "depth": 6,
+      "overBudget": 3
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "function": "assembleFromTranslation",
+      "line": 131,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "function": "if",
+      "line": 340,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "function": "evaluateGateInAstContext",
+      "line": 610,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/core/paleontology/MotifScanner.ts",
+      "function": "scanWorkshop",
+      "line": 29,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateStagedSpecimen",
+      "line": 1956,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "bindEvents",
+      "line": 87,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "scanExemplars",
+      "line": 762,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "function": "drawOscilloscope",
+      "line": 623,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "initDOM",
+      "line": 161,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "update",
+      "line": 387,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "bindHUDEvents",
+      "line": 636,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/ChronicleAnalysisLabModal.ts",
+      "function": "bindEvents",
+      "line": 102,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "function": "renderTimeline",
+      "line": 648,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "function": "renderForkWizard",
+      "line": 807,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "rebuildMantleFacets",
+      "line": 519,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "getProximityAlpha",
+      "line": 833,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawTargetLockOverlay",
+      "line": 1267,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "findPoreAtScreenCoord",
+      "line": 2621,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/visualizers/KinematicsOverlay.ts",
+      "function": "if",
+      "line": 253,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/visualizers/CircuitWireRouter.ts",
+      "function": "routeWires",
+      "line": 36,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 428,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepEndosymbiosis",
+      "line": 1068,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "setPoreBasalt",
+      "line": 1722,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "gougeTrench",
+      "line": 2109,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "buildBasaltWall",
+      "line": 2175,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "loadEnvironmentPreset",
+      "line": 2319,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/paleontology/DigitalPaleontologist.ts",
+      "function": "auditPores",
+      "line": 36,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "function": "init",
+      "line": 115,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "function": "getMilestones",
+      "line": 202,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "function": "getStorageStats",
+      "line": 558,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/storage/BioBank.ts",
+      "function": "importJSON",
+      "line": 169,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/storage/EnvironmentPresetRegistry.ts",
+      "function": "importFromJson",
+      "line": 156,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/storage/EnvironmentPresetRegistry.ts",
+      "function": "loadFromStorage",
+      "line": 207,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/kinematics/ColonyMorphologyClassifier.ts",
+      "function": "classify",
+      "line": 29,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/remote/RemoteSimulationClient.ts",
+      "function": "connect",
+      "line": 55,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/main.ts",
+      "function": "openMicroscope",
+      "line": 1734,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initWorkspaceModes",
+      "line": 1807,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/main.ts",
+      "function": "setupLegendToggle",
+      "line": 2190,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/core/codons/CodonTranslator.ts",
+      "function": "translateTape",
+      "line": 55,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/core/domain/Pore.ts",
+      "function": "stepMetaboliteDiffusionAndDecay",
+      "line": 197,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/core/domain/GenomeRecombinationEngine.ts",
+      "function": "createChimeric",
+      "line": 40,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/core/paleontology/WeisfeilerLehmanHasher.ts",
+      "function": "if",
+      "line": 36,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/core/paleontology/TaxonomyNomenclature.ts",
+      "function": "if",
+      "line": 396,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "bindLensSelector",
+      "line": 87,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "updateStorageIndicators",
+      "line": 150,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "toggleStatsPanel",
+      "line": 208,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "toggleDocsPanel",
+      "line": 278,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "function": "updateSelectedInfo",
+      "line": 391,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "setBrushMode",
+      "line": 2079,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "setTargetZLayer",
+      "line": 2156,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateBrushIndicator",
+      "line": 2201,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateBioBankUI",
+      "line": 2267,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "bindKeyboardShortcuts",
+      "line": 214,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "bindFilterControls",
+      "line": 297,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "function": "syncRemoteStatus",
+      "line": 561,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/MilestoneModal.ts",
+      "function": "bindEvents",
+      "line": 35,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "function": "freezeActiveSpecimenToBioBank",
+      "line": 1712,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/GeologicalEventModal.ts",
+      "function": "bindEvents",
+      "line": 35,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/VisualKeyModal.ts",
+      "function": "bindEvents",
+      "line": 52,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "function": "bindEvents",
+      "line": 318,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "function": "toggleDrawer",
+      "line": 573,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "function": "rebuildEventPips",
+      "line": 697,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "function": "if",
+      "line": 855,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/HistologicalInspectorModal.ts",
+      "function": "bindEvents",
+      "line": 73,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "loadStops",
+      "line": 240,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "function": "goToStop",
+      "line": 301,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/AudioSynthesizer.ts",
+      "function": "startAmbientHydrophone",
+      "line": 71,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "function": "bindEvents",
+      "line": 526,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "projectPores",
+      "line": 761,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawHexPrism",
+      "line": 977,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawDynamicActionBorders",
+      "line": 1567,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "function": "drawSilicoidOrganism",
+      "line": 2081,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/visualizers/CircuitTopology.ts",
+      "function": "if",
+      "line": 64,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 257,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "triggerEnvironmentalAction",
+      "line": 692,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepMetaboliteDiffusion",
+      "line": 800,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepCarcassDecay",
+      "line": 1366,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "setVentConfiguration",
+      "line": 1959,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "expandMinZToNegativeOne",
+      "line": 2057,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "recomputeNeighborPointersForColumn",
+      "line": 2088,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "placeVent",
+      "line": 2234,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "if",
+      "line": 2537,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "restoreWorldSnapshot",
+      "line": 2962,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/SimulationLoop.ts",
+      "function": "scheduleNextTick",
+      "line": 88,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/paleontology/FossilFreezer.ts",
+      "function": "freeze",
+      "line": 45,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/paleontology/FossilFreezer.ts",
+      "function": "counterfactualAutopsy",
+      "line": 115,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/paleontology/EvolutionaryHistoryExporter.ts",
+      "function": "recordTick",
+      "line": 97,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/paleontology/EvolutionaryBarrierAuditor.ts",
+      "function": "auditBarriers",
+      "line": 20,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "function": "executeMagmaticTremor",
+      "line": 240,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "function": "executeMarineSnow",
+      "line": 533,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "function": "getKinematicFrames",
+      "line": 333,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "function": "getAllSimulationSnapshots",
+      "line": 400,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "function": "getSnapshotsByBranch",
+      "line": 424,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "function": "getAllSimulationBranches",
+      "line": 513,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "function": "clearAll",
+      "line": 608,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/storage/BioBank.ts",
+      "function": "loadFromStorage",
+      "line": 197,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/storage/EnvironmentPresetRegistry.ts",
+      "function": "registerBuiltInPresets",
+      "line": 233,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/storage/SimulationSnapshotManager.ts",
+      "function": "importFromFile",
+      "line": 228,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/kinematics/ColonyKinematicsRecorder.ts",
+      "function": "for",
+      "line": 194,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/engine/kinematics/ColonyKinematicsRecorder.ts",
+      "function": "loadFrames",
+      "line": 640,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/main.ts",
+      "function": "constructor",
+      "line": 148,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initServerModeToggle",
+      "line": 779,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/main.ts",
+      "function": "updateAdvantageCard",
+      "line": 1066,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/main.ts",
+      "function": "bindMicroscopeZoomControls",
+      "line": 1164,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initMicroscopeTabsAndFont",
+      "line": 1244,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/main.ts",
+      "function": "initMicroscopeDrawer",
+      "line": 1659,
+      "depth": 4,
+      "overBudget": 1
+    },
+    {
+      "file": "src/main.ts",
+      "function": "startRenderLoop",
+      "line": 2642,
+      "depth": 4,
+      "overBudget": 1
+    }
+  ],
+  "forbiddenFileViolations": [],
+  "zeroDomViolations": [
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "line": 122,
+      "token": "window.",
+      "snippet": "const req = window.indexedDB.open('SiliquariumDB', 3);"
+    }
+  ],
+  "anyTypeViolations": [],
+  "encapsulationViolations": [
+    {
+      "file": "src/core/domain/Pore.ts",
+      "line": 45,
+      "property": "medium",
+      "snippet": "public medium: PoreMedium;"
+    }
+  ]
+}
