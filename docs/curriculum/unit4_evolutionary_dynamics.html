@@ -42,17 +42,43 @@
   <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
   <script>
     window.MathJax = {
+      loader: { load: ['[tex]/color', '[tex]/configmacros'] },
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
+        processEscapes: true,
+        packages: {'[+]': ['color', 'configmacros', 'ams']},
+        macros: {
+          color: ['\\\\textcolor{#1}{#2}', 2]
+        }
       },
       options: {
         skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
       }
     };
   </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.mermaid) {
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'dark',
+          themeVariables: {
+            darkMode: true,
+            background: '#0a0e1a',
+            primaryColor: '#00e5ff',
+            primaryBorderColor: '#00e5ff',
+            primaryTextColor: '#e2e8f0',
+            lineColor: '#38bdf8',
+            secondaryColor: '#1e293b',
+            tertiaryColor: '#0f172a'
+          }
+        });
+      }
+    });
+  </script>
 
   <style>
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -84,9 +110,9 @@
       overflow-x: auto;
     }
 
-    /* Citation Target Highlighting & Interactive Navigation */
+    /* Citation & Note Target Highlighting & Interactive Navigation */
     html { scroll-behavior: auto; }
-    li[id^="ref-"] {
+    li[id^="ref-"], li[id^="note-"], div[id^="note-"] {
       scroll-margin-top: 6rem;
       position: relative;
       transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
@@ -123,6 +149,15 @@
       background-color: rgba(8, 51, 68, 0.88) !important;
       z-index: 20;
     }
+    li[id^="note-"]:target,
+    li[id^="note-"].active-citation-target,
+    div[id^="note-"]:target,
+    div[id^="note-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #38bdf8 !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
+    }
     li[id^="ref-"]:target::after,
     li[id^="ref-"].active-citation-target::after {
       content: "CITED IN TEXT 🎯";
@@ -142,15 +177,57 @@
       animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       pointer-events: none;
     }
-    sup a[href^="#ref-"] {
+    li[id^="note-"]:target::after,
+    li[id^="note-"].active-citation-target::after,
+    div[id^="note-"]:target::after,
+    div[id^="note-"].active-citation-target::after {
+      content: "ANNOTATED NOTE 📝";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #ffffff;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+
+    /* Highlight reference number [n] */
+    li[id^="ref-"]:target > span:first-child,
+    li[id^="ref-"].active-citation-target > span:first-child,
+    li[id^="note-"]:target > span:first-child,
+    li[id^="note-"].active-citation-target > span:first-child {
+      color: #38bdf8 !important;
+      text-shadow: 0 0 12px rgba(56, 189, 248, 1);
+      transform: scale(1.15);
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    sup a[href^="#ref-"], sup a[href^="#note-"] {
       transition: all 0.2s ease;
       display: inline-block;
       padding: 0 1px;
     }
-    sup a[href^="#ref-"]:hover {
+    sup a[href^="#ref-"]:hover, sup a[href^="#note-"]:hover {
       color: #ffffff !important;
       text-shadow: 0 0 8px #22d3ee;
       transform: translateY(-1px);
+    }
+    sup[id^="fnref-"]:target, a[id^="fnref-"]:target,
+    sup[id^="cite_ref-"]:target, sup[id^="cite_ref-"].active-backlink-target,
+    sup.active-backlink-target {
+      animation: backlinkTargetFlash 2.5s ease-out;
+      outline: 2px solid #00e5ff;
+      outline-offset: 2px;
+      border-radius: 4px;
     }
     section[id], div[id], h2[id], h3[id] {
       scroll-margin-top: 5.5rem;
@@ -167,25 +244,31 @@
   <script id="citation-navigator">
     document.addEventListener('DOMContentLoaded', function() {
       function highlightRefCard(targetId) {
-        if (!targetId || !targetId.startsWith('ref-')) return;
+        if (!targetId || (!targetId.startsWith('ref-') && !targetId.startsWith('note-'))) return;
         const el = document.getElementById(targetId);
         if (!el) return;
-        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+        document.querySelectorAll('li[id^="ref-"].active-citation-target, li[id^="note-"].active-citation-target, div[id^="note-"].active-citation-target').forEach(function(item) {
           item.classList.remove('active-citation-target');
         });
         el.classList.remove('active-citation-target');
         void el.offsetWidth;
         el.classList.add('active-citation-target');
-        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       function scrollToTarget(targetId) {
         if (!targetId) return;
-        if (targetId.startsWith('ref-')) {
+        if (targetId.startsWith('ref-') || targetId.startsWith('note-')) {
           highlightRefCard(targetId);
           return;
         }
         const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.remove('active-backlink-target');
+          void el.offsetWidth;
+          el.classList.add('active-backlink-target');
+          setTimeout(() => el.classList.remove('active-backlink-target'), 2500);
+        }
       }
       document.addEventListener('click', function(e) {
         const link = e.target.closest('a[href*="#"]');
@@ -193,7 +276,13 @@
           const href = link.getAttribute('href');
           if (href && href.includes('#')) {
             const hash = href.substring(href.indexOf('#') + 1);
-            if (hash.startsWith('ref-')) highlightRefCard(hash);
+            if (hash.startsWith('ref-') || hash.startsWith('note-')) {
+              highlightRefCard(hash);
+            } else if (hash.startsWith('cite_ref-') || hash.startsWith('fnref-')) {
+              e.preventDefault();
+              history.pushState(null, '', '#' + hash);
+              scrollToTarget(hash);
+            }
           }
         }
       });
@@ -295,110 +384,234 @@
           <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
-        <span>🎓</span>
-        <span>Curriculum & Pedagogy</span>
-      </div>
-      <div class="grid grid-cols-1 gap-1"><a href="../index.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🐠</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Portal Overview</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Curriculum portal & modular index</div>
-        </div>
-      </a><a href="../CURRICULUM_AND_SYLLABUS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">📜</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Course Syllabus</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Syllabus, philosophy & symbol index</div>
-        </div>
-      </a><a href="../curriculum/unit1_prebiotic_threshold.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🌋</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Unit 1: Prebiotic Vents</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Alkaline vents, chemiosmosis & Pattee's cut</div>
-        </div>
-      </a><a href="../curriculum/unit2_logic_of_life.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">⚡</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Unit 2: Logic of Life</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Primitive enzymes & XOR impossibility proof</div>
-        </div>
-      </a><a href="../curriculum/unit3_systems_biology_motifs.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🕸️</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Unit 3: Systems Motifs</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Uri Alon motifs & Weisfeiler-Lehman hashes</div>
-        </div>
-      </a><a href="../curriculum/unit4_evolutionary_dynamics.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 bg-cyan-950/80 border border-cyan-700/60 text-cyan-300">
-        <span class="text-sm shrink-0 mt-0.5">🧬</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-cyan-300">Unit 4: Macro-Evolution</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Kimura drift, convergent homoplasy & LTEE</div>
-        </div>
-      </a><a href="../curriculum/practicums_lab_manual.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🧪</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Student Lab Manual</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">5 hands-on labs & formative assessments</div>
-        </div>
-      </a><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Companion Portal</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Master portal & assessment rubrics</div>
-        </div>
-      </a><a href="../companion/glossary.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">📖</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Lexicon & Glossary</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">55-term systems biology lexicon</div>
-        </div>
-      </a><a href="../companion/study_guides.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🧭</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Study Guides & Decoders</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">8 equation decoders & derivations</div>
-        </div>
-      </a><a href="../companion/bibliography.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">📚</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Annotated Bibliography</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">14 foundational primary papers</div>
-        </div>
-      </a><a href="../QA/STUDENT_UX_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🔍</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Student QA Report</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">12th-grade usability audit & screenshots</div>
-        </div>
-      </a></div></div><div class="space-y-1.5">
-      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
-        <span>🌊</span>
-        <span>Biophysical Theory</span>
+        <span>🌋</span>
+        <span>Volume I: Prebiotic Biophysics</span>
       </div>
       <div class="grid grid-cols-1 gap-1"><a href="../THEORETICAL_MODEL.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🌊</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Theoretical Model</div>
+          <div class="font-bold text-xs text-slate-200">1. Theoretical Model</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">21 sealed sections & thermodynamic laws</div>
         </div>
       </a><a href="../EPISTEMIC_FOUNDATIONS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🧬</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Epistemic Foundations</div>
+          <div class="font-bold text-xs text-slate-200">2. Epistemic Foundations</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Howard Pattee's Epistemic Cut & defenses</div>
         </div>
-      </a><a href="../DOCUMENTATION_DESIGN_PRINCIPLES.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">📐</span>
+      </a><a href="../REALITY_TO_SIMULATION_TRANSLATION_MATRIX.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔄</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Design Principles</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Documentation & UI/UX architecture</div>
+          <div class="font-bold text-xs text-slate-200">3. Translation Matrix (Reality ↔ Sim)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Grounding physical metaphors to computational invariants</div>
+        </div>
+      </a><a href="../DEEP_SEA_PROTO_COGNITION_AND_VENT_BIOPHYSICS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧠</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">4. Proto-Cognition & Vent Biophysics</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Sensory-motor coupling, temporal derivatives & biophysics</div>
+        </div>
+      </a><a href="../THE_GENETIC_BOOK_OF_THE_DEAD.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">5. Book of the Dead</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Dawkins, Adami & Environmental Info</div>
+        </div>
+      </a><a href="unit1_prebiotic_threshold.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">6. Unit 1: Prebiotic Vents</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Alkaline vents, chemiosmosis & Pattee's cut</div>
         </div>
       </a></div></div><div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
-        <span>🔬</span>
-        <span>Laboratory Guides</span>
+        <span>🧬</span>
+        <span>Volume II: Gene Regulatory Networks</span>
       </div>
-      <div class="grid grid-cols-1 gap-1"><a href="../PHASE_3_VISUALIZER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+      <div class="grid grid-cols-1 gap-1"><a href="../GENE_REGULATORY_NETWORKS_VOLUME.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">1. GRNs & Attractors (Vol II)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Biological & digital GRNs, attractors & Waddington</div>
+        </div>
+      </a><a href="unit2_logic_of_life.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚡</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">2. Unit 2: Logic of Life</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Primitive enzymes & XOR impossibility proof</div>
+        </div>
+      </a><a href="unit3_systems_biology_motifs.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🕸️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">3. Unit 3: Systems Motifs</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Uri Alon motifs & Weisfeiler-Lehman hashes</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🌸</span>
+        <span>Volume III: Multicellular Morphology</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌸</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">1. Multicellular Morphology (Vol III)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Graph theory, 3-cliques & 5 body topologies</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🦕</span>
+        <span>Volume IV: Circuit Paleontology</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Field Guide</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Master taxonomy, philosophy & WL hash overview</div>
+        </div>
+      </a><a href="unit4_evolutionary_dynamics.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 bg-cyan-950/80 border border-cyan-700/60 text-cyan-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-cyan-300">Unit 4: Macro-Evolution</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Kimura drift, convergent homoplasy & LTEE</div>
+        </div>
+      </a><a href="../paleontology/specimen_01_bistable_latch.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔒</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 1: Bistable Latch</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">1-bit memory latch & SR flip-flop</div>
+        </div>
+      </a><a href="../paleontology/specimen_02_repressilator.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔄</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 2: Repressilator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Odd-inverter ring oscillator & clock</div>
+        </div>
+      </a><a href="../paleontology/specimen_03_coherent_ffl.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⏳</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 3: Coherent FFL</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Sign-sensitive delay & persistence filter</div>
+        </div>
+      </a><a href="../paleontology/specimen_04_incoherent_ffl.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚡</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 4: Incoherent FFL</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Fold-change adaptation & pulse generator</div>
+        </div>
+      </a><a href="../paleontology/specimen_05_negative_autoregulation.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎚️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 5: Negative Autoreg</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Homeostatic clamp & response accelerator</div>
+        </div>
+      </a><a href="../paleontology/specimen_06_binary_half_adder.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧮</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 6: Binary Half-Adder</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Arithmetic sum (XOR) & carry (AND)</div>
+        </div>
+      </a><a href="../paleontology/specimen_07_allosteric_inverter.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🛡️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 7: Allosteric NOT</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Toxin defense & inverter shielding</div>
+        </div>
+      </a><a href="../paleontology/specimen_08_endosymbiotic_cassette.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 8: Endosymbiont</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Organelle cassette & metabolic boost</div>
+        </div>
+      </a><a href="../paleontology/specimen_09_syncytial_multicellularity.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🕸️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 9: Syncytium</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Multi-pore fusion & cytoplasmic sharing</div>
+        </div>
+      </a><a href="../paleontology/specimen_10_pelagic_sporulation.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 10: Pelagic Spores</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Buoyant dispersal & benthic escape</div>
+        </div>
+      </a><a href="../paleontology/specimen_11_chemiosmotic_autotroph.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 11: Apex Autotroph</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Mitchell PMF & hydrothermal plume coupling</div>
+        </div>
+      </a><a href="../paleontology/specimen_12_basalt_lithotroph.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🪨</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 12: Basalt Lithotroph</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Deep subterranean starvation & Landauer thrift</div>
+        </div>
+      </a><a href="../paleontology/specimen_13_trophic_predator.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🩸</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 13: Trophic Predator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Lytic enzymatic siphoning & heterotrophy</div>
+        </div>
+      </a><a href="../paleontology/specimen_14_detrital_scavenger.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🍂</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 14: Detrital Scavenger</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Carcass necromass & mineral mass recycling</div>
+        </div>
+      </a><a href="../paleontology/specimen_15_patriarch_lineage.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 15: Patriarch Ancestor</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Conserved primordial genome & LTEE anchor</div>
+        </div>
+      </a><a href="../paleontology/specimen_16_temporal_derivative_chemotaxis.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧭</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 16: Chemotaxis Engine</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Purcell-Berg fold-change dS/dt gradient sensor</div>
+        </div>
+      </a><a href="../paleontology/specimen_17_predictive_pavlovian.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔮</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 17: Pavlovian Regulator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Tagkopoulos anticipatory precursor feedforward shield</div>
+        </div>
+      </a><a href="../paleontology/specimen_18_entrained_pacemaker.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⏱️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 18: Entrained Pacemaker</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Johnson-Rust phase-locked KaiABC vent clock</div>
+        </div>
+      </a><a href="../paleontology/specimen_19_steiner_vascular_network.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌿</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 19: Steiner Vascular Net</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Nakagaki Physarum minimal tree conduit router</div>
+        </div>
+      </a><a href="../paleontology/specimen_20_cryptobiotic_dormancy_clamp.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🛡️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 20: Dormancy Clamp</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Balaban HipAB zero-burn cryptobiosis gate</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🛠️</span>
+        <span>Volume V: Systems Operations</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../USER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Illustrated Systems Manual</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">10-chapter illustrated manual & tutorials</div>
+        </div>
+      </a><a href="practicums_lab_manual.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧪</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Laboratory Practicums 1–5</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5 hands-on labs & formative assessments</div>
+        </div>
+      </a><a href="../PHASE_3_VISUALIZER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🔬</span>
         <div class="min-w-0">
           <div class="font-bold text-xs text-slate-200">3D Seafloor Visualizer</div>
@@ -421,6 +634,135 @@
         <div class="min-w-0">
           <div class="font-bold text-xs text-slate-200">Phylogeny & Dynamics</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Multi-lineage clades & Lenski benchmarks</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>📚</span>
+        <span>Volume VI: Academic References</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../index.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Master Library Portal</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Curriculum portal & modular index</div>
+        </div>
+      </a><a href="../companion/glossary.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Systems Biology Glossary</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">70-term systems biology lexicon</div>
+        </div>
+      </a><a href="../companion/study_guides.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧭</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Study Guides & Master Decoders</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">8 equation decoders & derivations</div>
+        </div>
+      </a><a href="../companion/bibliography.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Annotated Master Bibliography</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">22 foundational primary papers</div>
+        </div>
+      </a><a href="MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎓</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Full-Year University Syllabus</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">30-week university curriculum & syllabus</div>
+        </div>
+      </a><a href="../CIRCUIT_PALEONTOLOGY_NOTES.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📝</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Critical Scientific Notes</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">36 in-depth derivations, proofs & justifications</div>
+        </div>
+      </a><a href="../CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Glossary</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">50-term lexicon of evolved circuits</div>
+        </div>
+      </a><a href="../CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Bibliography</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">25+ landmark peer-reviewed papers</div>
+        </div>
+      </a><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Companion Portal</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Master portal & assessment rubrics</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>📏</span>
+        <span>Standards & Architecture</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../../standards/DEVELOPMENT_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚙️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Engineering Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Architecture, TypeScript & design principles</div>
+        </div>
+      </a><a href="../../standards/QA_AND_TESTING_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧪</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">QA & Testing Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Verification, CI & unit test frameworks</div>
+        </div>
+      </a><a href="../../standards/DOCUMENTATION_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Pedagogical Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5-Dimension rubric & equation decoders</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🔍</span>
+        <span>QA & Field Evaluations</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../../QA/QA_CODING_STANDARDS_FULL_AUDIT_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">QA Coding Standards Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Comprehensive audit against DEVELOPMENT, QA & DOCS standards</div>
+        </div>
+      </a><a href="../../QA/UX_ARCHITECTURE_AUDIT_AND_REDESIGN.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📐</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">UX Architecture Audit & Redesign</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5D HCI audit, domain integrity & interface redesign</div>
+        </div>
+      </a><a href="../../QA/PANEL_UX_EVALUATION_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Panel Evaluation Report</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Expert & tester panel 4x 1-hour journeys</div>
+        </div>
+      </a><a href="../../QA/DESIGN_STUDIO_UX_AUDIT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏗️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Design Studio UX Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">CAD sculpting & world builder evaluation</div>
+        </div>
+      </a><a href="../../QA/FIELD_GUIDE_NATURALIST_EVALUATION.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌿</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Naturalist Field Evaluation</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Field guide & safari co-pilot audit</div>
+        </div>
+      </a><a href="../../QA/NAIVE_USER_VISUAL_AUDIT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">👁️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Naive User Visual Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Visual clarity & cognitive ergonomics audit</div>
+        </div>
+      </a><a href="../../QA/STUDENT_UX_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔍</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Student QA Report</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">12th-grade usability audit & screenshots</div>
         </div>
       </a></div></div><div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
@@ -464,65 +806,132 @@
       </div>
       <div class="space-y-1">
       <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
-        <span>🎓</span>
-        <span>Curriculum & Pedagogy</span>
-      </div>
-      <div class="space-y-0.5"><a href="../index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🐠</span>
-        <span class="truncate">Portal Overview</span>
-      </a><a href="../CURRICULUM_AND_SYLLABUS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">📜</span>
-        <span class="truncate">Course Syllabus</span>
-      </a><a href="../curriculum/unit1_prebiotic_threshold.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🌋</span>
-        <span class="truncate">Unit 1: Prebiotic Vents</span>
-      </a><a href="../curriculum/unit2_logic_of_life.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">⚡</span>
-        <span class="truncate">Unit 2: Logic of Life</span>
-      </a><a href="../curriculum/unit3_systems_biology_motifs.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🕸️</span>
-        <span class="truncate">Unit 3: Systems Motifs</span>
-      </a><a href="../curriculum/unit4_evolutionary_dynamics.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold shadow-sm">
-        <span class="text-xs shrink-0">🧬</span>
-        <span class="truncate">Unit 4: Macro-Evolution</span>
-      </a><a href="../curriculum/practicums_lab_manual.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🧪</span>
-        <span class="truncate">Student Lab Manual</span>
-      </a><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🏛️</span>
-        <span class="truncate">Companion Portal</span>
-      </a><a href="../companion/glossary.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">📖</span>
-        <span class="truncate">Lexicon & Glossary</span>
-      </a><a href="../companion/study_guides.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🧭</span>
-        <span class="truncate">Study Guides & Decoders</span>
-      </a><a href="../companion/bibliography.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">📚</span>
-        <span class="truncate">Annotated Bibliography</span>
-      </a><a href="../QA/STUDENT_UX_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🔍</span>
-        <span class="truncate">Student QA Report</span>
-      </a></div></div><div class="space-y-1">
-      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
-        <span>🌊</span>
-        <span>Biophysical Theory</span>
+        <span>🌋</span>
+        <span>Volume I: Prebiotic Biophysics</span>
       </div>
       <div class="space-y-0.5"><a href="../THEORETICAL_MODEL.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
         <span class="text-xs shrink-0">🌊</span>
-        <span class="truncate">Theoretical Model</span>
+        <span class="truncate">1. Theoretical Model</span>
       </a><a href="../EPISTEMIC_FOUNDATIONS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
         <span class="text-xs shrink-0">🧬</span>
-        <span class="truncate">Epistemic Foundations</span>
-      </a><a href="../DOCUMENTATION_DESIGN_PRINCIPLES.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">📐</span>
-        <span class="truncate">Design Principles</span>
+        <span class="truncate">2. Epistemic Foundations</span>
+      </a><a href="../REALITY_TO_SIMULATION_TRANSLATION_MATRIX.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔄</span>
+        <span class="truncate">3. Translation Matrix (Reality ↔ Sim)</span>
+      </a><a href="../DEEP_SEA_PROTO_COGNITION_AND_VENT_BIOPHYSICS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧠</span>
+        <span class="truncate">4. Proto-Cognition & Vent Biophysics</span>
+      </a><a href="../THE_GENETIC_BOOK_OF_THE_DEAD.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">5. Book of the Dead</span>
+      </a><a href="unit1_prebiotic_threshold.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌋</span>
+        <span class="truncate">6. Unit 1: Prebiotic Vents</span>
       </a></div></div><div class="space-y-1">
       <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
-        <span>🔬</span>
-        <span>Laboratory Guides</span>
+        <span>🧬</span>
+        <span>Volume II: Gene Regulatory Networks</span>
       </div>
-      <div class="space-y-0.5"><a href="../PHASE_3_VISUALIZER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+      <div class="space-y-0.5"><a href="../GENE_REGULATORY_NETWORKS_VOLUME.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">1. GRNs & Attractors (Vol II)</span>
+      </a><a href="unit2_logic_of_life.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚡</span>
+        <span class="truncate">2. Unit 2: Logic of Life</span>
+      </a><a href="unit3_systems_biology_motifs.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🕸️</span>
+        <span class="truncate">3. Unit 3: Systems Motifs</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🌸</span>
+        <span>Volume III: Multicellular Morphology</span>
+      </div>
+      <div class="space-y-0.5"><a href="../MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌸</span>
+        <span class="truncate">1. Multicellular Morphology (Vol III)</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🦕</span>
+        <span>Volume IV: Circuit Paleontology</span>
+      </div>
+      <div class="space-y-0.5"><a href="../CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Paleontology Field Guide</span>
+      </a><a href="unit4_evolutionary_dynamics.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold shadow-sm">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Unit 4: Macro-Evolution</span>
+      </a><a href="../paleontology/specimen_01_bistable_latch.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔒</span>
+        <span class="truncate">Specimen 1: Bistable Latch</span>
+      </a><a href="../paleontology/specimen_02_repressilator.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔄</span>
+        <span class="truncate">Specimen 2: Repressilator</span>
+      </a><a href="../paleontology/specimen_03_coherent_ffl.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⏳</span>
+        <span class="truncate">Specimen 3: Coherent FFL</span>
+      </a><a href="../paleontology/specimen_04_incoherent_ffl.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚡</span>
+        <span class="truncate">Specimen 4: Incoherent FFL</span>
+      </a><a href="../paleontology/specimen_05_negative_autoregulation.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎚️</span>
+        <span class="truncate">Specimen 5: Negative Autoreg</span>
+      </a><a href="../paleontology/specimen_06_binary_half_adder.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧮</span>
+        <span class="truncate">Specimen 6: Binary Half-Adder</span>
+      </a><a href="../paleontology/specimen_07_allosteric_inverter.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🛡️</span>
+        <span class="truncate">Specimen 7: Allosteric NOT</span>
+      </a><a href="../paleontology/specimen_08_endosymbiotic_cassette.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔋</span>
+        <span class="truncate">Specimen 8: Endosymbiont</span>
+      </a><a href="../paleontology/specimen_09_syncytial_multicellularity.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🕸️</span>
+        <span class="truncate">Specimen 9: Syncytium</span>
+      </a><a href="../paleontology/specimen_10_pelagic_sporulation.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">Specimen 10: Pelagic Spores</span>
+      </a><a href="../paleontology/specimen_11_chemiosmotic_autotroph.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌋</span>
+        <span class="truncate">Specimen 11: Apex Autotroph</span>
+      </a><a href="../paleontology/specimen_12_basalt_lithotroph.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🪨</span>
+        <span class="truncate">Specimen 12: Basalt Lithotroph</span>
+      </a><a href="../paleontology/specimen_13_trophic_predator.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🩸</span>
+        <span class="truncate">Specimen 13: Trophic Predator</span>
+      </a><a href="../paleontology/specimen_14_detrital_scavenger.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🍂</span>
+        <span class="truncate">Specimen 14: Detrital Scavenger</span>
+      </a><a href="../paleontology/specimen_15_patriarch_lineage.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Specimen 15: Patriarch Ancestor</span>
+      </a><a href="../paleontology/specimen_16_temporal_derivative_chemotaxis.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧭</span>
+        <span class="truncate">Specimen 16: Chemotaxis Engine</span>
+      </a><a href="../paleontology/specimen_17_predictive_pavlovian.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔮</span>
+        <span class="truncate">Specimen 17: Pavlovian Regulator</span>
+      </a><a href="../paleontology/specimen_18_entrained_pacemaker.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⏱️</span>
+        <span class="truncate">Specimen 18: Entrained Pacemaker</span>
+      </a><a href="../paleontology/specimen_19_steiner_vascular_network.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌿</span>
+        <span class="truncate">Specimen 19: Steiner Vascular Net</span>
+      </a><a href="../paleontology/specimen_20_cryptobiotic_dormancy_clamp.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🛡️</span>
+        <span class="truncate">Specimen 20: Dormancy Clamp</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🛠️</span>
+        <span>Volume V: Systems Operations</span>
+      </div>
+      <div class="space-y-0.5"><a href="../USER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Illustrated Systems Manual</span>
+      </a><a href="practicums_lab_manual.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧪</span>
+        <span class="truncate">Laboratory Practicums 1–5</span>
+      </a><a href="../PHASE_3_VISUALIZER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
         <span class="text-xs shrink-0">🔬</span>
         <span class="truncate">3D Seafloor Visualizer</span>
       </a><a href="../PHASE_4_PALEONTOLOGY_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
@@ -534,6 +943,78 @@
       </a><a href="../PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
         <span class="text-xs shrink-0">🧬</span>
         <span class="truncate">Phylogeny & Dynamics</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>📚</span>
+        <span>Volume VI: Academic References</span>
+      </div>
+      <div class="space-y-0.5"><a href="../index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Master Library Portal</span>
+      </a><a href="../companion/glossary.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Systems Biology Glossary</span>
+      </a><a href="../companion/study_guides.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧭</span>
+        <span class="truncate">Study Guides & Master Decoders</span>
+      </a><a href="../companion/bibliography.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Annotated Master Bibliography</span>
+      </a><a href="MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎓</span>
+        <span class="truncate">Full-Year University Syllabus</span>
+      </a><a href="../CIRCUIT_PALEONTOLOGY_NOTES.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📝</span>
+        <span class="truncate">Critical Scientific Notes</span>
+      </a><a href="../CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Paleontology Glossary</span>
+      </a><a href="../CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Paleontology Bibliography</span>
+      </a><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Companion Portal</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>📏</span>
+        <span>Standards & Architecture</span>
+      </div>
+      <div class="space-y-0.5"><a href="../../standards/DEVELOPMENT_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚙️</span>
+        <span class="truncate">Engineering Standards</span>
+      </a><a href="../../standards/QA_AND_TESTING_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧪</span>
+        <span class="truncate">QA & Testing Standards</span>
+      </a><a href="../../standards/DOCUMENTATION_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Pedagogical Standards</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🔍</span>
+        <span>QA & Field Evaluations</span>
+      </div>
+      <div class="space-y-0.5"><a href="../../QA/QA_CODING_STANDARDS_FULL_AUDIT_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">QA Coding Standards Audit</span>
+      </a><a href="../../QA/UX_ARCHITECTURE_AUDIT_AND_REDESIGN.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📐</span>
+        <span class="truncate">UX Architecture Audit & Redesign</span>
+      </a><a href="../../QA/PANEL_UX_EVALUATION_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Panel Evaluation Report</span>
+      </a><a href="../../QA/DESIGN_STUDIO_UX_AUDIT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏗️</span>
+        <span class="truncate">Design Studio UX Audit</span>
+      </a><a href="../../QA/FIELD_GUIDE_NATURALIST_EVALUATION.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌿</span>
+        <span class="truncate">Naturalist Field Evaluation</span>
+      </a><a href="../../QA/NAIVE_USER_VISUAL_AUDIT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">👁️</span>
+        <span class="truncate">Naive User Visual Audit</span>
+      </a><a href="../../QA/STUDENT_UX_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔍</span>
+        <span class="truncate">Student QA Report</span>
       </a></div></div><div class="space-y-1">
       <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
         <span>🎨</span>
@@ -554,17 +1035,17 @@
     <!-- MAIN CONTENT VIEWPORT (Centered, Responsive, Zero Horizontal Scrollbars) -->
     <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-10 py-8 md:py-10">
       <div class="max-w-4xl mx-auto space-y-8">
-        <h1 id="unit-4-macro-evolutionary-dynamics-lenski-ltee" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🧬 Unit 4: Macro-Evolutionary Dynamics & Lenski LTEE <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#unit-4-macro-evolutionary-dynamics-lenski-ltee" title="Direct link">#</a></h1>
+        <h1 id="unit-4-macro-evolutionary-dynamics-lenski-ltee" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🧬 Unit 4: Macro-Evolutionary Dynamics & Lenski LTEE</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Motoo Kimura's Neutral Drift, Susumu Ohno's Duplications, Convergent Homoplasy Proofs, and Pelagic Spore Advection</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="1-visceral-intuition-beyond-simple-optimization" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Visceral Intuition: Beyond Simple Optimization <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-visceral-intuition-beyond-simple-optimization" title="Direct link">#</a></h2>
+<h2 id="1-visceral-intuition-beyond-simple-optimization" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Visceral Intuition: Beyond Simple Optimization</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In conventional computer science, genetic algorithms are treated as simple gradient-climbing optimizers: a population of candidate solutions crawls up a smooth mathematical fitness hill toward a single global peak.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In real evolutionary biology, fitness landscapes are not smooth hills; they are vast, hyper-dimensional plateaus, rugged canyons, and neutral saddles. More profoundly, living ecosystems are <strong class="text-slate-100 font-semibold">non-stationary</strong>: the environment itself shifts, and competing lineages alter the landscape through their own physical actions.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To understand macro-evolution, students must explore three foundational pillars:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Motoo Kimura's Neutral Theory (1968):</strong> Evolution proceeds largely through random drift along selectively neutral ridges, not relentless optimization.</li>
-<li><strong class="text-slate-100 font-semibold">Susumu Ohno's Gene Duplication (1970):</strong> Innovation requires redundant genetic copies freed from purifying selection to explore novel functions.</li>
-<li><strong class="text-slate-100 font-semibold">Richard Lenski's Long-Term Evolution Experiment (LTEE, 1988–Present):</strong> Adaptation is characterized by hyperbolic decelerating velocity punctuated by rare, historically contingent breakthrough innovations.</li>
+<li><strong class="text-slate-100 font-semibold">Susumu Ohno's Gene Duplication<sup id="cite_ref-2" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup> (1970):</strong> Innovation requires redundant genetic copies freed from purifying selection to explore novel functions.</li>
+<li><strong class="text-slate-100 font-semibold">Richard Lenski's Long-Term Evolution Experiment<sup id="cite_ref-3" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-3">[3]</a></sup> (LTEE, 1988–Present):</strong> Adaptation is characterized by hyperbolic decelerating velocity punctuated by rare, historically contingent breakthrough innovations.</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><figure class="my-8 text-center group">
       <div class="relative inline-block w-full max-w-4xl rounded-2xl p-1 bg-gradient-to-b from-slate-700/40 via-slate-800/20 to-slate-900/60 shadow-2xl border border-slate-800/80 hover:border-cyan-500/50 transition-all duration-300">
@@ -578,15 +1059,21 @@
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
-              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis</span>
+              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis &bull; Figure Breakdown</span>
             </div>
             <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Deep-Dive Analysis</span>
           </div>
-          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><br/><strong class="text-slate-100 font-semibold">Figure 4.1 Architectural Breakdown: Neutral Drift Manifolds & Paralog Neofunctionalization</strong><br/>- <strong class="text-slate-100 font-semibold">🔍 Visual Guide & Structural Mechanics:</strong> The left panel contrasts a naive gradient climbing ascent (where populations become permanently trapped in local sub-optimal peaks) against the multi-dimensional biological manifold, where lineages walk across neutral saddles ($\Delta W = 0$) until discovering adaptive breakthroughs. The right panel illustrates Susumu Ohno's gene duplication mechanism: an ancestral essential gene duplicates into twin copies. The primary paralog maintains homeostatic feeding under purifying selection, while the duplicate paralog is freed from selective constraints, accumulating neutral mutations until unlocking a novel catalytic adaptation (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_OR</code>).<br/>- <strong class="text-slate-100 font-semibold">🔬 Biophysical & Mathematical Reality:</strong> In molecular evolution (Kimura, 1968), the substitution rate of neutral mutations equals the mutation rate ($k = \mu$), independent of population size. Without neutral drift ridges, populations are paralyzed by local fitness valleys. Ohno's duplication (1970) provides the mutational raw material for evolutionary innovation without risking metabolic collapse.<br/>- <strong class="text-slate-100 font-semibold">💻 Digital Mapping & Silicon Architecture:</strong> In Siliquarium, non-coding codons (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">INTRON_SILENT</code>) act as duplicated genetic reserves. In the <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">EvolutionaryFlightRecorder</code></a>, single-bit counterfactual autopsies repeatedly reveal silent non-coding codons mutating into active gates that connect with pre-existing circuitry without causing parent starvation.<br/>- <strong class="text-slate-100 font-semibold">🏛️ Core Principle & Intuitive Summary:</strong> <em class="text-slate-200 italic">Duplication Frees the Hands of Evolution.</em> You cannot remodel a ship's engine while it is running at full throttle unless you have a second backup engine to keep the ship afloat.</div>
+          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Figure 4.1 Architectural Breakdown: Neutral Drift Manifolds & Paralog Neofunctionalization</strong></p>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">🔍 Visual Guide & Structural Mechanics:</strong> The left panel contrasts a naive gradient climbing ascent (where populations become permanently trapped in local sub-optimal peaks) against the multi-dimensional biological manifold, where lineages walk across neutral saddles ($\Delta W = 0$) until discovering adaptive breakthroughs. The right panel illustrates Susumu Ohno's gene duplication mechanism: an ancestral essential gene duplicates into twin copies. The primary paralog maintains homeostatic feeding under purifying selection, while the duplicate paralog is freed from selective constraints, accumulating neutral mutations until unlocking a novel catalytic adaptation (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_OR</code>).</li>
+<li><strong class="text-slate-100 font-semibold">🔬 Biophysical & Mathematical Reality:</strong> In molecular evolution (Kimura, 1968), the substitution rate of neutral mutations equals the mutation rate ($k = \mu$), independent of population size. Without neutral drift ridges, populations are paralyzed by local fitness valleys. Ohno's duplication (1970) provides the mutational raw material for evolutionary innovation without risking metabolic collapse.</li>
+<li><strong class="text-slate-100 font-semibold">💻 Digital Mapping & Silicon Architecture:</strong> In Siliquarium, non-coding codons (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">INTRON_SILENT</code>) act as duplicated genetic reserves. In the <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">EvolutionaryFlightRecorder</code></a>, single-bit counterfactual autopsies repeatedly reveal silent non-coding codons mutating into active gates that connect with pre-existing circuitry without causing parent starvation.</li>
+<li><strong class="text-slate-100 font-semibold">🏛️ Core Principle & Intuitive Summary:</strong> <em class="text-slate-200 italic">Duplication Frees the Hands of Evolution.</em> You cannot remodel a ship's engine while it is running at full throttle unless you have a second backup engine to keep the ship afloat.</li>
+</ul></div>
         </div>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="2-motoo-kimuras-neutral-theory-neutral-drift-saddles" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Motoo Kimura's Neutral Theory & Neutral Drift Saddles <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-motoo-kimuras-neutral-theory-neutral-drift-saddles" title="Direct link">#</a></h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1968, Japanese mathematical geneticist Motoo Kimura shook evolutionary biology by proving that at the molecular level, <strong class="text-slate-100 font-semibold">the majority of evolutionary changes are selectively neutral</strong>.</p>
+<h2 id="2-motoo-kimuras-neutral-theory-neutral-drift-saddles" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Motoo Kimura's Neutral Theory & Neutral Drift Saddles</h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1968, Japanese mathematical geneticist Motoo Kimura shook evolutionary biology by proving that at the molecular level, <strong class="text-slate-100 font-semibold">the majority of evolutionary changes are selectively neutral</strong> (Kimura, 1968)<sup id="cite_ref-1" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-1">[1]</a></sup>.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Siliquarium, Kimura's Neutral Theory is an emergent property of the 64-entry degenerate codon table:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Synonymous Degeneracy:</strong> Multiple 6-bit codons translate to the exact same logic gate (e.g., 12 distinct codons code for <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_AND</code>).</li>
@@ -599,19 +1086,26 @@
 <li>The mutation is selectively neutral!</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Without neutral drift, an evolving population becomes trapped on the first local fitness hillock it encounters. Neutral mutational drift allows a lineage to <strong class="text-slate-100 font-semibold">diffuse across the $N$-dimensional Hamming hypercube</strong>, wandering along neutral ridges until it stumbles upon a previously inaccessible adaptive breakthrough.</p>
+<h3 id="21-reconciling-kimura-neutral-drift-with-information-injection-kimuras-1961-theorem" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 Reconciling Kimura Neutral Drift with Information Injection: Kimura's 1961 Theorem</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">While Kimura's 1968 neutral theory demonstrated that the vast majority of molecular substitutions are governed by stochastic genetic drift, his earlier landmark 1961 paper<sup id="cite_ref-8" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-8">[8]</a></sup> established the exact mathematical rate at which natural selection accumulates informational bits from the environment into the gene pool:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\Delta I \approx \frac{V_W}{2 \bar{W}^2 \ln 2} \quad \text{bits per generation}$$</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>When an environment is completely homeostatic or mutations fall in non-coding introns, relative fitness variance is zero ($V_W = 0$). The informational accumulation rate drops to $\Delta I = 0$, and Kimura's neutral drift governs sequence diffusion across the genome space.</li>
+<li>But when an environmental disturbance arrives (such as a thermal surge, an acidic toxin pulse, or nutrient famine), fitness variance spikes ($V_W > 0$). Selective mortality immediately transforms natural selection into an active communication channel, rapidly accumulating bits of environmental order into the surviving gene pool.</li>
+</ul>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="3-susumu-ohnos-gene-duplication-neofunctionalization" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Susumu Ohno's Gene Duplication & Neofunctionalization <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-susumu-ohnos-gene-duplication-neofunctionalization" title="Direct link">#</a></h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1970, geneticist Susumu Ohno published <em class="text-slate-200 italic">Evolution by Gene Duplication</em>, declaring: <em class="text-slate-200 italic">"Natural selection merely modified, while gene duplication created."</em></p>
+<h2 id="3-susumu-ohnos-gene-duplication-neofunctionalization" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Susumu Ohno's Gene Duplication & Neofunctionalization</h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1970, geneticist Susumu Ohno published <em class="text-slate-200 italic">Evolution by Gene Duplication</em><sup id="cite_ref-2" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup>, declaring: <em class="text-slate-200 italic">"Natural selection merely modified, while gene duplication created."</em></p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If an organism possesses only one copy of an essential catalytic enzyme, natural selection acts with fierce <strong class="text-slate-100 font-semibold">purifying selection</strong>: any mutation that alters the active site destroys the enzyme, causing starvation and death. The gene is locked in place.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">How can a lineage ever discover a brand-new catalytic function? <strong class="text-slate-100 font-semibold">Through gene duplication:</strong></p>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">As diagrammed in Figure 4.1, duplication releases the secondary copy from purifying selection. While the ancestral copy continues homeostatic catalytic feeding, the redundant paralog is free to accumulate exploratory mutations, eventually discovering novel functions such as toxin shielding or dietary generalism.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">As diagrammed in Figure 4.1, duplication releases the secondary copy from purifying selection. While the ancestral copy continues homeostatic catalytic feeding, the redundant paralog is free to accumulate exploratory mutations, eventually discovering novel functions such as toxin shielding, multi-operon specialization, or endosymbiotic bioenergetic cassettes (Lane & Martin, 2010)<sup id="cite_ref-5" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-5">[5]</a></sup>.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Siliquarium, non-coding introns (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">INTRON_SILENT</code>) act as duplicated genetic reserves. In the <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">EvolutionaryFlightRecorder</code></a>, single-bit autopsies repeatedly reveal a silent intron mutating into a catalytic <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_OR</code>, pairing with a pre-existing <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_AND</code> to assemble composite motifs (such as the XOR circuit or toxin filter) without disrupting the organism's baseline metabolism.</p>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="4-mathematical-proof-of-convergent-evolution-homology-vs-homoplasy" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. Mathematical Proof of Convergent Evolution (Homology vs. Homoplasy) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-mathematical-proof-of-convergent-evolution-homology-vs-homoplasy" title="Direct link">#</a></h2>
+<h2 id="4-mathematical-proof-of-convergent-evolution-homology-vs-homoplasy" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. Mathematical Proof of Convergent Evolution (Homology vs. Homoplasy)</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A classic challenge in biology is distinguishing between:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Homology:</strong> A shared trait inherited from a common ancestor (e.g., the pentadactyl five-digit limb in humans, bats, and whales).</li>
-<li><strong class="text-slate-100 font-semibold">Homoplasy / Convergent Evolution:</strong> An identical trait independently discovered by separate lineages facing similar physical pressures (e.g., the evolution of wings in birds, bats, and insects, or camera eyes in cephalopods and vertebrates).</li>
+<li><strong class="text-slate-100 font-semibold">Homoplasy / Convergent Evolution:</strong> An identical trait independently discovered by separate lineages facing similar physical pressures (Stephen Jay Gould 2002)<sup id="cite_ref-4" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-4">[4]</a></sup> (e.g., the evolution of wings in birds, bats, and insects, or camera eyes in cephalopods and vertebrates).</li>
 </ul>
 <div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart TD
     subgraph HomologyTree[&quot;Case A: HOMOLOGY (Shared Ancestry)&quot;]
@@ -635,12 +1129,14 @@
 <li>The flight recorder walks their parent pointers backward to find their <strong class="text-slate-100 font-semibold">Least Common Ancestor (LCA)</strong>:</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\text{LCA}(A, B) = \text{argmin}_{u \in \text{Ancestors}(A) \cap \text{Ancestors}(B)} (\text{Depth}(u))$$</p>
-<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
-<li><strong class="text-slate-100 font-semibold">The Audit Decision Rule:</strong></li>
-</ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\text{Classification} = \begin{cases} \mathbf{HOMOLOGY}, & \text{if } M \in \text{Motifs}(\text{LCA}) \\ \mathbf{HOMOPLASY}, & \text{if } M \notin \text{Motifs}(\text{LCA}) \end{cases}$$</p>
+<h3 id="41-convergent-evolution-as-shared-environmental-reading-the-genetic-book-of-the-dead" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.1 Convergent Evolution as Shared Environmental Reading (The Genetic Book of the Dead)</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Why do phylogenetically independent lineages converge upon identical circuit topologies?</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In <em class="text-slate-200 italic">The Genetic Book of the Dead</em> (2024)<sup id="cite_ref-6" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-6">[6]</a></sup>, Richard Dawkins points out that when distinct taxa evolve identical phenotypes—such as echolocating bats and toothed whales converging on identical amino acid substitutions in the motor protein Prestin (<em class="text-slate-200 italic">SLC26A5</em>)—it is because their genomes are reading the <strong class="text-slate-100 font-semibold">exact same acoustic physical laws</strong> of ultrasound reflection from their environments.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Siliquarium, two clades on opposite sides of the seamount converge on the exact same <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">BISTABLE_LATCH</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">C-FFL</code> topology because both lineages are reading the <strong class="text-slate-100 font-semibold">same temporal hydrothermal pulse interval</strong> and the <strong class="text-slate-100 font-semibold">same fluid noise dynamics</strong> from the vent.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Christoph Adami et al. (2000)<sup id="cite_ref-7" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-7">[7]</a></sup> proved that natural selection maximizes the mutual information $I(X; E) = H(E) - H(E \mid X)$. When two independent lineages face identical environmental entropy $H(E)$, natural selection drives both toward the same informational configurations, producing convergent homoplasy without common ancestry.</p>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="5-richard-lenskis-ltee-dynamics-velocity-diversity" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Richard Lenski's LTEE Dynamics: Velocity & Diversity <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-richard-lenskis-ltee-dynamics-velocity-diversity" title="Direct link">#</a></h2>
+<h2 id="5-richard-lenskis-ltee-dynamics-velocity-diversity" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Richard Lenski's LTEE Dynamics: Velocity & Diversity</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1988, evolutionary biologist Richard Lenski initiated the Long-Term Evolution Experiment (LTEE), tracking twelve isolated populations of <em class="text-slate-200 italic">Escherichia coli</em> across more than 75,000 generations.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Two profound macro-evolutionary phenomena emerged from the LTEE:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
@@ -659,28 +1155,34 @@
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
-              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis</span>
+              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis &bull; Figure Breakdown</span>
             </div>
             <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Deep-Dive Analysis</span>
           </div>
-          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><br/><strong class="text-slate-100 font-semibold">Figure 4.2 Architectural Breakdown: Hyperbolic LTEE Velocity & Convergent Homoplasy</strong><br/>- <strong class="text-slate-100 font-semibold">🔍 Visual Guide & Structural Mechanics:</strong> The left panel portrays Richard Lenski's famous LTEE trajectory: rapid initial adaptive gain during colonization, asymptotic hyperbolic deceleration as organisms approach physical optimality, and rare punctuated breakthrough jumps ($\text{Cit}^+$ innovation). The right panel shows phylogenetic Least Common Ancestor (LCA) trees distinguishing Homology (trait shared through continuous vertical inheritance from an LCA) from Homoplasy / Convergent Evolution (independent discovery of the exact same circuit by isolated clades).<br/>- <strong class="text-slate-100 font-semibold">🔬 Biophysical & Mathematical Reality:</strong> In microbial experimental evolution (Lenski, 1991, 2003), power-law scaling governs fitness gain: $W(t) = (a t + 1)^b$. Innovations requiring multiple epistatic mutations (potentiation, actualization, refinement) cause sudden macroscopic shifts. In phylogeny, homoplasy demonstrates that physical optimality channels evolutionary paths.<br/>- <strong class="text-slate-100 font-semibold">💻 Digital Mapping & Silicon Architecture:</strong> Monitored continuously by <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LteeBenchmark.ts</code></a> and <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">EvolutionaryFlightRecorder.ts</code></a>. When two living cells display identical Weisfeiler-Lehman hashes, the flight recorder walks back their parent DAG to find their Least Common Ancestor and definitively renders a verdict: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">HOMOLOGY</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">HOMOPLASY</code>.<br/>- <strong class="text-slate-100 font-semibold">🏛️ Core Principle & Intuitive Summary:</strong> <em class="text-slate-200 italic">History Constrains, But Physics Channels.</em> Lineages inherit genetic baggage from the past, but the uncompromising laws of thermodynamics and Boolean logic repeatedly force separate lineages into identical optimal solutions.</div>
+          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Figure 4.2 Architectural Breakdown: Hyperbolic LTEE Velocity & Convergent Homoplasy</strong></p>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">🔍 Visual Guide & Structural Mechanics:</strong> The left panel portrays Richard Lenski's famous LTEE trajectory: rapid initial adaptive gain during colonization, asymptotic hyperbolic deceleration as organisms approach physical optimality, and rare punctuated breakthrough jumps ($\text{Cit}^+$ innovation). The right panel shows phylogenetic Least Common Ancestor (LCA) trees distinguishing Homology (trait shared through continuous vertical inheritance from an LCA) from Homoplasy / Convergent Evolution (independent discovery of the exact same circuit by isolated clades).</li>
+<li><strong class="text-slate-100 font-semibold">🔬 Biophysical & Mathematical Reality:</strong> In microbial experimental evolution (Lenski, 1991, 2003), power-law scaling governs fitness gain: $W(t) = (a t + 1)^b$. Innovations requiring multiple epistatic mutations (potentiation, actualization, refinement) cause sudden macroscopic shifts. In phylogeny, homoplasy demonstrates that physical optimality channels evolutionary paths.</li>
+<li><strong class="text-slate-100 font-semibold">💻 Digital Mapping & Silicon Architecture:</strong> Monitored continuously by <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LteeBenchmark.ts</code></a> and <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">EvolutionaryFlightRecorder.ts</code></a>. When two living cells display identical Weisfeiler-Lehman hashes, the flight recorder walks back their parent DAG to find their Least Common Ancestor and definitively renders a verdict: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">HOMOLOGY</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">HOMOPLASY</code>.</li>
+<li><strong class="text-slate-100 font-semibold">🏛️ Core Principle & Intuitive Summary:</strong> <em class="text-slate-200 italic">History Constrains, But Physics Channels.</em> Lineages inherit genetic baggage from the past, but the uncompromising laws of thermodynamics and Boolean logic repeatedly force separate lineages into identical optimal solutions.</li>
+</ul></div>
         </div>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="6-deconstructive-equation-anatomy-shannon-diversity-evolutionary-velocity" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. Deconstructive Equation Anatomy: Shannon Diversity & Evolutionary Velocity <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#6-deconstructive-equation-anatomy-shannon-diversity-evolutionary-velocity" title="Direct link">#</a></h2>
+<h2 id="6-deconstructive-equation-anatomy-shannon-diversity-evolutionary-velocity" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. Deconstructive Equation Anatomy: Shannon Diversity & Evolutionary Velocity</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium's <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LteeBenchmark.ts</code></a> tracks ecological diversity and macro-evolutionary dynamics using two canonical equations:</p>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\color{#38bdf8}{H} = -\sum_{i=1}^{\color{#fbbf24}{K}} \color{#4ade80}{p_i} \ln(\color{#4ade80}{p_i}), \qquad \color{#f87171}{V_{\text{evo}}} = \frac{\color{#a855f7}{\max(\text{Generation})}}{\color{#94a3b8}{T_{\text{tick}}}} \times 100$$</p>
-<h3 id="term-by-term-component-breakdown" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Term-by-Term Component Breakdown <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#term-by-term-component-breakdown" title="Direct link">#</a></h3>
-<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Symbol</th><th class="p-3.5 font-semibold">Mathematical Term</th><th class="p-3.5 font-semibold">Biophysical Reality in Siliquarium</th><th class="p-3.5 font-semibold">Macro-Evolutionary Consequence</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\color{#38bdf8}{H}$</td><td class="p-3.5 leading-relaxed">Shannon Diversity Index</td><td class="p-3.5 leading-relaxed">Information-theoretic entropy of the active founder clades.</td><td class="p-3.5 leading-relaxed">Measures clonal interference vs. monoculture sweeps ($H \approx 0 \implies$ monoculture; $H > 1.5 \implies$ stable co-existence).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\color{#fbbf24}{K}$</td><td class="p-3.5 leading-relaxed">Active Clades Count</td><td class="p-3.5 leading-relaxed">Number of distinct primordial founder lineages currently surviving on the grid.</td><td class="p-3.5 leading-relaxed">Tracks lineage survival and macro-extinction events.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\color{#4ade80}{p_i}$</td><td class="p-3.5 leading-relaxed">Clade Population Share</td><td class="p-3.5 leading-relaxed">Fractional abundance $N_i / N_{\text{total}}$ of clade $i$.</td><td class="p-3.5 leading-relaxed">Dominant clades have high $p_i$; endangered clades have tiny $p_i$.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\color{#f87171}{V_{\text{evo}}}$</td><td class="p-3.5 leading-relaxed">Evolutionary Velocity</td><td class="p-3.5 leading-relaxed">Generational turnover rate scaled per 100 simulation ticks.</td><td class="p-3.5 leading-relaxed">High during early colonization; asymptotically stabilizes as pores saturate.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\color{#a855f7}{\max(\text{Gen})}$</td><td class="p-3.5 leading-relaxed">Deepest Generation</td><td class="p-3.5 leading-relaxed">The highest number of binary fission cycles reached by any living lineage.</td><td class="p-3.5 leading-relaxed">Measures genealogical depth of the most successful lineage.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\color{#94a3b8}{T_{\text{tick}}}$</td><td class="p-3.5 leading-relaxed">Elapsed World Ticks</td><td class="p-3.5 leading-relaxed">Total discrete clock cycles executed by the simulation world.</td><td class="p-3.5 leading-relaxed">The physical thermodynamic time axis.</td></tr></tbody></table></div>
-<h3 id="the-intuitive-truth-behind-the-architecture" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">💡 The Intuitive Truth Behind the Architecture <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#the-intuitive-truth-behind-the-architecture" title="Direct link">#</a></h3>
-<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">Evolution is not just about individuals; it is about <strong class="text-slate-100 font-semibold">clades competing for physical territory</strong>. When a super-efficient mutant evolves, it rapidly colonizes empty pores, driving competing clades extinct and collapsing Shannon diversity ($H \to 0$). But if an environmental catastrophe or toxin pulse strikes, a diverse ecosystem ($H > 1.5$) is far more resilient because different clades possess different specialized survival armor.</blockquote>
-<h3 id="everyday-analogy-the-monoculture-wheat-field-vs-the-old-growth-forest" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">🌍 Everyday Analogy: The Monoculture Wheat Field vs. The Old-Growth Forest <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#everyday-analogy-the-monoculture-wheat-field-vs-the-old-growth-forest" title="Direct link">#</a></h3>
-<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">A modern industrial wheat field has a Shannon diversity near zero ($H \approx 0$): every plant is genetically identical. It grows at maximum speed, but a single virus can wipe out the entire harvest overnight. In contrast, an old-growth rainforest has a high Shannon diversity ($H > 2.0$): hundreds of tree species compete. When a drought or fire strikes, some species perish, but the forest as a living collective survives.</blockquote>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{H} = -\sum_{i=1}^{\textcolor{#fbbf24}{K}} \textcolor{#4ade80}{p_i} \ln(\textcolor{#4ade80}{p_i}), \qquad \textcolor{#f87171}{V_{\text{evo}}} = \frac{\textcolor{#a855f7}{\max(\text{Generation})}}{\textcolor{#94a3b8}{T_{\text{tick}}}} \times 100$$</p>
+<h3 id="term-by-term-component-breakdown" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Term-by-Term Component Breakdown</h3>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Symbol</th><th class="p-3.5 font-semibold">Mathematical Term</th><th class="p-3.5 font-semibold">Biophysical Reality in Siliquarium</th><th class="p-3.5 font-semibold">Macro-Evolutionary Consequence</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\textcolor{#38bdf8}{H}$</td><td class="p-3.5 leading-relaxed">Shannon Diversity Index</td><td class="p-3.5 leading-relaxed">Information-theoretic entropy of the active founder clades.</td><td class="p-3.5 leading-relaxed">Measures clonal interference vs. monoculture sweeps ($H \approx 0 \implies$ monoculture; $H > 1.5 \implies$ stable co-existence).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\textcolor{#fbbf24}{K}$</td><td class="p-3.5 leading-relaxed">Active Clades Count</td><td class="p-3.5 leading-relaxed">Number of distinct primordial founder lineages currently surviving on the grid.</td><td class="p-3.5 leading-relaxed">Tracks lineage survival and macro-extinction events.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\textcolor{#4ade80}{p_i}$</td><td class="p-3.5 leading-relaxed">Clade Population Share</td><td class="p-3.5 leading-relaxed">Fractional abundance $N_i / N_{\text{total}}$ of clade $i$.</td><td class="p-3.5 leading-relaxed">Dominant clades have high $p_i$; endangered clades have tiny $p_i$.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\textcolor{#f87171}{V_{\text{evo}}}$</td><td class="p-3.5 leading-relaxed">Evolutionary Velocity</td><td class="p-3.5 leading-relaxed">Generational turnover rate scaled per 100 simulation ticks.</td><td class="p-3.5 leading-relaxed">High during early colonization; asymptotically stabilizes as pores saturate.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\textcolor{#a855f7}{\max(\text{Gen})}$</td><td class="p-3.5 leading-relaxed">Deepest Generation</td><td class="p-3.5 leading-relaxed">The highest number of binary fission cycles reached by any living lineage.</td><td class="p-3.5 leading-relaxed">Measures genealogical depth of the most successful lineage.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">$\textcolor{#94a3b8}{T_{\text{tick}}}$</td><td class="p-3.5 leading-relaxed">Elapsed World Ticks</td><td class="p-3.5 leading-relaxed">Total discrete clock cycles executed by the simulation world.</td><td class="p-3.5 leading-relaxed">The physical thermodynamic time axis.</td></tr></tbody></table></div>
+<h3 id="the-intuitive-truth-behind-the-architecture" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">💡 The Intuitive Truth Behind the Architecture</h3>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5">Evolution is not just about individuals; it is about <strong class="text-slate-100 font-semibold">clades competing for physical territory</strong>. When a super-efficient mutant evolves, it rapidly colonizes empty pores, driving competing clades extinct and collapsing Shannon diversity ($H \to 0$). But if an environmental catastrophe or toxin pulse strikes, a diverse ecosystem ($H > 1.5$) is far more resilient because different clades possess different specialized survival armor.</p></blockquote>
+<h3 id="everyday-analogy-the-monoculture-wheat-field-vs-the-old-growth-forest" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">🌍 Everyday Analogy: The Monoculture Wheat Field vs. The Old-Growth Forest</h3>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5">A modern industrial wheat field has a Shannon diversity near zero ($H \approx 0$): every plant is genetically identical. It grows at maximum speed, but a single virus can wipe out the entire harvest overnight. In contrast, an old-growth rainforest has a high Shannon diversity ($H > 2.0$): hundreds of tree species compete. When a drought or fire strikes, some species perish, but the forest as a living collective survives.</p></blockquote>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="7-the-planktonic-transition-pelagic-spore-dispersal" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">7. The Planktonic Transition & Pelagic Spore Dispersal <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#7-the-planktonic-transition-pelagic-spore-dispersal" title="Direct link">#</a></h2>
-<h3 id="71-the-substrate-crowding-bottleneck" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">7.1 The Substrate Crowding Bottleneck <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#71-the-substrate-crowding-bottleneck" title="Direct link">#</a></h3>
+<h2 id="7-the-planktonic-transition-pelagic-spore-dispersal" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">7. The Planktonic Transition & Pelagic Spore Dispersal</h2>
+<h3 id="71-the-substrate-crowding-bottleneck" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">7.1 The Substrate Crowding Bottleneck</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">On a benthic seamount, adult organisms anchored to rock pores face an existential bottleneck: <strong class="text-slate-100 font-semibold">spatial crowding</strong>. Once all contiguous rock cavities on a volcanic terrace are occupied by living cells or mineralizing carcasses, binary fission halts.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If an organism's host vent cools or experiences a local catastrophe, an anchored colony faces total extinction.</p>
-<h3 id="72-broadcast-spawning-into-the-permeable-water-column" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">7.2 Broadcast Spawning into the Permeable Water Column <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#72-broadcast-spawning-into-the-permeable-water-column" title="Direct link">#</a></h3>
+<h3 id="72-broadcast-spawning-into-the-permeable-water-column" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">7.2 Broadcast Spawning into the Permeable Water Column</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Nature solved this via broadcast spawning: corals, sponges, and marine invertebrates release millions of buoyant, drifting larvae into oceanic currents.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Siliquarium, when an adult reaches division thresholds ($E \ge 100, M \ge 20$) but all adjacent substrate pores are full, it initiates <strong class="text-slate-100 font-semibold">Pelagic Spore Synthesis</strong> (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts#L127-L141" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationWorld.ts</code></a>):</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><figure class="my-8 text-center group">
@@ -695,13 +1197,19 @@
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
-              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis</span>
+              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis &bull; Figure Breakdown</span>
             </div>
             <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Deep-Dive Analysis</span>
           </div>
-          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><br/><strong class="text-slate-100 font-semibold">Figure 4.3 Architectural Breakdown: Stratified 3D Fluid Dynamics & Pelagic Colonization</strong><br/>- <strong class="text-slate-100 font-semibold">🔍 Visual Guide & Structural Mechanics:</strong> Depicts the vertical z-stratification of the abyssal ecosystem: the solid benthic bedrock floor ($z=0$, where adult silicoids anchor to rock cavities), the intermediate convective thermal updraft zone ($z=1$), and the upper pelagic advection layer ($z=2$). When adult cells crowd all local benthic pores, broadcast spore shedding releases buoyant spores into the water column to drift horizontally along rotational ocean currents ($\vec{v}_{\text{drift}}$).<br/>- <strong class="text-slate-100 font-semibold">🔬 Biophysical & Mathematical Reality:</strong> Solves the spatial crowding bottleneck of benthic ecosystems (such as coral broadcast spawning). Dispersal is governed by discrete advection vectors $\vec{x}_{\text{spore}}(t+1) = \vec{x}(t) + \vec{v}_{\text{plume}} + \vec{v}_{\text{drift}}$ subject to a metabolic decay clock $\tau = 25$ ticks. Spores landing on vacant basalt pores germinate into new trans-ridge founder clades; spores expiring in open water lyse into sinking marine snow.<br/>- <strong class="text-slate-100 font-semibold">💻 Digital Mapping & Silicon Architecture:</strong> Handled in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationWorld.ts</code></a> and visualized in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SeafloorRenderer3D.ts</code></a>. Fluid pores allow non-colliding drift while preserving exact mass and energy conservation laws.<br/>- <strong class="text-slate-100 font-semibold">🏛️ Core Principle & Intuitive Summary:</strong> <em class="text-slate-200 italic">Open-Water Drift Evades Local Extinction.</em> When a volcanic terrace is fully saturated or poisoned by thermal surges, floating spores carry ancestral blueprints across the abyss to colonize distant mineral oases.</div>
+          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Figure 4.3 Architectural Breakdown: Stratified 3D Fluid Dynamics & Pelagic Colonization</strong></p>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">🔍 Visual Guide & Structural Mechanics:</strong> Depicts the vertical z-stratification of the abyssal ecosystem: the solid benthic bedrock floor ($z=0$, where adult silicoids anchor to rock cavities), the intermediate convective thermal updraft zone ($z=1$), and the upper pelagic advection layer ($z=2$). When adult cells crowd all local benthic pores, broadcast spore shedding releases buoyant spores into the water column to drift horizontally along rotational ocean currents ($\vec{v}_{\text{drift}}$).</li>
+<li><strong class="text-slate-100 font-semibold">🔬 Biophysical & Mathematical Reality:</strong> Solves the spatial crowding bottleneck of benthic ecosystems (such as coral broadcast spawning). Dispersal is governed by discrete advection vectors $\vec{x}_{\text{spore}}(t+1) = \vec{x}(t) + \vec{v}_{\text{plume}} + \vec{v}_{\text{drift}}$ subject to a metabolic decay clock $\tau = 25$ ticks. Spores landing on vacant basalt pores germinate into new trans-ridge founder clades; spores expiring in open water lyse into sinking marine snow.</li>
+<li><strong class="text-slate-100 font-semibold">💻 Digital Mapping & Silicon Architecture:</strong> Handled in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationWorld.ts</code></a> and visualized in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SeafloorRenderer3D.ts</code></a>. Fluid pores allow non-colliding drift while preserving exact mass and energy conservation laws.</li>
+<li><strong class="text-slate-100 font-semibold">🏛️ Core Principle & Intuitive Summary:</strong> <em class="text-slate-200 italic">Open-Water Drift Evades Local Extinction.</em> When a volcanic terrace is fully saturated or poisoned by thermal surges, floating spores carry ancestral blueprints across the abyss to colonize distant mineral oases.</li>
+</ul></div>
         </div>
-<h3 id="73-discrete-o1-advection-mathematics" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">7.3 Discrete $O(1)$ Advection Mathematics <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#73-discrete-o1-advection-mathematics" title="Direct link">#</a></h3>
+<h3 id="73-discrete-o1-advection-mathematics" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">7.3 Discrete $O(1)$ Advection Mathematics</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To prevent computational bloat from continuous rigid-body collision solvers, Siliquarium models spore advection discretely in the stacked 3D hexagonal lattice $(q, r, z)$:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\vec{x}_{\text{spore}}(t+1) = \vec{x}_{\text{spore}}(t) + \vec{v}_{\text{plume}} + \vec{v}_{\text{drift}}$$</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\tau_{\text{lifespan}}(t+1) = \tau_{\text{lifespan}}(t) - 1$$</p>
@@ -711,19 +1219,96 @@
 <li><strong class="text-slate-100 font-semibold">Metabolic Survival Clock ($\tau = 25$ ticks):</strong> If a spore contacts an unoccupied rock pore before $\tau = 0$, it settles, germinates, and founds a new benthic colony. If $\tau$ expires in open water, the spore lyses into sinking marine detritus, strictly satisfying mass and energy conservation!</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="8-conceptual-misconception-immunity-skeptic-faq" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">8. Conceptual Misconception Immunity (Skeptic FAQ) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#8-conceptual-misconception-immunity-skeptic-faq" title="Direct link">#</a></h2>
-<h3 id="q1-isnt-natural-selection-constantly-driving-organisms-toward-perfection" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q1: "Isn't natural selection constantly driving organisms toward perfection?" <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#q1-isnt-natural-selection-constantly-driving-organisms-toward-perfection" title="Direct link">#</a></h3>
-<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><strong class="text-slate-100 font-semibold">Macro-Evolutionary Answer:</strong> No. Perfection is a human engineering concept. In nature and in Siliquarium, natural selection is a local, short-sighted filter. A simple 1-gate organism that toggles rarely can easily outcompete a complex 10-gate organism that consumes too much Landauer power. Furthermore, environmental cycles continuously change the selective pressures, turning yesterday's adaptations into today's metabolic liabilities.</blockquote>
-<h3 id="q2-can-two-organisms-evolve-identical-circuits-without-sharing-an-ancestor" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q2: "Can two organisms evolve identical circuits without sharing an ancestor?" <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#q2-can-two-organisms-evolve-identical-circuits-without-sharing-an-ancestor" title="Direct link">#</a></h3>
-<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><strong class="text-slate-100 font-semibold">Phylogenetic Answer:</strong> Absolutely. This is the definition of <strong class="text-slate-100 font-semibold">Homoplasy / Convergent Evolution</strong>. Because the laws of physics and Boolean logic are universal, two completely unrelated lineages under the same hydrothermal selection pressure (e.g., alternating food pulses) will frequently stumble upon the exact same optimal circuit topology (such as an SR flip-flop). The Evolutionary Flight Recorder mathematically proves this by verifying that their Least Common Ancestor lacked the circuit.</blockquote>
+<h2 id="8-conceptual-misconception-immunity-skeptic-faq" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">8. Conceptual Misconception Immunity (Skeptic FAQ)</h2>
+<h3 id="q1-isnt-natural-selection-constantly-driving-organisms-toward-perfection" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q1: "Isn't natural selection constantly driving organisms toward perfection?"</h3>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Macro-Evolutionary Answer:</strong> No. Perfection is a human engineering concept. In nature and in Siliquarium, natural selection is a local, short-sighted filter. A simple 1-gate organism that toggles rarely can easily outcompete a complex 10-gate organism that consumes too much Landauer power. Furthermore, environmental cycles continuously change the selective pressures, turning yesterday's adaptations into today's metabolic liabilities.</p></blockquote>
+<h3 id="q2-can-two-organisms-evolve-identical-circuits-without-sharing-an-ancestor" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q2: "Can two organisms evolve identical circuits without sharing an ancestor?"</h3>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Phylogenetic Answer:</strong> Absolutely. This is the definition of <strong class="text-slate-100 font-semibold">Homoplasy / Convergent Evolution</strong>. Because the laws of physics and Boolean logic are universal, two completely unrelated lineages under the same hydrothermal selection pressure (e.g., alternating food pulses) will frequently stumble upon the exact same optimal circuit topology (such as an SR flip-flop). The Evolutionary Flight Recorder mathematically proves this by verifying that their Least Common Ancestor lacked the circuit.</p></blockquote>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="9-socratic-discussion-study-questions" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">9. Socratic Discussion & Study Questions <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#9-socratic-discussion-study-questions" title="Direct link">#</a></h2>
+<h2 id="9-socratic-discussion-study-questions" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">9. Socratic Discussion & Study Questions</h2>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Kimura's Neutral Theory:</strong> Why would an evolving population with non-coding introns discover complex adaptations faster than a population with a 100% coding, maximally compressed genome?</li>
 <li><strong class="text-slate-100 font-semibold">Susumu Ohno's Gene Duplication:</strong> Why is an essential gene unable to evolve a new function on its own? How does a duplication event release this evolutionary brake?</li>
 <li><strong class="text-slate-100 font-semibold">Homology vs. Homoplasy:</strong> Describe how you would prove that the camera eyes of octopuses and humans are an example of convergent evolution (homoplasy) rather than homology.</li>
 <li><strong class="text-slate-100 font-semibold">Lenski's Citrate Breakthrough:</strong> In Lenski's LTEE, why did the citrate-metabolizing mutation only appear in one of the twelve flasks after 31,500 generations? What does this demonstrate about historical contingency?</li>
 </ol>
+<!-- COMPLETE ACADEMIC REFERENCES & CITATIONS -->
+<section id="references" class="mt-16 pt-8 border-t border-slate-800 space-y-6">
+<div class="flex items-center justify-between border-b border-slate-800 pb-3">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-800 text-cyan-400 font-mono font-bold text-xs flex items-center justify-center">📚</span>
+<h2 class="text-lg md:text-xl font-mono font-bold text-slate-100">References &amp; Foundational Literature</h2>
+</div>
+<span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Wikipedia-Style Academic Citations</span>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed font-sans">The theoretical assertions, biophysical models, and computer architectural frameworks presented in this volume are grounded in the following seminal peer-reviewed literature. Numbered superscripts throughout the text link directly to these entries.</p>
+<ol class="space-y-3.5 text-xs font-mono text-slate-300">
+<li id="ref-1" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[1]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Kimura, M.</span> (1968). <em class="text-cyan-300">Evolutionary rate at the molecular level</em>. <span class="text-slate-400">Nature, 217(5129), 624–626</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Motoo Kimura's Neutral Theory of Molecular Evolution:</strong> At the molecular level, most evolutionary changes and polymorphisms are driven by neutral genetic drift rather than positive Darwinian selection.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1038/217624a0" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1038/217624a0</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#weisfeiler1968" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-1" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+<li id="ref-2" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[2]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Ohno, S.</span> (1970). <em class="text-cyan-300">Evolution by Gene Duplication</em>. <span class="text-slate-400">Springer-Verlag. ISBN: 978-3642866593</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Susumu Ohno's Evolution by Gene Duplication:</strong> Gene duplication frees one copy from selective constraint, unlocking multi-operon specialization and endosymbiosis.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1007/978-3-642-86659-3" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1007/978-3-642-86659-3</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#weisfeiler1968" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-2" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+<li id="ref-3" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[3]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Lenski, R. E., Rose, M. R., Simpson, S. C., & Tadler, S. C.</span> (1991). <em class="text-cyan-300">Long-term experimental evolution in Escherichia coli. I. Adaptation and divergence during 2,000 generations</em>. <span class="text-slate-400">The American Naturalist, 138(6), 1315–1341</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Richard Lenski's Long-Term Evolution Experiment (LTEE):</strong> Decades-long laboratory evolution in E. coli reveals predictable hyperbolic fitness trajectories and historical contingency.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1086/285289" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1086/285289</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#weisfeiler1968" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-3" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+<li id="ref-4" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[4]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Gould, S. J.</span> (2002). <em class="text-cyan-300">The Structure of Evolutionary Theory</em>. <span class="text-slate-400">Harvard University Press / Belknap Press. ISBN: 978-0674006133</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Stephen Jay Gould: Replaying Life's Tape:</strong> Distinguishing homologous structures inherited from common ancestors from homoplasic structures discovered via convergent evolution.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.2307/j.ctv136c5t9" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.2307/j.ctv136c5t9</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#alon2007" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-4" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+<li id="ref-5" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[5]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Lane, N., & Martin, W.</span> (2010). <em class="text-cyan-300">The energetics of genome complexity</em>. <span class="text-slate-400">Nature, 467(7318), 929–934</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">The Energetic Expansion of Eukaryogenesis:</strong> Mitochondrial endosymbiosis shattered the prokaryotic surface-to-volume power ceiling.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1038/nature09486" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1038/nature09486</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#lane2010" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-5" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+<li id="ref-6" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[6]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Dawkins, R.</span> (2024). <em class="text-cyan-300">The Genetic Book of the Dead: A Darwinian Reverie of Ancestral Worlds</em>. <span class="text-slate-400">Head of Zeus / Apollo. ISBN: 978-1804548486</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">The Genetic Book of the Dead:</strong> Convergent evolution occurs because independent genomes read the exact same environmental and physical constraints.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="../companion/bibliography.html#dawkins2024" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-6" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+<li id="ref-7" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[7]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Adami, C., Ofria, C., & Collier, T. C.</span> (2000). <em class="text-cyan-300">Evolution of biological complexity</em>. <span class="text-slate-400">Proceedings of the National Academy of Sciences, 97(9), 4463–4468</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Complexity as Mutual Information:</strong> Natural selection drives genome complexity to match the mutual information with environmental entropy: C(X) = I(X; E).</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1073/pnas.97.9.4463" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1073/pnas.97.9.4463</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#adami2000" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-7" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+<li id="ref-8" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[8]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Kimura, M.</span> (1961). <em class="text-cyan-300">Natural selection as the process of accumulating genetic information in adaptive evolution</em>. <span class="text-slate-400">Genetical Research, 2(1), 127–140</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Information Accumulation Rate:</strong> Natural selection accumulates environmental bits at rate dI/dt ~ Vw / (2 W_bar^2 ln 2). At equilibrium, Vw = 0 and neutral drift dominates.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1017/S001667230000060X" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1017/S001667230000060X</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#kimura1961" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-8" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+</ol>
+</section>
       </div>
     </main>
   </div>

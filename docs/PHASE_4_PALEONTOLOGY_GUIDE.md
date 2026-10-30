@@ -32,6 +32,9 @@ In computational artificial life, evolution happens at blinding electronic speed
 > - **Digital Mapping:** Siliquarium uses 1-WL hashing to classify evolved organisms into structural clades ($O(|V| + |E|)$ complexity), enabling instant phylogenetic tracking and diversity indexing ($H$).
 > - **Core Principle:** *Isomorphic circuits share identical ecological function.* Structural graph theory provides the mathematical bridge between genotype and phenotype.
 
+> [!TIP]
+> **Complete Circuit Taxonomy:** For an exhaustive, illustrated catalog of all 10 network motifs and macro-adaptations with equations, decoders, and wiring schematics, consult the [Circuit Paleontology Field Guide](CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.md).
+
 ---
 
 ## 2. The Gradient of Abstraction: The Geological Stratigraphy Metaphor

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500" width="840" height="500" class="w-full h-auto font-sans">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#7e22ce" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#c084fc" />
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <style>
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 14.5px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="840" height="500" rx="12" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Header -->
+  <text x="24" y="32" class="title">🌾 A TALE OF TWO PORES: SPATIAL GENE REGULATION IN SILICO</text>
+  <text x="24" y="50" class="subtitle">Identical 60-bit clonal genome yielding opposite cellular phenotypes via Wolpertian boundary inputs</text>
+
+  <!-- Hydrothermal Plume Arrow (Top) -->
+  <g transform="translate(24, 66)">
+    <rect width="792" height="40" rx="6" fill="#131c31" stroke="#f59e0b" stroke-width="1" />
+    <text x="396" y="24" text-anchor="middle" class="label-bold" fill="#fbbf24">🌋 HYDROTHERMAL MORPHOGEN FIELD: Stream A (Protons) decays radially with distance</text>
+  </g>
+
+  <!-- Left: Pore 1 (Vent Core Trophocyte) -->
+  <g transform="translate(24, 118)">
+    <rect width="384" height="358" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.5" />
+    <rect x="0" y="0" width="384" height="28" rx="8" fill="rgba(16, 185, 129, 0.2)" />
+    <text x="192" y="19" text-anchor="middle" class="label-bold" fill="#10b981">PORE 1 (0, 1, 0) — VENT CORE (d = 1 ≤ 2)</text>
+
+    <!-- Inputs Strip -->
+    <g transform="translate(16, 40)">
+      <rect width="352" height="42" rx="4" fill="#0c1222" stroke="#334155" />
+      <text x="12" y="18" class="badge" fill="#fbbf24">Stream A: 1 (HIGH)</text>
+      <text x="130" y="18" class="badge" fill="#22d3ee">Stream B: 1 (HIGH)</text>
+      <text x="250" y="18" class="badge" fill="#10b981">Toxin: 0 (SAFE)</text>
+      <text x="12" y="34" class="subtitle">High electron donor concentration near vent mouth</text>
+    </g>
+
+    <!-- Logic Evaluation -->
+    <g transform="translate(16, 94)">
+      <!-- Gate 1: AND -->
+      <rect x="0" y="0" width="352" height="66" rx="6" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.2" />
+      <text x="16" y="24" class="label-bold" fill="#10b981">Gene 1 (GATE_AND): cypA</text>
+      <text x="16" y="44" class="code" fill="#34d399">inA=1, inB=1 ──► 1 AND 1 = OUTPUT 1 (EXPRESSED 🟢)</text>
+      <text x="16" y="58" class="subtitle">Synthesizes +2T energy tokens per tick</text>
+
+      <!-- Gate 2: NOT -->
+      <rect x="0" y="76" width="352" height="66" rx="6" fill="rgba(244, 63, 94, 0.08)" stroke="#f43f5e" stroke-width="1" />
+      <text x="16" y="100" class="label-bold" fill="#fb7185">Gene 2 (GATE_NOT): inhB</text>
+      <text x="16" y="120" class="code" fill="#f43f5e">inA=1 (from Gate 1) ──► NOT(1) = OUTPUT 0 (REPRESSED 🔴)</text>
+      <text x="16" y="134" class="subtitle">Allosteric inhibitor suppressed by high fuel flow</text>
+    </g>
+
+    <!-- Phenotypic Role Box -->
+    <g transform="translate(16, 250)">
+      <rect width="352" height="94" rx="6" fill="#0c1222" stroke="#10b981" stroke-width="1.5" />
+      <text x="176" y="26" text-anchor="middle" class="title" fill="#10b981">🌾 TROPHOCYTE (VENT FEEDER)</text>
+      <text x="176" y="50" text-anchor="middle" class="subtitle">• Generates +2T ATP surplus per cycle.</text>
+      <text x="176" y="68" text-anchor="middle" class="subtitle">• Pumps energy across purple conduits to partner cells.</text>
+      <text x="176" y="86" text-anchor="middle" class="badge" fill="#34d399">PRIMARY PRODUCER CELL FATE</text>
+    </g>
+  </g>
+
+  <!-- Right: Pore 2 (Periphery Somatic Shield) -->
+  <g transform="translate(432, 118)">
+    <rect width="384" height="358" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5" />
+    <rect x="0" y="0" width="384" height="28" rx="8" fill="rgba(56, 189, 248, 0.2)" />
+    <text x="192" y="19" text-anchor="middle" class="label-bold" fill="#38bdf8">PORE 2 (2, 2, 0) — PERIPHERY (d = 4 &gt; 2)</text>
+
+    <!-- Inputs Strip -->
+    <g transform="translate(16, 40)">
+      <rect width="352" height="42" rx="4" fill="#0c1222" stroke="#334155" />
+      <text x="12" y="18" class="badge" fill="#64748b">Stream A: 0 (DEPLETED)</text>
+      <text x="150" y="18" class="badge" fill="#64748b">Stream B: 0</text>
+      <text x="250" y="18" class="badge" fill="#f43f5e">Toxin: 1 (POISON)</text>
+      <text x="12" y="34" class="subtitle">Fuel stripped by upstream cells; pelagic toxin contacts rim</text>
+    </g>
+
+    <!-- Logic Evaluation -->
+    <g transform="translate(16, 94)">
+      <!-- Gate 1: AND -->
+      <rect x="0" y="0" width="352" height="66" rx="6" fill="rgba(244, 63, 94, 0.08)" stroke="#f43f5e" stroke-width="1" />
+      <text x="16" y="24" class="label-bold" fill="#fb7185">Gene 1 (GATE_AND): cypA</text>
+      <text x="16" y="44" class="code" fill="#f43f5e">inA=0, inB=0 ──► 0 AND 0 = OUTPUT 0 (REPRESSED 🔴)</text>
+      <text x="16" y="58" class="subtitle">Co-catalysis shut down due to absence of substrate</text>
+
+      <!-- Gate 2: NOT -->
+      <rect x="0" y="76" width="352" height="66" rx="6" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" stroke-width="1.2" />
+      <text x="16" y="100" class="label-bold" fill="#38bdf8">Gene 2 (GATE_NOT): inhB</text>
+      <text x="16" y="120" class="code" fill="#38bdf8">inA=0 (from Gate 1) ──► NOT(0) = OUTPUT 1 (EXPRESSED 🟢)</text>
+      <text x="16" y="134" class="subtitle">Allosteric inverter relieves inhibition; activates defense</text>
+    </g>
+
+    <!-- Phenotypic Role Box -->
+    <g transform="translate(16, 250)">
+      <rect width="352" height="94" rx="6" fill="#0c1222" stroke="#38bdf8" stroke-width="1.5" />
+      <text x="176" y="26" text-anchor="middle" class="title" fill="#38bdf8">🛡️ SOMATIC SHIELD (TOXIN INVERTER)</text>
+      <text x="176" y="50" text-anchor="middle" class="subtitle">• Consumes shared energy to neutralize acidic toxins.</text>
+      <text x="176" y="68" text-anchor="middle" class="subtitle">• Shields inner trophocytes from lethal -5T corrosion.</text>
+      <text x="176" y="86" text-anchor="middle" class="badge" fill="#38bdf8">PROTECTIVE SOMATIC CELL FATE</text>
+    </g>
+  </g>
+  
+</svg>

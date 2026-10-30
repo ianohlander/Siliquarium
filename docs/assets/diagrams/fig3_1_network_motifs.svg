@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" width="880" height="420" class="w-full h-auto font-sans">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 430" width="940" height="430" class="w-full h-auto font-sans">
   <defs>
     <!-- Background Gradients -->
     <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -62,32 +63,32 @@
   </defs>
 
   <style>
-    .title { font-family: 'Cascadia Code', Consolas, monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
-    .subtitle { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; fill: #94a3b8; }
-    .label { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; fill: #cbd5e1; }
-    .label-bold { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
-    .code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 10.5px; fill: #00e5ff; }
-    .badge { font-family: 'Cascadia Code', Consolas, monospace; font-size: 9.5px; font-weight: bold; }
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
   </style>
 
   <!-- Canvas Background -->
-  <rect width="880" height="420" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+  <rect width="940" height="430" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
 
   
-  <g transform="translate(30, 35)">
+  <g transform="translate(30, 34)">
     <text class="title">Figure 3.1: Canonical Network Motifs of Systems Biology (Uri Alon, 2007)</text>
     <text y="20" class="subtitle">The fundamental circuit building blocks discovered de novo by natural selection in deep-sea silicoids</text>
   </g>
 
   <!-- 1. Bistable Toggle Switch (Memory Latch) -->
-  <g transform="translate(40, 75)">
-    <rect width="380" height="155" rx="10" fill="#0c1726" stroke="#38bdf8" stroke-width="1.5" />
-    <rect x="15" y="12" width="200" height="22" rx="4" fill="#0369a1" />
+  <g transform="translate(30, 75)">
+    <rect width="425" height="160" rx="10" fill="#0c1726" stroke="#38bdf8" stroke-width="1.5" />
+    <rect x="15" y="12" width="205" height="22" rx="4" fill="#0369a1" />
     <text x="25" y="27" class="badge" fill="#e0f2fe">BISTABLE TOGGLE SWITCH</text>
-    <text x="225" y="27" class="label" fill="#38bdf8">Digestive Memory</text>
+    <text x="230" y="27" class="label" fill="#38bdf8">Digestive Memory</text>
 
     <!-- Gates with cross-coupling wires -->
-    <g transform="translate(25, 48)">
+    <g transform="translate(20, 48)">
       <rect x="0" y="10" width="70" height="32" rx="4" fill="#075985" stroke="#38bdf8" />
       <text x="18" y="31" class="code" fill="#fff" font-weight="bold">NOR 1</text>
 
@@ -99,7 +100,7 @@
       <path d="M 70 76 L 120 76 L 120 36 L 0 36" stroke="#00e5ff" stroke-width="1.5" fill="none" marker-end="url(#arrow-cyan)" />
 
       <!-- State persistence callout -->
-      <g transform="translate(140, 15)">
+      <g transform="translate(155, 12)">
         <text class="label-bold" fill="#7dd3fc">Hysteresis &amp; Memory</text>
         <text y="18" class="subtitle" font-size="10.5">• Traps nutrient pulse state</text>
         <text y="34" class="subtitle" font-size="10.5">• Retains charge when input = 0</text>
@@ -109,31 +110,31 @@
   </g>
 
   <!-- 2. The Repressilator (Ring Oscillator) -->
-  <g transform="translate(460, 75)">
-    <rect width="380" height="155" rx="10" fill="#200d17" stroke="#f43f5e" stroke-width="1.5" />
-    <rect x="15" y="12" width="180" height="22" rx="4" fill="#9f1239" />
+  <g transform="translate(485, 75)">
+    <rect width="425" height="160" rx="10" fill="#200d17" stroke="#f43f5e" stroke-width="1.5" />
+    <rect x="15" y="12" width="185" height="22" rx="4" fill="#9f1239" />
     <text x="25" y="27" class="badge" fill="#ffe4e6">THE REPRESSILATOR</text>
-    <text x="205" y="27" class="label" fill="#fb7185">Autonomous Clock</text>
+    <text x="210" y="27" class="label" fill="#fb7185">Autonomous Clock</text>
 
     <!-- Ring of 3 inverters -->
-    <g transform="translate(25, 48)">
-      <rect x="20" y="15" width="55" height="28" rx="4" fill="#881337" stroke="#f43f5e" />
-      <text x="28" y="33" class="code" fill="#fff" font-weight="bold">NOT A</text>
+    <g transform="translate(20, 48)">
+      <rect x="15" y="15" width="55" height="28" rx="4" fill="#881337" stroke="#f43f5e" />
+      <text x="23" y="33" class="code" fill="#fff" font-weight="bold">NOT A</text>
 
-      <path d="M 75 29 L 115 29" stroke="#f43f5e" stroke-width="1.5" marker-end="url(#arrow-rose)" />
+      <path d="M 70 29 L 105 29" stroke="#f43f5e" stroke-width="1.5" marker-end="url(#arrow-rose)" />
 
-      <rect x="115" y="15" width="55" height="28" rx="4" fill="#881337" stroke="#f43f5e" />
-      <text x="123" y="33" class="code" fill="#fff" font-weight="bold">NOT B</text>
+      <rect x="105" y="15" width="55" height="28" rx="4" fill="#881337" stroke="#f43f5e" />
+      <text x="113" y="33" class="code" fill="#fff" font-weight="bold">NOT B</text>
 
-      <path d="M 142 43 L 142 75 L 75 75" stroke="#f43f5e" stroke-width="1.5" marker-end="url(#arrow-rose)" />
+      <path d="M 132 43 L 132 75 L 70 75" stroke="#f43f5e" stroke-width="1.5" marker-end="url(#arrow-rose)" />
 
-      <rect x="20" y="60" width="55" height="28" rx="4" fill="#881337" stroke="#f43f5e" />
-      <text x="28" y="78" class="code" fill="#fff" font-weight="bold">NOT C</text>
+      <rect x="15" y="60" width="55" height="28" rx="4" fill="#881337" stroke="#f43f5e" />
+      <text x="23" y="78" class="code" fill="#fff" font-weight="bold">NOT C</text>
 
-      <path d="M 20 74 L 5 74 L 5 29 L 20 29" stroke="#f43f5e" stroke-width="1.5" fill="none" marker-end="url(#arrow-rose)" />
+      <path d="M 15 74 L 5 74 L 5 29 L 15 29" stroke="#f43f5e" stroke-width="1.5" fill="none" marker-end="url(#arrow-rose)" />
 
-      <!-- Ring clock callout -->
-      <g transform="translate(190, 15)">
+      <!-- Ring clock callout (Padded to eliminate edge clipping) -->
+      <g transform="translate(185, 12)">
         <text class="label-bold" fill="#fda4af">Limit Cycle Oscillator</text>
         <text y="18" class="subtitle" font-size="10.5">• Odd inverter closed ring</text>
         <text y="34" class="subtitle" font-size="10.5">• 3-phase limit cycle oscillation</text>
@@ -143,14 +144,14 @@
   </g>
 
   <!-- 3. Coherent Feed-Forward Loop (C-FFL Type 1) -->
-  <g transform="translate(40, 245)">
-    <rect width="380" height="155" rx="10" fill="#081e19" stroke="#10b981" stroke-width="1.5" />
-    <rect x="15" y="12" width="200" height="22" rx="4" fill="#065f46" />
+  <g transform="translate(30, 250)">
+    <rect width="425" height="160" rx="10" fill="#081e19" stroke="#10b981" stroke-width="1.5" />
+    <rect x="15" y="12" width="205" height="22" rx="4" fill="#065f46" />
     <text x="25" y="27" class="badge" fill="#d1fae5">COHERENT FFL (C-FFL)</text>
-    <text x="225" y="27" class="label" fill="#34d399">Persistence Filter</text>
+    <text x="230" y="27" class="label" fill="#34d399">Persistence Filter</text>
 
     <!-- FFL Triad Diagram -->
-    <g transform="translate(30, 48)">
+    <g transform="translate(25, 48)">
       <circle cx="30" cy="20" r="14" fill="#047857" stroke="#10b981" stroke-width="1.5" />
       <text x="25" y="24" class="code" fill="#fff" font-weight="bold">X</text>
 
@@ -165,7 +166,7 @@
       <text x="94" y="80" class="code" fill="#fff" font-weight="bold">Z</text>
 
       <!-- Callout -->
-      <g transform="translate(150, 15)">
+      <g transform="translate(155, 12)">
         <text class="label-bold" fill="#6ee7b7">Noise Rejection Filter</text>
         <text y="18" class="subtitle" font-size="10.5">• Sign-sensitive activation delay</text>
         <text y="34" class="subtitle" font-size="10.5">• Ignores transient nutrient spikes</text>
@@ -175,14 +176,14 @@
   </g>
 
   <!-- 4. Incoherent Feed-Forward Loop (I-FFL Type 1) -->
-  <g transform="translate(460, 245)">
-    <rect width="380" height="155" rx="10" fill="#1b1226" stroke="#a855f7" stroke-width="1.5" />
-    <rect x="15" y="12" width="210" height="22" rx="4" fill="#6b21a8" />
+  <g transform="translate(485, 250)">
+    <rect width="425" height="160" rx="10" fill="#1b1226" stroke="#a855f7" stroke-width="1.5" />
+    <rect x="15" y="12" width="215" height="22" rx="4" fill="#6b21a8" />
     <text x="25" y="27" class="badge" fill="#f3e8ff">INCOHERENT FFL (I-FFL)</text>
-    <text x="235" y="27" class="label" fill="#c084fc">Pulse Generator</text>
+    <text x="240" y="27" class="label" fill="#c084fc">Pulse Generator</text>
 
     <!-- I-FFL Triad Diagram -->
-    <g transform="translate(30, 48)">
+    <g transform="translate(25, 48)">
       <circle cx="30" cy="20" r="14" fill="#581c87" stroke="#a855f7" stroke-width="1.5" />
       <text x="25" y="24" class="code" fill="#fff" font-weight="bold">X</text>
 
@@ -199,7 +200,7 @@
       <text x="94" y="80" class="code" fill="#fff" font-weight="bold">Z</text>
 
       <!-- Callout -->
-      <g transform="translate(150, 15)">
+      <g transform="translate(155, 12)">
         <text class="label-bold" fill="#d8b4fe">Biphasic Pulse &amp; Adaptation</text>
         <text y="18" class="subtitle" font-size="10.5">• Rapid activation via direct path</text>
         <text y="34" class="subtitle" font-size="10.5">• Delayed repressor Y shuts Z off</text>

@@ -1,0 +1,298 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 820" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712"/>
+      <stop offset="50%" stop-color="#0b1329"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <!-- Markers -->
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#10b981"/>
+    </marker>
+    <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#06b6d4"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#f59e0b"/>
+    </marker>
+    <marker id="barRed" markerWidth="6" markerHeight="12" refX="3" refY="6" orient="auto">
+      <line x1="3" y1="0" x2="3" y2="12" stroke="#ef4444" stroke-width="3"/>
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1100" height="820" fill="url(#bgGrad09)"/>
+
+  <!-- Subtle Blueprint Grid -->
+  <g opacity="0.08" stroke="#38bdf8" stroke-width="0.5">
+    <pattern id="gridPattern09" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30"/>
+    </pattern>
+    <rect width="1100" height="820" fill="url(#gridPattern09)"/>
+  </g>
+
+  <!-- Title & Subtitle Banner -->
+  <g transform="translate(40, 45)">
+    <rect x="0" y="0" width="1020" height="65" rx="12" fill="#0f172a" stroke="#06b6d4" stroke-width="1.5" opacity="0.9"/>
+    <text x="25" y="32" fill="#38bdf8" font-family="monospace" font-size="18" font-weight="bold" letter-spacing="1.5">FIGURE GRN-09: GENE REGULATORY MECHANICS &amp; DIRECTED INTERACTIONS</text>
+    <text x="25" y="52" fill="#94a3b8" font-family="sans-serif" font-size="12">How Genes Turn Each Other ON and OFF: Comparative Triad of Molecular Biology, Graph Theory, and Digital Logic</text>
+  </g>
+
+  <!-- Four Quadrants / Interaction Panels -->
+
+  <!-- ========================================== -->
+  <!-- 1. DIRECT ACTIVATION (Top-Left) -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 130)">
+    <rect width="495" height="315" rx="12" fill="url(#panelGrad)" stroke="#10b981" stroke-width="1.2"/>
+    <rect x="15" y="15" width="220" height="24" rx="6" fill="#064e3b" stroke="#059669" stroke-width="1"/>
+    <text x="25" y="32" fill="#34d399" font-family="monospace" font-size="12" font-weight="bold">1. DIRECT ACTIVATION (A → B)</text>
+
+    <!-- Sub-row A: Molecular Biology -->
+    <g transform="translate(20, 55)">
+      <rect width="455" height="75" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="18" fill="#10b981" font-family="monospace" font-size="10" font-weight="bold">MOLECULAR BIOLOGY</text>
+      <!-- DNA strand -->
+      <line x1="20" y1="48" x2="435" y2="48" stroke="#475569" stroke-width="3"/>
+      <!-- Gene A -->
+      <rect x="30" y="35" width="60" height="26" rx="4" fill="#065f46" stroke="#10b981" stroke-width="1.5"/>
+      <text x="42" y="52" fill="#a7f3d0" font-family="monospace" font-size="11" font-weight="bold">Gene A</text>
+      <!-- Transcription factor bubble -->
+      <circle cx="150" cy="40" r="14" fill="#10b981" opacity="0.85"/>
+      <text x="143" y="44" fill="#022c22" font-family="monospace" font-size="10" font-weight="bold">TF</text>
+      <!-- Curved arrow to Promoter B -->
+      <path d="M 166 40 Q 220 18 270 38" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowGreen)"/>
+      <!-- Promoter B -->
+      <rect x="280" y="38" width="45" height="20" rx="3" fill="#0284c7" stroke="#38bdf8" stroke-width="1"/>
+      <text x="286" y="52" fill="#bae6fd" font-family="monospace" font-size="9" font-weight="bold">Promoter</text>
+      <!-- Gene B -->
+      <rect x="330" y="35" width="60" height="26" rx="4" fill="#0369a1" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="342" y="52" fill="#e0f2fe" font-family="monospace" font-size="11" font-weight="bold">Gene B</text>
+      <!-- RNA Pol -->
+      <ellipse cx="305" cy="24" rx="16" ry="10" fill="#f59e0b" opacity="0.8"/>
+      <text x="296" y="27" fill="#000" font-family="sans-serif" font-size="8" font-weight="bold">RNA Pol</text>
+      <text x="398" y="52" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold">ON 🟢</text>
+    </g>
+
+    <!-- Sub-row B: Graph Theory -->
+    <g transform="translate(20, 140)">
+      <rect width="455" height="65" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="16" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">GRAPH THEORY (DIRECTED EDGE WITH POSITIVE WEIGHT)</text>
+      <!-- Node A -->
+      <circle cx="80" cy="40" r="18" fill="#065f46" stroke="#10b981" stroke-width="2"/>
+      <text x="74" y="45" fill="#a7f3d0" font-family="monospace" font-size="13" font-weight="bold">A</text>
+      <!-- Directed Green Arrow -->
+      <line x1="105" y1="40" x2="330" y2="40" stroke="#10b981" stroke-width="3" marker-end="url(#arrowGreen)"/>
+      <rect x="195" y="28" width="45" height="22" rx="4" fill="#022c22" stroke="#10b981" stroke-width="1"/>
+      <text x="202" y="43" fill="#34d399" font-family="monospace" font-size="11" font-weight="bold">+1.0</text>
+      <!-- Node B -->
+      <circle cx="360" cy="40" r="18" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+      <text x="354" y="45" fill="#e0f2fe" font-family="monospace" font-size="13" font-weight="bold">B</text>
+      <text x="400" y="45" fill="#94a3b8" font-family="sans-serif" font-size="11">y = f(A)</text>
+    </g>
+
+    <!-- Sub-row C: Silicon Implementation -->
+    <g transform="translate(20, 215)">
+      <rect width="455" height="85" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="16" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">SILIQUARIUM DIGITAL LOGIC EQUIVALENT</text>
+      <!-- Wire from Stream A to Gate B -->
+      <text x="30" y="48" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold">Stream A [1]</text>
+      <line x1="120" y1="44" x2="220" y2="44" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+      <!-- AND Gate Symbol Box -->
+      <rect x="230" y="30" width="80" height="38" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+      <text x="242" y="53" fill="#34d399" font-family="monospace" font-size="11" font-weight="bold">GATE_AND</text>
+      <!-- Output wire -->
+      <line x1="310" y1="49" x2="380" y2="49" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+      <text x="390" y="53" fill="#10b981" font-family="monospace" font-size="12" font-weight="bold">Out = 1</text>
+      <text x="30" y="74" fill="#64748b" font-family="sans-serif" font-size="10">High input drives catalytic synthetase active (charges ATP battery pool).</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. DIRECT INHIBITION / REPRESSION (Top-Right) -->
+  <!-- ========================================== -->
+  <g transform="translate(565, 130)">
+    <rect width="495" height="315" rx="12" fill="url(#panelGrad)" stroke="#ef4444" stroke-width="1.2"/>
+    <rect x="15" y="15" width="235" height="24" rx="6" fill="#450a0a" stroke="#dc2626" stroke-width="1"/>
+    <text x="25" y="32" fill="#f87171" font-family="monospace" font-size="12" font-weight="bold">2. DIRECT INHIBITION (A ⊣ B)</text>
+
+    <!-- Sub-row A: Molecular Biology -->
+    <g transform="translate(20, 55)">
+      <rect width="455" height="75" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="18" fill="#ef4444" font-family="monospace" font-size="10" font-weight="bold">MOLECULAR BIOLOGY</text>
+      <!-- DNA strand -->
+      <line x1="20" y1="48" x2="435" y2="48" stroke="#475569" stroke-width="3"/>
+      <!-- Gene A -->
+      <rect x="30" y="35" width="60" height="26" rx="4" fill="#7f1d1d" stroke="#ef4444" stroke-width="1.5"/>
+      <text x="42" y="52" fill="#fca5a5" font-family="monospace" font-size="11" font-weight="bold">Gene A</text>
+      <!-- Repressor tetramer block -->
+      <rect x="140" y="28" width="26" height="24" rx="4" fill="#ef4444" opacity="0.9"/>
+      <text x="144" y="44" fill="#fff" font-family="monospace" font-size="9" font-weight="bold">Rep</text>
+      <!-- Curved arrow to Operator B -->
+      <path d="M 168 40 Q 215 15 265 35" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowGreen)"/>
+      <!-- Operator roadblock -->
+      <rect x="270" y="36" width="35" height="24" rx="2" fill="#dc2626" stroke="#f87171" stroke-width="1.5"/>
+      <text x="274" y="51" fill="#fff" font-family="monospace" font-size="8" font-weight="bold">BLOCK</text>
+      <!-- Blocked RNA Pol -->
+      <ellipse cx="245" cy="22" rx="14" ry="9" fill="#64748b" opacity="0.7"/>
+      <text x="238" y="25" fill="#fff" font-family="sans-serif" font-size="7">Blocked</text>
+      <!-- Gene B -->
+      <rect x="315" y="35" width="60" height="26" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+      <text x="327" y="52" fill="#94a3b8" font-family="monospace" font-size="11" font-weight="bold">Gene B</text>
+      <text x="395" y="52" fill="#ef4444" font-family="monospace" font-size="11" font-weight="bold">OFF 🔴</text>
+    </g>
+
+    <!-- Sub-row B: Graph Theory -->
+    <g transform="translate(20, 140)">
+      <rect width="455" height="65" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="16" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">GRAPH THEORY (DIRECTED BLUNT BAR / NEGATIVE EDGE)</text>
+      <!-- Node A -->
+      <circle cx="80" cy="40" r="18" fill="#7f1d1d" stroke="#ef4444" stroke-width="2"/>
+      <text x="74" y="45" fill="#fca5a5" font-family="monospace" font-size="13" font-weight="bold">A</text>
+      <!-- Directed Red Line ending in Blunt Bar -->
+      <line x1="105" y1="40" x2="335" y2="40" stroke="#ef4444" stroke-width="3" marker-end="url(#barRed)"/>
+      <rect x="195" y="28" width="45" height="22" rx="4" fill="#450a0a" stroke="#ef4444" stroke-width="1"/>
+      <text x="202" y="43" fill="#f87171" font-family="monospace" font-size="11" font-weight="bold">-1.0</text>
+      <!-- Node B -->
+      <circle cx="360" cy="40" r="18" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+      <text x="354" y="45" fill="#94a3b8" font-family="monospace" font-size="13" font-weight="bold">B</text>
+      <text x="395" y="45" fill="#94a3b8" font-family="sans-serif" font-size="11">y = ¬(A)</text>
+    </g>
+
+    <!-- Sub-row C: Silicon Implementation -->
+    <g transform="translate(20, 215)">
+      <rect width="455" height="85" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="16" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">SILIQUARIUM DIGITAL LOGIC EQUIVALENT</text>
+      <!-- Wire to Inverter -->
+      <text x="30" y="48" fill="#ef4444" font-family="monospace" font-size="11" font-weight="bold">Toxin T [1]</text>
+      <line x1="120" y1="44" x2="220" y2="44" stroke="#ef4444" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+      <!-- NOT Gate Symbol Box -->
+      <rect x="230" y="30" width="80" height="38" rx="6" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+      <text x="242" y="53" fill="#f87171" font-family="monospace" font-size="11" font-weight="bold">GATE_NOT</text>
+      <!-- Output wire -->
+      <line x1="310" y1="49" x2="380" y2="49" stroke="#64748b" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+      <text x="390" y="53" fill="#64748b" font-family="monospace" font-size="12" font-weight="bold">Out = 0</text>
+      <text x="30" y="74" fill="#64748b" font-family="sans-serif" font-size="10">Active NOT gate silences downstream pores, inverting poison into safe dormancy.</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. MUTUAL REPRESSION / TOGGLE SWITCH (Bottom-Left) -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 470)">
+    <rect width="495" height="315" rx="12" fill="url(#panelGrad)" stroke="#a855f7" stroke-width="1.2"/>
+    <rect x="15" y="15" width="310" height="24" rx="6" fill="#3b0764" stroke="#9333ea" stroke-width="1"/>
+    <text x="25" y="32" fill="#c084fc" font-family="monospace" font-size="12" font-weight="bold">3. MUTUAL REPRESSION / BISTABLE TOGGLE</text>
+
+    <!-- Graph Theory & Dynamics -->
+    <g transform="translate(20, 55)">
+      <rect width="455" height="135" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="16" fill="#c084fc" font-family="monospace" font-size="10" font-weight="bold">GRAPH TOPOLOGY: CROSS-COUPLED NEGATIVE FEEDBACK LOOP</text>
+      
+      <!-- Node u (lacI) -->
+      <circle cx="110" cy="70" r="26" fill="#065f46" stroke="#10b981" stroke-width="2.5"/>
+      <text x="100" y="73" fill="#a7f3d0" font-family="monospace" font-size="13" font-weight="bold">u (1)</text>
+      <text x="96" y="86" fill="#34d399" font-family="monospace" font-size="9">HIGH</text>
+
+      <!-- Curve A -> B (upper blunt bar) -->
+      <path d="M 136 55 C 190 20, 270 20, 314 55" fill="none" stroke="#ef4444" stroke-width="2.5" marker-end="url(#barRed)"/>
+      <rect x="210" y="20" width="35" height="18" rx="3" fill="#450a0a" stroke="#ef4444" stroke-width="1"/>
+      <text x="217" y="33" fill="#f87171" font-family="monospace" font-size="10" font-weight="bold">⊣ -1</text>
+
+      <!-- Node v (tetR) -->
+      <circle cx="340" cy="70" r="26" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+      <text x="330" y="73" fill="#94a3b8" font-family="monospace" font-size="13" font-weight="bold">v (0)</text>
+      <text x="328" y="86" fill="#64748b" font-family="monospace" font-size="9">LOW</text>
+
+      <!-- Curve B -> A (lower blunt bar) -->
+      <path d="M 314 85 C 270 120, 190 120, 136 85" fill="none" stroke="#64748b" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#barRed)"/>
+      <rect x="210" y="102" width="35" height="18" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+      <text x="217" y="115" fill="#94a3b8" font-family="monospace" font-size="10" font-weight="bold">⊣ (off)</text>
+
+      <!-- Outcome explanation -->
+      <text x="385" y="55" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">State 1:</text>
+      <text x="385" y="70" fill="#a7f3d0" font-family="monospace" font-size="10">[1, 0] Feeder</text>
+      <text x="385" y="95" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">State 2:</text>
+      <text x="385" y="110" fill="#fca5a5" font-family="monospace" font-size="10">[0, 1] Shield</text>
+    </g>
+
+    <!-- Digital Electronic Circuit -->
+    <g transform="translate(20, 200)">
+      <rect width="455" height="100" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="16" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">1-BIT BISTABLE MEMORY LATCH (SR FLIP-FLOP EQUIVALENT)</text>
+      <text x="20" y="42" fill="#cbd5e1" font-family="sans-serif" font-size="11">
+        Two cross-coupled inverters create <tspan fill="#c084fc" font-weight="bold">bistability</tspan>: once switched ON by a
+      </text>
+      <text x="20" y="60" fill="#cbd5e1" font-family="sans-serif" font-size="11">
+        transient signal, the state remains locked forever even after the signal vanishes.
+      </text>
+      <rect x="20" y="72" width="415" height="20" rx="4" fill="#1e1b4b" stroke="#818cf8" stroke-width="0.8"/>
+      <text x="30" y="86" fill="#a5b4fc" font-family="monospace" font-size="10">Biological Function: Irreversible cell-fate commitment (Specimen 01)</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. ODD-LOOP OSCILLATOR / REPRESSILATOR (Bottom-Right) -->
+  <!-- ========================================== -->
+  <g transform="translate(565, 470)">
+    <rect width="495" height="315" rx="12" fill="url(#panelGrad)" stroke="#f59e0b" stroke-width="1.2"/>
+    <rect x="15" y="15" width="310" height="24" rx="6" fill="#451a03" stroke="#d97706" stroke-width="1"/>
+    <text x="25" y="32" fill="#fbbf24" font-family="monospace" font-size="12" font-weight="bold">4. ODD-LOOP RING OSCILLATOR (REPRESSILATOR)</text>
+
+    <!-- Graph Theory Ring -->
+    <g transform="translate(20, 55)">
+      <rect width="455" height="135" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="16" fill="#fbbf24" font-family="monospace" font-size="10" font-weight="bold">TOPOLOGY: 3-INVERTER CYCLIC CASCADE (ODD NEGATIVE EDGES)</text>
+
+      <!-- Triangular Ring Nodes -->
+      <!-- Node X (top) -->
+      <circle cx="160" cy="40" r="18" fill="#7f1d1d" stroke="#ef4444" stroke-width="2"/>
+      <text x="155" y="44" fill="#fca5a5" font-family="monospace" font-size="12" font-weight="bold">X</text>
+
+      <!-- Node Y (bottom right) -->
+      <circle cx="230" cy="100" r="18" fill="#065f46" stroke="#10b981" stroke-width="2"/>
+      <text x="225" y="104" fill="#a7f3d0" font-family="monospace" font-size="12" font-weight="bold">Y</text>
+
+      <!-- Node Z (bottom left) -->
+      <circle cx="90" cy="100" r="18" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+      <text x="85" y="104" fill="#bae6fd" font-family="monospace" font-size="12" font-weight="bold">Z</text>
+
+      <!-- Arrows in circle -->
+      <path d="M 178 48 L 215 85" fill="none" stroke="#ef4444" stroke-width="2.5" marker-end="url(#barRed)"/>
+      <path d="M 210 105 L 115 105" fill="none" stroke="#10b981" stroke-width="2.5" marker-end="url(#barRed)"/>
+      <path d="M 105 85 L 145 48" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#barRed)"/>
+
+      <!-- Pulse waveform preview on the right -->
+      <g transform="translate(280, 30)">
+        <text x="0" y="12" fill="#94a3b8" font-family="monospace" font-size="10">Pulse Waveforms:</text>
+        <path d="M 0 35 L 30 35 L 30 20 L 60 20 L 60 35 L 90 35 L 90 20 L 120 20" fill="none" stroke="#ef4444" stroke-width="2"/>
+        <text x="130" y="28" fill="#f87171" font-family="monospace" font-size="9">X(t)</text>
+        <path d="M 0 55 L 15 55 L 15 40 L 45 40 L 45 55 L 75 55 L 75 40 L 105 40 L 105 55 L 120 55" fill="none" stroke="#10b981" stroke-width="2"/>
+        <text x="130" y="48" fill="#34d399" font-family="monospace" font-size="9">Y(t)</text>
+        <path d="M 0 75 L 45 75 L 45 60 L 75 60 L 75 75 L 105 75 L 105 60 L 120 60" fill="none" stroke="#38bdf8" stroke-width="2"/>
+        <text x="130" y="68" fill="#38bdf8" font-family="monospace" font-size="9">Z(t)</text>
+      </g>
+    </g>
+
+    <!-- Digital Electronic Circuit -->
+    <g transform="translate(20, 200)">
+      <rect width="455" height="100" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="16" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">AUTONOMOUS LIMIT CYCLE (CIRCADIAN CLOCK EQUIVALENT)</text>
+      <text x="20" y="42" fill="#cbd5e1" font-family="sans-serif" font-size="11">
+        Because 3 negative inversions cannot satisfy any static equilibrium,
+      </text>
+      <text x="20" y="60" fill="#cbd5e1" font-family="sans-serif" font-size="11">
+        the network chases its own tail forever, creating a stable biological oscillator.
+      </text>
+      <rect x="20" y="72" width="415" height="20" rx="4" fill="#451a03" stroke="#f59e0b" stroke-width="0.8"/>
+      <text x="30" y="86" fill="#fde68a" font-family="monospace" font-size="10">Biological Function: Pacemaker peristaltic fluid pumping (Specimen 02)</text>
+    </g>
+  </g>
+
+</svg>

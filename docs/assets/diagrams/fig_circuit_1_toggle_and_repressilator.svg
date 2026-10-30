@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 450" width="980" height="450" class="w-full h-auto font-sans">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#6b21a8" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+
+    <!-- Glow Filters -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-emerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
+  </style>
+
+  <!-- Canvas Background -->
+  <rect width="980" height="450" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  
+  <g transform="translate(30, 34)">
+    <text class="title">Figure 4.1: Bistable Memory Latch (SR Flip-Flop)</text>
+    <text y="20" class="subtitle">1-bit cellular memory via cross-coupled inverting feedback loops &amp; hysteresis</text>
+  </g>
+
+  <!-- Left: Schematic & Netlist -->
+  <g transform="translate(30, 70)">
+    <rect width="445" height="355" rx="12" fill="#0c1726" stroke="#38bdf8" stroke-width="1.5" />
+    <rect x="16" y="14" width="240" height="24" rx="4" fill="#0369a1" />
+    <text x="26" y="30" class="badge" fill="#e0f2fe">BISTABLE TOGGLE SWITCH (SR LATCH)</text>
+    <text x="270" y="30" class="label" fill="#38bdf8">Gate Schematic</text>
+
+    <!-- Schematic Gate Diagram -->
+    <g transform="translate(20, 48)">
+      <!-- Set terminal -->
+      <text x="0" y="24" class="code" font-size="11" fill="#38bdf8">Set (S)</text>
+      <path d="M 45 20 L 70 20" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-cyan)" />
+
+      <!-- NOR Gate 1 -->
+      <rect x="75" y="6" width="80" height="36" rx="6" fill="#075985" stroke="#38bdf8" stroke-width="1.5" />
+      <text x="92" y="29" class="code" fill="#ffffff" font-weight="bold">NOR 1</text>
+
+      <!-- Output Q -->
+      <path d="M 155 24 L 215 24" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrow-cyan)" />
+      <text x="225" y="28" class="code" font-size="11" fill="#00e5ff" font-weight="bold">Output Q</text>
+
+      <!-- Reset terminal -->
+      <text x="0" y="94" class="code" font-size="11" fill="#f43f5e">Reset (R)</text>
+      <path d="M 55 90 L 70 90" stroke="#f43f5e" stroke-width="2" marker-end="url(#arrow-rose)" />
+
+      <!-- NOR Gate 2 -->
+      <rect x="75" y="76" width="80" height="36" rx="6" fill="#075985" stroke="#38bdf8" stroke-width="1.5" />
+      <text x="92" y="99" class="code" fill="#ffffff" font-weight="bold">NOR 2</text>
+
+      <!-- Output Q_bar -->
+      <path d="M 155 94 L 215 94" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-slate)" />
+      <text x="225" y="98" class="code" font-size="11" fill="#94a3b8">Comp Q'</text>
+
+      <!-- Cross Feedback Wires -->
+      <path d="M 180 24 L 180 60 L 60 60 L 60 82 L 75 82" stroke="#00e5ff" stroke-width="1.5" fill="none" marker-end="url(#arrow-cyan)" />
+      <path d="M 170 94 L 170 52 L 60 52 L 60 32 L 75 32" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-dasharray="3 2" marker-end="url(#arrow-slate)" />
+    </g>
+
+    <!-- Truth Table Box -->
+    <g transform="translate(16, 175)">
+      <rect width="413" height="78" rx="8" fill="#07101e" stroke="#1e293b" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#7dd3fc">SR TRUTH TABLE &amp; THERMODYNAMICS</text>
+      <text x="14" y="38" class="code" font-size="9.2" fill="#cbd5e1">S=0, R=0 ──► Q(t) = Q(t-1)  [HOLD: 0 Tokens Dissipated!]</text>
+      <text x="14" y="54" class="code" font-size="9.2" fill="#38bdf8">S=1, R=0 ──► Q(t) = 1       [SET: -2T Landauer Burn]</text>
+      <text x="14" y="70" class="code" font-size="9.2" fill="#f43f5e">S=0, R=1 ──► Q(t) = 0       [RESET: -2T Landauer Burn]</text>
+    </g>
+
+    <!-- Callout -->
+    <g transform="translate(16, 265)">
+      <rect width="413" height="65" rx="8" fill="#031e38" stroke="#0284c7" stroke-width="1" />
+      <text x="14" y="20" class="label-bold" fill="#38bdf8">Digestive Memory &amp; Hysteresis</text>
+      <text x="14" y="38" class="subtitle" font-size="9.5">• Traps nutrient pulse energy across temporal famine gaps</text>
+      <text x="14" y="54" class="code" font-size="9" fill="#facc15">★ Landmark: Gardner, Cantor &amp; Collins (2000) Nature 403:339</text>
+    </g>
+  </g>
+
+  <!-- Right: Potential Well Landscape & Waveforms -->
+  <g transform="translate(505, 70)">
+    <rect width="445" height="355" rx="12" fill="#0c1726" stroke="#38bdf8" stroke-width="1.5" />
+    <rect x="16" y="14" width="240" height="24" rx="4" fill="#0369a1" />
+    <text x="26" y="30" class="badge" fill="#e0f2fe">DOUBLE-WELL ENERGY LANDSCAPE</text>
+    <text x="270" y="30" class="label" fill="#38bdf8">Dynamical Stability</text>
+
+    <!-- Double-well curve -->
+    <g transform="translate(25, 48)">
+      <path d="M 20 20 C 50 110, 100 110, 140 55 C 180 110, 230 110, 260 20" stroke="#38bdf8" stroke-width="2.5" fill="none" />
+      <circle cx="85" cy="98" r="7" fill="#64748b" />
+      <text x="85" y="120" class="code" font-size="9" fill="#94a3b8" text-anchor="middle">Basin 0 (Q=0)</text>
+
+      <circle cx="195" cy="98" r="9" fill="#00e5ff" />
+      <text x="195" y="120" class="code" font-size="9" fill="#00e5ff" font-weight="bold" text-anchor="middle">Basin 1 (Q=1) ●</text>
+
+      <line x1="140" y1="55" x2="140" y2="85" stroke="#f43f5e" stroke-dasharray="2 2" stroke-width="1.5" />
+      <text x="140" y="45" class="badge" fill="#f43f5e" text-anchor="middle">Barrier ΔE</text>
+
+      <!-- Explanatory legend -->
+      <g transform="translate(285, 20)">
+        <rect width="105" height="78" rx="6" fill="#07101e" stroke="#1e293b" stroke-width="1" />
+        <text x="8" y="18" class="badge" fill="#7dd3fc">STATE METRICS</text>
+        <text x="8" y="34" class="code" font-size="8.8" fill="#00e5ff">Q = 1 (Locked)</text>
+        <text x="8" y="48" class="subtitle" font-size="8.5">E_net: +6 Tokens</text>
+        <text x="8" y="64" class="code" font-size="8.5" fill="#facc15">Hold Cost: 0W</text>
+      </g>
+    </g>
+
+    <!-- Timing Trace Box -->
+    <g transform="translate(16, 175)">
+      <rect width="413" height="78" rx="8" fill="#07101e" stroke="#1e293b" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#7dd3fc">5-TICK CHRONOLOGICAL TIMING TRACE</text>
+      <text x="14" y="38" class="code" font-size="9" fill="#cbd5e1">t=1 (Set Pulse)  ──► Q flips 0 ➔ 1 (-2T Landauer Burn)</text>
+      <text x="14" y="54" class="code" font-size="9" fill="#38bdf8">t=2..3 (Famine)   ──► Q holds 1 indefinitely (0T Burn!)</text>
+      <text x="14" y="70" class="code" font-size="9" fill="#facc15">t=4 (Fuel B + R) ──► Catalysis: +10T harvest, Reset to 0</text>
+    </g>
+
+    <!-- Callout -->
+    <g transform="translate(16, 265)">
+      <rect width="413" height="65" rx="8" fill="#031e38" stroke="#0284c7" stroke-width="1" />
+      <text x="14" y="20" class="label-bold" fill="#38bdf8">Darwinian Selection Advantage</text>
+      <text x="14" y="38" class="subtitle" font-size="9.5">• Memory bridges asynchronous nutrient vents; unequipped cells starve</text>
+      <text x="14" y="54" class="code" font-size="8.8" fill="#facc15">★ Net Profit: +6T per cycle unlocks exponential population takeover</text>
+    </g>
+  </g>
+
+</svg>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 06: Financial Model & ROI Forecast — Siliquarium Marketing</title>
+  <meta name="author" content="Ian Ohlander / Jack Vance">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
+    .font-mono { font-family: 'Space Mono', monospace; }
+    .rainbow-border { background: linear-gradient(90deg, #38bdf8 0%, #06b6d4 25%, #10b981 50%, #fbbf24 75%, #f43f5e 100%); }
+    .card-box { background: #090e1a; border: 1px solid #1e293b; border-radius: 0.75rem; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #020617; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
+
+  <div class="h-1.5 w-full rainbow-border sticky top-0 z-50"></div>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="bg-[#090e1a]/95 border-b border-[#1e293b] px-6 py-3 flex flex-wrap items-center justify-between shadow-md gap-4 sticky top-1.5 z-40 backdrop-blur-md">
+    <div class="flex items-center space-x-3">
+      <a href="index.html" class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center shadow text-black font-extrabold text-base hover:scale-105 transition">
+        🐠
+      </a>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">Step 06 &bull; Marketing Suite</span>
+          <span class="px-2 py-0.5 rounded text-[9px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800">Financial Projections & ROI</span>
+        </div>
+        <h1 class="text-sm md:text-base font-extrabold text-white truncate max-w-xl">Financial Model & ROI Forecast</h1>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Links -->
+    <div class="flex items-center space-x-2 text-xs font-mono">
+      <a href="05_content_roadmap_and_community_launch_playbook.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5 text-xs font-mono"><span>&larr;</span> <span>Step 05</span></a>
+      <a href="index.html" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-lg transition border border-slate-700 flex items-center gap-1">
+        <span>🏠</span> <span>Operations Center</span>
+      </a>
+      <a href="07_ui_ux_gaming_experience_and_arena_blueprint.html" class="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-black font-extrabold transition flex items-center gap-1.5 text-xs font-mono shadow"><span>Step 07</span> <span>&rarr;</span></a>
+      <a href="../index.html" class="px-3 py-1.5 bg-cyan-950 hover:bg-cyan-900 text-cyan-200 rounded-lg transition border border-cyan-800 hidden sm:inline-flex items-center gap-1">
+        <span>⚡</span> <span>Simulator</span>
+      </a>
+      <a href="../docs/CURRICULUM_AND_SYLLABUS.html" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition border border-slate-700 hidden md:inline-flex items-center gap-1">
+        <span>📑</span> <span>Curriculum</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Two-Column Layout: Sidebar TOC + Main Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- LEFT SIDEBAR: STICKY TABLE OF CONTENTS -->
+    <aside class="lg:col-span-4 space-y-4 lg:sticky lg:top-16">
+      
+      <!-- Current Step Meta Card -->
+      <div class="card-box p-4 border-l-4 border-l-cyan-500 shadow-md">
+        <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-1">
+          <span>OPERATIONAL STEP</span>
+          <span class="text-cyan-400 font-bold">#06 OF 06</span>
+        </div>
+        <h3 class="font-extrabold text-white text-base leading-tight mb-1">Financial Model & ROI Forecast</h3>
+        <p class="text-xs text-slate-400 font-sans">Traffic Funnels, $0 Marginal Client Compute, Headless Server Economics & $3.5K–$55K/mo Models</p>
+      </div>
+
+      <!-- Table of Contents Nav Box -->
+      <div class="card-box p-4 shadow-md max-h-[68vh] flex flex-col">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+          <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
+            <span>📑</span> <span>Table of Contents</span>
+          </span>
+          <span class="text-[10px] font-mono text-slate-500">Jump to section</span>
+        </div>
+        <div class="overflow-y-auto space-y-0.5 pr-1">
+          
+          <a href="#1-executive-summary-the-pure-margin-advantage" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>1. Executive Summary: The Pure-Margin Advantage</span>
+          </a>
+        
+
+          <a href="#2-the-conversion-funnel-pricing-architecture" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>2. The Conversion Funnel &amp; Pricing Architecture</span>
+          </a>
+        
+
+          <a href="#blended-average-order-value-aov" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>Blended Average Order Value (AOV):</span>
+          </a>
+        
+
+          <a href="#3-three-comprehensive-financial-scenarios-monthly-annualized" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>3. Three Comprehensive Financial Scenarios (Monthly &amp; Annualized)</span>
+          </a>
+        
+
+          <a href="#scenario-a-conservative-steady-baseline-low-creator-traction" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>Scenario A: Conservative (Steady Baseline / Low Creator Traction)</span>
+          </a>
+        
+
+          <a href="#scenario-b-base-case-successful-launch-day-creator-mentions-academic-outreach" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>Scenario B: Base Case (Successful Launch Day + Creator Mentions + Academic Outreach)</span>
+          </a>
+        
+
+          <a href="#scenario-c-breakout-viral-tier-1-video-feature-3b1b-veritasium-lague-feature" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>Scenario C: Breakout Viral / Tier-1 Video Feature (3b1b / Veritasium / Lague Feature)</span>
+          </a>
+        
+
+          <a href="#4-academic-revenue-pipeline-multi-campus-expansion-499-1499" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>4. Academic Revenue Pipeline: Multi-Campus Expansion ($499 – $1,499)</span>
+          </a>
+        
+
+          <a href="#3-year-institutional-projection" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>3-Year Institutional Projection:</span>
+          </a>
+        
+
+          <a href="#5-risk-assessment-mitigations" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>5. Risk Assessment &amp; Mitigations</span>
+          </a>
+        
+        </div>
+      </div>
+
+      <!-- Quick Steps Navigation Matrix -->
+      <div class="card-box p-4 shadow-md space-y-2">
+        <span class="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block border-b border-slate-800 pb-1.5">
+          All 7 Marketing Steps
+        </span>
+        <div class="grid grid-cols-7 gap-1 font-mono text-center text-xs">
+          <a href="00_executive_summary_and_quickstart.html" title="Executive Summary & 30-Day Quickstart" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">00</a><a href="01_turnkey_monetization_and_hosted_saas_blueprint.html" title="Turnkey Monetization & Hosted SaaS Blueprint" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">01</a><a href="02_positioning_and_messaging_bible.html" title="Positioning & Messaging Bible" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">02</a><a href="03_creator_and_influencer_outreach_playbook.html" title="Creator & Influencer Outreach Playbook" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">03</a><a href="04_historical_connections_and_academic_expansion.html" title="Historical Connections & Academic Expansion" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">04</a><a href="05_content_roadmap_and_community_launch_playbook.html" title="Content Roadmap & Community Launch Playbook" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">05</a><a href="06_financial_model_and_roi_forecast.html" title="Financial Model & ROI Forecast" class="py-1.5 rounded bg-cyan-500 text-black font-extrabold shadow transition">06</a><a href="07_ui_ux_gaming_experience_and_arena_blueprint.html" title="UI/UX Experience & The Abyssal Arena Gamer Blueprint" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">07</a><a href="08_llc_infrastructure_hosting_and_deployment_strategy.html" title="LLC Formation, VPS Hosting & Deployment Strategy" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">08</a>
+        </div>
+      </div>
+
+      <!-- Simulator Direct Link -->
+      <a href="../index.html" class="block card-box p-3 hover:border-cyan-500 transition group text-center">
+        <span class="text-xs font-mono text-cyan-400 group-hover:text-cyan-300 font-bold flex items-center justify-center gap-1.5">
+          <span>🌊</span> <span>Launch 3D Seafloor Visualizer</span> <span>&rarr;</span>
+        </span>
+      </a>
+
+    </aside>
+
+    <!-- RIGHT COLUMN: MAIN CONTENT -->
+    <main class="lg:col-span-8 card-box p-6 md:p-10 shadow-xl overflow-hidden leading-relaxed">
+      
+      <!-- Document Banner -->
+      <div class="mb-6 pb-6 border-b border-slate-800 space-y-2">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="px-2.5 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-xs font-mono font-bold uppercase tracking-wider">
+            Siliquarium Commercialization &bull; Step 06
+          </span>
+          <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-xs font-mono border border-slate-800">
+            Author: Jack "The Closer" Vance
+          </span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-white font-mono tracking-tight">
+          Financial Model & ROI Forecast
+        </h1>
+        <p class="text-sm text-slate-400 font-sans">
+          Traffic Funnels, $0 Marginal Client Compute, Headless Server Economics & $3.5K–$55K/mo Models
+        </p>
+      </div>
+
+      <!-- Parsed Body Content -->
+      <article class="prose prose-invert max-w-none space-y-4">
+        <h1 id="financial-model-roi-forecast-the-unit-economics-of-hosted-digital-life" class="text-2xl sm:text-3xl font-black text-white font-mono mt-8 mb-4 border-b border-slate-800 pb-3 flex items-center gap-3"><span class="text-cyan-400">#</span> 📊 Financial Model & ROI Forecast: The Unit Economics of Hosted Digital Life</h1>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Author:</strong> Jack "The Closer" Vance, Chief Marketing Officer & Commercialization Strategist</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Target:</strong> Ian Ohlander, Founder & Chief Architect of Siliquarium</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Purpose:</strong> Unit Economics, Conversion Funnel Metrics, Infrastructure Cost Audits, and 3-Year Revenue Projections</p>
+<hr class="my-8 border-slate-800/80">
+<h2 id="1-executive-summary-the-pure-margin-advantage" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 1. Executive Summary: The Pure-Margin Advantage</h2>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Most software-as-a-service (SaaS) businesses fail because their infrastructure costs scale linearly with user growth. If a complex simulation requires heavy server GPUs or expensive cloud databases, high traffic can bankrupt a startup overnight.</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Siliquarium operates on an extraordinary dual-architecture financial model:</p>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span><strong class="text-white font-bold">Client-Side Free Tier:</strong> The vast majority of top-of-funnel users (95%+) run simulations client-side in their browser Web Workers and WebGL canvases. Static files are served via global CDNs (Cloudflare Pages / GitHub Pages) at virtually <strong class="text-white font-bold">$0.00 marginal cost per visitor</strong>.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span><strong class="text-white font-bold">High-Value Hosted Pro & Server Infrastructure:</strong> Users who pay for <strong class="text-white font-bold">Laboratory Pro</strong> ($34.99 lifetime or $7/mo) and <strong class="text-white font-bold">The Abyssal Arena</strong> ($9.99/$19.99) utilize persistent headless simulation execution (<code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">src/server/HeadlessSimulationHost.ts</code>). Because the Node.js engine is strictly optimized and zero-dependency, a single $40/month Hetzner or Fly.io instance can support hundreds of continuous headless background worlds.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span><strong class="text-white font-bold">Merchant of Record Efficiency:</strong> Lemon Squeezy handles 100% of global tax remittance and credit card processing for 5% + $0.50 per transaction.</span></li>
+</ol>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">The result is an enviable software profile: <strong class="text-white font-bold">Gross Margins exceed 97%, and Net Profit Margins consistently hover between 91% and 94%.</strong></p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT / SCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-1').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-1" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>+---------------------------------------------------------------------------------------------------------+
+|                                    MONTHLY UNIT COST COMPARISON (PER 100K USERS)                        |
++---------------------------------------------------------------------------------------------------------+
+|                                                                                                         |
+|  TRADITIONAL CLOUD SAAS PLATFORM:                                                                       |
+|  * AWS EC2 / GPU Compute: $3,200/mo                                                                     |
+|  * Managed RDS Postgres:    $850/mo                                                                     |
+|  * Bandwidth / Data Egress: $600/mo                                                                     |
+|  * Sales Tax Compliance:    $500/mo (TaxJar / Avalara)                                                  |
+|  --------------------------------------------------                                                     |
+|  TOTAL MONTHLY OVERHEAD:   $5,150/mo (High Risk)                                                        |
+|                                                                                                         |
+|  SILIQUARIUM HYBRID HOSTED ARCHITECTURE:                                                                |
+|  * Cloudflare Pages CDN:       $0.00/mo (Unlimited free static bandwidth)                              |
+|  * Headless Node.js Host:     $40.00/mo (Persistent background servers)                                 |
+|  * Global Sales Tax / VAT:     $0.00/mo (Remitted 100% by Lemon Squeezy MoR)                            |
+|  * Client Storage / DB:        $0.00/mo (Local IndexedDB &amp; compressed URL hash replays)                 |
+|  --------------------------------------------------                                                     |
+|  TOTAL MONTHLY OVERHEAD:      $40.00/mo (Near-Zero Risk, ~98% Gross Margin)                             |
+|                                                                                                         |
++---------------------------------------------------------------------------------------------------------+</code></pre>
+</div>
+<hr class="my-8 border-slate-800/80">
+<h2 id="2-the-conversion-funnel-pricing-architecture" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 2. The Conversion Funnel & Pricing Architecture</h2>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT / SCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-2').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-2" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>+---------------------------------------------------------------------------------------------------------+
+|                                    SILIQUARIUM CONVERSION FUNNEL METRICS                                |
++---------------------------------------------------------------------------------------------------------+
+|                                                                                                         |
+|  [ TOP OF FUNNEL: FREE VISITORS ]                                                                       |
+|  Monthly Unique Visitors (Show HN, Reddit, YouTube organic, Curriculum searches): 30,000 – 100,000      |
+|                                                                                                         |
+|                                     │                                                                   |
+|                                     ├───────────────────────────────┬───────────────────────────┐       |
+|                                     ▼ (1.8% Conversion)             ▼ (1.2% Conversion)         ▼       |
+|                                                                                                         |
+|  [ TIER 2: LABORATORY PRO ]     [ TIER 3: ABYSSAL ARENA ]       [ TIER 4: MASTER BUNDLE ]   [ CAMPUS ]  |
+|  $34.99 Lifetime ($7/mo)        $9.99 Pack / $19.99 Season      $69.99 BooleanGA + Sili     $499-$1,499 |
+|  540 units / month              360 units / month               150 units / month           4 depts/mo  |
+|  Revenue: $18,894/mo            Revenue: $3,596/mo              Revenue: $10,498/mo         $3,996/mo   |
+|                                                                                                         |
+|                                     │                               │                           │       |
+|                                     └───────────────────────────────┴───────────────────────────┘       |
+|                                                                     ▼                                   |
+|                                                      [ GROSS REVENUE: $36,984 / MONTH ]                 |
+|                                                      [ NET PROFIT:    $34,580 / MONTH ]                 |
+|                                                                                                         |
++---------------------------------------------------------------------------------------------------------+</code></pre>
+</div>
+<h3 id="blended-average-order-value-aov" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> Blended Average Order Value (AOV):</h3>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Tier 2 (Pro Pass):</strong> $34.99</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Tier 3 (Arena Pass):</strong> $12.50 (blended between $9.99 pack and $19.99 season pass)</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Tier 4 (Master Bundle):</strong> $74.99 (blended promotional and standard pricing)</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Tier 5 (University Site License):</strong> $749.00 (blended annual and perpetual departmental contracts)</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Weighted Average Retail Order Value:</strong> <strong class="text-white font-bold">$48.20</strong></span></li>
+</ul>
+<hr class="my-8 border-slate-800/80">
+<h2 id="3-three-comprehensive-financial-scenarios-monthly-annualized" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 3. Three Comprehensive Financial Scenarios (Monthly & Annualized)</h2>
+<h3 id="scenario-a-conservative-steady-baseline-low-creator-traction" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> Scenario A: Conservative (Steady Baseline / Low Creator Traction)</h3>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Monthly Traffic:</strong> 15,000 unique web visitors.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Conversion Breakdown:</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>120 Pro Lab Passes ($34.99) = $4,198.80</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>80 Abyssal Arena Passes ($9.99) = $799.20</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>25 Darwinian Master Bundles ($69.99) = $1,749.75</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>1 University Departmental License = $499.00</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Total Gross Monthly Revenue:</strong> <strong class="text-white font-bold">$7,246.75</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Lemon Squeezy Fees (5% + $0.50):</strong> ~$475.00</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Hosting & Infrastructure:</strong> ~$40.00</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Net Monthly Profit:</strong> <strong class="text-white font-bold">$6,731.75 / month</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Annualized Net Earnings:</strong> <strong class="text-white font-bold">$80,781.00 / year</strong></span></li>
+</ul>
+<h3 id="scenario-b-base-case-successful-launch-day-creator-mentions-academic-outreach" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> Scenario B: Base Case (Successful Launch Day + Creator Mentions + Academic Outreach)</h3>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Monthly Traffic:</strong> 45,000 unique web visitors.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Conversion Breakdown:</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>380 Pro Lab Passes ($34.99) = $13,296.20</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>250 Abyssal Arena Passes ($9.99) = $2,497.50</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>95 Darwinian Master Bundles ($69.99) = $6,649.05</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>3 University Departmental Licenses ($499 / $1,499 blended) = $2,497.00</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Total Gross Monthly Revenue:</strong> <strong class="text-white font-bold">$24,939.75</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Lemon Squeezy Fees (5% + $0.50):</strong> ~$1,620.00</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Hosting & Infrastructure:</strong> ~$60.00</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Net Monthly Profit:</strong> <strong class="text-white font-bold">$23,259.75 / month</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Annualized Net Earnings:</strong> <strong class="text-white font-bold">$279,117.00 / year</strong></span></li>
+</ul>
+<h3 id="scenario-c-breakout-viral-tier-1-video-feature-3b1b-veritasium-lague-feature" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> Scenario C: Breakout Viral / Tier-1 Video Feature (3b1b / Veritasium / Lague Feature)</h3>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Monthly Traffic:</strong> 180,000 unique web visitors.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Conversion Breakdown:</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>1,400 Pro Lab Passes ($34.99) = $48,986.00</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>1,100 Abyssal Arena Passes ($9.99) = $10,989.00</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>420 Darwinian Master Bundles ($69.99) = $29,395.80</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>8 University Departmental Licenses = $6,992.00</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Total Gross Monthly Revenue:</strong> <strong class="text-white font-bold">$96,362.80</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Lemon Squeezy Fees (5% + $0.50):</strong> ~$6,350.00</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Hosting & Infrastructure:</strong> ~$120.00</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Net Monthly Profit:</strong> <strong class="text-white font-bold">$89,892.80 / month</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Annualized Net Earnings:</strong> <strong class="text-white font-bold">$1,078,713.00 / year</strong></span></li>
+</ul>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT / SCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-3').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-3" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>+---------------------------------------------------------------------------------------------------------+
+|                                    ANNUAL NET PROFIT COMPARISON                                         |
++---------------------------------------------------------------------------------------------------------+
+|                                                                                                         |
+|  CONSERVATIVE SCENARIO:    $80,781 / yr  ████                                                           |
+|                                                                                                         |
+|  BASE CASE SCENARIO:      $279,117 / yr  ██████████████                                                 |
+|                                                                                                         |
+|  BREAKOUT SCENARIO:     $1,078,713 / yr  ████████████████████████████████████████████████               |
+|                                                                                                         |
++---------------------------------------------------------------------------------------------------------+</code></pre>
+</div>
+<hr class="my-8 border-slate-800/80">
+<h2 id="4-academic-revenue-pipeline-multi-campus-expansion-499-1499" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 4. Academic Revenue Pipeline: Multi-Campus Expansion ($499 – $1,499)</h2>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Academic site licenses provide high customer lifetime value and near-zero churn. Once an undergraduate biology or computer science department integrates Siliquarium’s 5-practicum lab manual into their course syllabus, they renew year after year out of departmental lab equipment budgets.</p>
+<h3 id="3-year-institutional-projection" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 3-Year Institutional Projection:</h3>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Year 1 Target:</strong> 15 Departmental Pilot Adoptions (leveraging NAU, ASU, and direct mentor intros).</span></li>
+</ul>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><em class="text-slate-200">15 departments × $499/yr = $7,485/yr.</em></p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Year 2 Target:</strong> 65 University Departments (biology, systems biology, bioinformatics, and CS).</span></li>
+</ul>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><em class="text-slate-200">65 departments × $499/yr = $32,435/yr.</em></p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Year 3 Target:</strong> 220 Global Campus Departments.</span></li>
+</ul>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><em class="text-slate-200">220 departments × $499/yr = $109,780/yr recurring institutional revenue.</em></p>
+<hr class="my-8 border-slate-800/80">
+<h2 id="5-risk-assessment-mitigations" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 5. Risk Assessment & Mitigations</h2>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-950/80 shadow-lg">
+<table class="w-full text-left text-xs text-slate-300 border-collapse">
+<thead><tr class="bg-slate-900 border-b border-slate-800 text-slate-200 font-mono text-[11px]">
+<th class="py-3 px-4 font-bold">Risk Factor</th>
+<th class="py-3 px-4 font-bold">Likelihood</th>
+<th class="py-3 px-4 font-bold">Impact</th>
+<th class="py-3 px-4 font-bold">Built-In Strategic Mitigation</th>
+</tr></thead><tbody>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Server Crash Under Traffic Surge</strong></td>
+<td class="py-2.5 px-4">Low</td>
+<td class="py-2.5 px-4">High</td>
+<td class="py-2.5 px-4">95%+ of traffic runs client-side on WebGL. Headless servers are only spun up for authenticated Pro users.</td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Sales Tax Audits & Multi-State Nexus</strong></td>
+<td class="py-2.5 px-4">Zero</td>
+<td class="py-2.5 px-4">High</td>
+<td class="py-2.5 px-4">Lemon Squeezy acts as Merchant of Record, legally indemnifying Ian and remitting all taxes automatically.</td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Piracy / Code Scraping</strong></td>
+<td class="py-2.5 px-4">Medium</td>
+<td class="py-2.5 px-4">Low</td>
+<td class="py-2.5 px-4">Core curriculum is deliberately 100% free open-source; monetization relies on persistent cloud headless server compute and community Arena matchmaking.</td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Low Academic Budget Approval</strong></td>
+<td class="py-2.5 px-4">Low</td>
+<td class="py-2.5 px-4">Low</td>
+<td class="py-2.5 px-4">At $499/year, the site license falls below the typical $1,000 threshold that triggers university board approvals; professors can charge it directly to discretionary p-cards.</td>
+</tr>
+</tbody></table></div>
+<hr class="my-8 border-slate-800/80">
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Proceed to <strong class="text-white font-bold"><a href="index.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition font-medium">index.html</a></strong> to review the interactive master marketing dashboard unifying all operational files.</p>
+      </article>
+
+      <!-- Bottom Navigation Footer -->
+      <div class="mt-12 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <a href="05_content_roadmap_and_community_launch_playbook.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5 text-xs font-mono"><span>&larr;</span> <span>Step 05</span></a>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="index.html" class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-mono transition">
+            🏠 Back to Dashboard
+          </a>
+          <a href="07_ui_ux_gaming_experience_and_arena_blueprint.html" class="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-black font-extrabold transition flex items-center gap-1.5 text-xs font-mono shadow"><span>Step 07</span> <span>&rarr;</span></a>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Master Footer -->
+  <footer class="bg-[#050811] border-t border-[#1e293b] py-8 text-center text-xs text-gray-500 font-mono mt-16">
+    <div class="max-w-7xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-bold">Siliquarium &bull; Open-Ended Digital Life &amp; Silicon Abiogenesis Platform</p>
+      <p class="text-slate-500">Commercial Architecture &amp; Hosted SaaS Blueprint by Jack "The Closer" Vance.</p>
+      <p class="text-slate-600 text-[11px]">&copy; 2026 Ian Ohlander. All rights reserved. Strict First-Law Conservation &bull; The Epistemic Cut &bull; Uri Alon Motifs.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

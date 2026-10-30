@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad00" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="50%" stop-color="#0b172a"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+
+    <marker id="arrowCyan00" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="520" fill="url(#bgGrad00)"/>
+
+  <!-- Title Banner -->
+  <g transform="translate(40, 35)">
+    <rect width="920" height="60" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="25" y="28" fill="#38bdf8" font-family="monospace" font-size="16" font-weight="bold" letter-spacing="1.2">THE DEVELOPMENTAL PROGRAM PARADOX</text>
+    <text x="25" y="48" fill="#94a3b8" font-family="sans-serif" font-size="12">Why the "Blueprint" Metaphor Fails — Genomes Are Dynamic Computer Programs Executed by Chemistry</text>
+  </g>
+
+  <!-- Left Card: The Blueprint Myth (Flawed View) -->
+  <g transform="translate(40, 115)">
+    <rect width="445" height="365" rx="12" fill="#0f172a" stroke="#ef4444" stroke-width="1.2"/>
+    <rect x="20" y="20" width="240" height="26" rx="6" fill="#450a0a" stroke="#ef4444" stroke-width="1"/>
+    <text x="32" y="38" fill="#fca5a5" font-family="monospace" font-size="12" font-weight="bold">❌ THE BLUEPRINT MYTH</text>
+
+    <!-- Schematic Box -->
+    <g transform="translate(20, 60)">
+      <rect width="405" height="110" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="15" y="22" fill="#94a3b8" font-family="monospace" font-size="10">Architectural Drawing (CAD):</text>
+      <!-- Static blueprint table drawing -->
+      <line x1="50" y1="55" x2="160" y2="55" stroke="#ef4444" stroke-width="2"/>
+      <line x1="60" y1="55" x2="60" y2="95" stroke="#ef4444" stroke-width="2"/>
+      <line x1="150" y1="55" x2="150" y2="95" stroke="#ef4444" stroke-width="2"/>
+      <text x="75" y="48" fill="#f87171" font-family="monospace" font-size="9">Gene A (Legs)</text>
+      <text x="180" y="65" fill="#f87171" font-family="monospace" font-size="9">Gene B (Top)</text>
+      <!-- External Carpenter Hand -->
+      <rect x="270" y="40" width="115" height="50" rx="6" fill="#1e293b" stroke="#ef4444" stroke-width="1"/>
+      <text x="280" y="60" fill="#fca5a5" font-family="monospace" font-size="10" font-weight="bold">External Builder</text>
+      <text x="280" y="78" fill="#94a3b8" font-family="sans-serif" font-size="9">(Teleological Agent)</text>
+    </g>
+
+    <!-- Flaws List -->
+    <g transform="translate(25, 195)">
+      <text x="0" y="0" fill="#f87171" font-family="monospace" font-size="11" font-weight="bold">Why this metaphor breaks down:</text>
+      <text x="0" y="24" fill="#cbd5e1" font-family="sans-serif" font-size="11">• Assumes 1 Gene = 1 Physical Part (Naive reductionism).</text>
+      <text x="0" y="48" fill="#cbd5e1" font-family="sans-serif" font-size="11">• Requires an external builder reading the paper plan.</text>
+      <text x="0" y="72" fill="#cbd5e1" font-family="sans-serif" font-size="11">• <tspan fill="#fca5a5" font-weight="bold">The Paradox:</tspan> All 30 trillion cells have identical DNA!</text>
+      <text x="0" y="96" fill="#94a3b8" font-family="sans-serif" font-size="10">If DNA were a blueprint, every cell would build the same table.</text>
+      <text x="0" y="116" fill="#94a3b8" font-family="sans-serif" font-size="10">A blueprint cannot explain how liver, bone, and eye cells diverge.</text>
+    </g>
+  </g>
+
+  <!-- Right Card: The Regulatory Reality (Scientific View) -->
+  <g transform="translate(515, 115)">
+    <rect width="445" height="365" rx="12" fill="#0f172a" stroke="#10b981" stroke-width="1.2"/>
+    <rect x="20" y="20" width="260" height="26" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
+    <text x="32" y="38" fill="#a7f3d0" font-family="monospace" font-size="12" font-weight="bold">✔ THE REGULATORY REALITY</text>
+
+    <!-- Dynamic Program Box -->
+    <g transform="translate(20, 60)">
+      <rect width="405" height="110" rx="8" fill="#020617" stroke="#334155" stroke-width="1"/>
+      <text x="15" y="22" fill="#38bdf8" font-family="monospace" font-size="10">Self-Executing Chemical Program:</text>
+      <!-- Node A -> Node B -> Output -->
+      <circle cx="50" cy="65" r="16" fill="#065f46" stroke="#10b981" stroke-width="1.5"/>
+      <text x="44" y="69" fill="#a7f3d0" font-family="monospace" font-size="11" font-weight="bold">G1</text>
+      <line x1="68" y1="65" x2="135" y2="65" stroke="#10b981" stroke-width="2" marker-end="url(#arrowCyan00)"/>
+      <circle cx="155" cy="65" r="16" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="149" y="69" fill="#bfdbfe" font-family="monospace" font-size="11" font-weight="bold">G2</text>
+      <line x1="173" y1="65" x2="240" y2="65" stroke="#ef4444" stroke-width="2"/>
+      <!-- Loop back -->
+      <path d="M 155 47 C 155 30, 50 30, 50 47" fill="none" stroke="#818cf8" stroke-width="1.5" stroke-dasharray="2,2"/>
+      <!-- Cell boundary -->
+      <rect x="260" y="35" width="130" height="60" rx="6" fill="#14532d" stroke="#22c55e" stroke-width="1"/>
+      <text x="272" y="55" fill="#bbf7d0" font-family="monospace" font-size="10" font-weight="bold">Local Branch:</text>
+      <text x="272" y="72" fill="#4ade80" font-family="sans-serif" font-size="10">Trophocyte Core</text>
+      <text x="272" y="87" fill="#86efac" font-family="sans-serif" font-size="9">vs Somatic Shield</text>
+    </g>
+
+    <!-- Mechanisms List -->
+    <g transform="translate(25, 195)">
+      <text x="0" y="0" fill="#34d399" font-family="monospace" font-size="11" font-weight="bold">How self-organization really works:</text>
+      <text x="0" y="24" fill="#cbd5e1" font-family="sans-serif" font-size="11">• Genes are switches that regulate other genes (GRNs).</text>
+      <text x="0" y="48" fill="#cbd5e1" font-family="sans-serif" font-size="11">• Self-executing: No builder; non-equilibrium physics runs the code.</text>
+      <text x="0" y="72" fill="#cbd5e1" font-family="sans-serif" font-size="11">• <tspan fill="#a7f3d0" font-weight="bold">The Solution:</tspan> Environmental cues select local code paths!</text>
+      <text x="0" y="96" fill="#94a3b8" font-family="sans-serif" font-size="10">Core vent cells run the Feeder subroutine.</text>
+      <text x="0" y="116" fill="#94a3b8" font-family="sans-serif" font-size="10">Exposed rim cells run the Defensive Shield subroutine.</text>
+    </g>
+  </g>
+</svg>

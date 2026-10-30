@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 480" width="980" height="480" class="w-full h-auto font-sans">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#6b21a8" />
+    </linearGradient>
+    <marker id="arr-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arr-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arr-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arr-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="980" height="480" fill="url(#bgGrad)" rx="16" />
+  <rect width="978" height="478" x="1" y="1" fill="none" stroke="#1e293b" stroke-width="1.5" rx="15" />
+
+  <!-- Title Header -->
+  <text x="35" y="38" fill="#00e5ff" font-size="16" font-family="monospace" font-weight="bold" letter-spacing="1">FIGURE 8: THE LIVE CIRCUIT MICROSCOPE GENE REGULATORY VIEWER</text>
+  <text x="35" y="60" fill="#94a3b8" font-size="12">Interactive UI Diagnostics: Real-Time Codon Execution, Operon Demarcation, and Metazoan Roles</text>
+
+  <!-- Microscope Window Frame -->
+  <g transform="translate(30, 80)">
+    <rect width="920" height="375" fill="#0a0f1d" stroke="#00e5ff" stroke-width="1.8" rx="14" filter="url(#glow-cyan)" />
+    <rect width="920" height="36" fill="#131c31" rx="14" />
+    <circle cx="25" cy="18" r="6" fill="#f43f5e" />
+    <circle cx="45" cy="18" r="6" fill="#f59e0b" />
+    <circle cx="65" cy="18" r="6" fill="#10b981" />
+    <text x="90" y="23" fill="#f8fafc" font-size="12" font-family="monospace" font-weight="bold">🔬 CIRCUIT MICROSCOPE — Pore (q=2, r=-1, z=0) [METAZOAN CLADE #4]</text>
+
+    <!-- Metazoan Role Banner -->
+    <rect x="25" y="50" width="870" height="38" fill="#064e3b" stroke="#10b981" stroke-width="1.2" rx="8" />
+    <text x="45" y="74" fill="#34d399" font-size="13" font-family="monospace" font-weight="bold">🌟 ACTIVE TISSUE ROLE: 🛡️ SOMATIC SHIELD (Toxin Inverter Node)</text>
+    <text x="660" y="74" fill="#a7f3d0" font-size="11" font-family="monospace">Battery: 78.4 mV • Leak: -0.05 T</text>
+
+    <!-- Host Genome Operon -->
+    <rect x="25" y="100" width="870" height="120" fill="#0f172a" stroke="#1e293b" rx="10" />
+    <text x="40" y="122" fill="#00e5ff" font-size="11" font-family="monospace" font-weight="bold">🧬 HOST GENOME OPERON (60-BIT TAPE, 10 CODONS):</text>
+
+    <!-- Codon Pills Row -->
+    <g transform="translate(40, 135)">
+      <!-- Codon 1: GATE_AND (Repressed) -->
+      <g transform="translate(0, 0)">
+        <rect width="76" height="68" fill="#1e1b4b" stroke="#f43f5e" stroke-width="1.5" rx="8" />
+        <rect width="76" height="20" fill="#f43f5e" opacity="0.25" rx="8" />
+        <text x="38" y="15" fill="#f43f5e" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">cypA</text>
+        <text x="38" y="38" fill="#f8fafc" font-size="9" font-family="monospace" text-anchor="middle">000000</text>
+        <circle cx="38" cy="53" r="5" fill="#f43f5e" />
+        <text x="38" y="65" fill="#f43f5e" font-size="7" font-family="monospace" text-anchor="middle">OFF (0)</text>
+      </g>
+
+      <!-- Codon 2: GATE_NOT (EXPRESSED) -->
+      <g transform="translate(85, 0)">
+        <rect width="76" height="68" fill="#064e3b" stroke="#10b981" stroke-width="2" rx="8" />
+        <rect width="76" height="20" fill="#10b981" opacity="0.35" rx="8" />
+        <text x="38" y="15" fill="#10b981" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">inhB</text>
+        <text x="38" y="38" fill="#f8fafc" font-size="9" font-family="monospace" text-anchor="middle">001100</text>
+        <circle cx="38" cy="53" r="5" fill="#10b981" />
+        <text x="38" y="65" fill="#10b981" font-size="7" font-family="monospace" text-anchor="middle">ON (1)</text>
+      </g>
+
+      <!-- Codon 3: PORIN_TOXIN -->
+      <g transform="translate(170, 0)">
+        <rect width="76" height="68" fill="#1e293b" stroke="#00e5ff" stroke-width="1.2" rx="8" />
+        <text x="38" y="15" fill="#00e5ff" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">oxrB</text>
+        <text x="38" y="38" fill="#f8fafc" font-size="9" font-family="monospace" text-anchor="middle">101100</text>
+        <text x="38" y="55" fill="#38bdf8" font-size="8" font-family="monospace" text-anchor="middle">PORIN</text>
+      </g>
+
+      <!-- Codon 4: SINK_SEPTUM -->
+      <g transform="translate(255, 0)">
+        <rect width="76" height="68" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2" rx="8" />
+        <text x="38" y="15" fill="#f59e0b" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">ftsZ</text>
+        <text x="38" y="38" fill="#f8fafc" font-size="9" font-family="monospace" text-anchor="middle">110100</text>
+        <text x="38" y="55" fill="#fbbf24" font-size="8" font-family="monospace" text-anchor="middle">SEPTUM</text>
+      </g>
+
+      <!-- Codon 5: PORIN_A -->
+      <g transform="translate(340, 0)">
+        <rect width="76" height="68" fill="#1e293b" stroke="#00e5ff" stroke-width="1.2" rx="8" />
+        <text x="38" y="15" fill="#00e5ff" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">trnS</text>
+        <text x="38" y="38" fill="#f8fafc" font-size="9" font-family="monospace" text-anchor="middle">100000</text>
+        <text x="38" y="55" fill="#38bdf8" font-size="8" font-family="monospace" text-anchor="middle">FUEL_A</text>
+      </g>
+
+      <!-- Codon 6: PORIN_B -->
+      <g transform="translate(425, 0)">
+        <rect width="76" height="68" fill="#1e293b" stroke="#00e5ff" stroke-width="1.2" rx="8" />
+        <text x="38" y="15" fill="#00e5ff" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">trnS</text>
+        <text x="38" y="38" fill="#f8fafc" font-size="9" font-family="monospace" text-anchor="middle">100110</text>
+        <text x="38" y="55" fill="#38bdf8" font-size="8" font-family="monospace" text-anchor="middle">OXID_B</text>
+      </g>
+
+      <!-- Codon 7: SINK_BATTERY -->
+      <g transform="translate(510, 0)">
+        <rect width="76" height="68" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2" rx="8" />
+        <text x="38" y="15" fill="#f59e0b" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">atpS</text>
+        <text x="38" y="38" fill="#f8fafc" font-size="9" font-family="monospace" text-anchor="middle">110010</text>
+        <text x="38" y="55" fill="#fbbf24" font-size="8" font-family="monospace" text-anchor="middle">BATTERY</text>
+      </g>
+
+      <!-- Codon 8: INTRON -->
+      <g transform="translate(595, 0)">
+        <rect width="76" height="68" fill="#0f172a" stroke="#475569" stroke-width="1" stroke-dasharray="2,2" rx="8" />
+        <text x="38" y="15" fill="#64748b" font-size="10" font-family="monospace" text-anchor="middle">intron</text>
+        <text x="38" y="38" fill="#475569" font-size="9" font-family="monospace" text-anchor="middle">111000</text>
+        <text x="38" y="55" fill="#475569" font-size="8" font-family="monospace" text-anchor="middle">NEUTRAL</text>
+      </g>
+
+      <!-- Codon 9: INTRON -->
+      <g transform="translate(680, 0)">
+        <rect width="76" height="68" fill="#0f172a" stroke="#475569" stroke-width="1" stroke-dasharray="2,2" rx="8" />
+        <text x="38" y="15" fill="#64748b" font-size="10" font-family="monospace" text-anchor="middle">intron</text>
+        <text x="38" y="38" fill="#475569" font-size="9" font-family="monospace" text-anchor="middle">111000</text>
+        <text x="38" y="55" fill="#475569" font-size="8" font-family="monospace" text-anchor="middle">NEUTRAL</text>
+      </g>
+
+      <!-- Codon 10: INTRON -->
+      <g transform="translate(765, 0)">
+        <rect width="76" height="68" fill="#0f172a" stroke="#475569" stroke-width="1" stroke-dasharray="2,2" rx="8" />
+        <text x="38" y="15" fill="#64748b" font-size="10" font-family="monospace" text-anchor="middle">intron</text>
+        <text x="38" y="38" fill="#475569" font-size="9" font-family="monospace" text-anchor="middle">111000</text>
+        <text x="38" y="55" fill="#475569" font-size="8" font-family="monospace" text-anchor="middle">NEUTRAL</text>
+      </g>
+    </g>
+
+    <!-- Symbiont Endosymbiotic Cassette Operon (Chimerococcus) -->
+    <rect x="25" y="235" width="870" height="110" fill="#1e112a" stroke="#a855f7" stroke-width="1.2" rx="10" />
+    <text x="40" y="258" fill="#c084fc" font-size="11" font-family="monospace" font-weight="bold">🟣 ENDOSYMBIONT CASSETTE (Chimerococcus margulisiae — Specimen 08):</text>
+    <text x="640" y="258" fill="#e9d5ff" font-size="10" font-family="monospace">Vertical Maternal Inheritance • Lysis on Death</text>
+
+    <!-- Symbiont Pills Row -->
+    <g transform="translate(40, 270)">
+      <g transform="translate(0, 0)">
+        <rect width="90" height="55" fill="#064e3b" stroke="#10b981" stroke-width="2" rx="6" />
+        <text x="45" y="15" fill="#10b981" font-size="9" font-family="monospace" font-weight="bold" text-anchor="middle">symA (AND)</text>
+        <text x="45" y="32" fill="#f8fafc" font-size="8" font-family="monospace" text-anchor="middle">000000</text>
+        <text x="45" y="46" fill="#34d399" font-size="8" font-family="monospace" font-weight="bold" text-anchor="middle">🟢 SUBSIDY +2T</text>
+      </g>
+
+      <g transform="translate(105, 0)">
+        <rect width="90" height="55" fill="#1e293b" stroke="#a855f7" stroke-width="1.2" rx="6" />
+        <text x="45" y="15" fill="#c084fc" font-size="9" font-family="monospace" font-weight="bold" text-anchor="middle">trnS (Fuel A)</text>
+        <text x="45" y="32" fill="#f8fafc" font-size="8" font-family="monospace" text-anchor="middle">100000</text>
+        <text x="45" y="46" fill="#a855f7" font-size="8" font-family="monospace" text-anchor="middle">PORIN_A</text>
+      </g>
+
+      <g transform="translate(210, 0)">
+        <rect width="90" height="55" fill="#1e293b" stroke="#a855f7" stroke-width="1.2" rx="6" />
+        <text x="45" y="15" fill="#c084fc" font-size="9" font-family="monospace" font-weight="bold" text-anchor="middle">trnS (Oxid B)</text>
+        <text x="45" y="32" fill="#f8fafc" font-size="8" font-family="monospace" text-anchor="middle">100110</text>
+        <text x="45" y="46" fill="#a855f7" font-size="8" font-family="monospace" text-anchor="middle">PORIN_B</text>
+      </g>
+
+      <g transform="translate(315, 0)">
+        <rect width="90" height="55" fill="#1e293b" stroke="#f59e0b" stroke-width="1.2" rx="6" />
+        <text x="45" y="15" fill="#f59e0b" font-size="9" font-family="monospace" font-weight="bold" text-anchor="middle">atpS (Transloc)</text>
+        <text x="45" y="32" fill="#f8fafc" font-size="8" font-family="monospace" text-anchor="middle">110010</text>
+        <text x="45" y="46" fill="#f59e0b" font-size="8" font-family="monospace" text-anchor="middle">PMF CHARGE</text>
+      </g>
+
+      <!-- Symbiont Status Info Box -->
+      <g transform="translate(420, 0)">
+        <rect width="365" height="55" fill="#0f172a" stroke="#6b21a8" stroke-width="1" rx="6" />
+        <text x="15" y="20" fill="#e9d5ff" font-size="10" font-family="monospace">Organelle mutates during host cytokinesis.</text>
+        <text x="15" y="35" fill="#c084fc" font-size="9" font-family="monospace">If host dies (E ≤ 0), organelle lyses simultaneously.</text>
+        <text x="15" y="48" fill="#10b981" font-size="9" font-family="monospace">Matter tokens (M) deposit into detritus carcass pool.</text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -42,19 +42,19 @@ Unit 1 addresses the foundational boundary condition of abiogenesis: how living 
 
 #### 🧭 Equation Decoder 1: The Mitchell-Russell Proton Motive Force (PMF)
 
-$$\mathbf{\Delta p} = \mathbf{\Delta \psi} - \mathbf{\frac{2.303 R T}{F} \Delta pH}$$
+$$\textcolor{#38bdf8}{\Delta p} = \textcolor{#34d399}{\Delta \psi} - \frac{\textcolor{#c084fc}{2.303} \textcolor{#fbbf24}{R T}}{\textcolor{#fbbf24}{F}} \textcolor{#f43f5e}{\Delta\text{pH}}$$
 
-- 🔵 **Output / Bioenergetic Potential:** $\Delta p$ (Transmembrane Proton Motive Force in millivolts, $\text{mV}$)
-- 🟢 **Electrical Vector Input:** $\Delta \psi$ (Electrostatic Membrane Potential across mineral wall, $\text{mV}$)
-- 🟣 **Chemical Thermodynamic Gradient:** $\Delta \text{pH} = \text{pH}_{\text{ext}} - \text{pH}_{\text{int}}$ (Trans-wall pH disparity)
-- 🟠 **Universal Physical Constants:** $R$ (Gas Constant), $T$ (Kelvin Temperature), $F$ (Faraday Constant)
+- **$\textcolor{#38bdf8}{\Delta p}$ (Net Proton Motive Force):** Total electrochemical driving force in millivolts ($\text{mV}$) pulling protons across the rock pore wall.
+- **$\textcolor{#34d399}{\Delta \psi}$ (Transmembrane Electrical Potential):** Physical electrostatic charge disparity across the thin mineral dielectric ($FeS$ wall), in $\text{mV}$.
+- **$\frac{\textcolor{#c084fc}{2.303} \textcolor{#fbbf24}{R T}}{\textcolor{#fbbf24}{F}}$ (Nernst Thermal Factor):** Thermodynamic voltage scaling factor converting decadic chemical gradients to electrical millivolts (~66 mV at 333 K).
+- **$\textcolor{#f43f5e}{\Delta\text{pH}}$ (Proton Concentration Disparity):** The 4.5-unit pH disparity between alkaline hydrothermal fluid ($\text{pH} \approx 10$) and acidic ocean seawater ($\text{pH} \approx 5.5$).
 
 | Term / Variable | Role & Classification | Biophysical Definition & Terrestrial Analogue | In Silico Realization in Siliquarium |
 | :--- | :--- | :--- | :--- |
-| **$\Delta p$** | **Net Electrochemical Potential**<br/>`[OUTPUT: mV]` | Total driving force pulling protons across the membrane to drive molecular motors ($F_o F_1$-ATPase drive). | Master token harvesting yield ($\Delta E_{\text{catalysis}}$) awarded to active pores. |
-| **$\Delta \psi$** | **Transmembrane Electrical Potential**<br/>`[INPUT: mV]` | Charge disparity across thin mineral walls ($FeS$ dielectric) separating alkaline fluid from ocean. | Potential difference between Vent Stream $A$ and Ground ($0 \text{ V}$). |
-| **$\Delta \text{pH}$** | **Proton Concentration Gradient**<br/>`[INPUT: pH Units]` | 4.5-unit pH difference between alkaline vent ($pH \sim 10$) and acidic Hadean ocean ($pH \sim 5.5$). | Modulated by cyclical vent flow rate and hydrothermal plume rhythm. |
-| **$\frac{2.303 R T}{F}$** | **Nernst Thermal Factor**<br/>`[CONSTANT: ~66 mV]` | Conversion factor from chemical decadic pH gradient to electrical millivolts at $60^\circ\text{C}$ ($333 \text{ K}$). | Geochemical conversion coefficient in [`VentPhysics.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/physics/VentPhysics.ts). |
+| **$\textcolor{#38bdf8}{\Delta p}$** | **Net Electrochemical Potential**<br/>`[OUTPUT: mV]` | Total driving force pulling protons across the membrane to drive molecular motors ($F_o F_1$-ATPase drive). | Master token harvesting yield ($\Delta E_{\text{catalysis}}$) awarded to active pores. |
+| **$\textcolor{#34d399}{\Delta \psi}$** | **Transmembrane Electrical Potential**<br/>`[INPUT: mV]` | Charge disparity across thin mineral walls ($FeS$ dielectric) separating alkaline fluid from ocean. | Potential difference between Vent Stream $A$ and Ground ($0 \text{ V}$). |
+| **$\textcolor{#f43f5e}{\Delta \text{pH}}$** | **Proton Concentration Gradient**<br/>`[INPUT: pH Units]` | 4.5-unit pH difference between alkaline vent ($pH \sim 10$) and acidic Hadean ocean ($pH \sim 5.5$). | Modulated by cyclical vent flow rate and hydrothermal plume rhythm. |
+| **$\textcolor{#c084fc}{\frac{2.303 R T}{F}}$** | **Nernst Thermal Factor**<br/>`[CONSTANT: ~66 mV]` | Conversion factor from chemical decadic pH gradient to electrical millivolts at $60^\circ\text{C}$ ($333 \text{ K}$). | Geochemical conversion coefficient in [`VentPhysics.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/physics/VentPhysics.ts). |
 
 > [!NOTE]
 > **💡 The Intuitive Truth Behind the Architecture:**  
@@ -68,12 +68,12 @@ $$\mathbf{\Delta p} = \mathbf{\Delta \psi} - \mathbf{\frac{2.303 R T}{F} \Delta 
 
 #### 🧭 Equation Decoder 2: The Nernst Electrochemical Equilibrium Gradient
 
-$$\mathbf{E} = \mathbf{E^\circ} - \mathbf{\frac{R T}{z F} \ln Q}$$
+$$\textcolor{#38bdf8}{E} = \textcolor{#34d399}{E^\circ} - \frac{\textcolor{#fbbf24}{R T}}{\textcolor{#c084fc}{z} \textcolor{#fbbf24}{F}} \ln \textcolor{#f43f5e}{Q}$$
 
-- 🔵 **Output / Non-Equilibrium Voltage:** $E$ (Real-time reduction potential in volts, $\text{V}$)
-- 🟢 **Standard Reference Potential:** $E^\circ$ (Standard redox potential under standard state, $\text{V}$)
-- 🟣 **Reaction Quotient Dynamic Flux:** $Q = \frac{[\text{Red}]}{[\text{Ox}]}$ (Ratio of reduced to oxidized chemical species)
-- 🟠 **Thermodynamic Constants:** $R$ (Gas constant), $T$ (Absolute temperature), $z$ (Number of moles of electrons transferred), $F$ (Faraday constant)
+- **$\textcolor{#38bdf8}{E}$ (Net Reduction Potential):** The real-time non-equilibrium voltage available to drive uphill electron transfers.
+- **$\textcolor{#34d399}{E^\circ}$ (Standard Redox Baseline):** Inherent chemical affinity under standard thermodynamic states ($1.0\text{ M}, 298\text{ K}$).
+- **$\frac{\textcolor{#fbbf24}{R T}}{\textcolor{#c084fc}{z} \textcolor{#fbbf24}{F}}$ (Thermal Voltage Scale):** Thermal kinetic scaling factor per mole of transferred electrons.
+- **$\ln \textcolor{#f43f5e}{Q}$ (Reaction Quotient Logarithm):** Logarithmic measure of reactant-to-product accumulation ($\textcolor{#f43f5e}{Q = [\text{Red}]/[\text{Ox}]}$).
 
 | Term / Variable | Role & Classification | Biophysical Definition & Terrestrial Analogue | In Silico Realization in Siliquarium |
 | :--- | :--- | :--- | :--- |
@@ -147,19 +147,19 @@ Unit 2 unifies biochemistry and digital electronics through the formal isomorphi
 
 #### 🧭 Equation Decoder 3: Rolf Landauer's Thermodynamic Erasure Limit
 
-$$\mathbf{Q_{\text{Landauer}}} \ge \mathbf{k_B T \ln 2}$$
+$$\textcolor{#38bdf8}{Q_{\text{Landauer}}} \ge \textcolor{#34d399}{k_B} \textcolor{#fbbf24}{T} \textcolor{#c084fc}{\ln 2}$$
 
-- 🔵 **Output / Thermal Dissipation:** $Q$ (Minimum thermodynamic heat dissipated into the environment, Joules)
-- 🟢 **Microscopic Thermal Scale:** $k_B$ (Boltzmann constant: $1.3806 \times 10^{-23} \text{ J/K}$)
-- 🟣 **Ambient Temperature Bath:** $T$ (Absolute temperature of the surrounding fluid, Kelvin)
-- 🟠 **Information Erasure Compression:** $\ln 2 \approx 0.69315$ (Entropy reduction of compressing 1 binary bit)
+- **$\textcolor{#38bdf8}{Q_{\text{Landauer}}}$ (Irreversible Thermal Dissipation):** Minimum thermodynamic heat dissipated into the environment upon erasing one bit (in Joules or energy tokens).
+- **$\textcolor{#34d399}{k_B}$ (Boltzmann Bridge Constant):** Microscopic thermodynamic bridge constant ($1.3806 \times 10^{-23} \text{ J/K}$).
+- **$\textcolor{#fbbf24}{T}$ (Ambient Hydrothermal Temperature):** Absolute temperature of the surrounding fluid (Kelvin).
+- **$\textcolor{#c084fc}{\ln 2}$ (Binary State Compression Ratio):** Natural logarithm of 2 ($\approx 0.69315$), reflecting the halving of phase space when resetting a bit from $\{0, 1\} \to \{0\}$.
 
 | Term / Variable | Role & Classification | Biophysical Definition & Terrestrial Analogue | In Silico Realization in Siliquarium |
 | :--- | :--- | :--- | :--- |
-| **$Q_{\text{Landauer}}$** | **Irreversible Heat Waste**<br/>`[OUTPUT: Joules]` | Minimum heat that must be expelled into the surrounding heat bath when 1 bit of information is erased. | 1 Energy Token deducted from the pore battery per gate state switch. |
-| **$k_B$** | **Boltzmann Bridge Constant**<br/>`[CONSTANT: J/K]` | Connects microscopic statistical microstates ($\Omega$) to macroscopic thermodynamic entropy ($S$). | Fundamental scale factor connecting bit flips to token deductions. |
-| **$T$** | **Environmental Heat Sink**<br/>`[VARIABLE: Kelvin]` | Ocean temperature; at higher temperatures, erasing a bit dissipates proportionally more Joules of heat. | Local pore temperature modulated by proximity to the caldera plume. |
-| **$\ln 2$** | **Binary State Reduction**<br/>`[SCALING: Nats/Bit]` | Natural logarithm of 2; reflects the halving of system phase space when resetting a bit from $\{0, 1\} \to \{0\}$. | The mathematical cost of setting gate output from unknown to deterministic state. |
+| **$\textcolor{#38bdf8}{Q_{\text{Landauer}}}$** | **Irreversible Heat Waste**<br/>`[OUTPUT: Joules]` | Minimum heat that must be expelled into the surrounding heat bath when 1 bit of information is erased. | 1 Energy Token deducted from the pore battery per gate state switch. |
+| **$\textcolor{#34d399}{k_B}$** | **Boltzmann Bridge Constant**<br/>`[CONSTANT: J/K]` | Connects microscopic statistical microstates ($\Omega$) to macroscopic thermodynamic entropy ($S$). | Fundamental scale factor connecting bit flips to token deductions. |
+| **$\textcolor{#fbbf24}{T}$** | **Environmental Heat Sink**<br/>`[VARIABLE: Kelvin]` | Ocean temperature; at higher temperatures, erasing a bit dissipates proportionally more Joules of heat. | Local pore temperature modulated by proximity to the caldera plume. |
+| **$\textcolor{#c084fc}{\ln 2}$** | **Binary State Reduction**<br/>`[SCALING: Nats/Bit]` | Natural logarithm of 2; reflects the halving of system phase space when resetting a bit from $\{0, 1\} \to \{0\}$. | The mathematical cost of setting gate output from unknown to deterministic state. |
 
 > [!NOTE]
 > **💡 The Intuitive Truth Behind the Architecture:**  
@@ -173,12 +173,12 @@ $$\mathbf{Q_{\text{Landauer}}} \ge \mathbf{k_B T \ln 2}$$
 
 #### 🧭 Equation Decoder 4: The Michaelis-Menten Catalytic Reaction Kinetics
 
-$$\mathbf{v} = \mathbf{\frac{V_{\max} [S]}{K_m + [S]}}$$
+$$\textcolor{#38bdf8}{v} = \frac{\textcolor{#34d399}{V_{\max}} \textcolor{#fbbf24}{[S]}}{\textcolor{#c084fc}{K_m} + \textcolor{#fbbf24}{[S]}}$$
 
-- 🔵 **Output / Reaction Velocity:** $v$ (Catalytic throughput rate, $\text{mol}\cdot\text{L}^{-1}\cdot\text{s}^{-1}$)
-- 🟢 **Maximum Catalytic Velocity:** $V_{\max} = k_{\text{cat}} [E]_{\text{total}}$ (Asymptotic maximum reaction rate at enzyme saturation)
-- 🟣 **Substrate Concentration Flux:** $[S]$ (Abundance of incoming chemical substrate molecules in solution)
-- 🟠 **Michaelis Constant Affinity:** $K_m = \frac{k_{-1} + k_{\text{cat}}}{k_1}$ (Substrate concentration at which velocity reaches half-maximum: $v = V_{\max} / 2$)
+- **$\textcolor{#38bdf8}{v}$ (Catalytic Reaction Velocity):** Real-time rate of catalytic product generation ($\text{mol}\cdot\text{L}^{-1}\cdot\text{s}^{-1}$ or tokens/tick).
+- **$\textcolor{#34d399}{V_{\max}}$ (Asymptotic Velocity Ceiling):** Theoretical maximum reaction rate when 100% of enzyme active sites are occupied.
+- **$\textcolor{#fbbf24}{[S]}$ (Incoming Substrate Density):** Abundance of incoming chemical substrate molecules admitted by porins.
+- **$\textcolor{#c084fc}{K_m}$ (Michaelis Affinity Constant):** Substrate concentration at which velocity reaches half-maximum ($v = V_{\max} / 2$).
 
 | Term / Variable | Role & Classification | Biophysical Definition & Terrestrial Analogue | In Silico Realization in Siliquarium |
 | :--- | :--- | :--- | :--- |
@@ -263,19 +263,19 @@ Unit 3 introduces systems biology and synthetic network topology through Uri Alo
 
 #### 🧭 Equation Decoder 5: The Hill Cooperativity Function
 
-$$\mathbf{f(R)} = \mathbf{\frac{1}{1 + \left(\frac{R}{K_d}\right)^n}}$$
+$$\textcolor{#38bdf8}{f(R)} = \frac{\textcolor{#c084fc}{1}}{\textcolor{#c084fc}{1} + \left(\frac{\textcolor{#fbbf24}{R}}{\textcolor{#34d399}{K_d}}\right)^{\textcolor{#c084fc}{n}}}$$
 
-- 🔵 **Output / Promoter Activity:** $f(R)$ (Fractional transcription rate, $0.0 \text{ to } 1.0$)
-- 🟢 **Repressor Molecule Abundance:** $R$ (Concentration of active repressor protein in cytoplasm)
-- 🟣 **Dissociation Constant Threshold:** $K_d$ (Concentration yielding 50% repression: $f(K_d) = 0.5$)
-- 🟠 **Hill Cooperativity Exponent:** $n$ (Steepness coefficient / multimeric binding subunit count)
+- **$\textcolor{#38bdf8}{f(R)}$ (Fractional Expression):** Output activity of the downstream gene ($0.0 \text{ to } 1.0$).
+- **$\textcolor{#fbbf24}{R}$ (Repressor Abundance / Concentration):** Concentration of active repressor protein in cytoplasm.
+- **$\textcolor{#34d399}{K_d}$ (Dissociation Constant Threshold):** Concentration yielding 50% repression ($f(K_d) = 0.5$).
+- **$\textcolor{#c084fc}{n}$ (Hill Cooperativity Exponent):** Steepness coefficient / multimeric binding subunit count.
 
 | Term / Variable | Role & Classification | Biophysical Definition & Terrestrial Analogue | In Silico Realization in Siliquarium |
 | :--- | :--- | :--- | :--- |
-| **$f(R)$** | **Fractional Expression**<br/>`[OUTPUT: 0..1]` | Output activity of the downstream gene; switches between fully ON ($1$) and fully OFF ($0$). | Logic gate Boolean output ($0$ or $1$) driving downstream signal wires. |
-| **$R$** | **Repressor Signal**<br/>`[INPUT: mol/L]` | Abundance of active repressor proteins (e.g., LacI or TetR) binding to DNA operator sites. | Output potential of an upstream inhibitory gate wired into an input pin. |
-| **$K_d$** | **Switching Threshold**<br/>`[CONSTANT: mol/L]` | Apparent dissociation constant; sets the exact inflection point of the biological toggle. | Switching threshold voltage across pore gate input pins. |
-| **$n$** | **Cooperative Exponent**<br/>`[SCALING: Subunits]` | Quantifies sigmoidal sharpness. When $n=1$, response is sluggish; when $n \ge 2$, response snaps like a digital switch. | Non-linear threshold step function implemented in [`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts). |
+| **$\textcolor{#38bdf8}{f(R)}$** | **Fractional Expression**<br/>`[OUTPUT: 0..1]` | Output activity of the downstream gene; switches between fully ON ($1$) and fully OFF ($0$). | Logic gate Boolean output ($0$ or $1$) driving downstream signal wires. |
+| **$\textcolor{#fbbf24}{R}$** | **Repressor Signal**<br/>`[INPUT: mol/L]` | Abundance of active repressor proteins (e.g., LacI or TetR) binding to DNA operator sites. | Output potential of an upstream inhibitory gate wired into an input pin. |
+| **$\textcolor{#34d399}{K_d}$** | **Switching Threshold**<br/>`[CONSTANT: mol/L]` | Apparent dissociation constant; sets the exact inflection point of the biological toggle. | Switching threshold voltage across pore gate input pins. |
+| **$\textcolor{#c084fc}{n}$** | **Cooperative Exponent**<br/>`[SCALING: Subunits]` | Quantifies sigmoidal sharpness. When $n=1$, response is sluggish; when $n \ge 2$, response snaps like a digital switch. | Non-linear threshold step function implemented in [`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts). |
 
 > [!NOTE]
 > **💡 The Intuitive Truth Behind the Architecture:**  
@@ -289,19 +289,20 @@ $$\mathbf{f(R)} = \mathbf{\frac{1}{1 + \left(\frac{R}{K_d}\right)^n}}$$
 
 #### 🧭 Equation Decoder 6: The Weisfeiler-Lehman (1-WL) Graph Invariant Kernel
 
-$$\mathbf{c_v^{(t+1)}} = \mathbf{\text{HASH}\left(c_v^{(t)}, \; \text{SORT}\left(\{c_u^{(t)} : u \in \mathcal{N}(v)\}\right)\right)}$$
+$$\textcolor{#38bdf8}{c_v^{(t+1)}} = \textcolor{#34d399}{\text{HASH}}\left(\textcolor{#fbbf24}{c_v^{(t)}}, \; \textcolor{#c084fc}{\text{SORT}}\left(\{\textcolor{#f43f5e}{c_u^{(t)}} : u \in \mathcal{N}(v)\}\right)\right)$$
 
-- 🔵 **Output / Refined Vertex Color:** $c_v^{(t+1)}$ (Updated 64-bit structural color label of vertex $v$)
-- 🟢 **Current Vertex Color:** $c_v^{(t)}$ (Vertex $v$'s categorical primitive color at refinement step $t$)
-- 🟣 **Sorted Multiset of Neighbors:** $\text{SORT}(\{c_u^{(t)} : u \in \mathcal{N}(v)\})$ (Permutation-invariant multiset of adjacent neighbor colors)
-- 🟠 **Deterministic Avalanche Hash:** $\text{HASH}(\dots)$ (64-bit non-cryptographic hash mixing color and neighborhood topology)
+- **$\textcolor{#38bdf8}{c_v^{(t+1)}}$ (Refined Node Signature):** Updated 64-bit categorical fingerprint of vertex $v$ capturing its 1-hop topological context.
+- **$\textcolor{#fbbf24}{c_v^{(t)}}$ (Current Vertex Color):** Node $v$'s intrinsic biophysical primitive color at step $t$ (`GATE_AND`, `GATE_NOT`, etc.).
+- **$\textcolor{#c084fc}{\text{SORT}}(\dots)$ (Permutation Sieve Operator):** Sorts incoming neighbor colors lexicographically, guaranteeing identical output regardless of node numbering.
+- **$\textcolor{#f43f5e}{c_u^{(t)}}$ (Neighbor Vertex Colors):** The multiset of colors from all adjacent neighbors $u \in \mathcal{N}(v)$.
+- **$\textcolor{#34d399}{\text{HASH}}(\dots)$ (Deterministic Avalanche Mixer):** 64-bit mixer mapping color plus neighbor structure to an invariant hash integer.
 
 | Term / Variable | Role & Classification | Computational Graph Meaning | In Silico Realization in Siliquarium |
 | :--- | :--- | :--- | :--- |
-| **$c_v^{(t+1)}$** | **Refined Node Signature**<br/>`[OUTPUT: 64-Bit]` | The updated categorical fingerprint of node $v$ capturing its 1-hop structural context. | Intermediate hash array entry inside [`WeisfeilerLehmanHasher.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/WeisfeilerLehmanHasher.ts). |
-| **$c_v^{(t)}$** | **Base Gate Identity**<br/>`[INPUT: Color]` | The gate's intrinsic biophysical primitive: `GATE_AND`, `GATE_NOT`, `GATE_OR`, etc. | Initialized from the node's [`CodonType`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts) at Round 0. |
-| **$\text{SORT}(\dots)$** | **Permutation Sieve**<br/>`[OPERATOR: Canonical]` | Sorts incoming neighbor colors lexicographically, guaranteeing identical output regardless of node ID ordering. | Alphabetical array sort executed prior to string concatenation. |
-| **$\text{HASH}(\dots)$** | **Avalanche Mixer**<br/>`[OPERATOR: Mixer]` | Mixes node color with neighbor multiset; identical wiring produces identical 64-bit integers. | Deterministic string hash function in [`WeisfeilerLehmanHasher.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/WeisfeilerLehmanHasher.ts#L60-L75). |
+| **$\textcolor{#38bdf8}{c_v^{(t+1)}}$** | **Refined Node Signature**<br/>`[OUTPUT: 64-Bit]` | The updated categorical fingerprint of node $v$ capturing its 1-hop structural context. | Intermediate hash array entry inside [`WeisfeilerLehmanHasher.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/WeisfeilerLehmanHasher.ts). |
+| **$\textcolor{#fbbf24}{c_v^{(t)}}$** | **Base Gate Identity**<br/>`[INPUT: Color]` | The gate's intrinsic biophysical primitive: `GATE_AND`, `GATE_NOT`, `GATE_OR`, etc. | Initialized from the node's [`CodonType`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts) at Round 0. |
+| **$\textcolor{#c084fc}{\text{SORT}}(\dots)$** | **Permutation Sieve**<br/>`[OPERATOR: Canonical]` | Sorts incoming neighbor colors lexicographically, guaranteeing identical output regardless of node ID ordering. | Alphabetical array sort executed prior to string concatenation. |
+| **$\textcolor{#34d399}{\text{HASH}}(\dots)$** | **Avalanche Mixer**<br/>`[OPERATOR: Mixer]` | Mixes node color with neighbor multiset; identical wiring produces identical 64-bit integers. | Deterministic string hash function in [`WeisfeilerLehmanHasher.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/WeisfeilerLehmanHasher.ts#L60-L75). |
 
 > [!NOTE]
 > **💡 The Intuitive Truth Behind the Architecture:**  
@@ -341,19 +342,19 @@ Unit 4 elevates student inquiry to macro-evolutionary timescales, addressing pop
 
 #### 🧭 Equation Decoder 7: Motoo Kimura's Neutral Allele Fixation Probability
 
-$$\mathbf{P_{\text{fix}}} = \mathbf{\frac{1}{2 N_e}} \quad \left(\text{or } \mathbf{\frac{1}{N}} \text{ for haploids}\right)$$
+$$\textcolor{#38bdf8}{P_{\text{fix}}} = \frac{\textcolor{#c084fc}{1}}{\textcolor{#fbbf24}{2 N_e}} \quad \left(\text{or } \frac{\textcolor{#c084fc}{1}}{\textcolor{#fbbf24}{N}} \text{ for haploids}\right)$$
 
-- 🔵 **Output / Fixation Probability:** $P_{\text{fix}}$ (Probability that a newly arisen neutral mutation sweeps to 100% population fixation)
-- 🟢 **Initial Allelic Share:** $1$ (Single initial mutant copy introduced into the population)
-- 🟣 **Effective Population Size:** $N_e$ (Effective breeding population size; $2N_e$ represents total gene copies in diploids)
-- 🟠 **Neutral Substitution Rate:** $k = \mu_0$ (Long-term substitution rate across evolutionary time)
+- **$\textcolor{#38bdf8}{P_{\text{fix}}}$ (Fixation Probability):** The mathematical likelihood that random genetic drift will carry a neutral allele to 100% fixation.
+- **$\textcolor{#c084fc}{1}$ (Mutant Founder Copy):** Single novel bit-flip introduced during replication in a child pore safe.
+- **$\textcolor{#fbbf24}{N_e}$ (Effective Population Size):** Total number of breeding organisms currently viable on the seamount.
+- **$\textcolor{#34d399}{k = \mu_0}$ (Neutral Substitution Rate):** Long-term rate of substitutions per generation, strictly invariant to population size $N$.
 
 | Term / Variable | Role & Classification | Population Genetics Meaning | In Silico Realization in Siliquarium |
 | :--- | :--- | :--- | :--- |
-| **$P_{\text{fix}}$** | **Fixation Probability**<br/>`[OUTPUT: Probability]` | The mathematical likelihood that random genetic drift will carry a neutral allele to 100% fixation. | Probability that an intron bit-flip sweeps across all occupied pores on the reef. |
-| **$1$** | **Mutant Founder Copy**<br/>`[CONSTANT: Integer]` | Represents the single novel bit-flip introduced during replication in a child pore safe. | The single bit inversion occurring with probability $p = 0.001$. |
-| **$N$** | **Census Population Size**<br/>`[VARIABLE: Population]` | Total number of living, viable organisms currently occupying rock pores on the seamount. | Number of living cells tracked in the telemetry HUD ($N_{\text{living}}$). |
-| **$k = \mu_0$** | **Substitution Rate Invariance**<br/>`[THEOREM: Invariant]` | Rate of neutral evolutionary substitutions per generation is strictly equal to the mutation rate $\mu_0$, independent of $N$. | Long-term accumulation of blue edges in [`FossilFreezer.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/FossilFreezer.ts). |
+| **$\textcolor{#38bdf8}{P_{\text{fix}}}$** | **Fixation Probability**<br/>`[OUTPUT: Probability]` | The mathematical likelihood that random genetic drift will carry a neutral allele to 100% fixation. | Probability that an intron bit-flip sweeps across all occupied pores on the reef. |
+| **$\textcolor{#c084fc}{1}$** | **Mutant Founder Copy**<br/>`[CONSTANT: Integer]` | Represents the single novel bit-flip introduced during replication in a child pore safe. | The single bit inversion occurring with probability $p = 0.001$. |
+| **$\textcolor{#fbbf24}{N}$** | **Census Population Size**<br/>`[VARIABLE: Population]` | Total number of living, viable organisms currently occupying rock pores on the seamount. | Number of living cells tracked in the telemetry HUD ($N_{\text{living}}$). |
+| **$\textcolor{#34d399}{k = \mu_0}$** | **Substitution Rate Invariance**<br/>`[THEOREM: Invariant]` | Rate of neutral evolutionary substitutions per generation is strictly equal to the mutation rate $\mu_0$, independent of $N$. | Long-term accumulation of blue edges in [`FossilFreezer.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/FossilFreezer.ts). |
 
 > [!NOTE]
 > **💡 The Intuitive Truth Behind the Architecture:**  
@@ -367,12 +368,12 @@ $$\mathbf{P_{\text{fix}}} = \mathbf{\frac{1}{2 N_e}} \quad \left(\text{or } \mat
 
 #### 🧭 Equation Decoder 8: Richard Lenski's LTEE Hyperbolic Fitness Trajectory
 
-$$\mathbf{\bar{W}(t)} = \mathbf{(1 + c \cdot t)^d} \quad \text{or} \quad \mathbf{\ln \bar{W}(t) = \ln W_0 + \frac{a \cdot t}{b + t}}$$
+$$\textcolor{#38bdf8}{\bar{W}(t)} = (\textcolor{#c084fc}{1} + \textcolor{#34d399}{c} \cdot \textcolor{#fbbf24}{t})^{\textcolor{#c084fc}{d}}$$
 
-- 🔵 **Output / Mean Relative Fitness:** $\bar{W}(t)$ (Population mean fitness at generation $t$ relative to ancestor)
-- 🟢 **Generational Elapsed Time:** $t$ (Cumulative number of generations elapsed since simulation founding)
-- 🟣 **Power-Law Scaling Exponent:** $d \approx 0.1 \text{ to } 0.15$ (Curvature parameter reflecting diminishing-returns epistasis)
-- 🟠 **Velocity Scaling Factor:** $c$ (Initial rate of adaptive fitness discovery during early colonization)
+- **$\textcolor{#38bdf8}{\bar{W}(t)}$ (Mean Population Relative Fitness):** Ratio of daughter population growth rate to ancestral Generation 0 reference strain.
+- **$\textcolor{#fbbf24}{t}$ (Generational Clock):** Cumulative generations elapsed since colonization.
+- **$\textcolor{#c084fc}{d \approx 0.12}$ (Power-Law Scaling Exponent):** Curvature parameter reflecting diminishing-returns epistasis.
+- **$\textcolor{#34d399}{c}$ (Initial Adaptation Velocity):** Initial rate of adaptive fitness discovery during early seamount colonization.
 
 | Term / Variable | Role & Classification | Experimental Evolution Meaning | In Silico Realization in Siliquarium |
 | :--- | :--- | :--- | :--- |
@@ -431,6 +432,27 @@ An uninhibited organism in Pore $(0, 2, 0)$ harbors a 3-gate ring oscillator (th
 
 ---
 
-> [!NOTE]
-> **Continue to Next Volume:**  
-> [📚 Advance to Annotated Bibliography](bibliography.md) | [📖 Return to Lexicon & Glossary](glossary.md) | [🏛️ Return to Master Companion Portal](../PEDAGOGICAL_COMPANION_SUITE.md)
+<!-- CHAPTER FOOTER NAVIGATION BAR -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-10 pt-6 border-t border-slate-800 font-mono text-xs">
+  <a href="glossary.html" class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between group">
+    <span class="text-[10px] text-slate-500 uppercase tracking-wider flex items-center gap-1 group-hover:text-cyan-400">
+      <span>←</span> Previous Section (Volume VI.1)
+    </span>
+    <span class="font-bold text-slate-200 mt-1">📖 Systems Biology Glossary</span>
+  </a>
+
+  <a href="../index.html" class="p-4 rounded-xl bg-slate-950/80 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between text-center group">
+    <span class="text-[10px] text-slate-500 uppercase tracking-wider group-hover:text-emerald-400">
+      🏛️ Curriculum Portal
+    </span>
+    <span class="font-bold text-slate-300 mt-1">Master Library Index</span>
+  </a>
+
+  <a href="bibliography.html" class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between text-right group">
+    <span class="text-[10px] text-slate-500 uppercase tracking-wider flex items-center justify-end gap-1 group-hover:text-cyan-400">
+      Next Section (Volume VI.3) <span>→</span>
+    </span>
+    <span class="font-bold text-slate-200 mt-1">📚 Annotated Master Bibliography</span>
+  </a>
+</div>
+

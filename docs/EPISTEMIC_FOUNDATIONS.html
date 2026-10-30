@@ -42,17 +42,43 @@
   <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
   <script>
     window.MathJax = {
+      loader: { load: ['[tex]/color', '[tex]/configmacros'] },
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
+        processEscapes: true,
+        packages: {'[+]': ['color', 'configmacros', 'ams']},
+        macros: {
+          color: ['\\\\textcolor{#1}{#2}', 2]
+        }
       },
       options: {
         skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
       }
     };
   </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.mermaid) {
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'dark',
+          themeVariables: {
+            darkMode: true,
+            background: '#0a0e1a',
+            primaryColor: '#00e5ff',
+            primaryBorderColor: '#00e5ff',
+            primaryTextColor: '#e2e8f0',
+            lineColor: '#38bdf8',
+            secondaryColor: '#1e293b',
+            tertiaryColor: '#0f172a'
+          }
+        });
+      }
+    });
+  </script>
 
   <style>
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -84,9 +110,9 @@
       overflow-x: auto;
     }
 
-    /* Citation Target Highlighting & Interactive Navigation */
+    /* Citation & Note Target Highlighting & Interactive Navigation */
     html { scroll-behavior: auto; }
-    li[id^="ref-"] {
+    li[id^="ref-"], li[id^="note-"], div[id^="note-"] {
       scroll-margin-top: 6rem;
       position: relative;
       transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
@@ -123,6 +149,15 @@
       background-color: rgba(8, 51, 68, 0.88) !important;
       z-index: 20;
     }
+    li[id^="note-"]:target,
+    li[id^="note-"].active-citation-target,
+    div[id^="note-"]:target,
+    div[id^="note-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #38bdf8 !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
+    }
     li[id^="ref-"]:target::after,
     li[id^="ref-"].active-citation-target::after {
       content: "CITED IN TEXT 🎯";
@@ -142,15 +177,57 @@
       animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       pointer-events: none;
     }
-    sup a[href^="#ref-"] {
+    li[id^="note-"]:target::after,
+    li[id^="note-"].active-citation-target::after,
+    div[id^="note-"]:target::after,
+    div[id^="note-"].active-citation-target::after {
+      content: "ANNOTATED NOTE 📝";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #ffffff;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+
+    /* Highlight reference number [n] */
+    li[id^="ref-"]:target > span:first-child,
+    li[id^="ref-"].active-citation-target > span:first-child,
+    li[id^="note-"]:target > span:first-child,
+    li[id^="note-"].active-citation-target > span:first-child {
+      color: #38bdf8 !important;
+      text-shadow: 0 0 12px rgba(56, 189, 248, 1);
+      transform: scale(1.15);
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    sup a[href^="#ref-"], sup a[href^="#note-"] {
       transition: all 0.2s ease;
       display: inline-block;
       padding: 0 1px;
     }
-    sup a[href^="#ref-"]:hover {
+    sup a[href^="#ref-"]:hover, sup a[href^="#note-"]:hover {
       color: #ffffff !important;
       text-shadow: 0 0 8px #22d3ee;
       transform: translateY(-1px);
+    }
+    sup[id^="fnref-"]:target, a[id^="fnref-"]:target,
+    sup[id^="cite_ref-"]:target, sup[id^="cite_ref-"].active-backlink-target,
+    sup.active-backlink-target {
+      animation: backlinkTargetFlash 2.5s ease-out;
+      outline: 2px solid #00e5ff;
+      outline-offset: 2px;
+      border-radius: 4px;
     }
     section[id], div[id], h2[id], h3[id] {
       scroll-margin-top: 5.5rem;
@@ -167,25 +244,31 @@
   <script id="citation-navigator">
     document.addEventListener('DOMContentLoaded', function() {
       function highlightRefCard(targetId) {
-        if (!targetId || !targetId.startsWith('ref-')) return;
+        if (!targetId || (!targetId.startsWith('ref-') && !targetId.startsWith('note-'))) return;
         const el = document.getElementById(targetId);
         if (!el) return;
-        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+        document.querySelectorAll('li[id^="ref-"].active-citation-target, li[id^="note-"].active-citation-target, div[id^="note-"].active-citation-target').forEach(function(item) {
           item.classList.remove('active-citation-target');
         });
         el.classList.remove('active-citation-target');
         void el.offsetWidth;
         el.classList.add('active-citation-target');
-        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       function scrollToTarget(targetId) {
         if (!targetId) return;
-        if (targetId.startsWith('ref-')) {
+        if (targetId.startsWith('ref-') || targetId.startsWith('note-')) {
           highlightRefCard(targetId);
           return;
         }
         const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.remove('active-backlink-target');
+          void el.offsetWidth;
+          el.classList.add('active-backlink-target');
+          setTimeout(() => el.classList.remove('active-backlink-target'), 2500);
+        }
       }
       document.addEventListener('click', function(e) {
         const link = e.target.closest('a[href*="#"]');
@@ -193,7 +276,13 @@
           const href = link.getAttribute('href');
           if (href && href.includes('#')) {
             const hash = href.substring(href.indexOf('#') + 1);
-            if (hash.startsWith('ref-')) highlightRefCard(hash);
+            if (hash.startsWith('ref-') || hash.startsWith('note-')) {
+              highlightRefCard(hash);
+            } else if (hash.startsWith('cite_ref-') || hash.startsWith('fnref-')) {
+              e.preventDefault();
+              history.pushState(null, '', '#' + hash);
+              scrollToTarget(hash);
+            }
           }
         }
       });
@@ -295,38 +384,89 @@
           <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
-        <span>🎓</span>
-        <span>Curriculum & Pedagogy</span>
+        <span>🌋</span>
+        <span>Volume I: Prebiotic Biophysics</span>
       </div>
-      <div class="grid grid-cols-1 gap-1"><a href="index.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🐠</span>
+      <div class="grid grid-cols-1 gap-1"><a href="THEORETICAL_MODEL.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Portal Overview</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Curriculum portal & modular index</div>
+          <div class="font-bold text-xs text-slate-200">1. Theoretical Model</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">21 sealed sections & thermodynamic laws</div>
         </div>
-      </a><a href="CURRICULUM_AND_SYLLABUS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">📜</span>
+      </a><a href="EPISTEMIC_FOUNDATIONS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 bg-cyan-950/80 border border-cyan-700/60 text-cyan-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Course Syllabus</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Syllabus, philosophy & symbol index</div>
+          <div class="font-bold text-xs text-cyan-300">2. Epistemic Foundations</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Howard Pattee's Epistemic Cut & defenses</div>
+        </div>
+      </a><a href="REALITY_TO_SIMULATION_TRANSLATION_MATRIX.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔄</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">3. Translation Matrix (Reality ↔ Sim)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Grounding physical metaphors to computational invariants</div>
+        </div>
+      </a><a href="DEEP_SEA_PROTO_COGNITION_AND_VENT_BIOPHYSICS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧠</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">4. Proto-Cognition & Vent Biophysics</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Sensory-motor coupling, temporal derivatives & biophysics</div>
+        </div>
+      </a><a href="THE_GENETIC_BOOK_OF_THE_DEAD.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">5. Book of the Dead</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Dawkins, Adami & Environmental Info</div>
         </div>
       </a><a href="curriculum/unit1_prebiotic_threshold.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🌋</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Unit 1: Prebiotic Vents</div>
+          <div class="font-bold text-xs text-slate-200">6. Unit 1: Prebiotic Vents</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Alkaline vents, chemiosmosis & Pattee's cut</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🧬</span>
+        <span>Volume II: Gene Regulatory Networks</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">1. GRNs & Attractors (Vol II)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Biological & digital GRNs, attractors & Waddington</div>
         </div>
       </a><a href="curriculum/unit2_logic_of_life.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">⚡</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Unit 2: Logic of Life</div>
+          <div class="font-bold text-xs text-slate-200">2. Unit 2: Logic of Life</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Primitive enzymes & XOR impossibility proof</div>
         </div>
       </a><a href="curriculum/unit3_systems_biology_motifs.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🕸️</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Unit 3: Systems Motifs</div>
+          <div class="font-bold text-xs text-slate-200">3. Unit 3: Systems Motifs</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Uri Alon motifs & Weisfeiler-Lehman hashes</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🌸</span>
+        <span>Volume III: Multicellular Morphology</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌸</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">1. Multicellular Morphology (Vol III)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Graph theory, 3-cliques & 5 body topologies</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🦕</span>
+        <span>Volume IV: Circuit Paleontology</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Field Guide</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Master taxonomy, philosophy & WL hash overview</div>
         </div>
       </a><a href="curriculum/unit4_evolutionary_dynamics.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🧬</span>
@@ -334,71 +474,144 @@
           <div class="font-bold text-xs text-slate-200">Unit 4: Macro-Evolution</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Kimura drift, convergent homoplasy & LTEE</div>
         </div>
+      </a><a href="paleontology/specimen_01_bistable_latch.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔒</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 1: Bistable Latch</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">1-bit memory latch & SR flip-flop</div>
+        </div>
+      </a><a href="paleontology/specimen_02_repressilator.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔄</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 2: Repressilator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Odd-inverter ring oscillator & clock</div>
+        </div>
+      </a><a href="paleontology/specimen_03_coherent_ffl.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⏳</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 3: Coherent FFL</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Sign-sensitive delay & persistence filter</div>
+        </div>
+      </a><a href="paleontology/specimen_04_incoherent_ffl.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚡</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 4: Incoherent FFL</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Fold-change adaptation & pulse generator</div>
+        </div>
+      </a><a href="paleontology/specimen_05_negative_autoregulation.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎚️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 5: Negative Autoreg</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Homeostatic clamp & response accelerator</div>
+        </div>
+      </a><a href="paleontology/specimen_06_binary_half_adder.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧮</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 6: Binary Half-Adder</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Arithmetic sum (XOR) & carry (AND)</div>
+        </div>
+      </a><a href="paleontology/specimen_07_allosteric_inverter.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🛡️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 7: Allosteric NOT</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Toxin defense & inverter shielding</div>
+        </div>
+      </a><a href="paleontology/specimen_08_endosymbiotic_cassette.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 8: Endosymbiont</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Organelle cassette & metabolic boost</div>
+        </div>
+      </a><a href="paleontology/specimen_09_syncytial_multicellularity.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🕸️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 9: Syncytium</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Multi-pore fusion & cytoplasmic sharing</div>
+        </div>
+      </a><a href="paleontology/specimen_10_pelagic_sporulation.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 10: Pelagic Spores</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Buoyant dispersal & benthic escape</div>
+        </div>
+      </a><a href="paleontology/specimen_11_chemiosmotic_autotroph.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 11: Apex Autotroph</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Mitchell PMF & hydrothermal plume coupling</div>
+        </div>
+      </a><a href="paleontology/specimen_12_basalt_lithotroph.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🪨</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 12: Basalt Lithotroph</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Deep subterranean starvation & Landauer thrift</div>
+        </div>
+      </a><a href="paleontology/specimen_13_trophic_predator.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🩸</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 13: Trophic Predator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Lytic enzymatic siphoning & heterotrophy</div>
+        </div>
+      </a><a href="paleontology/specimen_14_detrital_scavenger.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🍂</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 14: Detrital Scavenger</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Carcass necromass & mineral mass recycling</div>
+        </div>
+      </a><a href="paleontology/specimen_15_patriarch_lineage.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 15: Patriarch Ancestor</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Conserved primordial genome & LTEE anchor</div>
+        </div>
+      </a><a href="paleontology/specimen_16_temporal_derivative_chemotaxis.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧭</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 16: Chemotaxis Engine</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Purcell-Berg fold-change dS/dt gradient sensor</div>
+        </div>
+      </a><a href="paleontology/specimen_17_predictive_pavlovian.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔮</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 17: Pavlovian Regulator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Tagkopoulos anticipatory precursor feedforward shield</div>
+        </div>
+      </a><a href="paleontology/specimen_18_entrained_pacemaker.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⏱️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 18: Entrained Pacemaker</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Johnson-Rust phase-locked KaiABC vent clock</div>
+        </div>
+      </a><a href="paleontology/specimen_19_steiner_vascular_network.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌿</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 19: Steiner Vascular Net</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Nakagaki Physarum minimal tree conduit router</div>
+        </div>
+      </a><a href="paleontology/specimen_20_cryptobiotic_dormancy_clamp.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🛡️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 20: Dormancy Clamp</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Balaban HipAB zero-burn cryptobiosis gate</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🛠️</span>
+        <span>Volume V: Systems Operations</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="USER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Illustrated Systems Manual</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">10-chapter illustrated manual & tutorials</div>
+        </div>
       </a><a href="curriculum/practicums_lab_manual.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🧪</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Student Lab Manual</div>
+          <div class="font-bold text-xs text-slate-200">Laboratory Practicums 1–5</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">5 hands-on labs & formative assessments</div>
         </div>
-      </a><a href="PEDAGOGICAL_COMPANION_SUITE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Companion Portal</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Master portal & assessment rubrics</div>
-        </div>
-      </a><a href="companion/glossary.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">📖</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Lexicon & Glossary</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">55-term systems biology lexicon</div>
-        </div>
-      </a><a href="companion/study_guides.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🧭</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Study Guides & Decoders</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">8 equation decoders & derivations</div>
-        </div>
-      </a><a href="companion/bibliography.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">📚</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Annotated Bibliography</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">14 foundational primary papers</div>
-        </div>
-      </a><a href="QA/STUDENT_UX_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🔍</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Student QA Report</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">12th-grade usability audit & screenshots</div>
-        </div>
-      </a></div></div><div class="space-y-1.5">
-      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
-        <span>🌊</span>
-        <span>Biophysical Theory</span>
-      </div>
-      <div class="grid grid-cols-1 gap-1"><a href="THEORETICAL_MODEL.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🌊</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Theoretical Model</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">21 sealed sections & thermodynamic laws</div>
-        </div>
-      </a><a href="EPISTEMIC_FOUNDATIONS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 bg-cyan-950/80 border border-cyan-700/60 text-cyan-300">
-        <span class="text-sm shrink-0 mt-0.5">🧬</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-cyan-300">Epistemic Foundations</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Howard Pattee's Epistemic Cut & defenses</div>
-        </div>
-      </a><a href="DOCUMENTATION_DESIGN_PRINCIPLES.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">📐</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Design Principles</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Documentation & UI/UX architecture</div>
-        </div>
-      </a></div></div><div class="space-y-1.5">
-      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
-        <span>🔬</span>
-        <span>Laboratory Guides</span>
-      </div>
-      <div class="grid grid-cols-1 gap-1"><a href="PHASE_3_VISUALIZER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+      </a><a href="PHASE_3_VISUALIZER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🔬</span>
         <div class="min-w-0">
           <div class="font-bold text-xs text-slate-200">3D Seafloor Visualizer</div>
@@ -421,6 +634,135 @@
         <div class="min-w-0">
           <div class="font-bold text-xs text-slate-200">Phylogeny & Dynamics</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Multi-lineage clades & Lenski benchmarks</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>📚</span>
+        <span>Volume VI: Academic References</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="index.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Master Library Portal</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Curriculum portal & modular index</div>
+        </div>
+      </a><a href="companion/glossary.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Systems Biology Glossary</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">70-term systems biology lexicon</div>
+        </div>
+      </a><a href="companion/study_guides.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧭</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Study Guides & Master Decoders</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">8 equation decoders & derivations</div>
+        </div>
+      </a><a href="companion/bibliography.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Annotated Master Bibliography</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">22 foundational primary papers</div>
+        </div>
+      </a><a href="curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎓</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Full-Year University Syllabus</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">30-week university curriculum & syllabus</div>
+        </div>
+      </a><a href="CIRCUIT_PALEONTOLOGY_NOTES.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📝</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Critical Scientific Notes</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">36 in-depth derivations, proofs & justifications</div>
+        </div>
+      </a><a href="CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Glossary</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">50-term lexicon of evolved circuits</div>
+        </div>
+      </a><a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Bibliography</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">25+ landmark peer-reviewed papers</div>
+        </div>
+      </a><a href="PEDAGOGICAL_COMPANION_SUITE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Companion Portal</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Master portal & assessment rubrics</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>📏</span>
+        <span>Standards & Architecture</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../standards/DEVELOPMENT_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚙️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Engineering Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Architecture, TypeScript & design principles</div>
+        </div>
+      </a><a href="../standards/QA_AND_TESTING_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧪</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">QA & Testing Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Verification, CI & unit test frameworks</div>
+        </div>
+      </a><a href="../standards/DOCUMENTATION_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Pedagogical Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5-Dimension rubric & equation decoders</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🔍</span>
+        <span>QA & Field Evaluations</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../QA/QA_CODING_STANDARDS_FULL_AUDIT_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">QA Coding Standards Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Comprehensive audit against DEVELOPMENT, QA & DOCS standards</div>
+        </div>
+      </a><a href="../QA/UX_ARCHITECTURE_AUDIT_AND_REDESIGN.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📐</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">UX Architecture Audit & Redesign</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5D HCI audit, domain integrity & interface redesign</div>
+        </div>
+      </a><a href="../QA/PANEL_UX_EVALUATION_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Panel Evaluation Report</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Expert & tester panel 4x 1-hour journeys</div>
+        </div>
+      </a><a href="../QA/DESIGN_STUDIO_UX_AUDIT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏗️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Design Studio UX Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">CAD sculpting & world builder evaluation</div>
+        </div>
+      </a><a href="../QA/FIELD_GUIDE_NATURALIST_EVALUATION.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌿</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Naturalist Field Evaluation</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Field guide & safari co-pilot audit</div>
+        </div>
+      </a><a href="../QA/NAIVE_USER_VISUAL_AUDIT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">👁️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Naive User Visual Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Visual clarity & cognitive ergonomics audit</div>
+        </div>
+      </a><a href="../QA/STUDENT_UX_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔍</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Student QA Report</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">12th-grade usability audit & screenshots</div>
         </div>
       </a></div></div><div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
@@ -464,65 +806,132 @@
       </div>
       <div class="space-y-1">
       <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
-        <span>🎓</span>
-        <span>Curriculum & Pedagogy</span>
-      </div>
-      <div class="space-y-0.5"><a href="index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🐠</span>
-        <span class="truncate">Portal Overview</span>
-      </a><a href="CURRICULUM_AND_SYLLABUS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">📜</span>
-        <span class="truncate">Course Syllabus</span>
-      </a><a href="curriculum/unit1_prebiotic_threshold.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🌋</span>
-        <span class="truncate">Unit 1: Prebiotic Vents</span>
-      </a><a href="curriculum/unit2_logic_of_life.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">⚡</span>
-        <span class="truncate">Unit 2: Logic of Life</span>
-      </a><a href="curriculum/unit3_systems_biology_motifs.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🕸️</span>
-        <span class="truncate">Unit 3: Systems Motifs</span>
-      </a><a href="curriculum/unit4_evolutionary_dynamics.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🧬</span>
-        <span class="truncate">Unit 4: Macro-Evolution</span>
-      </a><a href="curriculum/practicums_lab_manual.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🧪</span>
-        <span class="truncate">Student Lab Manual</span>
-      </a><a href="PEDAGOGICAL_COMPANION_SUITE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🏛️</span>
-        <span class="truncate">Companion Portal</span>
-      </a><a href="companion/glossary.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">📖</span>
-        <span class="truncate">Lexicon & Glossary</span>
-      </a><a href="companion/study_guides.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🧭</span>
-        <span class="truncate">Study Guides & Decoders</span>
-      </a><a href="companion/bibliography.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">📚</span>
-        <span class="truncate">Annotated Bibliography</span>
-      </a><a href="QA/STUDENT_UX_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🔍</span>
-        <span class="truncate">Student QA Report</span>
-      </a></div></div><div class="space-y-1">
-      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
-        <span>🌊</span>
-        <span>Biophysical Theory</span>
+        <span>🌋</span>
+        <span>Volume I: Prebiotic Biophysics</span>
       </div>
       <div class="space-y-0.5"><a href="THEORETICAL_MODEL.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
         <span class="text-xs shrink-0">🌊</span>
-        <span class="truncate">Theoretical Model</span>
+        <span class="truncate">1. Theoretical Model</span>
       </a><a href="EPISTEMIC_FOUNDATIONS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold shadow-sm">
         <span class="text-xs shrink-0">🧬</span>
-        <span class="truncate">Epistemic Foundations</span>
-      </a><a href="DOCUMENTATION_DESIGN_PRINCIPLES.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">📐</span>
-        <span class="truncate">Design Principles</span>
+        <span class="truncate">2. Epistemic Foundations</span>
+      </a><a href="REALITY_TO_SIMULATION_TRANSLATION_MATRIX.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔄</span>
+        <span class="truncate">3. Translation Matrix (Reality ↔ Sim)</span>
+      </a><a href="DEEP_SEA_PROTO_COGNITION_AND_VENT_BIOPHYSICS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧠</span>
+        <span class="truncate">4. Proto-Cognition & Vent Biophysics</span>
+      </a><a href="THE_GENETIC_BOOK_OF_THE_DEAD.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">5. Book of the Dead</span>
+      </a><a href="curriculum/unit1_prebiotic_threshold.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌋</span>
+        <span class="truncate">6. Unit 1: Prebiotic Vents</span>
       </a></div></div><div class="space-y-1">
       <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
-        <span>🔬</span>
-        <span>Laboratory Guides</span>
+        <span>🧬</span>
+        <span>Volume II: Gene Regulatory Networks</span>
       </div>
-      <div class="space-y-0.5"><a href="PHASE_3_VISUALIZER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+      <div class="space-y-0.5"><a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">1. GRNs & Attractors (Vol II)</span>
+      </a><a href="curriculum/unit2_logic_of_life.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚡</span>
+        <span class="truncate">2. Unit 2: Logic of Life</span>
+      </a><a href="curriculum/unit3_systems_biology_motifs.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🕸️</span>
+        <span class="truncate">3. Unit 3: Systems Motifs</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🌸</span>
+        <span>Volume III: Multicellular Morphology</span>
+      </div>
+      <div class="space-y-0.5"><a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌸</span>
+        <span class="truncate">1. Multicellular Morphology (Vol III)</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🦕</span>
+        <span>Volume IV: Circuit Paleontology</span>
+      </div>
+      <div class="space-y-0.5"><a href="CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Paleontology Field Guide</span>
+      </a><a href="curriculum/unit4_evolutionary_dynamics.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Unit 4: Macro-Evolution</span>
+      </a><a href="paleontology/specimen_01_bistable_latch.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔒</span>
+        <span class="truncate">Specimen 1: Bistable Latch</span>
+      </a><a href="paleontology/specimen_02_repressilator.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔄</span>
+        <span class="truncate">Specimen 2: Repressilator</span>
+      </a><a href="paleontology/specimen_03_coherent_ffl.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⏳</span>
+        <span class="truncate">Specimen 3: Coherent FFL</span>
+      </a><a href="paleontology/specimen_04_incoherent_ffl.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚡</span>
+        <span class="truncate">Specimen 4: Incoherent FFL</span>
+      </a><a href="paleontology/specimen_05_negative_autoregulation.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎚️</span>
+        <span class="truncate">Specimen 5: Negative Autoreg</span>
+      </a><a href="paleontology/specimen_06_binary_half_adder.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧮</span>
+        <span class="truncate">Specimen 6: Binary Half-Adder</span>
+      </a><a href="paleontology/specimen_07_allosteric_inverter.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🛡️</span>
+        <span class="truncate">Specimen 7: Allosteric NOT</span>
+      </a><a href="paleontology/specimen_08_endosymbiotic_cassette.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔋</span>
+        <span class="truncate">Specimen 8: Endosymbiont</span>
+      </a><a href="paleontology/specimen_09_syncytial_multicellularity.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🕸️</span>
+        <span class="truncate">Specimen 9: Syncytium</span>
+      </a><a href="paleontology/specimen_10_pelagic_sporulation.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">Specimen 10: Pelagic Spores</span>
+      </a><a href="paleontology/specimen_11_chemiosmotic_autotroph.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌋</span>
+        <span class="truncate">Specimen 11: Apex Autotroph</span>
+      </a><a href="paleontology/specimen_12_basalt_lithotroph.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🪨</span>
+        <span class="truncate">Specimen 12: Basalt Lithotroph</span>
+      </a><a href="paleontology/specimen_13_trophic_predator.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🩸</span>
+        <span class="truncate">Specimen 13: Trophic Predator</span>
+      </a><a href="paleontology/specimen_14_detrital_scavenger.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🍂</span>
+        <span class="truncate">Specimen 14: Detrital Scavenger</span>
+      </a><a href="paleontology/specimen_15_patriarch_lineage.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Specimen 15: Patriarch Ancestor</span>
+      </a><a href="paleontology/specimen_16_temporal_derivative_chemotaxis.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧭</span>
+        <span class="truncate">Specimen 16: Chemotaxis Engine</span>
+      </a><a href="paleontology/specimen_17_predictive_pavlovian.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔮</span>
+        <span class="truncate">Specimen 17: Pavlovian Regulator</span>
+      </a><a href="paleontology/specimen_18_entrained_pacemaker.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⏱️</span>
+        <span class="truncate">Specimen 18: Entrained Pacemaker</span>
+      </a><a href="paleontology/specimen_19_steiner_vascular_network.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌿</span>
+        <span class="truncate">Specimen 19: Steiner Vascular Net</span>
+      </a><a href="paleontology/specimen_20_cryptobiotic_dormancy_clamp.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🛡️</span>
+        <span class="truncate">Specimen 20: Dormancy Clamp</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🛠️</span>
+        <span>Volume V: Systems Operations</span>
+      </div>
+      <div class="space-y-0.5"><a href="USER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Illustrated Systems Manual</span>
+      </a><a href="curriculum/practicums_lab_manual.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧪</span>
+        <span class="truncate">Laboratory Practicums 1–5</span>
+      </a><a href="PHASE_3_VISUALIZER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
         <span class="text-xs shrink-0">🔬</span>
         <span class="truncate">3D Seafloor Visualizer</span>
       </a><a href="PHASE_4_PALEONTOLOGY_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
@@ -534,6 +943,78 @@
       </a><a href="PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
         <span class="text-xs shrink-0">🧬</span>
         <span class="truncate">Phylogeny & Dynamics</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>📚</span>
+        <span>Volume VI: Academic References</span>
+      </div>
+      <div class="space-y-0.5"><a href="index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Master Library Portal</span>
+      </a><a href="companion/glossary.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Systems Biology Glossary</span>
+      </a><a href="companion/study_guides.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧭</span>
+        <span class="truncate">Study Guides & Master Decoders</span>
+      </a><a href="companion/bibliography.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Annotated Master Bibliography</span>
+      </a><a href="curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎓</span>
+        <span class="truncate">Full-Year University Syllabus</span>
+      </a><a href="CIRCUIT_PALEONTOLOGY_NOTES.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📝</span>
+        <span class="truncate">Critical Scientific Notes</span>
+      </a><a href="CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Paleontology Glossary</span>
+      </a><a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Paleontology Bibliography</span>
+      </a><a href="PEDAGOGICAL_COMPANION_SUITE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Companion Portal</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>📏</span>
+        <span>Standards & Architecture</span>
+      </div>
+      <div class="space-y-0.5"><a href="../standards/DEVELOPMENT_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚙️</span>
+        <span class="truncate">Engineering Standards</span>
+      </a><a href="../standards/QA_AND_TESTING_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧪</span>
+        <span class="truncate">QA & Testing Standards</span>
+      </a><a href="../standards/DOCUMENTATION_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Pedagogical Standards</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🔍</span>
+        <span>QA & Field Evaluations</span>
+      </div>
+      <div class="space-y-0.5"><a href="../QA/QA_CODING_STANDARDS_FULL_AUDIT_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">QA Coding Standards Audit</span>
+      </a><a href="../QA/UX_ARCHITECTURE_AUDIT_AND_REDESIGN.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📐</span>
+        <span class="truncate">UX Architecture Audit & Redesign</span>
+      </a><a href="../QA/PANEL_UX_EVALUATION_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Panel Evaluation Report</span>
+      </a><a href="../QA/DESIGN_STUDIO_UX_AUDIT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏗️</span>
+        <span class="truncate">Design Studio UX Audit</span>
+      </a><a href="../QA/FIELD_GUIDE_NATURALIST_EVALUATION.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌿</span>
+        <span class="truncate">Naturalist Field Evaluation</span>
+      </a><a href="../QA/NAIVE_USER_VISUAL_AUDIT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">👁️</span>
+        <span class="truncate">Naive User Visual Audit</span>
+      </a><a href="../QA/STUDENT_UX_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔍</span>
+        <span class="truncate">Student QA Report</span>
       </a></div></div><div class="space-y-1">
       <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
         <span>🎨</span>
@@ -554,22 +1035,32 @@
     <!-- MAIN CONTENT VIEWPORT (Centered, Responsive, Zero Horizontal Scrollbars) -->
     <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-10 py-8 md:py-10">
       <div class="max-w-4xl mx-auto space-y-8">
-        <h1 id="epistemic-foundations-prebiotic-justifications" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🧬 Epistemic Foundations & Prebiotic Justifications <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#epistemic-foundations-prebiotic-justifications" title="Direct link">#</a></h1>
+        <h1 id="epistemic-foundations-prebiotic-justifications" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🧬 Epistemic Foundations & Prebiotic Justifications</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Addressing the Boundary Between Abiogenesis and Evolution: Why the Battery, Workshop, and Epistemic Cut Are Not Smuggled Biology</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="executive-summary-the-skeptics-challenge" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Executive Summary: The Skeptic's Challenge <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#executive-summary-the-skeptics-challenge" title="Direct link">#</a></h2>
-<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><strong class="text-slate-100 font-semibold">The Core Inquiry:</strong><br/><em class="text-slate-200 italic">"Are we smuggling in information or complexity by positing a battery and a workshop? We are talking about that gray area between abiogenesis and evolution. We do not show the evolution of symbolic code representation—we posit it exists. Are we doing the same with reproduction using the workbench? Most concerning of all: why does a battery already exist?"</em></blockquote>
+<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">✨ Dedication</div>
+<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Dedicated to <strong class="text-slate-100 font-semibold">Anne Orme</strong> — for the deep and memorable conversations that probed the true nature of evolutionary emergence, inspiring this endeavor.</em></p></div></div>
+<hr class="border-t border-slate-800 my-8" />
+<div class="p-4 rounded-xl bg-purple-950/30 border-l-4 border-purple-400 my-4 text-sm text-slate-300"><div class="font-mono text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">IMPORTANT</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Independent Scientific Instrument & Non-Accreditation Notice:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">The Siliquarium application, theoretical model, and documentation are not designed, developed, peer-reviewed, or sponsored by any accredited university, government research agency, or academic accreditation board. Because this project represents an independent computational biophysics instrument, every statement, equation, and evolutionary claim is accompanied below by full mathematical derivations, thermodynamic proofs, and peer-reviewed scientific citations.</p>
+<p class="leading-relaxed font-sans text-xs my-1.5">📖 <strong class="text-slate-100 font-semibold">Circuit Paleontology Companion Reference Suite:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5"><a href="CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Paleontology Glossary</a> | <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="CIRCUIT_PALEONTOLOGY_NOTES.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📝 Critical Notes & Justifications</a> | <a href="index.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Documentation Portal</a></p></div></div>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="executive-summary-the-skeptics-challenge" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Executive Summary: The Skeptic's Challenge</h2>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">The Core Inquiry:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">"Are we smuggling in information or complexity by positing a battery and a workshop? We are talking about that gray area between abiogenesis and evolution. We do not show the evolution of symbolic code representation—we posit it exists. Are we doing the same with reproduction using the workbench? Most concerning of all: why does a battery already exist?"</em></p></blockquote>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This inquiry strikes at the heart of theoretical biology, the philosophy of science, and artificial life. Whenever an artificial life simulator claims to demonstrate open-ended evolution, the critical question must always be: <strong class="text-slate-100 font-semibold">Did the simulation truly discover something, or was the answer secretly smuggled into the premises?</strong></p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This document provides a formal, peer-reviewed, and mathematically rigorous justification for why positing:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
-<li><strong class="text-slate-100 font-semibold">The Battery</strong> (Inorganic Chemiosmosis & Mineral Capacitance),</li>
-<li><strong class="text-slate-100 font-semibold">The Workshop</strong> (Inorganic Micro-Compartmentation),</li>
-<li><strong class="text-slate-100 font-semibold">The Safe</strong> (Pattee's Epistemic Cut & Von Neumann's Automata Theorem), and</li>
-<li><strong class="text-slate-100 font-semibold">The Photocopy Reproduction</strong> (Abiotic Surface-Catalyzed Template Copying)</li>
+<li><strong class="text-slate-100 font-semibold">The Battery</strong> (Inorganic Chemiosmosis & Mineral Capacitance<sup id="cite_ref-4a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-4">[4]</a></sup> <sup id="cite_ref-3a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-3">[3]</a></sup>),</li>
+<li><strong class="text-slate-100 font-semibold">The Workshop</strong> (Inorganic Micro-Compartmentation<sup id="cite_ref-4b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-4">[4]</a></sup> <sup id="cite_ref-9a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-9">[9]</a></sup>),</li>
+<li><strong class="text-slate-100 font-semibold">The Safe</strong> (Pattee's Epistemic Cut<sup id="cite_ref-1a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-1">[1]</a></sup> &amp; Von Neumann's Automata Theorem<sup id="cite_ref-2a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup>),</li>
+<li><strong class="text-slate-100 font-semibold">The Photocopy Reproduction</strong> (Abiotic Surface-Catalyzed Template Copying<sup id="cite_ref-8a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-8">[8]</a></sup>), and</li>
+<li><strong class="text-slate-100 font-semibold">The Lithospheric Substrate & Subterranean Stratum</strong> (Oceanic Basalt Bedrock, Penrose Ophiolite Basement, and the Deep Dark Biosphere<sup id="cite_ref-14a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-14">[14]</a></sup> <sup id="cite_ref-15a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-15">[15]</a></sup>)</li>
 </ol>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">does <strong class="text-slate-100 font-semibold">not</strong> smuggle in biological information. Rather, these four elements define the <strong class="text-slate-100 font-semibold">absolute physical and mathematical floor</strong> upon which open-ended evolution can theoretically occur.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">does <strong class="text-slate-100 font-semibold">not</strong> smuggle in biological information. Rather, these five elements define the <strong class="text-slate-100 font-semibold">absolute physical and mathematical floor</strong> upon which open-ended evolution can theoretically occur.</p>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="1-visceral-intuition-the-dilemma-of-the-first-cell" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Visceral Intuition: The Dilemma of the First Cell <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-visceral-intuition-the-dilemma-of-the-first-cell" title="Direct link">#</a></h2>
+<h2 id="1-visceral-intuition-the-dilemma-of-the-first-cell" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Visceral Intuition: The Dilemma of the First Cell</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Imagine walking on the Hadean seafloor 4.1 billion years ago, long before bacteria, DNA, or proteins existed.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If you ask a traditional chemist how life began, they might imagine a warm pond where amino acids randomly collided until, by miracle, a cell membrane wrapped around an engine, invented a battery, developed a symbolic language, and began to divide.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In biophysics, this is known as the <strong class="text-slate-100 font-semibold">"Miracle upon Miracle" Fallacy</strong>. Modern life is astonishingly complex:</p>
@@ -579,12 +1070,12 @@
 <li>It requires ribosomes to translate a 1D symbolic script into 3D dynamic catalysts.</li>
 <li>It requires lipid synthesizing enzymes to make the very membrane that holds the ribosome!</li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If an artificial life simulation attempted to model every quantum orbital from raw hydrogen cyanide up through protein folding and into cellular ecology, the simulation would halt after three picoseconds. More importantly, attempting to evolve the <em class="text-slate-200 italic">concept of energy storage</em> or the <em class="text-slate-200 italic">concept of an epistemic cut</em> within an unguided evolutionary simulator commits a fatal category error: <strong class="text-slate-100 font-semibold">Evolution by natural selection cannot begin until an entity can maintain its own boundary and copy its hereditary instructions.</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If an artificial life simulation attempted to model every quantum orbital from raw hydrogen cyanide up through protein folding and into cellular ecology, the simulation would halt after three picoseconds. More importantly, attempting to evolve the <em class="text-slate-200 italic">concept of energy storage</em> or the <em class="text-slate-200 italic">concept of an epistemic cut</em> within an unguided evolutionary simulator commits a fatal category error: <strong class="text-slate-100 font-semibold">Evolution by natural selection cannot begin until an entity can maintain its own boundary and copy its hereditary instructions<sup id="cite_ref-10a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-10">[10]</a></sup>.</strong></p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium establishes its starting line precisely where physics hands off to heredity.</p>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="2-the-battery-justification-life-did-not-invent-the-battery-the-earth-did" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. The Battery Justification: Life Did Not Invent the Battery; The Earth Did <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-the-battery-justification-life-did-not-invent-the-battery-the-earth-did" title="Direct link">#</a></h2>
+<h2 id="2-the-battery-justification-life-did-not-invent-the-battery-the-earth-did" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. The Battery Justification: Life Did Not Invent the Battery; The Earth Did</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The most urgent concern is often: <strong class="text-slate-100 font-semibold">"Why does a battery already exist? Isn't a battery a complex biological invention?"</strong></p>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The answer from modern geobiology (Peter Mitchell, Michael Russell, Nick Lane, William Martin) is unambiguous:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The answer from modern geobiology (Peter Mitchell<sup id="cite_ref-3b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-3">[3]</a></sup>, Michael Russell<sup id="cite_ref-4c" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-4">[4]</a></sup>, Nick Lane<sup id="cite_ref-5a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-5">[5]</a></sup>, William Martin<sup id="cite_ref-9b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-9">[9]</a></sup>) is unambiguous:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Life did not invent the electrical battery. The prebiotic hydrothermal vent was literally an inorganic geochemical battery.</strong></p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><figure class="my-8 text-center group">
       <div class="relative inline-block w-full max-w-4xl rounded-2xl p-1 bg-gradient-to-b from-slate-700/40 via-slate-800/20 to-slate-900/60 shadow-2xl border border-slate-800/80 hover:border-cyan-500/50 transition-all duration-300">
@@ -598,29 +1089,47 @@
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
-              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis</span>
+              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis &bull; Figure Breakdown</span>
             </div>
             <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Deep-Dive Analysis</span>
           </div>
-          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><br/>### 🔬 Pedagogical Breakdown: Figure 1.2 — The Inorganic Hydrothermal Battery<br/>- <strong class="text-slate-100 font-semibold">Visual Guide:</strong> The left panel diagrams the towering hydrothermal mound with alkaline fluid channels ($pH \approx 10.0$) meeting the acidic Hadean ocean ($pH \approx 5.5$). The right panel magnifies the $5\text{ nm}$ semi-permeable iron-sulfide ($FeS$) mineral wall acting as a natural electrostatic capacitor.<br/>- <strong class="text-slate-100 font-semibold">Biophysical Reality:</strong> Peter Mitchell's chemiosmotic hypothesis and Russell-Martin vent models demonstrate that an abiotic transmembrane proton gradient ($\Delta pH = 4.5$, $\Delta \psi \approx 200\text{ mV}$) generated field strengths of $40\text{ MV/m}$ across thin mineral membranes before proteins or ATP synthase existed.<br/>- <strong class="text-slate-100 font-semibold">Digital Mapping:</strong> In Siliquarium, the pore battery ($E_{\text{battery}} \in [0, 100]$ tokens) directly models this inorganic mineral capacitance. Incoming catalytic metabolic reactions pump charge into the capacitor, while Landauer switching and basal membrane leakage continually drain it toward equilibrium ($E=0$).<br/>- <strong class="text-slate-100 font-semibold">Core Principle:</strong> <em class="text-slate-200 italic">Life did not invent the electrical battery; the Earth did.</em> The cell membrane and proton-motive bioenergetics are evolutionary replacements for pre-existing geochemical rock walls.</div>
+          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔬 Pedagogical Breakdown: Figure 1.2 — The Inorganic Hydrothermal Battery</div>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Visual Guide:</strong> The left panel diagrams the towering hydrothermal mound with alkaline fluid channels ($pH \approx 10.0$) meeting the acidic Hadean ocean ($pH \approx 5.5$). The right panel magnifies the $5\text{ nm}$ semi-permeable iron-sulfide ($FeS$) mineral wall acting as a natural electrostatic capacitor.</li>
+<li><strong class="text-slate-100 font-semibold">Biophysical Reality:</strong> Peter Mitchell's chemiosmotic hypothesis and Russell-Martin vent models demonstrate that an abiotic transmembrane proton gradient ($\Delta pH = 4.5$, $\Delta \psi \approx 200\text{ mV}$) generated field strengths of $40\text{ MV/m}$ across thin mineral membranes before proteins or ATP synthase existed.</li>
+<li><strong class="text-slate-100 font-semibold">Digital Mapping:</strong> In Siliquarium, the pore battery ($E_{\text{battery}} \in [0, 100]$ tokens) directly models this inorganic mineral capacitance. Incoming catalytic metabolic reactions pump charge into the capacitor, while Landauer switching and basal membrane leakage continually drain it toward equilibrium ($E=0$).</li>
+<li><strong class="text-slate-100 font-semibold">Core Principle:</strong> <em class="text-slate-200 italic">Life did not invent the electrical battery; the Earth did.</em> The cell membrane and proton-motive bioenergetics are evolutionary replacements for pre-existing geochemical rock walls.</li>
+</ul></div>
         </div>
-<h3 id="21-mitchells-chemiosmosis-the-geochemical-proton-gradient" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 Mitchell's Chemiosmosis & The Geochemical Proton Gradient <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#21-mitchells-chemiosmosis-the-geochemical-proton-gradient" title="Direct link">#</a></h3>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1961, Peter Mitchell proposed the Chemiosmotic Hypothesis (Nobel Prize 1978): life does not power itself with direct chemical combustion; life powers itself with an <strong class="text-slate-100 font-semibold">electrical circuit driven by a proton gradient</strong> across a membrane.</p>
+<h3 id="21-mitchells-chemiosmosis-the-geochemical-proton-gradient" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 Mitchell's Chemiosmosis & The Geochemical Proton Gradient</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1961, Peter Mitchell proposed the Chemiosmotic Hypothesis (Nobel Prize 1978)<sup id="cite_ref-3c" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-3">[3]</a></sup>: life does not power itself with direct chemical combustion; life powers itself with an <strong class="text-slate-100 font-semibold">electrical circuit driven by a proton gradient</strong> across a membrane.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">For decades, biologists wondered: why would the universal ancestor of all life (LUCA) rely on such a bizarre, indirect mechanism?</p>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1997, Michael Russell and Allan Hall solved this riddle:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1997, Michael Russell and Allan Hall solved this riddle<sup id="cite_ref-4d" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-4">[4]</a></sup>:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>Alkaline hydrothermal vents (like Lost City) spew warm fluids rich in $H_2$ and $OH^-$ ($pH \approx 9-11$).</li>
 <li>The primordial ocean was saturated with dissolved volcanic $CO_2$, forming carbonic acid ($pH \approx 5.5$).</li>
 <li>When vent fluids percolated through porous basalt, the thin mineral membranes separating the vent fluid from ocean water experienced a continuous, abiotic $\Delta pH$ of $4.5$ units.</li>
 <li>Across a 5-nanometer inorganic mineral wall, a $4.5$ unit pH gradient generates an electrical field strength of <strong class="text-slate-100 font-semibold">tens of millions of volts per meter</strong>—identical to the transmembrane potential of a living mitochondrion ($\sim 200 \text{ mV}$).</li>
 </ul>
-<h3 id="22-physical-capacitance-vs-smuggled-technology" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 Physical Capacitance vs. Smuggled Technology <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#22-physical-capacitance-vs-smuggled-technology" title="Direct link">#</a></h3>
+<h3 id="22-physical-capacitance-vs-smuggled-technology" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 Physical Capacitance vs. Smuggled Technology</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Siliquarium, the "Pore Battery" is not a smuggled lithium-ion cell or an evolved ATP Synthase turbine. It represents:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Electrostatic Mineral Capacitance:</strong>  </li>
 </ol>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$C = \varepsilon \frac{A}{d}$$</p>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">An inorganic mineral sheet of iron sulfide ($FeS$) or amorphous silica separating two conductive electrolytes naturally accumulates surface charge.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{C} = \textcolor{#34d399}{\varepsilon} \frac{\textcolor{#fbbf24}{A}}{\textcolor{#c084fc}{d}}$$</p>
+<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+          <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
+            <span>🧭</span> Equation Decoder Apparatus
+          </div>
+          <div class="leading-relaxed font-sans space-y-2"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔍 Equation Decoder: Mineral Rock Pore Capacitance</div>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#38bdf8}{C}$ (Physical Capacitance):</strong> Charge storage capability of the natural inorganic mineral pore wall.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{\varepsilon}$ (Permittivity of Aqueous Mineral):</strong> Dielectric permittivity of hydrated iron-sulfur/silica barrier rock.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#fbbf24}{A}$ (Pore Wall Surface Area):</strong> Internal micro-cavity contact area exposed to catalytic fluid.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{d}$ (Mineral Membrane Thickness):</strong> Nanoscale barrier thickness separating alkaline fluid from acidic seawater (~5 nm).</li>
+<li><strong class="text-slate-100 font-semibold">Biophysical Consequence:</strong> Charge accumulation is a passive physical property of thin conductive rock barriers, not an evolved cellular invention.</li>
+</ul></div>
+        </div>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Abiotic High-Energy Phosphates:</strong>  </li>
 </ol>
@@ -629,9 +1138,25 @@
 <li><strong class="text-slate-100 font-semibold">Passive Thermal & Hydrolytic Decay ($E_{\text{leak}}$):</strong>  </li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If a pore is inactive, the inorganic charge leaks away through thermal relaxation ($k_B T$). To avoid dying (discharging to equilibrium), a circuit inside the pore must continually tap the incoming non-equilibrium flux.</p>
-<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif">### 🔍 Equation Decoder: The Pore Battery Flux<br/><br/>$$E_{\text{battery}}(t+1) = \min\left(E_{\text{cap}}, \; E_{\text{battery}}(t) + \Delta E_{\text{catalysis}} - \sum_{i=1}^G \Delta E_{\text{Landauer}, i} - E_{\text{leak}}\right)$$<br/><br/>- <strong class="text-slate-100 font-semibold">$E_{\text{cap}}$ (Mineral Storage Ceiling):</strong> The maximum charge the pore's inorganic capacitance and mineral volume can store before saturation (default $100$ tokens).<br/>- <strong class="text-slate-100 font-semibold">$\Delta E_{\text{catalysis}}$ (Natural Influx):</strong> Free energy extracted when incoming complementary streams ($A$ and $B$) react across a catalytic gate.<br/>- <strong class="text-slate-100 font-semibold">$\sum \Delta E_{\text{Landauer}, i}$ (Dynamic Switching Cost):</strong> The unavoidable thermodynamic cost ($k_B T \ln 2$) of transitioning gate states.<br/>- <strong class="text-slate-100 font-semibold">$E_{\text{leak}}$ (Basal Decay):</strong> Spontaneous dissipation of charge across leaky mineral pores into the cold ocean sink.</blockquote>
+<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+          <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
+            <span>🧭</span> Equation Decoder Apparatus
+          </div>
+          <div class="leading-relaxed font-sans space-y-2"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔍 Equation Decoder: The Pore Battery Flux</div>
+<div class="my-3 overflow-x-auto text-center">$$\textcolor{#38bdf8}{E_{\text{battery}}(t+1)} = \textcolor{#34d399}{\min}\left(\textcolor{#c084fc}{E_{\text{cap}}}, \; \textcolor{#fbbf24}{E_{\text{battery}}(t)} + \textcolor{#34d399}{\Delta E_{\text{catalysis}}} - \sum_{i=1}^{\textcolor{#c084fc}{G}} \textcolor{#f43f5e}{\Delta E_{\text{Landauer}, i}} - \textcolor{#f43f5e}{E_{\text{leak}}}\right)$$</div>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#38bdf8}{E_{\text{battery}}(t+1)}$ (Next Battery State):</strong> Stored chemical free energy available for cellular computation at discrete epoch $t+1$.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{E_{\text{cap}}}$ (Mineral Storage Ceiling):</strong> The maximum charge the pore's inorganic capacitance and mineral volume can store before saturation (default $100$ tokens).</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#fbbf24}{E_{\text{battery}}(t)}$ (Current Stored Energy):</strong> Prior tick's battery token balance.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{\Delta E_{\text{catalysis}}}$ (Natural Influx):</strong> Free energy extracted when incoming complementary streams ($A$ and $B$) react across a catalytic gate.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{G}$ (Active Gate Count):</strong> Number of operational Boolean logic gates in the cell's circuit.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#f43f5e}{\Delta E_{\text{Landauer}, i}}$ (Dynamic Switching Cost):</strong> The unavoidable thermodynamic cost ($k_B T \ln 2$) of transitioning gate states (Landauer 1961<sup id="cite_ref-6a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-6">[6]</a></sup>; Bennett 1982<sup id="cite_ref-7a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-7">[7]</a></sup>).</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#f43f5e}{E_{\text{leak}}}$ (Basal Decay):</strong> Spontaneous dissipation of charge across leaky mineral pores into the cold ocean sink.</li>
+<li><strong class="text-slate-100 font-semibold">Biophysical Consequence:</strong> Cells that don't compute useful logic waste their energy on Landauer dissipation and leak to zero, resulting in irreversible starvation.</li>
+</ul></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="3-the-workshop-justification-natures-first-stone-compartments" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. The Workshop Justification: Nature's First Stone Compartments <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-the-workshop-justification-natures-first-stone-compartments" title="Direct link">#</a></h2>
+<h2 id="3-the-workshop-justification-natures-first-stone-compartments" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. The Workshop Justification: Nature's First Stone Compartments</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The second question: <strong class="text-slate-100 font-semibold">"Are we smuggling in a workshop?"</strong></p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In traditional artificial life, an organism is granted an arbitrary coordinate in empty space with a magic radius. In physical reality, this is destroyed by the <strong class="text-slate-100 font-semibold">Dilution Catastrophe</strong>:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
@@ -649,11 +1174,17 @@
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
-              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis</span>
+              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis &bull; Figure Breakdown</span>
             </div>
             <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Deep-Dive Analysis</span>
           </div>
-          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><br/>### 🔬 Pedagogical Breakdown: Figure 1.1 — The Dilution Catastrophe & Mineral Compartmentation<br/>- <strong class="text-slate-100 font-semibold">Visual Guide:</strong> The left chamber illustrates the open primordial sea where prebiotic organic monomers ($A$ and $B$) rapidly disperse to infinite dilution ($\rho \to 0$), preventing bimolecular collisions. The right chamber illustrates the interconnected micro-cavities ($10\text{–}100\,\mu\text{m}$) of an alkaline hydrothermal chimney where thermal siphoning and mineral adsorption concentrate reactants by $>1,000,000\times$.<br/>- <strong class="text-slate-100 font-semibold">Biophysical Reality:</strong> Without physical compartmentation, second-order reaction rates $v = k[A][B]$ drop toward zero. Hydrothermal chimney mounds provided inorganic catalytic cell walls millions of years before the synthesis of phospholipid bilayers.<br/>- <strong class="text-slate-100 font-semibold">Digital Mapping:</strong> In Siliquarium, the $8 \times 8$ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop</code> bounds spatial execution. Substrate logic gates and metabolites are confined within the inorganic pore volume, preventing the unphysical dispersion typical of uncompartmentalized artificial life models.<br/>- <strong class="text-slate-100 font-semibold">Core Principle:</strong> <em class="text-slate-200 italic">Compartmentation must precede metabolism.</em> Pores are not arbitrary bounding boxes; they are nature's primordial mineral incubators.</div>
+          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔬 Pedagogical Breakdown: Figure 1.1 — The Dilution Catastrophe & Mineral Compartmentation</div>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Visual Guide:</strong> The left chamber illustrates the open primordial sea where prebiotic organic monomers ($A$ and $B$) rapidly disperse to infinite dilution ($\rho \to 0$), preventing bimolecular collisions. The right chamber illustrates the interconnected micro-cavities ($10\text{–}100\,\mu\text{m}$) of an alkaline hydrothermal chimney where thermal siphoning and mineral adsorption concentrate reactants by $>1,000,000\times$.</li>
+<li><strong class="text-slate-100 font-semibold">Biophysical Reality:</strong> Without physical compartmentation, second-order reaction rates $v = k[A][B]$ drop toward zero. Hydrothermal chimney mounds provided inorganic catalytic cell walls millions of years before the synthesis of phospholipid bilayers.</li>
+<li><strong class="text-slate-100 font-semibold">Digital Mapping:</strong> In Siliquarium, the $8 \times 8$ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop</code> bounds spatial execution. Substrate logic gates and metabolites are confined within the inorganic pore volume, preventing the unphysical dispersion typical of uncompartmentalized artificial life models.</li>
+<li><strong class="text-slate-100 font-semibold">Core Principle:</strong> <em class="text-slate-200 italic">Compartmentation must precede metabolism.</em> Pores are not arbitrary bounding boxes; they are nature's primordial mineral incubators.</li>
+</ul></div>
         </div>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The "Workshop" in Siliquarium is simply the <strong class="text-slate-100 font-semibold">interior physical volume of a mineral pore</strong>.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
@@ -662,16 +1193,30 @@
 <li>The $8 \times 8$ gate canvas capacity is not an arbitrary game rule; it is the physical volumetric limit of an inorganic mineral pore (Haldane's surface-area-to-volume constraint).</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="4-the-epistemic-cut-why-positing-symbolic-code-is-mathematically-essential" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. The Epistemic Cut: Why Positing Symbolic Code Is Mathematically Essential <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-the-epistemic-cut-why-positing-symbolic-code-is-mathematically-essential" title="Direct link">#</a></h2>
+<h2 id="4-the-epistemic-cut-why-positing-symbolic-code-is-mathematically-essential" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. The Epistemic Cut: Why Positing Symbolic Code Is Mathematically Essential</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The third and deepest question:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">"We are not showing the evolution of symbolic code representation. We posit it exists. Are we smuggling in complexity here?"</strong></p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Yes, Siliquarium explicitly posits the existence of symbolic code representation (the 1D genome tape). <strong class="text-slate-100 font-semibold">This is an intentional, scientifically grounded design choice.</strong> Here is the epistemological proof of why:</p>
-<h3 id="41-von-neumanns-theorem-on-self-reproducing-automata-1966" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.1 Von Neumann's Theorem on Self-Reproducing Automata (1966) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#41-von-neumanns-theorem-on-self-reproducing-automata-1966" title="Direct link">#</a></h3>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In the 1940s, mathematician John von Neumann investigated what is required for an open-ended evolutionary machine to increase in complexity without decaying into chaos. He proved a fundamental theorem:</p>
+<h3 id="41-von-neumanns-theorem-on-self-reproducing-automata-1966" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.1 Von Neumann's Theorem on Self-Reproducing Automata (1966)</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In the 1940s, mathematician John von Neumann investigated<sup id="cite_ref-2b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup> what is required for an open-ended evolutionary machine to increase in complexity without decaying into chaos. He proved a fundamental theorem:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>If an organism reproduces by having its <strong class="text-slate-100 font-semibold">active machinery directly construct another copy of itself</strong> (dynamic self-inspection):</li>
 </ol>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\text{Machine } M \longrightarrow \text{inspects } M \longrightarrow \text{builds } M'$$</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{M} \xrightarrow{\textcolor{#34d399}{\text{inspects}}} \textcolor{#fbbf24}{M} \xrightarrow{\textcolor{#c084fc}{\text{builds}}} \textcolor{#f43f5e}{M'}$$</p>
+<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+          <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
+            <span>🧭</span> Equation Decoder Apparatus
+          </div>
+          <div class="leading-relaxed font-sans space-y-2"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔍 Equation Decoder: Lethal Self-Inspection Dynamics</div>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#38bdf8}{M}$ (Parent Active Engine):</strong> The operational, rate-dependent catalytic machine in the workshop.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{\text{inspects}}$ (Self-Measurement Step):</strong> The active machine measuring its own working components to deduce its own specification.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#fbbf24}{M}$ (Measured State):</strong> The noisy internal physical state captured during active operation.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{\text{builds}}$ (Direct Fabrication):</strong> Dynamic assembly of the daughter engine without an independent symbolic blueprint.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#f43f5e}{M'}$ (Degraded Offspring Engine):</strong> The mutated offspring machine, inheriting both physical wear and copying errors, precipitating von Neumann's lethal error catastrophe.</li>
+<li><strong class="text-slate-100 font-semibold">Biophysical Consequence:</strong> Without an uninterpreted symbolic tape ($\phi$) sheltered by an Epistemic Cut, active machines cannot sustain open-ended heredity without error catastrophe.</li>
+</ul></div>
+        </div>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Any mutation or defect in $M$ alters the copying apparatus itself. The machine suffers an immediate <strong class="text-slate-100 font-semibold">lethal error catastrophe</strong>: the mutated copier produces an even more broken copier, and the lineage collapses within generations.</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>To achieve indefinite evolutionary growth, an organism <strong class="text-slate-100 font-semibold">must separate description from execution</strong>:</li>
@@ -692,28 +1237,34 @@
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
-              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis</span>
+              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis &bull; Figure Breakdown</span>
             </div>
             <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Deep-Dive Analysis</span>
           </div>
-          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><br/>### 🔬 Pedagogical Breakdown: Figure 1.3 — The Epistemic Cut & Self-Reproducing Automata<br/>- <strong class="text-slate-100 font-semibold">Visual Guide:</strong> The top branch illustrates the lethal error catastrophe: when an active dynamic engine attempts to self-inspect and copy its own functioning parts, small transcription errors compound exponentially into collapse. The lower architecture illustrates von Neumann and Pattee's solution: bifurcating the organism into a quiescent, rate-independent symbolic tape (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">The Safe</code>) and a dynamic, rate-dependent metabolic engine (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">The Workshop</code>).<br/>- <strong class="text-slate-100 font-semibold">Biophysical Reality:</strong> Living organisms do not replicate by having ribosomes photocopy active ribosomes. They transcribe inert, uninterpreted DNA into mRNA and translate it into catalytic enzymes. The genetic code is rate-independent; chemical catalysis is rate-dependent.<br/>- <strong class="text-slate-100 font-semibold">Digital Mapping:</strong> Siliquarium enforces this separation with architectural purity: the 60-bit genome tape is locked within the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GenomeSafe</code> during life, conducting no electrical current and incurring no switching dissipation. Only during replication at $E_{\text{battery}} = 100$ is the inert tape blindly copied into the daughter safe with error rate $p_{\text{mut}} = 0.001$.<br/>- <strong class="text-slate-100 font-semibold">Core Principle:</strong> <em class="text-slate-200 italic">Indefinite evolutionary open-endedness requires the Epistemic Cut.</em> Rate-independent symbols must govern rate-dependent dynamics through an uninterpreted template photocopy mechanism.</div>
+          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔬 Pedagogical Breakdown: Figure 1.3 — The Epistemic Cut & Self-Reproducing Automata</div>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Visual Guide:</strong> The top branch illustrates the lethal error catastrophe: when an active dynamic engine attempts to self-inspect and copy its own functioning parts, small transcription errors compound exponentially into collapse. The lower architecture illustrates von Neumann and Pattee's solution: bifurcating the organism into a quiescent, rate-independent symbolic tape (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">The Safe</code>) and a dynamic, rate-dependent metabolic engine (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">The Workshop</code>).</li>
+<li><strong class="text-slate-100 font-semibold">Biophysical Reality:</strong> Living organisms do not replicate by having ribosomes photocopy active ribosomes. They transcribe inert, uninterpreted DNA into mRNA and translate it into catalytic enzymes. The genetic code is rate-independent; chemical catalysis is rate-dependent.</li>
+<li><strong class="text-slate-100 font-semibold">Digital Mapping:</strong> Siliquarium enforces this separation with architectural purity: the 60-bit genome tape is locked within the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GenomeSafe</code> during life, conducting no electrical current and incurring no switching dissipation. Only during replication at $E_{\text{battery}} = 100$ is the inert tape blindly copied into the daughter safe with error rate $p_{\text{mut}} = 0.001$.</li>
+<li><strong class="text-slate-100 font-semibold">Core Principle:</strong> <em class="text-slate-200 italic">Indefinite evolutionary open-endedness requires the Epistemic Cut.</em> Rate-independent symbols must govern rate-dependent dynamics through an uninterpreted template photocopy mechanism.</li>
+</ul></div>
         </div>
-<h3 id="42-howard-pattees-epistemic-cut-1972" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.2 Howard Pattee's "Epistemic Cut" (1972) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#42-howard-pattees-epistemic-cut-1972" title="Direct link">#</a></h3>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Theoretical biophysicist Howard Pattee formalized this boundary:</p>
+<h3 id="42-howard-pattees-epistemic-cut-1972" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.2 Howard Pattee's "Epistemic Cut" (1972)</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Theoretical biophysicist Howard Pattee formalized this boundary<sup id="cite_ref-1b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-1">[1]</a></sup>:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Physics is rate-dependent:</strong> Governed by differential equations, forces, and continuous time ($\frac{dx}{dt} = f(x)$). Active logic gates in the workshop operate in the realm of rate-dependent physics.</li>
 <li><strong class="text-slate-100 font-semibold">Symbols are rate-independent:</strong> A genetic codon or a line of computer code has the same meaning whether it is read in one microsecond or stored for a thousand years in an arctic seed vault.</li>
 <li>The <strong class="text-slate-100 font-semibold">Epistemic Cut</strong> is the necessary boundary where rate-independent symbolic constraints control rate-dependent physical dynamics.</li>
 </ul>
-<h3 id="43-the-category-error-of-simulating-both-abiogenesis-and-open-ended-ecology" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.3 The Category Error of Simulating Both Abiogenesis and Open-Ended Ecology <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#43-the-category-error-of-simulating-both-abiogenesis-and-open-ended-ecology" title="Direct link">#</a></h3>
+<h3 id="43-the-category-error-of-simulating-both-abiogenesis-and-open-ended-ecology" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.3 The Category Error of Simulating Both Abiogenesis and Open-Ended Ecology</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If a simulator attempts to start <em class="text-slate-200 italic">before</em> the Epistemic Cut (simulating how quantum fields formed polymers that spontaneously became symbolic code), it cannot simultaneously simulate hundreds of thousands of ticks of ecological multi-cellular competition across a 3D seabed.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">More critically: <strong class="text-slate-100 font-semibold">The transition from non-symbolic chemistry to symbolic heredity is a one-time historical crystallization (the "frozen accident" of the genetic code).</strong> Once that cut exists, open-ended biological evolution begins.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium does not pretend to simulate the origin of quantum mechanics; Siliquarium explores <strong class="text-slate-100 font-semibold">the emergence of autopoietic living complexity given the physical preconditions of an epistemic cut and an energetic gradient.</strong></p>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="5-reproduction-justification-the-photocopy-machine-as-abiotic-surface-templating" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Reproduction Justification: The Photocopy Machine as Abiotic Surface Templating <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-reproduction-justification-the-photocopy-machine-as-abiotic-surface-templating" title="Direct link">#</a></h2>
+<h2 id="5-reproduction-justification-the-photocopy-machine-as-abiotic-surface-templating" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Reproduction Justification: The Photocopy Machine as Abiotic Surface Templating</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The final question: <strong class="text-slate-100 font-semibold">"Are we smuggling in reproduction/duplication using the workbench?"</strong></p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When an organism's battery reaches $100$ tokens, the substrate photocopies the tape from the parent safe into an adjacent empty pore's safe, with a small bit-flip mutation rate ($p = 0.001$). Is this a smuggled biological machine?</p>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In prebiotic chemistry, <strong class="text-slate-100 font-semibold">template-directed polymerization</strong> is an abiotic physical process, not an evolved invention:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In prebiotic chemistry, <strong class="text-slate-100 font-semibold">template-directed polymerization</strong> is an abiotic physical process (Wächtershäuser 1990<sup id="cite_ref-8b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-8">[8]</a></sup>), not an evolved invention:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>In the presence of mineral surfaces (such as montmorillonite clay or zinc-rich basalts), single nucleotides naturally align opposite their complementary bases through electrostatic hydrogen bonding.</li>
 <li>The parent strand acts as a passive template. When chemical energy (activated monomers / mineral phosphate flux) is present, the complementary strand polymerizes spontaneously.</li>
@@ -721,9 +1272,63 @@
 <li>If the parent circuit dies before reaching $100$ tokens, no copying occurs. The physical law of templating is universal; whether an individual organism triggers it depends entirely on its own metabolic success.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="6-concrete-micro-scaffolding-a-worked-toy-trace" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. Concrete Micro-Scaffolding: A Worked Toy Trace <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#6-concrete-micro-scaffolding-a-worked-toy-trace" title="Direct link">#</a></h2>
+<h2 id="6-the-lithospheric-stage-justification-why-oceanic-crust-the-subseafloor-stratum-are-not-smuggled-complexity" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. The Lithospheric Stage Justification: Why Oceanic Crust & The Subseafloor Stratum Are Not Smuggled Complexity</h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A fourth, subtle question emerges when exploring the physical topology of Siliquarium:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">"Why does the simulation feature a massive, flared lithospheric crust foundation and a subterranean stratum ($z = -1$)? Is this added geological complexity smuggling in biological shelter or pre-engineering evolutionary survival?"</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The answer from marine geophysics and deep geomicrobiology (<strong class="text-slate-100 font-semibold">Katrina Edwards 2012</strong><sup id="cite_ref-14b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-14">[14]</a></sup>, <strong class="text-slate-100 font-semibold">Beth Orcutt 2011</strong><sup id="cite_ref-15b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-15">[15]</a></sup>, <strong class="text-slate-100 font-semibold">Matthew Schrenk 2010</strong><sup id="cite_ref-16a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-16">[16]</a></sup>) is conclusive:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The seabed is not an infinite, weightless 2D floating sheet suspended in a vacuum. It is anchored to the Penrose ophiolite stratigraphy of a dense oceanic tectonic plate, underlain by fractured subseafloor aquifers that hosted the primary crucible of Hadean abiogenesis.</strong></p>
+<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <div class="flex items-center gap-2">
+              <span class="text-cyan-400 text-sm">🔬</span>
+              <span class="font-bold text-slate-100 uppercase tracking-wider text-[11px]">Comprehensive Pedagogical Analysis &bull; Figure Breakdown</span>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Deep-Dive Analysis</span>
+          </div>
+          <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔬 Pedagogical Breakdown: The Oceanic Lithosphere & Subterranean Stratum</div>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Visual Guide:</strong> The seafloor visualizer renders a monolithic, flared lithospheric mantle foundation (dark basaltic slate <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#080d1a</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#111827</code>, with an $8\%$ outward tectonic flare, horizontal volcanic strata cooling striations, and vertical columnar basalt jointing). Below the primary benthic surface ($z = 0$), sunken axial rift grabens plunge to the subterranean stratum ($z = -1$).</li>
+<li><strong class="text-slate-100 font-semibold">Biophysical Reality:</strong> The Integrated Ocean Drilling Program (IODP) discovered that microbial life is not restricted to the benthic surface. The "Deep Dark Biosphere" extends kilometers into fractured oceanic crust, where serpentine reactions ($(\text{Mg}, \text{Fe})_2\text{SiO}_4 + \text{H}_2\text{O} \to \text{serpentine} + \text{magnetite} + \text{H}_2$) supply continuous reducing power without solar photon inputs.</li>
+<li><strong class="text-slate-100 font-semibold">Digital Mapping:</strong> Pores at $z = -1$ are bounded by solid basalt bedrock and high-pressure overburden, experiencing dampened fluid turbulence and thermal shock. When surface layers are sterilized by magmatic eruptions or thermal pulses, subterranean trenches preserve viable seed cells.</li>
+<li><strong class="text-slate-100 font-semibold">Core Principle:</strong> <em class="text-slate-200 italic">Geology precedes and grounds biology without predetermining its code.</em> Sunken graben trenches and monolithic crustal plates are abiotic physical boundary conditions. They contain zero preprogrammed algorithms, zero teleological fitness metrics, and zero informational shortcuts.</li>
+</ul></div>
+        </div>
+<h3 id="61-the-hadean-impact-paradox-why-surface-pores-were-periodically-lethal" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">6.1 The Hadean Impact Paradox: Why Surface Pores Were Periodically Lethal</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">During the Hadean Eon (4.1 to 3.8 billion years ago), the prebiotic Earth was subject to the Late Heavy Bombardment. Giant bolide impacts periodically vaporized upper photic ocean layers, and intense ultraviolet radiation bathed the unprotected sea surface in lethal ionizing flux.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If primordial proto-life were confined strictly to a single flat 2D surface layer:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>Every catastrophic thermal surge, seismic dislocation, or surface boiling pulse would cause complete, irreversible global extinction ($N \to 0$).</li>
+<li>Evolution would repeatedly reset to $t=0$, preventing the cumulative preservation of Pattee's rate-independent genomic records.</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In terrestrial reality, the <strong class="text-slate-100 font-semibold">oceanic lithosphere is three-dimensional and porous</strong>. Fractured basalt aquifers, tectonic graben crevices, and subterranean hydrothermal pathways provided an unbroken, shielded geothermal haven where chemical redox flux continued uninterrupted beneath the turbulent sea.</p>
+<h3 id="62-the-penrose-ophiolite-sequence-natures-monolithic-foundation" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">6.2 The Penrose Ophiolite Sequence: Nature's Monolithic Foundation</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Geologists classify oceanic lithosphere according to the <strong class="text-slate-100 font-semibold">Penrose Ophiolite Stratigraphy</strong>:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Sediment & Hydrothermal Precipitates ($z \ge 1$):</strong> Pelagic plumes, amorphous silica, and chimney structures.</li>
+<li><strong class="text-slate-100 font-semibold">Pillow Basalts ($z = 0$):</strong> Rapidly quenched volcanic basalt lobes forming benthic terraces.</li>
+<li><strong class="text-slate-100 font-semibold">Sheeted Dike Complex & Axial Rift Faults ($z = -1$):</strong> Vertical basalt feeder conduits, normal fault grabens, and deep fractured aquifers.</li>
+<li><strong class="text-slate-100 font-semibold">Gabbros & Ultramafic Mantle Peridotite (Foundation Slab):</strong> The dense, impermeable crystalline basement providing tectonic ballast and the geochemical engine of serpentinization.</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Siliquarium, rendering the monolithic lithospheric foundation with flared cliff facets and volcanic strata banding is not mere decorative ornament; it is the physical representation of this planetary ballast. Organisms residing in the subterranean stratum ($z = -1$) face the exact same physical laws—Landauer switching costs ($k_B T \ln 2$), First-Law energy conservation ($\Delta E = 0.000$), and template replication—as surface cells. The trench does not "hand them food"; it merely provides physical geometry.</p>
+<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+          <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
+            <span>🧭</span> Equation Decoder Apparatus
+          </div>
+          <div class="leading-relaxed font-sans space-y-2"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔍 Equation Decoder: Subterranean Tectonic Stratification</div>
+<div class="my-3 overflow-x-auto text-center">$$\textcolor{#38bdf8}{T(q, r, z)} = \textcolor{#fbbf24}{T_{\text{core}}} \cdot \textcolor{#34d399}{\exp}\left(-\frac{\textcolor{#c084fc}{\sqrt{q^2 + r^2 + qr}}}{\textcolor{#34d399}{R_{\text{vent}}}}\right) + \textcolor{#34d399}{\kappa_{\text{depth}}} \cdot (\textcolor{#c084fc}{-z}) + \textcolor{#f43f5e}{\eta_{\text{graben}}}$$</div>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#38bdf8}{T(q, r, z)}$ (Local Geothermal Temperature):</strong> The physical temperature of pore $(q, r, z)$.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#fbbf24}{T_{\text{core}}}$ (Caldera Core Heat):</strong> The peak hydrothermal temperature emitted by the central chimney nozzle.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{\exp}, \textcolor{#34d399}{R_{\text{vent}}}, \textcolor{#34d399}{\kappa_{\text{depth}}}$ (Thermal Decay & Conduction Constants):</strong> Radial exponential attenuation length and conductive transfer coefficient from the mantle.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{\sqrt{q^2+r^2+qr}}, \textcolor{#c084fc}{-z}$ (Hexagonal Spatial Coordinates):</strong> Planar distance from the vent orifice and depth below seafloor ($z = -1$).</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#f43f5e}{\eta_{\text{graben}}}$ (Hydraulic Boundary Damping):</strong> Convective stability afforded by enclosed fault rift walls, preventing pelagic fluid shear from stripping metabolites away.</li>
+<li><strong class="text-slate-100 font-semibold">Biophysical Consequence:</strong> Deep subterranean trenches retain steady abiotic heat while shielding proto-cells from violent benthic tidal currents.</li>
+</ul></div>
+        </div>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="7-concrete-micro-scaffolding-a-worked-toy-trace" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">7. Concrete Micro-Scaffolding: A Worked Toy Trace</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To make these principles concrete, let us trace a single minimal organism over 5 ticks in a single pore.</p>
-<h3 id="initial-setup" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Initial Setup <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#initial-setup" title="Direct link">#</a></h3>
+<h3 id="initial-setup" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Initial Setup</h3>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Genome:</strong> Single codon representing an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate wired to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">STREAM_A</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">STREAM_B</code>.</li>
 <li><strong class="text-slate-100 font-semibold">Pore Environment:</strong> Mineral capacitance $C = 100$. Basal leak $E_{\text{leak}} = 1$ token every 2 ticks. Gate toggle cost $= 1$ token. Catalytic reaction yield $= +3$ tokens.</li>
@@ -732,10 +1337,10 @@
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Tick</th><th class="p-3.5 font-semibold">Vent Stream A</th><th class="p-3.5 font-semibold">Vent Stream B</th><th class="p-3.5 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> Gate Output</th><th class="p-3.5 font-semibold">Gate Toggled?</th><th class="p-3.5 font-semibold">Energy Influx</th><th class="p-3.5 font-semibold">Landauer Cost</th><th class="p-3.5 font-semibold">Leak Cost</th><th class="p-3.5 font-semibold">Net Battery</th><th class="p-3.5 font-semibold">Physical Biological Event</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">0</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed">No ($0 \to 0$)</td><td class="p-3.5 leading-relaxed">$+0$</td><td class="p-3.5 leading-relaxed">$-0$</td><td class="p-3.5 leading-relaxed">$-0$</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$50$</strong></td><td class="p-3.5 leading-relaxed">Dormant; substrates mismatched.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">1</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Yes</strong> ($0 \to 1$)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$+3$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$-1$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$-1$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$51$</strong></td><td class="p-3.5 leading-relaxed">Co-catalysis sparks! Net $+1$ token stored in mineral capacitance.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">2</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Yes</strong> ($1 \to 0$)</td><td class="p-3.5 leading-relaxed">$+0$</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$-1$</strong></td><td class="p-3.5 leading-relaxed">$-0$</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$50$</strong></td><td class="p-3.5 leading-relaxed">Substrate B drops; gate discharges.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">3</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code></td><td class="p-3.5 leading-relaxed">No ($0 \to 0$)</td><td class="p-3.5 leading-relaxed">$+0$</td><td class="p-3.5 leading-relaxed">$-0$</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$-1$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$49$</strong></td><td class="p-3.5 leading-relaxed">Famine tick; mineral charge slowly leaks to ocean sink.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">4</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Yes</strong> ($0 \to 1$)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$+3$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$-1$</strong></td><td class="p-3.5 leading-relaxed">$-0$</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$51$</strong></td><td class="p-3.5 leading-relaxed">Catalysis recurs; charges recover.</td></tr></tbody></table></div>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Observation:</strong> The organism did not "decide" to eat. It possesses no brain or goals. Its physical <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate simply conducted electricity when two chemical streams met, depositing energy into the pre-existing mineral capacitor.</p>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="7-conceptual-misconception-immunity-the-skeptics-faq" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">7. Conceptual Misconception Immunity (The Skeptic's FAQ) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#7-conceptual-misconception-immunity-the-skeptics-faq" title="Direct link">#</a></h2>
-<h3 id="q1-if-the-battery-already-exists-isnt-fitness-guaranteed" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q1: "If the battery already exists, isn't fitness guaranteed?" <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#q1-if-the-battery-already-exists-isnt-fitness-guaranteed" title="Direct link">#</a></h3>
+<h2 id="8-conceptual-misconception-immunity-the-skeptics-faq" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">8. Conceptual Misconception Immunity (The Skeptic's FAQ)</h2>
+<h3 id="q1-if-the-battery-already-exists-isnt-fitness-guaranteed" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q1: "If the battery already exists, isn't fitness guaranteed?"</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">No.</strong> The battery is an empty bucket with a leak at the bottom ($E_{\text{leak}}$). If an organism's wiring does not capture incoming vent pulses at a rate higher than its Landauer switching costs and basal dissipation, its battery hits $0$ and it undergoes irreversible lysis. In fact, over $90\%$ of random primordial soup genomes starve to death within the first 100 ticks!</p>
-<h3 id="q2-why-not-make-organisms-evolve-their-own-chemical-elements-and-physical-constants" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q2: "Why not make organisms evolve their own chemical elements and physical constants?" <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#q2-why-not-make-organisms-evolve-their-own-chemical-elements-and-physical-constants" title="Direct link">#</a></h3>
+<h3 id="q2-why-not-make-organisms-evolve-their-own-chemical-elements-and-physical-constants" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q2: "Why not make organisms evolve their own chemical elements and physical constants?"</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">That would be a simulation of cosmological nucleosynthesis, not artificial life. Science progresses by isolating bounded layers of reality:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>Chemistry assumes atomic physics.</li>
@@ -743,27 +1348,212 @@
 <li>Evolutionary biology assumes genetics, metabolism, and compartmentation.</li>
 </ul>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium models the layer of <strong class="text-slate-100 font-semibold">evolutionary systems biology</strong>, resting solidly on verified prebiotic geochemistry.</p>
-<h3 id="q3-does-the-simulation-reward-circuits-that-look-like-human-engineering" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q3: "Does the simulation reward circuits that look like human engineering?" <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#q3-does-the-simulation-reward-circuits-that-look-like-human-engineering" title="Direct link">#</a></h3>
+<h3 id="q3-does-the-simulation-reward-circuits-that-look-like-human-engineering" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q3: "Does the simulation reward circuits that look like human engineering?"</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Emphatically no.</strong> The Digital Paleontologist uses Uri Alon network motif definitions <em class="text-slate-200 italic">strictly as a passive measuring tape</em>. A circuit that evolves an SR latch receives zero extra points, zero bonus energy, and zero evolutionary favoritism. If that latch does not help it catch vent pulses or survive thermal noise, natural selection purges it without mercy.</p>
+<h3 id="q4-does-adding-a-thick-lithospheric-crust-slab-and-subterranean-layer-z-1-smuggle-in-biological-fitness" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q4: "Does adding a thick lithospheric crust slab and subterranean layer ($z = -1$) smuggle in biological fitness?"</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Emphatically no.</strong> The lithospheric bedrock and sunken rift grabens are abiotic geological features, identically to how rocks and gravity are features of the physical world. A cell in a subterranean trench ($z = -1$) still faces the strict First-Law energy conservation ledger ($\sum E_{\text{in}} = \sum E_{\text{out}}$), Landauer switching penalties ($1\text{ token per toggle}$), and basal membrane leakage ($E_{\text{leak}}$). If its logic netlist fails to synchronize with incoming hydrothermal pulses, it starves and lyses into detritus, exactly like a surface cell. The trench provides geometry, not fitness.</p>
+<h3 id="q5-why-make-the-mantle-foundation-flare-outward-with-columnar-basalt-joints-instead-of-a-simple-flat-box" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q5: "Why make the mantle foundation flare outward with columnar basalt joints instead of a simple flat box?"</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Because the physics of igneous rock formation dictate columnar cooling joints and tectonic slope stability. As basaltic magma cools against cold seawater, thermal contraction produces hexagonal tension cracks (columnar jointing, as observed at the Giant's Causeway and mid-ocean spreading ridges). The $8\%$ tectonic flare models the natural angle of repose and structural shear strength of oceanic crust plates. Accurately representing abiotic physics honors the boundary between geophysics and biology.</p>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="8-academic-provenance-master-citations" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">8. Academic Provenance & Master Citations <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#8-academic-provenance-master-citations" title="Direct link">#</a></h2>
+<h2 id="9-where-does-the-information-come-from-the-environment-as-the-informational-fountainhead" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">9. Where Does the Information Come From? The Environment as the Informational Fountainhead</h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The ultimate philosophical challenge often posed to evolutionary biology and artificial life is:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">"Random mutation is just noise. How can unguided noise create the functional information of an adaptive circuit?"</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The answer—grounded in peer-reviewed evolutionary information theory (<strong class="text-slate-100 font-semibold">Richard Dawkins 2024</strong><sup id="cite_ref-11a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-11">[11]</a></sup>, <strong class="text-slate-100 font-semibold">Christoph Adami 2000</strong><sup id="cite_ref-12a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-12">[12]</a></sup>, and <strong class="text-slate-100 font-semibold">Motoo Kimura 1961</strong><sup id="cite_ref-13a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-13">[13]</a></sup>)—is unequivocal:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Mutation does not create biological information. The environment is the informational fountainhead.</strong></p>
+<h3 id="91-the-genetic-book-of-the-dead" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">9.1 The Genetic Book of the Dead</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In <em class="text-slate-200 italic">The Genetic Book of the Dead</em> (2024)<sup id="cite_ref-11b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-11">[11]</a></sup>, Richard Dawkins demonstrates that an organism's genome is an archival palimpsest and an inverse relief of past environments:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>An organism’s adaptations mirror its ancestral world like a key mirrors the tumblers of a lock.</li>
+<li>The information in the key was not invented by the key; it was dictated by the lock.</li>
+<li>In Siliquarium, every logic gate netlist inside an evolved pore is an open page in the <strong class="text-slate-100 font-semibold">Genetic Book of the Dead</strong>. If an organism evolves an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate, that gate is an exact physical record that chemical streams $A$ and $B$ pulsed concurrently in its ancestral environment!</li>
+</ul>
+<h3 id="92-christoph-adamis-mutual-information-proof" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">9.2 Christoph Adami's Mutual Information Proof</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Christoph Adami (2000)<sup id="cite_ref-12b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-12">[12]</a></sup> formalized this mathematically. Genomic complexity is not raw Shannon entropy $H(X)$, but the <strong class="text-slate-100 font-semibold">Mutual Information</strong> between the genome ($X$) and its selective environment ($E$):</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{C(X)} = \textcolor{#34d399}{I(X; E)} = \textcolor{#fbbf24}{H(E)} - \textcolor{#f43f5e}{H(E \mid X)}$$</p>
+<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+          <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
+            <span>🧭</span> Equation Decoder Apparatus
+          </div>
+          <div class="leading-relaxed font-sans space-y-2"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔍 Equation Decoder: Christoph Adami Genomic Mutual Information</div>
+<ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#38bdf8}{C(X)}$ (Physical Complexity):</strong> True biological information (bits) possessed by genome tape $X$.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{I(X; E)}$ (Mutual Information):</strong> Statistical information shared between the genome and environmental regularities.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#fbbf24}{H(E)}$ (Environmental State Entropy):</strong> Total uncertainty in hydrothermal substrate fluctuations and chemical pulses.</li>
+<li><strong class="text-slate-100 font-semibold">$\textcolor{#f43f5e}{H(E \mid X)}$ (Conditional Genome Equivocation):</strong> Residual uncertainty about the environment remaining after consulting the genome tape.</li>
+<li><strong class="text-slate-100 font-semibold">Biophysical Consequence:</strong> Biological complexity cannot arise from random unguided mutation alone; natural selection carves the environmental shape into the genome through differential mortality.</li>
+</ul></div>
+        </div>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
-<li><strong class="text-slate-100 font-semibold">Chemiosmosis and Prebiotic Proton Motive Force:</strong></li>
-<li><em class="text-slate-200 italic">Mitchell, P. (1961).</em> "Coupling of phosphorylation to electron and hydrogen transfer by a chemi-osmotic type of mechanism." <em class="text-slate-200 italic">Nature</em>, 191(4784), 144–148.</li>
-<li><em class="text-slate-200 italic">Russell, M. J., & Hall, A. J. (1997).</em> "The emergence of life from iron monosulphide bubbles at a submarine hydrothermal spring." <em class="text-slate-200 italic">Journal of the Geological Society</em>, 154(3), 377–402.</li>
-<li><em class="text-slate-200 italic">Lane, N., & Martin, W. F. (2012).</em> "The origin of membrane bioenergetics." <em class="text-slate-200 italic">Cell</em>, 151(7), 1406–1416.</li>
-<li><em class="text-slate-200 italic">Lane, N. (2015).</em> *The Vital Question: Energy, Evolution, and the Origins of Complex Life.* W. W. Norton & Company.</li>
-<li><strong class="text-slate-100 font-semibold">The Epistemic Cut and Symbolic Automata:</strong></li>
-<li><em class="text-slate-200 italic">Von Neumann, J. (1966).</em> *Theory of Self-Reproducing Automata* (Ed. A. W. Burks). University of Illinois Press.</li>
-<li><em class="text-slate-200 italic">Pattee, H. H. (1972).</em> "The nature of hierarchical controls in living matter." <em class="text-slate-200 italic">Foundations of Mathematical Biology</em>, 1, 1–22.</li>
-<li><em class="text-slate-200 italic">Pattee, H. H. (2001).</em> "The physics of symbols: bridging the epistemic cut." <em class="text-slate-200 italic">Biosystems</em>, 60(1-3), 5–21.</li>
-<li><strong class="text-slate-100 font-semibold">Thermodynamics of Computation:</strong></li>
-<li><em class="text-slate-200 italic">Landauer, R. (1961).</em> "Irreversibility and heat generation in the computing process." <em class="text-slate-200 italic">IBM Journal of Research and Development</em>, 5(3), 183–191.</li>
-<li><em class="text-slate-200 italic">Bennett, C. H. (1982).</em> "The thermodynamics of computation—a review." <em class="text-slate-200 italic">International Journal of Theoretical Physics</em>, 21(12), 905–940.</li>
-<li><strong class="text-slate-100 font-semibold">Origin of Compartmentation & Surface Catalysis:</strong></li>
-<li><em class="text-slate-200 italic">Wächtershäuser, G. (1990).</em> "Evolution of the first metabolic cycles." <em class="text-slate-200 italic">Proceedings of the National Academy of Sciences</em>, 87(1), 200–204.</li>
-<li><em class="text-slate-200 italic">Martin, W., & Russell, M. J. (2003).</em> "On the origins of cells: a hypothesis for the evolutionary transitions from abiotic geochemistry to chemoautotrophic prokaryotes, and from prokaryotes to nucleated cells." <em class="text-slate-200 italic">Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences</em>, 358(1429), 59–85.</li>
+<li><strong class="text-slate-100 font-semibold">At Initialization ($t=0$):</strong> Genomes are random bitstrings, yielding $I(X; E) = 0 \text{ bits}$. No biological information is smuggled in.</li>
+<li><strong class="text-slate-100 font-semibold">Under Natural Selection ($t > 0$):</strong> Unfit variants lyse ($E_{\text{battery}} = 0$). Only sequences that predict environmental regularities survive, driving $I(X; E)$ upward.</li>
+<li><strong class="text-slate-100 font-semibold">The Sieve:</strong> Natural selection acts as a physical thermodynamic communication channel that transcribes environmental constraints into the rate-independent symbolic tape.</li>
 </ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">For the exhaustive mathematical proof, derivations, and specimen-by-specimen mapping, see the master companion treatise:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">👉 <a href="THE_GENETIC_BOOK_OF_THE_DEAD.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">The Genetic Book of the Dead: Environmental Information Injection and the Biophysical Mirror of Abiogenesis</strong></a>.</p>
+<hr class="border-t border-slate-800 my-8" />
+<!-- COMPLETE ACADEMIC REFERENCES & CITATIONS -->
+<section id="references" class="mt-16 pt-8 border-t border-slate-800 space-y-6">
+<div class="flex items-center justify-between border-b border-slate-800 pb-3">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-800 text-cyan-400 font-mono font-bold text-xs flex items-center justify-center">📚</span>
+<h2 class="text-lg md:text-xl font-mono font-bold text-slate-100">References &amp; Foundational Literature</h2>
+</div>
+<span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Wikipedia-Style Academic Citations</span>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed font-sans">The theoretical assertions, biophysical models, and computer architectural frameworks presented in this volume are grounded in the following seminal peer-reviewed literature. Numbered superscripts throughout the text link directly to these entries.</p>
+<ol class="space-y-3.5 text-xs font-mono text-slate-300">
+<li id="ref-1" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[1]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Pattee, H. H.</span> (1972). <em class="text-cyan-300">The nature of hierarchical controls in living matter</em>. <span class="text-slate-400">Foundations of Mathematical Biology, 1, 1–22</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Howard Pattee's Epistemic Cut:</strong> The physical necessity of bifurcating living systems into rate-independent symbolic hereditary records and rate-dependent catalytic dynamics.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1016/B978-0-12-598001-9.50005-7" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1016/B978-0-12-598001-9.50005-7</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#pattee1972" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a><span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-2" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 2 Proof</a> <span class="text-slate-600">&bull;</span> <span class="text-slate-500">&uarr; Back to text:</span> <a href="#cite_ref-1a" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^a</a> <a href="#cite_ref-1b" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^b</a></div>
+</div>
+</li>
+<li id="ref-2" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[2]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Von Neumann, J.</span> (1966). <em class="text-cyan-300">Theory of Self-Reproducing Automata (Edited and completed by A. W. Burks)</em>. <span class="text-slate-400">University of Illinois Press. ISBN: 978-0252727337</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Von Neumann's Self-Reproducing Automata:</strong> Proof that direct self-inspection triggers exponential transcription error collapse; open-ended evolution requires blind tape photocopying.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1109/TEC.1968.5219395" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1109/TEC.1968.5219395</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#pattee1972" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a><span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-2" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 2 Proof</a> <span class="text-slate-600">&bull;</span> <span class="text-slate-500">&uarr; Back to text:</span> <a href="#cite_ref-2a" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^a</a> <a href="#cite_ref-2b" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^b</a></div>
+</div>
+</li>
+<li id="ref-3" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[3]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Mitchell, P.</span> (1961). <em class="text-cyan-300">Coupling of phosphorylation to electron and hydrogen transfer by a chemi-osmotic type of mechanism</em>. <span class="text-slate-400">Nature, 191(4784), 144–148</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Mitchell's Chemiosmotic Proton Motive Force:</strong> Natural continuous proton motive force of ~200 mV generated across thin semi-permeable inorganic membranes by geochemical pH gradients.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1038/191144a0" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1038/191144a0</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#mitchell1961" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a><span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-32" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 32 Proof</a> <span class="text-slate-600">&bull;</span> <span class="text-slate-500">&uarr; Back to text:</span> <a href="#cite_ref-3a" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^a</a> <a href="#cite_ref-3b" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^b</a> <a href="#cite_ref-3c" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^c</a></div>
+</div>
+</li>
+<li id="ref-4" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[4]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Russell, M. J., & Hall, A. J.</span> (1997). <em class="text-cyan-300">The emergence of life from iron monosulphide bubbles at a submarine hydrothermal spring</em>. <span class="text-slate-400">Journal of the Geological Society, 154(3), 377–402</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Alkaline Vents as Nature's Primordial Batteries:</strong> Inorganic iron monosulphide (FeS) micro-cavities acted as nature's first cell walls, concentrating organic reagents by >1,000,000×.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1144/gsjgs.154.3.0377" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1144/gsjgs.154.3.0377</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#russell1997" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a><span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-4" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 4 Proof</a> <span class="text-slate-600">&bull;</span> <span class="text-slate-500">&uarr; Back to text:</span> <a href="#cite_ref-4a" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^a</a> <a href="#cite_ref-4b" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^b</a> <a href="#cite_ref-4c" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^c</a> <a href="#cite_ref-4d" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^d</a></div>
+</div>
+</li>
+<li id="ref-5" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[5]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Lane, N., & Martin, W. F.</span> (2012). <em class="text-cyan-300">The origin of membrane bioenergetics</em>. <span class="text-slate-400">Cell, 151(7), 1406–1416</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Origin of Membrane Bioenergetics:</strong> Abiotic proton gradients across inorganic mineral barriers preceded the evolution of lipid bilayers and modern ATP synthases.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1016/j.cell.2012.11.050" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1016/j.cell.2012.11.050</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#lane2010" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a><span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-21" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 21 Proof</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-5a" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+<li id="ref-6" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[6]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Landauer, R.</span> (1961). <em class="text-cyan-300">Irreversibility and heat generation in the computing process</em>. <span class="text-slate-400">IBM Journal of Research and Development, 5(3), 183–191</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Landauer's Switching Dissipation:</strong> Thermodynamic floor of computation: erasing or updating information dissipates kB T ln 2 of heat into the ocean sink.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1147/rd.53.0183" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1147/rd.53.0183</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#landauer1961" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a><span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-5" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 5 Proof</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-6a" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+<li id="ref-7" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[7]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Bennett, C. H.</span> (1982). <em class="text-cyan-300">The thermodynamics of computation—a review</em>. <span class="text-slate-400">International Journal of Theoretical Physics, 21(12), 905–940</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Thermodynamics of Computation Review:</strong> Dissipation in computing systems arises strictly from logical irreversibility, establishing the physical cost of gate state updates.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1007/BF02084158" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1007/BF02084158</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#landauer1961" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a><span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-5" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 5 Proof</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-7a" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+<li id="ref-8" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[8]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Wächtershäuser, G.</span> (1990). <em class="text-cyan-300">Evolution of the first metabolic cycles</em>. <span class="text-slate-400">Proceedings of the National Academy of Sciences (PNAS), 87(1), 200–204</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Iron-Sulfur Surface Metabolism & Abiotic Polymerization:</strong> Template-directed polymerization on charged mineral surfaces is an abiotic physical process driven by exergonic redox condensation.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1073/pnas.87.1.200" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1073/pnas.87.1.200</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#russell1997" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <span class="text-slate-500">&uarr; Back to text:</span> <a href="#cite_ref-8a" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^a</a> <a href="#cite_ref-8b" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^b</a></div>
+</div>
+</li>
+<li id="ref-9" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[9]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Martin, W., & Russell, M. J.</span> (2003). <em class="text-cyan-300">On the origins of cells: a hypothesis for the evolutionary transitions from abiotic geochemistry to chemoautotrophic prokaryotes, and from prokaryotes to nucleated cells</em>. <span class="text-slate-400">Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences, 358(1429), 59–85</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Origins of Cells in Inorganic Hydrothermal Mounds:</strong> Hadean hydrothermal chimneys provided non-free, pre-existing inorganic micro-compartments that insulated proto-metabolic cycles.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1098/rstb.2002.1183" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1098/rstb.2002.1183</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#russell1997" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a><span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-4" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 4 Proof</a> <span class="text-slate-600">&bull;</span> <span class="text-slate-500">&uarr; Back to text:</span> <a href="#cite_ref-9a" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^a</a> <a href="#cite_ref-9b" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^b</a></div>
+</div>
+</li>
+<li id="ref-10" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[10]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Maturana, H. R., & Varela, F. J.</span> (1972). <em class="text-cyan-300">Autopoiesis and Cognition: The Realization of the Living</em>. <span class="text-slate-400">Boston Studies in the Philosophy of Science, Vol. 42. D. Reidel Publishing</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Autopoiesis & Non-Teleological Self-Maintenance:</strong> Living organizations maintain identity strictly through continuous metabolic regenerative loops without external fitness functions.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1007/978-94-009-8947-4" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1007/978-94-009-8947-4</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#pattee1972" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a><span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-1" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 1 Proof</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-10a" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+<li id="ref-11" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[11]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Dawkins, R.</span> (2024). <em class="text-cyan-300">The Genetic Book of the Dead: A Darwinian Reverie</em>. <span class="text-slate-400">Apollo / Head of Zeus / Princeton University Press. ISBN: 978-1804548875</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">The Genome as Ancestral Palimpsest:</strong> Organisms and their hereditary code are an inverse description of past environments; the environment is the informational fountainhead.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#dawkins2024" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-37" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 37 Proof</a> <span class="text-slate-600">&bull;</span> <span class="text-slate-500">&uarr; Back to text:</span> <a href="#cite_ref-11a" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^a</a> <a href="#cite_ref-11b" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^b</a></div>
+</div>
+</li>
+<li id="ref-12" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[12]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Adami, C., Ofria, C., & Collier, T. C.</span> (2000). <em class="text-cyan-300">Evolution of biological complexity</em>. <span class="text-slate-400">Proceedings of the National Academy of Sciences (PNAS), 97(9), 4463–4468</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Physical Complexity as Mutual Information:</strong> Formal proof that biological information is mutual information between genome and environment ($I(X; E) = H(E) - H(E \mid X)$).</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1073/pnas.97.9.4463" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1073/pnas.97.9.4463</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#adami2000" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-38" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 38 Proof</a> <span class="text-slate-600">&bull;</span> <span class="text-slate-500">&uarr; Back to text:</span> <a href="#cite_ref-12a" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^a</a> <a href="#cite_ref-12b" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^b</a></div>
+</div>
+</li>
+<li id="ref-13" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[13]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Kimura, M.</span> (1961). <em class="text-cyan-300">Natural selection as the process of accumulating genetic information in adaptive evolution</em>. <span class="text-slate-400">Genetical Research, 2(1), 127–140</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Rate of Genetic Information Accumulation:</strong> Derivation showing that natural selection functions as an information-accumulating channel whose transmission rate is bounded by fitness variance.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1017/S0016672300000624" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1017/S0016672300000624</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#kimura1961" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-39" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 39 Proof</a> <span class="text-slate-600">&bull;</span> <span class="text-slate-500">&uarr; Back to text:</span> <a href="#cite_ref-13a" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^a</a></div>
+</div>
+</li>
+<li id="ref-14" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[14]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Edwards, K. J., Becker, K., & Colwell, F.</span> (2012). <em class="text-cyan-300">The deep, dark biosphere: intraterrestrial life on Earth</em>. <span class="text-slate-400">Annual Review of Earth and Planetary Sciences, 40, 551–568</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">The Deep Dark Biosphere:</strong> Proof of vast endolithic microbial ecosystems thriving inside fractured oceanic basalt crust kilometers beneath the seabed, powered by abiotic water-rock serpentinization.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1146/annurev-earth-042711-105500" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1146/annurev-earth-042711-105500</a> <span class="text-slate-600">&bull;</span> <a href="companion/bibliography.html#edwards2012" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <span class="text-slate-500">&uarr; Back to text:</span> <a href="#cite_ref-14a" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^a</a> <a href="#cite_ref-14b" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^b</a></div>
+</div>
+</li>
+<li id="ref-15" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[15]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Orcutt, B. N., Sylvan, J. B., Knab, N. J., & Edwards, K. J.</span> (2011). <em class="text-cyan-300">Microbial life in the oceanic crust</em>. <span class="text-slate-400">Microbiology and Molecular Biology Reviews, 75(2), 361–425</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Microbial Life in Oceanic Crustal Aquifers:</strong> Comprehensive review of metabolic pathways and energetic limits in subseafloor basaltic basements and axial rift grabens.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1128/MMBR.00039-10" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1128/MMBR.00039-10</a> <span class="text-slate-600">&bull;</span> <a href="companion/bibliography.html#orcutt2011" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <span class="text-slate-500">&uarr; Back to text:</span> <a href="#cite_ref-15a" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^a</a> <a href="#cite_ref-15b" class="text-slate-400 hover:text-cyan-300 font-mono text-xs px-0.5 font-bold">^b</a></div>
+</div>
+</li>
+<li id="ref-16" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+<span class="text-cyan-400 font-bold shrink-0">[16]</span>
+<div class="space-y-1">
+<div><span class="text-slate-100 font-bold">Schrenk, M. O., Huber, J. A., & Edwards, K. J.</span> (2010). <em class="text-cyan-300">Microbial provinces in the subseafloor</em>. <span class="text-slate-400">Annual Review of Marine Science, 2, 279–304</span>.</div>
+<div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Subseafloor Biogeochemical Provinces:</strong> Spatial heterogeneity, temperature gradients, and abiotic nutrient fluxes in sedimented vs bare-rock basalt oceanic environments.</div></div>
+<div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1146/annurev-marine-120308-081000" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1146/annurev-marine-120308-081000</a> <span class="text-slate-600">&bull;</span> <a href="companion/bibliography.html#schrenk2010" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-16a" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+</div>
+</li>
+</ol>
+</section>
+<hr class="border-t border-slate-800 my-8" />
+<!-- CHAPTER FOOTER NAVIGATION BAR -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-10 pt-6 border-t border-slate-800 font-mono text-xs">
+<a href="THEORETICAL_MODEL.html" class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between group">
+<span class="text-[10px] text-slate-500 uppercase tracking-wider flex items-center gap-1 group-hover:text-cyan-400">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><span>←</span> Previous Section (Volume I.1)</p>
+</span>
+<span class="font-bold text-slate-200 mt-1">🌋 Prebiotic Biophysics &amp; Theory</span>
+</a>
+<a href="index.html" class="p-4 rounded-xl bg-slate-950/80 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between text-center group">
+<span class="text-[10px] text-slate-500 uppercase tracking-wider group-hover:text-emerald-400">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">🏛️ Curriculum Portal</p>
+</span>
+<span class="font-bold text-slate-300 mt-1">Master Library Index</span>
+</a>
+<a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between text-right group">
+<span class="text-[10px] text-slate-500 uppercase tracking-wider flex items-center justify-end gap-1 group-hover:text-cyan-400">
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Next Volume (Volume II) <span>→</span></p>
+</span>
+<span class="font-bold text-slate-200 mt-1">🧬 Gene Regulatory Networks</span>
+</a>
+</div>
       </div>
     </main>
   </div>

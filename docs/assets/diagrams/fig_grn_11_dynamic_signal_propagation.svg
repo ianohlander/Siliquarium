@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 820" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad11" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="50%" stop-color="#071226"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+
+    <!-- Pulse marker -->
+    <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect width="1100" height="820" fill="url(#bgGrad11)"/>
+
+  <!-- Title Banner -->
+  <g transform="translate(40, 40)">
+    <rect width="1020" height="65" rx="12" fill="#0f172a" stroke="#06b6d4" stroke-width="1.5"/>
+    <text x="25" y="32" fill="#38bdf8" font-family="monospace" font-size="18" font-weight="bold" letter-spacing="1.5">FIGURE GRN-11: DYNAMIC SIGNAL PROPAGATION &amp; STATE SWITCHING</text>
+    <text x="25" y="52" fill="#94a3b8" font-family="sans-serif" font-size="12">Clocked Waveform Execution Across 4 Discrete Ticks (t_0 to t_3) with Landauer Dissipation Taxes</text>
+  </g>
+
+  <!-- TIMELINE STAGES (4 COLUMNS: T_0, T_1, T_2, T_3) -->
+  <g transform="translate(40, 130)">
+    <rect width="1020" height="420" rx="12" fill="#0b1329" stroke="#334155" stroke-width="1.2"/>
+
+    <!-- Column Headers -->
+    <g transform="translate(20, 20)">
+      <!-- Tick 0 -->
+      <rect x="0" y="0" width="230" height="35" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+      <text x="15" y="22" fill="#94a3b8" font-family="monospace" font-size="12" font-weight="bold">TICK t_0: INCOMING PULSE</text>
+
+      <!-- Tick 1 -->
+      <rect x="250" y="0" width="230" height="35" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
+      <text x="265" y="22" fill="#34d399" font-family="monospace" font-size="12" font-weight="bold">TICK t_1: GATE 1 ACTIVATION</text>
+
+      <!-- Tick 2 -->
+      <rect x="500" y="0" width="230" height="35" rx="6" fill="#450a0a" stroke="#ef4444" stroke-width="1"/>
+      <text x="515" y="22" fill="#f87171" font-family="monospace" font-size="12" font-weight="bold">TICK t_2: REPRESSION INVERT</text>
+
+      <!-- Tick 3 -->
+      <rect x="750" y="0" width="230" height="35" rx="6" fill="#14532d" stroke="#22c55e" stroke-width="1"/>
+      <text x="765" y="22" fill="#4ade80" font-family="monospace" font-size="12" font-weight="bold">TICK t_3: METABOLIC LATCH</text>
+    </g>
+
+    <!-- Signal Flow Illustrations in each column -->
+
+    <!-- COLUMN 0: Tick 0 -->
+    <g transform="translate(30, 80)">
+      <rect width="215" height="280" rx="8" fill="#020617" stroke="#1e293b" stroke-width="1"/>
+      <!-- Hydrothermal surge arrives -->
+      <circle cx="107" cy="40" r="18" fill="#06b6d4" stroke="#38bdf8" stroke-width="2" filter="url(#glowCyan)"/>
+      <text x="85" y="44" fill="#000" font-family="monospace" font-size="11" font-weight="bold">PULSE</text>
+      <text x="40" y="80" fill="#38bdf8" font-family="sans-serif" font-size="10">Fuel Waveform Surges: 1</text>
+      <!-- Porin accepts -->
+      <rect x="57" y="100" width="100" height="30" rx="4" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
+      <text x="72" y="120" fill="#a7f3d0" font-family="monospace" font-size="10">PORIN_A = 1</text>
+
+      <!-- Gates currently quiescent -->
+      <rect x="57" y="155" width="100" height="30" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+      <text x="75" y="174" fill="#94a3b8" font-family="monospace" font-size="10">G1 (AND): 0</text>
+
+      <rect x="57" y="210" width="100" height="30" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+      <text x="75" y="229" fill="#94a3b8" font-family="monospace" font-size="10">G2 (NOT): 1</text>
+
+      <text x="45" y="265" fill="#64748b" font-family="sans-serif" font-size="9">Dissipation: 0.05T (Leak)</text>
+    </g>
+
+    <!-- COLUMN 1: Tick 1 -->
+    <g transform="translate(280, 80)">
+      <rect width="215" height="280" rx="8" fill="#020617" stroke="#059669" stroke-width="1.2"/>
+      <!-- Porin A HIGH -->
+      <rect x="57" y="30" width="100" height="26" rx="4" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
+      <text x="72" y="47" fill="#a7f3d0" font-family="monospace" font-size="10">PORIN_A = 1</text>
+
+      <!-- Wire traveling pulse -->
+      <line x1="107" y1="56" x2="107" y2="95" stroke="#10b981" stroke-width="3"/>
+      <circle cx="107" cy="75" r="5" fill="#34d399" filter="url(#glowCyan)"/>
+
+      <!-- Gate 1 FIRES! -->
+      <rect x="47" y="100" width="120" height="40" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2" filter="url(#glowCyan)"/>
+      <text x="62" y="125" fill="#bfdbfe" font-family="monospace" font-size="12" font-weight="bold">G1: FIRES! (1)</text>
+
+      <!-- Landauer Tax Callout -->
+      <rect x="35" y="155" width="145" height="24" rx="4" fill="#451a03" stroke="#f59e0b" stroke-width="1"/>
+      <text x="42" y="171" fill="#fde68a" font-family="monospace" font-size="10" font-weight="bold">⚡ Landauer Tax: 1.0T</text>
+
+      <!-- Gate 2 hasn't received pulse yet -->
+      <rect x="57" y="210" width="100" height="30" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+      <text x="75" y="229" fill="#94a3b8" font-family="monospace" font-size="10">G2 (NOT): 1</text>
+
+      <text x="40" y="265" fill="#34d399" font-family="sans-serif" font-size="9">Total Cost: 1.05T</text>
+    </g>
+
+    <!-- COLUMN 2: Tick 2 -->
+    <g transform="translate(530, 80)">
+      <rect width="215" height="280" rx="8" fill="#020617" stroke="#dc2626" stroke-width="1.2"/>
+      <!-- Gate 1 still 1 -->
+      <rect x="47" y="30" width="120" height="30" rx="4" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1"/>
+      <text x="68" y="50" fill="#bfdbfe" font-family="monospace" font-size="10">G1 (AND) = 1</text>
+
+      <!-- Downward repression wire -->
+      <line x1="107" y1="60" x2="107" y2="105" stroke="#ef4444" stroke-width="3"/>
+      <circle cx="107" cy="85" r="5" fill="#f87171" filter="url(#glowCyan)"/>
+
+      <!-- Gate 2 INVERTS & SHUTS DOWN -->
+      <rect x="47" y="110" width="120" height="40" rx="6" fill="#450a0a" stroke="#ef4444" stroke-width="2" filter="url(#glowCyan)"/>
+      <text x="56" y="135" fill="#fca5a5" font-family="monospace" font-size="12" font-weight="bold">G2: FLIPS (0)</text>
+
+      <!-- Landauer Tax Callout -->
+      <rect x="35" y="165" width="145" height="24" rx="4" fill="#451a03" stroke="#f59e0b" stroke-width="1"/>
+      <text x="42" y="181" fill="#fde68a" font-family="monospace" font-size="10" font-weight="bold">⚡ Landauer Tax: 1.0T</text>
+
+      <!-- Repression relieved on downstream -->
+      <text x="35" y="220" fill="#fca5a5" font-family="sans-serif" font-size="10">Repression Relieved!</text>
+      <text x="35" y="235" fill="#cbd5e1" font-family="sans-serif" font-size="10">Battery Synthetase Unlocked</text>
+
+      <text x="40" y="265" fill="#f87171" font-family="sans-serif" font-size="9">Total Cost: 1.05T</text>
+    </g>
+
+    <!-- COLUMN 3: Tick 3 -->
+    <g transform="translate(780, 80)">
+      <rect width="215" height="280" rx="8" fill="#020617" stroke="#22c55e" stroke-width="1.2"/>
+      <!-- Stable Trophocyte Attractor -->
+      <rect x="47" y="30" width="120" height="30" rx="4" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1"/>
+      <text x="68" y="50" fill="#bfdbfe" font-family="monospace" font-size="10">G1 (AND) = 1</text>
+
+      <rect x="47" y="75" width="120" height="30" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+      <text x="68" y="95" fill="#94a3b8" font-family="monospace" font-size="10">G2 (NOT) = 0</text>
+
+      <!-- ATP Battery Charges +2T -->
+      <circle cx="107" cy="155" r="26" fill="#14532d" stroke="#22c55e" stroke-width="2.5" filter="url(#glowCyan)"/>
+      <text x="85" y="159" fill="#bbf7d0" font-family="monospace" font-size="12" font-weight="bold">+2.0 T</text>
+      <text x="60" y="195" fill="#4ade80" font-family="sans-serif" font-size="10" font-weight="bold">Battery Charged</text>
+
+      <!-- Steady State Achieved -->
+      <rect x="25" y="215" width="165" height="26" rx="4" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
+      <text x="32" y="232" fill="#a7f3d0" font-family="monospace" font-size="10" font-weight="bold">STABLE ATTRACTOR (A_1)</text>
+
+      <text x="40" y="265" fill="#4ade80" font-family="sans-serif" font-size="9">Dissipation drops to 0.05T!</text>
+    </g>
+  </g>
+
+  <!-- BOTTOM SECTION: TIMELINE WAVEFORM PLOT (LOGIC TRACE V(t)) -->
+  <g transform="translate(40, 570)">
+    <rect width="1020" height="210" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+    <text x="20" y="26" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="bold">MULTI-CHANNEL LOGIC WAVEFORM TRACE (TIME SERIES OVER TICKS)</text>
+
+    <!-- Channel 1: Environmental Fuel Input -->
+    <g transform="translate(40, 45)">
+      <text x="0" y="16" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">Stream A:</text>
+      <path d="M 100 20 L 220 20 L 220 5 L 940 5" fill="none" stroke="#38bdf8" stroke-width="2"/>
+      <text x="955" y="15" fill="#38bdf8" font-family="monospace" font-size="10">1 (HIGH)</text>
+    </g>
+
+    <!-- Channel 2: Gate 1 (AND) Output -->
+    <g transform="translate(40, 80)">
+      <text x="0" y="16" fill="#60a5fa" font-family="monospace" font-size="11" font-weight="bold">Gate 1 (AND):</text>
+      <path d="M 100 20 L 360 20 L 360 5 L 940 5" fill="none" stroke="#60a5fa" stroke-width="2"/>
+      <text x="955" y="15" fill="#60a5fa" font-family="monospace" font-size="10">1 (HIGH)</text>
+    </g>
+
+    <!-- Channel 3: Gate 2 (NOT) Output -->
+    <g transform="translate(40, 115)">
+      <text x="0" y="16" fill="#f87171" font-family="monospace" font-size="11" font-weight="bold">Gate 2 (NOT):</text>
+      <path d="M 100 5 L 610 5 L 610 20 L 940 20" fill="none" stroke="#f87171" stroke-width="2"/>
+      <text x="955" y="15" fill="#f87171" font-family="monospace" font-size="10">0 (LOW)</text>
+    </g>
+
+    <!-- Channel 4: Landauer Power Dissipation (Impulses) -->
+    <g transform="translate(40, 150)">
+      <text x="0" y="16" fill="#f59e0b" font-family="monospace" font-size="11" font-weight="bold">Landauer (E):</text>
+      <!-- Baseline leak -->
+      <line x1="100" y1="20" x2="940" y2="20" stroke="#475569" stroke-width="1.5"/>
+      <!-- Spike at Tick 1 -->
+      <line x1="360" y1="20" x2="360" y2="0" stroke="#f59e0b" stroke-width="3"/>
+      <polygon points="356,4 360,0 364,4" fill="#f59e0b"/>
+      <text x="345" y="-5" fill="#fde68a" font-family="monospace" font-size="9">+1.0T</text>
+      <!-- Spike at Tick 2 -->
+      <line x1="610" y1="20" x2="610" y2="0" stroke="#f59e0b" stroke-width="3"/>
+      <polygon points="606,4 610,0 614,4" fill="#f59e0b"/>
+      <text x="595" y="-5" fill="#fde68a" font-family="monospace" font-size="9">+1.0T</text>
+      <text x="955" y="15" fill="#94a3b8" font-family="monospace" font-size="10">0.05T leak</text>
+    </g>
+  </g>
+
+</svg>

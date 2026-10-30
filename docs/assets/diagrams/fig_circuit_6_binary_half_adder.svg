@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 450" width="980" height="450" class="w-full h-auto font-sans">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#6b21a8" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+
+    <!-- Glow Filters -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-emerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
+  </style>
+
+  <!-- Canvas Background -->
+  <rect width="980" height="450" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  
+  <g transform="translate(30, 34)">
+    <text class="title">Figure 9.1: 1-Bit Binary Half-Adder</text>
+    <text y="20" class="subtitle">Digital arithmetic computation via dual XOR (sum) and AND (carry-out) catalytic logic</text>
+  </g>
+
+  <!-- Left: Schematic Netlist -->
+  <g transform="translate(30, 70)">
+    <rect width="445" height="355" rx="12" fill="#081e26" stroke="#00e5ff" stroke-width="1.5" />
+    <rect x="16" y="14" width="240" height="24" rx="4" fill="#0e7490" />
+    <text x="26" y="30" class="badge" fill="#cffafe">1-BIT BINARY HALF-ADDER</text>
+    <text x="270" y="30" class="label" fill="#22d3ee">Combinatorial Parity</text>
+
+    <!-- Schematic: XOR and AND in parallel -->
+    <g transform="translate(20, 48)">
+      <!-- Inputs A and B -->
+      <text x="0" y="28" class="code" font-size="11" fill="#38bdf8">Input A (Fuel A)</text>
+      <text x="0" y="82" class="code" font-size="11" fill="#10b981">Input B (Fuel B)</text>
+
+      <!-- XOR Gate (Sum) -->
+      <rect x="125" y="10" width="80" height="34" rx="6" fill="#155e75" stroke="#22d3ee" stroke-width="1.5" />
+      <text x="140" y="32" class="code" fill="#ffffff" font-weight="bold">XOR</text>
+
+      <!-- AND Gate (Carry) -->
+      <rect x="125" y="65" width="80" height="34" rx="6" fill="#065f46" stroke="#10b981" stroke-width="1.5" />
+      <text x="140" y="87" class="code" fill="#ffffff" font-weight="bold">AND</text>
+
+      <!-- Connections -->
+      <path d="M 100 24 L 125 24" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)" />
+      <path d="M 100 78 L 125 78" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrow-emerald)" />
+      <path d="M 110 24 L 110 72 L 125 72" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow-cyan)" />
+      <path d="M 115 78 L 115 32 L 125 32" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrow-emerald)" />
+
+      <!-- Outputs -->
+      <path d="M 205 27 L 255 27" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrow-cyan)" />
+      <text x="265" y="31" class="code" font-size="11" fill="#22d3ee" font-weight="bold">Sum (S = A ⊕ B)</text>
+
+      <path d="M 205 82 L 255 82" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-emerald)" />
+      <text x="265" y="86" class="code" font-size="11" fill="#10b981" font-weight="bold">Carry (C = A · B)</text>
+    </g>
+
+    <!-- Circuit Architecture Box -->
+    <g transform="translate(16, 175)">
+      <rect width="413" height="78" rx="8" fill="#051722" stroke="#155e75" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#67e8f9">ARITHMETIC DECOMPOSITION</text>
+      <text x="14" y="38" class="code" font-size="8.8" fill="#22d3ee">Sum Flag (S): Parity detector fires when exactly ONE resource exists</text>
+      <text x="14" y="54" class="code" font-size="8.8" fill="#10b981">Carry Flag (C): Quorum detector fires when BOTH co-occur (Overflow)</text>
+      <text x="14" y="70" class="subtitle" font-size="9">Enables true multi-bit digital arithmetic in prebiotic chemical networks</text>
+    </g>
+
+    <!-- Callout -->
+    <g transform="translate(16, 265)">
+      <rect width="413" height="65" rx="8" fill="#083344" stroke="#0e7490" stroke-width="1" />
+      <text x="14" y="20" class="label-bold" fill="#67e8f9">Digital Arithmetic in Living Cells</text>
+      <text x="14" y="38" class="subtitle" font-size="9.5">• Decomposes dual fuel streams into basal maintenance vs. reproduction</text>
+      <text x="14" y="54" class="code" font-size="9" fill="#facc15">★ Landmark: Alon (2019) An Introduction to Systems Biology</text>
+    </g>
+  </g>
+
+  <!-- Right: Truth Table & Metabolic Yield -->
+  <g transform="translate(505, 70)">
+    <rect width="445" height="355" rx="12" fill="#081e26" stroke="#00e5ff" stroke-width="1.5" />
+    <rect x="16" y="14" width="240" height="24" rx="4" fill="#0e7490" />
+    <text x="26" y="30" class="badge" fill="#cffafe">ARITHMETIC TRUTH TABLE</text>
+    <text x="270" y="30" class="label" fill="#22d3ee">Metabolic Quorum</text>
+
+    <!-- Truth Table Box -->
+    <g transform="translate(16, 48)">
+      <rect width="413" height="120" rx="8" fill="#051722" stroke="#155e75" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#67e8f9">ARITHMETIC TRUTH TABLE &amp; METABOLIC YIELD</text>
+      <text x="14" y="38" class="code" font-size="8.8" fill="#cbd5e1">A=0, B=0 ──► Sum=0, Carry=0 [Basal Idle: 0 Tokens Burned]</text>
+      <text x="14" y="58" class="code" font-size="8.8" fill="#22d3ee">A=1, B=0 ──► Sum=1, Carry=0 [Fuel A Alone: +5 Tokens (Maintenance)]</text>
+      <text x="14" y="78" class="code" font-size="8.8" fill="#22d3ee">A=0, B=1 ──► Sum=1, Carry=0 [Fuel B Alone: +5 Tokens (Maintenance)]</text>
+      <text x="14" y="98" class="code" font-size="8.8" fill="#facc15">A=1, B=1 ──► Sum=0, Carry=1 [CO-OCCURRENCE: +20T DIVISION TRIGGER!]</text>
+    </g>
+
+    <!-- Stoichiometric Decoupling Box -->
+    <g transform="translate(16, 175)">
+      <rect width="413" height="78" rx="8" fill="#051722" stroke="#155e75" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#67e8f9">STOICHIOMETRIC QUORUM DECISION</text>
+      <text x="14" y="38" class="code" font-size="8.8" fill="#facc15">Division Trigger: Carry bit routes battery power to FtsZ septum ring</text>
+      <text x="14" y="54" class="subtitle" font-size="9">Prevents premature cell division when only partial nutrients are available</text>
+      <text x="14" y="70" class="code" font-size="8.8" fill="#22d3ee">Guarantees daughter cells inherit sufficient reserves to survive</text>
+    </g>
+
+    <!-- Callout -->
+    <g transform="translate(16, 265)">
+      <rect width="413" height="65" rx="8" fill="#083344" stroke="#0e7490" stroke-width="1" />
+      <text x="14" y="20" class="label-bold" fill="#67e8f9">Evolutionary Significance</text>
+      <text x="14" y="38" class="subtitle" font-size="9.5">• Origin of multi-bit arithmetic and combinatorial logic in living matter</text>
+      <text x="14" y="54" class="code" font-size="9" fill="#facc15">★ Enables complex metabolic branch point decisions</text>
+    </g>
+  </g>
+
+</svg>

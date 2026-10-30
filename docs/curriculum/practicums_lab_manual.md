@@ -32,7 +32,7 @@ Review Unit 1, Section 5. In your notebook, define Pattee's **Epistemic Cut** an
    - **Zoom:** Scroll wheel to zoom from a bird's-eye view of the caldera down to an individual hexagonal pore.
 3. Locate the central hydrothermal caldera nozzle at coordinates $(0, 0, 0)$. Notice the glowing thermal convection plume rising vertically into the water column.
 
-![Figure L1.1: The Panoramic 3D Seafloor Seamount & Interactive Lattice Key](assets/screenshots/01_overview_and_lattice_key.png)
+![Figure L1.1: The Panoramic 3D Seafloor Seamount & Interactive Lattice Key](../assets/screenshots/01_overview_and_lattice_key.png)
 
 > [!TIP]
 > **Field Guide Callout: Reading the 3D Seamount & Lattice States**
@@ -45,9 +45,9 @@ Review Unit 1, Section 5. In your notebook, define Pattee's **Epistemic Cut** an
 6. Open the **Circuit Microscope** panel on the right side of the screen. Identify the three core anatomical compartments:
    - **The Genome Safe Ribbon:** The 60-bit inert tape displayed across the top.
    - **The Active Workshop Netlist:** The physical logic gates (`AND`, `OR`, `NOT`, `BUF`) and pulsing signal wires.
-   - **The Battery Gauge:** Real-time token counter ($0..100$).
+   - **The Battery Gauge:** Real-time token counter ($0..100$) tracking chemiosmotic electrochemical charge accumulation (Mitchell 1961)<sup id="cite_ref-2" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup>.
 
-![Figure L1.2: Selected Silicoid with Neon Reticle and Live Circuit Microscope](assets/screenshots/03_selected_silicoid_and_microscope.png)
+![Figure L1.2: Selected Silicoid with Neon Reticle and Live Circuit Microscope](../assets/screenshots/03_selected_silicoid_and_microscope.png)
 
 > [!NOTE]
 > **Field Guide Callout: Anatomy of the Circuit Microscope**
@@ -58,7 +58,7 @@ Review Unit 1, Section 5. In your notebook, define Pattee's **Epistemic Cut** an
 7. Click the **Pause** button (`❚❚`) on the bottom transport bar. Use the **Step Forward** button (`Step ►`) to advance the simulation clock cycle by clock cycle ($\pm 1$ tick).
 8. Observe how gate pins light up when vent pulses enter the pore, and track whether the battery charges or discharges.
 
-![Figure L1.3: Deep Zoom into In-Situ Hexagonal Logic Gate Netlist](assets/screenshots/04_deep_zoom_and_insitu_circuit.png)
+![Figure L1.3: Deep Zoom into In-Situ Hexagonal Logic Gate Netlist](../assets/screenshots/04_deep_zoom_and_insitu_circuit.png)
 
 > [!NOTE]
 > **Field Guide Callout: In-Situ Micro-Pore Inspection**
@@ -82,7 +82,7 @@ Select three distinct occupied pores at varying distances from the vent nozzle a
 ## ⚡ Lab 2: Observing Landauer Power Dissipation & Metabolic Starvation
 
 ### 1. Learning Objectives
-1. Quantify dynamic Landauer switching dissipation ($1$ token per gate toggle) versus basal maintenance decay ($1$ token every 10 ticks).
+1. Quantify dynamic Landauer switching dissipation<sup id="cite_ref-1" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-1">[1]</a></sup> ($1$ token per gate toggle) versus basal maintenance decay ($1$ token every 10 ticks).
 2. Demonstrate that computation is not free: show that excessive, uncoordinated gate switching causes rapid metabolic starvation.
 3. Verify the First Law of Thermodynamics ($\Delta E_{\text{universe}} = 0.000$) using the Thermodynamic Ledger.
 
@@ -104,7 +104,7 @@ Review Unit 2, Section 5. Write the algebraic formula for Rolf Landauer's thermo
 8. Inspect the **Thermodynamic Ledger HUD badge** at the top right:
    $$\Delta E_{\text{universe}} = \sum E_{\text{in}} - \sum E_{\text{stored}} - \sum E_{\text{dissipated}} = 0.000$$
 
-![Figure L2.1: Landauer Power Dissipation & Dynamic CMOS Switching Ledger](assets/diagrams/fig2_3_landauer_dissipation.svg)
+![Figure L2.1: Landauer Power Dissipation & Dynamic CMOS Switching Ledger](../assets/diagrams/fig2_3_landauer_dissipation.svg)
 
 > [!NOTE]
 > **Field Guide Callout: Reading the Thermodynamic Ledger**
@@ -132,7 +132,7 @@ Review Unit 2, Section 5. Write the algebraic formula for Rolf Landauer's thermo
 ### 1. Learning Objectives
 1. Observe natural selection favoring catalytic `AND` enzymes that resonate with complementary vent pulses.
 2. Investigate the selective advantage of allosteric inhibitor `NOT` gates during periodic toxin ($T$) pulses.
-3. Map decoded 6-bit codons from the genome tape to physical circuit netlists using the Codon Table.
+3. Map decoded 6-bit codons from the genome tape to physical circuit netlists using the Codon Table and in-situ network motif analysis (Alon 2019)<sup id="cite_ref-4" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-4">[4]</a></sup>.
 
 ### 2. Theoretical Pre-Lab Preparation
 Review Unit 2, Section 2. Explain why a cell with genotype expressing `(A AND B) AND (NOT T)` will outcompete a simple `A AND B` cell in a toxic vent regime.
@@ -150,7 +150,7 @@ Review Unit 2, Section 2. Explain why a cell with genotype expressing `(A AND B)
    - Group the 60 bits into ten 6-bit codons: `[Bits 0-5]`, `[Bits 6-11]`, ..., `[Bits 54-59]`.
    - Identify whether the cell possesses `PORIN_TOXIN_T` coupled to an inhibitory `GATE_NOT`.
 
-![Figure L3.1: Primitive Catalytic Enzymes and Toxin Inhibition Motifs](assets/diagrams/fig2_1_primitive_enzymes.svg)
+![Figure L3.1: Primitive Catalytic Enzymes and Toxin Inhibition Motifs](../assets/diagrams/fig2_1_primitive_enzymes.svg)
 
 > [!NOTE]
 > **Field Guide Callout: Codons to Catalytic Gates**
@@ -197,7 +197,7 @@ Review Unit 4, Section 6. Define the Shannon Diversity Index ($H$). What happens
    - Click **"🔥 Thermal Surge Pulse"** (+200 tokens injected into the central plume).
    - Observe the immediate metabolic boom: cells adjacent to the caldera rapidly hit $100$ tokens and trigger a wave of binary fissions.
 
-![Figure L4.1: God-Suite Experimental Interventions Panel](assets/screenshots/05_god_suite_lab_controls.png)
+![Figure L4.1: God-Suite Experimental Interventions Panel](../assets/screenshots/05_god_suite_lab_controls.png)
 
 > [!TIP]
 > **Field Guide Callout: Operating the God-Suite Drawer**
@@ -211,7 +211,7 @@ Review Unit 4, Section 6. Define the Shannon Diversity Index ($H$). What happens
    - Watch the selected quadrant collapse into carcass rubble.
 6. Record the immediate collapse of $H$ and $N_{\text{living}}$.
 
-![Figure L4.2: Thermal Surge Pulse & Catastrophic Extinction Shock](assets/screenshots/06_thermal_surge_and_extinction.png)
+![Figure L4.2: Thermal Surge Pulse & Catastrophic Extinction Shock](../assets/screenshots/06_thermal_surge_and_extinction.png)
 
 > [!WARNING]
 > **Field Guide Callout: Post-Extinction Collapse & Rubble**
@@ -240,7 +240,7 @@ Review Unit 4, Section 6. Define the Shannon Diversity Index ($H$). What happens
 ## 🦕 Lab 5: Lenski Long-Term Evolution Experiment (LTEE) & Evolutionary Flight Recorder Autopsy
 
 ### 1. Learning Objectives
-1. Conduct a digital analogue of Richard Lenski's Long-Term Evolution Experiment (LTEE).
+1. Conduct a digital analogue of Richard Lenski's Long-Term Evolution Experiment (LTEE) (Lenski et al. 1991)<sup id="cite_ref-3" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-3">[3]</a></sup>.
 2. Trace an organism's ancestral lineage back to Generation 0 using [`EvolutionaryFlightRecorder.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts).
 3. Perform a counterfactual single-bit autopsy using [`FossilFreezer.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/FossilFreezer.ts) to isolate the exact point mutation that assembled a novel network motif.
 4. Mathematically prove whether two lineages sharing a network motif represent **Homology** or **Homoplasy / Convergent Evolution**.
@@ -269,7 +269,7 @@ Review Unit 4, Section 5. Review Richard Lenski's discovery of the $Cit^+$ trait
    - Run the automated Least Common Ancestor (LCA) query.
    - Check the audit verdict: does it declare **HOMOLOGY** or **HOMOPLASY**?
 
-![Figure L5.1: Richard Lenski LTEE Trajectory and Homology vs. Homoplasy Phylogeny](assets/diagrams/fig4_2_lenski_and_phylogeny.svg)
+![Figure L5.1: Richard Lenski LTEE Trajectory and Homology vs. Homoplasy Phylogeny](../assets/diagrams/fig4_2_lenski_and_phylogeny.svg)
 
 > [!NOTE]
 > **Field Guide Callout: Reading the Phylogenetic Audit**
@@ -307,6 +307,9 @@ Review Unit 4, Section 5. Review Richard Lenski's discovery of the $Cit^+$ trait
 
 ### Seminar 3: Historical Contingency vs. Determinism
 > *"Stephen Jay Gould famously asked: if we could 'replay the tape of life' from the beginning, would anything look the same? In Richard Lenski's LTEE, only one out of twelve lineages evolved citrate metabolism, requiring a specific pre-adaptation. In Siliquarium, if we run two simulations with the exact same starting seed, but introduce a single bit-flip perturbation at Tick 100, what will happen to the macro-evolutionary trajectory? Is convergence inevitable, or is history hostage to contingency?"*
+
+### Seminar 4: Richard Dawkins' Genetic Book of the Dead & The Environmental Fountainhead
+> *"In 'The Genetic Book of the Dead' (2024)<sup id="cite_ref-5" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-5">[5]</a></sup>, Richard Dawkins proposes that a genome is not an author, but an inverse parchment written by the environment. Consider a Siliquarium organism whose genome has evolved an SR bistable latch that triggers nutrient intake only when Stream B arrives after Stream A. Does the silicoid 'know' the vent's rhythm? Where did this information originate? Mathematically formulate how the mortality of uncoordinated ancestors acts as the physical communication channel (Kimura, 1961; Adami, 2000)<sup id="cite_ref-6" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-6">[6]</a></sup> transferring bits from the hydrothermal plume into the 60-bit safe."*
 
 ---
 
@@ -403,3 +406,93 @@ Given a 3-gate circuit:
   - Node 3: $\text{OR}:[\text{AND}]$
 - Applying deterministic hash produces updated color multiset.
 - **Permutation Invariance:** If the gates are re-indexed such that Node 3 is placed first, the neighbor multiset is lexicographically sorted prior to hashing (`SORT(...)`). The resulting collection of color hashes across the graph remains identical, yielding the exact same canonical invariant hash.
+
+---
+
+#### Problem 3: Calculating Christoph Adami's Genomic Mutual Information $C(X) = I(X; E)$
+A hydrothermal environment $E$ has two equally probable states: Fuel Plume Active ($E = 1$, $p=0.5$) and Fuel Plume Inactive ($E = 0$, $p=0.5$).
+1. Calculate the Shannon entropy of the environment $H(E) = -\sum p(e) \log_2 p(e)$.
+2. Protocell Alpha possesses an unevolved, random 60-bit genome tape. Its logic gates fire completely at random, uncorrelated with the environment ($P(X=1 \mid E=1) = 0.5$, $P(X=1 \mid E=0) = 0.5$). Calculate the conditional entropy $H(E \mid X_{\text{Alpha}})$ and its physical genomic complexity $C(X_{\text{Alpha}}) = I(X_{\text{Alpha}}; E)$.
+3. Protocell Beta has evolved a catalytic `GATE_AND` sensor perfectly coupled to the vent plume ($P(X=1 \mid E=1) = 1.0$, $P(X=1 \mid E=0) = 0.0$). Calculate $H(E \mid X_{\text{Beta}})$ and $C(X_{\text{Beta}}) = I(X_{\text{Beta}}; E)$.
+4. According to Adami (2000)<sup id="cite_ref-6" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-6">[6]</a></sup> and Dawkins (2024)<sup id="cite_ref-5" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-5">[5]</a></sup>, where did Protocell Beta's 1 bit of information originate?
+
+*Worked Solution:*
+1. **Environmental Entropy:**
+   $$H(E) = -(0.5 \log_2 0.5 + 0.5 \log_2 0.5) = 1.0 \text{ bit}$$
+2. **Protocell Alpha (Random Genome):**
+   - Because $X_{\text{Alpha}}$ is statistically independent of $E$:
+     $$H(E \mid X_{\text{Alpha}}) = H(E) = 1.0 \text{ bit}$$
+   - Genomic Complexity / Mutual Information:
+     $$C(X_{\text{Alpha}}) = I(X_{\text{Alpha}}; E) = H(E) - H(E \mid X_{\text{Alpha}}) = 1.0 - 1.0 = 0.0 \text{ bits}$$
+   - *Conclusion:* Even though Alpha possesses 60 physical bits in its Safe, its physical genomic complexity is exactly zero because it contains zero information about its environment!
+3. **Protocell Beta (Evolved Adapted Genome):**
+   - Because $X_{\text{Beta}}$ uniquely determines $E$, the conditional uncertainty of the environment given the genome's state is zero:
+     $$H(E \mid X_{\text{Beta}}) = 0.0 \text{ bits}$$
+   - Genomic Complexity / Mutual Information:
+     $$C(X_{\text{Beta}}) = I(X_{\text{Beta}}; E) = 1.0 - 0.0 = 1.0 \text{ bit}$$
+4. **Epistemological Source:**
+   - The 1 bit of information was **not created by mutation**. Mutation provided only random bitflips.
+   - The information was **injected from the hydrothermal environment $E$**. The death (lysis) of all random variants that fired during inactive ticks ($E=0$) filtered out entropic noise, leaving surviving lineages with a physical mirror of the external world ($C(X) = 1.0$ bit).
+
+
+<!-- COMPLETE ACADEMIC REFERENCES & CITATIONS -->
+<section id="references" class="mt-16 pt-8 border-t border-slate-800 space-y-6">
+<div class="flex items-center justify-between border-b border-slate-800 pb-3">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-800 text-cyan-400 font-mono font-bold text-xs flex items-center justify-center">📚</span>
+<h2 class="text-lg md:text-xl font-mono font-bold text-slate-100">References &amp; Foundational Literature</h2>
+</div>
+<span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Wikipedia-Style Academic Citations</span>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed font-sans">The theoretical assertions, biophysical models, and computer architectural frameworks presented in this volume are grounded in the following seminal peer-reviewed literature. Numbered superscripts throughout the text link directly to these entries.</p>
+<ol class="space-y-3.5 text-xs font-mono text-slate-300">
+    <li id="ref-1" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[1]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Landauer, R.</span> (1961). <em class="text-cyan-300">Irreversibility and heat generation in the computing process</em>. <span class="text-slate-400">IBM Journal of Research and Development, 5(3), 183–191</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Landauer Dynamic Switching Dissipation:</strong> Laboratory verification of metabolic starvation: idle gates consume 0 tokens; active gate switching dissipates 1 token per toggle.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1147/rd.53.0183" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1147/rd.53.0183</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#landauer1961" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-1" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-2" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[2]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Mitchell, P.</span> (1961). <em class="text-cyan-300">Coupling of phosphorylation to electron and hydrogen transfer by a chemi-osmotic type of mechanism</em>. <span class="text-slate-400">Nature, 191(4784), 144–148</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Chemiosmotic Proton Motive Force Harvesting:</strong> Tracking pore battery charge as cells harvest synthetic hydrothermal fuel streams.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1038/191144a0" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1038/191144a0</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#mitchell1961" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-2" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-3" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[3]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Lenski, R. E., Rose, M. R., Simpson, S. C., & Tadler, S. C.</span> (1991). <em class="text-cyan-300">Long-term experimental evolution in Escherichia coli. I. Adaptation and divergence during 2,000 generations</em>. <span class="text-slate-400">The American Naturalist, 138(6), 1315–1341</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Lenski -80°C Cryogenic Fossil Freezing & Autopsy:</strong> Single-bit counterfactual autopsies: freezing ancestors and pinpointing the exact bit mutation that sparked motif emergence.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1086/285289" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1086/285289</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#weisfeiler1968" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-3" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-4" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[4]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Alon, U.</span> (2019). <em class="text-cyan-300">An Introduction to Systems Biology: Design Principles of Biological Networks (2nd ed.)</em>. <span class="text-slate-400">CRC Press / Taylor & Francis Group. ISBN: 978-1439837016</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">In-Situ Circuit Diagnostics & Weisfeiler-Lehman Verification:</strong> Using the Circuit Microscope to inspect logic gate netlists and verify topological WL invariants.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1201/9780429283901" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1201/9780429283901</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#alon2019" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-4" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-5" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[5]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Dawkins, R.</span> (2024). <em class="text-cyan-300">The Genetic Book of the Dead: A Darwinian Reverie of Ancestral Worlds</em>. <span class="text-slate-400">Head of Zeus / Apollo. ISBN: 978-1804548486</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">The Genetic Book of the Dead:</strong> The genome is an inverse description of the ancestral environments that sculpted it; natural selection acts as the communication scribe.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="../companion/bibliography.html#dawkins2024" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-5" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-6" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[6]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Adami, C., Ofria, C., & Collier, T. C.</span> (2000). <em class="text-cyan-300">Evolution of biological complexity</em>. <span class="text-slate-400">Proceedings of the National Academy of Sciences, 97(9), 4463–4468</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Complexity as Mutual Information:</strong> Formal proof that genomic complexity is the mutual information between the genome bitstring and the physical environment: C(X) = I(X; E).</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1073/pnas.97.9.4463" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1073/pnas.97.9.4463</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#adami2000" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-6" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+</ol>
+</section>

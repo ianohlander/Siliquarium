@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440" class="w-full h-auto font-sans">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#7e22ce" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#c084fc" />
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <style>
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 14.5px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="440" rx="12" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Header -->
+  <text x="24" y="32" class="title">🌲 DENDRITIC ARBORESCENT CORAL TOPOLOGY</text>
+  <text x="24" y="50" class="subtitle">Acyclic branching tree graphs exploring diverse thermal and chemical chemoclines</text>
+
+  <!-- Left: Tree Graph Schematic -->
+  <g transform="translate(24, 70)">
+    <rect width="370" height="346" rx="8" fill="url(#cardGrad)" stroke="#334155" stroke-width="1" />
+    <text x="185" y="24" text-anchor="middle" class="label-bold" fill="#34d399">Branching Topology (Δ ≥ 3, τ = 0)</text>
+
+    <!-- Branch Conduits -->
+    <!-- Root to Hub -->
+    <line x1="185" y1="300" x2="185" y2="210" stroke="#c084fc" stroke-width="3.5" />
+    <!-- Hub to Branch 1 & 2 -->
+    <line x1="185" y1="210" x2="110" y2="140" stroke="#c084fc" stroke-width="3" />
+    <line x1="185" y1="210" x2="260" y2="140" stroke="#c084fc" stroke-width="3" />
+    <!-- Sub-branches -->
+    <line x1="110" y1="140" x2="60" y2="70" stroke="#c084fc" stroke-width="2.5" />
+    <line x1="110" y1="140" x2="140" y2="70" stroke="#c084fc" stroke-width="2.5" />
+    <line x1="260" y1="140" x2="230" y2="70" stroke="#c084fc" stroke-width="2.5" />
+    <line x1="260" y1="140" x2="310" y2="70" stroke="#c084fc" stroke-width="2.5" />
+
+    <!-- Terminal Leaf Scouts (Degree 1) -->
+    <polygon points="75.6,61.0 75.6,79.0 60.0,88.0 44.4,79.0 44.4,61.0 60.0,52.0" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+    <polygon points="155.6,61.0 155.6,79.0 140.0,88.0 124.4,79.0 124.4,61.0 140.0,52.0" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+    <polygon points="245.6,61.0 245.6,79.0 230.0,88.0 214.4,79.0 214.4,61.0 230.0,52.0" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+    <polygon points="325.6,61.0 325.6,79.0 310.0,88.0 294.4,79.0 294.4,61.0 310.0,52.0" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="185" y="52" text-anchor="middle" class="badge" fill="#38bdf8">🛡️ TERMINAL SOMATIC SCOUTS (deg = 1)</text>
+
+    <!-- Branch Nodes (Degree 3) -->
+    <polygon points="129.1,129.0 129.1,151.0 110.0,162.0 90.9,151.0 90.9,129.0 110.0,118.0" fill="#0f172a" stroke="#10b981" stroke-width="2" />
+    <polygon points="279.1,129.0 279.1,151.0 260.0,162.0 240.9,151.0 240.9,129.0 260.0,118.0" fill="#0f172a" stroke="#10b981" stroke-width="2" />
+
+    <!-- Central Fork Hub (Degree 3) -->
+    <polygon points="207.5,197.0 207.5,223.0 185.0,236.0 162.5,223.0 162.5,197.0 185.0,184.0" fill="#0f172a" stroke="#f59e0b" stroke-width="2.5" />
+    <text x="185" y="206" text-anchor="middle" class="code" fill="#f59e0b">HUB</text>
+    <text x="185" y="220" text-anchor="middle" class="badge" fill="#ffffff">deg = 3</text>
+
+    <!-- Root Anchor (Degree 1) -->
+    <polygon points="205.8,288.0 205.8,312.0 185.0,324.0 164.2,312.0 164.2,288.0 185.0,276.0" fill="#0f172a" stroke="#94a3b8" stroke-width="2" />
+    <text x="185" y="296" text-anchor="middle" class="code" fill="#94a3b8">ROOT</text>
+    <text x="185" y="310" text-anchor="middle" class="badge" fill="#ffffff">⚓ Anchor</text>
+
+    <text x="185" y="335" text-anchor="middle" class="subtitle">Acyclic: |E| = |V| - 1 = 8 - 1 = 7 edges</text>
+  </g>
+
+  <!-- Right: Graph Theory Invariants & Ecological Strategy -->
+  <g transform="translate(418, 70)">
+    <rect width="358" height="346" rx="8" fill="url(#cardGrad)" stroke="#334155" stroke-width="1" />
+    <text x="179" y="24" text-anchor="middle" class="label-bold" fill="#38bdf8">Diagnostic Invariant &amp; Graph Metrics</text>
+
+    <!-- Equation Box -->
+    <rect x="16" y="40" width="326" height="66" rx="6" fill="#0c1222" stroke="#34d399" stroke-width="1.2" />
+    <text x="179" y="66" text-anchor="middle" class="code" font-size="12.5px" fill="#34d399">max(deg(v)) ≥ 3   AND   τ(G) = 0</text>
+    <text x="179" y="88" text-anchor="middle" class="subtitle" fill="#cbd5e1">Branching arborization with zero mutual 3-pore triangular cliques</text>
+
+    <!-- Metric Breakdown -->
+    <g transform="translate(16, 120)">
+      <rect width="326" height="96" rx="6" fill="#131c31" stroke="#334155" />
+      <text x="12" y="22" class="label">Total Vertices (|V|): <tspan class="code">8</tspan></text>
+      <text x="170" y="22" class="label">Total Edges (|E|): <tspan class="code">7</tspan></text>
+      <text x="12" y="44" class="label">Clustering C(G): <tspan class="code">0.00 (Zero Cliques)</tspan></text>
+      <text x="170" y="44" class="label">Betti γ(G): <tspan class="code">0 (Acyclic)</tspan></text>
+      <text x="12" y="66" class="label">Tree Invariant: <tspan class="code" fill="#38bdf8">|E| = |V| - 1</tspan></text>
+      <text x="12" y="86" class="subtitle">Maximally spans spatial volume per metabolic unit of biomass</text>
+    </g>
+
+    <!-- Ecological Role -->
+    <g transform="translate(16, 230)">
+      <rect width="326" height="100" rx="6" fill="#131c31" stroke="#334155" />
+      <text x="12" y="22" class="label-bold" fill="#fbbf24">🌾 Ecological Niche: Chemocline Foraging</text>
+      <text x="12" y="42" class="subtitle">1. Dendritic branches reach across diverse micro-thermal gradients.</text>
+      <text x="12" y="62" class="subtitle">2. If one branch is poisoned by heavy metals, others continue feeding.</text>
+      <text x="12" y="82" class="subtitle">3. Natural biological analog: Arborescent bryozoans and deep-sea gorgonians.</text>
+    </g>
+  </g>
+  
+</svg>

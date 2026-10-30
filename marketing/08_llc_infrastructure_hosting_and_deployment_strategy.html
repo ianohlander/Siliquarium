@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 08: LLC Formation, VPS Hosting & Deployment Strategy — Siliquarium Marketing</title>
+  <meta name="author" content="Ian Ohlander / Jack Vance">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
+    .font-mono { font-family: 'Space Mono', monospace; }
+    .rainbow-border { background: linear-gradient(90deg, #38bdf8 0%, #06b6d4 25%, #10b981 50%, #fbbf24 75%, #f43f5e 100%); }
+    .card-box { background: #090e1a; border: 1px solid #1e293b; border-radius: 0.75rem; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #020617; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
+
+  <div class="h-1.5 w-full rainbow-border sticky top-0 z-50"></div>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="bg-[#090e1a]/95 border-b border-[#1e293b] px-6 py-3 flex flex-wrap items-center justify-between shadow-md gap-4 sticky top-1.5 z-40 backdrop-blur-md">
+    <div class="flex items-center space-x-3">
+      <a href="index.html" class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center shadow text-black font-extrabold text-base hover:scale-105 transition">
+        🐠
+      </a>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">Step 08 &bull; Marketing Suite</span>
+          <span class="px-2 py-0.5 rounded text-[9px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800">Legal, VPS & Infrastructure</span>
+        </div>
+        <h1 class="text-sm md:text-base font-extrabold text-white truncate max-w-xl">LLC Formation, VPS Hosting & Deployment Strategy</h1>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Links -->
+    <div class="flex items-center space-x-2 text-xs font-mono">
+      <a href="07_ui_ux_gaming_experience_and_arena_blueprint.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5 text-xs font-mono"><span>&larr;</span> <span>Step 07</span></a>
+      <a href="index.html" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-lg transition border border-slate-700 flex items-center gap-1">
+        <span>🏠</span> <span>Operations Center</span>
+      </a>
+      <a href="index.html" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-black font-extrabold transition flex items-center gap-1.5 text-xs font-mono shadow"><span>Return to Dashboard</span> <span>&check;</span></a>
+      <a href="../index.html" class="px-3 py-1.5 bg-cyan-950 hover:bg-cyan-900 text-cyan-200 rounded-lg transition border border-cyan-800 hidden sm:inline-flex items-center gap-1">
+        <span>⚡</span> <span>Simulator</span>
+      </a>
+      <a href="../docs/CURRICULUM_AND_SYLLABUS.html" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition border border-slate-700 hidden md:inline-flex items-center gap-1">
+        <span>📑</span> <span>Curriculum</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Two-Column Layout: Sidebar TOC + Main Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- LEFT SIDEBAR: STICKY TABLE OF CONTENTS -->
+    <aside class="lg:col-span-4 space-y-4 lg:sticky lg:top-16">
+      
+      <!-- Current Step Meta Card -->
+      <div class="card-box p-4 border-l-4 border-l-cyan-500 shadow-md">
+        <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-1">
+          <span>OPERATIONAL STEP</span>
+          <span class="text-cyan-400 font-bold">#08 OF 06</span>
+        </div>
+        <h3 class="font-extrabold text-white text-base leading-tight mb-1">LLC Formation, VPS Hosting & Deployment Strategy</h3>
+        <p class="text-xs text-slate-400 font-sans">Jack Vance's Unvarnished Reality Check: Umbrella LLC, Hostinger VPS, Domain Routing & Anti-Spam Email</p>
+      </div>
+
+      <!-- Table of Contents Nav Box -->
+      <div class="card-box p-4 shadow-md max-h-[68vh] flex flex-col">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+          <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
+            <span>📑</span> <span>Table of Contents</span>
+          </span>
+          <span class="text-[10px] font-mono text-slate-500">Jump to section</span>
+        </div>
+        <div class="overflow-y-auto space-y-0.5 pr-1">
+          
+          <a href="#ian-here-is-the-unvarnished-truth" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>Ian, Here Is the Unvarnished Truth.</span>
+          </a>
+        
+
+          <a href="#1-the-llc-decision-corporate-shield-vs-bureaucratic-money-pit" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>1. The LLC Decision: Corporate Shield vs. Bureaucratic Money Pit</span>
+          </a>
+        
+
+          <a href="#11-is-an-llc-advisable-right-now" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>1.1 Is an LLC Advisable Right Now?</span>
+          </a>
+        
+
+          <a href="#12-the-delaware-myth-the-trap-to-avoid" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>1.2 The &quot;Delaware Myth&quot; (The Trap to Avoid)</span>
+          </a>
+        
+
+          <a href="#13-the-recommended-structure-the-multi-product-umbrella-llc" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>1.3 The Recommended Structure: The Multi-Product Umbrella LLC</span>
+          </a>
+        
+
+          <a href="#14-step-by-step-llc-execution-checklist" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>1.4 Step-by-Step LLC Execution Checklist</span>
+          </a>
+        
+
+          <a href="#2-domain-branding-architecture-ianohlandercom-on-godaddy" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>2. Domain &amp; Branding Architecture: ianohlander.com on GoDaddy</span>
+          </a>
+        
+
+          <a href="#21-the-unvarnished-truth-about-personal-vs-product-domains" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>2.1 The Unvarnished Truth About Personal vs. Product Domains</span>
+          </a>
+        
+
+          <a href="#22-godaddy-dns-vs-cloudflare-nameserver-delegation" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>2.2 GoDaddy DNS vs. Cloudflare Nameserver Delegation</span>
+          </a>
+        
+
+          <a href="#3-the-hosting-deployment-strategy-hostinger-vps-vs-client-side-edge" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>3. The Hosting &amp; Deployment Strategy: Hostinger VPS vs. Client-Side Edge</span>
+          </a>
+        
+
+          <a href="#31-the-fatal-compute-trap-the-math-of-cellular-automata" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>3.1 The Fatal Compute Trap: The Math of Cellular Automata</span>
+          </a>
+        
+
+          <a href="#32-the-asymmetric-hybrid-solution" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>3.2 The Asymmetric Hybrid Solution</span>
+          </a>
+        
+
+          <a href="#33-what-lives-where" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>3.3 What Lives Where</span>
+          </a>
+        
+
+          <a href="#34-turnkey-hostinger-vps-setup-guide-linux-commands" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>3.4 Turnkey Hostinger VPS Setup Guide (Linux Commands)</span>
+          </a>
+        
+
+          <a href="#4-segregated-professional-email-architecture" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>4. Segregated Professional Email Architecture</span>
+          </a>
+        
+
+          <a href="#41-the-unvarnished-truth-about-domain-email" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>4.1 The Unvarnished Truth About Domain Email</span>
+          </a>
+        
+
+          <a href="#42-segregated-addresses-operational-roles" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>4.2 Segregated Addresses &amp; Operational Roles</span>
+          </a>
+        
+
+          <a href="#43-the-email-provider-options-cost-vs-simplicity" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>4.3 The Email Provider Options (Cost vs. Simplicity)</span>
+          </a>
+        
+
+          <a href="#44-the-non-negotiable-anti-spam-trifecta-spf-dkim-dmarc" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>4.4 The Non-Negotiable Anti-Spam Trifecta: SPF, DKIM, DMARC</span>
+          </a>
+        
+
+          <a href="#5-jack-vances-reality-check-what-will-sell-vs-what-wont" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>5. Jack Vance&#x27;s Reality Check: What Will Sell vs. What Won&#x27;t</span>
+          </a>
+        
+
+          <a href="#51-the-academic-market-4991499-departmental-licenses" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>5.1 The Academic Market ($499–$1,499 Departmental Licenses)</span>
+          </a>
+        
+
+          <a href="#52-influencer-celebrity-cold-outreach-dawkins-lane-veritasium" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>5.2 Influencer &amp; Celebrity Cold Outreach (Dawkins, Lane, Veritasium)</span>
+          </a>
+        
+
+          <a href="#53-the-gaming-arena-experience" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>5.3 The Gaming / Arena Experience</span>
+          </a>
+        
+
+          <a href="#6-the-revised-30-day-go-to-market-execution-checklist" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>6. The Revised 30-Day Go-To-Market Execution Checklist</span>
+          </a>
+        
+
+          <a href="#7-the-bottom-line" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>7. The Bottom Line</span>
+          </a>
+        
+        </div>
+      </div>
+
+      <!-- Quick Steps Navigation Matrix -->
+      <div class="card-box p-4 shadow-md space-y-2">
+        <span class="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block border-b border-slate-800 pb-1.5">
+          All 7 Marketing Steps
+        </span>
+        <div class="grid grid-cols-7 gap-1 font-mono text-center text-xs">
+          <a href="00_executive_summary_and_quickstart.html" title="Executive Summary & 30-Day Quickstart" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">00</a><a href="01_turnkey_monetization_and_hosted_saas_blueprint.html" title="Turnkey Monetization & Hosted SaaS Blueprint" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">01</a><a href="02_positioning_and_messaging_bible.html" title="Positioning & Messaging Bible" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">02</a><a href="03_creator_and_influencer_outreach_playbook.html" title="Creator & Influencer Outreach Playbook" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">03</a><a href="04_historical_connections_and_academic_expansion.html" title="Historical Connections & Academic Expansion" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">04</a><a href="05_content_roadmap_and_community_launch_playbook.html" title="Content Roadmap & Community Launch Playbook" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">05</a><a href="06_financial_model_and_roi_forecast.html" title="Financial Model & ROI Forecast" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">06</a><a href="07_ui_ux_gaming_experience_and_arena_blueprint.html" title="UI/UX Experience & The Abyssal Arena Gamer Blueprint" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">07</a><a href="08_llc_infrastructure_hosting_and_deployment_strategy.html" title="LLC Formation, VPS Hosting & Deployment Strategy" class="py-1.5 rounded bg-cyan-500 text-black font-extrabold shadow transition">08</a>
+        </div>
+      </div>
+
+      <!-- Simulator Direct Link -->
+      <a href="../index.html" class="block card-box p-3 hover:border-cyan-500 transition group text-center">
+        <span class="text-xs font-mono text-cyan-400 group-hover:text-cyan-300 font-bold flex items-center justify-center gap-1.5">
+          <span>🌊</span> <span>Launch 3D Seafloor Visualizer</span> <span>&rarr;</span>
+        </span>
+      </a>
+
+    </aside>
+
+    <!-- RIGHT COLUMN: MAIN CONTENT -->
+    <main class="lg:col-span-8 card-box p-6 md:p-10 shadow-xl overflow-hidden leading-relaxed">
+      
+      <!-- Document Banner -->
+      <div class="mb-6 pb-6 border-b border-slate-800 space-y-2">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="px-2.5 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-xs font-mono font-bold uppercase tracking-wider">
+            Siliquarium Commercialization &bull; Step 08
+          </span>
+          <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-xs font-mono border border-slate-800">
+            Author: Jack "The Closer" Vance
+          </span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-white font-mono tracking-tight">
+          LLC Formation, VPS Hosting & Deployment Strategy
+        </h1>
+        <p class="text-sm text-slate-400 font-sans">
+          Jack Vance's Unvarnished Reality Check: Umbrella LLC, Hostinger VPS, Domain Routing & Anti-Spam Email
+        </p>
+      </div>
+
+      <!-- Parsed Body Content -->
+      <article class="prose prose-invert max-w-none space-y-4">
+        <h1 id="siliquarium-infrastructure-corporate-shield-deployment-strategy" class="text-2xl sm:text-3xl font-black text-white font-mono mt-8 mb-4 border-b border-slate-800 pb-3 flex items-center gap-3"><span class="text-cyan-400">#</span> 🏛️ Siliquarium Infrastructure, Corporate Shield & Deployment Strategy</h1>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">From:</strong> Jack "The Closer" Vance, Chief Marketing Officer & Commercialization Strategist</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">To:</strong> Ian Ohlander, Founder & Chief Architect of Siliquarium</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Date:</strong> October 2026</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Subject:</strong> The Unvarnished Truth: LLC Formation, GoDaddy Domain Routing, Hostinger VPS Architecture, Segregated Email & Marketing Reality Check</p>
+<hr class="my-8 border-slate-800/80">
+<h2 id="ian-here-is-the-unvarnished-truth" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> Ian, Here Is the Unvarnished Truth.</h2>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">You asked me not to be a yes-man or a sycophant. You asked for reality over fantasy, and unvarnished truth over confirmation bias.</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Good. In thirty years of taking software from garage prototypes to commercial exits, I have seen more brilliant engineers run their startups into the ground because their advisors smiled and nodded while they drove off a cliff than from any technical failure.</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Let's strip away the tech-bro mythology and look at cold, hard operational realities. You have four concrete pieces on the table:</p>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span><strong class="text-white font-bold">An LLC Formation</strong> (You think it's advisable—let's evaluate the legal and financial reality).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span><strong class="text-white font-bold"><code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">ianohlander.com</code> on GoDaddy</strong> (Domain routing, branding trade-offs, and technical debt).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span><strong class="text-white font-bold">A VPS through Hostinger</strong> (Server/client architecture, compute economics, and the fatal trap of server-side CA simulation).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">4.</span> <span><strong class="text-white font-bold">Segregated Professional Email</strong> (Deliverability, anti-spam protocols, and cold outreach survival).</span></li>
+</ol>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Here is the unvarnished breakdown of what works, what fails, what to avoid, and the exact turnkey deployment playbook to execute this week.</p>
+<hr class="my-8 border-slate-800/80">
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT / SCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-1').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-1" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>===================================================================================================
+                       THE UNVARNISHED REALITY SCORECARD (JACK VANCE AUDIT)
+===================================================================================================
+
+STRATEGIC INITIATIVE        RATING     THE UNVARNISHED TRUTH
+──────────────────────────  ─────────  ────────────────────────────────────────────────────────────
+1. Single-Member LLC        MANDATORY  Protects personal assets from copyright/IP trolls, chargeback
+                                       disputes, and contracts. BUT do NOT file in Delaware. File in
+                                       your home state under an umbrella entity (&quot;Ohlander Labs LLC&quot;)
+                                       that covers BOTH Siliquarium and BooleanGA.
+
+2. Hostinger VPS for CA     FATAL IF   If you try to simulate 5,000 visitors&#x27; 60 FPS hexagonal CA on
+   Simulation               MISUSED    a 2–4 vCPU Hostinger VPS, it will crash in 30 seconds. The VPS
+                                       must ONLY host the 24/7 Headless Daemon for paying Pro runs,
+                                       SSE streaming, and license checks. The public lab MUST stay
+                                       client-side WebGL/WebWorker fronted by Cloudflare CDN ($0 cost).
+
+3. `ianohlander.com`       SOLID FOR  `siliquarium.ianohlander.com` is 100% fine for dev and initial
+   Domain on GoDaddy        PHASE 1    launch. But for institutional $499 sales and gaming credibility,
+                                       buy a dedicated $12/yr domain (`siliquarium.org` or `.io`)
+                                       before cold-pitching university department heads.
+
+4. GoDaddy Email Upsell     TRAP       Do NOT pay GoDaddy $3–$7/mo per inbox for Microsoft 365.
+                                       Use Hostinger&#x27;s included email or Cloudflare Free Email
+                                       Routing. Configure SPF, DKIM, and DMARC immediately or every
+                                       pitch to Richard Dawkins and professors goes to spam.
+
+5. Cold Outreach to Celebs  FANTASY    Cold-emailing Dawkins or Veritasium without prior social proof
+   (Dawkins, Veritasium)    UNLESS     will be deleted by their assistants. You MUST launch on Hacker
+                            STAGED     News / Reddit first, get 200+ upvotes, and lead with proof.
+===================================================================================================</code></pre>
+</div>
+<hr class="my-8 border-slate-800/80">
+<h2 id="1-the-llc-decision-corporate-shield-vs-bureaucratic-money-pit" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 1. The LLC Decision: Corporate Shield vs. Bureaucratic Money Pit</h2>
+<h3 id="11-is-an-llc-advisable-right-now" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 1.1 Is an LLC Advisable Right Now?</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Yes, absolutely—with one crucial operational distinction.</strong></p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">If you sell software online as an individual (sole proprietorship), you have <strong class="text-white font-bold">zero liability protection</strong>. If a university student claims your software corrupted their hard drive, if an academic journal flags a copyright dispute, or if an aggressive patent troll targets cellular automaton algorithms, <strong class="text-white font-bold">your personal assets (home, personal bank accounts, personal vehicle, savings) are on the table in civil court.</strong></p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Furthermore, Lemon Squeezy and Stripe require formal payout accounts. If you operate as a sole proprietorship, your personal legal name and Social Security Number (SSN) are tied to merchant accounts, 1099-K tax reports, and potentially customer credit card receipt descriptors.</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">An LLC (Limited Liability Company) creates the <strong class="text-white font-bold">Corporate Veil</strong>—a statutory legal wall separating Ian Ohlander (the human being) from the commercial software entity.</p>
+<h3 id="12-the-delaware-myth-the-trap-to-avoid" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 1.2 The "Delaware Myth" (The Trap to Avoid)</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Every amateur startup podcast screams: <em class="text-slate-200">"Incorporate in Delaware!"</em></p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">For a solo bootstrapper funding an independent software business, a Delaware LLC is an expensive mistake.</strong></p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Here is the unvarnished reality:</p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>Delaware is ideal for venture-backed C-Corporations raising Series A capital from Silicon Valley VCs who demand Delaware General Corporation Law.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>If you form a Delaware LLC while living and operating in your home state:</span></li>
+</ul>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span>You pay Delaware their <strong class="text-white font-bold">$300/year Franchise Tax</strong> plus <strong class="text-white font-bold">$150–$200/year</strong> to a Delaware Registered Agent.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span>Because you physically write code and manage servers in your home state, your home state legally considers you "transacting business" locally.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span>You are <strong class="text-white font-bold">legally required to register as a Foreign LLC in your home state</strong>, paying your home state's filing fee and annual report fees <em class="text-slate-200">on top of</em> Delaware's!</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">4.</span> <span>You file two state tax forms every April instead of one.</span></li>
+</ol>
+<h3 id="13-the-recommended-structure-the-multi-product-umbrella-llc" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 1.3 The Recommended Structure: The Multi-Product Umbrella LLC</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Do not form "Siliquarium LLC" and then pay another set of state fees next year to form "BooleanGA LLC."</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Form a single parent holding entity:</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold"><code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">Ohlander Biocomputing LLC</code></strong> or <strong class="text-white font-bold"><code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">Ohlander Labs LLC</code></strong></p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Under this single entity, you register two "Doing Business As" (DBA / Fictitious Name) filings:</p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>DBA 1: <em class="text-slate-200">Siliquarium</em></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>DBA 2: <em class="text-slate-200">BooleanGA</em></span></li>
+</ul>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Why this is the superior strategy:</strong></p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">One state filing fee</strong> and <strong class="text-white font-bold">one annual franchise report</strong>.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">One Federal Employer Identification Number (EIN)</strong> from the IRS.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">One business checking account</strong> (Mercury, Relay, or Chase Business).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">One tax return</strong> (Schedule C attached to your standard 1040, or Form 1065 if multi-member).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Both products protected</strong> under the same corporate liability umbrella.</span></li>
+</ul>
+<h3 id="14-step-by-step-llc-execution-checklist" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 1.4 Step-by-Step LLC Execution Checklist</h3>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>MERMAID</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-2').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-2" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>flowchart TD
+    Step1[&quot;Step 1: Check Name Availability&lt;br&gt;State Sec of State Database&quot;] --&gt; Step2[&quot;Step 2: Appoint Commercial Registered Agent&lt;br&gt;($39–$99/yr to protect home address)&quot;]
+    Step2 --&gt; Step3[&quot;Step 3: File Articles of Organization&lt;br&gt;(Online via Sec of State, ~$50–$200)&quot;]
+    Step3 --&gt; Step4[&quot;Step 4: Obtain Free EIN from IRS.gov&lt;br&gt;(Takes 5 minutes, $0.00 cost)&quot;]
+    Step4 --&gt; Step5[&quot;Step 5: Draft Single-Member Operating Agreement&lt;br&gt;(Internal legal separation)&quot;]
+    Step5 --&gt; Step6[&quot;Step 6: Open Business Bank Account&lt;br&gt;(Mercury / Relay / Chase Business)&quot;]
+    Step6 --&gt; Step7[&quot;Step 7: Connect to Lemon Squeezy MoR&lt;br&gt;(Entity Payout Verification)&quot;]</code></pre>
+</div>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span><strong class="text-white font-bold">Step 1: Name Clearance:</strong> Check your state's Secretary of State online business registry for <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">Ohlander Biocomputing LLC</code> or <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">Ohlander Labs LLC</code>.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span><strong class="text-white font-bold">Step 2: Registered Agent:</strong> Never use your home residential address on the public state filing. Commercial registered agents (e.g., Northwest Registered Agent, LegalZoom, or ZenBusiness) cost $39–$125/year and keep your home address off public search records.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span><strong class="text-white font-bold">Step 3: File Articles of Organization:</strong> Submit online through your state's official Secretary of State portal. Most states approve within 24 to 72 hours.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">4.</span> <span><strong class="text-white font-bold">Step 4: Obtain an EIN (Employer Identification Number):</strong></span></li>
+</ol>
+
+<blockquote class="my-4 p-4 rounded-xl border-l-4 border-cyan-500 bg-slate-900/60 text-slate-300 text-xs md:text-sm font-sans italic shadow-sm leading-relaxed">
+  [!CAUTION]
+</blockquote>
+
+<blockquote class="my-4 p-4 rounded-xl border-l-4 border-cyan-500 bg-slate-900/60 text-slate-300 text-xs md:text-sm font-sans italic shadow-sm leading-relaxed">
+  Do <strong class="text-white font-bold">NOT</strong> pay a third-party service $150–$300 to get an EIN! Go directly to <a href="https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition font-medium">IRS.gov EIN Assistant</a>. It is <strong class="text-white font-bold">100% free</strong> and generates your official CP-575 EIN confirmation PDF instantly in 5 minutes.
+</blockquote>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">5.</span> <span><strong class="text-white font-bold">Step 5: Execute an Operating Agreement:</strong> Even for a single-member LLC, banks require an Operating Agreement to open an account. It formally states that Ian Ohlander owns 100% of member units and governs all intellectual property transfers.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">6.</span> <span><strong class="text-white font-bold">Step 6: Open a Dedicated Business Bank Account:</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>Use <strong class="text-white font-bold">Mercury</strong> (mercury.com) or <strong class="text-white font-bold">Relay Financial</strong> (relayfi.com) for modern online tech banking, or a local commercial bank (Chase, US Bank).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>Deposit $100–$500 from your personal checking as an "Initial Capital Contribution."</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">7.</span> <span><strong class="text-white font-bold">Step 7: The Iron Rule of the Corporate Veil:</strong></span></li>
+</ol>
+
+<blockquote class="my-4 p-4 rounded-xl border-l-4 border-cyan-500 bg-slate-900/60 text-slate-300 text-xs md:text-sm font-sans italic shadow-sm leading-relaxed">
+  [!IMPORTANT]
+</blockquote>
+
+<blockquote class="my-4 p-4 rounded-xl border-l-4 border-cyan-500 bg-slate-900/60 text-slate-300 text-xs md:text-sm font-sans italic shadow-sm leading-relaxed">
+  <strong class="text-white font-bold">Never commingle funds.</strong> Do not buy groceries with the LLC debit card. Do not deposit Siliquarium checks into your personal account. If you commingle funds, an opposing lawyer will argue the LLC is an "alter ego," pierce the corporate veil, and hold you personally liable. When you want to take profits, transfer money from the business account to personal checking and book it as an <strong class="text-white font-bold">Owner's Draw</strong>.
+</blockquote>
+<hr class="my-8 border-slate-800/80">
+<h2 id="2-domain-branding-architecture-ianohlandercom-on-godaddy" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 2. Domain & Branding Architecture: <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">ianohlander.com</code> on GoDaddy</h2>
+<h3 id="21-the-unvarnished-truth-about-personal-vs-product-domains" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 2.1 The Unvarnished Truth About Personal vs. Product Domains</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">You currently own <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">ianohlander.com</code> through GoDaddy. Let's look at the pros and cons of using this domain for Siliquarium:</p>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-950/80 shadow-lg">
+<table class="w-full text-left text-xs text-slate-300 border-collapse">
+<thead><tr class="bg-slate-900 border-b border-slate-800 text-slate-200 font-mono text-[11px]">
+<th class="py-3 px-4 font-bold">Deployment Vector</th>
+<th class="py-3 px-4 font-bold">Commercial Credibility</th>
+<th class="py-3 px-4 font-bold">Academic Procurement</th>
+<th class="py-3 px-4 font-bold">Gaming Vibe</th>
+<th class="py-3 px-4 font-bold">Recommendation</th>
+</tr></thead><tbody>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold"><code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">ianohlander.com/siliquarium</code></strong></td>
+<td class="py-2.5 px-4">Low (Looks like a student portfolio)</td>
+<td class="py-2.5 px-4">Poor (AP won't cut PO to personal name)</td>
+<td class="py-2.5 px-4">Bad (Casual gamers bounce immediately)</td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Reject for Production</strong></td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold"><code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">siliquarium.ianohlander.com</code></strong></td>
+<td class="py-2.5 px-4">Medium-High (Subdomain branding)</td>
+<td class="py-2.5 px-4">Acceptable (Clearly an author project)</td>
+<td class="py-2.5 px-4">Passable</td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Ideal for Phase 1 / Beta Launch</strong></td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold"><code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">siliquarium.org</code> / <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">.io</code> / <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">.com</code></strong></td>
+<td class="py-2.5 px-4">Maximum (Dedicated scientific entity)</td>
+<td class="py-2.5 px-4">Flawless (Standard vendor appearance)</td>
+<td class="py-2.5 px-4">High (Independent game platform)</td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Mandatory for Phase 2 ($12/yr)</strong></td>
+</tr>
+</tbody></table></div>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Jack's Recommendation:</strong></p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Phase 1 (Immediate Launch & Testing):</strong> Use the subdomain <strong class="text-white font-bold"><code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">siliquarium.ianohlander.com</code></strong>. It costs you $0, leverages your existing GoDaddy asset, and allows you to test DNS, VPS reverse proxying, and analytics today.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Phase 2 (Public Outreach to Dawkins & University Heads):</strong> Spend $12/year to register <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">siliquarium.io</code> or <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">siliquarium.org</code> (or <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">.net</code> / <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">.com</code>). When pitching an emeritus professor at Oxford or a procurement officer at UC Berkeley, an independent domain converts at 3x the rate of an individual's personal website.</span></li>
+</ul>
+<h3 id="22-godaddy-dns-vs-cloudflare-nameserver-delegation" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 2.2 GoDaddy DNS vs. Cloudflare Nameserver Delegation</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">GoDaddy is an acceptable domain registrar, but their native DNS has significant drawbacks:</p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>Slow global DNS propagation (often 12–24 hours for record updates).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>Aggressive upsells on SSL certificates ($70–$100/yr for basic SSL that should be free).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>High-friction email upsells ($3–$7/user/month for Microsoft 365).</span></li>
+</ul>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">The Professional Architecture:</strong></p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Keep your domain registered at GoDaddy, but <strong class="text-white font-bold">delegate the Nameservers to Cloudflare (Free Tier)</strong>:</p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT / SCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-3').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-3" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>[ GoDaddy Domain Registrar ] ──(Set NS)──&gt; [ Cloudflare Global Edge DNS ]
+                                                    │
+                                   ┌────────────────┴────────────────┐
+                                   ▼                                 ▼
+                     siliquarium.ianohlander.com           api.ianohlander.com
+                       (Cloudflare Pages CDN)           (Hostinger VPS Node.js)</code></pre>
+</div>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Benefits of delegating DNS to Cloudflare (Zero Cost):</strong></p>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span><strong class="text-white font-bold">Free Universal SSL / TLS:</strong> Automatic HTTPS on all subdomains.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span><strong class="text-white font-bold">Instant Global Anycast DNS:</strong> Record updates propagate globally in 3 seconds instead of 12 hours.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span><strong class="text-white font-bold">DDoS Protection & Caching:</strong> Fronts your static assets so traffic surges never touch your server.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">4.</span> <span><strong class="text-white font-bold">Free Email Routing:</strong> Free forwarding of custom email addresses directly to your Gmail inbox.</span></li>
+</ol>
+<hr class="my-8 border-slate-800/80">
+<h2 id="3-the-hosting-deployment-strategy-hostinger-vps-vs-client-side-edge" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 3. The Hosting & Deployment Strategy: Hostinger VPS vs. Client-Side Edge</h2>
+<h3 id="31-the-fatal-compute-trap-the-math-of-cellular-automata" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 3.1 The Fatal Compute Trap: The Math of Cellular Automata</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Here is the engineering reality that must govern our architecture:</p>
+
+<blockquote class="my-4 p-4 rounded-xl border-l-4 border-cyan-500 bg-slate-900/60 text-slate-300 text-xs md:text-sm font-sans italic shadow-sm leading-relaxed">
+  [!WARNING]
+</blockquote>
+
+<blockquote class="my-4 p-4 rounded-xl border-l-4 border-cyan-500 bg-slate-900/60 text-slate-300 text-xs md:text-sm font-sans italic shadow-sm leading-relaxed">
+  <strong class="text-white font-bold">If you attempt to run Siliquarium's full 60 FPS 3D hexagonal cellular automaton on your Hostinger VPS for all web visitors, your VPS will crash within 60 seconds of a Hacker News spike.</strong>
+</blockquote>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Let's do the math:</p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>A standard Hostinger VPS (e.g., KVM 1 or KVM 2) provides <strong class="text-white font-bold">1 to 2 vCPU cores</strong> and <strong class="text-white font-bold">4 to 8 GB RAM</strong>.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>Each active Siliquarium simulation executes thousands of boolean gate register evaluations, Landauer thermodynamic ledger updates, and 3D coordinate checks every single tick.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>In Node.js, running 1 single headless simulation at full speed consumes <strong class="text-white font-bold">15% to 35% of a CPU core</strong>.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">10 concurrent users running server-side simulations will pin a 2-core VPS at 100% CPU utilization.</strong> The Linux kernel OOM (Out Of Memory) killer will terminate the Node process, dropping the entire application.</span></li>
+</ul>
+<h3 id="32-the-asymmetric-hybrid-solution" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 3.2 The Asymmetric Hybrid Solution</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Siliquarium was engineered with an <strong class="text-white font-bold">Asymmetric Hybrid Architecture</strong> for this exact reason:</p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>MERMAID</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-4').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-4" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>flowchart TD
+    UserBrowser[&quot;Web Visitor (1 to 500,000 visitors)&quot;]
+    
+    subgraph EdgeCDN[&quot;Tier 1: Global Edge CDN (Cloudflare Pages or Hostinger Static)&quot;]
+        StaticAssets[&quot;index.html + dist/main.js + docs/ + logos/&quot;]
+        ClientSim[&quot;100% Client-Side Engine&lt;br&gt;(Runs in user&#x27;s browser via Web Workers &amp; WebGL)&quot;]
+    end
+    
+    subgraph HostingerVPS[&quot;Tier 2: Hostinger VPS (Ubuntu Linux / PM2 / Nginx)&quot;]
+        ReverseProxy[&quot;Nginx Reverse Proxy (:443 with Let&#x27;s Encrypt SSL)&quot;]
+        HeadlessDaemon[&quot;Node.js HeadlessSimulationHost (:3000)&lt;br&gt;• 24/7 Deep-Time Evolution Daemon&lt;br&gt;• Persistent Caldera Saves&lt;br&gt;• Multi-Client SSE Stream (/api/sim/stream)&lt;br&gt;• REST Remote Control (/api/sim/control)&quot;]
+        LicenseEngine[&quot;Lemon Squeezy Webhook &amp; License Verifier&quot;]
+        StateDB[&quot;.silisave Cloud Snapshot Storage&quot;]
+    end
+
+    UserBrowser --&gt;|Loads Static Assets ($0.00)| StaticAssets
+    StaticAssets --&gt;|Executes Locally on Visitor&#x27;s GPU/CPU| ClientSim
+    UserBrowser -.-&gt;|Paying Pro / Lab Tier: Connects to 24/7 Deep-Time| ReverseProxy
+    ReverseProxy --&gt; HeadlessDaemon
+    HeadlessDaemon --&gt; StateDB
+    ReverseProxy --&gt; LicenseEngine</code></pre>
+</div>
+<h3 id="33-what-lives-where" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 3.3 What Lives Where</h3>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-950/80 shadow-lg">
+<table class="w-full text-left text-xs text-slate-300 border-collapse">
+<thead><tr class="bg-slate-900 border-b border-slate-800 text-slate-200 font-mono text-[11px]">
+<th class="py-3 px-4 font-bold">Subsystem</th>
+<th class="py-3 px-4 font-bold">Hosting Location</th>
+<th class="py-3 px-4 font-bold">Why It Belongs There</th>
+<th class="py-3 px-4 font-bold">Resource Cost</th>
+</tr></thead><tbody>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Public Simulator UI</strong></td>
+<td class="py-2.5 px-4">Cloudflare Pages / Hostinger Static</td>
+<td class="py-2.5 px-4">Client-side execution; unlimited bandwidth, 0 CPU load on your VPS.</td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">$0.00 / month</strong></td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">All Documentation & Curriculum</strong></td>
+<td class="py-2.5 px-4">Cloudflare Pages / Hostinger Static</td>
+<td class="py-2.5 px-4">Static markdown-compiled HTML; indexable by Google/academic bots.</td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">$0.00 / month</strong></td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">24/7 Background Headless Engine</strong></td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Hostinger VPS</strong> (PM2 Daemon)</td>
+<td class="py-2.5 px-4">Runs autonomous deep-time evolution (100k+ ticks) for Pro users.</td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Included in your VPS</strong></td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Telemetry Streaming (<code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">/api/sim/stream</code>)</strong></td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Hostinger VPS</strong> (SSE Server)</td>
+<td class="py-2.5 px-4">Streams server simulation state to multi-user classrooms in real time.</td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Low CPU (I/O bound)</strong></td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Cloud State Saves (<code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">.silisave</code>)</strong></td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Hostinger VPS</strong> (Disk/JSON storage)</td>
+<td class="py-2.5 px-4">Allows Pro users to save and branch their evolutionary lineages.</td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Minimal Disk (<1 GB)</strong></td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Lemon Squeezy License Validation</strong></td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Hostinger VPS</strong> (Node webhook)</td>
+<td class="py-2.5 px-4">Cryptographically verifies Pro licenses and activates server features.</td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Near Zero</strong></td>
+</tr>
+</tbody></table></div>
+<h3 id="34-turnkey-hostinger-vps-setup-guide-linux-commands" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 3.4 Turnkey Hostinger VPS Setup Guide (Linux Commands)</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Here are the exact terminal commands to configure your Hostinger Ubuntu VPS for Siliquarium's Headless Daemon:</p>
+<h4 id="step-1-connect-update" class="text-sm font-bold text-amber-300 font-mono mt-4 mb-2">Step 1: Connect & Update</h4>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>BASH</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-5').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-5" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code># Connect to your Hostinger VPS via SSH
+ssh root@YOUR_VPS_IP
+
+# Update system packages
+apt update &amp;&amp; apt upgrade -y
+
+# Install Git, Curl, Nginx, and Certbot
+apt install -y git curl nginx certbot python3-certbot-nginx ufw</code></pre>
+</div>
+<h4 id="step-2-install-nodejs-lts-pm2" class="text-sm font-bold text-amber-300 font-mono mt-4 mb-2">Step 2: Install Node.js LTS & PM2</h4>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>BASH</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-6').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-6" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code># Install Node.js 20.x LTS via NodeSource
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt install -y nodejs
+
+# Verify installation
+node -v  # Should be v20.x
+npm -v
+
+# Install PM2 process manager globally (auto-restarts on crash or server reboot)
+npm install -g pm2</code></pre>
+</div>
+<h4 id="step-3-deploy-the-siliquarium-headless-server" class="text-sm font-bold text-amber-300 font-mono mt-4 mb-2">Step 3: Deploy the Siliquarium Headless Server</h4>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>BASH</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-7').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-7" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code># Create application directory
+mkdir -p /var/www/siliquarium
+cd /var/www/siliquarium
+
+# Clone the repository (or upload using SCP / Git)
+git clone https://github.com/YOUR_USERNAME/Siliquarium.git .
+
+# Install dependencies and compile TypeScript
+npm ci
+node scripts/tsc.mjs
+
+# Launch the Headless Simulation Host with PM2
+pm2 start scripts/serve.mjs --name &quot;siliquarium-daemon&quot; -- --server
+
+# Ensure PM2 starts automatically on server reboots
+pm2 startup systemd
+pm2 save</code></pre>
+</div>
+<h4 id="step-4-configure-nginx-as-secure-reverse-proxy" class="text-sm font-bold text-amber-300 font-mono mt-4 mb-2">Step 4: Configure Nginx as Secure Reverse Proxy</h4>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Create <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">/etc/nginx/sites-available/siliquarium</code>:</p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>NGINX</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-8').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-8" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>server {
+    server_name api.siliquarium.ianohlander.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        
+        # Crucial headers for Server-Sent Events (SSE) streaming without buffering
+        proxy_set_header Connection &#x27;&#x27;;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+    }
+}</code></pre>
+</div>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Enable the site and obtain a free SSL certificate:</p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>BASH</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-9').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-9" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code># Enable Nginx configuration
+ln -s /etc/nginx/sites-available/siliquarium /etc/nginx/sites-enabled/
+nginx -t
+systemctl restart nginx
+
+# Obtain free Let&#x27;s Encrypt SSL certificate
+certbot --nginx -d api.siliquarium.ianohlander.com --non-interactive --agree-tos -m ian@ianohlander.com
+
+# Configure UFW firewall
+ufw allow OpenSSH
+ufw allow &#x27;Nginx Full&#x27;
+ufw --force enable</code></pre>
+</div>
+<hr class="my-8 border-slate-800/80">
+<h2 id="4-segregated-professional-email-architecture" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 4. Segregated Professional Email Architecture</h2>
+<h3 id="41-the-unvarnished-truth-about-domain-email" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 4.1 The Unvarnished Truth About Domain Email</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">When you email Richard Dawkins, Nick Lane, or a university department chair, <strong class="text-white font-bold">your email address is your first credential</strong>:</p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>An email from <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">ian.ohlander94@gmail.com</code> looks like fan mail. It has an 85% chance of being archived by an assistant.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>An email from <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">ian@ianohlander.com</code> or <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">lab@siliquarium.ianohlander.com</code> with authenticated SPF/DKIM/DMARC headers looks like an institutional communication. It gets opened.</span></li>
+</ul>
+<h3 id="42-segregated-addresses-operational-roles" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 4.2 Segregated Addresses & Operational Roles</h3>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT / SCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-10').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-10" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>┌──────────────────────────────────────┬────────────────────────────────────────────────────────┐
+│ Email Address                        │ Functional Role &amp; Inbox Segregation                    │
+├──────────────────────────────────────┼────────────────────────────────────────────────────────┤
+│ ian@ianohlander.com                  │ Executive &amp; academic outreach (Dawkins, Lane, Davies). │
+│ support@siliquarium.ianohlander.com  │ Customer support, bug reports, and user feedback.      │
+│ licensing@ianohlander.com            │ University P-card procurement, invoices, and W-9s.     │
+│ arena@siliquarium.ianohlander.com    │ Community tournament disputes and battle replays.      │
+└──────────────────────────────────────┴────────────────────────────────────────────────────────┘</code></pre>
+</div>
+<h3 id="43-the-email-provider-options-cost-vs-simplicity" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 4.3 The Email Provider Options (Cost vs. Simplicity)</h3>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-950/80 shadow-lg">
+<table class="w-full text-left text-xs text-slate-300 border-collapse">
+<thead><tr class="bg-slate-900 border-b border-slate-800 text-slate-200 font-mono text-[11px]">
+<th class="py-3 px-4 font-bold">Option</th>
+<th class="py-3 px-4 font-bold">Monthly Cost</th>
+<th class="py-3 px-4 font-bold">Deliverability</th>
+<th class="py-3 px-4 font-bold">Pros / Cons</th>
+</tr></thead><tbody>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Hostinger Webmail / Titan</strong></td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">$0.00</strong> (Included with your VPS / plan)</td>
+<td class="py-2.5 px-4">Good</td>
+<td class="py-2.5 px-4">Free; native webmail; supports IMAP on your phone. Slightly clunkier UI than Gmail.</td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Cloudflare Email Routing</strong></td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">$0.00</strong></td>
+<td class="py-2.5 px-4">Excellent (Inbound)</td>
+<td class="py-2.5 px-4">Forwards inbound <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">licensing@ianohlander.com</code> directly to your personal Gmail. Cannot send outbound natively without SMTP relay.</td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Google Workspace</strong></td>
+<td class="py-2.5 px-4">$6.00 / user / mo</td>
+<td class="py-2.5 px-4">Industry Standard</td>
+<td class="py-2.5 px-4">Native Gmail interface, Google Drive, calendar. Most expensive, but cleanest experience.</td>
+</tr>
+</tbody></table></div>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Jack's Recommendation:</strong></p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Start with <strong class="text-white font-bold">Hostinger Webmail</strong> or <strong class="text-white font-bold">Cloudflare Inbound Routing</strong>. If budget permits $6/mo, Google Workspace is the gold standard for zero friction.</p>
+<h3 id="44-the-non-negotiable-anti-spam-trifecta-spf-dkim-dmarc" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 4.4 The Non-Negotiable Anti-Spam Trifecta: SPF, DKIM, DMARC</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">If you send emails from a custom domain without configuring SPF, DKIM, and DMARC, <strong class="text-white font-bold">Gmail and Microsoft 365 will send your outreach directly to spam.</strong></p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Add these three DNS TXT records in your GoDaddy / Cloudflare DNS manager immediately:</p>
+<h4 id="1-spf-record-sender-policy-framework" class="text-sm font-bold text-amber-300 font-mono mt-4 mb-2">1. SPF Record (Sender Policy Framework)</h4>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Authorizes your mail server to send on behalf of <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">ianohlander.com</code>:</p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Type:</strong> <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">TXT</code></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Host / Name:</strong> <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">@</code></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Value:</strong> <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">v=spf1 include:_spf.hostinger.com ~all</code> (if using Hostinger) or <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">v=spf1 include:_spf.google.com ~all</code> (if using Workspace).</span></li>
+</ul>
+<h4 id="2-dkim-record-domainkeys-identified-mail" class="text-sm font-bold text-amber-300 font-mono mt-4 mb-2">2. DKIM Record (DomainKeys Identified Mail)</h4>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Cryptographically signs every outbound email to prove it wasn't forged:</p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Type:</strong> <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">TXT</code> or <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">CNAME</code> (Generated inside your Hostinger Email or Google Workspace control panel).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>Copy the exact public key selector string provided by your mail host into DNS.</span></li>
+</ul>
+<h4 id="3-dmarc-record-domain-based-message-authentication" class="text-sm font-bold text-amber-300 font-mono mt-4 mb-2">3. DMARC Record (Domain-based Message Authentication)</h4>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Tells recipient servers what to do if an email fails SPF/DKIM (prevents spoofing):</p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Type:</strong> <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">TXT</code></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Host / Name:</strong> <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">_dmarc</code></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Value:</strong> <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">v=DMARC1; p=quarantine; rua=mailto:dmarc-reports@ianohlander.com; pct=100; sp=quarantine</code></span></li>
+</ul>
+<hr class="my-8 border-slate-800/80">
+<h2 id="5-jack-vances-reality-check-what-will-sell-vs-what-wont" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 5. Jack Vance's Reality Check: What Will Sell vs. What Won't</h2>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">You asked for the unvarnished truth about the commercialization plan. Here is my audit of every major assumption in our playbook:</p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT / SCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-11').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-11" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>===================================================================================================
+                                JACK VANCE&#x27;S UNVARNISHED REALITY CHECK
+===================================================================================================</code></pre>
+</div>
+<h3 id="51-the-academic-market-4991499-departmental-licenses" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 5.1 The Academic Market ($499–$1,499 Departmental Licenses)</h3>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">The Fantasy:</strong> <em class="text-slate-200">"We will email universities and their procurement departments will buy $1,499 site licenses."</em></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">The Reality:</strong> University procurement is a bureaucratic nightmare. To get an official purchase order (PO) through university procurement, vendors must provide SOC 2 compliance reports, VPAT accessibility certifications, FERPA student privacy declarations, and wait 90 to 120 days for payment terms. A solo founder will drown in paperwork.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">What ACTUALLY Sells:</strong></span></li>
+</ul>
+
+<blockquote class="my-4 p-4 rounded-xl border-l-4 border-cyan-500 bg-slate-900/60 text-slate-300 text-xs md:text-sm font-sans italic shadow-sm leading-relaxed">
+  [!TIP]
+</blockquote>
+
+<blockquote class="my-4 p-4 rounded-xl border-l-4 border-cyan-500 bg-slate-900/60 text-slate-300 text-xs md:text-sm font-sans italic shadow-sm leading-relaxed">
+  <strong class="text-white font-bold">The Discretionary Faculty P-Card (Purchasing Card).</strong>
+</blockquote>
+
+<blockquote class="my-4 p-4 rounded-xl border-l-4 border-cyan-500 bg-slate-900/60 text-slate-300 text-xs md:text-sm font-sans italic shadow-sm leading-relaxed">
+  In North American and UK universities, every tenured professor, lab director, and course coordinator has an institutional credit card (P-Card) with an <strong class="text-white font-bold">instant approval threshold of $500 to $1,000</strong>. If a software purchase is under their threshold (e.g., <strong class="text-white font-bold">$499 Single-Course Lab License</strong>), they do not need department chair approval, procurement bidding, or committee reviews. They swipe the card on Lemon Squeezy, expense it under lab course fees, and download the license key immediately.
+</blockquote>
+
+<blockquote class="my-4 p-4 rounded-xl border-l-4 border-cyan-500 bg-slate-900/60 text-slate-300 text-xs md:text-sm font-sans italic shadow-sm leading-relaxed">
+  <strong class="text-white font-bold">Action:</strong> Never push a $1,499 enterprise tier on cold outreach. Always anchor on the <strong class="text-white font-bold">$499 Course Practicum Pass</strong>.
+</blockquote>
+<h3 id="52-influencer-celebrity-cold-outreach-dawkins-lane-veritasium" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 5.2 Influencer & Celebrity Cold Outreach (Dawkins, Lane, Veritasium)</h3>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">The Fantasy:</strong> <em class="text-slate-200">"We will email Richard Dawkins's foundation and Derek Muller at Veritasium, and they will retweet or feature Siliquarium."</em></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">The Reality:</strong> Dawkins receives hundreds of pitch emails per week. His foundation assistants screen out 98% of unsolicited software demos. Veritasium's production team plans video topics 4 to 6 months in advance with massive production budgets.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">What ACTUALLY Sells:</strong></span></li>
+</ul>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span><strong class="text-white font-bold">Public Social Proof First:</strong> You do not email them with a blank slate. You launch on <strong class="text-white font-bold">Hacker News (Show HN)</strong> and targeted subreddits (<code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">r/cellular_automata</code>, <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">r/alife</code>, <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">r/compsci</code>). When the post trends to the front page or gathers 300+ upvotes, <strong class="text-white font-bold">that is your leverage</strong>.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span><strong class="text-white font-bold">The 30-Second Unlisted Preview Hook:</strong> Never send a link to a complex application and expect a famous author to click through and figure out the UI. Send an unlisted 30-second video of an emergent phenomenon (e.g., an evolved bistable memory latch or a predatory organism engulfing prey) with one sentence: <em class="text-slate-200">"We built an autopoietic digital life simulation as an empirical homage to Chapter 11 of The Greatest Show on Earth."</em></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span><strong class="text-white font-bold">The Personal Connection Leverage:</strong> Ian already has historical connections with <strong class="text-white font-bold">Trevor Low, Scott Zgraggen, Jeff Rushall, and Prof. Paul Davies</strong> (Guide 04). These are warm, verified academic relationships. Get <strong class="text-white font-bold">them</strong> on board first. A quote from Paul Davies or an endorsement from a university faculty member makes cold outreach 10x more effective.</span></li>
+</ol>
+<h3 id="53-the-gaming-arena-experience" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 5.3 The Gaming / Arena Experience</h3>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">The Fantasy:</strong> <em class="text-slate-200">"Casual mobile and Steam gamers will flock to play an artificial life simulator."</em></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">The Reality:</strong> Casual gamers do not read academic whitepapers. If they land on a page that looks like an academic PDF, they bounce in 3 seconds.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">What ACTUALLY Sells:</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>The <strong class="text-white font-bold">Two-Portal Architecture</strong> we just built (<code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">[ 🔬 Deep Lab ] ⇄ [ ⚔️ Abyssal Arena ]</code>) is the exact right fix.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>When a user enters <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">?mode=arena</code>, all academic jargon vanishes. They see the Clade Tug-of-War bar, the 7 tactical cards (<code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">SUBSTRATE_C_BLOOM</code>, <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">ACID_PURGE</code>), the TAP mana pressure gauge, and a 3-minute combat timer.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">The arena MUST be free to play.</strong> Do not gate basic matches behind a paywall. Monetize via:</span></li>
+</ul>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span>Custom Caldera Map Builder (Design Studio exports).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span>4K Video Kinematics flight recorder exports.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span>Tournament Hosting & Leaderboard passes ($9.99).</span></li>
+</ol>
+<hr class="my-8 border-slate-800/80">
+<h2 id="6-the-revised-30-day-go-to-market-execution-checklist" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 6. The Revised 30-Day Go-To-Market Execution Checklist</h2>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Here is the realistic, sequenced execution order for the next 30 days:</p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT / SCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-12').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-12" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ PHASE 1: CORPORATE SHIELD &amp; INFRASTRUCTURE (DAYS 1 – 7)                                │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ [ ] Day 1: File Articles of Organization for &quot;Ohlander Biocomputing LLC&quot; (Home State).  │
+│ [ ] Day 2: Obtain free EIN from IRS.gov (takes 5 minutes, $0).                         │
+│ [ ] Day 3: Open business checking account at Mercury or Relay Financial.               │
+│ [ ] Day 4: Delegate GoDaddy Nameservers to Cloudflare for ianohlander.com.             │
+│ [ ] Day 5: Configure SPF, DKIM, and DMARC DNS records for professional email.          │
+│ [ ] Day 6: SSH into Hostinger VPS; install Node.js 20, PM2, Nginx, and Certbot.        │
+│ [ ] Day 7: Start Siliquarium Headless Daemon via PM2; verify /api/sim/stream endpoint. │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ PHASE 2: PAYMENT INTEGRATION &amp; VERIFICATION (DAYS 8 – 14)                             │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ [ ] Day 8: Register business account on Lemon Squeezy using LLC EIN &amp; business bank.   │
+│ [ ] Day 9: Configure the 4 core products: Lab Pro ($34.99), Arena Pack ($9.99),       │
+│            Master Bundle ($69.99), and Course Lab License ($499).                      │
+│ [ ] Day 10: Test sandbox checkout embeds in index.html and verify license keys.        │
+│ [ ] Day 11: Deploy static web build to Cloudflare Pages (siliquarium.ianohlander.com). │
+│ [ ] Day 12: Run complete 24-stage test suite against live production endpoints.        │
+│ [ ] Day 13: Capture 3 high-octane 30-second gameplay GIFs and 1 YouTube preview.       │
+│ [ ] Day 14: Review staging site on desktop, laptop, and tablet viewports.              │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ PHASE 3: COMMUNITY LAUNCH &amp; WARM CONNECTIONS (DAYS 15 – 22)                            │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ [ ] Day 15: Reach out to Trevor Low, Scott Zgraggen, Jeff Rushall, &amp; Paul Davies.      │
+│ [ ] Day 16: Launch &quot;Show HN: Siliquarium – Open-ended digital life in browser&quot; on HN.  │
+│ [ ] Day 17: Post Arena gameplay GIF to r/cellular_automata, r/alife, and r/compsci.    │
+│ [ ] Day 18: Publish Twitter/X launch mega-thread with video demos and live web links.  │
+│ [ ] Day 19: Monitor traffic spikes; confirm VPS headless daemon remains stable.         │
+│ [ ] Day 20: Collect first 100 community simulation snapshot saves and feedback.         │
+│ [ ] Day 21: Push hotfix patch based on initial user bug reports.                       │
+│ [ ] Day 22: Compile launch analytics (visitors, conversion rate, top clades).          │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ PHASE 4: HIGH-IMPACT OUTREACH &amp; INSTITUTIONAL SEEDING (DAYS 23 – 30)                   │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ [ ] Day 23: Send Richard Dawkins homage letter (citing Hacker News traction &amp; video).  │
+│ [ ] Day 24: Send Nick Lane and Michael Levin personalized academic inquiry emails.     │
+│ [ ] Day 25: Pitch 3b1b (Grant Sanderson) and Veritasium (Derek Muller) with clip.      │
+│ [ ] Day 26: Email 25 computational biology course instructors ($499 P-card offer).     │
+│ [ ] Day 27: Host inaugural &quot;Abyssal Arena Caldera Championship&quot; tournament.           │
+│ [ ] Day 28: Publish first Community Paleontology Fossil Report.                        │
+│ [ ] Day 29: Evaluate first 30-day revenue and Lemon Squeezy payout transfer.           │
+│ [ ] Day 30: Executive Strategy Review with Jack Vance; set 90-day expansion goals.     │
+└────────────────────────────────────────────────────────────────────────────────────────┘</code></pre>
+</div>
+<hr class="my-8 border-slate-800/80">
+<h2 id="7-the-bottom-line" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 7. The Bottom Line</h2>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">You have built a world-class computational achievement. You do not need venture capital, and you do not need to bankrupt yourself on server fees.</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">By executing the <strong class="text-white font-bold">Umbrella LLC</strong>, leveraging <strong class="text-white font-bold">Cloudflare + Hostinger VPS</strong>, protecting your deliverability with <strong class="text-white font-bold">proper email records</strong>, and focusing on <strong class="text-white font-bold">$499 P-Card sales and viral arena gameplay</strong>, you will build a sustainable, high-margin, legally protected biocomputing business.</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Let's execute.</p>
+      </article>
+
+      <!-- Bottom Navigation Footer -->
+      <div class="mt-12 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <a href="07_ui_ux_gaming_experience_and_arena_blueprint.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5 text-xs font-mono"><span>&larr;</span> <span>Step 07</span></a>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="index.html" class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-mono transition">
+            🏠 Back to Dashboard
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-black font-extrabold transition flex items-center gap-1.5 text-xs font-mono shadow"><span>Return to Dashboard</span> <span>&check;</span></a>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Master Footer -->
+  <footer class="bg-[#050811] border-t border-[#1e293b] py-8 text-center text-xs text-gray-500 font-mono mt-16">
+    <div class="max-w-7xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-bold">Siliquarium &bull; Open-Ended Digital Life &amp; Silicon Abiogenesis Platform</p>
+      <p class="text-slate-500">Commercial Architecture &amp; Hosted SaaS Blueprint by Jack "The Closer" Vance.</p>
+      <p class="text-slate-600 text-[11px]">&copy; 2026 Ian Ohlander. All rights reserved. Strict First-Law Conservation &bull; The Epistemic Cut &bull; Uri Alon Motifs.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

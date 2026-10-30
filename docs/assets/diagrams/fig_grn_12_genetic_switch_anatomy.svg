@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="50%" stop-color="#071226"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+
+    <marker id="arrowGrn12" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#10b981"/>
+    </marker>
+    <marker id="barRed12" markerWidth="5" markerHeight="10" refX="2.5" refY="5" orient="auto">
+      <line x1="2.5" y1="0" x2="2.5" y2="10" stroke="#ef4444" stroke-width="2.5"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="560" fill="url(#bgGrad12)"/>
+
+  <!-- Title Banner -->
+  <g transform="translate(40, 30)">
+    <rect width="920" height="60" rx="10" fill="#0f172a" stroke="#06b6d4" stroke-width="1.5"/>
+    <text x="25" y="28" fill="#38bdf8" font-family="monospace" font-size="16" font-weight="bold" letter-spacing="1.2">ANATOMY OF A MOLECULAR &amp; DIGITAL GENETIC SWITCH</text>
+    <text x="25" y="48" fill="#94a3b8" font-family="sans-serif" font-size="12">Deconstructing the Promoter (Landing Pad), Operator (Gatekeeper), and Coding Sequence into Digital Logic</text>
+  </g>
+
+  <!-- TOP HALF: BIOLOGICAL GENE STRUCTURE & DOCKING -->
+  <g transform="translate(40, 110)">
+    <rect width="920" height="200" rx="12" fill="#0b1329" stroke="#334155" stroke-width="1.2"/>
+    <text x="20" y="25" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="bold">1. MOLECULAR BIOLOGY: TRANSCRIPTION FACTOR DOCKING AT DNA OPERATOR</text>
+
+    <!-- DNA Strand -->
+    <line x1="40" y1="120" x2="880" y2="120" stroke="#475569" stroke-width="4"/>
+
+    <!-- Section 1: Promoter -->
+    <g transform="translate(80, 75)">
+      <rect width="180" height="70" rx="6" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+      <text x="20" y="28" fill="#bae6fd" font-family="monospace" font-size="12" font-weight="bold">PROMOTER REGION</text>
+      <text x="20" y="48" fill="#7dd3fc" font-family="sans-serif" font-size="10">RNA Polymerase Landing Pad</text>
+      <!-- RNA Pol Bubble -->
+      <ellipse cx="90" cy="-18" rx="42" ry="24" fill="#f59e0b" opacity="0.85"/>
+      <text x="60" y="-14" fill="#000" font-family="monospace" font-size="10" font-weight="bold">RNA Pol</text>
+      <!-- Downward Arrow -->
+      <line x1="90" y1="8" x2="90" y2="28" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowGrn12)"/>
+    </g>
+
+    <!-- Section 2: Operator Site -->
+    <g transform="translate(300, 75)">
+      <rect width="180" height="70" rx="6" fill="#7f1d1d" stroke="#ef4444" stroke-width="2"/>
+      <text x="24" y="28" fill="#fca5a5" font-family="monospace" font-size="12" font-weight="bold">OPERATOR SITE</text>
+      <text x="20" y="48" fill="#f87171" font-family="sans-serif" font-size="10">Physical Gatekeeper / Block</text>
+      <!-- Repressor Protein Block -->
+      <rect x="50" y="-35" width="80" height="30" rx="4" fill="#ef4444" stroke="#fca5a5" stroke-width="1.5"/>
+      <text x="62" y="-15" fill="#fff" font-family="monospace" font-size="10" font-weight="bold">REPRESSOR</text>
+      <!-- Block symbol -->
+      <line x1="90" y1="-3" x2="90" y2="25" stroke="#ef4444" stroke-width="2.5" marker-end="url(#barRed12)"/>
+    </g>
+
+    <!-- Section 3: Coding Sequence -->
+    <g transform="translate(520, 75)">
+      <rect width="320" height="70" rx="6" fill="#065f46" stroke="#10b981" stroke-width="2"/>
+      <text x="30" y="28" fill="#a7f3d0" font-family="monospace" font-size="12" font-weight="bold">CODING SEQUENCE (GENE RECIPE)</text>
+      <text x="30" y="48" fill="#6ee7b7" font-family="sans-serif" font-size="10">Translated into Catalytic Enzyme (AND, OR, NOT, SINK)</text>
+      <text x="30" y="62" fill="#34d399" font-family="monospace" font-size="9">Codons: [000000 110000 ...]</text>
+    </g>
+
+    <text x="80" y="180" fill="#94a3b8" font-family="sans-serif" font-size="11">
+      • If Repressor is BOUND to Operator ──► RNA Polymerase is physically blocked (Gene is <tspan fill="#ef4444" font-weight="bold">OFF / 0</tspan>).
+    </text>
+    <text x="520" y="180" fill="#94a3b8" font-family="sans-serif" font-size="11">
+      • If Operator is CLEAR ──► RNA Polymerase transcribes mRNA (Gene is <tspan fill="#10b981" font-weight="bold">ON / 1</tspan>).
+    </text>
+  </g>
+
+  <!-- BOTTOM HALF: DIGITAL CMOS & LOGIC GATE EQUIVALENT -->
+  <g transform="translate(40, 330)">
+    <rect width="920" height="195" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+    <text x="20" y="25" fill="#f59e0b" font-family="monospace" font-size="12" font-weight="bold">2. SILIQUARIUM DIGITAL LOGIC EQUIVALENT: GATE ENABLE &amp; INHIBIT PINS</text>
+
+    <!-- Circuit Wire Diagram -->
+    <g transform="translate(40, 45)">
+      <!-- Input A -->
+      <text x="0" y="25" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold">Input A (Promoter Signal):</text>
+      <line x1="220" y1="20" x2="350" y2="20" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrowGrn12)"/>
+
+      <!-- Input B (Inhibitor / Operator) -->
+      <text x="0" y="65" fill="#ef4444" font-family="monospace" font-size="11" font-weight="bold">Input B (Operator Invert):</text>
+      <line x1="220" y1="60" x2="350" y2="60" stroke="#ef4444" stroke-width="2.5" marker-end="url(#barRed12)"/>
+
+      <!-- Logic Gate Symbol Box -->
+      <rect x="360" y="5" width="160" height="85" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+      <text x="385" y="32" fill="#38bdf8" font-family="monospace" font-size="13" font-weight="bold">GATE_CATALYST</text>
+      <text x="380" y="52" fill="#94a3b8" font-family="sans-serif" font-size="10">Logic: A AND NOT(B)</text>
+      <text x="380" y="72" fill="#fde68a" font-family="monospace" font-size="9">Dissipation: 1.0T / toggle</text>
+
+      <!-- Output Wire -->
+      <line x1="520" y1="48" x2="630" y2="48" stroke="#10b981" stroke-width="3" marker-end="url(#arrowGrn12)"/>
+      <circle cx="670" cy="48" r="24" fill="#065f46" stroke="#10b981" stroke-width="2"/>
+      <text x="652" y="53" fill="#a7f3d0" font-family="monospace" font-size="12" font-weight="bold">OUTPUT</text>
+
+      <!-- Explanation on the right -->
+      <g transform="translate(720, 15)">
+        <rect width="140" height="65" rx="6" fill="#020617" stroke="#334155" stroke-width="1"/>
+        <text x="12" y="22" fill="#34d399" font-family="monospace" font-size="10" font-weight="bold">Truth Output:</text>
+        <text x="12" y="40" fill="#cbd5e1" font-family="monospace" font-size="10">A=1, B=0 ──► 1 🟢</text>
+        <text x="12" y="55" fill="#f87171" font-family="monospace" font-size="10">A=1, B=1 ──► 0 🔴</text>
+      </g>
+
+      <text x="0" y="115" fill="#94a3b8" font-family="sans-serif" font-size="11">
+        In Siliquarium, biological operator binding is executed by passing the inhibitor signal into a <tspan fill="#fca5a5" font-weight="bold">GATE_NOT</tspan> inverter before feeding the metabolic synthetase.
+      </text>
+    </g>
+  </g>
+</svg>

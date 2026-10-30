@@ -42,17 +42,43 @@
   <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
   <script>
     window.MathJax = {
+      loader: { load: ['[tex]/color', '[tex]/configmacros'] },
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
+        processEscapes: true,
+        packages: {'[+]': ['color', 'configmacros', 'ams']},
+        macros: {
+          color: ['\\\\textcolor{#1}{#2}', 2]
+        }
       },
       options: {
         skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
       }
     };
   </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.mermaid) {
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'dark',
+          themeVariables: {
+            darkMode: true,
+            background: '#0a0e1a',
+            primaryColor: '#00e5ff',
+            primaryBorderColor: '#00e5ff',
+            primaryTextColor: '#e2e8f0',
+            lineColor: '#38bdf8',
+            secondaryColor: '#1e293b',
+            tertiaryColor: '#0f172a'
+          }
+        });
+      }
+    });
+  </script>
 
   <style>
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -84,9 +110,9 @@
       overflow-x: auto;
     }
 
-    /* Citation Target Highlighting & Interactive Navigation */
+    /* Citation & Note Target Highlighting & Interactive Navigation */
     html { scroll-behavior: auto; }
-    li[id^="ref-"] {
+    li[id^="ref-"], li[id^="note-"], div[id^="note-"] {
       scroll-margin-top: 6rem;
       position: relative;
       transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
@@ -123,6 +149,15 @@
       background-color: rgba(8, 51, 68, 0.88) !important;
       z-index: 20;
     }
+    li[id^="note-"]:target,
+    li[id^="note-"].active-citation-target,
+    div[id^="note-"]:target,
+    div[id^="note-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #38bdf8 !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
+    }
     li[id^="ref-"]:target::after,
     li[id^="ref-"].active-citation-target::after {
       content: "CITED IN TEXT 🎯";
@@ -142,15 +177,57 @@
       animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       pointer-events: none;
     }
-    sup a[href^="#ref-"] {
+    li[id^="note-"]:target::after,
+    li[id^="note-"].active-citation-target::after,
+    div[id^="note-"]:target::after,
+    div[id^="note-"].active-citation-target::after {
+      content: "ANNOTATED NOTE 📝";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #ffffff;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+
+    /* Highlight reference number [n] */
+    li[id^="ref-"]:target > span:first-child,
+    li[id^="ref-"].active-citation-target > span:first-child,
+    li[id^="note-"]:target > span:first-child,
+    li[id^="note-"].active-citation-target > span:first-child {
+      color: #38bdf8 !important;
+      text-shadow: 0 0 12px rgba(56, 189, 248, 1);
+      transform: scale(1.15);
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    sup a[href^="#ref-"], sup a[href^="#note-"] {
       transition: all 0.2s ease;
       display: inline-block;
       padding: 0 1px;
     }
-    sup a[href^="#ref-"]:hover {
+    sup a[href^="#ref-"]:hover, sup a[href^="#note-"]:hover {
       color: #ffffff !important;
       text-shadow: 0 0 8px #22d3ee;
       transform: translateY(-1px);
+    }
+    sup[id^="fnref-"]:target, a[id^="fnref-"]:target,
+    sup[id^="cite_ref-"]:target, sup[id^="cite_ref-"].active-backlink-target,
+    sup.active-backlink-target {
+      animation: backlinkTargetFlash 2.5s ease-out;
+      outline: 2px solid #00e5ff;
+      outline-offset: 2px;
+      border-radius: 4px;
     }
     section[id], div[id], h2[id], h3[id] {
       scroll-margin-top: 5.5rem;
@@ -167,25 +244,31 @@
   <script id="citation-navigator">
     document.addEventListener('DOMContentLoaded', function() {
       function highlightRefCard(targetId) {
-        if (!targetId || !targetId.startsWith('ref-')) return;
+        if (!targetId || (!targetId.startsWith('ref-') && !targetId.startsWith('note-'))) return;
         const el = document.getElementById(targetId);
         if (!el) return;
-        document.querySelectorAll('li[id^="ref-"].active-citation-target').forEach(function(item) {
+        document.querySelectorAll('li[id^="ref-"].active-citation-target, li[id^="note-"].active-citation-target, div[id^="note-"].active-citation-target').forEach(function(item) {
           item.classList.remove('active-citation-target');
         });
         el.classList.remove('active-citation-target');
         void el.offsetWidth;
         el.classList.add('active-citation-target');
-        el.scrollIntoView({ behavior: 'auto', block: 'center' });
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       function scrollToTarget(targetId) {
         if (!targetId) return;
-        if (targetId.startsWith('ref-')) {
+        if (targetId.startsWith('ref-') || targetId.startsWith('note-')) {
           highlightRefCard(targetId);
           return;
         }
         const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.remove('active-backlink-target');
+          void el.offsetWidth;
+          el.classList.add('active-backlink-target');
+          setTimeout(() => el.classList.remove('active-backlink-target'), 2500);
+        }
       }
       document.addEventListener('click', function(e) {
         const link = e.target.closest('a[href*="#"]');
@@ -193,7 +276,13 @@
           const href = link.getAttribute('href');
           if (href && href.includes('#')) {
             const hash = href.substring(href.indexOf('#') + 1);
-            if (hash.startsWith('ref-')) highlightRefCard(hash);
+            if (hash.startsWith('ref-') || hash.startsWith('note-')) {
+              highlightRefCard(hash);
+            } else if (hash.startsWith('cite_ref-') || hash.startsWith('fnref-')) {
+              e.preventDefault();
+              history.pushState(null, '', '#' + hash);
+              scrollToTarget(hash);
+            }
           }
         }
       });
@@ -295,38 +384,89 @@
           <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
-        <span>🎓</span>
-        <span>Curriculum & Pedagogy</span>
+        <span>🌋</span>
+        <span>Volume I: Prebiotic Biophysics</span>
       </div>
-      <div class="grid grid-cols-1 gap-1"><a href="index.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🐠</span>
+      <div class="grid grid-cols-1 gap-1"><a href="THEORETICAL_MODEL.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Portal Overview</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Curriculum portal & modular index</div>
+          <div class="font-bold text-xs text-slate-200">1. Theoretical Model</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">21 sealed sections & thermodynamic laws</div>
         </div>
-      </a><a href="CURRICULUM_AND_SYLLABUS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">📜</span>
+      </a><a href="EPISTEMIC_FOUNDATIONS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Course Syllabus</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Syllabus, philosophy & symbol index</div>
+          <div class="font-bold text-xs text-slate-200">2. Epistemic Foundations</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Howard Pattee's Epistemic Cut & defenses</div>
+        </div>
+      </a><a href="REALITY_TO_SIMULATION_TRANSLATION_MATRIX.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔄</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">3. Translation Matrix (Reality ↔ Sim)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Grounding physical metaphors to computational invariants</div>
+        </div>
+      </a><a href="DEEP_SEA_PROTO_COGNITION_AND_VENT_BIOPHYSICS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧠</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">4. Proto-Cognition & Vent Biophysics</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Sensory-motor coupling, temporal derivatives & biophysics</div>
+        </div>
+      </a><a href="THE_GENETIC_BOOK_OF_THE_DEAD.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">5. Book of the Dead</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Dawkins, Adami & Environmental Info</div>
         </div>
       </a><a href="curriculum/unit1_prebiotic_threshold.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🌋</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Unit 1: Prebiotic Vents</div>
+          <div class="font-bold text-xs text-slate-200">6. Unit 1: Prebiotic Vents</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Alkaline vents, chemiosmosis & Pattee's cut</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🧬</span>
+        <span>Volume II: Gene Regulatory Networks</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">1. GRNs & Attractors (Vol II)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Biological & digital GRNs, attractors & Waddington</div>
         </div>
       </a><a href="curriculum/unit2_logic_of_life.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">⚡</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Unit 2: Logic of Life</div>
+          <div class="font-bold text-xs text-slate-200">2. Unit 2: Logic of Life</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Primitive enzymes & XOR impossibility proof</div>
         </div>
       </a><a href="curriculum/unit3_systems_biology_motifs.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🕸️</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Unit 3: Systems Motifs</div>
+          <div class="font-bold text-xs text-slate-200">3. Unit 3: Systems Motifs</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Uri Alon motifs & Weisfeiler-Lehman hashes</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🌸</span>
+        <span>Volume III: Multicellular Morphology</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌸</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">1. Multicellular Morphology (Vol III)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Graph theory, 3-cliques & 5 body topologies</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🦕</span>
+        <span>Volume IV: Circuit Paleontology</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Field Guide</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Master taxonomy, philosophy & WL hash overview</div>
         </div>
       </a><a href="curriculum/unit4_evolutionary_dynamics.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🧬</span>
@@ -334,71 +474,144 @@
           <div class="font-bold text-xs text-slate-200">Unit 4: Macro-Evolution</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Kimura drift, convergent homoplasy & LTEE</div>
         </div>
+      </a><a href="paleontology/specimen_01_bistable_latch.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔒</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 1: Bistable Latch</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">1-bit memory latch & SR flip-flop</div>
+        </div>
+      </a><a href="paleontology/specimen_02_repressilator.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔄</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 2: Repressilator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Odd-inverter ring oscillator & clock</div>
+        </div>
+      </a><a href="paleontology/specimen_03_coherent_ffl.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⏳</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 3: Coherent FFL</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Sign-sensitive delay & persistence filter</div>
+        </div>
+      </a><a href="paleontology/specimen_04_incoherent_ffl.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚡</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 4: Incoherent FFL</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Fold-change adaptation & pulse generator</div>
+        </div>
+      </a><a href="paleontology/specimen_05_negative_autoregulation.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎚️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 5: Negative Autoreg</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Homeostatic clamp & response accelerator</div>
+        </div>
+      </a><a href="paleontology/specimen_06_binary_half_adder.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧮</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 6: Binary Half-Adder</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Arithmetic sum (XOR) & carry (AND)</div>
+        </div>
+      </a><a href="paleontology/specimen_07_allosteric_inverter.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🛡️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 7: Allosteric NOT</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Toxin defense & inverter shielding</div>
+        </div>
+      </a><a href="paleontology/specimen_08_endosymbiotic_cassette.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 8: Endosymbiont</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Organelle cassette & metabolic boost</div>
+        </div>
+      </a><a href="paleontology/specimen_09_syncytial_multicellularity.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🕸️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 9: Syncytium</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Multi-pore fusion & cytoplasmic sharing</div>
+        </div>
+      </a><a href="paleontology/specimen_10_pelagic_sporulation.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 10: Pelagic Spores</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Buoyant dispersal & benthic escape</div>
+        </div>
+      </a><a href="paleontology/specimen_11_chemiosmotic_autotroph.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 11: Apex Autotroph</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Mitchell PMF & hydrothermal plume coupling</div>
+        </div>
+      </a><a href="paleontology/specimen_12_basalt_lithotroph.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🪨</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 12: Basalt Lithotroph</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Deep subterranean starvation & Landauer thrift</div>
+        </div>
+      </a><a href="paleontology/specimen_13_trophic_predator.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🩸</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 13: Trophic Predator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Lytic enzymatic siphoning & heterotrophy</div>
+        </div>
+      </a><a href="paleontology/specimen_14_detrital_scavenger.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🍂</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 14: Detrital Scavenger</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Carcass necromass & mineral mass recycling</div>
+        </div>
+      </a><a href="paleontology/specimen_15_patriarch_lineage.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 15: Patriarch Ancestor</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Conserved primordial genome & LTEE anchor</div>
+        </div>
+      </a><a href="paleontology/specimen_16_temporal_derivative_chemotaxis.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧭</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 16: Chemotaxis Engine</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Purcell-Berg fold-change dS/dt gradient sensor</div>
+        </div>
+      </a><a href="paleontology/specimen_17_predictive_pavlovian.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔮</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 17: Pavlovian Regulator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Tagkopoulos anticipatory precursor feedforward shield</div>
+        </div>
+      </a><a href="paleontology/specimen_18_entrained_pacemaker.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⏱️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 18: Entrained Pacemaker</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Johnson-Rust phase-locked KaiABC vent clock</div>
+        </div>
+      </a><a href="paleontology/specimen_19_steiner_vascular_network.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌿</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 19: Steiner Vascular Net</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Nakagaki Physarum minimal tree conduit router</div>
+        </div>
+      </a><a href="paleontology/specimen_20_cryptobiotic_dormancy_clamp.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🛡️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 20: Dormancy Clamp</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Balaban HipAB zero-burn cryptobiosis gate</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🛠️</span>
+        <span>Volume V: Systems Operations</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="USER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Illustrated Systems Manual</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">10-chapter illustrated manual & tutorials</div>
+        </div>
       </a><a href="curriculum/practicums_lab_manual.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🧪</span>
         <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Student Lab Manual</div>
+          <div class="font-bold text-xs text-slate-200">Laboratory Practicums 1–5</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">5 hands-on labs & formative assessments</div>
         </div>
-      </a><a href="PEDAGOGICAL_COMPANION_SUITE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Companion Portal</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Master portal & assessment rubrics</div>
-        </div>
-      </a><a href="companion/glossary.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">📖</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Lexicon & Glossary</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">55-term systems biology lexicon</div>
-        </div>
-      </a><a href="companion/study_guides.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🧭</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Study Guides & Decoders</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">8 equation decoders & derivations</div>
-        </div>
-      </a><a href="companion/bibliography.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">📚</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Annotated Bibliography</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">14 foundational primary papers</div>
-        </div>
-      </a><a href="QA/STUDENT_UX_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🔍</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Student QA Report</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">12th-grade usability audit & screenshots</div>
-        </div>
-      </a></div></div><div class="space-y-1.5">
-      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
-        <span>🌊</span>
-        <span>Biophysical Theory</span>
-      </div>
-      <div class="grid grid-cols-1 gap-1"><a href="THEORETICAL_MODEL.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🌊</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Theoretical Model</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">21 sealed sections & thermodynamic laws</div>
-        </div>
-      </a><a href="EPISTEMIC_FOUNDATIONS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
-        <span class="text-sm shrink-0 mt-0.5">🧬</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-slate-200">Epistemic Foundations</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Howard Pattee's Epistemic Cut & defenses</div>
-        </div>
-      </a><a href="DOCUMENTATION_DESIGN_PRINCIPLES.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 bg-cyan-950/80 border border-cyan-700/60 text-cyan-300">
-        <span class="text-sm shrink-0 mt-0.5">📐</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs text-cyan-300">Design Principles</div>
-          <div class="text-[10px] text-slate-500 truncate font-sans">Documentation & UI/UX architecture</div>
-        </div>
-      </a></div></div><div class="space-y-1.5">
-      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
-        <span>🔬</span>
-        <span>Laboratory Guides</span>
-      </div>
-      <div class="grid grid-cols-1 gap-1"><a href="PHASE_3_VISUALIZER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+      </a><a href="PHASE_3_VISUALIZER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
         <span class="text-sm shrink-0 mt-0.5">🔬</span>
         <div class="min-w-0">
           <div class="font-bold text-xs text-slate-200">3D Seafloor Visualizer</div>
@@ -421,6 +634,135 @@
         <div class="min-w-0">
           <div class="font-bold text-xs text-slate-200">Phylogeny & Dynamics</div>
           <div class="text-[10px] text-slate-500 truncate font-sans">Multi-lineage clades & Lenski benchmarks</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>📚</span>
+        <span>Volume VI: Academic References</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="index.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Master Library Portal</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Curriculum portal & modular index</div>
+        </div>
+      </a><a href="companion/glossary.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Systems Biology Glossary</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">70-term systems biology lexicon</div>
+        </div>
+      </a><a href="companion/study_guides.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧭</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Study Guides & Master Decoders</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">8 equation decoders & derivations</div>
+        </div>
+      </a><a href="companion/bibliography.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Annotated Master Bibliography</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">22 foundational primary papers</div>
+        </div>
+      </a><a href="curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎓</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Full-Year University Syllabus</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">30-week university curriculum & syllabus</div>
+        </div>
+      </a><a href="CIRCUIT_PALEONTOLOGY_NOTES.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📝</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Critical Scientific Notes</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">36 in-depth derivations, proofs & justifications</div>
+        </div>
+      </a><a href="CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Glossary</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">50-term lexicon of evolved circuits</div>
+        </div>
+      </a><a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Bibliography</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">25+ landmark peer-reviewed papers</div>
+        </div>
+      </a><a href="PEDAGOGICAL_COMPANION_SUITE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Companion Portal</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Master portal & assessment rubrics</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>📏</span>
+        <span>Standards & Architecture</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../standards/DEVELOPMENT_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚙️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Engineering Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Architecture, TypeScript & design principles</div>
+        </div>
+      </a><a href="../standards/QA_AND_TESTING_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧪</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">QA & Testing Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Verification, CI & unit test frameworks</div>
+        </div>
+      </a><a href="../standards/DOCUMENTATION_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Pedagogical Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5-Dimension rubric & equation decoders</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🔍</span>
+        <span>QA & Field Evaluations</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../QA/QA_CODING_STANDARDS_FULL_AUDIT_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">QA Coding Standards Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Comprehensive audit against DEVELOPMENT, QA & DOCS standards</div>
+        </div>
+      </a><a href="../QA/UX_ARCHITECTURE_AUDIT_AND_REDESIGN.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📐</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">UX Architecture Audit & Redesign</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5D HCI audit, domain integrity & interface redesign</div>
+        </div>
+      </a><a href="../QA/PANEL_UX_EVALUATION_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Panel Evaluation Report</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Expert & tester panel 4x 1-hour journeys</div>
+        </div>
+      </a><a href="../QA/DESIGN_STUDIO_UX_AUDIT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏗️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Design Studio UX Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">CAD sculpting & world builder evaluation</div>
+        </div>
+      </a><a href="../QA/FIELD_GUIDE_NATURALIST_EVALUATION.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌿</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Naturalist Field Evaluation</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Field guide & safari co-pilot audit</div>
+        </div>
+      </a><a href="../QA/NAIVE_USER_VISUAL_AUDIT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">👁️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Naive User Visual Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Visual clarity & cognitive ergonomics audit</div>
+        </div>
+      </a><a href="../QA/STUDENT_UX_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔍</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Student QA Report</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">12th-grade usability audit & screenshots</div>
         </div>
       </a></div></div><div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
@@ -464,65 +806,132 @@
       </div>
       <div class="space-y-1">
       <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
-        <span>🎓</span>
-        <span>Curriculum & Pedagogy</span>
-      </div>
-      <div class="space-y-0.5"><a href="index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🐠</span>
-        <span class="truncate">Portal Overview</span>
-      </a><a href="CURRICULUM_AND_SYLLABUS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">📜</span>
-        <span class="truncate">Course Syllabus</span>
-      </a><a href="curriculum/unit1_prebiotic_threshold.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🌋</span>
-        <span class="truncate">Unit 1: Prebiotic Vents</span>
-      </a><a href="curriculum/unit2_logic_of_life.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">⚡</span>
-        <span class="truncate">Unit 2: Logic of Life</span>
-      </a><a href="curriculum/unit3_systems_biology_motifs.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🕸️</span>
-        <span class="truncate">Unit 3: Systems Motifs</span>
-      </a><a href="curriculum/unit4_evolutionary_dynamics.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🧬</span>
-        <span class="truncate">Unit 4: Macro-Evolution</span>
-      </a><a href="curriculum/practicums_lab_manual.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🧪</span>
-        <span class="truncate">Student Lab Manual</span>
-      </a><a href="PEDAGOGICAL_COMPANION_SUITE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🏛️</span>
-        <span class="truncate">Companion Portal</span>
-      </a><a href="companion/glossary.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">📖</span>
-        <span class="truncate">Lexicon & Glossary</span>
-      </a><a href="companion/study_guides.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🧭</span>
-        <span class="truncate">Study Guides & Decoders</span>
-      </a><a href="companion/bibliography.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">📚</span>
-        <span class="truncate">Annotated Bibliography</span>
-      </a><a href="QA/STUDENT_UX_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
-        <span class="text-xs shrink-0">🔍</span>
-        <span class="truncate">Student QA Report</span>
-      </a></div></div><div class="space-y-1">
-      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
-        <span>🌊</span>
-        <span>Biophysical Theory</span>
+        <span>🌋</span>
+        <span>Volume I: Prebiotic Biophysics</span>
       </div>
       <div class="space-y-0.5"><a href="THEORETICAL_MODEL.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
         <span class="text-xs shrink-0">🌊</span>
-        <span class="truncate">Theoretical Model</span>
+        <span class="truncate">1. Theoretical Model</span>
       </a><a href="EPISTEMIC_FOUNDATIONS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
         <span class="text-xs shrink-0">🧬</span>
-        <span class="truncate">Epistemic Foundations</span>
-      </a><a href="DOCUMENTATION_DESIGN_PRINCIPLES.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold shadow-sm">
-        <span class="text-xs shrink-0">📐</span>
-        <span class="truncate">Design Principles</span>
+        <span class="truncate">2. Epistemic Foundations</span>
+      </a><a href="REALITY_TO_SIMULATION_TRANSLATION_MATRIX.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔄</span>
+        <span class="truncate">3. Translation Matrix (Reality ↔ Sim)</span>
+      </a><a href="DEEP_SEA_PROTO_COGNITION_AND_VENT_BIOPHYSICS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧠</span>
+        <span class="truncate">4. Proto-Cognition & Vent Biophysics</span>
+      </a><a href="THE_GENETIC_BOOK_OF_THE_DEAD.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">5. Book of the Dead</span>
+      </a><a href="curriculum/unit1_prebiotic_threshold.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌋</span>
+        <span class="truncate">6. Unit 1: Prebiotic Vents</span>
       </a></div></div><div class="space-y-1">
       <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
-        <span>🔬</span>
-        <span>Laboratory Guides</span>
+        <span>🧬</span>
+        <span>Volume II: Gene Regulatory Networks</span>
       </div>
-      <div class="space-y-0.5"><a href="PHASE_3_VISUALIZER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+      <div class="space-y-0.5"><a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">1. GRNs & Attractors (Vol II)</span>
+      </a><a href="curriculum/unit2_logic_of_life.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚡</span>
+        <span class="truncate">2. Unit 2: Logic of Life</span>
+      </a><a href="curriculum/unit3_systems_biology_motifs.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🕸️</span>
+        <span class="truncate">3. Unit 3: Systems Motifs</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🌸</span>
+        <span>Volume III: Multicellular Morphology</span>
+      </div>
+      <div class="space-y-0.5"><a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌸</span>
+        <span class="truncate">1. Multicellular Morphology (Vol III)</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🦕</span>
+        <span>Volume IV: Circuit Paleontology</span>
+      </div>
+      <div class="space-y-0.5"><a href="CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Paleontology Field Guide</span>
+      </a><a href="curriculum/unit4_evolutionary_dynamics.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Unit 4: Macro-Evolution</span>
+      </a><a href="paleontology/specimen_01_bistable_latch.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔒</span>
+        <span class="truncate">Specimen 1: Bistable Latch</span>
+      </a><a href="paleontology/specimen_02_repressilator.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔄</span>
+        <span class="truncate">Specimen 2: Repressilator</span>
+      </a><a href="paleontology/specimen_03_coherent_ffl.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⏳</span>
+        <span class="truncate">Specimen 3: Coherent FFL</span>
+      </a><a href="paleontology/specimen_04_incoherent_ffl.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚡</span>
+        <span class="truncate">Specimen 4: Incoherent FFL</span>
+      </a><a href="paleontology/specimen_05_negative_autoregulation.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎚️</span>
+        <span class="truncate">Specimen 5: Negative Autoreg</span>
+      </a><a href="paleontology/specimen_06_binary_half_adder.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧮</span>
+        <span class="truncate">Specimen 6: Binary Half-Adder</span>
+      </a><a href="paleontology/specimen_07_allosteric_inverter.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🛡️</span>
+        <span class="truncate">Specimen 7: Allosteric NOT</span>
+      </a><a href="paleontology/specimen_08_endosymbiotic_cassette.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔋</span>
+        <span class="truncate">Specimen 8: Endosymbiont</span>
+      </a><a href="paleontology/specimen_09_syncytial_multicellularity.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🕸️</span>
+        <span class="truncate">Specimen 9: Syncytium</span>
+      </a><a href="paleontology/specimen_10_pelagic_sporulation.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">Specimen 10: Pelagic Spores</span>
+      </a><a href="paleontology/specimen_11_chemiosmotic_autotroph.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌋</span>
+        <span class="truncate">Specimen 11: Apex Autotroph</span>
+      </a><a href="paleontology/specimen_12_basalt_lithotroph.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🪨</span>
+        <span class="truncate">Specimen 12: Basalt Lithotroph</span>
+      </a><a href="paleontology/specimen_13_trophic_predator.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🩸</span>
+        <span class="truncate">Specimen 13: Trophic Predator</span>
+      </a><a href="paleontology/specimen_14_detrital_scavenger.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🍂</span>
+        <span class="truncate">Specimen 14: Detrital Scavenger</span>
+      </a><a href="paleontology/specimen_15_patriarch_lineage.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Specimen 15: Patriarch Ancestor</span>
+      </a><a href="paleontology/specimen_16_temporal_derivative_chemotaxis.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧭</span>
+        <span class="truncate">Specimen 16: Chemotaxis Engine</span>
+      </a><a href="paleontology/specimen_17_predictive_pavlovian.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔮</span>
+        <span class="truncate">Specimen 17: Pavlovian Regulator</span>
+      </a><a href="paleontology/specimen_18_entrained_pacemaker.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⏱️</span>
+        <span class="truncate">Specimen 18: Entrained Pacemaker</span>
+      </a><a href="paleontology/specimen_19_steiner_vascular_network.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌿</span>
+        <span class="truncate">Specimen 19: Steiner Vascular Net</span>
+      </a><a href="paleontology/specimen_20_cryptobiotic_dormancy_clamp.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🛡️</span>
+        <span class="truncate">Specimen 20: Dormancy Clamp</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🛠️</span>
+        <span>Volume V: Systems Operations</span>
+      </div>
+      <div class="space-y-0.5"><a href="USER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Illustrated Systems Manual</span>
+      </a><a href="curriculum/practicums_lab_manual.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧪</span>
+        <span class="truncate">Laboratory Practicums 1–5</span>
+      </a><a href="PHASE_3_VISUALIZER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
         <span class="text-xs shrink-0">🔬</span>
         <span class="truncate">3D Seafloor Visualizer</span>
       </a><a href="PHASE_4_PALEONTOLOGY_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
@@ -534,6 +943,78 @@
       </a><a href="PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
         <span class="text-xs shrink-0">🧬</span>
         <span class="truncate">Phylogeny & Dynamics</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>📚</span>
+        <span>Volume VI: Academic References</span>
+      </div>
+      <div class="space-y-0.5"><a href="index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Master Library Portal</span>
+      </a><a href="companion/glossary.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Systems Biology Glossary</span>
+      </a><a href="companion/study_guides.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧭</span>
+        <span class="truncate">Study Guides & Master Decoders</span>
+      </a><a href="companion/bibliography.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Annotated Master Bibliography</span>
+      </a><a href="curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎓</span>
+        <span class="truncate">Full-Year University Syllabus</span>
+      </a><a href="CIRCUIT_PALEONTOLOGY_NOTES.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📝</span>
+        <span class="truncate">Critical Scientific Notes</span>
+      </a><a href="CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Paleontology Glossary</span>
+      </a><a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Paleontology Bibliography</span>
+      </a><a href="PEDAGOGICAL_COMPANION_SUITE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Companion Portal</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>📏</span>
+        <span>Standards & Architecture</span>
+      </div>
+      <div class="space-y-0.5"><a href="../standards/DEVELOPMENT_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚙️</span>
+        <span class="truncate">Engineering Standards</span>
+      </a><a href="../standards/QA_AND_TESTING_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧪</span>
+        <span class="truncate">QA & Testing Standards</span>
+      </a><a href="../standards/DOCUMENTATION_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Pedagogical Standards</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🔍</span>
+        <span>QA & Field Evaluations</span>
+      </div>
+      <div class="space-y-0.5"><a href="../QA/QA_CODING_STANDARDS_FULL_AUDIT_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">QA Coding Standards Audit</span>
+      </a><a href="../QA/UX_ARCHITECTURE_AUDIT_AND_REDESIGN.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📐</span>
+        <span class="truncate">UX Architecture Audit & Redesign</span>
+      </a><a href="../QA/PANEL_UX_EVALUATION_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Panel Evaluation Report</span>
+      </a><a href="../QA/DESIGN_STUDIO_UX_AUDIT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏗️</span>
+        <span class="truncate">Design Studio UX Audit</span>
+      </a><a href="../QA/FIELD_GUIDE_NATURALIST_EVALUATION.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌿</span>
+        <span class="truncate">Naturalist Field Evaluation</span>
+      </a><a href="../QA/NAIVE_USER_VISUAL_AUDIT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">👁️</span>
+        <span class="truncate">Naive User Visual Audit</span>
+      </a><a href="../QA/STUDENT_UX_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔍</span>
+        <span class="truncate">Student QA Report</span>
       </a></div></div><div class="space-y-1">
       <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
         <span>🎨</span>
@@ -554,21 +1035,21 @@
     <!-- MAIN CONTENT VIEWPORT (Centered, Responsive, Zero Horizontal Scrollbars) -->
     <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-10 py-8 md:py-10">
       <div class="max-w-4xl mx-auto space-y-8">
-        <h1 id="siliquarium-documentation-design-principles-architectural-blueprint" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🏛️ Siliquarium Documentation Design Principles & Architectural Blueprint <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#siliquarium-documentation-design-principles-architectural-blueprint" title="Direct link">#</a></h1>
+        <h1 id="siliquarium-documentation-design-principles-architectural-blueprint" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🏛️ Siliquarium Documentation Design Principles & Architectural Blueprint</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Distilled from BooleanGA's Flagship Curriculum Architecture for Enterprise-Grade Biophysical Pedagogy</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><em class="text-slate-200 italic">"If a student cannot feel the physical stakes before encountering the mathematics, the documentation has failed. If an engineer cannot trace the formal derivation directly to a data structure in code, the architecture has failed. World-class technical documentation must be simultaneously a scientific treatise, an interactive museum exhibit, and an unambiguous software blueprint."</em></blockquote>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">"If a student cannot feel the physical stakes before encountering the mathematics, the documentation has failed. If an engineer cannot trace the formal derivation directly to a data structure in code, the architecture has failed. World-class technical documentation must be simultaneously a scientific treatise, an interactive museum exhibit, and an unambiguous software blueprint."</em></p></blockquote>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="1-executive-summary-comparative-architectural-audit" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Executive Summary & Comparative Architectural Audit <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#1-executive-summary-comparative-architectural-audit" title="Direct link">#</a></h2>
+<h2 id="1-executive-summary-comparative-architectural-audit" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Executive Summary & Comparative Architectural Audit</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A rigorous analytical dissection of <strong class="text-slate-100 font-semibold">BooleanGA's</strong> flagship documentation (specifically <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">BIOLOGICAL_FOUNDATIONS_OF_GENETIC_ALGORITHMS.html</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">INDEX.html</code>, and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">vol1/ch01_molecular_architecture_of_heredity.html</code>) reveals an educational publishing architecture that operates at the highest tier of modern scientific exposition.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Rather than treating documentation as static text or a generic developer wiki, BooleanGA treats documentation as a <strong class="text-slate-100 font-semibold">living, hyper-scaffolded cognitive instrument</strong>. It achieves parity with elite scientific publications and interactive computational portals (such as <em class="text-slate-200 italic">Distill.pub</em>, <em class="text-slate-200 italic">Stripe Press</em>, and <em class="text-slate-200 italic">Nature Methods</em>) while maintaining 100% standalone, zero-server offline utility (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">file:///</code> protocol compatibility).</p>
-<h3 id="comparative-audit-booleanga-vs-current-siliquarium-documentation" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Comparative Audit: BooleanGA vs. Current Siliquarium Documentation <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#comparative-audit-booleanga-vs-current-siliquarium-documentation" title="Direct link">#</a></h3>
+<h3 id="comparative-audit-booleanga-vs-current-siliquarium-documentation" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Comparative Audit: BooleanGA vs. Current Siliquarium Documentation</h3>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Architectural Dimension</th><th class="p-3.5 font-semibold">BooleanGA Flagship Standard</th><th class="p-3.5 font-semibold">Current Siliquarium Implementation</th><th class="p-3.5 font-semibold">Gap & Required Transformation</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">CSS & Design Engine</strong></td><td class="p-3.5 leading-relaxed">Modern <strong class="text-slate-100 font-semibold">Tailwind CSS</strong> CDN runtime with <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">class=&quot;dark&quot;</code>, extended biomorphic color tokens, and custom scrollbars.</td><td class="p-3.5 leading-relaxed">Custom inline CSS stylesheet (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">:root</code> variables) in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">build_docs_html.mjs</code> without utility classes or responsive grid utilities.</td><td class="p-3.5 leading-relaxed">Upgrade compiler to inject Tailwind CDN with customized abyssal theme configuration, frosted glass filters, and responsive typography scales.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Visual Hierarchy & Depth</strong></td><td class="p-3.5 leading-relaxed">Semantic gradient cards (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-bio</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-digital</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-margin</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-experiment</code>), glowing borders, and backdrop blurs.</td><td class="p-3.5 leading-relaxed">Flat solid-color container cards (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">--bg-card: #0d1322</code>) with single-pixel border strokes and no semantic hue-differentiation.</td><td class="p-3.5 leading-relaxed">Implement 4 semantic gradient card classes with glowing borders matching Siliquarium's biophysical domains.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Header & Navigation UX</strong></td><td class="p-3.5 leading-relaxed">Breadcrumb hierarchy (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Portal / Vol / Ch</code>), glowing 14-16rem gradient logo badge, Title Hero, and <strong class="text-slate-100 font-semibold">Status & Pedagogical Compass Strip</strong>.</td><td class="p-3.5 leading-relaxed">Basic sticky header bar with flat horizontal text link row; no breadcrumbs, no chapter metrics, no compass quick-jump links.</td><td class="p-3.5 leading-relaxed">Construct a standardized Master Header with breadcrumb navigation trail, gradient logo box, title hero, and interactive Compass Strip.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Portal Information Architecture</strong></td><td class="p-3.5 leading-relaxed">2-column modular chapter cards featuring subchapter rosters, reading times (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">~12 min read</code>), feature pills, and glowing action buttons.</td><td class="p-3.5 leading-relaxed">Markdown tables with raw text links and bulleted lists in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PORTAL.md</code>.</td><td class="p-3.5 leading-relaxed">Rebuild <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/PORTAL.md</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/index.html</code> as a modular, responsive 2-column curriculum card grid with subchapters and feature pills.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Mathematical Typesetting</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">MathJax 3</strong> with single-dollar inline math (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">$</code>), color-coded TeX tokens (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#...}</code>), and post-render anchor coordination.</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">KaTeX</strong> auto-render with standard white typesetting; equations lack color breakdown or interactive alignment.</td><td class="p-3.5 leading-relaxed">Migrate to color-coordinated MathJax 3 with single-dollar delimiter support and DOM lifecycle synchronization.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Didactic Scaffolding</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Teacher's Orientation prologue</strong>, <strong class="text-slate-100 font-semibold">4-Pillar SVG diagram cards</strong>, <strong class="text-slate-100 font-semibold">3-part color-coded equation decoders</strong>, and <strong class="text-slate-100 font-semibold">active-retrieval checkpoints</strong>.</td><td class="p-3.5 leading-relaxed">Markdown blockquotes and text alerts (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[!NOTE]</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[!TIP]</code>); equations lack variable breakdowns; no diagram analysis cards.</td><td class="p-3.5 leading-relaxed">Institutionalize the 5-Dimension Conceptual Rubric with formal Equation Decoders, 4-Pillar Diagram Cards, and Concept Checkpoints.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Interactive Citations</strong></td><td class="p-3.5 leading-relaxed">Instant fragment targeting with <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">@keyframes refTargetPulse</code>, floating <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;CITED IN TEXT 🎯&quot;</code> beacon pill, and backlink target flashes.</td><td class="p-3.5 leading-relaxed">Standard anchor jumps (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#ref-1</code>) without visual feedback, glow pulses, or targeted highlighting.</td><td class="p-3.5 leading-relaxed">Inject BooleanGA's interactive citation stylesheet and zero-dependency citation navigation JavaScript engine into all pages.</td></tr></tbody></table></div>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="2-visual-hierarchy-theme-systems" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Visual Hierarchy & Theme Systems <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#2-visual-hierarchy-theme-systems" title="Direct link">#</a></h2>
+<h2 id="2-visual-hierarchy-theme-systems" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Visual Hierarchy & Theme Systems</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">BooleanGA's aesthetic power stems from a carefully balanced juxtaposition: <strong class="text-slate-100 font-semibold">deep, non-fatiguing dark abyssal backgrounds</strong> paired with <strong class="text-slate-100 font-semibold">high-contrast, bioluminescent neon accents</strong> that mirror the physical reality of the systems being described.</p>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Semantic Container</th><th class="p-3.5 font-semibold">CSS Class & Glow Gradient</th><th class="p-3.5 font-semibold">Border Specification</th><th class="p-3.5 font-semibold">Primary Curricular Use</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Biophysical Reality</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-bio</code> (135° Emerald Glow)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">border: 1px solid rgba(16, 185, 129, 0.40)</code></td><td class="p-3.5 leading-relaxed">Peter Mitchell chemiosmosis, vents, natural selection</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Digital Architecture</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-digital</code> (135° Cyan Glow)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">border: 1px solid rgba(6, 182, 212, 0.40)</code></td><td class="p-3.5 leading-relaxed">CMOS netlists, logic gates, Landauer token costs</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Sacred Analogy</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-margin</code> (135° Amber Glow)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">border: 1px solid rgba(245, 158, 11, 0.35)</code></td><td class="p-3.5 leading-relaxed">Everyday conceptual anchors, apartment analogies</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Paleontological Fossil</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-experiment</code> (135° Purple Glow)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">border: 1px solid rgba(168, 85, 247, 0.40)</code></td><td class="p-3.5 leading-relaxed">Lenski LTEE, Weisfeiler-Lehman hashes, frozen clades</td></tr></tbody></table></div>
-<h3 id="21-the-deep-sea-abyssal-palette" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 The Deep-Sea Abyssal Palette <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#21-the-deep-sea-abyssal-palette" title="Direct link">#</a></h3>
+<h3 id="21-the-deep-sea-abyssal-palette" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 The Deep-Sea Abyssal Palette</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium's documentation palette adapts BooleanGA's palette to evoke the deep oceanic trenches where alkaline hydrothermal chimneys vent into freezing Hadean seawater:</p>
 <pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-javascript">tailwind.config = {
   darkMode: &#39;class&#39;,
@@ -596,7 +1077,7 @@
     }
   }
 };</code></pre>
-<h3 id="22-semantic-card-gradients" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 Semantic Card Gradients <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#22-semantic-card-gradients" title="Direct link">#</a></h3>
+<h3 id="22-semantic-card-gradients" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 Semantic Card Gradients</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Instead of generic grey cards, BooleanGA assigns <strong class="text-slate-100 font-semibold">strict epistemological roles</strong> to specific gradient and border treatments. Siliquarium maps these directly to its core biophysical concepts:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-chemiosmotic</code> (formerly <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.card-bio</code>):</strong>  </li>
@@ -612,23 +1093,23 @@
 <li><em class="text-slate-200 italic">Colors:</em> Purple gradient (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(168, 85, 247, 0.08)</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(15, 23, 42, 0.7)</code>), 1px border <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">rgba(168, 85, 247, 0.4)</code>.  </li>
 <li><em class="text-slate-200 italic">Role:</em> Historical landmark experiments (Mitchell 1961, Russell 1997, Lenski LTEE 1988), Weisfeiler-Lehman topological hashes, and evolutionary flight recorder autopsies.</li>
 </ol>
-<h3 id="23-typography-readability-constraints" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.3 Typography & Readability Constraints <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#23-typography-readability-constraints" title="Direct link">#</a></h3>
+<h3 id="23-typography-readability-constraints" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.3 Typography & Readability Constraints</h3>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Body Copy:</strong> Set in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">font-sans</code> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Inter</code>), line-height <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1.75</code> (relaxed), text color <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#cbd5e1</code> (slate-300) to minimize eye strain across long reading sessions.</li>
 <li><strong class="text-slate-100 font-semibold">Titles & Headings:</strong> Set in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">font-mono</code> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Cascadia Code</code>), uppercase tracking (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">tracking-tight</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">tracking-wider</code> on subheadings), crisp <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#f8fafc</code> (slate-100).</li>
 <li><strong class="text-slate-100 font-semibold">Inline Code:</strong> Rendered in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">font-mono</code> with subtle rounded background <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#0a0e1a</code>, single-pixel border <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#1e2c4a</code>, and cyan text <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#38bdf8</code>.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="3-layout-information-architecture" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Layout & Information Architecture <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#3-layout-information-architecture" title="Direct link">#</a></h2>
+<h2 id="3-layout-information-architecture" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Layout & Information Architecture</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">BooleanGA structures its textbook volumes and portal pages using an unmistakable architectural hierarchy:</p>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Document Section</th><th class="p-3.5 font-semibold">Visual Treatment</th><th class="p-3.5 font-semibold">Interactive Functionality</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">1. Master Header</strong></td><td class="p-3.5 leading-relaxed">Glassmorphic sticky bar with dynamic breadcrumbs</td><td class="p-3.5 leading-relaxed">Quick jump to portal hub and volume root</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">2. Title Hero</strong></td><td class="p-3.5 leading-relaxed">High-contrast gradient emblem box + typography</td><td class="p-3.5 leading-relaxed">Displays chapter, subtitles, and cognitive scope</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">3. Pedagogical Compass</strong></td><td class="p-3.5 leading-relaxed">Horizontal badge strip with reading time</td><td class="p-3.5 leading-relaxed">Real-time progress orientation and module roster</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">4. Orientation Prologue</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">blockquote</code> with deep cyan vertical border</td><td class="p-3.5 leading-relaxed">Explains existential stakes and foundational questions</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">5. Modular Chapter Grid</strong></td><td class="p-3.5 leading-relaxed">Responsive 2-column card layout</td><td class="p-3.5 leading-relaxed">Visual subchapters, feature pills, direct action links</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">6. Flagship Figures</strong></td><td class="p-3.5 leading-relaxed">Glowing gradient borders + 4-pillar analysis cards</td><td class="p-3.5 leading-relaxed">Full SVG diagrams and high-res browser screenshots</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">7. Academic Citations</strong></td><td class="p-3.5 leading-relaxed">Pop-in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CITED IN TEXT 🎯</code> beacon badge</td><td class="p-3.5 leading-relaxed">Smooth jump to bibliography with pulse animation</td></tr></tbody></table></div>
-<h3 id="31-the-standardized-master-header" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.1 The Standardized Master Header <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#31-the-standardized-master-header" title="Direct link">#</a></h3>
+<h3 id="31-the-standardized-master-header" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.1 The Standardized Master Header</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Every page features a top breadcrumb navigation row anchored to the master portal, accompanied by quick-action simulator links:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>Left: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">📚 Master Portal / [Domain] / [Current Document]</code></li>
 <li>Right: Direct action pills (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🚀 Live Seafloor Simulator</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🔬 Lab Practicums</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">📚 Master Library</code>)</li>
 </ul>
-<h3 id="32-the-status-pedagogical-compass-strip" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.2 The Status & Pedagogical Compass Strip <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#32-the-status-pedagogical-compass-strip" title="Direct link">#</a></h3>
+<h3 id="32-the-status-pedagogical-compass-strip" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.2 The Status & Pedagogical Compass Strip</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Immediately below the title hero, a high-density, single-line compass bar provides readers with situational awareness and instant jump anchors:</p>
 <pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;div class=&quot;p-4 bg-slate-950/90 border border-slate-800 rounded-xl flex flex-wrap items-center justify-between gap-3 text-xs font-mono&quot;&gt;
   &lt;div class=&quot;flex items-center gap-3&quot;&gt;
@@ -645,7 +1126,7 @@
     &lt;a href=&quot;#practicums&quot; class=&quot;text-slate-400 hover:text-purple-400 transition-colors&quot;&gt;Lab Practicums&lt;/a&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-<h3 id="33-the-modular-chapter-card-grid" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.3 The Modular Chapter Card Grid <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#33-the-modular-chapter-card-grid" title="Direct link">#</a></h3>
+<h3 id="33-the-modular-chapter-card-grid" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.3 The Modular Chapter Card Grid</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Chapters and modules are presented not as bullet points, but as <strong class="text-slate-100 font-semibold">rich cards</strong> with five essential components:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Chapter Badge & Domain Pill:</strong> (e.g., <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Unit 01</code> + <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Prebiotic Physics</code>).</li>
@@ -655,15 +1136,15 @@
 <li><strong class="text-slate-100 font-semibold">Card Footer & Action Button:</strong> Left side denotes module type (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Standalone Module</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Interactive Lab</code>); right side features a styled button (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Open Unit 01 →</code>) with arrow hover translation.</li>
 </ol>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="4-didactic-pedagogical-architecture" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. Didactic & Pedagogical Architecture <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#4-didactic-pedagogical-architecture" title="Direct link">#</a></h2>
+<h2 id="4-didactic-pedagogical-architecture" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. Didactic & Pedagogical Architecture</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">BooleanGA achieves pedagogical mastery by following a strict epistemological philosophy: <strong class="text-slate-100 font-semibold">abstract mathematics must never be taught without physical grounding, and physical mechanisms must never be taught without everyday analogies.</strong></p>
-<h3 id="41-a-teachers-orientation-prologue" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.1 A Teacher's Orientation Prologue <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#41-a-teachers-orientation-prologue" title="Direct link">#</a></h3>
+<h3 id="41-a-teachers-orientation-prologue" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.1 A Teacher's Orientation Prologue</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Every major document opens with a dedicated section entitled <em class="text-slate-200 italic">"A Teacher's Orientation: [Existential Theme]"</em>.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">The Core Rule:</strong> Frame the entire volume as an existential crisis that physical nature had to overcome (e.g., the <em class="text-slate-200 italic">Dilution Catastrophe</em> in prebiotic chemistry, or <em class="text-slate-200 italic">Levinthal's Paradox</em> in protein folding).</li>
 <li><strong class="text-slate-100 font-semibold">Tone:</strong> Welcoming, authoritative, philosophically grounded, inviting the reader to think as an experimental scientist rather than a passive student.</li>
 </ul>
-<h3 id="42-the-four-sacred-everyday-analogies" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.2 The Four Sacred Everyday Analogies <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#42-the-four-sacred-everyday-analogies" title="Direct link">#</a></h3>
+<h3 id="42-the-four-sacred-everyday-analogies" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.2 The Four Sacred Everyday Analogies</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">As codified in Siliquarium's documentation standards, abstract biophysical dynamics must be anchored to the <strong class="text-slate-100 font-semibold">Four Sacred Analogies</strong>:</p>
 <pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;!-- THE 4 SACRED EVERYDAY ANALOGIES PATTERN --&gt;
 &lt;div class=&quot;p-4 rounded-xl bg-slate-900/90 border border-amber-500/30 space-y-2 text-xs font-sans text-slate-300 leading-relaxed my-3 shadow-lg&quot;&gt;
@@ -681,12 +1162,12 @@
 <li><strong class="text-slate-100 font-semibold">The Rock Pores (Nature's First Walls):</strong> Microscopic rock cavities in deep-sea basalt act as free stone houses protecting proto-life before lipid membranes evolved.</li>
 <li><strong class="text-slate-100 font-semibold">The Battery (The Local Pantry):</strong> A dynamic CMOS calorie counter. Toggling logic gates burns energy; matching vent rhythms stores energy; reaching 100 tokens triggers division.</li>
 </ol>
-<h3 id="43-color-coordinated-mathematical-decoders" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.3 Color-Coordinated Mathematical Decoders <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#43-color-coordinated-mathematical-decoders" title="Direct link">#</a></h3>
+<h3 id="43-color-coordinated-mathematical-decoders" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.3 Color-Coordinated Mathematical Decoders</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Whenever a mathematical equation appears, it is forbidden to simply print the equation and walk away. BooleanGA introduces the <strong class="text-slate-100 font-semibold">Color-Coordinated Mathematical Decoder</strong>:</p>
-<h4 id="step-1-tex-equation-with-color-coding" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Step 1: TeX Equation with Color Coding <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#step-1-tex-equation-with-color-coding" title="Direct link">#</a></h4>
+<h4 id="step-1-tex-equation-with-color-coding" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Step 1: TeX Equation with Color Coding</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Each algebraic symbol is wrapped in a distinct hex color macro:</p>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\color{#38bdf8}{\Delta p} = \color{#34d399}{\Delta \psi} - \color{#fbbf24}{\frac{2.303 R T}{F}} \color{#f43f5e}{\Delta \text{pH}}$$</p>
-<h4 id="step-2-the-color-legend-row" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Step 2: The Color Legend Row <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#step-2-the-color-legend-row" title="Direct link">#</a></h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\Delta p} = \textcolor{#34d399}{\Delta \psi} - \textcolor{#fbbf24}{\frac{2.303 R T}{F}} \textcolor{#f43f5e}{\Delta \text{pH}}$$</p>
+<h4 id="step-2-the-color-legend-row" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Step 2: The Color Legend Row</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Directly beneath the formula, legend pills indicate the variable mappings:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>🔵 <strong class="text-slate-100 font-semibold">Proton Motive Force ($\Delta p$)</strong></li>
@@ -694,7 +1175,7 @@
 <li>🟡 <strong class="text-slate-100 font-semibold">Nernst Thermodynamic Factor ($\frac{2.303 R T}{F}$)</strong></li>
 <li>🔴 <strong class="text-slate-100 font-semibold">Chemical pH Gradient ($\Delta \text{pH}$)</strong></li>
 </ul>
-<h4 id="step-3-the-3-part-variable-grid-intuitive-truth-card" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Step 3: The 3-Part Variable Grid & Intuitive Truth Card <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#step-3-the-3-part-variable-grid-intuitive-truth-card" title="Direct link">#</a></h4>
+<h4 id="step-3-the-3-part-variable-grid-intuitive-truth-card" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Step 3: The 3-Part Variable Grid & Intuitive Truth Card</h4>
 <pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;div class=&quot;p-4 rounded-xl bg-slate-900/90 border border-emerald-500/30 space-y-3 text-xs leading-relaxed my-3 font-sans shadow-lg&quot;&gt;
   &lt;div class=&quot;flex items-center gap-2 font-mono text-emerald-300 font-bold text-sm pb-1 border-b border-slate-800&quot;&gt;
     &lt;span&gt;🧭&lt;/span&gt; Color-Coordinated Equation Decoder: Mitchell Chemiosmotic Potential
@@ -744,7 +1225,7 @@
     &lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-<h3 id="44-svg-diagram-pedagogical-breakdown-cards-the-4-pillars" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.4 SVG Diagram Pedagogical Breakdown Cards (The 4 Pillars) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#44-svg-diagram-pedagogical-breakdown-cards-the-4-pillars" title="Direct link">#</a></h3>
+<h3 id="44-svg-diagram-pedagogical-breakdown-cards-the-4-pillars" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.4 SVG Diagram Pedagogical Breakdown Cards (The 4 Pillars)</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Beneath every schematic diagram or data visualization, BooleanGA embeds a <strong class="text-slate-100 font-semibold">Comprehensive Pedagogical Analysis Card</strong> divided into four immutable pillars:</p>
 <pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;div class=&quot;p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 mt-4 shadow-inner&quot;&gt;
   &lt;div class=&quot;flex items-center justify-between border-b border-slate-800 pb-2&quot;&gt;
@@ -773,7 +1254,7 @@
     &lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-<h3 id="45-foundational-concept-checkpoints" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.5 Foundational Concept Checkpoints <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#45-foundational-concept-checkpoints" title="Direct link">#</a></h3>
+<h3 id="45-foundational-concept-checkpoints" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.5 Foundational Concept Checkpoints</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To enforce active learning and self-assessment, chapters include interactive checkpoints:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">🎯 Diagnostic Challenge:</strong> A targeted thought experiment testing conceptual limits.</li>
@@ -781,28 +1262,34 @@
 <li><strong class="text-slate-100 font-semibold">💡 Model Analytical Solution & Derivation:</strong> Expandable <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&lt;details&gt;</code> block with full derivation and the mandatory <strong class="text-slate-100 font-semibold">Nature-to-Silicon Anchor</strong>.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="5-interactive-micro-interactions-citation-mechanics" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Interactive Micro-Interactions & Citation Mechanics <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#5-interactive-micro-interactions-citation-mechanics" title="Direct link">#</a></h2>
+<h2 id="5-interactive-micro-interactions-citation-mechanics" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Interactive Micro-Interactions & Citation Mechanics</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">BooleanGA's interactive citation engine represents the gold standard in scholarly digital navigation. Clicking an inline superscript citation (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1]</code>) does not merely snap the page downwards; it engages an <strong class="text-slate-100 font-semibold">orchestrated multi-sensory feedback loop</strong>.</p>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">[Reader clicks sup [1] in text]
-               │
-               ▼
-[Citation Navigator smooth-centers #ref-1 card in viewport]
-               │
-               ├────────────────────────────────────────────────┐
-               ▼                                                ▼
-[@keyframes refTargetPulse triggers]               [@keyframes badgePopIn triggers]
-- Border flares into luminous cyan (#22d3ee)       - Floating badge pops in at top right:
-- Box-shadow surges (0 0 50px rgba(6,182,212))       &quot;CITED IN TEXT 🎯&quot;
-- Card background pulses to rgba(8,51,68,0.92)     - Gradient: cyan-600 to blue-600
-- Reference number [1] scales up (scale 1.2)       - Pill shadow with glow
-               │
-               ▼
-[Reader clicks &quot;↑ Back to text&quot; link]
-               │
-               ▼
-[@keyframes backlinkTargetFlash triggers on origin section]
-- Glowing cyan outline pulse fades gently over 2.5 seconds</code></pre>
-<h3 id="51-the-citation-target-keyframes-stylesheet" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.1 The Citation Target Keyframes & Stylesheet <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#51-the-citation-target-keyframes-stylesheet" title="Direct link">#</a></h3>
+<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart TD
+    Click[&quot;🖱️ Reader clicks superscript citation [1] in text&quot;]
+    Scroll[&quot;Smooth-scroll centers #ref-1 card in viewport&quot;]
+    
+    subgraph Feedback[&quot;Simultaneous Visual Orchestration&quot;]
+        Pulse[&quot;&lt;b&gt;@keyframes refTargetPulse&lt;/b&gt;&lt;br/&gt;• Border flares into luminous cyan (#22d3ee)&lt;br/&gt;• Box-shadow surges: 0 0 50px rgba(6,182,212)&lt;br/&gt;• Background pulses to rgba(8,51,68,0.92)&lt;br/&gt;• Reference number [1] scales up (1.2×)&quot;]
+        Badge[&quot;&lt;b&gt;@keyframes badgePopIn&lt;/b&gt;&lt;br/&gt;• Floating badge pops in at top-right: &#39;CITED IN TEXT 🎯&#39;&lt;br/&gt;• Gradient: cyan-600 to blue-600&lt;br/&gt;• Glowing pill shadow&quot;]
+    end
+
+    Back[&quot;Reader clicks &#39;↑ Back to text&#39; link&quot;]
+    Flash[&quot;&lt;b&gt;@keyframes backlinkTargetFlash&lt;/b&gt;&lt;br/&gt;Glowing cyan outline pulse fades gently over 2.5s on origin paragraph&quot;]
+
+    Click --&gt; Scroll
+    Scroll --&gt; Pulse
+    Scroll --&gt; Badge
+    Pulse --&gt; Back
+    Badge --&gt; Back
+    Back --&gt; Flash
+
+    style Click fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
+    style Scroll fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc
+    style Pulse fill:#083344,stroke:#22d3ee,stroke-width:2px,color:#f8fafc
+    style Badge fill:#083344,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
+    style Back fill:#0f172a,stroke:#34d399,stroke-width:1.5px,color:#f8fafc
+    style Flash fill:#0f172a,stroke:#34d399,stroke-width:2px,color:#f8fafc</div>
+<h3 id="51-the-citation-target-keyframes-stylesheet" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.1 The Citation Target Keyframes & Stylesheet</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To mirror BooleanGA, Siliquarium's documentation compiler must inject the following complete CSS block into every generated HTML page:</p>
 <pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-css">/* ========================================================================= */
 /* CITATION TARGET HIGHLIGHTING &amp; INTERACTIVE NAVIGATION                     */
@@ -929,7 +1416,7 @@ section[id], div[id^=&quot;unit-&quot;], div[id^=&quot;practicum-&quot;], h2[id]
 section[id]:target, div[id]:target {
   animation: backlinkTargetFlash 2.5s ease-out;
 }</code></pre>
-<h3 id="52-the-client-side-citation-navigator-engine" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.2 The Client-Side Citation Navigator Engine <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#52-the-client-side-citation-navigator-engine" title="Direct link">#</a></h3>
+<h3 id="52-the-client-side-citation-navigator-engine" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.2 The Client-Side Citation Navigator Engine</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This companion JavaScript block intercepts inline link clicks, manages hash navigation, centers targeted cards without disorientation, and coordinates with asynchronous MathJax typesetting:</p>
 <pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-javascript">&lt;script id=&quot;citation-navigator&quot;&gt;
   document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
@@ -1010,7 +1497,7 @@ section[id]:target, div[id]:target {
   });
 &lt;/script&gt;</code></pre>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="6-concrete-engineering-roadmap-for-siliquarium" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. Concrete Engineering Roadmap for Siliquarium <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#6-concrete-engineering-roadmap-for-siliquarium" title="Direct link">#</a></h2>
+<h2 id="6-concrete-engineering-roadmap-for-siliquarium" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. Concrete Engineering Roadmap for Siliquarium</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To elevate Siliquarium's documentation to BooleanGA's benchmark, execution will proceed across four synchronized engineering phases.</p>
 <div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart TD
     P1[&quot;Phase 1: Compiler Pipeline Overhaul&lt;br/&gt;(scripts/build_docs_html.mjs)&quot;]
@@ -1024,11 +1511,11 @@ section[id]:target, div[id]:target {
     P2 --&gt; Integration[&quot;Harmonized Standalone Documentation Portal&quot;]
     P3 --&gt; Integration
     P4 --&gt; Integration</div>
-<h3 id="phase-1-compiler-pipeline-overhaul-scriptsbuild-docs-htmlmjs" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 1: Compiler Pipeline Overhaul (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">scripts/build_docs_html.mjs</code>) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#phase-1-compiler-pipeline-overhaul-scriptsbuild-docs-htmlmjs" title="Direct link">#</a></h3>
+<h3 id="phase-1-compiler-pipeline-overhaul-scriptsbuild-docs-htmlmjs" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 1: Compiler Pipeline Overhaul (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">scripts/build_docs_html.mjs</code>)</h3>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Engine Modernization:</strong></li>
 <li>Replace the legacy CSS stylesheet in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">renderHtmlTemplate</code> with <strong class="text-slate-100 font-semibold">Tailwind CSS CDN</strong> configured with the Abyssal color tokens (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">abyssal-bg: #060911</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">abyssal-cyan: #00e5ff</code>, etc.).</li>
-<li>Replace standard KaTeX script tags with <strong class="text-slate-100 font-semibold">MathJax 3</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">tex-mml-chtml.js</code>) configured for single-dollar inline math (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[&#39;$&#39;, &#39;$&#39;]</code>), display math (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[&#39;$$&#39;, &#39;$$&#39;]</code>), and HTML tag skipping (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;]</code>).</li>
+<li>Replace standard KaTeX script tags with <strong class="text-slate-100 font-semibold">MathJax 3</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">tex-mml-chtml.js</code>) configured for single-dollar inline math (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[&#39;$', '$&#39;]</code>), display math (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[&#39;$$', '$$&#39;]</code>), and HTML tag skipping (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;]</code>).</li>
 <li>Inject the complete <strong class="text-slate-100 font-semibold">Citation Keyframes Stylesheet</strong> and <strong class="text-slate-100 font-semibold">Client-Side Citation Navigator</strong> into the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&lt;head&gt;</code> of every generated document.</li>
 <li><strong class="text-slate-100 font-semibold">Markdown Parsing Extensions:</strong></li>
 <li><strong class="text-slate-100 font-semibold">Analogy Callouts:</strong> Detect <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&gt; [!ANALOGY]</code> and format as the amber-bordered Sacred Analogy container.</li>
@@ -1036,7 +1523,7 @@ section[id]:target, div[id]:target {
 <li><strong class="text-slate-100 font-semibold">Pedagogical Breakdown Cards:</strong> Detect <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&gt; [!PILLARS]</code> and generate the 4-pillar analysis box (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🔍 Visual Guide</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🔬 Biophysical Reality</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">💻 Digital Mapping</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">💡 Core Principle</code>).</li>
 <li><strong class="text-slate-100 font-semibold">Checkpoints:</strong> Detect <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&gt; [!CHECKPOINT]</code> and format into diagnostic challenges with misconception warnings and expandable derivations.</li>
 </ol>
-<h3 id="phase-2-master-portal-transformation-docsportalmd-docsindexhtml" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 2: Master Portal Transformation (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/PORTAL.md</code> & <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/index.html</code>) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#phase-2-master-portal-transformation-docsportalmd-docsindexhtml" title="Direct link">#</a></h3>
+<h3 id="phase-2-master-portal-transformation-docsportalmd-docsindexhtml" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 2: Master Portal Transformation (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/PORTAL.md</code> & <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/index.html</code>)</h3>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Master Header & Hero:</strong></li>
 <li>Embed the official canonical Siliquarium Logo (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">assets/logos/logo.jpg</code>) inside a glowing 16rem gradient badge (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">border border-cyan-400/40 drop-shadow-[0_0_15px_rgba(0,229,255,0.45)]</code>).</li>
@@ -1048,7 +1535,7 @@ section[id]:target, div[id]:target {
 <li><strong class="text-slate-100 font-semibold">Flagship Keystone Cards:</strong></li>
 <li>Prominently feature Keystone 01 (<strong class="text-slate-100 font-semibold">The Grand Epistemological Bridge: Howard Pattee's Epistemic Cut</strong>) and Keystone 02 (<strong class="text-slate-100 font-semibold">The Master Biophysical Model: Dual-Currency Thermodynamics</strong>).</li>
 </ol>
-<h3 id="phase-3-curriculum-syllabus-upgrade-docscurriculum-and-syllabushtml" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 3: Curriculum & Syllabus Upgrade (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/CURRICULUM_AND_SYLLABUS.html</code>) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#phase-3-curriculum-syllabus-upgrade-docscurriculum-and-syllabushtml" title="Direct link">#</a></h3>
+<h3 id="phase-3-curriculum-syllabus-upgrade-docscurriculum-and-syllabushtml" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 3: Curriculum & Syllabus Upgrade (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/CURRICULUM_AND_SYLLABUS.html</code>)</h3>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>Integrate color-coordinated equation decoders for:</li>
 <li>Mitchell Chemiosmotic Potential ($\Delta p = \Delta \psi - 59 \Delta\text{pH}$).</li>
@@ -1058,14 +1545,14 @@ section[id]:target, div[id]:target {
 <li>Attach 4-Pillar Pedagogical Breakdown Cards to all ASCII/SVG architecture diagrams (the basalt pore grid, the CMOS gate catalyst, the repressilator motif).</li>
 <li>Embed Foundational Concept Checkpoints targeting the <strong class="text-slate-100 font-semibold">Teleological Fallacy</strong> and the <strong class="text-slate-100 font-semibold">Smuggled Intelligence Trapdoor</strong>.</li>
 </ol>
-<h3 id="phase-4-pedagogical-companion-suite-upgrade-docspedagogical-companion-suitehtml" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 4: Pedagogical Companion Suite Upgrade (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/PEDAGOGICAL_COMPANION_SUITE.html</code>) <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#phase-4-pedagogical-companion-suite-upgrade-docspedagogical-companion-suitehtml" title="Direct link">#</a></h3>
+<h3 id="phase-4-pedagogical-companion-suite-upgrade-docspedagogical-companion-suitehtml" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 4: Pedagogical Companion Suite Upgrade (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/PEDAGOGICAL_COMPANION_SUITE.html</code>)</h3>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
-<li><strong class="text-slate-100 font-semibold">Interactive Bibliography:</strong> Convert all 14 annotated papers into targeted reference items (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&lt;li id=&quot;ref-1&quot;&gt;</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&lt;li id=&quot;ref-14&quot;&gt;</code>) with DOI badges and back-to-text links, wired to the pulse animation engine.</li>
+<li><strong class="text-slate-100 font-semibold">Interactive Bibliography:</strong> Convert all 14 annotated papers into targeted reference items (e.g., <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&amp;lt;li id=&quot;ref-1&quot;&amp;gt;</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&amp;lt;li id=&quot;ref-14&quot;&amp;gt;</code>) with DOI badges and back-to-text links, wired to the pulse animation engine.</li>
 <li><strong class="text-slate-100 font-semibold">Glossary Enhancement:</strong> Ensure all 55 terms feature an Everyday Analogy callout and a Siliquarium Digital Simulator mapping.</li>
 <li><strong class="text-slate-100 font-semibold">Assessment Rubrics:</strong> Format the 4-tier laboratory rubrics with high-contrast responsive tables.</li>
 </ol>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="7-actionable-implementation-checklist" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">7. Actionable Implementation Checklist <a class="text-slate-600 hover:text-cyan-400 text-sm opacity-60 ml-2" href="#7-actionable-implementation-checklist" title="Direct link">#</a></h2>
+<h2 id="7-actionable-implementation-checklist" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">7. Actionable Implementation Checklist</h2>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>[x] <strong class="text-slate-100 font-semibold">Audit & Principle Distillation:</strong> Completed exhaustive analytical review of BooleanGA's visual system, information architecture, pedagogical patterns, and interactive micro-interactions.</li>
 <li>[ ] <strong class="text-slate-100 font-semibold">Compiler Script Upgrade:</strong> Update <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">scripts/build_docs_html.mjs</code> to inject Tailwind CSS CDN, MathJax 3 configuration, citation keyframes, and the citation navigator script.</li>

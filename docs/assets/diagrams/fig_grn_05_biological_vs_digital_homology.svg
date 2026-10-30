@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 480" width="980" height="480" class="w-full h-auto font-sans">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#6b21a8" />
+    </linearGradient>
+    <marker id="arr-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arr-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arr-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arr-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="980" height="480" fill="url(#bgGrad)" rx="16" />
+  <rect width="978" height="478" x="1" y="1" fill="none" stroke="#1e293b" stroke-width="1.5" rx="15" />
+
+  <!-- Title Header -->
+  <text x="35" y="38" fill="#00e5ff" font-size="16" font-family="monospace" font-weight="bold" letter-spacing="1">FIGURE 5: THE MOLECULAR ROSETTA STONE</text>
+  <text x="35" y="60" fill="#94a3b8" font-size="12">Deep Homology: Molecular Biology Central Dogma vs Howard Pattee's Epistemic Cut in Silico</text>
+
+  <!-- Left Panel: Terrestrial Molecular Biology -->
+  <g transform="translate(30, 80)">
+    <rect width="445" height="370" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" rx="12" />
+    <rect width="445" height="36" fill="#1e293b" opacity="0.6" rx="12" />
+    <text x="20" y="24" fill="#38bdf8" font-size="13" font-family="monospace" font-weight="bold">🌿 TERRESTRIAL MOLECULAR BIOLOGY</text>
+
+    <!-- Step 1: Double Helix DNA -->
+    <rect x="20" y="55" width="405" height="50" fill="#0f172a" stroke="#0284c7" stroke-width="1.2" rx="8" />
+    <circle cx="45" cy="80" r="16" fill="#0284c7" opacity="0.3" />
+    <text x="45" y="85" fill="#38bdf8" font-size="16" text-anchor="middle">🧬</text>
+    <text x="75" y="75" fill="#f8fafc" font-size="12" font-weight="bold">Double-Stranded DNA (Linear Genome)</text>
+    <text x="75" y="93" fill="#64748b" font-size="10" font-family="monospace">Phosphodiester A-T-C-G base pairs (Rate-independent safe)</text>
+
+    <!-- Arrow 1 -->
+    <path d="M 222 105 L 222 125" stroke="#00e5ff" stroke-width="2" marker-end="url(#arr-cyan)" />
+    <text x="235" y="118" fill="#38bdf8" font-size="9" font-family="monospace">RNA Polymerase Transcription</text>
+
+    <!-- Step 2: mRNA Transcript -->
+    <rect x="20" y="125" width="405" height="50" fill="#0f172a" stroke="#10b981" stroke-width="1.2" rx="8" />
+    <circle cx="45" cy="150" r="16" fill="#047857" opacity="0.3" />
+    <text x="45" y="155" fill="#34d399" font-size="16" text-anchor="middle">📜</text>
+    <text x="75" y="145" fill="#f8fafc" font-size="12" font-weight="bold">Messenger RNA (mRNA Transcripts)</text>
+    <text x="75" y="163" fill="#64748b" font-size="10" font-family="monospace">64 triplet codons (Kimura neutral mutation buffers)</text>
+
+    <!-- Arrow 2 -->
+    <path d="M 222 175 L 222 195" stroke="#10b981" stroke-width="2" marker-end="url(#arr-emerald)" />
+    <text x="235" y="188" fill="#34d399" font-size="9" font-family="monospace">Ribosomal Translation</text>
+
+    <!-- Step 3: Folded Protein Enzyme -->
+    <rect x="20" y="195" width="405" height="50" fill="#0f172a" stroke="#f59e0b" stroke-width="1.2" rx="8" />
+    <circle cx="45" cy="220" r="16" fill="#b45309" opacity="0.3" />
+    <text x="45" y="225" fill="#fbbf24" font-size="16" text-anchor="middle">⚙️</text>
+    <text x="75" y="215" fill="#f8fafc" font-size="12" font-weight="bold">Catalytic Enzymes &amp; Transcription Factors</text>
+    <text x="75" y="233" fill="#64748b" font-size="10" font-family="monospace">Folded 3D active sites &amp; allosteric repressor pockets</text>
+
+    <!-- Arrow 3 -->
+    <path d="M 222 245 L 222 265" stroke="#f59e0b" stroke-width="2" marker-end="url(#arr-amber)" />
+    <text x="235" y="258" fill="#fbbf24" font-size="9" font-family="monospace">Catalytic Turnover</text>
+
+    <!-- Step 4: Cellular Metabolism -->
+    <rect x="20" y="265" width="405" height="85" fill="#0f172a" stroke="#a855f7" stroke-width="1.2" rx="8" />
+    <circle cx="45" cy="305" r="16" fill="#6b21a8" opacity="0.3" />
+    <text x="45" y="310" fill="#c084fc" font-size="16" text-anchor="middle">🔋</text>
+    <text x="75" y="285" fill="#f8fafc" font-size="12" font-weight="bold">Metabolic Flux &amp; Epigenetic State</text>
+    <text x="75" y="303" fill="#64748b" font-size="10" font-family="monospace">ATP chemiosmotic pool • Lac operon repression</text>
+    <text x="75" y="320" fill="#a855f7" font-size="10" font-family="monospace">Bistable memory latches • Waddington tissue fate</text>
+    <text x="75" y="337" fill="#10b981" font-size="10" font-family="monospace">Feedback onto promoter operators (Rate-dependent)</text>
+  </g>
+
+  <!-- Right Panel: Siliquarium Digital Cell -->
+  <g transform="translate(505, 80)">
+    <rect width="445" height="370" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" rx="12" />
+    <rect width="445" height="36" fill="#1e293b" opacity="0.6" rx="12" />
+    <text x="20" y="24" fill="#a855f7" font-size="13" font-family="monospace" font-weight="bold">💻 SILIQUARIUM DIGITAL IN SILICO</text>
+
+    <!-- Step 1: GenomeSafe -->
+    <rect x="20" y="55" width="405" height="50" fill="#0f172a" stroke="#a855f7" stroke-width="1.2" rx="8" />
+    <circle cx="45" cy="80" r="16" fill="#6b21a8" opacity="0.3" />
+    <text x="45" y="85" fill="#c084fc" font-size="16" text-anchor="middle">🔒</text>
+    <text x="75" y="75" fill="#f8fafc" font-size="12" font-weight="bold">GenomeSafe (1D Symbolic Tape)</text>
+    <text x="75" y="93" fill="#64748b" font-size="10" font-family="monospace">60-bit inert bitstring: 000000 001100... (∂S/∂t = 0)</text>
+
+    <!-- Arrow 1 -->
+    <path d="M 222 105 L 222 125" stroke="#a855f7" stroke-width="2" marker-end="url(#arr-purple)" />
+    <text x="235" y="118" fill="#c084fc" font-size="9" font-family="monospace">GenomeSafe.photocopy() Scanner</text>
+
+    <!-- Step 2: 6-Bit Codons -->
+    <rect x="20" y="125" width="405" height="50" fill="#0f172a" stroke="#00e5ff" stroke-width="1.2" rx="8" />
+    <circle cx="45" cy="150" r="16" fill="#0284c7" opacity="0.3" />
+    <text x="45" y="155" fill="#38bdf8" font-size="16" text-anchor="middle">📦</text>
+    <text x="75" y="145" fill="#f8fafc" font-size="12" font-weight="bold">64-Entry Degenerate Codon Alphabet</text>
+    <text x="75" y="163" fill="#64748b" font-size="10" font-family="monospace">6-bit words (GATE_AND, GATE_NOT, SINK, INTRON)</text>
+
+    <!-- Arrow 2 -->
+    <path d="M 222 175 L 222 195" stroke="#00e5ff" stroke-width="2" marker-end="url(#arr-cyan)" />
+    <text x="235" y="188" fill="#38bdf8" font-size="9" font-family="monospace">PoreWorkshop Netlist Wiring</text>
+
+    <!-- Step 3: Logic Gates -->
+    <rect x="20" y="195" width="405" height="50" fill="#0f172a" stroke="#f43f5e" stroke-width="1.2" rx="8" />
+    <circle cx="45" cy="220" r="16" fill="#be123c" opacity="0.3" />
+    <text x="45" y="225" fill="#fb7185" font-size="16" text-anchor="middle">⚡</text>
+    <text x="75" y="215" fill="#f8fafc" font-size="12" font-weight="bold">CMOS Logic Gates (K = 2 Inputs)</text>
+    <text x="75" y="233" fill="#64748b" font-size="10" font-family="monospace">AND co-catalyst • NOT allosteric inverter (-1T Landauer)</text>
+
+    <!-- Arrow 3 -->
+    <path d="M 222 245 L 222 265" stroke="#f43f5e" stroke-width="2" marker-end="url(#arr-rose)" />
+    <text x="235" y="258" fill="#fb7185" font-size="9" font-family="monospace">Boolean State Update F(x, u)</text>
+
+    <!-- Step 4: Cellular Workshop Execution -->
+    <rect x="20" y="265" width="405" height="85" fill="#0f172a" stroke="#10b981" stroke-width="1.2" rx="8" />
+    <circle cx="45" cy="305" r="16" fill="#047857" opacity="0.3" />
+    <text x="45" y="310" fill="#34d399" font-size="16" text-anchor="middle">🏗️</text>
+    <text x="75" y="285" fill="#f8fafc" font-size="12" font-weight="bold">PoreBattery &amp; Syncytial Tissue State</text>
+    <text x="75" y="303" fill="#64748b" font-size="10" font-family="monospace">Battery tokens [0..100T] • 4 Feedback metabolites M0..M3</text>
+    <text x="75" y="320" fill="#10b981" font-size="10" font-family="monospace">Trophocyte vs Somatic Shield attractor basins</text>
+    <text x="75" y="337" fill="#f59e0b" font-size="10" font-family="monospace">Cytoplasmic sharing across rock pores (Rate-dependent)</text>
+  </g>
+</svg>

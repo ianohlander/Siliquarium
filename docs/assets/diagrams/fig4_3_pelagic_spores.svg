@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" width="880" height="360" class="w-full h-auto font-sans">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 375" width="940" height="375" class="w-full h-auto font-sans">
   <defs>
     <!-- Background Gradients -->
     <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -62,67 +63,69 @@
   </defs>
 
   <style>
-    .title { font-family: 'Cascadia Code', Consolas, monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
-    .subtitle { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; fill: #94a3b8; }
-    .label { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; fill: #cbd5e1; }
-    .label-bold { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
-    .code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 10.5px; fill: #00e5ff; }
-    .badge { font-family: 'Cascadia Code', Consolas, monospace; font-size: 9.5px; font-weight: bold; }
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
   </style>
 
   <!-- Canvas Background -->
-  <rect width="880" height="360" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+  <rect width="940" height="375" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
 
   
-  <g transform="translate(30, 35)">
+  <g transform="translate(30, 34)">
     <text class="title">Figure 4.3: Seafloor Benthic Matrix vs. Pelagic Spore Water Column Advection</text>
     <text y="20" class="subtitle">Multi-layer hydrodynamic dispersion: Fluid transport of dormant silicoid spores across 3D basalt seamounts</text>
   </g>
 
   <!-- Water Column Stratification -->
-  <g transform="translate(40, 70)">
+  <g transform="translate(30, 70)">
     <!-- z = 2: Pelagic Advection Layer -->
-    <rect width="800" height="75" rx="6" fill="#082f49" stroke="#0284c7" stroke-width="1" />
-    <rect x="15" y="10" width="190" height="20" rx="4" fill="#0369a1" />
+    <rect width="880" height="75" rx="6" fill="#082f49" stroke="#0284c7" stroke-width="1" />
+    <rect x="15" y="10" width="205" height="20" rx="4" fill="#0369a1" />
     <text x="25" y="24" class="badge" fill="#e0f2fe">LAYER z = 2 (PELAGIC DRIFT)</text>
-    <text x="220" y="24" class="code" fill="#38bdf8">Advection Velocity: v_drift = (0.04, 0.01)</text>
+    <text x="240" y="24" class="code" fill="#38bdf8">Advection Velocity: v_drift = (0.04, 0.01)</text>
 
-    <g transform="translate(150, 42)">
+    <g transform="translate(160, 42)">
       <circle cx="50" cy="8" r="8" fill="#38bdf8" /> <text x="65" y="12" class="code" font-size="9.5" fill="#bae6fd">Spore #142</text>
-      <path d="M 120 8 L 220 8" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#arrow-cyan)" />
+      <path d="M 125 8 L 245 8" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#arrow-cyan)" />
 
-      <circle cx="340" cy="8" r="8" fill="#38bdf8" /> <text x="355" y="12" class="code" font-size="9.5" fill="#bae6fd">Spore #189</text>
-      <path d="M 410 8 L 510 8" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#arrow-cyan)" />
+      <circle cx="380" cy="8" r="8" fill="#38bdf8" /> <text x="395" y="12" class="code" font-size="9.5" fill="#bae6fd">Spore #189</text>
+      <path d="M 455 8 L 575 8" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#arrow-cyan)" />
     </g>
 
     <!-- z = 1: Hydrothermal Plume Updraft Boundary -->
-    <g transform="translate(0, 80)">
-      <rect width="800" height="75" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
-      <rect x="15" y="10" width="220" height="20" rx="4" fill="#1e293b" />
+    <g transform="translate(0, 82)">
+      <rect width="880" height="75" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+      <rect x="15" y="10" width="225" height="20" rx="4" fill="#1e293b" />
       <text x="25" y="24" class="badge" fill="#cbd5e1">LAYER z = 1 (PLUME BOUNDARY)</text>
-      <text x="250" y="24" class="label" fill="#94a3b8">Thermal buoyancy updrafts lift spores off basalt pores</text>
+      <text x="260" y="24" class="label" fill="#94a3b8">Thermal buoyancy updrafts lift spores off basalt pores</text>
 
-      <path d="M 220 70 L 220 15" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow-amber)" />
-      <text x="230" y="45" class="code" font-size="9.5" fill="#f59e0b">Thermal Updraft</text>
+      <path d="M 200 70 L 200 15" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrow-amber)" />
+      <text x="210" y="45" class="code" font-size="9.5" fill="#f59e0b">Thermal Updraft</text>
 
-      <path d="M 620 15 L 620 70" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow-emerald)" />
-      <text x="630" y="45" class="code" font-size="9.5" fill="#10b981">Downwelling Re-Settlement</text>
+      <path d="M 670 15 L 670 70" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrow-emerald)" />
+      <text x="680" y="45" class="code" font-size="9.5" fill="#10b981">Downwelling Re-Settlement</text>
     </g>
 
     <!-- z = 0: Benthic Basalt Matrix -->
-    <g transform="translate(0, 160)">
-      <rect width="800" height="95" rx="6" fill="#111827" stroke="#374151" stroke-width="1.5" />
-      <rect x="15" y="10" width="210" height="20" rx="4" fill="#1f2937" />
+    <g transform="translate(0, 164)">
+      <rect width="880" height="98" rx="6" fill="#111827" stroke="#374151" stroke-width="1.5" />
+      <rect x="15" y="10" width="230" height="20" rx="4" fill="#1f2937" />
       <text x="25" y="24" class="badge" fill="#f3f4f6">LAYER z = 0 (BENTHIC SUBSTRATE)</text>
-      <text x="240" y="24" class="code" fill="#facc15">Mineral Pores (q, r, 0) | Hydrothermal Chimney Vents</text>
+      <text x="265" y="24" class="code" fill="#facc15">Mineral Pores (q, r, 0) | Hydrothermal Chimney Vents</text>
 
-      <g transform="translate(180, 40)">
+      <!-- Sessile Vent Pore aligned with Updraft -->
+      <g transform="translate(170, 42)">
         <polygon points="20,10 40,10 50,27 40,44 20,44 10,27" fill="#1f2937" stroke="#00e5ff" stroke-width="2" />
-        <text x="30" y="32" class="code" font-size="8" fill="#00e5ff" text-anchor="middle">Sessile</text>
+        <text x="30" y="32" class="code" font-size="8.5" fill="#00e5ff" text-anchor="middle">Sessile</text>
       </g>
-      <g transform="translate(580, 40)">
+      <!-- Colonized Basalt Terrace aligned with Downwelling -->
+      <g transform="translate(640, 42)">
         <polygon points="20,10 40,10 50,27 40,44 20,44 10,27" fill="#1f2937" stroke="#10b981" stroke-width="2" />
-        <text x="30" y="32" class="code" font-size="8" fill="#10b981" text-anchor="middle">Colonized</text>
+        <text x="30" y="32" class="code" font-size="8.5" fill="#10b981" text-anchor="middle">Colonized</text>
       </g>
     </g>
   </g>

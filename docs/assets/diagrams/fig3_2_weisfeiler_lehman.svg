@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" width="880" height="360" class="w-full h-auto font-sans">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 375" width="940" height="375" class="w-full h-auto font-sans">
   <defs>
     <!-- Background Gradients -->
     <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -62,87 +63,88 @@
   </defs>
 
   <style>
-    .title { font-family: 'Cascadia Code', Consolas, monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
-    .subtitle { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; fill: #94a3b8; }
-    .label { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; fill: #cbd5e1; }
-    .label-bold { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
-    .code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 10.5px; fill: #00e5ff; }
-    .badge { font-family: 'Cascadia Code', Consolas, monospace; font-size: 9.5px; font-weight: bold; }
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
   </style>
 
   <!-- Canvas Background -->
-  <rect width="880" height="360" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+  <rect width="940" height="375" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
 
   
-  <g transform="translate(30, 35)">
+  <g transform="translate(30, 34)">
     <text class="title">Figure 3.2: The Weisfeiler-Lehman (1-WL) Graph Isomorphism Kernel</text>
     <text y="20" class="subtitle">Real-time topological invariant hashing of directed Siliquarium logic netlists (Weisfeiler &amp; Lehman, 1968)</text>
   </g>
 
   <!-- Step 1: Round 0 Node Coloring -->
-  <g transform="translate(40, 75)">
-    <rect width="245" height="250" rx="10" fill="#090d16" stroke="#38bdf8" stroke-width="1.5" />
-    <rect x="15" y="15" width="115" height="22" rx="4" fill="#0369a1" />
+  <g transform="translate(30, 75)">
+    <rect width="275" height="265" rx="10" fill="#090d16" stroke="#38bdf8" stroke-width="1.5" />
+    <rect x="15" y="15" width="130" height="22" rx="4" fill="#0369a1" />
     <text x="25" y="30" class="badge" fill="#e0f2fe">ROUND 0: INIT</text>
 
     <text x="20" y="65" class="label-bold" fill="#7dd3fc">Initial Primitive Colors</text>
     <text x="20" y="82" class="subtitle">Each gate takes its codon type:</text>
 
-    <g transform="translate(35, 105)">
+    <g transform="translate(35, 110)">
       <circle cx="20" cy="20" r="14" fill="#075985" stroke="#38bdf8" stroke-width="2" />
       <text x="10" y="24" class="code" fill="#fff" font-size="10">AND</text>
-      <text x="45" y="24" class="label" font-size="10.5">c₁⁽⁰⁾ = "AND"</text>
+      <text x="48" y="24" class="label" font-size="10.5">c₁⁽⁰⁾ = "AND"</text>
 
-      <circle cx="20" cy="60" r="14" fill="#881337" stroke="#f43f5e" stroke-width="2" />
-      <text x="10" y="64" class="code" fill="#fff" font-size="10">NOT</text>
-      <text x="45" y="64" class="label" font-size="10.5">c₂⁽⁰⁾ = "NOT"</text>
+      <circle cx="20" cy="62" r="14" fill="#881337" stroke="#f43f5e" stroke-width="2" />
+      <text x="10" y="66" class="code" fill="#fff" font-size="10">NOT</text>
+      <text x="48" y="66" class="label" font-size="10.5">c₂⁽⁰⁾ = "NOT"</text>
 
-      <circle cx="20" cy="100" r="14" fill="#047857" stroke="#10b981" stroke-width="2" />
-      <text x="14" y="104" class="code" fill="#fff" font-size="10">OR</text>
-      <text x="45" y="104" class="label" font-size="10.5">c₃⁽⁰⁾ = "OR"</text>
+      <circle cx="20" cy="104" r="14" fill="#047857" stroke="#10b981" stroke-width="2" />
+      <text x="14" y="108" class="code" fill="#fff" font-size="10">OR</text>
+      <text x="48" y="108" class="label" font-size="10.5">c₃⁽⁰⁾ = "OR"</text>
     </g>
   </g>
 
   <!-- Step 2: Round 1 Multiset Gathering -->
-  <g transform="translate(315, 75)">
-    <rect width="260" height="250" rx="10" fill="#090d16" stroke="#10b981" stroke-width="1.5" />
-    <rect x="15" y="15" width="140" height="22" rx="4" fill="#065f46" />
+  <g transform="translate(332.5, 75)">
+    <rect width="275" height="265" rx="10" fill="#090d16" stroke="#10b981" stroke-width="1.5" />
+    <rect x="15" y="15" width="155" height="22" rx="4" fill="#065f46" />
     <text x="25" y="30" class="badge" fill="#d1fae5">ROUND 1: NEIGHBORS</text>
 
     <text x="20" y="65" class="label-bold" fill="#6ee7b7">Multiset Neighborhood Sort</text>
     <text x="20" y="82" class="subtitle">Collect &amp; sort neighbor colors:</text>
 
-    <g transform="translate(20, 105)">
-      <rect width="220" height="32" rx="6" fill="#052e16" stroke="#10b981" stroke-width="1" />
+    <g transform="translate(18, 105)">
+      <rect width="238" height="32" rx="6" fill="#052e16" stroke="#10b981" stroke-width="1" />
       <text x="10" y="20" class="code" font-size="10" fill="#a7f3d0">Node 1: (AND, [NOT, OR])</text>
 
-      <rect y="40" width="220" height="32" rx="6" fill="#052e16" stroke="#10b981" stroke-width="1" />
-      <text x="10" y="60" class="code" font-size="10" fill="#a7f3d0">Node 2: (NOT, [AND])</text>
+      <rect y="42" width="238" height="32" rx="6" fill="#052e16" stroke="#10b981" stroke-width="1" />
+      <text x="10" y="62" class="code" font-size="10" fill="#a7f3d0">Node 2: (NOT, [AND])</text>
 
-      <rect y="80" width="220" height="32" rx="6" fill="#052e16" stroke="#10b981" stroke-width="1" />
-      <text x="10" y="100" class="code" font-size="10" fill="#a7f3d0">Node 3: (OR, [AND])</text>
+      <rect y="84" width="238" height="32" rx="6" fill="#052e16" stroke="#10b981" stroke-width="1" />
+      <text x="10" y="104" class="code" font-size="10" fill="#a7f3d0">Node 3: (OR, [AND])</text>
     </g>
 
-    <text x="20" y="235" class="subtitle" font-size="10">Strict permutation invariance guaranteed</text>
+    <text x="20" y="244" class="subtitle" font-size="10">Strict permutation invariance guaranteed</text>
   </g>
 
   <!-- Step 3: Avalanche Hash Invariant -->
-  <g transform="translate(605, 75)">
-    <rect width="235" height="250" rx="10" fill="#090d16" stroke="#a855f7" stroke-width="1.5" />
-    <rect x="15" y="15" width="130" height="22" rx="4" fill="#6b21a8" />
+  <g transform="translate(635, 75)">
+    <rect width="275" height="265" rx="10" fill="#090d16" stroke="#a855f7" stroke-width="1.5" />
+    <rect x="15" y="15" width="140" height="22" rx="4" fill="#6b21a8" />
     <text x="25" y="30" class="badge" fill="#f3e8ff">HASH INVARIANT</text>
 
     <text x="20" y="65" class="label-bold" fill="#d8b4fe">64-Bit Avalanche Hash</text>
     <text x="20" y="82" class="subtitle">Canonical structural identity:</text>
 
-    <g transform="translate(15, 110)">
-      <rect width="205" height="42" rx="6" fill="#2e1065" stroke="#c084fc" stroke-width="1.5" />
-      <text x="10" y="25" class="code" font-size="10.5" fill="#f3e8ff">WL = 0x9f4a_7c2b_11de</text>
+    <g transform="translate(15, 108)">
+      <rect width="245" height="42" rx="6" fill="#2e1065" stroke="#c084fc" stroke-width="1.5" />
+      <text x="12" y="26" class="code" font-size="10.5" fill="#f3e8ff">WL = 0x9f4a_7c2b_11de</text>
     </g>
 
-    <rect x="15" y="170" width="205" height="60" rx="6" fill="#1e102e" stroke="#7e22ce" stroke-width="1" />
-    <text x="25" y="190" class="label-bold" font-size="10" fill="#facc15">✓ Isomorphism Theorem:</text>
-    <text x="25" y="206" class="subtitle" font-size="9.5">Two circuits match WL hash iff</text>
-    <text x="25" y="220" class="subtitle" font-size="9.5">their wiring graphs are isomorphic!</text>
+    <rect x="15" y="168" width="245" height="68" rx="6" fill="#1e102e" stroke="#7e22ce" stroke-width="1" />
+    <text x="25" y="190" class="label-bold" font-size="10.5" fill="#facc15">✓ Isomorphism Theorem:</text>
+    <text x="25" y="208" class="subtitle" font-size="10">Two circuits match WL hash iff</text>
+    <text x="25" y="224" class="subtitle" font-size="10">their wiring graphs are isomorphic!</text>
+  </g>
 
 </svg>

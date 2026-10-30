@@ -20,17 +20,27 @@ Life does not calculate arithmetic for its own sake. In living cells, **computat
 | **Regulated Power Supply (Wall Outlet)** | **Mitchell Redox Potential (Vent Battery)** |
 | **Clock Signal (Quartz Oscillator)** | **Periodic Hydrothermal Pulse Rhythms** |
 
+### 1.1 The Logic of Life as the Environment's Mirror: Environmental Information Injection
+
+Why does a living protocell evolve Boolean logic in the first place?
+A common misconception is that the organism "thinks", "solves", or "invents" computational strategies.
+In reality, the circuit is an **inverse photographic relief of the hydrothermal environment that sculpted it**, exactly as Richard Dawkins posits in *The Genetic Book of the Dead* (2024)<sup id="cite_ref-5" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-5">[5]</a></sup>:
+- If the hydrothermal chimney delivers complementary electron donors and acceptors concurrently, the physical reality is $P(A \land B) > 0$. Organisms whose random mutations wire an `AND` gate harvest free energy and survive; uncoordinated variants starve. The `AND` gate is a physical mirror of the chimney's chemistry.
+- If the vent belches episodic acidic toxin pulses, $P(T) > 0$. Lineages mutating an inhibitory `NOT` gate survive; unshielded cells undergo catastrophic battery corrosion. The `NOT` gate is the environmental record of lethal geochemistry.
+
+Christoph Adami et al. (2000, 2004)<sup id="cite_ref-6" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-6">[6]</a></sup>, building upon Claude Shannon's mathematical foundation of information theory (1948)<sup id="cite_ref-4" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-4">[4]</a></sup>, formalized this mathematically: physical genomic complexity $C(X)$ is identical to the mutual information $I(X; E) = H(E) - H(E \mid X)$. The Boolean logic gates etched onto the workshop breadboard do not generate information *ex nihilo*; they are the physical conduits through which environmental regularity has been thermodynamically injected into the organism's genome.
+
 ---
 
 ## 2. The Three Primitive Enzymes: Active Site Biophysics
 
 In prebiotic chemistry, catalytic molecules (whether ribozymes or iron-sulfur peptide clusters) interact with substrates through physical binding pockets. Siliquarium models how **real enzymes operate before complex organs existed** through three fundamental catalytic primitives:
 
-![Figure 2.1: The Three Primitive Catalysts, Linear Separability, and the Composite XOR Motif](assets/diagrams/fig2_1_primitive_enzymes.svg)
+![Figure 2.1: The Three Primitive Catalysts, Linear Separability, and the Composite XOR Motif](../assets/diagrams/fig2_1_primitive_enzymes.svg)
 
 > [!ANALYSIS]
 > **Figure 2.1 Architectural Breakdown: Primitive Enzymatic Pockets & The XOR Barrier**
-> - **🔍 Visual Guide & Structural Mechanics:** The top panel details the physical mechanics of the three primitive catalysts: 1) Co-Substrate Catalyst (`AND`, requiring simultaneous binding in Pockets A & B), 2) Promiscuous Catalyst (`OR`, flexible active site accommodating either substrate), and 3) Allosteric Inhibitor (`NOT`, inhibitor binding at an allosteric regulatory site induces conformational shutdown). The bottom panel contrasts linearly separable gates (`AND`) with linearly non-separable gates (`XOR`), detailing the emergent 3-gate composite network motif $(A \lor B) \land \neg(A \land B)$.
+> - **🔍 Visual Guide & Structural Mechanics:** The top panel details the physical mechanics of the three primitive catalysts: 1) Co-Substrate Catalyst (`AND`, requiring simultaneous binding in Pockets A & B), 2) Promiscuous Catalyst (`OR`, flexible active site accommodating either substrate), and 3) Allosteric Inhibitor (`NOT`, inhibitor binding at an allosteric regulatory site induces conformational shutdown). The bottom panel contrasts linearly separable gates (`AND`) with linearly non-separable<sup id="cite_ref-3" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-3">[3]</a></sup> gates (`XOR`), detailing the emergent 3-gate composite network motif $(A \lor B) \land \neg(A \land B)$.
 > - **🔬 Biophysical & Mathematical Reality:** In single protein active sites, single-substrate binding obeys Michaelis-Menten kinetics, and bi-substrate binding obeys ternary complex mechanisms. A single pocket can easily execute conjunction (`AND`) or disjunction (`OR`), but cannot physically execute exclusive disjunction (`XOR`) because binding of both substrates would have to produce negative catalytic output.
 > - **💻 Digital Mapping & Silicon Architecture:** In Siliquarium, `GATE_AND`, `GATE_OR`, and `GATE_NOT` are primitive codons in [`CodonTable.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts). `XOR` has no codon. It can only emerge when random mutation wires an `OR` gate, an `AND` gate, and a `NOT` gate together in [`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts).
 > - **🏛️ Core Principle & Intuitive Summary:** *Complexity Emerges from Composition, Not Special Creation.* High-level logical decisions are not fundamental particles; they are networks of simple physical switches cooperating in space.
@@ -100,7 +110,7 @@ $$(A \oplus B) \equiv (A \lor B) \land \neg(A \land B)$$
 
 To prevent smuggled teleology (e.g. artificial opcodes like `MOVE`, `EAT`, or `FIGHT`), every 6-bit codon in Siliquarium's degenerate table ([`CodonTable.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts)) corresponds strictly to physical biomolecular primitives:
 
-![Figure 2.2: 64-Entry Degenerate Codon Architecture and Neutral Introns](assets/diagrams/fig2_2_codon_table.svg)
+![Figure 2.2: 64-Entry Degenerate Codon Architecture and Neutral Introns](../assets/diagrams/fig2_2_codon_table.svg)
 
 > [!ANALYSIS]
 > **Figure 2.2 Architectural Breakdown: Degenerate Codon Anatomy & Mutational Buffers**
@@ -145,12 +155,12 @@ $$P_{\text{dynamic}} = \alpha \cdot C \cdot V^2 \cdot f$$
 
 In Siliquarium, every time a logic gate switches state, it incurs a non-negotiable Landauer penalty of **$1$ Energy Token** ([`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts)).
 
-![Figure 2.3: Rolf Landauer's Thermodynamic Bound & CMOS Dynamic Power Ledger](assets/diagrams/fig2_3_landauer_dissipation.svg)
+![Figure 2.3: Rolf Landauer's Thermodynamic Bound & CMOS Dynamic Power Ledger](../assets/diagrams/fig2_3_landauer_dissipation.svg)
 
 > [!ANALYSIS]
 > **Figure 2.3 Architectural Breakdown: Landauer Dynamic Power & The Thermodynamic Ledger**
 > - **🔍 Visual Guide & Structural Mechanics:** Shows the three branches of the metabolic token ledger: 1) Catalytic Influx ($+2\text{ to }+3$ tokens when complementary substrates bind), 2) Dynamic Landauer Dissipation ($-1$ token deducted for every logic gate transition $0 \to 1$ or $1 \to 0$), and 3) Basal Maintenance Leak ($-1$ token lost every 10 ticks due to spontaneous dielectric decay). The lower curve tracks battery depletion toward starvation lysis ($E=0$).
-> - **🔬 Biophysical & Mathematical Reality:** In modern physics, logical irreversibility demands thermodynamic entropy production: $Q \ge k_B T \ln 2$. In CMOS integrated circuits and biological allosteric enzymes, physical power consumption scales with switching frequency: $P = \alpha C V^2 f$. Holding state dissipates almost nothing; changing state burns finite energy.
+> - **🔬 Biophysical & Mathematical Reality:** In modern physics, logical irreversibility demands thermodynamic entropy production (Landauer 1961<sup id="cite_ref-2" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup>): $Q \ge k_B T \ln 2$. In CMOS integrated circuits and biological allosteric enzyme<sup id="cite_ref-1" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-1">[1]</a></sup>s, physical power consumption scales with switching frequency: $P = \alpha C V^2 f$. Holding state dissipates almost nothing; changing state burns finite energy.
 > - **💻 Digital Mapping & Silicon Architecture:** Tracked in [`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts) via `toggledGates` and integrated in the global HUD `Thermodynamic Ledger`: $\Delta E_{\text{universe}} = 0.000$.
 > - **🏛️ Core Principle & Intuitive Summary:** *Thinking Costs Calories.* Complex brains and hyperactive regulatory circuits are lethal liabilities unless their computation generates more catalytic energy than they dissipate.
 
@@ -158,16 +168,16 @@ In Siliquarium, every time a logic gate switches state, it incurs a non-negotiab
 
 ## 6. Deconstructive Equation Anatomy: Dynamic CMOS Toggle Dissipation
 
-$$\color{#f87171}{\Delta E_{\text{metabolic}}} = \sum_{g=1}^{\color{#38bdf8}{N_{\text{gates}}}} \color{#fbbf24}{\mathbb{I}\left(y_g(t) \ne y_g(t-1)\right)} \cdot \color{#4ade80}{\kappa_{\text{toggle}}}$$
+$$\textcolor{#f87171}{\Delta E_{\text{metabolic}}} = \sum_{g=1}^{\textcolor{#38bdf8}{N_{\text{gates}}}} \textcolor{#fbbf24}{\mathbb{I}\left(y_g(t) \ne y_g(t-1)\right)} \cdot \textcolor{#4ade80}{\kappa_{\text{toggle}}}$$
 
 ### Term-by-Term Component Breakdown
 
 | Symbol | Mathematical Term | Biophysical Reality in Siliquarium | Physical Biological Consequence |
 | :---: | :--- | :--- | :--- |
-| $\color{#f87171}{\Delta E_{\text{metabolic}}}$ | Total Landauer Burn | Total energy tokens subtracted from battery due to circuit activity. | Burns battery reserves; if higher than catalytic yield, causes starvation. |
-| $\color{#38bdf8}{N_{\text{gates}}}$ | Active Gate Count | Number of translated logic gates in the workshop ($N \le 16$). | Haldane's constraint: large circuits have more opportunities to dissipate power. |
-| $\color{#fbbf24}{\mathbb{I}(\dots)}$ | Indicator Function | Evaluates to $1$ if gate $g$ switched state; evaluates to $0$ if state was held. | Resting circuits burn zero Landauer energy; vibrating circuits burn maximum energy. |
-| $\color{#4ade80}{\kappa_{\text{toggle}}}$ | Dynamic Switching Cost | Fundamental Landauer cost per bit transition ($1$ token/toggle). | The non-negotiable thermodynamic tax of living computation. |
+| $\textcolor{#f87171}{\Delta E_{\text{metabolic}}}$ | Total Landauer Burn | Total energy tokens subtracted from battery due to circuit activity. | Burns battery reserves; if higher than catalytic yield, causes starvation. |
+| $\textcolor{#38bdf8}{N_{\text{gates}}}$ | Active Gate Count | Number of translated logic gates in the workshop ($N \le 16$). | Haldane's constraint: large circuits have more opportunities to dissipate power. |
+| $\textcolor{#fbbf24}{\mathbb{I}(\dots)}$ | Indicator Function | Evaluates to $1$ if gate $g$ switched state; evaluates to $0$ if state was held. | Resting circuits burn zero Landauer energy; vibrating circuits burn maximum energy. |
+| $\textcolor{#4ade80}{\kappa_{\text{toggle}}}$ | Dynamic Switching Cost | Fundamental Landauer cost per bit transition ($1$ token/toggle). | The non-negotiable thermodynamic tax of living computation. |
 
 ### 💡 The Intuitive Truth Behind the Architecture
 > Computation is not free. Every time a living cell changes its mind—every time an enzyme switches from inactive to active—it must physically rearrange its atoms and burn energy. An organism with a massive, hyperactive brain that switches wildly will starve to death long before an organism with a tiny, quiet brain that only fires when food is actually present.
@@ -218,3 +228,66 @@ Both start at $E_0 = 50$ tokens. Catalytic yield $= +3$ tokens. Toggle cost $= 1
 2. **The XOR Barrier:** Why is it physically impossible for a single catalytic binding pocket to execute an XOR operation? What is the minimum number of primitive gates required to construct an XOR network motif?
 3. **Landauer's Principle:** Why does an uninhibited, freely running oscillator circuit cause rapid cell death in a nutrient-poor environment?
 4. **Haldane's Parsimony:** In evolutionary biology, why are bacteria with streamlined, minimal genomes often able to outcompete bacteria with bloated genomes in stable environments?
+
+
+<!-- COMPLETE ACADEMIC REFERENCES & CITATIONS -->
+<section id="references" class="mt-16 pt-8 border-t border-slate-800 space-y-6">
+<div class="flex items-center justify-between border-b border-slate-800 pb-3">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-800 text-cyan-400 font-mono font-bold text-xs flex items-center justify-center">📚</span>
+<h2 class="text-lg md:text-xl font-mono font-bold text-slate-100">References &amp; Foundational Literature</h2>
+</div>
+<span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Wikipedia-Style Academic Citations</span>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed font-sans">The theoretical assertions, biophysical models, and computer architectural frameworks presented in this volume are grounded in the following seminal peer-reviewed literature. Numbered superscripts throughout the text link directly to these entries.</p>
+<ol class="space-y-3.5 text-xs font-mono text-slate-300">
+    <li id="ref-1" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[1]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Jacob, F., & Monod, J.</span> (1961). <em class="text-cyan-300">Genetic regulatory mechanisms in the synthesis of proteins</em>. <span class="text-slate-400">Journal of Molecular Biology, 3(3), 318–356</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">The Logic of Life: Logic Gates as Enzymes:</strong> Allosteric enzyme inhibition maps to Boolean NOT; co-catalysis maps to Boolean AND.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1016/S0022-2836(61)80072-7" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1016/S0022-2836(61)80072-7</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#jacob1961" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-1" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-2" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[2]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Landauer, R.</span> (1961). <em class="text-cyan-300">Irreversibility and heat generation in the computing process</em>. <span class="text-slate-400">IBM Journal of Research and Development, 5(3), 183–191</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Thermodynamics of Computation & Switching Costs:</strong> Every logical operation that erases information dissipates at least kB T ln 2 of heat into the environment.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1147/rd.53.0183" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1147/rd.53.0183</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#landauer1961" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-2" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-3" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[3]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Minsky, M., & Papert, S.</span> (1969). <em class="text-cyan-300">Perceptrons: An Introduction to Computational Geometry</em>. <span class="text-slate-400">MIT Press. ISBN: 978-0262631111</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Perceptrons: The XOR Impossibility Proof:</strong> Single-layer linear threshold units cannot compute XOR; biological circuits require dual-pathway networks.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.7551/mitpress/5303.001.0001" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.7551/mitpress/5303.001.0001</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#alon2019" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-3" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-4" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[4]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Shannon, C. E.</span> (1948). <em class="text-cyan-300">A mathematical theory of communication</em>. <span class="text-slate-400">Bell System Technical Journal, 27(3), 379–423</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Shannon Information & Genetic Entropy:</strong> Formal mathematical bounds on channel capacity, error-correction, and symbolic information transmission in living systems.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1002/j.1538-7305.1948.tb01338.x</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#weisfeiler1968" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-4" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-5" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[5]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Dawkins, R.</span> (2024). <em class="text-cyan-300">The Genetic Book of the Dead: A Darwinian Reverie of Ancestral Worlds</em>. <span class="text-slate-400">Head of Zeus / Apollo. ISBN: 978-1804548486</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">The Genetic Book of the Dead:</strong> Logic gates and enzymatic pathways are the physical inverse carvings of ancestral environments, not creations ex nihilo.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="../companion/bibliography.html#dawkins2024" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-5" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-6" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[6]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Adami, C., Ofria, C., & Collier, T. C.</span> (2000). <em class="text-cyan-300">Evolution of biological complexity</em>. <span class="text-slate-400">Proceedings of the National Academy of Sciences, 97(9), 4463–4468</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Complexity as Mutual Information:</strong> The informational complexity of an evolved Boolean circuit equals the uncertainty it removes about its selective environment: C(X) = I(X; E).</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1073/pnas.97.9.4463" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1073/pnas.97.9.4463</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#adami2000" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-6" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+</ol>
+</section>

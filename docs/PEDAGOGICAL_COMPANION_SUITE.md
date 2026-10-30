@@ -43,23 +43,55 @@ In Siliquarium's biophysical engine and genetic codon table ([`CodonTable.ts`](f
 ### 2.2 The Geometric and Biochemical Proof
 In 1969, Marvin Minsky and Seymour Papert published *Perceptrons*, proving that single-layer linear decision units cannot compute the Boolean `XOR` function because the truth table points $(0, 0)$, $(0, 1)$, $(1, 0)$, and $(1, 1)$ are **linearly non-separable** in 2D Euclidean input space.
 
-```
-                    THE GEOMETRIC LINEAR SEPARABILITY BARRIER
-         
-         Substrate B
-             ▲
-             │
-          1  │    ● (0, 1) [HIGH]        ○ (1, 1) [LOW / INERT]
-             │      (Fires Catalysis)      (Must SHUT DOWN!)
-             │
-             │           NO SINGLE STRAIGHT LINE CAN SEPARATE
-             │           THE FILLED CIRCLES (●) FROM HOLLOW (○)!
-             │
-          0  │    ○ (0, 0) [LOW]         ● (1, 0) [HIGH]
-             │      (Inactive)             (Fires Catalysis)
-             └────────────────────────────────────────────────► Substrate A
-                  0                      1
-```
+<div class="my-6 p-6 rounded-xl bg-slate-950/80 border border-slate-800 flex flex-col items-center">
+  <div class="text-xs font-semibold text-cyan-400 mb-3 tracking-wider uppercase">Figure 2.0: The Geometric Linear Separability Barrier (Minsky &amp; Papert, 1969)</div>
+  <svg viewBox="0 0 520 310" class="w-full max-w-lg" style="font-family: system-ui, -apple-system, sans-serif;">
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#64748b" />
+      </marker>
+    </defs>
+    <!-- Axes -->
+    <line x1="80" y1="240" x2="440" y2="240" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="80" y1="240" x2="80" y2="40" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <!-- Grid dashed guidelines -->
+    <line x1="320" y1="240" x2="320" y2="80" stroke="#334155" stroke-dasharray="4 4" stroke-width="1" />
+    <line x1="80" y1="80" x2="320" y2="80" stroke="#334155" stroke-dasharray="4 4" stroke-width="1" />
+    
+    <!-- Axis Labels -->
+    <text x="445" y="244" fill="#94a3b8" font-size="12" font-weight="600">Substrate A</text>
+    <text x="80" y="25" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle">Substrate B</text>
+    <text x="68" y="244" fill="#64748b" font-size="11" text-anchor="end">0</text>
+    <text x="68" y="84" fill="#64748b" font-size="11" text-anchor="end">1</text>
+    <text x="80" y="260" fill="#64748b" font-size="11" text-anchor="middle">0</text>
+    <text x="320" y="260" fill="#64748b" font-size="11" text-anchor="middle">1</text>
+
+    <!-- Failed Linear Boundary Attempts (Dashed Red Lines) -->
+    <line x1="60" y1="180" x2="360" y2="70" stroke="#ef4444" stroke-dasharray="5 5" stroke-width="1.5" stroke-opacity="0.7" />
+    <line x1="70" y1="260" x2="350" y2="150" stroke="#ef4444" stroke-dasharray="5 5" stroke-width="1.5" stroke-opacity="0.7" />
+
+    <!-- Point (0,0): INACTIVE (Hollow Circle) -->
+    <circle cx="80" cy="240" r="8" fill="#0f172a" stroke="#64748b" stroke-width="2.5" />
+    <text x="95" y="235" fill="#cbd5e1" font-size="11">(0, 0) <tspan fill="#94a3b8" font-weight="600">INACTIVE [0]</tspan></text>
+
+    <!-- Point (1,1): SHUT DOWN (Hollow Red Circle) -->
+    <circle cx="320" cy="80" r="8" fill="#0f172a" stroke="#f43f5e" stroke-width="2.5" />
+    <text x="335" y="75" fill="#cbd5e1" font-size="11">(1, 1) <tspan fill="#f43f5e" font-weight="600">INERT / SHUT DOWN [0]</tspan></text>
+
+    <!-- Point (0,1): FIRES CATALYSIS (Solid Emerald Circle) -->
+    <circle cx="80" cy="80" r="8" fill="#10b981" stroke="#34d399" stroke-width="2.5" />
+    <text x="95" y="84" fill="#f8fafc" font-size="11" font-weight="600">(0, 1) <tspan fill="#34d399">FIRES CATALYSIS [1]</tspan></text>
+
+    <!-- Point (1,0): FIRES CATALYSIS (Solid Emerald Circle) -->
+    <circle cx="320" cy="240" r="8" fill="#10b981" stroke="#34d399" stroke-width="2.5" />
+    <text x="335" y="244" fill="#f8fafc" font-size="11" font-weight="600">(1, 0) <tspan fill="#34d399">FIRES CATALYSIS [1]</tspan></text>
+
+    <!-- Impossibility Callout Card -->
+    <rect x="130" y="135" width="260" height="32" rx="6" fill="#1e293b" stroke="#eab308" stroke-width="1" stroke-opacity="0.8" />
+    <text x="260" y="155" fill="#fde047" font-size="11" font-weight="600" text-anchor="middle">❌ No Single Straight Line Separates [1] from [0]</text>
+  </svg>
+</div>
 
 In molecular biophysics, this geometric barrier corresponds to fundamental physical constraints on protein binding pockets:
 1. **The `AND` Gate (Co-Catalysis):** Easily achieved by a single enzyme pocket requiring the simultaneous binding of two substrates (e.g., kinase binding glucose and ATP). The reaction occurs if and only if both reagents are present ($A \land B$).
@@ -113,7 +145,7 @@ When the Digital Paleontologist's [`MotifScanner`](file:///h:/My%20Drive/Repos/S
 
 ---
 
-## 3. Pedagogical Rubrics & Assessment Guide
+## 3. Pedagogical Rubrics & Assessment Guide <span id="4-pedagogical-rubrics--assessment-guide"></span><span id="pedagogical-rubrics"></span>
 
 To evaluate student mastery across laboratory inquiries, experimental design, and computational autopsies, instructors should employ the following four-tier analytic scoring rubrics.
 

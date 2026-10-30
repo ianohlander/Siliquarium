@@ -64,7 +64,7 @@
 - **Formal Definition:** Semi-permeable micro-cavities within precipitated iron-sulfide or silica mineral structures that physically confine organic reactants, serving as abiotic precursors to lipid membranes (*Russell & Hall, 1997; Martin & Russell, 2003*).
 - **Mathematical / Physical Expression:**
   $$V_{\text{pore}} \sim 10^{-15} \text{ to } 10^{-13} \text{ m}^3, \quad \frac{A}{V} = \frac{6}{d} \gg 1$$
-- **In Silico Realization in Siliquarium:** The 3D hexagonal basalt pores of the seafloor lattice ([`HexGrid3D.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/grid/HexGrid3D.ts)), each accommodating up to an $8 \times 8$ gate netlist.
+- **In Silico Realization in Siliquarium:** The 3D hexagonal basalt pores of the seafloor lattice ([`HexGrid3D.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/spatial/HexGrid3D.ts)), each accommodating up to an $8 \times 8$ gate netlist.
 - **Biological Cognate:** Micro-scale cavities in hydrothermal chimneys composed of mackinawite ($FeS$) and greigite ($Fe_3S_4$).
 - **Epistemic Significance:** Illustrates how compartmentation was an abiotic geophysical gift rather than a complex biological innovation.
 
@@ -271,7 +271,7 @@
 - **Formal Definition:** The dependence of the state of a dynamical system on its history, wherein the transition from state $0 \to 1$ occurs at a higher threshold than the reverse transition $1 \to 0$.
 - **Mathematical / Physical Expression:**
   $$x_{\text{switch},\uparrow} \ne x_{\text{switch},\downarrow}$$
-- **In Silico Realization in Siliquarium:** Observable in the Circuit Microscope when a cell with a bistable latch holds its active state after the external vent pulse has dropped to zero ([`CircuitMicroscope.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/ui/CircuitMicroscope.ts)).
+- **In Silico Realization in Siliquarium:** Observable in the Circuit Microscope when a cell with a bistable latch holds its active state after the external vent pulse has dropped to zero ([`CircuitMicroscopeView.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/CircuitMicroscopeView.ts)).
 - **Biological Cognate:** Irreversible commitment to mitosis in the eukaryotic cell cycle.
 - **Epistemic Significance:** Teaches that living systems retain internal memories of transient past events.
 
@@ -457,7 +457,7 @@
 - **Formal Definition:** The hydrodynamic transport of dormant biological propagules or spores by fluid advection and buoyancy plumes across marine water columns, enabling colonization of distant habitats.
 - **Mathematical / Physical Expression:**
   $$\vec{u}_{\text{spore}} = \vec{v}_{\text{fluid}} + \vec{w}_{\text{buoyancy}}, \quad \frac{\partial C_s}{\partial t} + \nabla \cdot (\vec{u} C_s) = D \nabla^2 C_s - \lambda C_s$$
-- **In Silico Realization in Siliquarium:** Implemented in [`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts#L127-L141) and visualized in [`PelagicVisualizer.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/ui/PelagicVisualizer.ts); spores survive for $\tau=25$ ticks in aqueous space ($z \ge 1$).
+- **In Silico Realization in Siliquarium:** Implemented in [`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts#L127-L141) and visualized in [`SeafloorRenderer3D.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts#L1503-L1515); spores survive for $\tau=25$ ticks in aqueous space ($z \ge 1$).
 - **Biological Cognate:** Broadcast spawning in corals, ascidian larvae, and marine planktonic diatoms.
 - **Epistemic Significance:** Illustrates how organisms overcome spatial substrate saturation and colonize fractured topography.
 
@@ -477,8 +477,150 @@
 - **Biological Cognate:** Ephemeral weeds and pelagic blooms ($r$) versus climax forest trees and large mammals ($K$).
 - **Epistemic Significance:** Integrates population dynamics with thermodynamic resource constraints.
 
+### 56. Contact Predation (Trophic Siphoning)
+- **Formal Definition:** An antagonistic ecological interaction wherein an active predatory organism establishes physical contact with an adjacent living cell and actively extracts metabolic energy and structural tokens, driving recipient starvation.
+- **Mathematical / Physical Expression:**
+  $$\Delta E_{\text{predator}} = +\eta_{\text{siphon}} \cdot \min(E_{\text{prey}}, \Phi_{\text{transfer}}), \quad \Delta E_{\text{prey}} = -\min(E_{\text{prey}}, \Phi_{\text{transfer}})$$
+- **In Silico Realization in Siliquarium:** Implemented in [`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts) where predatory cells siphon up to 10 battery tokens from unshielded neighbor cells across a crimson siphon arc, subject to strict Landauer transfer dissipation.
+- **Biological Cognate:** Bacterial predatory bacteriovores such as *Bdellovibrio bacteriovorus* penetrating and lysing Gram-negative host cells.
+- **Epistemic Significance:** Introduces top-down trophic regulation and breaks static monoculture domination on the benthic seafloor.
+
+### 57. Detrital Scavenging (Necromass Catabolism)
+- **Formal Definition:** The saprotrophic enzymatic breakdown and mineral recycling of organic necromass or post-lysis cellular detritus by living cells, preventing permanent nutrient sequestering.
+- **Mathematical / Physical Expression:**
+  $$E_{\text{cell}}(t+1) = E_{\text{cell}}(t) + \beta \cdot E_{\text{carcass}}, \quad M_{\text{cell}}(t+1) = M_{\text{cell}}(t) + \mu \cdot M_{\text{carcass}}$$
+- **In Silico Realization in Siliquarium:** Benthic cells possessing catabolic logic gates (`OR`, `XOR`, `NOT`) harvest energy and matter tokens from decaying adjacent carcasses via amber detrital streamers ([`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts)).
+- **Biological Cognate:** Marine benthic bacterial mats recycling whale falls and pelagic marine snow on abyssal plains.
+- **Epistemic Significance:** Demonstrates closed-loop material cycles and ecosystem energetics without abiotic energy subsidies.
+
+### 58. Margulisian Endosymbiosis & Syncytial Macro-Organisms
+- **Formal Definition:** An evolutionary transition in individuality wherein two distinct symbiotic organisms physically merge their cytoplasmic compartments and genomes into an obligate chimeric syncytium, establishing new cellular complexity (*Margulis, 1967*).
+- **Mathematical / Physical Expression:**
+  $$\mathcal{G}_{\text{chimeric}} = \mathcal{G}_A \uplus \mathcal{G}_B, \quad \mathcal{B}_{\text{syncytium}} = \frac{E_A + E_B}{2}$$
+- **In Silico Realization in Siliquarium:** Mature neighboring cells of complementary clades undergo mutualistic fusion via [`GenomeSafe.createChimeric`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/GenomeSafe.ts), forming violet syncytial bridges and multi-pore macro-silicoids classified as *Chimerococcus margulisiae*.
+- **Biological Cognate:** The symbiogenetic origin of eukaryotic mitochondria from alphaproteobacteria and chloroplasts from cyanobacteria.
+- **Epistemic Significance:** Models major evolutionary transitions and the emergence of multicellular individuality from digital proto-organisms.
+
+### 59. Linnaean Digital Binomial Nomenclature
+- **Formal Definition:** A formal, two-term taxonomic naming protocol ($Genus \; species$) classifying synthetic organisms by phenotypic logic netlist topology, Landauer efficiency, and generational pedigree, while whimsically honoring pioneering scientists of computation and biology.
+- **Mathematical / Physical Expression:**
+  $$\mathcal{T}: (\mathcal{G}_{\text{safe}}, \mathcal{W}_{\text{gates}}, \text{Gen}) \mapsto (\text{Genus}, \text{Species}, \mathcal{C}_{\text{aura}})$$
+- **In Silico Realization in Siliquarium:** Generated dynamically by [`TaxonomyNomenclature.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/TaxonomyNomenclature.ts), featuring taxa honoring Uri Alon, Michael Elowitz, James Collins, Alan Turing, Rolf Landauer, Peter Mitchell, Richard Lenski, Nick Lane, Michael Russell, Lynn Margulis, Claude Shannon, and Howard Pattee.
+- **Biological Cognate:** The Linnaean binomial taxonomic system standardizing biological organism classification worldwide.
+- **Epistemic Significance:** Connects abstract silicon gate topologies with human scientific history and authentic biological taxonomy.
+
+### 60. The Genetic Book of the Dead (Dawkins Thesis)
+- **Formal Definition:** The evolutionary principle formulated by Richard Dawkins (2024) establishing that an organism's genome, morphology, and biochemistry are an inverse description, a photographic negative, and an archival palimpsest of the ancestral environments in which its lineage survived and reproduced.
+- **Mathematical / Physical Expression:**
+  $$\mathcal{G}_{\text{adapted}} = \text{Mold}^{-1}(\mathcal{E}_{\text{ancestral}})$$
+- **In Silico Realization in Siliquarium:** Analyzed in [`THE_GENETIC_BOOK_OF_THE_DEAD.md`](file:///h:/My%20Drive/Repos/Siliquarium/docs/THE_GENETIC_BOOK_OF_THE_DEAD.md). When a Silicoid evolves an `AND` gate, a Coherent FFL, or an Allosteric Inverter, that circuit is an open page in the Book of the Dead, recording the concurrent arrival of vent streams $A$ and $B$, toxic heavy-metal surges, or fluid turbulence.
+- **Biological Cognate:** Camels carrying desert aridity maps in loops of Henle; echolocating bats and dolphins converging on identical *Prestin* motor protein sequences to match acoustic fluid physics.
+- **Epistemic Significance:** Proves that living systems do not generate functional information ex nihilo; the environment is the informational fountainhead.
+
+### 61. Environmental Information Injection
+- **Formal Definition:** The thermodynamic and information-theoretic process wherein the statistical regularities, physical constraints, and chemical distributions of an external environment are transcribed into the digital sequence of a genome through the selective mortality of non-adapted variants.
+- **Mathematical / Physical Expression:**
+  $$\dot{I}_{\text{injection}} = \sum_i p_i' \log_2 \left(\frac{p_i'}{p_i}\right) \ge 0$$
+- **In Silico Realization in Siliquarium:** At initialization ($t=0$), the primordial soup has zero mutual information with the environment ($I(X; E) = 0$). As lineages starve at $E=0$ or survive to divide, bits of environmental constraint are steadily injected into the population gene pool.
+- **Biological Cognate:** Selection of cold-tolerant alleles in woolly mammoths and loss of globin genes in Antarctic icefish to reduce blood viscosity in oxygen-rich sub-zero seas.
+- **Epistemic Significance:** Demolishes the creationist canard that "mutation is noise and cannot create information": mutation provides variation, but the environment injects the information via selection.
+
+### 62. Genomic Mutual Information & Physical Complexity (Adami Complexity)
+- **Formal Definition:** Christoph Adami's (2000, 2004) rigorous mathematical definition of biological complexity as the mutual information $I(X; E)$ shared between the genome $X$ and its selective environment $E$:
+  $$C(X) = I(X; E) = H(E) - H(E \mid X) = H(X) - H(X \mid E)$$
+- **Mathematical / Physical Expression:**
+  $$I(X; E) = \sum_{x \in X} \sum_{e \in E} p(x, e) \log_2 \frac{p(x, e)}{p(x) p(e)}$$
+- **In Silico Realization in Siliquarium:** Quantified as the degree to which a pore cell's logic gate netlist correlates with the chemical plume frequencies of the hydrothermal nozzle.
+- **Biological Cognate:** The degree to which bacterial regulatory networks predict sugar fluctuations in the mammalian intestine.
+- **Epistemic Significance:** Separates physical biological complexity from raw Shannon entropy, proving that random DNA has zero complexity.
+
+### 63. Kimura Information Accumulation Rate
+- **Formal Definition:** Motoo Kimura's (1961) theorem establishing that the rate at which natural selection accumulates environmental information into a population's gene pool (in bits per generation) is proportional to the genetic variance in fitness:
+  $$\Delta I = \sum_i p_i' \log_2 \left(\frac{p_i'}{p_i}\right) \approx \frac{V_W}{2 (\bar{W})^2 \ln 2} \quad \text{[bits/generation]}$$
+- **In Silico Realization in Siliquarium:** Measured during environmental transitions (thermal pulses, toxic vent surges) as the rate of motif fixation in the seamount population.
+- **Biological Cognate:** The rate of antibiotic resistance gene fixation in bacterial populations under clinical antibiotic selection.
+- **Epistemic Significance:** Unifies Fisher's Fundamental Theorem of Natural Selection with Shannon's noisy channel coding theorem.
+
+### 64. Oceanic Lithosphere & Basaltic Foundation Slab
+- **Formal Definition:** The dense, rigid outermost mechanical shell of oceanic tectonic plates founded upon the Penrose ophiolite sequence (pillow lavas, sheeted dikes, gabbros, and ultramafic peridotite mantle), acting as the planetary heat engine and structural foundation for hydrothermal vent fields.
+- **Mathematical / Physical Expression:**
+  $$\mathbf{V}_{\text{mantle}}(i) = \begin{bmatrix} s_{\text{flare}} \cdot x_{\text{hull}}(i) \\ y_{\text{base}} - \Delta y_{\text{mantle}} \\ s_{\text{flare}} \cdot z_{\text{hull}}(i) \end{bmatrix}, \quad s_{\text{flare}} = 1.08$$
+- **In Silico Realization in Siliquarium:** Implemented in [`SeafloorRenderer3D.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts) via `drawLithosphericCrustMantle()`, projecting an $8\%$ flared cliff base, vertical columnar basalt jointing, and horizontal volcanic strata banding anchored to a solid bottom capping plate.
+- **Biological Cognate:** The basaltic oceanic crust of mid-ocean spreading ridges (e.g., Mid-Atlantic Ridge, East Pacific Rise) providing structural anchor and mineral substrate for benthic hydrothermal life.
+- **Epistemic Significance:** Grounding the simulation in planetary geology; proves the physical stage is an abiotic foundation rather than an abstract, unphysical floating plane.
+
+### 65. Deep Subseafloor Biosphere (Endolithic Microbial Aquifers)
+- **Formal Definition:** The vast intraterrestrial biome discovered by the Integrated Ocean Drilling Program (IODP) inhabiting fractured basalt crust and permeable sediment aquifers kilometers beneath the seabed, sustained by serpentinization without sunlight (*Edwards et al., 2012; Orcutt et al., 2011*).
+- **Mathematical / Physical Expression:**
+  $$\text{Flux}_{\text{serpentinization}}: (\text{Mg}, \text{Fe})_2\text{SiO}_4 + \text{H}_2\text{O} \to \text{serpentine} + \text{magnetite} + \text{H}_2$$
+- **In Silico Realization in Siliquarium:** The subterranean stratum ($z = -1$) in [`HexGrid3D.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/spatial/HexGrid3D.ts) and [`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts), where cells find shelter in deep basalt pores with dampened thermal and hydrodynamic shocks.
+- **Biological Cognate:** Archaea and bacteria living in subseafloor basalt pores at temperatures up to $122^\circ\text{C}$ at the Costa Rica Rift and Juan de Fuca Ridge flanks.
+- **Epistemic Significance:** Resolves the Hadean bolide sterilization paradox: subterranean crustal pores provided continuous geothermal nursery conditions even when surface oceans were boiled or irradiated.
+
+### 66. Axial Rift Graben / Sunken Trench ($z = -1$)
+- **Formal Definition:** A down-dropped fault block bounded by normal faults generated by crustal extensional stress along volcanic spreading axes, forming depressed geological trenches and fault scarps (*German et al., 2010*).
+- **Mathematical / Physical Expression:**
+  $$\text{Graben Displacement}: z_{\text{pore}} \leftarrow \min(z) - 1, \quad \text{under normal fault shear } \tau > \tau_{\text{crit}}$$
+- **In Silico Realization in Siliquarium:** Generated during `MAGMATIC_TREMOR` pressure events in [`GeologicalPressuresEngine.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/environment/GeologicalPressuresEngine.ts) or excavated manually with the $z=-1$ brush in [`LabFlyout.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/ui/LabFlyout.ts).
+- **Biological Cognate:** The central axial rift valleys of mid-ocean ridges where hydrothermal vents and fissured fault troughs concentrate prebiotic mineral precipitates.
+- **Epistemic Significance:** Introduces negative vertical bathymetric relief, creating micro-refugia and spatial niches for adaptive radiation.
+
+### 67. Columnar Basalt Cooling Joints
+- **Formal Definition:** Distinct regular polygonal (prismatic) fracture patterns produced by tensile contraction stress as thick basaltic lava flows or volcanic sills cool uniformly against seawater.
+- **Mathematical / Physical Expression:**
+  $$\sigma_{\text{thermal}} = \frac{E \alpha \Delta T}{1 - \nu} > \sigma_{\text{tensile}} \implies \text{hexagonal fracture spacing } \lambda \propto \sqrt{\frac{\kappa}{\dot{T}}}$$
+- **In Silico Realization in Siliquarium:** Rendered as vertical cooling striations along the mantle cliff facets in [`SeafloorRenderer3D.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts), visually anchoring the hexagonal tessellation to physical geological thermodynamics.
+- **Biological Cognate:** Columnar basalt formations such as the Giant's Causeway and oceanic crust exposed in ophiolites.
+- **Epistemic Significance:** Demonstrates that hexagonal geometry in nature is often an emergent consequence of thermal contraction physics rather than arbitrary geometric convenience.
+
+### 68. Pillow Lava Accretion & Flared Cliff Facets
+- **Formal Definition:** The bulbous, lobate volcanic structures formed when submarine basalt lava extrudes into cold water, quenching an elastic glassy crust that repeatedly ruptures to stack new volcanic terraces at a stable slope angle.
+- **Mathematical / Physical Expression:**
+  $$\theta_{\text{slope}} \le \theta_{\text{repose}} \approx 35^\circ\text{--}40^\circ, \quad \text{flare ratio } s_{\text{flare}} = 1.08$$
+- **In Silico Realization in Siliquarium:** Substrate building (`setSubstratePore`) expanding benthic terraces upward ($z = 1, 2, 3, 4$) while the lithospheric mantle foundation expands outward with an $8\%$ slope flare.
+- **Biological Cognate:** Submarine seamounts and underwater volcano slopes accreting successive pillow basalt layers over millions of years.
+- **Epistemic Significance:** Grounds the 3D multi-tier substrate architecture in real igneous accretional physics.
+
+### 69. Ecosystem Telemetry Pull-Down Architecture
+- **Formal Definition:** A non-intrusive UI/UX telemetry display system that decouples high-density non-equilibrium ecosystem state tracking from persistent transport controls, preventing visual clutter while enabling continuous first-law thermodynamic verification.
+- **Mathematical / Physical Expression:**
+  $$\Delta E_{\text{universe}} = \sum E_{\text{in}} - \sum E_{\text{out}} \equiv 0.000, \quad \Delta M_{\text{universe}} \equiv 0.000$$
+- **In Silico Realization in Siliquarium:** The `#hud-stats-panel` in [`index.html`](file:///h:/My%20Drive/Repos/Siliquarium/index.html) and [`main.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/main.ts), displaying real-time carcass detritus, living biomass, spore counts, stored tokens, active vents, and ledger audits with click-outside and `Esc` dismissal.
+- **Biological Cognate:** Ecological field monitoring stations tracking nutrient cycles, biomass fluxes, and trophic pyramids in marine nature reserves.
+- **Epistemic Significance:** Guarantees transparent scientific observability of conservation invariants without obstructing visual exploration of the living seamount.
+
+### 70. Zero-Smuggling Thermodynamic Geostage
+- **Formal Definition:** The methodological principle in artificial life and biophysics requiring that physical and geological boundaries (bedrock slabs, trenches, water columns, hydrothermal nozzles) provide strictly geometry and energy flux, without encoding precomputed biological adaptations or fitness bonuses.
+- **Mathematical / Physical Expression:**
+  $$\mathcal{F}_{\text{geology}}: (q, r, z) \mapsto (\text{Medium}, T, P, \Phi_{\text{vent}}), \quad \text{with } \frac{\partial \text{Fitness}}{\partial \text{Geology}} = 0$$
+- **In Silico Realization in Siliquarium:** All geological modifications ($z=-1$ trenches, substrate building, magmatic rifting) alter only physical pore medium and coordinates. Silicon organisms must evolve their own logic circuits to survive in these new geometries.
+- **Biological Cognate:** The indifferent, non-teleological Earth: rocks and ocean currents exist without regard for whether organisms survive or perish.
+- **Epistemic Significance:** Protects the epistemic integrity of digital abiogenesis from teleological design fallacies.
+
 ---
 
-> [!NOTE]
-> **Continue to Next Volume:**  
-> [🧭 Advance to Study Guides & Equation Decoders](study_guides.md) | [📚 Advance to Annotated Bibliography](bibliography.md) | [🏛️ Return to Master Companion Portal](../PEDAGOGICAL_COMPANION_SUITE.md)
+<!-- CHAPTER FOOTER NAVIGATION BAR -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-10 pt-6 border-t border-slate-800 font-mono text-xs">
+  <a href="../USER_GUIDE.html" class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between group">
+    <span class="text-[10px] text-slate-500 uppercase tracking-wider flex items-center gap-1 group-hover:text-cyan-400">
+      <span>←</span> Previous Volume (Volume V)
+    </span>
+    <span class="font-bold text-slate-200 mt-1">🛠️ Systems Operations &amp; Practicums</span>
+  </a>
+
+  <a href="../index.html" class="p-4 rounded-xl bg-slate-950/80 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between text-center group">
+    <span class="text-[10px] text-slate-500 uppercase tracking-wider group-hover:text-emerald-400">
+      🏛️ Curriculum Portal
+    </span>
+    <span class="font-bold text-slate-300 mt-1">Master Library Index</span>
+  </a>
+
+  <a href="study_guides.html" class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all flex flex-col justify-between text-right group">
+    <span class="text-[10px] text-slate-500 uppercase tracking-wider flex items-center justify-end gap-1 group-hover:text-cyan-400">
+      Next Section (Volume VI.2) <span>→</span>
+    </span>
+    <span class="font-bold text-slate-200 mt-1">🧭 Study Guides &amp; Master Decoders</span>
+  </a>
+</div>
+
+

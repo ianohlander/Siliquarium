@@ -1,0 +1,313 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 820" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="50%" stop-color="#0b172a"/>
+      <stop offset="100%" stop-color="#010409"/>
+    </linearGradient>
+
+    <!-- Markers -->
+    <marker id="arrowGrn10" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#10b981"/>
+    </marker>
+    <marker id="arrowCyan10" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <polygon points="0 0, 7 3.5, 0 7" fill="#38bdf8"/>
+    </marker>
+    <marker id="barRed10" markerWidth="5" markerHeight="10" refX="2.5" refY="5" orient="auto">
+      <line x1="2.5" y1="0" x2="2.5" y2="10" stroke="#ef4444" stroke-width="2.5"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="820" fill="url(#bgGrad10)"/>
+
+  <!-- Title Banner -->
+  <g transform="translate(40, 40)">
+    <rect width="1020" height="65" rx="12" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="25" y="32" fill="#38bdf8" font-family="monospace" font-size="18" font-weight="bold" letter-spacing="1.5">FIGURE GRN-10: GRAPH THEORY REPRESENTATION OF GENE REGULATORY NETWORKS</text>
+    <text x="25" y="52" fill="#94a3b8" font-family="sans-serif" font-size="12">Deconstructing a 60-Bit Genome Tape into Directed Graph Vertices V, Weighted Edges E, and Adjacency Matrix A</text>
+  </g>
+
+  <!-- TOP SECTION: THE 60-BIT GENOME TAPE (1D) -->
+  <g transform="translate(40, 125)">
+    <rect width="1020" height="110" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+    <text x="20" y="26" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="bold">1. 1D GENOME STRING (10 CODONS × 6 BITS = 60 BITS IN GENOME SAFE)</text>
+
+    <!-- 10 Codon Pills -->
+    <g transform="translate(20, 42)">
+      <!-- Codon 0: PORIN_A -->
+      <g transform="translate(0, 0)">
+        <rect width="92" height="48" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1.5"/>
+        <text x="10" y="20" fill="#a7f3d0" font-family="monospace" font-size="10" font-weight="bold">100000</text>
+        <text x="10" y="38" fill="#34d399" font-family="monospace" font-size="10">PORIN_A</text>
+      </g>
+      <!-- Codon 1: PORIN_B -->
+      <g transform="translate(98, 0)">
+        <rect width="92" height="48" rx="6" fill="#451a03" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="10" y="20" fill="#fde68a" font-family="monospace" font-size="10" font-weight="bold">100110</text>
+        <text x="10" y="38" fill="#fbbf24" font-family="monospace" font-size="10">PORIN_B</text>
+      </g>
+      <!-- Codon 2: GATE_AND -->
+      <g transform="translate(196, 0)">
+        <rect width="92" height="48" rx="6" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
+        <text x="10" y="20" fill="#bfdbfe" font-family="monospace" font-size="10" font-weight="bold">000001</text>
+        <text x="10" y="38" fill="#60a5fa" font-family="monospace" font-size="10">GATE_AND</text>
+      </g>
+      <!-- Codon 3: PORIN_T -->
+      <g transform="translate(294, 0)">
+        <rect width="92" height="48" rx="6" fill="#450a0a" stroke="#ef4444" stroke-width="1.5"/>
+        <text x="10" y="20" fill="#fca5a5" font-family="monospace" font-size="10" font-weight="bold">101100</text>
+        <text x="10" y="38" fill="#f87171" font-family="monospace" font-size="10">PORIN_TOX</text>
+      </g>
+      <!-- Codon 4: GATE_NOT -->
+      <g transform="translate(392, 0)">
+        <rect width="92" height="48" rx="6" fill="#581c87" stroke="#a855f7" stroke-width="1.5"/>
+        <text x="10" y="20" fill="#e9d5ff" font-family="monospace" font-size="10" font-weight="bold">001100</text>
+        <text x="10" y="38" fill="#c084fc" font-family="monospace" font-size="10">GATE_NOT</text>
+      </g>
+      <!-- Codon 5: SINK_BATT -->
+      <g transform="translate(490, 0)">
+        <rect width="92" height="48" rx="6" fill="#14532d" stroke="#22c55e" stroke-width="1.5"/>
+        <text x="10" y="20" fill="#bbf7d0" font-family="monospace" font-size="10" font-weight="bold">110000</text>
+        <text x="10" y="38" fill="#4ade80" font-family="monospace" font-size="10">SINK_BATT</text>
+      </g>
+      <!-- Codon 6: SINK_SEPT -->
+      <g transform="translate(588, 0)">
+        <rect width="92" height="48" rx="6" fill="#083344" stroke="#06b6d4" stroke-width="1.5"/>
+        <text x="10" y="20" fill="#cffafe" font-family="monospace" font-size="10" font-weight="bold">110100</text>
+        <text x="10" y="38" fill="#22d3ee" font-family="monospace" font-size="10">SINK_SEPT</text>
+      </g>
+      <!-- Codon 7: INTRON -->
+      <g transform="translate(686, 0)">
+        <rect width="92" height="48" rx="6" fill="#020617" stroke="#475569" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <text x="10" y="20" fill="#94a3b8" font-family="monospace" font-size="10">111000</text>
+        <text x="10" y="38" fill="#64748b" font-family="monospace" font-size="10">INTRON</text>
+      </g>
+      <!-- Codon 8: INTRON -->
+      <g transform="translate(784, 0)">
+        <rect width="92" height="48" rx="6" fill="#020617" stroke="#475569" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <text x="10" y="20" fill="#94a3b8" font-family="monospace" font-size="10">111001</text>
+        <text x="10" y="38" fill="#64748b" font-family="monospace" font-size="10">INTRON</text>
+      </g>
+      <!-- Codon 9: INTRON -->
+      <g transform="translate(882, 0)">
+        <rect width="92" height="48" rx="6" fill="#020617" stroke="#475569" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <text x="10" y="20" fill="#94a3b8" font-family="monospace" font-size="10">111010</text>
+        <text x="10" y="38" fill="#64748b" font-family="monospace" font-size="10">INTRON</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- BOTTOM LEFT: 2D DIRECTED GRAPH VISUALIZATION (V, E) -->
+  <g transform="translate(40, 255)">
+    <rect width="590" height="525" rx="12" fill="#0b1329" stroke="#06b6d4" stroke-width="1.2"/>
+    <text x="20" y="26" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="bold">2. DIRECTED GRAPH TOPOLOGY G = (V, E)</text>
+
+    <!-- Layers of Vertices -->
+
+    <!-- Layer 1: Boundary Porins (Left) -->
+    <g transform="translate(40, 60)">
+      <text x="0" y="0" fill="#94a3b8" font-family="monospace" font-size="10" font-weight="bold">INPUT PORINS (V_in)</text>
+
+      <!-- Node S_A -->
+      <circle cx="40" cy="50" r="22" fill="#064e3b" stroke="#10b981" stroke-width="2"/>
+      <text x="26" y="55" fill="#a7f3d0" font-family="monospace" font-size="12" font-weight="bold">S_A</text>
+      <text x="15" y="86" fill="#34d399" font-family="sans-serif" font-size="9">Stream A</text>
+
+      <!-- Node S_B -->
+      <circle cx="40" cy="160" r="22" fill="#451a03" stroke="#f59e0b" stroke-width="2"/>
+      <text x="26" y="165" fill="#fde68a" font-family="monospace" font-size="12" font-weight="bold">S_B</text>
+      <text x="15" y="196" fill="#fbbf24" font-family="sans-serif" font-size="9">Stream B</text>
+
+      <!-- Node S_T (Toxin) -->
+      <circle cx="40" cy="270" r="22" fill="#450a0a" stroke="#ef4444" stroke-width="2"/>
+      <text x="26" y="275" fill="#fca5a5" font-family="monospace" font-size="12" font-weight="bold">S_T</text>
+      <text x="15" y="306" fill="#f87171" font-family="sans-serif" font-size="9">Toxin T</text>
+    </g>
+
+    <!-- Layer 2: Catalytic Logic Gates (Middle) -->
+    <g transform="translate(230, 60)">
+      <text x="0" y="0" fill="#94a3b8" font-family="monospace" font-size="10" font-weight="bold">LOGIC GATES (V_gate)</text>
+
+      <!-- Gate 1: AND -->
+      <rect x="20" y="75" width="80" height="50" rx="8" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+      <text x="32" y="105" fill="#bfdbfe" font-family="monospace" font-size="12" font-weight="bold">G1:AND</text>
+      <text x="30" y="140" fill="#60a5fa" font-family="sans-serif" font-size="9">Synthetase</text>
+
+      <!-- Gate 2: NOT -->
+      <rect x="20" y="225" width="80" height="50" rx="8" fill="#581c87" stroke="#a855f7" stroke-width="2"/>
+      <text x="32" y="255" fill="#e9d5ff" font-family="monospace" font-size="12" font-weight="bold">G2:NOT</text>
+      <text x="32" y="290" fill="#c084fc" font-family="sans-serif" font-size="9">Inverter</text>
+    </g>
+
+    <!-- Layer 3: Actuator Sinks & Battery (Right) -->
+    <g transform="translate(420, 60)">
+      <text x="0" y="0" fill="#94a3b8" font-family="monospace" font-size="10" font-weight="bold">ACTUATOR SINKS (V_out)</text>
+
+      <!-- Sink: Battery -->
+      <circle cx="50" cy="100" r="24" fill="#14532d" stroke="#22c55e" stroke-width="2"/>
+      <text x="35" y="104" fill="#bbf7d0" font-family="monospace" font-size="11" font-weight="bold">BATT</text>
+      <text x="25" y="138" fill="#4ade80" font-family="sans-serif" font-size="9">Charge +2T</text>
+
+      <!-- Sink: Septum / FtsZ -->
+      <circle cx="50" cy="250" r="24" fill="#083344" stroke="#06b6d4" stroke-width="2"/>
+      <text x="35" y="254" fill="#cffafe" font-family="monospace" font-size="11" font-weight="bold">SEPT</text>
+      <text x="22" y="288" fill="#22d3ee" font-family="sans-serif" font-size="9">FtsZ Division</text>
+    </g>
+
+    <!-- Feedback Register Node: M0 (Bottom Center) -->
+    <g transform="translate(250, 420)">
+      <rect x="0" y="0" width="100" height="40" rx="6" fill="#1e1b4b" stroke="#818cf8" stroke-width="1.5"/>
+      <text x="18" y="24" fill="#c7d2fe" font-family="monospace" font-size="11" font-weight="bold">Reg M_0 [1]</text>
+      <text x="12" y="52" fill="#818cf8" font-family="sans-serif" font-size="9">Metabolite Memory</text>
+    </g>
+
+    <!-- Directed Edges (Arrows & Bars) -->
+    <!-- S_A -> G1 -->
+    <line x1="102" y1="110" x2="250" y2="150" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrowGrn10)"/>
+    <!-- S_B -> G1 -->
+    <line x1="102" y1="220" x2="250" y2="170" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arrowGrn10)"/>
+
+    <!-- G1 Output -> BATT -->
+    <line x1="330" y1="160" x2="445" y2="160" stroke="#10b981" stroke-width="3" marker-end="url(#arrowGrn10)"/>
+
+    <!-- G1 Output -> G2 Repression (blunt bar) -->
+    <path d="M 290 185 C 270 210, 270 260, 285 285" fill="none" stroke="#ef4444" stroke-width="2.5" marker-end="url(#barRed10)"/>
+    <text x="245" y="240" fill="#f87171" font-family="monospace" font-size="10" font-weight="bold">⊣</text>
+
+    <!-- S_T (Toxin) -> G2 -->
+    <line x1="102" y1="330" x2="250" y2="320" stroke="#ef4444" stroke-width="2.5" marker-end="url(#arrowGrn10)"/>
+
+    <!-- G2 Output -> SEPT -->
+    <line x1="330" y1="310" x2="445" y2="310" stroke="#a855f7" stroke-width="2.5" marker-end="url(#arrowCyan10)"/>
+
+    <!-- G1 -> M0 Feedback Loop -->
+    <path d="M 310 185 Q 360 300 310 420" fill="none" stroke="#818cf8" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowCyan10)"/>
+    <!-- M0 -> G1 Loop Back -->
+    <path d="M 250 440 Q 180 320 250 185" fill="none" stroke="#818cf8" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowCyan10)"/>
+
+    <!-- Legend strip inside graph -->
+    <g transform="translate(30, 475)">
+      <line x1="0" y1="10" x2="25" y2="10" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrowGrn10)"/>
+      <text x="35" y="14" fill="#a7f3d0" font-family="monospace" font-size="10">Activating Edge (+1)</text>
+
+      <line x1="190" y1="10" x2="215" y2="10" stroke="#ef4444" stroke-width="2.5" marker-end="url(#barRed10)"/>
+      <text x="225" y="14" fill="#fca5a5" font-family="monospace" font-size="10">Inhibitory Edge (-1)</text>
+
+      <line x1="380" y1="10" x2="405" y2="10" stroke="#818cf8" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arrowCyan10)"/>
+      <text x="415" y="14" fill="#c7d2fe" font-family="monospace" font-size="10">Feedback Loop (M_k)</text>
+    </g>
+  </g>
+
+  <!-- BOTTOM RIGHT: FORMAL GRAPH ADJACENCY MATRIX A_ij (N x N) -->
+  <g transform="translate(650, 255)">
+    <rect width="410" height="525" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+    <text x="20" y="26" fill="#38bdf8" font-family="monospace" font-size="12" font-weight="bold">3. ADJACENCY MATRIX A_ij &amp; ALGEBRA</text>
+
+    <!-- Explanatory note -->
+    <text x="20" y="50" fill="#94a3b8" font-family="sans-serif" font-size="11">
+      Every gene network maps to a signed adjacency matrix:
+    </text>
+    <text x="20" y="68" fill="#cbd5e1" font-family="monospace" font-size="11">
+      A_ij = +1 (activate), -1 (inhibit), 0 (none)
+    </text>
+
+    <!-- Matrix Grid Visual -->
+    <g transform="translate(20, 85)">
+      <!-- Header labels -->
+      <text x="60" y="15" fill="#94a3b8" font-family="monospace" font-size="10">S_A</text>
+      <text x="100" y="15" fill="#94a3b8" font-family="monospace" font-size="10">S_B</text>
+      <text x="140" y="15" fill="#94a3b8" font-family="monospace" font-size="10">S_T</text>
+      <text x="180" y="15" fill="#60a5fa" font-family="monospace" font-size="10" font-weight="bold">G1</text>
+      <text x="220" y="15" fill="#c084fc" font-family="monospace" font-size="10" font-weight="bold">G2</text>
+      <text x="260" y="15" fill="#4ade80" font-family="monospace" font-size="10">BAT</text>
+      <text x="300" y="15" fill="#22d3ee" font-family="monospace" font-size="10">SEP</text>
+      <text x="340" y="15" fill="#818cf8" font-family="monospace" font-size="10">M0</text>
+
+      <!-- Matrix Row 1: S_A -->
+      <text x="10" y="42" fill="#94a3b8" font-family="monospace" font-size="10">S_A</text>
+      <text x="65" y="42" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="105" y="42" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="145" y="42" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="182" y="42" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold">+1</text>
+      <text x="225" y="42" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="265" y="42" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="305" y="42" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="345" y="42" fill="#475569" font-family="monospace" font-size="11">0</text>
+
+      <!-- Matrix Row 2: S_B -->
+      <text x="10" y="70" fill="#94a3b8" font-family="monospace" font-size="10">S_B</text>
+      <text x="65" y="70" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="105" y="70" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="145" y="70" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="182" y="70" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold">+1</text>
+      <text x="225" y="70" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="265" y="70" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="305" y="70" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="345" y="70" fill="#475569" font-family="monospace" font-size="11">0</text>
+
+      <!-- Matrix Row 3: S_T -->
+      <text x="10" y="98" fill="#94a3b8" font-family="monospace" font-size="10">S_T</text>
+      <text x="65" y="98" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="105" y="98" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="145" y="98" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="185" y="98" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="222" y="98" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold">+1</text>
+      <text x="265" y="98" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="305" y="98" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="345" y="98" fill="#475569" font-family="monospace" font-size="11">0</text>
+
+      <!-- Matrix Row 4: G1 -->
+      <text x="10" y="126" fill="#60a5fa" font-family="monospace" font-size="10" font-weight="bold">G1</text>
+      <text x="65" y="126" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="105" y="126" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="145" y="126" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="185" y="126" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="223" y="126" fill="#ef4444" font-family="monospace" font-size="11" font-weight="bold">-1</text>
+      <text x="262" y="126" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold">+1</text>
+      <text x="305" y="126" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="342" y="126" fill="#818cf8" font-family="monospace" font-size="11" font-weight="bold">+1</text>
+
+      <!-- Matrix Row 5: G2 -->
+      <text x="10" y="154" fill="#c084fc" font-family="monospace" font-size="10" font-weight="bold">G2</text>
+      <text x="65" y="154" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="105" y="154" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="145" y="154" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="185" y="154" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="225" y="154" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="265" y="154" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="302" y="154" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold">+1</text>
+      <text x="345" y="154" fill="#475569" font-family="monospace" font-size="11">0</text>
+
+      <!-- Matrix Row 6: M0 -->
+      <text x="10" y="182" fill="#818cf8" font-family="monospace" font-size="10">M0</text>
+      <text x="65" y="182" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="105" y="182" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="145" y="182" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="182" y="182" fill="#818cf8" font-family="monospace" font-size="11" font-weight="bold">+1</text>
+      <text x="225" y="182" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="265" y="182" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="305" y="182" fill="#475569" font-family="monospace" font-size="11">0</text>
+      <text x="345" y="182" fill="#475569" font-family="monospace" font-size="11">0</text>
+    </g>
+
+    <!-- Graph Theory Properties Box -->
+    <g transform="translate(20, 290)">
+      <rect width="370" height="210" rx="8" fill="#020617" stroke="#1e293b" stroke-width="1"/>
+      <text x="15" y="24" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">TOPOLOGICAL INVARIANTS IN SILICO</text>
+
+      <text x="15" y="52" fill="#a7f3d0" font-family="monospace" font-size="10" font-weight="bold">• In-Degree K_in = 2:</text>
+      <text x="15" y="68" fill="#94a3b8" font-family="sans-serif" font-size="10">Every logic gate node receives exactly 2 inputs.</text>
+
+      <text x="15" y="96" fill="#fde68a" font-family="monospace" font-size="10" font-weight="bold">• Betti Number β_1 = 1:</text>
+      <text x="15" y="112" fill="#94a3b8" font-family="sans-serif" font-size="10">Contains exactly 1 independent 1D cycle (M_0 feedback).</text>
+
+      <text x="15" y="140" fill="#fca5a5" font-family="monospace" font-size="10" font-weight="bold">• Weisfeiler-Lehman (WL) Hash:</text>
+      <text x="15" y="156" fill="#cbd5e1" font-family="monospace" font-size="10">wl_hash: "a4f8-e129-c902"</text>
+      <text x="15" y="172" fill="#64748b" font-family="sans-serif" font-size="9">Permutation-invariant cryptographic fingerprint.</text>
+
+      <text x="15" y="196" fill="#38bdf8" font-family="sans-serif" font-size="10" font-weight="bold">Identical graph = Identical tissue physiology!</text>
+    </g>
+  </g>
+
+</svg>

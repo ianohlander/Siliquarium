@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 450" width="980" height="450" class="w-full h-auto font-sans">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#6b21a8" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+
+    <!-- Glow Filters -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-emerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
+  </style>
+
+  <!-- Canvas Background -->
+  <rect width="980" height="450" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  
+  <g transform="translate(30, 34)">
+    <text class="title">Figure 7.1: Incoherent Feed-Forward Loop Type 1 (I-FFL)</text>
+    <text y="20" class="subtitle">Transient pulse generator, sensory adaptation &amp; fold-change derivative detection</text>
+  </g>
+
+  <!-- Left: Schematic Motif -->
+  <g transform="translate(30, 70)">
+    <rect width="445" height="355" rx="12" fill="#1b1226" stroke="#a855f7" stroke-width="1.5" />
+    <rect x="16" y="14" width="240" height="24" rx="4" fill="#6b21a8" />
+    <text x="26" y="30" class="badge" fill="#f3e8ff">INCOHERENT FFL (I-FFL TYPE 1)</text>
+    <text x="270" y="30" class="label" fill="#c084fc">Pulse Generator</text>
+
+    <!-- Triad Schematic -->
+    <g transform="translate(25, 48)">
+      <circle cx="35" cy="30" r="16" fill="#581c87" stroke="#a855f7" stroke-width="2" />
+      <text x="29" y="35" class="code" fill="#ffffff" font-weight="bold">X</text>
+      <text x="55" y="25" class="code" font-size="9" fill="#e9d5ff">Sensor</text>
+
+      <!-- Path to Y (Repressor) -->
+      <path d="M 52 30 L 125 30" stroke="#a855f7" stroke-width="2" marker-end="url(#arrow-purple)" />
+      <circle cx="140" cy="30" r="16" fill="#be123c" stroke="#f43f5e" stroke-width="2" />
+      <text x="134" y="35" class="code" fill="#ffffff" font-weight="bold">Y</text>
+      <text x="160" y="25" class="code" font-size="9" fill="#fecdd3">Repressor</text>
+
+      <!-- Direct fast activation (+) and slow delayed inhibition (-) -->
+      <path d="M 45 46 L 105 90" stroke="#a855f7" stroke-width="2" marker-end="url(#arrow-purple)" />
+      <text x="45" y="75" class="code" font-size="8.5" fill="#d8b4fe">Fast (+)</text>
+
+      <path d="M 140 48 L 140 85" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="3 2" />
+      <text x="145" y="70" class="code" font-size="8.5" fill="#f43f5e">Slow (-)</text>
+
+      <!-- Target Gate Z (AND-NOT) -->
+      <rect x="105" y="92" width="75" height="34" rx="6" fill="#3b0764" stroke="#c084fc" stroke-width="2" />
+      <text x="113" y="114" class="code" fill="#ffffff" font-weight="bold">Z (A·NOT)</text>
+
+      <!-- Adaptive Pulse Output -->
+      <path d="M 180 109 L 240 109" stroke="#c084fc" stroke-width="2.5" marker-end="url(#arrow-purple)" />
+      <text x="250" y="113" class="code" font-size="11" fill="#c084fc" font-weight="bold">Output Z</text>
+    </g>
+
+    <!-- Mathematical Formula Box -->
+    <g transform="translate(16, 175)">
+      <rect width="413" height="78" rx="8" fill="#12091c" stroke="#581c87" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#d8b4fe">OPPOSING REGULATORY ARMS</text>
+      <text x="14" y="38" class="code" font-size="8.8" fill="#c084fc">Sign Product: (+) · (+) · (-) = -1 (Opposing / Incoherent)</text>
+      <text x="14" y="54" class="subtitle" font-size="9">Direct arm accelerates initial response; delayed repressor restores baseline</text>
+      <text x="14" y="70" class="code" font-size="8.8" fill="#f43f5e">Pulse duration: Δt = τ_repressor (intrinsic kinetic delay)</text>
+    </g>
+
+    <!-- Callout -->
+    <g transform="translate(16, 265)">
+      <rect width="413" height="65" rx="8" fill="#2e1065" stroke="#7e22ce" stroke-width="1" />
+      <text x="14" y="20" class="label-bold" fill="#d8b4fe">Fold-Change Sensory Adaptation</text>
+      <text x="14" y="38" class="subtitle" font-size="9.5">• Measures environmental derivative (d/dt) rather than absolute levels</text>
+      <text x="14" y="54" class="code" font-size="9" fill="#facc15">★ Landmark: Alon (2007) Nat Rev Genet &amp; Goentoro (2009)</text>
+    </g>
+  </g>
+
+  <!-- Right: Biphasic Pulse Waveforms -->
+  <g transform="translate(505, 70)">
+    <rect width="445" height="355" rx="12" fill="#1b1226" stroke="#a855f7" stroke-width="1.5" />
+    <rect x="16" y="14" width="240" height="24" rx="4" fill="#6b21a8" />
+    <text x="26" y="30" class="badge" fill="#f3e8ff">PULSE DYNAMICS &amp; RESET</text>
+    <text x="270" y="30" class="label" fill="#c084fc">Fold-Change Detection</text>
+
+    <!-- Timing Waveform Box -->
+    <g transform="translate(16, 48)">
+      <rect width="413" height="120" rx="8" fill="#12091c" stroke="#581c87" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#d8b4fe">STEP INPUT &amp; BIPHASIC ADAPTIVE PULSE</text>
+
+      <!-- Step input X -->
+      <text x="15" y="42" class="code" font-size="8.5" fill="#a855f7">Input X (Step)</text>
+      <path d="M 95 44 L 135 44 L 135 30 L 275 30" stroke="#a855f7" stroke-width="1.8" fill="none" />
+
+      <!-- Repressor Y (slow exponential accumulation) -->
+      <text x="15" y="74" class="code" font-size="8.5" fill="#f43f5e">Repressor Y</text>
+      <path d="M 95 76 L 135 76 C 150 76, 175 58, 275 58" stroke="#f43f5e" stroke-width="1.8" fill="none" />
+      <line x1="95" y1="62" x2="275" y2="62" stroke="#64748b" stroke-dasharray="2 2" stroke-width="0.8" />
+      <text x="280" y="64" class="code" font-size="7.5" fill="#64748b">Inhibition K_i</text>
+
+      <!-- Pulse output Z -->
+      <text x="15" y="106" class="code" font-size="8.5" fill="#facc15">Output Z (Pulse)</text>
+      <path d="M 95 108 L 135 108 L 140 88 L 175 88 C 190 88, 205 108, 275 108" stroke="#facc15" stroke-width="2.2" fill="none" />
+      <text x="145" y="82" class="code" font-size="8" fill="#facc15">Transient Spike</text>
+      <text x="220" y="104" class="code" font-size="8" fill="#a855f7">Adapted Baseline</text>
+    </g>
+
+    <!-- Fold-Change Invariance Box -->
+    <g transform="translate(16, 175)">
+      <rect width="413" height="78" rx="8" fill="#12091c" stroke="#581c87" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#d8b4fe">FOLD-CHANGE INVARIANCE (FCD)</text>
+      <text x="14" y="38" class="code" font-size="8.8" fill="#facc15">Amplitude: Peak depends on (X_final / X_initial), NOT absolute X</text>
+      <text x="14" y="54" class="subtitle" font-size="9">Allows organism to navigate chemical plumes across 4 orders of magnitude</text>
+      <text x="14" y="70" class="code" font-size="8.8" fill="#c084fc">Weber-Fechner Law of sensory biology implemented in 3 logic gates</text>
+    </g>
+
+    <!-- Callout -->
+    <g transform="translate(16, 265)">
+      <rect width="413" height="65" rx="8" fill="#2e1065" stroke="#7e22ce" stroke-width="1" />
+      <text x="14" y="20" class="label-bold" fill="#d8b4fe">Darwinian Fitness Value</text>
+      <text x="14" y="38" class="subtitle" font-size="9.5">• Prevents sensory saturation in rich plumes; detects subtle new boundaries</text>
+      <text x="14" y="54" class="code" font-size="8.8" fill="#facc15">★ Drives optimal chemotactic foraging on the hydrothermal seafloor</text>
+    </g>
+  </g>
+
+</svg>

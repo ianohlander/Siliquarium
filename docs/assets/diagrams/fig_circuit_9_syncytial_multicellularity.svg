@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 450" width="980" height="450" class="w-full h-auto font-sans">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#6b21a8" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+
+    <!-- Glow Filters -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-emerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
+  </style>
+
+  <!-- Canvas Background -->
+  <rect width="980" height="450" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  
+  <g transform="translate(30, 34)">
+    <text class="title">Figure 12.1: Syncytial Multicellularity</text>
+    <text y="20" class="subtitle">Multi-pore cytoplasmic resource pooling, shared battery bus &amp; division of labor</text>
+  </g>
+
+  <!-- Left: Multi-Pore Syncytium Lattice -->
+  <g transform="translate(30, 70)">
+    <rect width="445" height="355" rx="12" fill="#0a1926" stroke="#0284c7" stroke-width="1.5" />
+    <rect x="16" y="14" width="240" height="24" rx="4" fill="#0369a1" />
+    <text x="26" y="30" class="badge" fill="#e0f2fe">SYNCYTIAL MACRO-ORGANISM</text>
+    <text x="270" y="30" class="label" fill="#38bdf8">Cytoplasmic Streaming</text>
+
+    <!-- Hexagonal Pores Connected (Pores A, B, C forming triangular cluster) -->
+    <g transform="translate(20, 35)">
+      <!-- Pore A -->
+      <polygon points="40,20 75,20 92,48 75,76 40,76 23,48" fill="#075985" stroke="#38bdf8" stroke-width="2" />
+      <text x="57" y="44" class="code" fill="#ffffff" font-weight="bold" text-anchor="middle">Pore A</text>
+      <text x="57" y="58" class="code" font-size="9" fill="#facc15" text-anchor="middle">90T</text>
+
+      <!-- Cytoplasmic Bridge AB -->
+      <rect x="92" y="44" width="45" height="8" fill="#00e5ff" opacity="0.8" />
+      <path d="M 92 48 L 137 48" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrow-cyan)" />
+
+      <!-- Pore B -->
+      <polygon points="143,20 178,20 195,48 178,76 143,76 126,48" fill="#075985" stroke="#38bdf8" stroke-width="2" />
+      <text x="160" y="44" class="code" fill="#ffffff" font-weight="bold" text-anchor="middle">Pore B</text>
+      <text x="160" y="58" class="code" font-size="9" fill="#f43f5e" text-anchor="middle">20T</text>
+
+      <!-- Cytoplasmic Bridges to C -->
+      <path d="M 68 76 L 95 100" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrow-cyan)" />
+      <path d="M 150 76 L 128 100" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrow-cyan)" />
+
+      <!-- Pore C (Nested neatly below A & B without overlapping box below) -->
+      <polygon points="95,80 130,80 147,108 130,136 95,136 78,108" fill="#075985" stroke="#38bdf8" stroke-width="2" />
+      <text x="112" y="104" class="code" fill="#ffffff" font-weight="bold" text-anchor="middle">Pore C</text>
+      <text x="112" y="118" class="code" font-size="9" fill="#38bdf8" text-anchor="middle">40T</text>
+
+      <!-- Equalized Banner -->
+      <rect x="225" y="25" width="175" height="105" rx="8" fill="#082f49" stroke="#00e5ff" stroke-width="1.5" />
+      <text x="237" y="48" class="badge" fill="#7dd3fc">POOLED METABOLIC BUS</text>
+      <text x="237" y="70" class="code" font-size="12" fill="#facc15" font-weight="bold">50 Tokens Each</text>
+      <text x="237" y="90" class="subtitle" font-size="9.5">Equipartition Pool (150T / 3)</text>
+      <text x="237" y="108" class="code" font-size="8.8" fill="#38bdf8">90T + 20T + 40T = 150T</text>
+    </g>
+
+    <!-- Conserved Mass Law Box (Clean clearance below Pore C) -->
+    <g transform="translate(16, 175)">
+      <rect width="413" height="78" rx="8" fill="#051b2c" stroke="#0369a1" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#7dd3fc">CONSERVED MASS &amp; ZERO LEAKAGE</text>
+      <text x="14" y="38" class="code" font-size="9" fill="#38bdf8">Total Mass: M_colony = ∑(M_p) ──► ΔM = 0.000</text>
+      <text x="14" y="54" class="subtitle" font-size="9.5">Rich vent pores feed shadowed pores, defeating localized starvation</text>
+      <text x="14" y="70" class="code" font-size="8.8" fill="#7dd3fc">Shared cytoplasm establishes single physiological super-individual</text>
+    </g>
+
+    <!-- Callout -->
+    <g transform="translate(16, 265)">
+      <rect width="413" height="65" rx="8" fill="#0c4a6e" stroke="#0284c7" stroke-width="1" />
+      <text x="14" y="20" class="label-bold" fill="#7dd3fc">Syncytial Macro-Colony Dynamics</text>
+      <text x="14" y="38" class="subtitle" font-size="9.5">• Multinucleated cytoplasmic sheets coordinate whole-colony reproduction</text>
+      <text x="14" y="54" class="code" font-size="9" fill="#facc15">★ Landmark: Bonner (1965) &amp; Margulis (1981) Symbiosis</text>
+    </g>
+  </g>
+
+  <!-- Right: Diffusion Dynamics & Collective Resilience -->
+  <g transform="translate(505, 70)">
+    <rect width="445" height="355" rx="12" fill="#0a1926" stroke="#0284c7" stroke-width="1.5" />
+    <rect x="16" y="14" width="240" height="24" rx="4" fill="#0369a1" />
+    <text x="26" y="30" class="badge" fill="#e0f2fe">COLLECTIVE RESILIENCE DYNAMICS</text>
+    <text x="270" y="30" class="label" fill="#38bdf8">Famine Survival</text>
+
+    <!-- Diffusion Dynamics Box -->
+    <g transform="translate(16, 48)">
+      <rect width="413" height="120" rx="8" fill="#051b2c" stroke="#0369a1" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#7dd3fc">FICKIAN METABOLIC EQUALIZATION (J = -D · ∇Φ)</text>
+
+      <!-- Bar 1: Isolated Pore (Clean non-overlapping coordinates) -->
+      <text x="14" y="44" class="code" font-size="8.8" fill="#f43f5e">Isolated Pore</text>
+      <rect x="120" y="33" width="55" height="15" rx="3" fill="#be123c" />
+      <text x="185" y="44" class="subtitle" font-size="8.8">Starves in 35 ticks when vent shifts</text>
+
+      <!-- Bar 2: Syncytial Pore Network -->
+      <text x="14" y="70" class="code" font-size="8.8" fill="#38bdf8">Syncytial Net</text>
+      <rect x="120" y="59" width="180" height="15" rx="3" fill="#0284c7" />
+      <text x="128" y="70" class="code" font-size="8" fill="#fff" font-weight="bold">Survives 180+ Ticks (Pooled Buffering)</text>
+
+      <text x="14" y="96" class="subtitle" font-size="9" fill="#7dd3fc">Division of Labor: Peripheral harvest redox; central pores store reserves</text>
+      <text x="14" y="112" class="code" font-size="8.5" fill="#facc15">Surplus energy flows continuously along chemical potential gradients</text>
+    </g>
+
+    <!-- Division of Labor Box -->
+    <g transform="translate(16, 175)">
+      <rect width="413" height="78" rx="8" fill="#051b2c" stroke="#0369a1" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#7dd3fc">DIVISION OF LABOR &amp; SPECIALIZATION</text>
+      <text x="14" y="38" class="code" font-size="8.8" fill="#facc15">Somatic vs. Germline: One pore specializes in FtsZ spore generation</text>
+      <text x="14" y="54" class="subtitle" font-size="9.5">Other pores maintain full catalytic throughput to power the colony</text>
+      <text x="14" y="70" class="code" font-size="8.8" fill="#38bdf8">Permits biological complexity impossible in solitary unicells</text>
+    </g>
+
+    <!-- Callout -->
+    <g transform="translate(16, 265)">
+      <rect width="413" height="65" rx="8" fill="#0c4a6e" stroke="#0284c7" stroke-width="1" />
+      <text x="14" y="20" class="label-bold" fill="#7dd3fc">Darwinian Fitness Value</text>
+      <text x="14" y="38" class="subtitle" font-size="9.5">• Conquers the abyssal floor by forming extensive continuous biofilms</text>
+      <text x="14" y="54" class="code" font-size="8.8" fill="#facc15">★ Biological analog: Hexactinellid glass sponges &amp; Physarum slime molds</text>
+    </g>
+  </g>
+
+</svg>

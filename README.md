@@ -35,11 +35,29 @@ While BooleanGA explores **heteropoietic engineering synthesis** (evolving ALUs,
 7. **Pelagic Spore Dispersal & $O(1)$ Planktonic Movement:**  
    Discrete hop-by-hop water column movement avoiding 3D continuous physics engine bloat while supporting larval spore drift, colonization, and free-swimming protozoa.
 
+### 🗺️ The Reality-to-Simulation Rosetta Stone
+
+Siliquarium is an authentic computational biophysics laboratory that abstracts deep-sea hydrothermal ecosystems into rate-independent symbolic code and rate-dependent digital components under strict thermodynamic conservation ($\Delta E \equiv 0.000, \Delta M \equiv 0.000$):
+
+| Biophysical Phenomenon | Everyday Analogy | In-Silico Simulation Implementation | Core Class / Kernel Module |
+| :--- | :--- | :--- | :--- |
+| **Inert DNA vs. Active Metabolism** | Cookbook in Safe vs. Kitchen Workshop | Quiescent 60-bit tape vs. Active CMOS Boolean logic netlist | `GenomeSafe` vs. `PoreWorkshop` |
+| **Hydrothermal Vent Plumes** | Passing musical drumbeat | Periodic binary bitstream pulses (`Stream A`, `Stream B`, `Toxin T`) | `VentPhysics` |
+| **Inorganic Rock Honeycomb** | Nature's first stone houses | 3D hexagonal basalt cavities ($q, r, z$) preventing dilution | `HexGrid3D<Pore>` |
+| **Chemiosmotic PMF & Landauer Heat** | Cellular calorie counter | $[0..100]$ token register; $-1\text{T}$ per gate flip ($k_B T \ln 2$) | `PoreBattery` |
+| **Slime Mold Pseudoplasmodial Motility** | Front conveyor growth & rear resorption | Directed cleavage forward, mass/energy transfer, trailing autolysis | `TreadmillingEngine` |
+| **Histological Staining** | Fluorescent GFP/DAPI microscopy | 4 real-time viewport shader stains (Morphology, GRNs, Flux, PMF) | `KinematicsOverlay` |
+| **Longitudinal Kinematics Playback** | Strata time-lapse recording | Playback clock freezing physics; clade centroid & predation vectors | `ColonyKinematicsRecorder` |
+
+*(For the complete 17-element translation matrix and pedagogical justifications, see [`docs/REALITY_TO_SIMULATION_TRANSLATION_MATRIX.md`](docs/REALITY_TO_SIMULATION_TRANSLATION_MATRIX.md) and [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md).)*
+
 ---
 
 ## 📂 Project Manifest & Standards
 
 - **[`THEORETICAL_MODEL.md`](THEORETICAL_MODEL.md):** Complete 21-section master biophysical specification, equations, and thermodynamic models.
+- **[`docs/REALITY_TO_SIMULATION_TRANSLATION_MATRIX.md`](docs/REALITY_TO_SIMULATION_TRANSLATION_MATRIX.md):** Complete 17-element translation matrix mapping deep-sea hydrothermal biophysics to in-silico computational invariants.
+- **[`docs/USER_GUIDE.md`](docs/USER_GUIDE.md):** Comprehensive user guide, visual decoder, and interactive lab tutorial.
 - **[`docs/EPISTEMIC_FOUNDATIONS.md`](docs/EPISTEMIC_FOUNDATIONS.md):** Epistemological boundaries, prebiotic battery physics (Mitchell, Russell, Lane), the Epistemic Cut (Pattee, Von Neumann), and the anti-smuggling defense.
 - **[`docs/BRAND_IDENTITY.md`](docs/BRAND_IDENTITY.md):** Brand philosophy, Fibonacci nautilus suites, biophysical design cognates, and asset inventory.
 - **[`docs/PHASE_3_VISUALIZER_GUIDE.md`](docs/PHASE_3_VISUALIZER_GUIDE.md):** 3D Seafloor rendering, hex math, and interactive circuit microscope.
@@ -48,6 +66,7 @@ While BooleanGA explores **heteropoietic engineering synthesis** (evolving ALUs,
 - **[`docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.md`](docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.md):** Multi-lineage phylogeny, Lenski LTEE dynamics, Shannon diversity index, and convergent evolution classification.
 - **[`docs/CURRICULUM_AND_SYLLABUS.md`](docs/CURRICULUM_AND_SYLLABUS.md):** Comprehensive multi-vector syllabus, 5 hands-on laboratory practicums, and Socratic seminars.
 - **[`docs/PEDAGOGICAL_COMPANION_SUITE.md`](docs/PEDAGOGICAL_COMPANION_SUITE.md):** 55-term technical glossary, deep-dive study guides, analytical derivations, grading rubrics, and annotated primary literature bibliography.
+- **[`marketing/index.html`](marketing/index.html):** Commercial Operations Center & Turnkey Monetization Blueprint (Lemon Squeezy MoR, 5 Hosted Tiers, Persistent Cloud Server, The Abyssal Arena Battler, and Richard Dawkins Homage Outreach).
 - **[`standards/DEVELOPMENT_STANDARDS.md`](standards/DEVELOPMENT_STANDARDS.md):** Strict OOP/SOLID architecture, complexity budgets ($\le 7$), branded types, Web Worker threading, and anti-monolith file structure.
 - **[`standards/QA_AND_TESTING_STANDARDS.md`](standards/QA_AND_TESTING_STANDARDS.md):** Native zero-dependency Node.js test harness, progressive test pipeline, and physical conservation audits.
 - **[`standards/DOCUMENTATION_STANDARDS.md`](standards/DOCUMENTATION_STANDARDS.md):** 5-Dimension Conceptual Rubric (50/50 target), the 4 Sacred Everyday Analogies, and academic provenance.

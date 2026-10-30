@@ -178,7 +178,7 @@ Whenever a mathematical equation appears, it is forbidden to simply print the eq
 
 #### Step 1: TeX Equation with Color Coding
 Each algebraic symbol is wrapped in a distinct hex color macro:
-$$\color{#38bdf8}{\Delta p} = \color{#34d399}{\Delta \psi} - \color{#fbbf24}{\frac{2.303 R T}{F}} \color{#f43f5e}{\Delta \text{pH}}$$
+$$\textcolor{#38bdf8}{\Delta p} = \textcolor{#34d399}{\Delta \psi} - \textcolor{#fbbf24}{\frac{2.303 R T}{F}} \textcolor{#f43f5e}{\Delta \text{pH}}$$
 
 #### Step 2: The Color Legend Row
 Directly beneath the formula, legend pills indicate the variable mappings:
@@ -285,26 +285,32 @@ To enforce active learning and self-assessment, chapters include interactive che
 
 BooleanGA's interactive citation engine represents the gold standard in scholarly digital navigation. Clicking an inline superscript citation (`[1]`) does not merely snap the page downwards; it engages an **orchestrated multi-sensory feedback loop**.
 
-```
-[Reader clicks sup [1] in text]
-               │
-               ▼
-[Citation Navigator smooth-centers #ref-1 card in viewport]
-               │
-               ├────────────────────────────────────────────────┐
-               ▼                                                ▼
-[@keyframes refTargetPulse triggers]               [@keyframes badgePopIn triggers]
-- Border flares into luminous cyan (#22d3ee)       - Floating badge pops in at top right:
-- Box-shadow surges (0 0 50px rgba(6,182,212))       "CITED IN TEXT 🎯"
-- Card background pulses to rgba(8,51,68,0.92)     - Gradient: cyan-600 to blue-600
-- Reference number [1] scales up (scale 1.2)       - Pill shadow with glow
-               │
-               ▼
-[Reader clicks "↑ Back to text" link]
-               │
-               ▼
-[@keyframes backlinkTargetFlash triggers on origin section]
-- Glowing cyan outline pulse fades gently over 2.5 seconds
+```mermaid
+flowchart TD
+    Click["🖱️ Reader clicks superscript citation [1] in text"]
+    Scroll["Smooth-scroll centers #ref-1 card in viewport"]
+    
+    subgraph Feedback["Simultaneous Visual Orchestration"]
+        Pulse["<b>@keyframes refTargetPulse</b><br/>• Border flares into luminous cyan (#22d3ee)<br/>• Box-shadow surges: 0 0 50px rgba(6,182,212)<br/>• Background pulses to rgba(8,51,68,0.92)<br/>• Reference number [1] scales up (1.2×)"]
+        Badge["<b>@keyframes badgePopIn</b><br/>• Floating badge pops in at top-right: 'CITED IN TEXT 🎯'<br/>• Gradient: cyan-600 to blue-600<br/>• Glowing pill shadow"]
+    end
+
+    Back["Reader clicks '↑ Back to text' link"]
+    Flash["<b>@keyframes backlinkTargetFlash</b><br/>Glowing cyan outline pulse fades gently over 2.5s on origin paragraph"]
+
+    Click --> Scroll
+    Scroll --> Pulse
+    Scroll --> Badge
+    Pulse --> Back
+    Badge --> Back
+    Back --> Flash
+
+    style Click fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
+    style Scroll fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc
+    style Pulse fill:#083344,stroke:#22d3ee,stroke-width:2px,color:#f8fafc
+    style Badge fill:#083344,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
+    style Back fill:#0f172a,stroke:#34d399,stroke-width:1.5px,color:#f8fafc
+    style Flash fill:#0f172a,stroke:#34d399,stroke-width:2px,color:#f8fafc
 ```
 
 ### 5.1 The Citation Target Keyframes & Stylesheet
@@ -575,7 +581,7 @@ flowchart TD
 3. Embed Foundational Concept Checkpoints targeting the **Teleological Fallacy** and the **Smuggled Intelligence Trapdoor**.
 
 ### Phase 4: Pedagogical Companion Suite Upgrade (`docs/PEDAGOGICAL_COMPANION_SUITE.html`)
-1. **Interactive Bibliography:** Convert all 14 annotated papers into targeted reference items (`<li id="ref-1">` to `<li id="ref-14">`) with DOI badges and back-to-text links, wired to the pulse animation engine.
+1. **Interactive Bibliography:** Convert all 14 annotated papers into targeted reference items (e.g., `&lt;li id="ref-1"&gt;` to `&lt;li id="ref-14"&gt;`) with DOI badges and back-to-text links, wired to the pulse animation engine.
 2. **Glossary Enhancement:** Ensure all 55 terms feature an Everyday Analogy callout and a Siliquarium Digital Simulator mapping.
 3. **Assessment Rubrics:** Format the 4-tier laboratory rubrics with high-contrast responsive tables.
 

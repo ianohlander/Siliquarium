@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 420" width="780" height="420" class="w-full h-auto font-sans">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#7e22ce" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#c084fc" />
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <style>
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 14.5px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="780" height="420" rx="12" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Header -->
+  <text x="24" y="32" class="title">⭕ TOROIDAL HEXAGONAL RING TOPOLOGY</text>
+  <text x="24" y="50" class="subtitle">1D closed loop circumnavigating an obstacle with zero terminal dead ends</text>
+
+  <!-- Left: Schematic -->
+  <g transform="translate(24, 70)">
+    <rect width="360" height="326" rx="8" fill="url(#cardGrad)" stroke="#334155" stroke-width="1" />
+    <text x="180" y="24" text-anchor="middle" class="label-bold" fill="#38bdf8">Closed Loop Architecture (|E| = |V| = 6)</text>
+
+    <!-- Central Vacant Hole / Obstacle -->
+    <polygon points="211.2,147.0 211.2,183.0 180.0,201.0 148.8,183.0 148.8,147.0 180.0,129.0" fill="#070a14" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 4" />
+    <text x="180" y="162" text-anchor="middle" class="code" fill="#64748b">OBSTACLE</text>
+    <text x="180" y="176" text-anchor="middle" class="badge" fill="#475569">Vacant Pore (0,0)</text>
+
+    <!-- Ring Conduits (Closed 6-cycle) -->
+    <polygon points="180,95 240,130 240,200 180,235 120,200 120,130" fill="none" stroke="#c084fc" stroke-width="4" stroke-linecap="round" />
+
+    <!-- 6 Pores on Ring -->
+    <polygon points="200.8,83.0 200.8,107.0 180.0,119.0 159.2,107.0 159.2,83.0 180.0,71.0" fill="#0f172a" stroke="#38bdf8" stroke-width="1.8" />
+    <polygon points="260.8,118.0 260.8,142.0 240.0,154.0 219.2,142.0 219.2,118.0 240.0,106.0" fill="#0f172a" stroke="#38bdf8" stroke-width="1.8" />
+    <polygon points="260.8,188.0 260.8,212.0 240.0,224.0 219.2,212.0 219.2,188.0 240.0,176.0" fill="#0f172a" stroke="#10b981" stroke-width="2" />
+    <polygon points="200.8,223.0 200.8,247.0 180.0,259.0 159.2,247.0 159.2,223.0 180.0,211.0" fill="#0f172a" stroke="#38bdf8" stroke-width="1.8" />
+    <polygon points="140.8,188.0 140.8,212.0 120.0,224.0 99.2,212.0 99.2,188.0 120.0,176.0" fill="#0f172a" stroke="#38bdf8" stroke-width="1.8" />
+    <polygon points="140.8,118.0 140.8,142.0 120.0,154.0 99.2,142.0 99.2,118.0 120.0,106.0" fill="#0f172a" stroke="#f59e0b" stroke-width="2" />
+
+    <!-- Labels -->
+    <text x="240" y="204" text-anchor="middle" class="badge" fill="#10b981">🌾</text>
+    <text x="120" y="134" text-anchor="middle" class="badge" fill="#f59e0b">⚡</text>
+
+    <!-- Cytoplasmic Streaming Arrows -->
+    <path d="M 195,85 Q 260,110 255,165" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#arrow-cyan)" />
+    <path d="M 165,245 Q 100,220 105,165" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="3 3" marker-end="url(#arrow-cyan)" />
+    <text x="180" y="280" text-anchor="middle" class="subtitle">Continuous bidirectional cytoplasmic streaming</text>
+    <text x="180" y="298" text-anchor="middle" class="badge" fill="#00e5ff">NO DEAD ENDS • REDUNDANT SURVIVAL PATHWAYS</text>
+  </g>
+
+  <!-- Right: Invariant Math -->
+  <g transform="translate(404, 70)">
+    <rect width="352" height="326" rx="8" fill="url(#cardGrad)" stroke="#334155" stroke-width="1" />
+    <text x="176" y="24" text-anchor="middle" class="label-bold" fill="#38bdf8">Topological Ring Invariants</text>
+
+    <!-- Formula Box -->
+    <rect x="16" y="40" width="320" height="66" rx="6" fill="#0c1222" stroke="#00e5ff" stroke-width="1.2" />
+    <text x="176" y="66" text-anchor="middle" class="code" font-size="12.5px" fill="#00e5ff">|E| ≥ |V|   AND   max(deg(v)) ≤ 2</text>
+    <text x="176" y="88" text-anchor="middle" class="subtitle" fill="#cbd5e1">Every node has degree exactly 2: 2-regular simple cycle C_n</text>
+
+    <!-- Betti Number Box -->
+    <g transform="translate(16, 120)">
+      <rect width="320" height="90" rx="6" fill="#131c31" stroke="#334155" />
+      <text x="12" y="22" class="label-bold" fill="#c084fc">First Betti Number (Cyclomatic Rank):</text>
+      <text x="12" y="44" class="code" font-size="12px" fill="#cbd5e1">γ(G) = |E| - |V| + 1 = 6 - 6 + 1 = <tspan fill="#c084fc" font-weight="bold">1</tspan></text>
+      <text x="12" y="66" class="subtitle">The graph contains exactly ONE fundamental independent cycle.</text>
+      <text x="12" y="82" class="subtitle">Homeomorphic to the mathematical circle S¹.</text>
+    </g>
+
+    <!-- Resiliency Comparison -->
+    <g transform="translate(16, 222)">
+      <rect width="320" height="88" rx="6" fill="#131c31" stroke="#334155" />
+      <text x="12" y="20" class="label-bold" fill="#34d399">Predation Damage Resiliency:</text>
+      <text x="12" y="38" class="subtitle">• Linear filament cut: divides into 2 isolated fragments.</text>
+      <text x="12" y="56" class="subtitle">• Ring cut: degenerates gracefully into a filament (P₅).</text>
+      <text x="12" y="74" class="subtitle">• All surviving cells remain connected via alternative route!</text>
+    </g>
+  </g>
+  
+</svg>

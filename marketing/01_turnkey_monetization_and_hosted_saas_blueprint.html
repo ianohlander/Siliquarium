@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 01: Turnkey Monetization & Hosted SaaS Blueprint — Siliquarium Marketing</title>
+  <meta name="author" content="Ian Ohlander / Jack Vance">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
+    .font-mono { font-family: 'Space Mono', monospace; }
+    .rainbow-border { background: linear-gradient(90deg, #38bdf8 0%, #06b6d4 25%, #10b981 50%, #fbbf24 75%, #f43f5e 100%); }
+    .card-box { background: #090e1a; border: 1px solid #1e293b; border-radius: 0.75rem; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #020617; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
+
+  <div class="h-1.5 w-full rainbow-border sticky top-0 z-50"></div>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="bg-[#090e1a]/95 border-b border-[#1e293b] px-6 py-3 flex flex-wrap items-center justify-between shadow-md gap-4 sticky top-1.5 z-40 backdrop-blur-md">
+    <div class="flex items-center space-x-3">
+      <a href="index.html" class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center shadow text-black font-extrabold text-base hover:scale-105 transition">
+        🐠
+      </a>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">Step 01 &bull; Marketing Suite</span>
+          <span class="px-2 py-0.5 rounded text-[9px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800">Payment & Hosted SaaS</span>
+        </div>
+        <h1 class="text-sm md:text-base font-extrabold text-white truncate max-w-xl">Turnkey Monetization & Hosted SaaS Blueprint</h1>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Links -->
+    <div class="flex items-center space-x-2 text-xs font-mono">
+      <a href="00_executive_summary_and_quickstart.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5 text-xs font-mono"><span>&larr;</span> <span>Step 00</span></a>
+      <a href="index.html" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-lg transition border border-slate-700 flex items-center gap-1">
+        <span>🏠</span> <span>Operations Center</span>
+      </a>
+      <a href="02_positioning_and_messaging_bible.html" class="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-black font-extrabold transition flex items-center gap-1.5 text-xs font-mono shadow"><span>Step 02</span> <span>&rarr;</span></a>
+      <a href="../index.html" class="px-3 py-1.5 bg-cyan-950 hover:bg-cyan-900 text-cyan-200 rounded-lg transition border border-cyan-800 hidden sm:inline-flex items-center gap-1">
+        <span>⚡</span> <span>Simulator</span>
+      </a>
+      <a href="../docs/CURRICULUM_AND_SYLLABUS.html" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition border border-slate-700 hidden md:inline-flex items-center gap-1">
+        <span>📑</span> <span>Curriculum</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Two-Column Layout: Sidebar TOC + Main Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- LEFT SIDEBAR: STICKY TABLE OF CONTENTS -->
+    <aside class="lg:col-span-4 space-y-4 lg:sticky lg:top-16">
+      
+      <!-- Current Step Meta Card -->
+      <div class="card-box p-4 border-l-4 border-l-cyan-500 shadow-md">
+        <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-1">
+          <span>OPERATIONAL STEP</span>
+          <span class="text-cyan-400 font-bold">#01 OF 06</span>
+        </div>
+        <h3 class="font-extrabold text-white text-base leading-tight mb-1">Turnkey Monetization & Hosted SaaS Blueprint</h3>
+        <p class="text-xs text-slate-400 font-sans">Lemon Squeezy MoR, 5 Hosted Tiers, Persistent Cloud Server & Abyssal Arena</p>
+      </div>
+
+      <!-- Table of Contents Nav Box -->
+      <div class="card-box p-4 shadow-md max-h-[68vh] flex flex-col">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+          <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
+            <span>📑</span> <span>Table of Contents</span>
+          </span>
+          <span class="text-[10px] font-mono text-slate-500">Jump to section</span>
+        </div>
+        <div class="overflow-y-auto space-y-0.5 pr-1">
+          
+          <a href="#1-the-operational-superweapon-why-merchant-of-record-lemon-squeezy-beats-stripe-direct" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>1. The Operational Superweapon: Why Merchant of Record (Lemon Squeezy) Beats Stripe Direct</span>
+          </a>
+        
+
+          <a href="#the-tax-nexus-nightmare-in-software" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>The Tax Nexus Nightmare in Software:</span>
+          </a>
+        
+
+          <a href="#the-solution-lemon-squeezy-as-merchant-of-record-mor" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>The Solution: Lemon Squeezy as Merchant of Record (MoR)</span>
+          </a>
+        
+
+          <a href="#2-the-5-high-margin-tiers-tailored-for-hosted-siliquarium" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>2. The 5 High-Margin Tiers Tailored for Hosted Siliquarium</span>
+          </a>
+        
+
+          <a href="#detailed-tier-breakdown" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>Detailed Tier Breakdown:</span>
+          </a>
+        
+
+          <a href="#21-the-asymmetric-hybrid-architecture-why-this-model-generates-90-margins-without-server-bankruptcy" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>2.1 The Asymmetric Hybrid Architecture: Why This Model Generates &gt;90% Margins Without Server Bankruptcy</span>
+          </a>
+        
+
+          <a href="#3-the-abyssal-arena-gamification-virality-social-dynamics" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>3. &quot;The Abyssal Arena&quot;: Gamification, Virality &amp; Social Dynamics</span>
+          </a>
+        
+
+          <a href="#31-arena-mechanics-the-battle-of-the-silicoids" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>3.1 Arena Mechanics: The Battle of the Silicoids</span>
+          </a>
+        
+
+          <a href="#32-viral-sharing-spectator-replays" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>3.2 Viral Sharing &amp; Spectator Replays</span>
+          </a>
+        
+
+          <a href="#33-the-geothermal-commander-ccg-tactical-action-deck-the-5-substrate-resource-well" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>3.3 &quot;The Geothermal Commander&quot; CCG: Tactical Action Deck &amp; The 5-Substrate Resource Well</span>
+          </a>
+        
+
+          <a href="#4-technical-implementation-lemon-squeezy-storefront-verification" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>4. Technical Implementation: Lemon Squeezy Storefront &amp; Verification</span>
+          </a>
+        
+
+          <a href="#step-1-embed-lemonjs-in-indexhtml" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>Step 1: Embed Lemon.js in index.html</span>
+          </a>
+        
+
+          <a href="#step-2-wire-the-pro-checkout-triggers" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>Step 2: Wire the Pro Checkout Triggers</span>
+          </a>
+        
+
+          <a href="#step-3-client-side-license-verification-pattern-licensemanagerts" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>Step 3: Client-Side License Verification Pattern (LicenseManager.ts)</span>
+          </a>
+        
+
+          <a href="#5-university-procurement-selling-institutional-site-licenses-499-1499" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>5. University Procurement: Selling Institutional Site Licenses ($499 – $1,499)</span>
+          </a>
+        
+
+          <a href="#the-institutional-procurement-workflow" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>The Institutional Procurement Workflow:</span>
+          </a>
+        
+
+          <a href="#standard-institutional-quote-template" class="block py-1 text-xs hover:text-cyan-300 transition pl-5 text-slate-400 text-[11px] truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▫</span>
+            <span>Standard Institutional Quote Template:</span>
+          </a>
+        
+
+          <a href="#6-summary-your-turnkey-launch-plan" class="block py-1 text-xs hover:text-cyan-300 transition pl-2 truncate flex items-center gap-1.5">
+            <span class="text-cyan-500 font-mono text-[10px]">▪</span>
+            <span>6. Summary: Your Turnkey Launch Plan</span>
+          </a>
+        
+        </div>
+      </div>
+
+      <!-- Quick Steps Navigation Matrix -->
+      <div class="card-box p-4 shadow-md space-y-2">
+        <span class="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block border-b border-slate-800 pb-1.5">
+          All 7 Marketing Steps
+        </span>
+        <div class="grid grid-cols-7 gap-1 font-mono text-center text-xs">
+          <a href="00_executive_summary_and_quickstart.html" title="Executive Summary & 30-Day Quickstart" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">00</a><a href="01_turnkey_monetization_and_hosted_saas_blueprint.html" title="Turnkey Monetization & Hosted SaaS Blueprint" class="py-1.5 rounded bg-cyan-500 text-black font-extrabold shadow transition">01</a><a href="02_positioning_and_messaging_bible.html" title="Positioning & Messaging Bible" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">02</a><a href="03_creator_and_influencer_outreach_playbook.html" title="Creator & Influencer Outreach Playbook" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">03</a><a href="04_historical_connections_and_academic_expansion.html" title="Historical Connections & Academic Expansion" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">04</a><a href="05_content_roadmap_and_community_launch_playbook.html" title="Content Roadmap & Community Launch Playbook" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">05</a><a href="06_financial_model_and_roi_forecast.html" title="Financial Model & ROI Forecast" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">06</a><a href="07_ui_ux_gaming_experience_and_arena_blueprint.html" title="UI/UX Experience & The Abyssal Arena Gamer Blueprint" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">07</a><a href="08_llc_infrastructure_hosting_and_deployment_strategy.html" title="LLC Formation, VPS Hosting & Deployment Strategy" class="py-1.5 rounded bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800 transition">08</a>
+        </div>
+      </div>
+
+      <!-- Simulator Direct Link -->
+      <a href="../index.html" class="block card-box p-3 hover:border-cyan-500 transition group text-center">
+        <span class="text-xs font-mono text-cyan-400 group-hover:text-cyan-300 font-bold flex items-center justify-center gap-1.5">
+          <span>🌊</span> <span>Launch 3D Seafloor Visualizer</span> <span>&rarr;</span>
+        </span>
+      </a>
+
+    </aside>
+
+    <!-- RIGHT COLUMN: MAIN CONTENT -->
+    <main class="lg:col-span-8 card-box p-6 md:p-10 shadow-xl overflow-hidden leading-relaxed">
+      
+      <!-- Document Banner -->
+      <div class="mb-6 pb-6 border-b border-slate-800 space-y-2">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="px-2.5 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-xs font-mono font-bold uppercase tracking-wider">
+            Siliquarium Commercialization &bull; Step 01
+          </span>
+          <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-xs font-mono border border-slate-800">
+            Author: Jack "The Closer" Vance
+          </span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-white font-mono tracking-tight">
+          Turnkey Monetization & Hosted SaaS Blueprint
+        </h1>
+        <p class="text-sm text-slate-400 font-sans">
+          Lemon Squeezy MoR, 5 Hosted Tiers, Persistent Cloud Server & Abyssal Arena
+        </p>
+      </div>
+
+      <!-- Parsed Body Content -->
+      <article class="prose prose-invert max-w-none space-y-4">
+        <h1 id="turnkey-monetization-hosted-saas-blueprint" class="text-2xl sm:text-3xl font-black text-white font-mono mt-8 mb-4 border-b border-slate-800 pb-3 flex items-center gap-3"><span class="text-cyan-400">#</span> 💳 Turnkey Monetization & Hosted SaaS Blueprint</h1>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Author:</strong> Jack "The Closer" Vance, Chief Marketing Officer & Commercialization Strategist</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Target:</strong> Ian Ohlander, Founder & Chief Architect of Siliquarium</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><strong class="text-white font-bold">Purpose:</strong> Zero-Tax Liability, Merchant of Record Setup, 5 High-Margin Hosted Tiers, and Technical Implementation</p>
+<hr class="my-8 border-slate-800/80">
+<h2 id="1-the-operational-superweapon-why-merchant-of-record-lemon-squeezy-beats-stripe-direct" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 1. The Operational Superweapon: Why Merchant of Record (Lemon Squeezy) Beats Stripe Direct</h2>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Most technical founders make a catastrophic mistake when commercializing their first application: they create a Stripe account, write custom webhook code, and think they are done.</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Six months later, they receive a certified notice from the California Department of Tax and Fee Administration, followed by inquiries from New York, Texas, and HM Revenue & Customs in the United Kingdom.</p>
+<h3 id="the-tax-nexus-nightmare-in-software" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> The Tax Nexus Nightmare in Software:</h3>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">US Multi-State Economic Nexus:</strong> Over 45 US states have enacted economic nexus laws for digital goods and SaaS. If you sell software to residents in Pennsylvania, Ohio, or Washington, you may be legally required to register with each state’s treasury, calculate local county/municipal sales taxes, and file quarterly returns.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">European Union & UK VAT:</strong> In the EU and UK, digital services sold to consumers are subject to Destination-Based VAT (from 17% in Luxembourg to 27% in Hungary). You must register for EU VAT One Stop Shop (OSS) and remit VAT in euros, or face severe penalties.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Canadian GST/HST, Australian GST, etc.:</strong> Each jurisdiction has distinct thresholds and filing schedules.</span></li>
+</ul>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">If you use Stripe directly, <strong class="text-white font-bold">you are the legal seller</strong>. You bear 100% of the tax compliance, collection, remittance, audit, and legal defense costs. For a solo founder, this administrative overhead is lethal.</p>
+<h3 id="the-solution-lemon-squeezy-as-merchant-of-record-mor" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> The Solution: Lemon Squeezy as Merchant of Record (MoR)</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">With <strong class="text-white font-bold">Lemon Squeezy</strong> (owned by Stripe), Lemon Squeezy is legally the Merchant of Record:</p>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span><strong class="text-white font-bold">Lemon Squeezy is the reseller:</strong> The customer buys from Lemon Squeezy; Lemon Squeezy buys from you.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span><strong class="text-white font-bold">Zero Tax Liability for Ian:</strong> Lemon Squeezy calculates, collects, and remits sales tax and VAT across all 50 US states, the EU, UK, Canada, Australia, and beyond. They assume 100% of the legal tax liability.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span><strong class="text-white font-bold">Turnkey License Key Generation:</strong> Lemon Squeezy automatically generates, manages, and validates cryptographic license keys out of the box.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">4.</span> <span><strong class="text-white font-bold">Simple Payouts:</strong> Every week or month, Lemon Squeezy deposits your clean net earnings directly into your bank account via ACH.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">5.</span> <span><strong class="text-white font-bold">Ultra-Low Cost:</strong> Lemon Squeezy charges just <strong class="text-white font-bold">5% + $0.50 per transaction</strong>. Because Siliquarium's client-side simulation has zero compute cost, your <strong class="text-white font-bold">net profit margin is ~93% to 95%</strong>.</span></li>
+</ol>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT / SCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-1').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-1" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>+---------------------------------------------------------------------------------------------------------+
+|                                    LEMON SQUEEZY ARCHITECTURAL FLOW                                     |
++---------------------------------------------------------------------------------------------------------+
+|                                                                                                         |
+|  [ CUSTOMER ]                                                                                           |
+|  Visits siliquarium.ianohlander.com ──&gt; Clicks &quot;Unlock Laboratory Pro&quot; or &quot;Enter Abyssal Arena&quot;         |
+|                                                                                                         |
+|                                      │                                                                  |
+|                                      ▼                                                                  |
+|  [ LEMON SQUEEZY OVERLAY CHECKOUT ]                                                                     |
+|  * Displays localized price &amp; currency ($34.99 USD, €32.50 EUR, £28.00 GBP)                             |
+|  * Automatically collects &amp; remits local sales tax / VAT                                                |
+|  * Supports Apple Pay, Google Pay, Credit/Debit Cards, PayPal                                           |
+|                                                                                                         |
+|                                      │                                                                  |
+|                                      ▼                                                                  |
+|  [ INSTANT FULFILLMENT &amp; WEBHOOK ]                                                                      |
+|  * Generates Cryptographic Pro License Key (e.g., SILI-8F92-4B1C-99E0)                                  |
+|  * Emails invoice, receipt, and license key directly to customer                                        |
+|  * Injects key into client localStorage for immediate zero-lag Pro feature activation                  |
+|                                                                                                         |
+|                                      │                                                                  |
+|                                      ▼                                                                  |
+|  [ CLEAN ACH DIRECT DEPOSIT TO IAN ]                                                                    |
+|  Net payout deposited weekly. Zero tax filings, zero accounting headaches, 95% net profit.              |
+|                                                                                                         |
++---------------------------------------------------------------------------------------------------------+</code></pre>
+</div>
+<hr class="my-8 border-slate-800/80">
+<h2 id="2-the-5-high-margin-tiers-tailored-for-hosted-siliquarium" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 2. The 5 High-Margin Tiers Tailored for Hosted Siliquarium</h2>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Siliquarium's architecture combines client-side browser execution with the autonomous Node.js <strong class="text-white font-bold"><code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">HeadlessSimulationHost</code></strong> (<code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">src/server/HeadlessSimulationHost.ts</code>) and Server-Sent Events (SSE). This unlocks a five-tier monetization ladder targeting casual hobbyists, competitive simulation gamers, bio-hackers, and academic institutions.</p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT / SCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-2').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-2" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>+---------------------------------------------------------------------------------------------------------+
+|                                      SILIQUARIUM MONETIZATION LADDER                                    |
++---------------------------------------------------------------------------------------------------------+
+|                                                                                                         |
+|  TIER 1: FREE COMMUNITY WEB LAB ($0)                                                                    |
+|  * Immediate zero-friction in-browser simulation (radius 5)                                             |
+|  * 100% open access to 12-Volume Curriculum &amp; 154 Primary Citations                                     |
+|  * Circuit Microscope &amp; 4 Histological Shaders (GFP, DAPI, Flux, PMF)                                   |
+|  * Local single-session execution (top-of-funnel viral acquisition)                                      |
+|                                                                                                         |
+|  TIER 2: SILIQUARIUM LABORATORY PRO PASS ($34.99 One-Time Lifetime or $7.00/Month Hosted SaaS)          |
+|  * 24/7 Persistent Headless Cloud Simulation (runs 100,000+ ticks with laptop closed)                   |
+|  * Massive Seafloor Worlds (radius up to 15; 9x basalt pore capacity)                                   |
+|  * Cloud Snapshot Vault (.silisave auto-backup &amp; cross-device state sync)                               |
+|  * Real-Time SSE Telemetry Streaming to Desktop &amp; Mobile viewports                                      |
+|  * Custom Abyssal Environment Editor (caldera topography, pulse tuning, toxic shock controls)          |
+|  * High-Res 4K Kinematics Video &amp; Multi-Lineage Phylogenetic Flight Recorder Data Exporters            |
+|                                                                                                         |
+|  TIER 3: &quot;THE ABYSSAL ARENA&quot; GLADIATORIAL BATTLER ($9.99 Pack / $19.99 Season Pass)                     |
+|  * Gamified non-equilibrium competitive arena (Sulfur Caldera, Midnight Gauntlet, Toxic Geyser)         |
+|  * Head-to-Head BioBank genome duels: trophic displacement, biomass cannibalism, survival showdowns   |
+|  * Compressed shareable battle replay URLs (siliquarium.com/#arena=replay...)                           |
+|  * Global Leaderboards: Longevity, Energy Harvested, Reproductive Progeny, Gate Parsimony               |
+|  * Creator Tournament Suite (YouTubers/streamers host subscriber-submitted genome tournaments)          |
+|                                                                                                         |
+|  TIER 4: THE DARWINIAN BIOCOMPUTING MASTER BUNDLE ($69.99 – $89.99 One-Time)                            |
+|  * BooleanGA (Directed Evolution CAD: Nand2Tetris Hack ALU, RAM latches, CPU netlists)                 |
+|    + Siliquarium Laboratory Pro (Undirected Evolution: Abiogenesis &amp; Hydrothermal Autopoiesis)          |
+|  * The definitive realization of Richard Dawkins&#x27;s dual evolutionary framework                          |
+|  * 24 Combined Textbook Volumes &amp; Unified Pro License Key across both platforms                         |
+|                                                                                                         |
+|  TIER 5: UNIVERSITY &amp; DEPARTMENTAL SITE LICENSE ($499/Year or $1,499 Perpetual)                         |
+|  * Dedicated On-Premise / Cloud Docker Container for HeadlessSimulationHost                             |
+|  * Multi-Student Concurrent SSE Classroom Observation                                                   |
+|  * Complete 5-Practicum 90-Minute Laboratory Manual &amp; Socratic Seminar Guides                           |
+|  * Automated Student Experiment Verification &amp; Grading Harness                                          |
+|  * Net-30 Invoicing, Official Purchase Orders &amp; IRS W-9 Support                                         |
+|                                                                                                         |
++---------------------------------------------------------------------------------------------------------+</code></pre>
+</div>
+<h3 id="detailed-tier-breakdown" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> Detailed Tier Breakdown:</h3>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-950/80 shadow-lg">
+<table class="w-full text-left text-xs text-slate-300 border-collapse">
+<thead><tr class="bg-slate-900 border-b border-slate-800 text-slate-200 font-mono text-[11px]">
+<th class="py-3 px-4 font-bold">Feature Dimension</th>
+<th class="py-3 px-4 font-bold">Tier 1: Free Community</th>
+<th class="py-3 px-4 font-bold">Tier 2: Laboratory Pro</th>
+<th class="py-3 px-4 font-bold">Tier 3: Abyssal Arena</th>
+<th class="py-3 px-4 font-bold">Tier 4: Master Bundle</th>
+<th class="py-3 px-4 font-bold">Tier 5: University License</th>
+</tr></thead><tbody>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Price Point</strong></td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">$0.00</strong></td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">$34.99 lifetime</strong> (or $7/mo)</td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">$9.99 / $19.99</strong></td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">$69.99 – $89.99</strong></td>
+<td class="py-2.5 px-4"><strong class="text-white font-bold">$499 / $1,499</strong></td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Simulation Host</strong></td>
+<td class="py-2.5 px-4">Client Browser Tab</td>
+<td class="py-2.5 px-4">Headless Server (24/7)</td>
+<td class="py-2.5 px-4">Headless Server Arena</td>
+<td class="py-2.5 px-4">Client + Server</td>
+<td class="py-2.5 px-4">Dedicated Institutional Server</td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">World Scale</strong></td>
+<td class="py-2.5 px-4">Radius 5 (91 pores)</td>
+<td class="py-2.5 px-4">Radius 15 (469 pores)</td>
+<td class="py-2.5 px-4">Standardized Arenas</td>
+<td class="py-2.5 px-4">Radius 15 + BooleanGA</td>
+<td class="py-2.5 px-4">Radius 20+ (Custom Scaled)</td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Continuous Epochs</strong></td>
+<td class="py-2.5 px-4">Tab Active Only</td>
+<td class="py-2.5 px-4">100,000+ Ticks in Cloud</td>
+<td class="py-2.5 px-4">Match-based (5k ticks)</td>
+<td class="py-2.5 px-4">100,000+ Ticks</td>
+<td class="py-2.5 px-4">Multi-Semester Persistence</td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">State Persistence</strong></td>
+<td class="py-2.5 px-4">Session Memory</td>
+<td class="py-2.5 px-4">Cloud <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">.silisave</code> Vault</td>
+<td class="py-2.5 px-4">Replay String Archives</td>
+<td class="py-2.5 px-4">Cloud Vault</td>
+<td class="py-2.5 px-4">Central Campus Repository</td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Curriculum Access</strong></td>
+<td class="py-2.5 px-4">Full 12 Volumes (Free)</td>
+<td class="py-2.5 px-4">Full 12 Volumes</td>
+<td class="py-2.5 px-4">Arena Battle Manual</td>
+<td class="py-2.5 px-4">All 24 Combined Vols</td>
+<td class="py-2.5 px-4">Full Suite + Grading Rubrics</td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Arena Battler Access</strong></td>
+<td class="py-2.5 px-4">Spectator Only</td>
+<td class="py-2.5 px-4">3 Practice Matches</td>
+<td class="py-2.5 px-4">Unlimited Arena / League</td>
+<td class="py-2.5 px-4">Unlimited Arena</td>
+<td class="py-2.5 px-4">Campus Tournament Mode</td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Hardware / ASIC Netlist</strong></td>
+<td class="py-2.5 px-4">N/A</td>
+<td class="py-2.5 px-4">N/A</td>
+<td class="py-2.5 px-4">N/A</td>
+<td class="py-2.5 px-4">Included (BooleanGA)</td>
+<td class="py-2.5 px-4">Included (Both Suites)</td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Payment Method</strong></td>
+<td class="py-2.5 px-4">Free Instant Access</td>
+<td class="py-2.5 px-4">Lemon Squeezy MoR</td>
+<td class="py-2.5 px-4">Lemon Squeezy MoR</td>
+<td class="py-2.5 px-4">Lemon Squeezy MoR</td>
+<td class="py-2.5 px-4">Credit Card, Wire, or Net-30 PO</td>
+</tr>
+</tbody></table></div>
+<h3 id="21-the-asymmetric-hybrid-architecture-why-this-model-generates-90-margins-without-server-bankruptcy" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 2.1 The Asymmetric Hybrid Architecture: Why This Model Generates >90% Margins Without Server Bankruptcy</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Many founders bankrupt themselves by building client-server applications where every free user triggers a backend server container (e.g. 100,000 visitors × $0.05 compute = $5,000 AWS bill).</p>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Siliquarium avoids this trap through an <strong class="text-white font-bold">Asymmetric Hybrid Architecture</strong>:</p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT / SCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-3').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-3" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>+---------------------------------------------------------------------------------------------------------+
+|                                    THE ASYMMETRIC HYBRID ARCHITECTURE                                   |
++---------------------------------------------------------------------------------------------------------+
+|                                                                                                         |
+|  [ 1. LOCAL IN-BROWSER MODE (FREE TIER) ]               [ 2. AUTONOMOUS HEADLESS HOST (PRO/INSTITUTION) ]|
+|  * 100% Client-Side Web Workers + WebGL                  * Node.js HeadlessSimulationHost (scripts/serve.mjs)    |
+|  * Static assets served via Cloudflare Pages CDN         * 24/7 background evolution (100,000+ ticks)   |
+|  * Visitor&#x27;s own laptop CPU/GPU executes simulation      * Massive hex lattices (radius 15-20+, 469+ pores) |
+|  * Zero server physics calculations                      * Multi-user Server-Sent Events (SSE) streaming|
+|                                                                                                         |
+|                     │                                                         │                         |
+|                     ▼                                                         ▼                         |
+|        [ IAN&#x27;S CLOUD COMPUTE BILL ]                               [ WHO PAYS FOR THE COMPUTE? ]         |
+|              $0.00 PER MONTH                                            THE CUSTOMER!                   |
+|                                                                                                         |
++---------------------------------------------------------------------------------------------------------+</code></pre>
+</div>
+<h4 id="who-pays-for-compute-across-the-4-deployment-models" class="text-sm font-bold text-amber-300 font-mono mt-4 mb-2">Who Pays for Compute Across the 4 Deployment Models?</h4>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span><strong class="text-white font-bold">Model A: In-Browser Free Lab ($0 / Free Funnel):</strong></span></li>
+</ol>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Runs on the visitor's device. Cloudflare Pages serves the static files with <strong class="text-white font-bold">unlimited free bandwidth</strong>. Ian's compute cost for 500,000 viral visitors is <strong class="text-white font-bold">$0.00</strong>.</p>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span><strong class="text-white font-bold">Model B: Local Workstation Pro ($34.99 Pro Pass):</strong></span></li>
+</ol>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Bio-hackers and researchers run <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">node scripts/serve.mjs</code> on their <strong class="text-white font-bold">own</strong> laptop or home workstation. Their machine does the heavy simulation; the web UI connects to <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">localhost:3000</code> via SSE. Ian collects $34.99; compute cost to Ian: <strong class="text-white font-bold">$0.00</strong>.</p>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span><strong class="text-white font-bold">Model C: University Site License ($499–$1,499/year):</strong></span></li>
+</ol>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">The university IT department deploys our Docker container onto their <strong class="text-white font-bold">own campus server cluster</strong>. 100+ students stream simulations simultaneously. The university pays their own IT and electricity bills; Ian collects recurring software license fees.</p>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">4.</span> <span><strong class="text-white font-bold">Model D: Managed Cloud SaaS ($7/month or Pro Pass):</strong></span></li>
+</ol>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">If you choose to offer hosted cloud instances on a VPS (Hetzner, Fly.io, or Railway), our <strong class="text-white font-bold">Sparse Active Pore Engine</strong> is so fast ($O(N_{\text{active}})$ execution) that a single $10–$20/mo server hosts dozens of concurrent simulations. The customer's $7/mo subscription easily covers compute with <strong class="text-white font-bold">85%–95% net margins</strong>.</p>
+<hr class="my-8 border-slate-800/80">
+<h2 id="3-the-abyssal-arena-gamification-virality-social-dynamics" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 3. "The Abyssal Arena": Gamification, Virality & Social Dynamics</h2>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">The greatest engine of organic software growth is <strong class="text-white font-bold">competition and social comparison</strong>. While solitary simulation is deeply educational, pitting evolved genomes against each other in a public gladiator ring creates irresistible drama and social virality.</p>
+<h3 id="31-arena-mechanics-the-battle-of-the-silicoids" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 3.1 Arena Mechanics: The Battle of the Silicoids</h3>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span><strong class="text-white font-bold">The Inoculation Gate:</strong> A user selects two strains from their <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">BioBank</code> (e.g., an ancestral Generation 0 generalist vs. an evolved Generation 15,000 specialist, or their own strain vs. a friend's strain).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span><strong class="text-white font-bold">The Standardized Biotic Environment:</strong> Battles take place on standardized, sealed hydrothermal arenas:</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">The Sulfur Caldera:</strong> Extreme temperature; rapid, narrow pulses of Streams A and B. High Landauer toggle penalties. Favors ultra-efficient, parsimonious circuits.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">The Midnight Gauntlet:</strong> Scanty, unpredictable nutrient pulses; high basalt competition. Favors motility (treadmilling) and syncytial cytoplasm sharing.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">The Toxic Geyser:</strong> Violently oscillating surges of lethal Stream T. Silicoids without functional <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">NOT</code>-gate shields or coherent feed-forward loops (C-FFLs) undergo rapid thermal lysis.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span><strong class="text-white font-bold">The Victory Conditions:</strong></span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Total Competitive Exclusion:</strong> Complete extinction of the rival clade (trophic starvation or competitive displacement).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Biomass Supremacy:</strong> Highest living cell count at Epoch 5,000.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">Metabolic Superiority:</strong> Maximum net energy tokens harvested per unit Landauer heat dissipated.</span></li>
+</ol>
+<h3 id="32-viral-sharing-spectator-replays" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 3.2 Viral Sharing & Spectator Replays</h3>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>At the end of every Arena duel, Siliquarium automatically compiles a lightweight, compressed match log into a URL fragment:</span></li>
+</ul>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">https://siliquarium.ianohlander.com/#arena=v1_e82a9...</code></p>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>When clicked, this link instantly loads the exact match playback in any browser, rendering the clash of clades with color-coded histological overlays.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>A prominent button allows users to share the replay directly to X (Twitter), Reddit, or Discord:</span></li>
+</ul>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans"><em class="text-slate-200">"My 4-gate Silicoid just wiped out an 8-gate complex clade in The Sulfur Caldera! Watch the replay: [link]"</em></p>
+<h3 id="33-the-geothermal-commander-ccg-tactical-action-deck-the-5-substrate-resource-well" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> 3.3 "The Geothermal Commander" CCG: Tactical Action Deck & The 5-Substrate Resource Well</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">To turn passive observation into an active, strategic game that hooks simulation enthusiasts and CCG players, Siliquarium features <strong class="text-white font-bold">"The Geothermal Commander"</strong>—a tactical card-driven intervention layer where commanders manipulate the abyssal environment in real-time.</p>
+<h4 id="the-5-substrate-resource-well" class="text-sm font-bold text-amber-300 font-mono mt-4 mb-2">The 5-Substrate Resource Well</h4>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Unlike primitive artificial life models with a single generic "food" variable, Siliquarium models a rich, realistic prebiotic geochemical soup:</p>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span><strong class="text-white font-bold">Substrate A (Hydrothermal Proton Stream, $H^+$):</strong> Acidic, reduced fluid driving primary Mitchell proton motive force (PMF).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span><strong class="text-white font-bold">Substrate B (Alkaline Electron Acceptor, $OH^-$):</strong> Ambient alkaline deep-sea fluid serving as terminal electron sink for redox coupling.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span><strong class="text-white font-bold">Substrate C (Refractory Pyrophosphate / Methane):</strong> Lenski Cit+ analog; high-enthalpy carbon/phosphorus donor catabolized exclusively by organisms expressing <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">PORIN_STREAM_C</code> (+3 catalytic energy yield).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">4.</span> <span><strong class="text-white font-bold">Substrate D (Ammonia & Nitrogen Donor, $NH_3$):</strong> Prebiotic nitrogen source catabolized by <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">PORIN_STREAM_D</code> (+2 catalytic energy yield, +1 matter token for accelerated cellular division).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">5.</span> <span><strong class="text-white font-bold">Mineral M (Basalt Rock Matrix):</strong> Solid geological substrate solubilized into bioavailable matter tokens (+1 matter) when cells secrete extracellular siderophore chelators (<code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">SECRETION_CHELATOR</code>).</span></li>
+</ol>
+<h4 id="thermal-action-points-tap-mana-the-7-card-action-deck" class="text-sm font-bold text-amber-300 font-mono mt-4 mb-2">Thermal Action Points (TAP) Mana & The 7-Card Action Deck</h4>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Players manage a regenerable <strong class="text-white font-bold">Thermal Action Points (TAP)</strong> mana pool (100 TAP cap, regenerating +5 TAP every 10 ticks). Players play environmental intervention cards from a tactical hand to assist their clade or disrupt rivals—while all actions strictly obey First-Law energy and mass conservation:</p>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-950/80 shadow-lg">
+<table class="w-full text-left text-xs text-slate-300 border-collapse">
+<thead><tr class="bg-slate-900 border-b border-slate-800 text-slate-200 font-mono text-[11px]">
+<th class="py-3 px-4 font-bold">Card Name</th>
+<th class="py-3 px-4 font-bold">TAP Cost</th>
+<th class="py-3 px-4 font-bold">Tactical Effect & Biophysical Impact</th>
+<th class="py-3 px-4 font-bold">Strategic Clade Counter</th>
+</tr></thead><tbody>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Substrate C Bloom</strong></td>
+<td class="py-2.5 px-4">25 TAP</td>
+<td class="py-2.5 px-4">Injects global pyrophosphate plume for 30 ticks; supercharges organisms expressing <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">PORIN_STREAM_C</code> (+3 energy).</td>
+<td class="py-2.5 px-4">Rapidly fuels Cit+ specialist clades over generalists.</td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Substrate D Bloom</strong></td>
+<td class="py-2.5 px-4">30 TAP</td>
+<td class="py-2.5 px-4">Injects ammonia plume; provides nitrogen donors (+2 energy, +1 matter) to accelerate reproduction.</td>
+<td class="py-2.5 px-4">Catalyzes rapid biomass expansion before rival reaches division threshold.</td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Acoustic Cavitation Shock</strong></td>
+<td class="py-2.5 px-4">20 TAP</td>
+<td class="py-2.5 px-4">Triggers high-amplitude infrasound pressure wave; forces sensory porin transitions (<code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">PORIN_BARO_ACOUSTIC</code>), draining rival energy via Landauer switching costs ($1\text{ token}$/flip) and shearing unshielded membranes.</td>
+<td class="py-2.5 px-4">Drains energy from complex, high-gate rival clades.</td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Photon Flare</strong></td>
+<td class="py-2.5 px-4">15 TAP</td>
+<td class="py-2.5 px-4">Emits thermal blackbody infrared radiation pulse (<code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">PORIN_PHOTON_IR</code>); triggers anticipatory feed-forward loops (C-FFLs) in adapted clades before chemical flux arrives.</td>
+<td class="py-2.5 px-4">Pre-activates metabolic gates in anticipatory lineages.</td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Siderophore Rain</strong></td>
+<td class="py-2.5 px-4">35 TAP</td>
+<td class="py-2.5 px-4">Blankets epicenter coordinate in synthetic chelating ligands; accelerates basalt rock solubilization into matter tokens (+1 matter).</td>
+<td class="py-2.5 px-4">Grants benthic clades rapid matter without waiting for division lag.</td>
+</tr>
+<tr class="bg-slate-900/30 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Tidal Inversion</strong></td>
+<td class="py-2.5 px-4">40 TAP</td>
+<td class="py-2.5 px-4">Flips hydrothermal convection current vectors; sweeps pelagic spores across the lattice into rival basalt niches.</td>
+<td class="py-2.5 px-4">Disrupts clustered rival colonies via long-distance advection.</td>
+</tr>
+<tr class="bg-slate-950/40 border-b border-slate-900 hover:bg-slate-800/40 transition">
+<td class="py-2.5 px-4"><strong class="text-white font-bold">Acid Purge</strong></td>
+<td class="py-2.5 px-4">50 TAP</td>
+<td class="py-2.5 px-4">Floods targeted caldera zone with lethal heavy-metal Stream T toxin; destroys any organism lacking an antitoxin <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">NOT</code>-gate shield or allosteric repressor.</td>
+<td class="py-2.5 px-4">Decimates unshielded monolithic competitors.</td>
+</tr>
+</tbody></table></div>
+<h4 id="monetization-hook-arena-card-expansion-packs" class="text-sm font-bold text-amber-300 font-mono mt-4 mb-2">Monetization Hook: Arena Card Expansion Packs</h4>
+<ul class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>The Base Community edition provides 3 starter cards.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span><strong class="text-white font-bold">The Geothermal Commander Expansion Pass ($9.99)</strong> unlocks all 7 tactical cards, custom deck-building loadouts, and ranked gladiatorial match matchmaking.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono text-xs mt-0.5">•</span> <span>Tournaments and seasonal events keep engagement high, with users sharing tournament replay links across social channels.</span></li>
+</ul>
+<hr class="my-8 border-slate-800/80">
+<h2 id="4-technical-implementation-lemon-squeezy-storefront-verification" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 4. Technical Implementation: Lemon Squeezy Storefront & Verification</h2>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Integrating Lemon Squeezy takes under two hours and requires zero external database dependencies.</p>
+<h3 id="step-1-embed-lemonjs-in-indexhtml" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> Step 1: Embed Lemon.js in <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">index.html</code></h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Add the Lemon Squeezy checkout script to the <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800"><head></code> of <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">index.html</code>:</p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>HTML</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-4').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-4" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>&lt;!-- Lemon Squeezy Turnkey Checkout Overlay --&gt;
+&lt;script src=&quot;https://assets.lemonsqueezy.com/lemon.js&quot; defer&gt;&lt;/script&gt;</code></pre>
+</div>
+<h3 id="step-2-wire-the-pro-checkout-triggers" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> Step 2: Wire the Pro Checkout Triggers</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">In your header, settings drawer, and arena battle modal, attach Lemon Squeezy checkout triggers:</p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>HTML</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-5').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-5" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>&lt;!-- Laboratory Pro Pass Checkout Button --&gt;
+&lt;a href=&quot;https://ianohlander.lemonsqueezy.com/buy/PRO_PASS_VARIANT_ID?embed=1&quot; 
+   class=&quot;lemonsqueezy-button bg-cyan-500 hover:bg-cyan-400 text-black font-extrabold px-4 py-2 rounded-lg shadow transition&quot;&gt;
+  ⚡ Unlock Laboratory Pro ($34.99)
+&lt;/a&gt;
+
+&lt;!-- Abyssal Arena Pass Checkout Button --&gt;
+&lt;a href=&quot;https://ianohlander.lemonsqueezy.com/buy/ARENA_PASS_VARIANT_ID?embed=1&quot; 
+   class=&quot;lemonsqueezy-button bg-amber-500 hover:bg-amber-400 text-black font-extrabold px-4 py-2 rounded-lg shadow transition&quot;&gt;
+  ⚔️ Enter Abyssal Arena ($9.99)
+&lt;/a&gt;
+
+&lt;!-- The Darwinian Master Bundle Button --&gt;
+&lt;a href=&quot;https://ianohlander.lemonsqueezy.com/buy/MASTER_BUNDLE_VARIANT_ID?embed=1&quot; 
+   class=&quot;lemonsqueezy-button bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-black font-extrabold px-4 py-2 rounded-lg shadow transition&quot;&gt;
+  🧬 Master Bundle: BooleanGA + Siliquarium ($69.99)
+&lt;/a&gt;</code></pre>
+</div>
+<h3 id="step-3-client-side-license-verification-pattern-licensemanagerts" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> Step 3: Client-Side License Verification Pattern (<code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">LicenseManager.ts</code>)</h3>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Create a lightweight, resilient client-side license manager that verifies keys against Lemon Squeezy’s public validation endpoint and caches the result locally:</p>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TYPESCRIPT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-6').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-6" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>/**
+ * 🐠 Siliquarium License Management Subsystem
+ * Validates cryptographic license keys via Lemon Squeezy API
+ * and enables offline persistence in localStorage.
+ */
+
+export interface ILicenseStatus {
+  readonly isValid: boolean;
+  readonly tier: &#x27;community&#x27; | &#x27;pro&#x27; | &#x27;arena&#x27; | &#x27;master&#x27; | &#x27;campus&#x27;;
+  readonly customerName?: string;
+  readonly licenseKey?: string;
+  readonly expiresAt?: string;
+}
+
+export class LicenseManager {
+  private static readonly STORAGE_KEY = &#x27;siliquarium_license_token&#x27;;
+  private static readonly API_ENDPOINT = &#x27;https://api.lemonsqueezy.com/v1/licenses/validate&#x27;;
+
+  public static async validateKey(licenseKey: string): Promise&lt;ILicenseStatus&gt; {
+    const trimmed = licenseKey.trim();
+    if (!trimmed) {
+      return { isValid: false, tier: &#x27;community&#x27; };
+    }
+
+    try {
+      const response = await fetch(this.API_ENDPOINT, {
+        method: &#x27;POST&#x27;,
+        headers: {
+          &#x27;Accept&#x27;: &#x27;application/json&#x27;,
+          &#x27;Content-Type&#x27;: &#x27;application/x-www-form-urlencoded&#x27;
+        },
+        body: new URLSearchParams({ license_key: trimmed })
+      });
+
+      const data = await response.json();
+
+      if (data.valid) {
+        const productName = data.meta?.product_name?.toLowerCase() || &#x27;&#x27;;
+        let tier: ILicenseStatus[&#x27;tier&#x27;] = &#x27;pro&#x27;;
+
+        if (productName.includes(&#x27;master&#x27;)) tier = &#x27;master&#x27;;
+        else if (productName.includes(&#x27;arena&#x27;)) tier = &#x27;arena&#x27;;
+        else if (productName.includes(&#x27;site&#x27;) || productName.includes(&#x27;campus&#x27;)) tier = &#x27;campus&#x27;;
+
+        const status: ILicenseStatus = {
+          isValid: true,
+          tier,
+          customerName: data.meta?.customer_name,
+          licenseKey: trimmed,
+          expiresAt: data.license_key?.expires_at
+        };
+
+        // Cache valid license token locally
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(status));
+        return status;
+      }
+    } catch (err) {
+      console.warn(&#x27;[LicenseManager] Network error during validation; checking cache&#x27;, err);
+    }
+
+    // Fallback: Check cached validation token
+    const cached = localStorage.getItem(this.STORAGE_KEY);
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+        if (parsed.licenseKey === trimmed &amp;&amp; parsed.isValid) {
+          return parsed;
+        }
+      } catch (e) {
+        // invalid cache
+      }
+    }
+
+    return { isValid: false, tier: &#x27;community&#x27; };
+  }
+
+  public static getActiveStatus(): ILicenseStatus {
+    const cached = localStorage.getItem(this.STORAGE_KEY);
+    if (cached) {
+      try {
+        return JSON.parse(cached);
+      } catch (e) {}
+    }
+    return { isValid: false, tier: &#x27;community&#x27; };
+  }
+}</code></pre>
+</div>
+<hr class="my-8 border-slate-800/80">
+<h2 id="5-university-procurement-selling-institutional-site-licenses-499-1499" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 5. University Procurement: Selling Institutional Site Licenses ($499 – $1,499)</h2>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Academic institutions represent high-margin, sticky revenue, but professors rarely pay with corporate credit cards. They operate via departmental budgets, purchase orders (POs), and Net-30 invoicing.</p>
+<h3 id="the-institutional-procurement-workflow" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> The Institutional Procurement Workflow:</h3>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span><strong class="text-white font-bold">The Inbound Inquiry:</strong> A professor of Systems Biology or Computer Science uses the free simulator in class and wants campus-wide deployment.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span><strong class="text-white font-bold">The Quote & W-9 Generation:</strong> You provide an official quote ($499/year for up to 500 students or $1,499 for perpetual department license) alongside a standard IRS Form W-9 (available pre-filled in your records).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span><strong class="text-white font-bold">The Purchase Order (PO):</strong> The university procurement office issues a PO number (e.g., <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">PO-NAU-2026-9481</code>).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">4.</span> <span><strong class="text-white font-bold">License Activation:</strong> You issue a dedicated Institutional License Key configured in Lemon Squeezy with 500 activations.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">5.</span> <span><strong class="text-white font-bold">Net-30 Invoice Payment:</strong> The university wires the payment or mails a corporate check within 30 days.</span></li>
+</ol>
+<h3 id="standard-institutional-quote-template" class="text-base sm:text-lg font-bold text-cyan-300 font-mono mt-6 mb-3 flex items-center gap-2"><span class="text-slate-500">###</span> Standard Institutional Quote Template:</h3>
+
+<div class="relative my-5 rounded-xl border border-slate-800 bg-[#06090e] shadow-xl overflow-hidden group">
+  <div class="flex items-center justify-between px-4 py-2 bg-slate-900/80 border-b border-slate-800 text-xs font-mono text-slate-400">
+    <span class="flex items-center gap-1.5 font-bold text-cyan-400">
+      <span>💻</span> <span>TEXT</span>
+    </span>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('snippet-7').innerText); alert('Copied to clipboard!');" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-600 hover:text-black text-slate-300 font-mono text-[11px] transition flex items-center gap-1">
+      <span>📋</span> <span>Copy Code</span>
+    </button>
+  </div>
+  <pre id="snippet-7" class="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"><code>================================================================================
+INSTITUTIONAL QUOTE / STATEMENT OF WORK: SILIQUARIUM ACADEMIC LICENSE
+================================================================================
+
+Date: October 2026
+Vendor: Ian Ohlander / Siliquarium Commercial Operations
+Product: Siliquarium Institutional Site License &amp; Headless Simulation Server
+Billing Cycle: Annual Subscription ($499.00 USD) or Perpetual ($1,499.00 USD)
+
+Deliverables:
+1. Campus-Wide Unlimited Student Access to Siliquarium Laboratory Pro.
+2. Dockerized HeadlessSimulationHost Server Container for on-premise lab hosting.
+3. Complete 5-Practicum 90-Minute Undergraduate Systems Biology Lab Manual.
+4. Auto-Grading Harness &amp; Student Verification Checkpoint Scripts.
+5. Socratic Seminar Instructor Guide &amp; Primary Literature Companion.
+6. Multi-Seat Institutional License Key (up to 500 concurrent activations).
+
+Payment Terms: Net 30 Days from invoice issuance.
+Remittance: ACH Bank Transfer, University Purchasing Card, or Official Check.
+W-9 Form: Furnished upon request.
+
+Authorized Signature: Ian Ohlander, Chief Architect
+================================================================================</code></pre>
+</div>
+<hr class="my-8 border-slate-800/80">
+<h2 id="6-summary-your-turnkey-launch-plan" class="text-xl sm:text-2xl font-bold text-white font-mono mt-10 mb-4 border-b border-slate-800/80 pb-2 flex items-center gap-2.5"><span class="text-emerald-400">##</span> 6. Summary: Your Turnkey Launch Plan</h2>
+<ol class="my-3 space-y-1.5 text-xs text-slate-300 list-none pl-2">
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">1.</span> <span><strong class="text-white font-bold">Sign up at Lemon Squeezy</strong> (takes 10 minutes).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">2.</span> <span><strong class="text-white font-bold">Create the 5 products</strong> ($34.99 Pro, $9.99 Arena, $69.99 Master Bundle, $499 University).</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">3.</span> <span><strong class="text-white font-bold">Drop the Lemon.js embed into <code class="px-1.5 py-0.5 rounded bg-slate-900 text-cyan-300 font-mono text-[11px] border border-slate-800">index.html</code></strong>.</span></li>
+<li class="flex items-start gap-2"><span class="text-cyan-400 font-mono font-bold text-xs">4.</span> <span><strong class="text-white font-bold">Collect 95% net margins</strong> deposited directly to your bank account with zero sales tax liability.</span></li>
+</ol>
+<p class="my-3 text-xs md:text-sm text-slate-300 leading-relaxed font-sans">Next, read <strong class="text-white font-bold"><a href="02_POSITIONING_AND_MESSAGING_BIBLE.md" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition font-medium">02_POSITIONING_AND_MESSAGING_BIBLE.md</a></strong> to see the exact copy, elevator pitches, and Richard Dawkins narrative that converts visitors into paying customers.</p>
+      </article>
+
+      <!-- Bottom Navigation Footer -->
+      <div class="mt-12 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <a href="00_executive_summary_and_quickstart.html" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5 text-xs font-mono"><span>&larr;</span> <span>Step 00</span></a>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="index.html" class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-mono transition">
+            🏠 Back to Dashboard
+          </a>
+          <a href="02_positioning_and_messaging_bible.html" class="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-black font-extrabold transition flex items-center gap-1.5 text-xs font-mono shadow"><span>Step 02</span> <span>&rarr;</span></a>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Master Footer -->
+  <footer class="bg-[#050811] border-t border-[#1e293b] py-8 text-center text-xs text-gray-500 font-mono mt-16">
+    <div class="max-w-7xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-bold">Siliquarium &bull; Open-Ended Digital Life &amp; Silicon Abiogenesis Platform</p>
+      <p class="text-slate-500">Commercial Architecture &amp; Hosted SaaS Blueprint by Jack "The Closer" Vance.</p>
+      <p class="text-slate-600 text-[11px]">&copy; 2026 Ian Ohlander. All rights reserved. Strict First-Law Conservation &bull; The Epistemic Cut &bull; Uri Alon Motifs.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 450" width="980" height="450" class="w-full h-auto font-sans">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1222" />
+      <stop offset="100%" stop-color="#070a14" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131c31" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#6b21a8" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+    </marker>
+
+    <!-- Glow Filters -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-emerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
+  </style>
+
+  <!-- Canvas Background -->
+  <rect width="980" height="450" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  
+  <g transform="translate(30, 34)">
+    <text class="title">Figure 16.1: Trophic Predator (Vampirococcus vorax)</text>
+    <text y="20" class="subtitle">Direct heterotrophic prey lysis, enzymatic siphoning &amp; predatory biomass theft</text>
+  </g>
+
+  <!-- Left: Predation Mechanics -->
+  <g transform="translate(30, 70)">
+    <rect width="445" height="355" rx="12" fill="#200a12" stroke="#f43f5e" stroke-width="1.5" />
+    <rect x="16" y="14" width="240" height="24" rx="4" fill="#9f1239" />
+    <text x="26" y="30" class="badge" fill="#ffe4e6">LYTIC TROPHIC PREDATION</text>
+    <text x="270" y="30" class="label" fill="#fb7185">Enzymatic Lysis Siphon</text>
+
+    <!-- Schematic: Predator striking adjacent prey -->
+    <g transform="translate(20, 48)">
+      <!-- Predator Pore -->
+      <polygon points="35,10 70,10 87,38 70,66 35,66 18,38" fill="#881337" stroke="#f43f5e" stroke-width="2.5" />
+      <text x="52" y="34" class="code" fill="#ffffff" font-weight="bold" text-anchor="middle">Predator</text>
+      <text x="52" y="48" class="code" font-size="8.5" fill="#facc15" text-anchor="middle">Carnivore</text>
+
+      <!-- Crimson Enzymatic Siphon Beam -->
+      <path d="M 87 38 L 165 38" stroke="#f43f5e" stroke-width="3" marker-end="url(#arrow-rose)" />
+      <text x="126" y="28" class="code" font-size="8.5" fill="#fda4af" text-anchor="middle">Lytic Siphon</text>
+
+      <!-- Prey Pore (Lysing) -->
+      <polygon points="180,10 215,10 232,38 215,66 180,66 163,38" fill="#1e293b" stroke="#64748b" stroke-width="2" stroke-dasharray="3 2" />
+      <text x="197" y="34" class="code" fill="#94a3b8" text-anchor="middle">Prey Pore</text>
+      <text x="197" y="48" class="code" font-size="8.5" fill="#f43f5e" text-anchor="middle">Lysed (0T)</text>
+
+      <!-- Harvest Box -->
+      <rect x="255" y="15" width="140" height="48" rx="6" fill="#4c0519" stroke="#f43f5e" stroke-width="1.5" />
+      <text x="265" y="34" class="code" font-size="10" fill="#facc15" font-weight="bold">+25T Drained</text>
+      <text x="265" y="50" class="subtitle" font-size="8.5">Prey cytoplasm reclaimed</text>
+
+      <g transform="translate(10, 80)">
+        <text x="0" y="20" class="code" font-size="9" fill="#fda4af">Biomass Flux: ΔE_predator = +η_trophic · E_prey - C_strike</text>
+        <text x="0" y="36" class="subtitle" font-size="9">Breaches mineral septum of adjacent prey; digests nucleic tape</text>
+      </g>
+    </g>
+
+    <!-- Trophic Thermodynamics Box -->
+    <g transform="translate(16, 175)">
+      <rect width="413" height="78" rx="8" fill="#14060c" stroke="#4c0519" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#fecdd3">HETEROTROPHIC TROPHIC EFFICIENCY</text>
+      <text x="14" y="38" class="code" font-size="9" fill="#facc15">Lindeman Efficiency: η ≈ 20% conversion of prey biomass into battery</text>
+      <text x="14" y="54" class="subtitle" font-size="9">Unlocks carnivory: organisms survive independent of chimney redox flux</text>
+      <text x="14" y="70" class="code" font-size="8.8" fill="#fda4af">Controls overpopulated biofilms; drives evolutionary arms races</text>
+    </g>
+
+    <!-- Callout -->
+    <g transform="translate(16, 265)">
+      <rect width="413" height="65" rx="8" fill="#4c0519" stroke="#9f1239" stroke-width="1" />
+      <text x="14" y="20" class="label-bold" fill="#fda4af">Evolution of Secondary Consumers</text>
+      <text x="14" y="38" class="subtitle" font-size="9.5">• Spontaneous emergence of predation transforms chemistry into an ecosystem</text>
+      <text x="14" y="54" class="code" font-size="9" fill="#facc15">★ Landmark: Dawkins (1976) The Selfish Gene &amp; Lindeman (1942)</text>
+    </g>
+  </g>
+
+  <!-- Right: Lotka-Volterra Population Cycles -->
+  <g transform="translate(505, 70)">
+    <rect width="445" height="355" rx="12" fill="#200a12" stroke="#f43f5e" stroke-width="1.5" />
+    <rect x="16" y="14" width="240" height="24" rx="4" fill="#9f1239" />
+    <text x="26" y="30" class="badge" fill="#ffe4e6">LOTKA-VOLTERRA DYNAMICS</text>
+    <text x="270" y="30" class="label" fill="#fb7185">Predator-Prey Waves</text>
+
+    <!-- Graph: Predator-Prey Oscillation -->
+    <g transform="translate(16, 48)">
+      <rect width="413" height="120" rx="8" fill="#14060c" stroke="#4c0519" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#fecdd3">POPULATION ABUNDANCE OSCILLATIONS (90° LAG)</text>
+
+      <!-- Prey wave (Green) and Predator wave (Red) -->
+      <path d="M 30.0 65.0 L 32.5 61.1 L 35.0 57.3 L 37.5 53.7 L 40.0 50.3 L 42.5 47.3 L 45.0 44.8 L 47.5 42.7 L 50.0 41.2 L 52.5 40.3 L 55.0 40.0 L 57.5 40.3 L 60.0 41.2 L 62.5 42.7 L 65.0 44.8 L 67.5 47.3 L 70.0 50.3 L 72.5 53.7 L 75.0 57.3 L 77.5 61.1 L 80.0 65.0 L 82.5 68.9 L 85.0 72.7 L 87.5 76.3 L 90.0 79.7 L 92.5 82.7 L 95.0 85.2 L 97.5 87.3 L 100.0 88.8 L 102.5 89.7 L 105.0 90.0 L 107.5 89.7 L 110.0 88.8 L 112.5 87.3 L 115.0 85.2 L 117.5 82.7 L 120.0 79.7 L 122.5 76.3 L 125.0 72.7 L 127.5 68.9 L 130.0 65.0 L 132.5 61.1 L 135.0 57.3 L 137.5 53.7 L 140.0 50.3 L 142.5 47.3 L 145.0 44.8 L 147.5 42.7 L 150.0 41.2 L 152.5 40.3 L 155.0 40.0 L 157.5 40.3 L 160.0 41.2 L 162.5 42.7 L 165.0 44.8 L 167.5 47.3 L 170.0 50.3 L 172.5 53.7 L 175.0 57.3 L 177.5 61.1 L 180.0 65.0 L 182.5 68.9 L 185.0 72.7 L 187.5 76.3 L 190.0 79.7 L 192.5 82.7 L 195.0 85.2 L 197.5 87.3 L 200.0 88.8 L 202.5 89.7 L 205.0 90.0 L 207.5 89.7 L 210.0 88.8 L 212.5 87.3 L 215.0 85.2 L 217.5 82.7 L 220.0 79.7 L 222.5 76.3 L 225.0 72.7 L 227.5 68.9 L 230.0 65.0 L 232.5 61.1 L 235.0 57.3 L 237.5 53.7 L 240.0 50.3 L 242.5 47.3 L 245.0 44.8 L 247.5 42.7 L 250.0 41.2 L 252.5 40.3 L 255.0 40.0 L 257.5 40.3 L 260.0 41.2 L 262.5 42.7 L 265.0 44.8 L 267.5 47.3 L 270.0 50.3 L 272.5 53.7 L 275.0 57.3 L 277.5 61.1 L 280.0 65.0 L 282.5 68.9 L 285.0 72.7 L 287.5 76.3 L 290.0 79.7 L 292.5 82.7 L 295.0 85.2 L 297.5 87.3 L 300.0 88.8 L 302.5 89.7 L 305.0 90.0 L 307.5 89.7 L 310.0 88.8 L 312.5 87.3 L 315.0 85.2 L 317.5 82.7 L 320.0 79.7 L 322.5 76.3 L 325.0 72.7 L 327.5 68.9 L 330.0 65.0 L 332.5 61.1 L 335.0 57.3" stroke="#10b981" stroke-width="2" fill="none" />
+      <path d="M 30.0 87.0 L 32.5 86.7 L 35.0 85.9 L 37.5 84.6 L 40.0 82.8 L 42.5 80.6 L 45.0 77.9 L 47.5 75.0 L 50.0 71.8 L 52.5 68.4 L 55.0 65.0 L 57.5 61.6 L 60.0 58.2 L 62.5 55.0 L 65.0 52.1 L 67.5 49.4 L 70.0 47.2 L 72.5 45.4 L 75.0 44.1 L 77.5 43.3 L 80.0 43.0 L 82.5 43.3 L 85.0 44.1 L 87.5 45.4 L 90.0 47.2 L 92.5 49.4 L 95.0 52.1 L 97.5 55.0 L 100.0 58.2 L 102.5 61.6 L 105.0 65.0 L 107.5 68.4 L 110.0 71.8 L 112.5 75.0 L 115.0 77.9 L 117.5 80.6 L 120.0 82.8 L 122.5 84.6 L 125.0 85.9 L 127.5 86.7 L 130.0 87.0 L 132.5 86.7 L 135.0 85.9 L 137.5 84.6 L 140.0 82.8 L 142.5 80.6 L 145.0 77.9 L 147.5 75.0 L 150.0 71.8 L 152.5 68.4 L 155.0 65.0 L 157.5 61.6 L 160.0 58.2 L 162.5 55.0 L 165.0 52.1 L 167.5 49.4 L 170.0 47.2 L 172.5 45.4 L 175.0 44.1 L 177.5 43.3 L 180.0 43.0 L 182.5 43.3 L 185.0 44.1 L 187.5 45.4 L 190.0 47.2 L 192.5 49.4 L 195.0 52.1 L 197.5 55.0 L 200.0 58.2 L 202.5 61.6 L 205.0 65.0 L 207.5 68.4 L 210.0 71.8 L 212.5 75.0 L 215.0 77.9 L 217.5 80.6 L 220.0 82.8 L 222.5 84.6 L 225.0 85.9 L 227.5 86.7 L 230.0 87.0 L 232.5 86.7 L 235.0 85.9 L 237.5 84.6 L 240.0 82.8 L 242.5 80.6 L 245.0 77.9 L 247.5 75.0 L 250.0 71.8 L 252.5 68.4 L 255.0 65.0 L 257.5 61.6 L 260.0 58.2 L 262.5 55.0 L 265.0 52.1 L 267.5 49.4 L 270.0 47.2 L 272.5 45.4 L 275.0 44.1 L 277.5 43.3 L 280.0 43.0 L 282.5 43.3 L 285.0 44.1 L 287.5 45.4 L 290.0 47.2 L 292.5 49.4 L 295.0 52.1 L 297.5 55.0 L 300.0 58.2 L 302.5 61.6 L 305.0 65.0 L 307.5 68.4 L 310.0 71.8 L 312.5 75.0 L 315.0 77.9 L 317.5 80.6 L 320.0 82.8 L 322.5 84.6 L 325.0 85.9 L 327.5 86.7 L 330.0 87.0 L 332.5 86.7 L 335.0 85.9" stroke="#f43f5e" stroke-width="2" fill="none" />
+
+      <!-- Legend -->
+      <rect x="345" y="28" width="60" height="75" rx="4" fill="#1f0a12" stroke="#4c0519" stroke-width="0.8" />
+      <circle cx="353" cy="45" r="3.5" fill="#10b981" />
+      <text x="361" y="48" class="code" font-size="8.5" fill="#10b981">Prey</text>
+      <circle cx="353" cy="68" r="3.5" fill="#f43f5e" />
+      <text x="361" y="71" class="code" font-size="8.5" fill="#f43f5e">Predator</text>
+    </g>
+
+    <!-- Arms Race Box -->
+    <g transform="translate(16, 175)">
+      <rect width="413" height="78" rx="8" fill="#14060c" stroke="#4c0519" stroke-width="1" />
+      <text x="14" y="20" class="badge" fill="#fecdd3">RED QUEEN CO-EVOLUTIONARY ARMS RACE</text>
+      <text x="14" y="38" class="code" font-size="8.8" fill="#facc15">Van Valen (1973) Red Queen: Armored prey vs. high-velocity siphons</text>
+      <text x="14" y="54" class="subtitle" font-size="9">Accelerates innovation rate 10x faster than abiotic selection alone</text>
+      <text x="14" y="70" class="code" font-size="8.8" fill="#fda4af">Drives diversification into specialized offensive and defensive clades</text>
+    </g>
+
+    <!-- Callout -->
+    <g transform="translate(16, 265)">
+      <rect width="413" height="65" rx="8" fill="#4c0519" stroke="#9f1239" stroke-width="1" />
+      <text x="14" y="20" class="label-bold" fill="#fda4af">Ecological Apex Principle</text>
+      <text x="14" y="38" class="subtitle" font-size="9.5">• Predation prevents monotypic blooms, enforcing biodiversity on the seafloor</text>
+      <text x="14" y="54" class="code" font-size="9" fill="#facc15">★ Creates multi-tiered food webs from inorganic mineral precursors</text>
+    </g>
+  </g>
+
+</svg>

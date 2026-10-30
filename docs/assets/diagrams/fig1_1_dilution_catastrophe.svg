@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" width="880" height="360" class="w-full h-auto font-sans">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 370" width="940" height="370" class="w-full h-auto font-sans">
   <defs>
     <!-- Background Gradients -->
     <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -62,86 +63,90 @@
   </defs>
 
   <style>
-    .title { font-family: 'Cascadia Code', Consolas, monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
-    .subtitle { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; fill: #94a3b8; }
-    .label { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; fill: #cbd5e1; }
-    .label-bold { font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
-    .code { font-family: 'Cascadia Code', Consolas, monospace; font-size: 10.5px; fill: #00e5ff; }
-    .badge { font-family: 'Cascadia Code', Consolas, monospace; font-size: 9.5px; font-weight: bold; }
+    .title { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 15px; font-weight: bold; fill: #f8fafc; }
+    .subtitle { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; fill: #94a3b8; }
+    .label { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11px; fill: #cbd5e1; }
+    .label-bold { font-family: system-ui, -apple-system, 'Inter', sans-serif; font-size: 11.5px; font-weight: bold; fill: #f8fafc; }
+    .code { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 10.5px; fill: #00e5ff; }
+    .badge { font-family: ui-monospace, 'Cascadia Code', Consolas, 'SF Mono', monospace; font-size: 9.5px; font-weight: bold; letter-spacing: 0.5px; }
   </style>
 
   <!-- Canvas Background -->
-  <rect width="880" height="360" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
+  <rect width="940" height="370" rx="16" fill="url(#panelGrad)" stroke="#1e293b" stroke-width="1.5" />
 
   
   <!-- Header -->
-  <g transform="translate(30, 35)">
+  <g transform="translate(30, 34)">
     <text class="title">Figure 1.1: The Dilution Catastrophe vs. Alkaline Hydrothermal Micro-Pores</text>
     <text y="20" class="subtitle">Why open-ocean abiogenesis is thermodynamically impossible without inorganic micro-compartmentation</text>
   </g>
 
   <!-- Left: Open Ocean -->
-  <g transform="translate(40, 75)">
-    <rect width="380" height="250" rx="12" fill="#090d16" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="4 2" />
-    <rect x="15" y="15" width="130" height="24" rx="6" fill="#4c0519" stroke="#f43f5e" stroke-width="1" />
-    <text x="25" y="31" class="badge" fill="#fecdd3">OPEN HADEAN OCEAN</text>
-    <text x="155" y="31" class="label" fill="#f43f5e">Dilution Catastrophe</text>
+  <g transform="translate(30, 75)">
+    <rect width="425" height="265" rx="12" fill="#090d16" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="4 2" />
+    <rect x="18" y="15" width="150" height="24" rx="6" fill="#4c0519" stroke="#f43f5e" stroke-width="1" />
+    <text x="28" y="31" class="badge" fill="#fecdd3">OPEN HADEAN OCEAN</text>
+    <text x="180" y="31" class="label" fill="#f43f5e">Dilution Catastrophe</text>
 
-    <!-- Drifting Monomers in open water -->
-    <circle cx="80" cy="110" r="14" fill="#0284c7" opacity="0.3" />
-    <circle cx="80" cy="110" r="8" fill="#38bdf8" />
-    <text x="76" y="114" class="code" fill="#000" font-weight="bold">A</text>
-    <path d="M 95 105 Q 140 80 180 95" stroke="#38bdf8" stroke-width="1.5" fill="none" stroke-dasharray="3 3" marker-end="url(#arrow-cyan)" />
-    <text x="190" y="100" class="subtitle" font-size="10">Drifts into infinity</text>
+    <!-- Drifting Monomer A -->
+    <circle cx="75" cy="95" r="14" fill="#0284c7" opacity="0.3" />
+    <circle cx="75" cy="95" r="8" fill="#38bdf8" />
+    <text x="71" y="99" class="code" fill="#000" font-weight="bold">A</text>
+    <path d="M 90 90 Q 140 68 190 80" stroke="#38bdf8" stroke-width="1.5" fill="none" stroke-dasharray="3 3" marker-end="url(#arrow-cyan)" />
+    <text x="200" y="84" class="subtitle" font-size="10">Drifts into infinity</text>
 
-    <circle cx="300" cy="190" r="14" fill="#10b981" opacity="0.3" />
-    <circle cx="300" cy="190" r="8" fill="#4ade80" />
-    <text x="296" y="194" class="code" fill="#000" font-weight="bold">B</text>
-    <path d="M 285 190 Q 230 220 180 200" stroke="#4ade80" stroke-width="1.5" fill="none" stroke-dasharray="3 3" marker-end="url(#arrow-emerald)" />
+    <!-- Drifting Monomer B (positioned away from callout) -->
+    <circle cx="340" cy="110" r="14" fill="#10b981" opacity="0.3" />
+    <circle cx="340" cy="110" r="8" fill="#4ade80" />
+    <text x="336" y="114" class="code" fill="#000" font-weight="bold">B</text>
+    <path d="M 330 100 Q 305 65 285 52" stroke="#4ade80" stroke-width="1.5" fill="none" stroke-dasharray="3 3" marker-end="url(#arrow-emerald)" />
+    <text x="215" y="48" class="subtitle" font-size="10">Disperses unbounded</text>
 
-    <!-- Math Callout -->
-    <rect x="25" y="160" width="220" height="60" rx="8" fill="#1e101a" stroke="#881337" stroke-width="1" />
-    <text x="35" y="180" class="code" fill="#f43f5e">[A] → 0,  [B] → 0</text>
-    <text x="35" y="198" class="label" font-size="10.5">Reaction Rate: v = k · [A][B] = 0</text>
-    <text x="35" y="212" class="subtitle" font-size="9.5">Molecules never meet; free energy lost!</text>
+    <!-- Math Callout Box -->
+    <rect x="25" y="150" width="375" height="66" rx="8" fill="#1e101a" stroke="#881337" stroke-width="1" />
+    <text x="38" y="171" class="code" fill="#f43f5e">[A] → 0,  [B] → 0  (Infinite Dilution)</text>
+    <text x="38" y="190" class="label" font-size="10.5">Reaction Rate: v = k · [A][B] = 0 s⁻¹</text>
+    <text x="38" y="205" class="subtitle" font-size="9.5">Molecules never collide; free energy lost to entropy!</text>
 
-    <rect x="25" y="225" width="330" height="15" fill="none" />
-    <text x="190" y="238" class="label" text-anchor="middle" fill="#fda4af">Entropy disperses organic polymers before replication</text>
+    <text x="212" y="244" class="label" text-anchor="middle" fill="#fda4af">Entropy disperses organic polymers before replication can ignite</text>
   </g>
 
   <!-- Right: Alkaline Vent Micro-Pores -->
-  <g transform="translate(460, 75)">
-    <rect width="380" height="250" rx="12" fill="#090d16" stroke="#00e5ff" stroke-width="1.5" />
-    <rect x="15" y="15" width="165" height="24" rx="6" fill="#083344" stroke="#00e5ff" stroke-width="1" />
-    <text x="25" y="31" class="badge" fill="#bae6fd">HYDROTHERMAL FOAM</text>
-    <text x="190" y="31" class="label" fill="#00e5ff">Basalt Micro-Pores</text>
+  <g transform="translate(485, 75)">
+    <rect width="425" height="265" rx="12" fill="#090d16" stroke="#00e5ff" stroke-width="1.5" />
+    <rect x="18" y="15" width="165" height="24" rx="6" fill="#083344" stroke="#00e5ff" stroke-width="1" />
+    <text x="28" y="31" class="badge" fill="#bae6fd">HYDROTHERMAL FOAM</text>
+    <text x="195" y="31" class="label" fill="#00e5ff">Basalt Micro-Pores</text>
 
-    <!-- Mineral honeycomb micro-cavities -->
-    <polygon points="120,80 160,80 180,115 160,150 120,150 100,115" fill="#132238" stroke="#38bdf8" stroke-width="1.5" />
-    <polygon points="180,115 220,115 240,150 220,185 180,185 160,150" fill="#132238" stroke="#38bdf8" stroke-width="1.5" />
-    <polygon points="120,150 160,150 180,185 160,220 120,220 100,185" fill="#0f2942" stroke="#00e5ff" stroke-width="2" filter="url(#glow-cyan)" />
+    <!-- Mineral honeycomb micro-cavities (bounded within x=25..135 to prevent text collisions) -->
+    <!-- Cavity 1 (upper-left) -->
+    <polygon points="55,75 85,75 100,101 85,127 55,127 40,101" fill="#132238" stroke="#38bdf8" stroke-width="1.5" />
+    <!-- Cavity 2 (lower-left) -->
+    <polygon points="55,135 85,135 100,161 85,187 55,187 40,161" fill="#132238" stroke="#38bdf8" stroke-width="1.5" />
+    <!-- Cavity 3 (active catalytic chamber) -->
+    <polygon points="95,105 125,105 140,131 125,157 95,157 80,131" fill="#0f2942" stroke="#00e5ff" stroke-width="2" filter="url(#glow-cyan)" />
 
-    <!-- Trapped and concentrated reactants -->
-    <circle cx="135" cy="180" r="7" fill="#38bdf8" />
-    <text x="132" y="184" class="code" fill="#000" font-weight="bold" font-size="9">A</text>
-    <circle cx="150" cy="180" r="7" fill="#4ade80" />
-    <text x="147" y="184" class="code" fill="#000" font-weight="bold" font-size="9">B</text>
+    <!-- Trapped and concentrated reactants inside Cavity 3 -->
+    <circle cx="102" cy="131" r="6.5" fill="#38bdf8" />
+    <text x="99" y="135" class="code" fill="#000" font-weight="bold" font-size="8.5">A</text>
+    <circle cx="118" cy="131" r="6.5" fill="#4ade80" />
+    <text x="115" y="135" class="code" fill="#000" font-weight="bold" font-size="8.5">B</text>
 
-    <!-- Reaction spark -->
-    <polygon points="142,168 145,174 151,175 146,179 148,185 142,181 137,185 139,179 134,175 140,174" fill="#facc15" />
+    <!-- Catalytic Reaction Spark -->
+    <polygon points="110,121 113,126 119,127 114,131 116,137 110,133 105,137 107,131 102,127 108,126" fill="#facc15" />
 
-    <!-- Features -->
-    <g transform="translate(210, 85)">
+    <!-- Features Callout Card (starts at x=155, leaving ample breathing room) -->
+    <g transform="translate(155, 62)">
       <text class="label-bold" fill="#38bdf8">Nature's First Cell Walls</text>
-      <text y="18" class="label" font-size="10.5">• Pore diameter: 10 – 50 μm</text>
-      <text y="34" class="label" font-size="10.5">• FeS / silica inorganic walls</text>
-      <text y="50" class="label" font-size="10.5">• Thermal siphoning concentration</text>
-      <rect x="0" y="65" width="150" height="50" rx="6" fill="#042f2e" stroke="#10b981" stroke-width="1" />
-      <text x="10" y="85" class="code" fill="#4ade80">CONCENTRATION: > 1,000,000×</text>
-      <text x="10" y="102" class="subtitle" font-size="10">Reaction cascades spark!</text>
+      <text y="19" class="label" font-size="10.5">• Pore diameter: 10 – 50 μm</text>
+      <text y="36" class="label" font-size="10.5">• FeS / silica inorganic walls</text>
+      <text y="53" class="label" font-size="10.5">• Thermal siphoning concentration</text>
+      <rect x="0" y="68" width="245" height="52" rx="6" fill="#042f2e" stroke="#10b981" stroke-width="1" />
+      <text x="12" y="89" class="code" fill="#4ade80" font-weight="bold">CONCENTRATION: &gt; 1,000,000×</text>
+      <text x="12" y="106" class="subtitle" font-size="10">Reaction cascades spark autopoietically!</text>
     </g>
 
-    <text x="190" y="238" class="label" text-anchor="middle" fill="#67e8f9">Trapped in basalt foam, prebiotic enzymes replicate autopoietically</text>
+    <text x="212" y="244" class="label" text-anchor="middle" fill="#67e8f9">Trapped in basalt foam, prebiotic enzymes replicate autopoietically</text>
   </g>
 
 </svg>

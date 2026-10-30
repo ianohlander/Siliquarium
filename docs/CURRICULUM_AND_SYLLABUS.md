@@ -3,6 +3,12 @@
 
 ---
 
+> [!NOTE]
+> ### ✨ Dedication
+> *Dedicated to **Anne Orme**, whose inspiring, foundational conversations ignited the passion to model the beauty and uncompromising logic of real biological evolution.*
+
+---
+
 ## 1. Course Architecture & Modular Portal
 
 To prevent vertical scrolling fatigue and provide a structured, college-level learning trajectory, this course is divided into **four core theoretical units** and an **interactive student laboratory manual**. Each module is published as an independent chapter equipped with high-resolution visual scaffolding, worked toy traces, BooleanGA Equation Decoders, and conceptual misconception immunity.
@@ -13,7 +19,10 @@ To prevent vertical scrolling fatigue and provide a structured, college-level le
 | **Unit 2: The Logic of Life** | Primitive Catalysts (`AND`, `OR`, `NOT`), XOR Impossibility Proof, Codon Table, Landauer Bound | Lab 2: Landauer Dissipation; Lab 3: Toxin Shielding | [Open Unit 2 →](curriculum/unit2_logic_of_life.md) |
 | **Unit 3: Systems Biology Motifs** | Uri Alon Motifs (Latches, Repressilator, FFLs), Weisfeiler-Lehman Graph Hashes | Real-Time Milestone Detection & State Hysteresis | [Open Unit 3 →](curriculum/unit3_systems_biology_motifs.md) |
 | **Unit 4: Evolutionary Dynamics** | Kimura Neutral Drift, Ohno Duplications, Homology vs Homoplasy, Lenski LTEE | Lab 4: God-Suite Perturbations; Lab 5: Flight Recorder Autopsy | [Open Unit 4 →](curriculum/unit4_evolutionary_dynamics.md) |
+| **Volume 01: Morphology** | Multicellular Topologies, Maximal 3-Cliques ($K_3$), Betti Numbers, Kleiber's Law | In-Silico Syncytial Fusion & Cytoplasmic Streaming | [Open Volume 1 →](MULTICELLULAR_MORPHOLOGY_GUIDE.md) |
+| **Volume 02: GRNs & Attractors** | Waddington Landscapes, Kauffman $K_c=2$ Criticality, Hill Cooperativity, 10-Tick Trace | Live Circuit Microscope Gene Regulatory Viewer | [Open Volume 2 →](GENE_REGULATORY_NETWORKS_VOLUME.md) |
 | **Practicums: Student Lab Manual** | Five 90-Minute Block Practicums, Socratic Seminars, Formative Diagnostic Assessments | Interactive 3D WebGL Seamount & Single-Bit Autopsy | [Open Lab Manual →](curriculum/practicums_lab_manual.md) |
+| **Full-Year Syllabus** | Full-Year Graduate Curriculum (30 Weeks), Biophysical Foundations, & Multicellular Review | Comprehensive 30-Week Treatise & Visual Aid Blueprints | [Open Full Syllabus →](curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.md) |
 
 ---
 
@@ -21,6 +30,9 @@ To prevent vertical scrolling fatigue and provide a structured, college-level le
 
 | Chapter | Document Title | Primary Concepts Explored |
 | :---: | :--- | :--- |
+| **Full-Year Syllabus** | [**Comprehensive Full-Year University Syllabus**](curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.md) | 30-week comprehensive curriculum, 6-pillar weekly modules, biophysical proofs, pedagogical review of multicellular morphology, and 13 SVG architectural blueprints. |
+| **Volume 01** | [**Multicellular Body Topologies & Morphometric Graph Theory Manual**](MULTICELLULAR_MORPHOLOGY_GUIDE.md) | Maximal 3-cliques ($K_3$), 5 canonical topologies (Rosette, Columnar, Dendritic, Ring, Filamentous), Hagen-Poiseuille syncytial hydrodynamic flow, Betti invariants, and 9 publication-grade SVGs. |
+| **Volume 02** | [**The Architecture of Gene Regulatory Networks & Epigenetic Landscapes**](GENE_REGULATORY_NETWORKS_VOLUME.md) | Conrad Waddington epigenetic landscapes, Stuart Kauffman $K_c=2$ Boolean criticality, Derrida sensitivity $s=1$, Hill cooperativity, 10-tick state machine trace, homeotic Hox-like saltations, and Live Circuit Microscope Gene Regulatory Viewer. |
 | **Unit 1** | [**The Prebiotic Threshold & Howard Pattee's Epistemic Cut**](curriculum/unit1_prebiotic_threshold.md) | Dilution catastrophe, alkaline hydrothermal vents, Mitchell proton motive force ($\Delta pH \approx 4.5 \implies \sim 200\text{ mV}$), von Neumann automata theorem, and Pattee's separation of symbolic Safe from active Workshop. |
 | **Unit 2** | [**The Logic of Life & Primitive Enzymes**](curriculum/unit2_logic_of_life.md) | Enzymes as Boolean operators, active site biophysics, the **XOR Impossibility Proof** (linear non-separability), the 64-entry degenerate codon table, and Landauer dynamic switching dissipation ($1$ token/toggle). |
 | **Unit 3** | [**Systems Biology & Uri Alon's Network Motifs**](curriculum/unit3_systems_biology_motifs.md) | Uri Alon motifs: Bistable Toggle Switches (cell fate & digestive memory), Repressilators (circadian limit cycles), C-FFL and I-FFL filters, and Weisfeiler-Lehman topological graph invariant hashing. |
@@ -118,3 +130,9 @@ All laboratory practicums and theoretical chapters link directly to verified Typ
 7. **Graph Theory & Weisfeiler-Lehman Isomorphism:**
    - *Weisfeiler, B., & Leman, A. (1968).* "A reduction of a graph to a canonical form and an algebra arising during this reduction." *Nauchno-Tekhnicheskaya Informatsiya*, 2(9), 12–16.
    - *Shervashidze, N., et al. (2011).* "Weisfeiler-Lehman graph kernels." *Journal of Machine Learning Research*, 12, 2539–2561.
+8. **Evolutionary Information Theory & The Genetic Book of the Dead:**
+   - *Dawkins, R. (2024).* *The Genetic Book of the Dead: A Darwinian Reverie of Ancestral Worlds.* Head of Zeus / Apollo.
+   - *Adami, C., Ofria, C., & Collier, T. C. (2000).* "Evolution of biological complexity." *Proceedings of the National Academy of Sciences*, 97(9), 4463–4468.
+   - *Kimura, M. (1961).* "Natural selection as the process of accumulating genetic information in adaptive evolution." *Genetical Research*, 2(1), 127–140.
+   - *Maynard Smith, J. (2000).* "The concept of information in biology." *Philosophy of Science*, 67(2), 177–194.
+

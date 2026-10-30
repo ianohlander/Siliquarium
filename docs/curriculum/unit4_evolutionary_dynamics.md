@@ -11,10 +11,10 @@ In real evolutionary biology, fitness landscapes are not smooth hills; they are 
 
 To understand macro-evolution, students must explore three foundational pillars:
 1. **Motoo Kimura's Neutral Theory (1968):** Evolution proceeds largely through random drift along selectively neutral ridges, not relentless optimization.
-2. **Susumu Ohno's Gene Duplication (1970):** Innovation requires redundant genetic copies freed from purifying selection to explore novel functions.
-3. **Richard Lenski's Long-Term Evolution Experiment (LTEE, 1988–Present):** Adaptation is characterized by hyperbolic decelerating velocity punctuated by rare, historically contingent breakthrough innovations.
+2. **Susumu Ohno's Gene Duplication<sup id="cite_ref-2" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup> (1970):** Innovation requires redundant genetic copies freed from purifying selection to explore novel functions.
+3. **Richard Lenski's Long-Term Evolution Experiment<sup id="cite_ref-3" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-3">[3]</a></sup> (LTEE, 1988–Present):** Adaptation is characterized by hyperbolic decelerating velocity punctuated by rare, historically contingent breakthrough innovations.
 
-![Figure 4.1: Motoo Kimura's Neutral Drift Saddles & Susumu Ohno's Gene Duplications](assets/diagrams/fig4_1_kimura_and_ohno.svg)
+![Figure 4.1: Motoo Kimura's Neutral Drift Saddles & Susumu Ohno's Gene Duplications](../assets/diagrams/fig4_1_kimura_and_ohno.svg)
 
 > [!ANALYSIS]
 > **Figure 4.1 Architectural Breakdown: Neutral Drift Manifolds & Paralog Neofunctionalization**
@@ -27,7 +27,7 @@ To understand macro-evolution, students must explore three foundational pillars:
 
 ## 2. Motoo Kimura's Neutral Theory & Neutral Drift Saddles
 
-In 1968, Japanese mathematical geneticist Motoo Kimura shook evolutionary biology by proving that at the molecular level, **the majority of evolutionary changes are selectively neutral**.
+In 1968, Japanese mathematical geneticist Motoo Kimura shook evolutionary biology by proving that at the molecular level, **the majority of evolutionary changes are selectively neutral** (Kimura, 1968)<sup id="cite_ref-1" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-1">[1]</a></sup>.
 
 In Siliquarium, Kimura's Neutral Theory is an emergent property of the 64-entry degenerate codon table:
 - **Synonymous Degeneracy:** Multiple 6-bit codons translate to the exact same logic gate (e.g., 12 distinct codons code for `GATE_AND`).
@@ -40,16 +40,25 @@ When an unguided point mutation flips a bit inside a non-coding intron:
 
 Without neutral drift, an evolving population becomes trapped on the first local fitness hillock it encounters. Neutral mutational drift allows a lineage to **diffuse across the $N$-dimensional Hamming hypercube**, wandering along neutral ridges until it stumbles upon a previously inaccessible adaptive breakthrough.
 
+### 2.1 Reconciling Kimura Neutral Drift with Information Injection: Kimura's 1961 Theorem
+
+While Kimura's 1968 neutral theory demonstrated that the vast majority of molecular substitutions are governed by stochastic genetic drift, his earlier landmark 1961 paper<sup id="cite_ref-8" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-8">[8]</a></sup> established the exact mathematical rate at which natural selection accumulates informational bits from the environment into the gene pool:
+
+$$\Delta I \approx \frac{V_W}{2 \bar{W}^2 \ln 2} \quad \text{bits per generation}$$
+
+- When an environment is completely homeostatic or mutations fall in non-coding introns, relative fitness variance is zero ($V_W = 0$). The informational accumulation rate drops to $\Delta I = 0$, and Kimura's neutral drift governs sequence diffusion across the genome space.
+- But when an environmental disturbance arrives (such as a thermal surge, an acidic toxin pulse, or nutrient famine), fitness variance spikes ($V_W > 0$). Selective mortality immediately transforms natural selection into an active communication channel, rapidly accumulating bits of environmental order into the surviving gene pool.
+
 ---
 
 ## 3. Susumu Ohno's Gene Duplication & Neofunctionalization
 
-In 1970, geneticist Susumu Ohno published *Evolution by Gene Duplication*, declaring: *"Natural selection merely modified, while gene duplication created."*
+In 1970, geneticist Susumu Ohno published *Evolution by Gene Duplication*<sup id="cite_ref-2" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup>, declaring: *"Natural selection merely modified, while gene duplication created."*
 
 If an organism possesses only one copy of an essential catalytic enzyme, natural selection acts with fierce **purifying selection**: any mutation that alters the active site destroys the enzyme, causing starvation and death. The gene is locked in place.
 
 How can a lineage ever discover a brand-new catalytic function? **Through gene duplication:**
-As diagrammed in Figure 4.1, duplication releases the secondary copy from purifying selection. While the ancestral copy continues homeostatic catalytic feeding, the redundant paralog is free to accumulate exploratory mutations, eventually discovering novel functions such as toxin shielding or dietary generalism.
+As diagrammed in Figure 4.1, duplication releases the secondary copy from purifying selection. While the ancestral copy continues homeostatic catalytic feeding, the redundant paralog is free to accumulate exploratory mutations, eventually discovering novel functions such as toxin shielding, multi-operon specialization, or endosymbiotic bioenergetic cassettes (Lane & Martin, 2010)<sup id="cite_ref-5" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-5">[5]</a></sup>.
 
 In Siliquarium, non-coding introns (`INTRON_SILENT`) act as duplicated genetic reserves. In the [`EvolutionaryFlightRecorder`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts), single-bit autopsies repeatedly reveal a silent intron mutating into a catalytic `GATE_NOT` or `GATE_OR`, pairing with a pre-existing `GATE_AND` to assemble composite motifs (such as the XOR circuit or toxin filter) without disrupting the organism's baseline metabolism.
 
@@ -59,7 +68,7 @@ In Siliquarium, non-coding introns (`INTRON_SILENT`) act as duplicated genetic r
 
 A classic challenge in biology is distinguishing between:
 - **Homology:** A shared trait inherited from a common ancestor (e.g., the pentadactyl five-digit limb in humans, bats, and whales).
-- **Homoplasy / Convergent Evolution:** An identical trait independently discovered by separate lineages facing similar physical pressures (e.g., the evolution of wings in birds, bats, and insects, or camera eyes in cephalopods and vertebrates).
+- **Homoplasy / Convergent Evolution:** An identical trait independently discovered by separate lineages facing similar physical pressures (Stephen Jay Gould 2002)<sup id="cite_ref-4" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-4">[4]</a></sup> (e.g., the evolution of wings in birds, bats, and insects, or camera eyes in cephalopods and vertebrates).
 
 ```mermaid
 flowchart TD
@@ -84,8 +93,16 @@ The [`EvolutionaryFlightRecorder`](file:///h:/My%20Drive/Repos/Siliquarium/src/e
 1. Given two living specimens $A$ and $B$ expressing an identical Weisfeiler-Lehman motif hash $M$.
 2. The flight recorder walks their parent pointers backward to find their **Least Common Ancestor (LCA)**:
    $$\text{LCA}(A, B) = \text{argmin}_{u \in \text{Ancestors}(A) \cap \text{Ancestors}(B)} (\text{Depth}(u))$$
-3. **The Audit Decision Rule:**
    $$\text{Classification} = \begin{cases} \mathbf{HOMOLOGY}, & \text{if } M \in \text{Motifs}(\text{LCA}) \\ \mathbf{HOMOPLASY}, & \text{if } M \notin \text{Motifs}(\text{LCA}) \end{cases}$$
+
+### 4.1 Convergent Evolution as Shared Environmental Reading (The Genetic Book of the Dead)
+
+Why do phylogenetically independent lineages converge upon identical circuit topologies?
+In *The Genetic Book of the Dead* (2024)<sup id="cite_ref-6" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-6">[6]</a></sup>, Richard Dawkins points out that when distinct taxa evolve identical phenotypes—such as echolocating bats and toothed whales converging on identical amino acid substitutions in the motor protein Prestin (*SLC26A5*)—it is because their genomes are reading the **exact same acoustic physical laws** of ultrasound reflection from their environments.
+
+In Siliquarium, two clades on opposite sides of the seamount converge on the exact same `BISTABLE_LATCH` or `C-FFL` topology because both lineages are reading the **same temporal hydrothermal pulse interval** and the **same fluid noise dynamics** from the vent.
+
+Christoph Adami et al. (2000)<sup id="cite_ref-7" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-7">[7]</a></sup> proved that natural selection maximizes the mutual information $I(X; E) = H(E) - H(E \mid X)$. When two independent lineages face identical environmental entropy $H(E)$, natural selection drives both toward the same informational configurations, producing convergent homoplasy without common ancestry.
 
 ---
 
@@ -97,7 +114,7 @@ Two profound macro-evolutionary phenomena emerged from the LTEE:
 1. **Hyperbolic Decelerating Velocity:** Adaptations accumulate rapidly during the initial colonization phase, then decelerate asymptotically as organisms approach biophysical optimality.
 2. **Punctuated Innovation ($Cit^+$):** Around Generation 31,500, one lineage suddenly unlocked the ability to aerobically metabolize citrate ($Cit^+$), causing a massive population explosion. Analyzing frozen ancestors revealed that this breakthrough required a rare, historically contingent genomic rearrangement that occurred thousands of generations earlier.
 
-![Figure 4.2: Richard Lenski's LTEE Dynamics & Homology vs. Homoplasy Phylogeny](assets/diagrams/fig4_2_lenski_and_phylogeny.svg)
+![Figure 4.2: Richard Lenski's LTEE Dynamics & Homology vs. Homoplasy Phylogeny](../assets/diagrams/fig4_2_lenski_and_phylogeny.svg)
 
 > [!ANALYSIS]
 > **Figure 4.2 Architectural Breakdown: Hyperbolic LTEE Velocity & Convergent Homoplasy**
@@ -112,18 +129,18 @@ Two profound macro-evolutionary phenomena emerged from the LTEE:
 
 Siliquarium's [`LteeBenchmark.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts) tracks ecological diversity and macro-evolutionary dynamics using two canonical equations:
 
-$$\color{#38bdf8}{H} = -\sum_{i=1}^{\color{#fbbf24}{K}} \color{#4ade80}{p_i} \ln(\color{#4ade80}{p_i}), \qquad \color{#f87171}{V_{\text{evo}}} = \frac{\color{#a855f7}{\max(\text{Generation})}}{\color{#94a3b8}{T_{\text{tick}}}} \times 100$$
+$$\textcolor{#38bdf8}{H} = -\sum_{i=1}^{\textcolor{#fbbf24}{K}} \textcolor{#4ade80}{p_i} \ln(\textcolor{#4ade80}{p_i}), \qquad \textcolor{#f87171}{V_{\text{evo}}} = \frac{\textcolor{#a855f7}{\max(\text{Generation})}}{\textcolor{#94a3b8}{T_{\text{tick}}}} \times 100$$
 
 ### Term-by-Term Component Breakdown
 
 | Symbol | Mathematical Term | Biophysical Reality in Siliquarium | Macro-Evolutionary Consequence |
 | :---: | :--- | :--- | :--- |
-| $\color{#38bdf8}{H}$ | Shannon Diversity Index | Information-theoretic entropy of the active founder clades. | Measures clonal interference vs. monoculture sweeps ($H \approx 0 \implies$ monoculture; $H > 1.5 \implies$ stable co-existence). |
-| $\color{#fbbf24}{K}$ | Active Clades Count | Number of distinct primordial founder lineages currently surviving on the grid. | Tracks lineage survival and macro-extinction events. |
-| $\color{#4ade80}{p_i}$ | Clade Population Share | Fractional abundance $N_i / N_{\text{total}}$ of clade $i$. | Dominant clades have high $p_i$; endangered clades have tiny $p_i$. |
-| $\color{#f87171}{V_{\text{evo}}}$ | Evolutionary Velocity | Generational turnover rate scaled per 100 simulation ticks. | High during early colonization; asymptotically stabilizes as pores saturate. |
-| $\color{#a855f7}{\max(\text{Gen})}$ | Deepest Generation | The highest number of binary fission cycles reached by any living lineage. | Measures genealogical depth of the most successful lineage. |
-| $\color{#94a3b8}{T_{\text{tick}}}$ | Elapsed World Ticks | Total discrete clock cycles executed by the simulation world. | The physical thermodynamic time axis. |
+| $\textcolor{#38bdf8}{H}$ | Shannon Diversity Index | Information-theoretic entropy of the active founder clades. | Measures clonal interference vs. monoculture sweeps ($H \approx 0 \implies$ monoculture; $H > 1.5 \implies$ stable co-existence). |
+| $\textcolor{#fbbf24}{K}$ | Active Clades Count | Number of distinct primordial founder lineages currently surviving on the grid. | Tracks lineage survival and macro-extinction events. |
+| $\textcolor{#4ade80}{p_i}$ | Clade Population Share | Fractional abundance $N_i / N_{\text{total}}$ of clade $i$. | Dominant clades have high $p_i$; endangered clades have tiny $p_i$. |
+| $\textcolor{#f87171}{V_{\text{evo}}}$ | Evolutionary Velocity | Generational turnover rate scaled per 100 simulation ticks. | High during early colonization; asymptotically stabilizes as pores saturate. |
+| $\textcolor{#a855f7}{\max(\text{Gen})}$ | Deepest Generation | The highest number of binary fission cycles reached by any living lineage. | Measures genealogical depth of the most successful lineage. |
+| $\textcolor{#94a3b8}{T_{\text{tick}}}$ | Elapsed World Ticks | Total discrete clock cycles executed by the simulation world. | The physical thermodynamic time axis. |
 
 ### 💡 The Intuitive Truth Behind the Architecture
 > Evolution is not just about individuals; it is about **clades competing for physical territory**. When a super-efficient mutant evolves, it rapidly colonizes empty pores, driving competing clades extinct and collapsing Shannon diversity ($H \to 0$). But if an environmental catastrophe or toxin pulse strikes, a diverse ecosystem ($H > 1.5$) is far more resilient because different clades possess different specialized survival armor.
@@ -145,7 +162,7 @@ Nature solved this via broadcast spawning: corals, sponges, and marine invertebr
 
 In Siliquarium, when an adult reaches division thresholds ($E \ge 100, M \ge 20$) but all adjacent substrate pores are full, it initiates **Pelagic Spore Synthesis** ([`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts#L127-L141)):
 
-![Figure 4.3: 3D Water Column Stratification & Pelagic Spore Dispersal](assets/diagrams/fig4_3_pelagic_spores.svg)
+![Figure 4.3: 3D Water Column Stratification & Pelagic Spore Dispersal](../assets/diagrams/fig4_3_pelagic_spores.svg)
 
 > [!ANALYSIS]
 > **Figure 4.3 Architectural Breakdown: Stratified 3D Fluid Dynamics & Pelagic Colonization**
@@ -183,3 +200,82 @@ $$\tau_{\text{lifespan}}(t+1) = \tau_{\text{lifespan}}(t) - 1$$
 2. **Susumu Ohno's Gene Duplication:** Why is an essential gene unable to evolve a new function on its own? How does a duplication event release this evolutionary brake?
 3. **Homology vs. Homoplasy:** Describe how you would prove that the camera eyes of octopuses and humans are an example of convergent evolution (homoplasy) rather than homology.
 4. **Lenski's Citrate Breakthrough:** In Lenski's LTEE, why did the citrate-metabolizing mutation only appear in one of the twelve flasks after 31,500 generations? What does this demonstrate about historical contingency?
+
+
+<!-- COMPLETE ACADEMIC REFERENCES & CITATIONS -->
+<section id="references" class="mt-16 pt-8 border-t border-slate-800 space-y-6">
+<div class="flex items-center justify-between border-b border-slate-800 pb-3">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-800 text-cyan-400 font-mono font-bold text-xs flex items-center justify-center">📚</span>
+<h2 class="text-lg md:text-xl font-mono font-bold text-slate-100">References &amp; Foundational Literature</h2>
+</div>
+<span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Wikipedia-Style Academic Citations</span>
+</div>
+<p class="text-xs text-slate-400 leading-relaxed font-sans">The theoretical assertions, biophysical models, and computer architectural frameworks presented in this volume are grounded in the following seminal peer-reviewed literature. Numbered superscripts throughout the text link directly to these entries.</p>
+<ol class="space-y-3.5 text-xs font-mono text-slate-300">
+    <li id="ref-1" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[1]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Kimura, M.</span> (1968). <em class="text-cyan-300">Evolutionary rate at the molecular level</em>. <span class="text-slate-400">Nature, 217(5129), 624–626</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Motoo Kimura's Neutral Theory of Molecular Evolution:</strong> At the molecular level, most evolutionary changes and polymorphisms are driven by neutral genetic drift rather than positive Darwinian selection.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1038/217624a0" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1038/217624a0</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#weisfeiler1968" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-1" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-2" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[2]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Ohno, S.</span> (1970). <em class="text-cyan-300">Evolution by Gene Duplication</em>. <span class="text-slate-400">Springer-Verlag. ISBN: 978-3642866593</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Susumu Ohno's Evolution by Gene Duplication:</strong> Gene duplication frees one copy from selective constraint, unlocking multi-operon specialization and endosymbiosis.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1007/978-3-642-86659-3" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1007/978-3-642-86659-3</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#weisfeiler1968" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-2" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-3" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[3]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Lenski, R. E., Rose, M. R., Simpson, S. C., & Tadler, S. C.</span> (1991). <em class="text-cyan-300">Long-term experimental evolution in Escherichia coli. I. Adaptation and divergence during 2,000 generations</em>. <span class="text-slate-400">The American Naturalist, 138(6), 1315–1341</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Richard Lenski's Long-Term Evolution Experiment (LTEE):</strong> Decades-long laboratory evolution in E. coli reveals predictable hyperbolic fitness trajectories and historical contingency.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1086/285289" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1086/285289</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#weisfeiler1968" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-3" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-4" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[4]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Gould, S. J.</span> (2002). <em class="text-cyan-300">The Structure of Evolutionary Theory</em>. <span class="text-slate-400">Harvard University Press / Belknap Press. ISBN: 978-0674006133</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Stephen Jay Gould: Replaying Life's Tape:</strong> Distinguishing homologous structures inherited from common ancestors from homoplasic structures discovered via convergent evolution.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.2307/j.ctv136c5t9" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.2307/j.ctv136c5t9</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#alon2007" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-4" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-5" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[5]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Lane, N., & Martin, W.</span> (2010). <em class="text-cyan-300">The energetics of genome complexity</em>. <span class="text-slate-400">Nature, 467(7318), 929–934</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">The Energetic Expansion of Eukaryogenesis:</strong> Mitochondrial endosymbiosis shattered the prokaryotic surface-to-volume power ceiling.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1038/nature09486" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1038/nature09486</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#lane2010" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-5" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-6" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[6]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Dawkins, R.</span> (2024). <em class="text-cyan-300">The Genetic Book of the Dead: A Darwinian Reverie of Ancestral Worlds</em>. <span class="text-slate-400">Head of Zeus / Apollo. ISBN: 978-1804548486</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">The Genetic Book of the Dead:</strong> Convergent evolution occurs because independent genomes read the exact same environmental and physical constraints.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="../companion/bibliography.html#dawkins2024" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-6" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-7" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[7]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Adami, C., Ofria, C., & Collier, T. C.</span> (2000). <em class="text-cyan-300">Evolution of biological complexity</em>. <span class="text-slate-400">Proceedings of the National Academy of Sciences, 97(9), 4463–4468</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Complexity as Mutual Information:</strong> Natural selection drives genome complexity to match the mutual information with environmental entropy: C(X) = I(X; E).</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1073/pnas.97.9.4463" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1073/pnas.97.9.4463</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#adami2000" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-7" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+    <li id="ref-8" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
+      <span class="text-cyan-400 font-bold shrink-0">[8]</span>
+      <div class="space-y-1">
+        <div><span class="text-slate-100 font-bold">Kimura, M.</span> (1961). <em class="text-cyan-300">Natural selection as the process of accumulating genetic information in adaptive evolution</em>. <span class="text-slate-400">Genetical Research, 2(1), 127–140</span>.</div>
+        <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Information Accumulation Rate:</strong> Natural selection accumulates environmental bits at rate dI/dt ~ Vw / (2 W_bar^2 ln 2). At equilibrium, Vw = 0 and neutral drift dominates.</div></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1017/S001667230000060X" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1017/S001667230000060X</a> <span class="text-slate-600">&bull;</span> <a href="../companion/bibliography.html#kimura1961" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-8" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+      </div>
+    </li>
+</ol>
+</section>

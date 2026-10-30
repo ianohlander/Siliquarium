@@ -22,22 +22,27 @@ To prevent false claims and ensure institutional-grade integrity, Siliquarium ad
 
 Siliquarium’s automated verification suite (`tests/run_tests.mjs`) must be organized into progressive verification stages:
 
-```
-[Stage 01: PRNG Determinism] ──► Verified Mulberry32 sequence reproducibility
-       │
-[Stage 02: Codon Translation] ──► 64-entry degenerate codon map & silent introns
-       │
-[Stage 03: Pore Workshop AST] ──► Logic gate placement, wiring validity, and execution
-       │
-[Stage 04: Vent Physics]     ──► Hydrothermal pulse generation & spatial dissipation
-       │
-[Stage 05: Pore Battery]     ──► Landauer switching costs & energy depletion
-       │
-[Stage 06: Replication]      ──► Photocopy to neighbor pore, mutation rate bounds
-       │
-[Stage 07: Thermodynamics]   ──► Conservation of energy invariance audits
-       │
-[Stage 08: Ecological Arms]  ──► Neighbor wiretaps, jammer attacks, and lysis decay
+```mermaid
+flowchart TD
+    S1["Stage 01: PRNG Determinism<br/><span style='color:#94a3b8'>Verified Mulberry32 sequence reproducibility</span>"]
+    S2["Stage 02: Codon Translation<br/><span style='color:#94a3b8'>64-entry degenerate codon map & silent introns</span>"]
+    S3["Stage 03: Pore Workshop AST<br/><span style='color:#94a3b8'>Logic gate placement, wiring validity, and execution</span>"]
+    S4["Stage 04: Vent Physics<br/><span style='color:#94a3b8'>Hydrothermal pulse generation & spatial dissipation</span>"]
+    S5["Stage 05: Pore Battery<br/><span style='color:#94a3b8'>Landauer switching costs & energy depletion</span>"]
+    S6["Stage 06: Replication<br/><span style='color:#94a3b8'>Photocopy to neighbor pore, mutation rate bounds</span>"]
+    S7["Stage 07: Thermodynamics<br/><span style='color:#94a3b8'>Conservation of energy invariance audits (ΔE ≡ 0.000)</span>"]
+    S8["Stage 08: Ecological Arms<br/><span style='color:#94a3b8'>Neighbor wiretaps, jammer attacks, and lysis decay</span>"]
+
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8
+
+    style S1 fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc
+    style S2 fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc
+    style S3 fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc
+    style S4 fill:#0f172a,stroke:#34d399,stroke-width:1.5px,color:#f8fafc
+    style S5 fill:#0f172a,stroke:#34d399,stroke-width:1.5px,color:#f8fafc
+    style S6 fill:#0f172a,stroke:#a855f7,stroke-width:1.5px,color:#f8fafc
+    style S7 fill:#0f172a,stroke:#eab308,stroke-width:1.5px,color:#f8fafc
+    style S8 fill:#0f172a,stroke:#f43f5e,stroke-width:1.5px,color:#f8fafc
 ```
 
 ---

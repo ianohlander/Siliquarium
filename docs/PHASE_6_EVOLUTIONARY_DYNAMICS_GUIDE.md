@@ -126,3 +126,35 @@ Phase 6 is verified across all 14 test stages:
 - **Zero Energy Leaks:** \(\Delta E = 0.000\) across thousands of multi-generational ticks.
 - **Zero Matter Leaks:** \(\Delta M = 0.000\) under continuous mineral precipitation, scavenging, and lysis.
 - **100% Determinism:** Identical PRNG seeds yield bit-for-bit identical phylogenetic trees.
+
+---
+
+## 7. Whimsical Linnaean Binomial Nomenclature & Scientist Homages
+
+To bridge digital automata and living biology with scholarly whimsy, Siliquarium dynamically classifies all emergent digital organisms into formal Linnaean binomial taxa named in homage to landmark scientists in computation, biophysics, and evolutionary genetics ([`TaxonomyNomenclature.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/TaxonomyNomenclature.ts)):
+
+| Binomial Taxon | Common Name | Honoree & Field | Landmark Citation | Glow Aura |
+| :--- | :--- | :--- | :--- | :--- |
+| *Pulsilicon alonii* | Alon's Pulsing Silicoid | **Uri Alon** (Systems Biology & Motifs) | *Nat. Rev. Genet.* 8(6), 450 (2007) | Emerald (`#10b981`) |
+| *Oscillocladus elowitzii* | Elowitz's Repressilator | **Michael B. Elowitz** (Synthetic Oscillators) | *Nature* 403, 335 (2000) | Violet (`#a855f7`) |
+| *Bistabilus collinsii* | Collins' Toggle Switch | **James J. Collins** (Cellular Memory Latches) | *Nature* 403, 339 (2000) | Electric Cyan (`#00e5ff`) |
+| *Synergobacter turingii* | Turing's Parity Morphogen | **Alan Turing** (Morphogenesis & Logic) | *Phil. Trans. R. Soc. B* 237, 37 (1952) | Amber Gold (`#f59e0b`) |
+| *Inhibitovibrio landaueri* | Landauer's Minimal Dissipator | **Rolf Landauer** (Physics of Computation) | *IBM J. Res. Dev.* 5(3), 183 (1961) | Sapphire Blue (`#3b82f6`) |
+| *Ventricola mitchellii* | Mitchell's Chemiosmotic Feeder | **Peter Mitchell** (Chemiosmosis & PMF) | *Nature* 191, 144 (1961) | Deep Vent Coral (`#f97316`) |
+| *Silicoplasma lenskii* | Lenski's High-Gen Adapter | **Richard E. Lenski** (Experimental Evolution / LTEE) | *Am. Nat.* 138(6), 1315 (1991) | Hot Pink (`#ec4899`) |
+| *Lithomicrobium lanei* | Lane's Lithotrophic Pore-Dweller | **Nick Lane** (Prebiotic Bioenergetics) | *Cell* 151(7), 1406 (2012) | Deep Teal (`#14b8a6`) |
+| *Autopoietobacter russellii* | Russell's Mineral Cavity Cell | **Michael J. Russell** (Inorganic Compartments) | *J. Geol. Soc.* 154, 377 (1997) | Pyrite Gold (`#eab308`) |
+| *Chimerococcus margulisiae* | Margulis's Multi-Gate Symbiont | **Lynn Margulis** (Endosymbiotic Theory) | *J. Theor. Biol.* 14(3), 225 (1967) | Indigo Violet (`#8b5cf6`) |
+| *Informavibrio shannonii* | Shannon's High-Fidelity Coder | **Claude Shannon** (Information Theory) | *Bell Syst. Tech. J.* 27(3), 379 (1948) | Neon Aqua (`#06b6d4`) |
+| *Symbiovibrio patteei* | Pattee's Epistemic Generalist | **Howard H. Pattee** (The Epistemic Cut) | *Hierarchy Theory*, pp. 73-100 (1972) | Sky Blue (`#38bdf8`) |
+
+---
+
+## 8. Multi-Cell Ecological Drama & Trophic Dynamics
+
+Rather than static solitary cells, Siliquarium simulates rich multi-organism trophic interactions on the 3D seafloor:
+1. **Contact Predation:** An aggressive, unshielded predator taps an adjacent prey pore, firing a crimson predatory siphon arc (`#f43f5e`) that draws up to 10 battery tokens per tick.
+2. **Carcass Scavenging:** When an organism exhausts its battery and lyses into a mineralizing carcass, neighboring catabolic cells emit amber detrital streamers (`#fbbf24`), extracting residual chemical tokens.
+3. **Pelagic Spore Launch Bursts:** Stressed or mature cells eject buoyant spore capsules into the aqueous water column ($z \ge 1$), generating expanding yellow-gold ionization flashes (`#facc15`).
+4. **Endosymbiotic Syncytial Macro-Silicoids:** Neighboring mature cells from complementary clades undergo mutualistic chimeric fusion, forming violet cytoplasmic bridges (`#8b5cf6`) and shared multi-pore syncytial colonies (*Chimerococcus margulisiae*).
+

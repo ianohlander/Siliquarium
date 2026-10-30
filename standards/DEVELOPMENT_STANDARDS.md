@@ -91,17 +91,14 @@ High-level modules must **depend on abstractions (interfaces), never on low-leve
 
 To ensure maintainability and eliminate cognitive overhead, all code must satisfy strict numerical budgets:
 
-```
-┌───────────────────────────────────────────────────────────────┐
-│                      STRICT CODE BUDGETS                      │
-│                                                               │
-│  • Cyclomatic Complexity per Function:  MAX 7 (ESLint Error)  │
-│  • Function Length:                     MAX 50–60 Lines       │
-│  • File Length:                         MAX 250–300 Lines     │
-│  • Parameter Count per Function:        MAX 3–4 Parameters    │
-│  • Maximum Nesting Depth:               MAX 3 Levels          │
-└───────────────────────────────────────────────────────────────┘
-```
+| Architectural Metric | Strict Maximum Budget | Automated Enforcement & Remediation |
+| :--- | :--- | :--- |
+| **Cyclomatic Complexity per Function** | $\le 7$ | ESLint rule (`complexity: ["error", 7]`); decompose with guard clauses |
+| **Function Length** | $\le 50\text{--}60$ Lines | Single-screen rule; violations require extraction of atomic subroutines |
+| **File Length** | $\le 250\text{--}300$ Lines | Strict single-responsibility principle (SRP); split multi-concern files |
+| **Parameter Count per Function** | $\le 3\text{--}4$ Parameters | Functions with $> 3$ args must accept a strongly-typed options object |
+| **Maximum Nesting Depth** | $\le 3$ Levels | Guard clauses / early returns (Bouncer Pattern) eliminate pyramids |
+
 
 ### 2.1 Cyclomatic Complexity Maximum $\le 7$
 - **Enforcement:** Enforced via automated linting (`complexity: ["error", 7]`).
@@ -138,7 +135,7 @@ One of the most destructive anti-patterns is the "Kitchen Sink" file: dumping mi
    Each source file must declare exactly one primary class or interface. Supporting types/enums may live in the same file only if they are private to that module.
 4. **Strict Directory Taxonomy:**  
    Organize files into cohesive domain packages:
-   ```
+   ```tree
    src/
    ├── core/
    │   ├── domain/        # Pore, Cell, GenomeSafe, PoreWorkshop, PoreBattery
@@ -156,14 +153,24 @@ One of the most destructive anti-patterns is the "Kitchen Sink" file: dumping mi
 
 Siliquarium enforces a strict unidirectional dependency rule:
 
-```
-  [Presentation Layer]   (React, HTML5 Canvas, WebGL, UI Controls)
-           │
-           ▼ (Reads telemetry packets)
-  [Engine / Application] (Web Worker Dispatch, Tick Loop, Scheduler)
-           │
-           ▼ (Executes domain physics)
-  [Core Domain Layer]    (Pores, Cells, Gates, Codons, Thermodynamics)
+```mermaid
+flowchart TD
+    subgraph Presentation["Presentation Layer (UI & HUD)"]
+        UI["DOM Controls • HUD Telemetry • WebGL/Canvas Viewport"]
+    end
+    subgraph Engine["Engine / Application Layer"]
+        SCHED["Simulation Scheduler • Web Worker Dispatch • Tick Loop"]
+    end
+    subgraph Core["Core Domain Layer (Zero DOM)"]
+        PHYS["PoreWorkshop • Mineral Battery • Landauer Thermodynamics • Codons"]
+    end
+
+    Presentation -->|"Reads flat telemetry buffers"| Engine
+    Engine -->|"Executes deterministic physics"| Core
+
+    style Presentation fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
+    style Engine fill:#0f172a,stroke:#34d399,stroke-width:2px,color:#f8fafc
+    style Core fill:#0f172a,stroke:#a855f7,stroke-width:2px,color:#f8fafc
 ```
 
 - **The Zero-DOM Mandate in Core:**  
