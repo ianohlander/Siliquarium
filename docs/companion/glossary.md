@@ -530,14 +530,14 @@
   $$C(X) = I(X; E) = H(E) - H(E \mid X) = H(X) - H(X \mid E)$$
 - **Mathematical / Physical Expression:**
   $$I(X; E) = \sum_{x \in X} \sum_{e \in E} p(x, e) \log_2 \frac{p(x, e)}{p(x) p(e)}$$
-- **In Silico Realization in Siliquarium:** Quantified as the degree to which a pore cell's logic gate netlist correlates with the chemical plume frequencies of the hydrothermal nozzle.
+- **In Silico Realization in Siliquarium:** Conceptual theoretical framework: rather than an online runtime entropy calculation, this principle guides the simulation's selection mechanics, where pore cells whose logic netlists correlate with chemical plume frequencies survive and fix in the population.
 - **Biological Cognate:** The degree to which bacterial regulatory networks predict sugar fluctuations in the mammalian intestine.
 - **Epistemic Significance:** Separates physical biological complexity from raw Shannon entropy, proving that random DNA has zero complexity.
 
 ### 63. Kimura Information Accumulation Rate
 - **Formal Definition:** Motoo Kimura's (1961) theorem establishing that the rate at which natural selection accumulates environmental information into a population's gene pool (in bits per generation) is proportional to the genetic variance in fitness:
   $$\Delta I = \sum_i p_i' \log_2 \left(\frac{p_i'}{p_i}\right) \approx \frac{V_W}{2 (\bar{W})^2 \ln 2} \quad \text{[bits/generation]}$$
-- **In Silico Realization in Siliquarium:** Measured during environmental transitions (thermal pulses, toxic vent surges) as the rate of motif fixation in the seamount population.
+- **In Silico Realization in Siliquarium:** Theoretical guiding principle: represents the mathematical bound on how fast differential survival can fix motifs during environmental shocks (thermal pulses, toxic surges), rather than an online numerical variable calculated by the game loop.
 - **Biological Cognate:** The rate of antibiotic resistance gene fixation in bacterial populations under clinical antibiotic selection.
 - **Epistemic Significance:** Unifies Fisher's Fundamental Theorem of Natural Selection with Shannon's noisy channel coding theorem.
 

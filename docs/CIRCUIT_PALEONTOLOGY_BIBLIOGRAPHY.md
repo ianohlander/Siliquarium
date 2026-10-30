@@ -30,7 +30,7 @@
 - **Siliquarium Mapping:** Validated in [`MotifScanner.detectBistableLatch()`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts#L72-L85) and [`specimen_01_bistable_latch.md`](paleontology/specimen_01_bistable_latch.md).
 - **Justification:** Justifies the presence of 1-bit memory in Siliquarium without invoking magical storage registers; memory arises naturally from cross-coupled physical inverting gates.
 
-### <span id="elowitz2000"></span><span id="ref-elowitz2000"></span>1.2 Elowitz & Leibler (2000) — The Repressilator
+### <span id="elowitz2000"></span><span id="razavi2001"></span><span id="ref-elowitz2000"></span>1.2 Elowitz & Leibler (2000) — The Repressilator
 - **Full Citation:** Elowitz, M. B., & Leibler, S. (2000). "A synthetic oscillatory network of transcriptional regulators." *Nature*, 403(6767), 335–338. [DOI: 10.1038/35002125](https://doi.org/10.1038/35002125).
 - **Core Theoretical Thesis:** Demonstrates that a cyclic loop of three mutually repressing transcriptional inverters (*lacI*, *tetR*, *cI*) generates autonomous limit-cycle oscillations in *E. coli*.
 - **Biophysical Mechanism:** Proves that an odd number of inverters ($N=3$) enforces phase-shifted feedback frustration. The Barkhausen criterion ensures continuous periodic orbits with period $T \approx 6\tau$ and phase offsets of $120^\circ$.
@@ -67,8 +67,8 @@
 - **Siliquarium Mapping:** Governs the Allosteric NOT Inverter in [`DigitalPaleontologist.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/DigitalPaleontologist.ts#L75-L95) and [`fig_circuit_7_allosteric_inverter.svg`](file:///h:/My%20Drive/Repos/Siliquarium/docs/assets/diagrams/fig_circuit_7_allosteric_inverter.svg).
 - **Justification:** Justifies the use of logic inverters as accurate biophysical analogs of allosteric enzyme gating.
 
-### <span id="alon2019"></span><span id="ref-alon2019"></span>1.7 Alon (2019) — Systems Biology Design Principles
-- **Full Citation:** Alon, U. (2019). *An Introduction to Systems Biology: Design Principles of Biological Networks* (2nd ed.). CRC Press / Taylor & Francis Group. [ISBN: 978-1439837016](https://www.routledge.com/An-Introduction-to-Systems-Biology-Design-Principles-of-Biological-Networks/Alon/p/book/9780429283901).
+### <span id="alon2019"></span><span id="minsky1969"></span><span id="ref-alon2019"></span>1.7 Alon (2019) — Systems Biology Design Principles
+- **Full Citation:** Alon, U. (2019). *An Introduction to Systems Biology: Design Principles of Biological Networks* (2nd ed.). CRC Press / Taylor & Francis Group. [ISBN: 978-1439837016](https://www.routledge.com/An-Introduction-to-Systems-Biology-Design-Principles-of-Biological-Networks/Alon/p/book/9780429283321).
 - **Core Theoretical Thesis:** Establishes that biological regulatory networks are not arbitrary tangles of wires, but are modular assemblies built from a small set of recurring, mathematically optimal network motifs.
 - **Biophysical Mechanism:** Provides the definitive taxonomy of feed-forward loops, autoregulatory clamps, multi-input gates, and half-adder parity logic, showing that network motifs evolve convergently across divergent phylogenetic kingdoms.
 - **Siliquarium Mapping:** Foundational architecture for [`NetworkMotif.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/NetworkMotif.ts) and the Paleontology Field Guide taxonomy.
@@ -111,10 +111,10 @@
 - **Siliquarium Mapping:** Directly implemented in [`PoreBattery.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreBattery.ts#L45-L65).
 - **Justification:** Proves that logic gates in Siliquarium are physical enzymatic machines that obey real-world thermodynamics rather than free software functions.
 
-### <span id="edwards2012"></span><span id="ref-edwards2012"></span><span id="dhondt2019"></span><span id="ref-dhondt2019"></span>2.5 Edwards et al. (2012) & D'Hondt et al. (2019) — Deep Subseafloor Biosphere & Starvation Kinetics
+### <span id="edwards2012"></span><span id="ref-edwards2012"></span><span id="dhondt2015"></span><span id="ref-dhondt2015"></span><span id="dhondt2019"></span><span id="ref-dhondt2019"></span>2.5 Edwards et al. (2012) & D'Hondt et al. (2015) — Deep Subseafloor Biosphere & Starvation Kinetics
 - **Full Citations:**  
   - Edwards, K. J., Becker, K., & Colwell, F. (2012). "The deep, dark biosphere: intraterrestrial life on Earth." *Annual Review of Earth and Planetary Sciences*, 40, 551–568. [DOI: 10.1146/annurev-earth-042711-105500](https://doi.org/10.1146/annurev-earth-042711-105500).
-  - D'Hondt, S., Inagaki, F., & Zierenberg, R. (2019). "Energy-limited microbial life in marine sediment." *Nature Geoscience*, 12, 281–289. [DOI: 10.1038/s41561-019-0348-1](https://doi.org/10.1038/s41561-019-0348-1).
+  - D'Hondt, S., Inagaki, F., Zierenberg, R., et al. (2015). "Presence of oxygen and aerobic communities from seafloor to basement in deep-sea sediment." *Nature Geoscience*, 8(4), 299–304. [DOI: 10.1038/ngeo2387](https://doi.org/10.1038/ngeo2387).
 - **Core Theoretical Thesis:** Demonstrates that microbial communities in the oceanic crust and deep marine sediments survive for millions of years under extreme energy starvation, operating near fundamental thermodynamic maintenance limits.
 - **Biophysical Mechanism:** Subseafloor chemolithoautotrophs metabolize with electron turnover rates orders of magnitude below laboratory cultures, utilizing basal maintenance energies that approach the Landauer switching bound.
 - **Siliquarium Mapping:** The subterranean basalt bedrock ($z = -1$) and lithotrophic survival strategies of Specimen 12 ([`specimen_12_basalt_lithotroph.md`](paleontology/specimen_12_basalt_lithotroph.md)).
@@ -134,7 +134,7 @@
 - **Siliquarium Mapping:** The Endosymbiotic Organelle Cassette in [`DigitalPaleontologist.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/DigitalPaleontologist.ts#L80-L95).
 - **Justification:** Justifies the multi-tape genome architecture in Siliquarium where organelles execute auxiliary operons in parallel.
 
-### <span id="bonner1965"></span><span id="ref-bonner1965"></span><span id="bonner1998"></span><span id="ref-bonner1998"></span>3.2 Bonner (1965, 1998) — Morphogenesis & Syncytial Multicellularity
+### <span id="bonner1965"></span><span id="ref-bonner1965"></span><span id="bonner1998"></span><span id="maynardsmith1995"></span><span id="ref-bonner1998"></span>3.2 Bonner (1965, 1998) — Morphogenesis & Syncytial Multicellularity
 - **Full Citations:**  
   - Bonner, J. T. (1965). *Size and Cycle: An Essay on the Structure of Biology*. Princeton University Press. [ISBN: 978-0691080338](https://press.princeton.edu/books/hardcover/9780691080338/size-and-cycle).
   - Bonner, J. T. (1998). *The Evolution of Culture in Animals* & *First Signals: The Evolution of Multicellular Development*. Princeton University Press.
@@ -143,7 +143,7 @@
 - **Siliquarium Mapping:** Implemented in [`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts#L100-L135) and [`fig_circuit_9_syncytial_multicellularity.svg`](file:///h:/My%20Drive/Repos/Siliquarium/docs/assets/diagrams/fig_circuit_9_syncytial_multicellularity.svg).
 - **Justification:** Validates Siliquarium's syncytial colony mechanics where adjacent pores fuse membranes and pool battery tokens under strict mass conservation ($\Delta M = 0.000$).
 
-### <span id="dawkins1976"></span><span id="ref-dawkins1976"></span><span id="dawkins1982"></span><span id="ref-dawkins1982"></span>3.3 Dawkins (1976, 1982) — The Selfish Gene, Extended Phenotype & Spore Dispersal
+### <span id="dawkins1976"></span><span id="ref-dawkins1976"></span><span id="dawkins1982"></span><span id="erickson2010"></span><span id="keilin1959"></span><span id="vogel1994"></span><span id="ref-dawkins1982"></span>3.3 Dawkins (1976, 1982) — The Selfish Gene, Extended Phenotype & Spore Dispersal
 - **Full Citations:**  
   - Dawkins, R. (1976). *The Selfish Gene*. Oxford University Press. [ISBN: 978-0192860927](https://global.oup.com/academic/product/the-selfish-gene-9780198788607).
   - Dawkins, R. (1982). *The Extended Phenotype: The Long Reach of the Gene*. Oxford University Press. [ISBN: 978-0192860880](https://global.oup.com/academic/product/the-extended-phenotype-9780198788911).
@@ -163,7 +163,7 @@
 - **Siliquarium Mapping:** The Evolutionary Flight Recorder and Fossil Freezer in [`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts) and [`DigitalPaleontologist.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/DigitalPaleontologist.ts).
 - **Justification:** Justifies Siliquarium's benchmark comparisons against real empirical evolutionary trajectories.
 
-### <span id="kimura1968"></span><span id="ref-kimura1968"></span><span id="ohno1970"></span><span id="ref-ohno1970"></span>3.5 Kimura (1968, 1983) & Ohno (1970) — Neutral Drift & Gene Duplication
+### <span id="kimura1968"></span><span id="ref-kimura1968"></span><span id="ohno1970"></span><span id="gould2002"></span><span id="ref-ohno1970"></span>3.5 Kimura (1968, 1983) & Ohno (1970) — Neutral Drift & Gene Duplication
 - **Full Citations:**  
   - Kimura, M. (1968). "Evolutionary rate at the molecular level." *Nature*, 217(5129), 624–626. [DOI: 10.1038/217624a0](https://doi.org/10.1038/217624a0).
   - Kimura, M. (1983). *The Neutral Theory of Molecular Evolution*. Cambridge University Press. [ISBN: 978-0521316224](https://www.cambridge.org/core/books/neutral-theory-of-molecular-evolution/8F3E90124D8520A8FA45B8B16B8EB6BA).
@@ -182,11 +182,11 @@
 - **Siliquarium Mapping:** The lytic predatory circuits and allosteric shielding mechanisms of Specimen 13 ([`specimen_13_trophic_predator.md`](paleontology/specimen_13_trophic_predator.md)).
 - **Justification:** Justifies why predatory and competitive interactions emerge spontaneously in Siliquarium under closed-universe mass conservation.
 
-### <span id="fenchel1987"></span><span id="ref-fenchel1987"></span><span id="jorgensen2007"></span><span id="ref-jorgensen2007"></span><span id="moran2016"></span><span id="ref-moran2016"></span>3.7 Fenchel (1987), Jørgensen & D'Hondt (2007), & Moran et al. (2016) — Detrital Scavenging & Necromass Recycling
+### <span id="fenchel1987"></span><span id="ref-fenchel1987"></span><span id="jorgensen2006"></span><span id="ref-jorgensen2006"></span><span id="moran2016"></span><span id="ref-moran2016"></span>3.7 Fenchel (1987), Jørgensen & D'Hondt (2006), & Moran et al. (2016) — Detrital Scavenging & Necromass Recycling
 - **Full Citations:**  
-  - Fenchel, T. (1987). *Ecology of Protozoa: The Biology of Free-living Phagotrophic Protists*. Springer-Verlag. [DOI: 10.1007/978-3-662-02489-8](https://doi.org/10.1007/978-3-662-02489-8).
-  - Jørgensen, B. B., & D'Hondt, S. (2007). "A starving majority deep beneath the seafloor." *Science*, 317(5837), 510–514. [DOI: 10.1126/science.1143759](https://doi.org/10.1126/science.1143759).
-  - Moran, M. A., et al. (2016). "Deciphering ocean carbon fluxes through microbial metabolomics." *PNAS*, 113(12), 3143–3151. [DOI: 10.1073/pnas.1525865113](https://doi.org/10.1073/pnas.1525865113).
+  - Fenchel, T. (1987). *Ecology of Protozoa: The Biology of Free-living Phagotrophic Protists*. Springer-Verlag. [DOI: 10.1007/978-3-662-06817-5](https://doi.org/10.1007/978-3-662-06817-5).
+  - Jørgensen, B. B., & D'Hondt, S. (2006). "A starving majority deep beneath the seafloor." *Science*, 314(5801), 932–934. [DOI: 10.1126/science.1133796](https://doi.org/10.1126/science.1133796).
+  - Moran, M. A., Kujawinski, E. B., Stubbins, A., et al. (2016). "Deciphering ocean carbon in a changing world." *PNAS*, 113(12), 3143–3151. [DOI: 10.1073/pnas.1514645113](https://doi.org/10.1073/pnas.1514645113).
 - **Core Theoretical Thesis:** Closed ecological loops in benthic marine habitats depend on detrital scavenging networks that recycle lysed organic carcasses and macromolecular necromass back into bioavailable energy and matter tokens.
 - **Biophysical Mechanism:** When cells lyse, their intact biomolecules diffuse into adjacent pores. Scavengers with catabolic logic harvest necromass tokens with high efficiency, preventing irreversible entropic dispersion.
 - **Siliquarium Mapping:** The detrital carcass recycling mechanics and amber detrital streamers of Specimen 14 ([`specimen_14_detrital_scavenger.md`](paleontology/specimen_14_detrital_scavenger.md)).
@@ -205,7 +205,7 @@
 
 ### <span id="pattee1972"></span><span id="ref-pattee1972"></span><span id="pattee2001"></span><span id="ref-pattee2001"></span>4.2 Pattee (1972, 2001) — The Epistemic Cut
 - **Full Citations:**  
-  - Pattee, H. H. (1972). "The nature of hierarchical controls in living matter." *Foundations of Mathematical Biology*, Vol. 1, 1–22. Academic Press. [DOI: 10.1016/B978-0-12-597201-7.50007-9](https://doi.org/10.1016/B978-0-12-597201-7.50007-9).
+  - Pattee, H. H. (1972). "The nature of hierarchical controls in living matter." *Foundations of Mathematical Biology*, Vol. 1, 1–22. Academic Press. [DOI: 10.1016/B978-0-12-597201-7.50008-5](https://doi.org/10.1016/B978-0-12-597201-7.50008-5).
   - Pattee, H. H. (2001). "The physics of symbols: bridging the epistemic cut." *Biosystems*, 60(1-3), 5–21. [DOI: 10.1016/S0303-2647(01)00104-6](https://doi.org/10.1016/S0303-2647(01)00104-6).
 - **Core Theoretical Thesis:** Formulates the **Epistemic Cut**: the irreducible complementarity between rate-independent symbolic informational descriptions and rate-dependent continuous physical dynamical laws.
 - **Biophysical Mechanism:** Physical laws are inexorable differential equations governed by time; symbolic codes are discrete, time-invariant sequences. A physical machine cannot evolve open-endedly without an uninterpreted symbolic description that can be copied blindly.
@@ -255,7 +255,7 @@
 - **Justification:** Mathematically proves that Siliquarium does not smuggle in information: initial populations have $I(X;E) = 0$; all acquired bits are injected by the hydrothermal environment.
 
 ### <span id="kimura1961"></span><span id="ref-kimura1961"></span>5.3 Kimura (1961) — Natural Selection as an Information Channel
-- **Full Citation:** Kimura, M. (1961). "Natural selection as the process of accumulating genetic information in adaptive evolution." *Genetical Research*, 2(1), 127–140. [DOI: 10.1017/S0016672300000624](https://doi.org/10.1017/S0016672300000624).
+- **Full Citation:** Kimura, M. (1961). "Natural selection as the process of accumulating genetic information in adaptive evolution." *Genetical Research*, 2(1), 127–140. [DOI: 10.1017/S0016672300000616](https://doi.org/10.1017/S0016672300000616).
 - **Core Theoretical Thesis:** Derives the physical rate of genetic information accumulation per generation, $\Delta I \approx V_W / [2(\bar{W})^2 \ln 2]$, demonstrating that the informational channel capacity of natural selection is bounded by the variance in reproductive fitness.
 - **Biophysical Mechanism:** Shows that the elimination of unfit variants produces an informational gain equivalent to the Kullback-Leibler divergence $D_{\text{KL}}(\mathbf{p}' \parallel \mathbf{p})$ between generational allele distributions.
 - **Siliquarium Mapping:** Reflected in the rate of motif fixation during environmental shifts, thermal surges, and toxic vent pulses.

@@ -141,7 +141,7 @@ Every single week is structured around six mandatory pedagogical pillars meeting
 - **Assigned Reading:**  
   - Minsky, M., & Papert, S. (1969). *Perceptrons: An Introduction to Computational Geometry.* MIT Press.
   - McCulloch, W. S., & Pitts, W. (1943). *A logical calculus of the ideas immanent in nervous activity.* Bulletin of Mathematical Biophysics, 5(4), 115–133.
-  - Alon, U. (2019). *Network motifs: simple building blocks of complex networks.* Science, 298(5594), 824–827.
+  - Milo, R., Shen-Orr, S., Itzkovitz, S., Kashtan, N., Chklovskii, D., & Alon, U. (2002). *Network motifs: simple building blocks of complex networks.* Science, 298(5594), 824–827. DOI: 10.1126/science.298.5594.824.
 
 ---
 

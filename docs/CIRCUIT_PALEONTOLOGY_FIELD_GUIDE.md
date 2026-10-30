@@ -880,7 +880,7 @@ When the Paleontologist detects any of the 10 motifs, it executes three automate
         </div>
       
         <div class="flex items-center gap-3 text-[11px] pt-0.5">
-          <a href="https://doi.org/10.1016/B978-0-12-598001-9.50005-7" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1016/B978-0-12-598001-9.50005-7</a>
+          <a href="https://doi.org/10.1016/B978-0-12-597201-7.50008-5" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1016/B978-0-12-597201-7.50008-5</a>
           <span class="text-slate-600">&bull;</span>
           <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#pattee1972" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a>
           <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-2" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 2 Proof</a>
@@ -1262,7 +1262,7 @@ When the Paleontologist detects any of the 10 motifs, it executes three automate
         </div>
       
         <div class="flex items-center gap-3 text-[11px] pt-0.5">
-          <a href="https://doi.org/10.7551/mitpress/5303.001.0001" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.7551/mitpress/5303.001.0001</a>
+          <a href="https://doi.org/10.7551/mitpress/11301.001.0001" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.7551/mitpress/11301.001.0001</a>
           <span class="text-slate-600">&bull;</span>
           <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#alon2019" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a>
           <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-18" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 18 Proof</a>
@@ -1382,7 +1382,7 @@ When the Paleontologist detects any of the 10 motifs, it executes three automate
         </div>
       
         <div class="flex items-center gap-3 text-[11px] pt-0.5">
-          <a href="https://doi.org/10.1515/9781400874675" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1515/9781400874675</a>
+          <a href="https://doi.org/10.1515/9781400874750" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1515/9781400874750</a>
           <span class="text-slate-600">&bull;</span>
           <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#bonner1965" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a>
           <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-23" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 23 Proof</a>
@@ -1550,7 +1550,7 @@ When the Paleontologist detects any of the 10 motifs, it executes three automate
         </div>
       
         <div class="flex items-center gap-3 text-[11px] pt-0.5">
-          <a href="https://doi.org/10.1093/oso/9780198788911.001.0001" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1093/oso/9780198788911.001.0001</a>
+          <a href="https://doi.org/10.1093/oso/9780192860880.001.0001" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1093/oso/9780192860880.001.0001</a>
           <span class="text-slate-600">&bull;</span>
           <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#dawkins1982" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a>
           <span class="text-slate-600">&bull;</span> <a href="CIRCUIT_PALEONTOLOGY_NOTES.html#note-30" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors flex items-center gap-1"><span>📝</span> Note 30 Proof</a>

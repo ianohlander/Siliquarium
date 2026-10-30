@@ -168,7 +168,7 @@
 ---
 
 ## 17. Motoo Kimura (1961) <span id="kimura1961"></span><span id="ref-17"></span>
-- **Primary Citation:** Kimura, M. (1961). "Natural selection as the process of accumulating genetic information in adaptive evolution." *Genetical Research*, 2(1), 127–140. DOI: 10.1017/S001667230000060X.
+- **Primary Citation:** Kimura, M. (1961). "Natural selection as the process of accumulating genetic information in adaptive evolution." *Genetical Research*, 2(1), 127–140. DOI: 10.1017/S0016672300000616.
 - **Foundational Theoretical Thesis:** Natural selection is mathematically equivalent to an informational communication channel accumulating environmental information into the gene pool at a rate bounded by the additive genetic variance in relative fitness.
 - **Epistemological & Biophysical Mechanism:** Kimura proved that the rate of information accumulation per generation $\Delta I$ is directly proportional to Fisher's Fundamental Theorem of Natural Selection:
   $$\Delta I \approx \frac{V_W}{2 \bar{W}^2 \ln 2} \quad \text{bits per generation}$$
@@ -215,7 +215,7 @@
 ---
 
 ## 22. Christopher R. German et al. (2010) <span id="german2010"></span><span id="ref-22"></span>
-- **Primary Citation:** German, C. R., et al. (2010). "Diverse hydrothermal systems found on a hyper-slow spreading ridge." *Nature Geoscience*, 3, 564–568. DOI: 10.1038/ngeo922.
+- **Primary Citation:** German, C. R., Bowen, A., Coleman, M. L., et al. (2010). "Diverse styles of submarine venting on the ultraslow spreading Mid-Cayman Rise." *Proceedings of the National Academy of Sciences*, 107(32), 14020–14025. DOI: 10.1073/pnas.1009205107.
 - **Foundational Theoretical Thesis:** Hydrothermal vent systems along slow and ultra-slow spreading ridges are driven by deep tectonic faulting, extensional normal faults, and axial rift grabens that expose ultramafic mantle peridotite directly to seawater circulation.
 - **Epistemological & Biophysical Mechanism:** Proved that hydrothermal venting is not restricted to fast-spreading volcanic axes; deep tectonic faulting exposes ultramafic mantle peridotite over vast oceanic areas, sustaining long-lived alkaline serpentinization vents (analogous to the Von Damm and Lost City fields) for hundreds of thousands of years.
 - **Operational Realization in Siliquarium:** Inspires the dynamic `MAGMATIC_TREMOR` rifting mechanics in [`GeologicalPressuresEngine.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/environment/GeologicalPressuresEngine.ts), where extensional tectonic faults displace peripheral blocks into sunken axial grabens ($z = -1$).

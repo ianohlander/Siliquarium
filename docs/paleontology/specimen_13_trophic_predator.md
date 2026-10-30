@@ -164,9 +164,9 @@ $$\textcolor{#38bdf8}{\frac{dE_{\text{pred}}}{dt}} = \textcolor{#34d399}{\Phi_{\
     <li id="ref-2" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
       <span class="text-cyan-400 font-bold shrink-0">[2]</span>
       <div class="space-y-1">
-        <div><span class="text-slate-100 font-bold">Dawkins, R.</span> (1976). <em class="text-cyan-300">The Selfish Gene</em>. <span class="text-slate-400">Oxford University Press</span>.</div>
+        <div><span class="text-slate-100 font-bold">Dawkins, R.</span> (1976). <em class="text-cyan-300">The Selfish Gene</em>. <span class="text-slate-400">Oxford University Press. ISBN: 978-0199291151</span>.</div>
         <div><div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Selfish Replicators:</strong> Formulated the gene's-eye view of evolution where phenotypic survival machines compete for physical substrates.</div></div>
-        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="https://doi.org/10.1093/oso/9780198575191.001.0001" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">doi:10.1093/oso/9780198575191.001.0001</a> <span class="text-slate-600">&bull;</span> <a href="../CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#dawkins1976" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-2" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
+        <div class="flex items-center gap-3 text-[11px] pt-0.5"><a href="../CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html#dawkins1976" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-cyan-300 transition-colors flex items-center gap-1"><span>📚</span> Master Bib</a> <span class="text-slate-600">&bull;</span> <a href="#cite_ref-2" class="text-slate-500 hover:text-cyan-300 transition-colors">&uarr; Back to text</a></div>
       </div>
     </li>
     <li id="ref-3" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
