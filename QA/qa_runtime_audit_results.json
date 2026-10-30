@@ -1,0 +1,395 @@
+{
+  "meta": {
+    "suite": "Siliquarium Master Systems Biology & Visual UX Audit",
+    "version": "0.1.0",
+    "timestamp": "2026-10-09T06:47:06.091Z",
+    "evaluator": "Senior Systems Biology & Visual UX QA Evaluator",
+    "targetBrowser": "Microsoft Edge (Headless / Chromium 120+)",
+    "testEnvironments": [
+      {
+        "name": "Desktop Ultra-Wide / FHD",
+        "width": 1920,
+        "height": 1080,
+        "dpr": 1
+      },
+      {
+        "name": "Laptop Standard (MacBook Air / XPS 13)",
+        "width": 1440,
+        "height": 900,
+        "dpr": 1
+      },
+      {
+        "name": "Compact Laptop / Student Chromebook",
+        "width": 1280,
+        "height": 800,
+        "dpr": 1
+      }
+    ]
+  },
+  "executiveSummary": {
+    "overallStatus": "DEGRADED BY 3 CRITICAL UX DEFECTS & ARCHITECTURAL DISCONNECT",
+    "overallScore": 78.4,
+    "modulesAudited": 5,
+    "criticalDefectsIdentified": 3,
+    "functionalFeaturesCount": 42,
+    "partiallyFunctionalCount": 14,
+    "brokenOrMissingCount": 6,
+    "verdict": "The biophysical simulation core, closed-universe thermodynamic conservation (ΔE=0.000, ΔM=0.000), Pattee epistemic cut replication, and Uri Alon motif classification are computationally robust and fully passing 20/20 stages. However, severe UI geometry collisions, persistent telemetry obscuration on standard student laptop viewports, and failure of the live 3D seafloor renderer to execute multi-lens biological morphing fundamentally undermine the designer vision of a serene, uncluttered scientific observatory."
+  },
+  "forensicDefectProof": {
+    "defectA": {
+      "name": "Observatory Silicoid Telemetry & Flyouts Missing/Pushed Off-Screen in Header Bar",
+      "affectedViewports": [
+        "1440x900",
+        "1280x800",
+        "1920x1080 (scaled/split)"
+      ],
+      "severity": "CRITICAL (P0)",
+      "measurements": {
+        "headerContainerPaddingPx": 32,
+        "brandSectionWidthPx": 220,
+        "workspaceModeSelectorWidthPx": 560,
+        "lensSelectorWidthPx": 540,
+        "telemetryRowWidthPx": 880,
+        "totalHeaderContentWidthPx": 2248,
+        "viewport1920": {
+          "availableWidthPx": 1888,
+          "overflowPx": 360,
+          "clippedElements": [
+            "#hud-naturalist-btn (Assistant Guide)",
+            "#hud-geo-event-btn (Environment & Temp Telemetry)",
+            "#hud-fullscreen-btn (View Mode Fullscreen Toggle)"
+          ]
+        },
+        "viewport1440": {
+          "availableWidthPx": 1408,
+          "overflowPx": 840,
+          "clippedElements": [
+            "#hud-stats-btn (📊 Ecosystem Stats Flyout)",
+            "#hud-discoveries-btn (🏆 Discoveries Drawer)",
+            "#hud-naturalist-btn (✨ Assistant Guide)",
+            "#hud-geo-event-btn (🌋 Environment & Temp)",
+            "#hud-fullscreen-btn (⛶ View Mode)"
+          ]
+        },
+        "viewport1280": {
+          "availableWidthPx": 1248,
+          "overflowPx": 1000,
+          "clippedElements": [
+            "#hud-phylogeny-btn (🌿 Phylogeny & Clades)",
+            "#hud-stats-btn (📊 Ecosystem Stats Flyout)",
+            "#hud-discoveries-btn (🏆 Discoveries Drawer)",
+            "#hud-naturalist-btn (✨ Assistant Guide)",
+            "#hud-geo-event-btn (🌋 Environment & Temp)",
+            "#hud-fullscreen-btn (⛶ View Mode)"
+          ]
+        }
+      },
+      "vitalTelemetryAudit": {
+        "epochTicks": {
+          "inHeaderDOM": true,
+          "visibleAt1280": true,
+          "visibleAt1440": true
+        },
+        "livingPopulation": {
+          "inHeaderDOM": false,
+          "note": "Only exists inside compressed preview pill #hud-stats-preview which is pushed off-screen on <= 1440px"
+        },
+        "sporeCount": {
+          "inHeaderDOM": false,
+          "note": "Completely absent from header bar; buried inside pull-down modal #hud-stats-panel"
+        },
+        "cladeDiversity": {
+          "inHeaderDOM": true,
+          "visibleAt1280": false,
+          "note": "Inside #hud-phylogeny-btn which is pushed off-screen at 1280px"
+        },
+        "generations": {
+          "inHeaderDOM": true,
+          "visibleAt1280": false,
+          "note": "Inside #hud-phylogeny-btn which is pushed off-screen at 1280px"
+        }
+      },
+      "rootCauseCode": "index.html:33-48 defines header as a single flex row with overflow-x: auto and display: none on webkit scrollbars. Children (.brand-section, #workspace-mode-selector, #hud-lens-selector, .telemetry-row) have fixed non-wrapping flex-shrink: 0 footprints summing to 2,248px. Any display under 2,248px silently clips the rightmost items without visual scrollbars.",
+      "architecturalRedesignSpec": "Decouple workspace mode selector and lens selector from top header. Relocate workspace switcher to a sleek vertical left-rail docked HUD pill (48px wide) or integrate lenses directly into viewport context. Keep top header dedicated strictly to brand logo, master run status, and the 5 vital metrics (Population, Spores, Clades, Generations, Epoch Ticks) with permanent flex-shrink prevention and responsive font scaling."
+    },
+    "defectB": {
+      "name": "Bottom Transport Bar Collision Covering #floating-env-pill and #floating-btn-visual-key in Non-Fullscreen View",
+      "affectedViewports": [
+        "1280x800",
+        "1440x900",
+        "1920x1080 (when wrapped)"
+      ],
+      "severity": "CRITICAL (P0)",
+      "measurements": {
+        "transportBarRules": {
+          "cssSelector": ".transport-bar",
+          "position": "absolute",
+          "bottom": "12px",
+          "left": "50%",
+          "transform": "translateX(-50%)",
+          "zIndex": 25,
+          "buttonCount": 22,
+          "unwrappedWidthPx": 1140,
+          "wrappedHeight1280Px": 86,
+          "verticalExtentFromBottomPx": "12px to 98px"
+        },
+        "floatingEnvPillRules": {
+          "cssSelector": "#floating-env-pill",
+          "position": "absolute",
+          "bottom": "58px",
+          "left": "50%",
+          "transform": "translateX(-50%)",
+          "zIndex": 15,
+          "heightPx": 32,
+          "verticalExtentFromBottomPx": "58px to 90px"
+        },
+        "floatingVisualKeyRules": {
+          "cssSelector": "#floating-btn-visual-key",
+          "position": "absolute",
+          "bottom": "14px",
+          "left": "14px",
+          "zIndex": 10,
+          "widthPx": 136,
+          "heightPx": 34
+        },
+        "geometricOverlapAnalysis": {
+          "envPillVerticalOverlapPx": 32,
+          "envPillHorizontalOverlapPx": "100% (both centered at 50%)",
+          "envPillZIndexDeficit": "Transport (25) > Env Pill (15)",
+          "envPillOcclusionState": "TOTAL COATING / 100% OBSCURED",
+          "visualKeyVerticalOverlapPx": 34,
+          "visualKeyHorizontalOverlapPx": 18,
+          "visualKeyZIndexDeficit": "Transport (25) > Visual Key (10)",
+          "visualKeyClickIntercepted": true,
+          "visualKeyOcclusionState": "LEFT-EDGE COLLISION & POINTER INTERCEPTION"
+        }
+      },
+      "rootCauseCode": "index.html:788-808 positions .transport-bar at bottom: 12px with z-index 25 and flex-wrap: wrap. index.html:4241-4260 positions #floating-env-pill at bottom: 58px with z-index 15. When transport bar wraps onto two lines on standard screens, its height reaches 86px (top edge at 98px from bottom), directly overlaying and burying the env pill. At the same time, max-width: calc(100vw - 32px) stretches the transport bar to 16px from screen edge, directly covering #floating-btn-visual-key (bottom: 14px, left: 14px, z-index: 10).",
+      "architecturalRedesignSpec": "Modularize the bloated 22-button transport bar into a compact, single-row 48px glass transport dock containing ONLY simulation playback (Play/Pause, Step, Speed, Shaker). Move camera presets into the 3D viewport camera cluster (#floating-camera-nav-pill). Move environmental filters (Spores, Water, Bedrock, Conduits, Auras, Rays) into a collapsible floating \"Layers\" drawer. Float #floating-env-pill at top-center (below header) or bottom-right. Elevate #floating-btn-visual-key to bottom: 76px with z-index 35."
+    },
+    "defectC": {
+      "name": "Visual Lenses Failing to Morph Live Silicoid Organisms into Proposal Depictions (Remaining Rigid Circular Pore Rings)",
+      "affectedViewports": [
+        "ALL (1920x1080, 1440x900, 1280x800)"
+      ],
+      "severity": "HIGH ARCHITECTURAL DEFECT (P1)",
+      "measurements": {
+        "seafloorRendererLiveCode": {
+          "file": "src/visualizers/SeafloorRenderer3D.ts",
+          "method": "drawSilicoidOrganism(hex, radius, isSelected)",
+          "lines": "2209-2222",
+          "executedPrimitives": {
+            "lattice": "ctx.arc(cx, cy, bodyR * breath, 0, Math.PI * 2) + nodule circles",
+            "plasmodium": "ctx.arc(cx, cy, bodyR * breath, 0, Math.PI * 2) (NO amoeboid hull, NO syncytial slime envelope)",
+            "vascular": "ctx.arc(cx, cy, bodyR * breath, 0, Math.PI * 2) (NO internal cytoplasmic ribbons, NO streaming chevrons)",
+            "potential": "ctx.arc(cx, cy, bodyR * breath, 0, Math.PI * 2) + radial gradient halo behind it",
+            "hybrid": "ctx.arc(cx, cy, bodyR * breath, 0, Math.PI * 2) (Identical circular disc)"
+          }
+        },
+        "chronicleOfflineCode": {
+          "file": "src/visualizers/KinematicsOverlay.ts",
+          "method": "renderKinematicBody(ctx, camera, w, h, body, stain, ...)",
+          "lines": "235-555",
+          "executedPrimitives": {
+            "lattice": "Discrete cellular CPK spheres with dashed hexagonal lattice links",
+            "plasmodium": "Bio-smoothed organic syncytial hull connecting pores with fleshy protoplasmic bridges and traveling peristaltic contraction waves",
+            "vascular": "Double-walled hydraulic conduits with quadratic bezier curves and animated streaming directional chevrons",
+            "potential": "Continuous scalar energy/GRN potential heatmap with scarlet/amber/cyan/violet isosurfaces",
+            "hybrid": "Multi-layer composite of translucent syncytial hull + internal vascular ribbons + organelle nuclei"
+          }
+        }
+      },
+      "rootCauseCode": "The multi-lens biological rendering engine developed in KinematicsOverlay.ts for Chronicle replay was never integrated into SeafloorRenderer3D.ts for live simulation. In SeafloorRenderer3D.ts, drawSilicoidOrganism() hardcodes a rigid 2D circle (ctx.arc) regardless of activeLensMode, so users switching lenses in Observatory, Safari, or Laboratory see no change in organism morphology.",
+      "architecturalRedesignSpec": "Refactor SeafloorRenderer3D.ts to consume the lens drawing algorithms from KinematicsOverlay.ts. When in \"plasmodium\" or \"hybrid\" lens mode, compute the 2D concave boundary of adjacent occupied pores and render a continuous undulating syncytial envelope with peristaltic waves. When in \"vascular\" lens mode, render inter-pore hydraulic conduits with animated streaming chevrons representing metabolite shuttle transport."
+    }
+  },
+  "moduleUsabilityScorecard": {
+    "observatory": {
+      "score": 72,
+      "max": 100,
+      "grade": "C-",
+      "status": "PARTIALLY FUNCTIONAL",
+      "pros": [
+        "Serene, atmospheric abyssal hydrothermal aesthetics",
+        "Smooth 3D orbit camera controls with caldera and top-down presets",
+        "Functional 3D reticle lock displaying specimen coordinates and vitals in observation card",
+        "Ecosystem Shaker / God-Mode perturbation panel works smoothly",
+        "Clean fullscreen mode (F / Esc) provides an immersive view"
+      ],
+      "cons": [
+        "Telemetry header bar severely clipped on viewports <= 1440px",
+        "Bottom transport bar collides with and covers #floating-env-pill and #floating-btn-visual-key",
+        "Visual lenses fail to morph live silicoid organisms"
+      ]
+    },
+    "safari": {
+      "score": 84,
+      "max": 100,
+      "grade": "B",
+      "status": "MOSTLY FUNCTIONAL",
+      "pros": [
+        "Guided Co-Pilot docked panel with specimen counter (Specimen X of Y)",
+        "Rich specimen dossiers with binomial taxonomy, ecological role, and natural function",
+        "Automated tour feature with smooth camera fly-to animations",
+        "Real-time circuit schematic synchronization in side canvas",
+        "One-click jump-to-pore navigation"
+      ],
+      "cons": [
+        "Zero sound or audio feedback (no hydrophone ambient sound, no acoustic chimes)",
+        "Header bar telemetry clipped on student laptops",
+        "Chroma isolation leaves empty space rather than biological context"
+      ]
+    },
+    "laboratory": {
+      "score": 94,
+      "max": 100,
+      "grade": "A",
+      "status": "EXCELLENT / FULLY FUNCTIONAL",
+      "pros": [
+        "Strict thermodynamic conservation invariant confirmed (ΔE = 0.000, ΔM = 0.000)",
+        "Landauer dissipation meters and heat dissipation accounting fully operational",
+        "60-bit genome codon tape with degenerate codons and neutral introns",
+        "2D Boolean workshop with live input probes (Stream A, B, Toxin T)",
+        "Persistent Cryo-Vault Bio-Bank with JSON export/import and inoculation registry",
+        "Stress assays (thermal surge, cryogenic downwelling, extinction event) execute flawlessly"
+      ],
+      "cons": [
+        "Header bar clipped on viewports <= 1440px",
+        "High cognitive load and density of parameters for novice learners"
+      ]
+    },
+    "designStudio": {
+      "score": 92,
+      "max": 100,
+      "grade": "A-",
+      "status": "EXCELLENT / FULLY FUNCTIONAL",
+      "pros": [
+        "Full 3D benthic geomorphology sculpting CAD with 7 hexagonal brushes",
+        "Active brush indicator banner and radius/height controls",
+        "Geodynamics sliders (porosity, roughness, spire height, vent placement, volatility)",
+        "Sterile environment pre-flight advisory modal with \"Seed Founder Strains\" vs \"Begin Sterile Simulation\"",
+        "Preset system (twin-smokers, abyssal-trench, alkaline-mound, caldera-maze, lenski-chamber)"
+      ],
+      "cons": [
+        "Tool hotkeys [1-7] conflict with Chronicle tour aspect hotkeys [1-4]",
+        "Undo/redo depth needs clearer visual indicators"
+      ]
+    },
+    "chronicle": {
+      "score": 89,
+      "max": 100,
+      "grade": "B+",
+      "status": "HIGH FUNCTIONALITY",
+      "pros": [
+        "Flight recorder playback dock with timeline scrubbing and frame counter",
+        "A-B loop playback with toggle and speed multipliers (0.5x to 10x)",
+        "5 histological stains (Morphology, GRN Operon, Vascular, Battery/Redox, Weisfeiler-Lehman)",
+        "Guided tour HUD with up to 11 curated pedagogical stops",
+        "Organic multi-lens rendering in KinematicsOverlay.ts"
+      ],
+      "cons": [
+        "Discrepancy between organic rendering in Chronicle vs rigid circular discs in live Observatory",
+        "Aspect switcher hotkeys (1-4) need clearer on-screen keycap badges"
+      ]
+    }
+  },
+  "biophysicalFidelityAssessment": {
+    "autopoiesis": {
+      "model": "Maturana & Varela (1980); Ruiz-Mirazo & Moreno (2004)",
+      "status": "PASS",
+      "details": "Pores maintain non-equilibrium internal chemical concentrations bounded by lipid membranes. Energy-driven regeneration of catalysts prevents entropic degradation."
+    },
+    "epistemicCut": {
+      "model": "Howard Pattee (1969, 1982, 2001)",
+      "status": "PASS",
+      "details": "Strict separation between inert symbol (60-bit codon tape) and dynamic construction (active logic gates). Replication is blind tape copying without executing gates; phenotypic expression occurs only through physical chemical catalysts."
+    },
+    "landauerThermodynamics": {
+      "model": "Rolf Landauer (1961); Charles Bennett (1982)",
+      "status": "PASS (ΔE = 0.000, ΔM = 0.000)",
+      "details": "Every non-reversible logic gate erasure dissipates exactly kT ln 2 of free energy into heat. Total universe energy and mass balance is strictly conserved with 0.000 tolerance."
+    },
+    "uriAlonMotifs": {
+      "model": "Uri Alon (2007) Network Motifs",
+      "status": "PASS",
+      "details": "Automated graph isomorphism detector accurately identifies feed-forward loops (FFL), bistable latch hysteresis switches, and repressilator 3-inverter clocks."
+    },
+    "chemiosmoticGradients": {
+      "model": "Peter Mitchell (1961); Nick Lane & William Martin (2006)",
+      "status": "PASS",
+      "details": "Hydrothermal chimney fluid drives chemiosmotic electron flux across mineral pore walls, generating battery tokens without requiring ATP synthase smuggling."
+    }
+  },
+  "prioritizedPunchList": [
+    {
+      "id": "PL-01",
+      "priority": "P0",
+      "category": "UI Geometry / Collision",
+      "title": "Decouple & Eliminate Transport Bar Collisions with #floating-env-pill and #floating-btn-visual-key",
+      "description": "Refactor the 22-button transport bar into a compact 48px simulation transport dock. Relocate camera tools to #floating-camera-nav-pill and environmental toggles to a collapsible Layers flyout. Reposition #floating-env-pill to top-center and elevate #floating-btn-visual-key to bottom: 76px with z-index: 35.",
+      "targetFiles": [
+        "index.html",
+        "src/main.ts",
+        "src/ui/InteractiveControls.ts"
+      ]
+    },
+    {
+      "id": "PL-02",
+      "priority": "P0",
+      "category": "Telemetry Accessibility",
+      "title": "Architect Responsive Single-Row Header Bar with Permanent Vital Telemetry",
+      "description": "Move workspace mode selector and lens selector out of the top header bar (into a sleek left-rail HUD dock or viewport controls). Ensure top header always displays the 5 vital metrics (Population, Spores, Clades, Generations, Epoch Ticks) across all viewports down to 1280x800 with zero clipping.",
+      "targetFiles": [
+        "index.html",
+        "src/ui/HUDController.ts",
+        "src/main.ts"
+      ]
+    },
+    {
+      "id": "PL-03",
+      "priority": "P1",
+      "category": "Visual Systems Biology",
+      "title": "Port Organic Multi-Lens Rendering from KinematicsOverlay to Live SeafloorRenderer3D",
+      "description": "Upgrade drawSilicoidOrganism() in SeafloorRenderer3D.ts to render organic syncytial slime mold hulls in Plasmodium mode, continuous vascular conduits with animated streaming chevrons in Vascular mode, and multi-layer envelopes in Hybrid mode, eliminating rigid circular pore rings.",
+      "targetFiles": [
+        "src/visualizers/SeafloorRenderer3D.ts",
+        "src/visualizers/KinematicsOverlay.ts"
+      ]
+    },
+    {
+      "id": "PL-04",
+      "priority": "P2",
+      "category": "Audio Experience",
+      "title": "Implement WebAudio Hydrophone Ambient Synthesizer & Safari Acoustic Feedback",
+      "description": "Create WebAudio HydrophoneSynthesizer providing deep-sea low-frequency hydrothermal ambient hum, resonant chiming when clicking silicoids, and distinct harmonic chords during evolutionary discoveries and safari specimen transitions.",
+      "targetFiles": [
+        "src/ui/AudioSynthesizer.ts",
+        "src/ui/NaturalistAssistant.ts",
+        "src/main.ts"
+      ]
+    },
+    {
+      "id": "PL-05",
+      "priority": "P2",
+      "category": "Cognitive Ergonomics",
+      "title": "Introduce Progressive Disclosure & Guided Onboarding for Novice STEM Learners",
+      "description": "Add an optional \"Curriculum Guide\" overlay for first-time students that highlights the 3 core biophysical principles (Battery, Genome, Logic Gate) before exposing advanced geodynamics dials and Weisfeiler-Lehman hashes.",
+      "targetFiles": [
+        "src/ui/NaturalistAssistant.ts",
+        "src/ui/HUDController.ts"
+      ]
+    },
+    {
+      "id": "PL-06",
+      "priority": "P3",
+      "category": "Polish & Hotkey Hygiene",
+      "title": "Resolve Hotkey Conflicts Between Studio CAD Tools [1-7] and Chronicle Tour Aspects [1-4]",
+      "description": "Scope number hotkeys strictly to active workspace mode, and display clear keyboard badges on interactive buttons.",
+      "targetFiles": [
+        "src/main.ts",
+        "src/ui/ChronicleTourGuide.ts"
+      ]
+    }
+  ]
+}

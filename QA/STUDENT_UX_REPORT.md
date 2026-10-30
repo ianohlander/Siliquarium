@@ -1,9 +1,6 @@
-# 🔬 Siliquarium Student QA & Usability Report
+# 🔬 Siliquarium Student & Novice Learner Usability Audit
 **Document ID:** `QA/STUDENT_UX_REPORT.md`  
-**Date:** September 25, 2026  
-**Investigator:** Alex Rivera (12th Grade Senior, AP Biology & AP Computer Science A / Systems Track)  
-**Academic Institution:** STEM Magnet Academy for Advanced Science & Technology  
-**Instructor:** Dr. Evelyn Vance, Department of Biophysics & Computational Life Sciences  
+**Evaluation Track:** Introductory STEM & Systems Biology Student Archetype  
 **Curricular Reference:** [`docs/CURRICULUM_AND_SYLLABUS.md`](file:///h:/My%20Drive/Repos/Siliquarium/docs/CURRICULUM_AND_SYLLABUS.md) (Practicums 1, 2, 3, & 4)  
 **Test Surface:** Real browser interaction on Microsoft Edge (Chromium Engine v128, 1920×1080 display, DOM event dispatch at human input cadence)  
 **Live Target:** `http://localhost:3000` (Local Vite/TypeScript Build)
@@ -35,19 +32,19 @@
 
 ## 1. Student Profile & Curriculum Objectives
 
-### 1.1 Student Persona & Technical Context
-My name is Alex Rivera. I am a 12th-grade senior concurrently taking **AP Biology** and **AP Computer Science A** (with an independent study in Systems & Graph Algorithms). I have spent the last three weeks working through our assigned textbook curriculum, the *Siliquarium Curriculum & Lab Manual* ([`docs/CURRICULUM_AND_SYLLABUS.md`](file:///h:/My%20Drive/Repos/Siliquarium/docs/CURRICULUM_AND_SYLLABUS.md)), investigating the biophysical foundations of non-equilibrium thermodynamics, silicon-based autopoiesis, and digital macro-evolution.
+### 1.1 Learner Archetype & Technical Context
+This usability evaluation examines Siliquarium through the lens of a student learner concurrently taking introductory biology and computer science (such as AP Biology / AP Computer Science or 1st-year undergraduate STEM). The audit investigates how effectively the platform communicates the biophysical foundations of non-equilibrium thermodynamics, silicon-based autopoiesis, and digital macro-evolution without presenting gratuitous complexity barriers.
 
-In AP Bio, we spent months memorizing oxidative phosphorylation, the Krebs cycle, and Peter Mitchell's chemiosmotic hypothesis. In AP CS, we built binary trees, Boolean logic gates, and graph traversals. But until running Siliquarium, those two disciplines felt like completely disconnected worlds. Siliquarium is the first tool I have used where **enzymes are literally Boolean logic gates** (`AND`, `OR`, `NOT`, `XOR`) and where **fitness is not a cheat score or external loss function**, but simple physical persistence governed by Rolf Landauer's thermodynamic limit ($k_B T \ln 2$).
+In typical introductory biology courses, students study oxidative phosphorylation, the Krebs cycle, and Peter Mitchell's chemiosmotic hypothesis. In computer science, they study binary trees, Boolean logic gates, and graph traversals. Siliquarium bridges these disciplines: **enzymes operate as Boolean logic gates** (`AND`, `OR`, `NOT`, `XOR`) and **fitness is governed by physical persistence under Rolf Landauer's thermodynamic limit ($k_B T \ln 2$)**.
 
 ### 1.2 Laboratory Practicum Mandates
-For this formal testing session, Dr. Vance tasked me with executing four core laboratory practicums outlined in Section 7 of the manual:
+This formal testing session evaluated the four core laboratory practicums outlined in Section 7 of [`docs/CURRICULUM_AND_SYLLABUS.md`](file:///h:/My%20Drive/Repos/Siliquarium/docs/CURRICULUM_AND_SYLLABUS.md):
 - **Practicum 1 (Hydrothermal Seafloor & Circuit Microscope):** Navigate the 3D seamount, inspect inorganic mineral pores versus fluid parcels, test the 3D reticle lock, and verify Howard Pattee's *Epistemic Cut* by juxtaposing the rate-independent 60-bit 1D genome tape against the rate-dependent 2D workshop logic gates.
 - **Practicum 2 (Landauer Dissipation & Metabolic Starvation):** Track dynamic switching power dissipation ($1\text{ token per gate toggle}$) against basal membrane leakage ($1\text{ token per 10 ticks}$), witness an uncoordinated circuit starve to death into a mineralizing carcass, and verify the first law of thermodynamics ($\Delta E_{\text{universe}} = 0.000$).
 - **Practicum 3 (Redox Gradient Adaptation):** Observe populations under multi-scale cyclic vent flows (Stream A fuel, Stream B oxidizer, and intermittent Toxin T corrosive pulses), noting how natural selection sieves for coordinated `AND` co-catalysts and inhibitory `NOT` gates.
 - **Practicum 4 (God-Suite Perturbations):** Execute interactive environmental stresses using the Lab Flyout—injecting a $+200\text{ token}$ thermal surge to trigger exponential fission, deploying catastrophic localized extinction pulses ($r=2$), measuring Shannon Diversity Index ($H$) collapses, and logging secondary succession driven by buoyant pelagic spore advection.
 
-Over a 90-minute testing session, I interacted with the live web application on Microsoft Edge at `http://localhost:3000` using standard mouse and keyboard inputs at realistic student speeds. Below is my candid, comprehensive evaluation of what works brilliantly, where the interface actively fights the student, and how the developers can elevate this platform from a fascinating prototype to an effortless learning instrument.
+Over a 90-minute testing session, the live web application was operated on Microsoft Edge at `http://localhost:3000` using standard mouse and keyboard inputs at realistic student interaction speeds. Below is a candid, comprehensive evaluation of what works brilliantly, where the interface introduces friction, and how developers can elevate this platform into an effortless learning instrument.
 
 ---
 
@@ -611,9 +608,7 @@ As documented in this report, the current interaction surface suffers from class
 Implementing the five concrete engineering recommendations detailed above—especially **cursor-centric raycast zooming**, **transparent aqueous raycast pass-through**, and **elevating the transport bar z-index**—will eliminate this friction entirely. Once these ergonomics are in place, Siliquarium will be an unbeatable, world-class teaching platform for university and high school STEM education.
 
 ---
-**Report Filed By:**  
-*Alex Rivera*  
-Senior Candidate, STEM Honors Diploma  
-Thomas Jefferson High School for Science and Technology  
-Contact: `alex.rivera@stem-siliquarium-lab.org`  
-GitHub Committer Ref: `siliquarium-qa-student-eval-2026`
+**Evaluation Audit Completed:**  
+Usability & Educational Ergonomics Review Track  
+Automated & Human-in-the-Loop QA Evaluation  
+GitHub Committer Ref: `siliquarium-qa-student-eval`

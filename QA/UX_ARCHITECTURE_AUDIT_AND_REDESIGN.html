@@ -1,0 +1,2067 @@
+<!-- 🐠 Siliquarium Open-Ended Digital Life & Silicon Abiogenesis Laboratory • Created by & Copyright © 2026 Ian Ohlander. All rights reserved. -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siliquarium UX/UI Architecture Audit &amp; Complete Interface Redesign Specification — Siliquarium Master Documentation</title>
+  <link rel="icon" type="image/jpeg" href="../docs/assets/logos/logo.jpg">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bio: {
+              bg: '#060911',
+              surface: '#0a0e1a',
+              panel: '#121829',
+              card: '#0f172a',
+              border: '#1e2c4a',
+              cyan: '#00e5ff',
+              amber: '#f59e0b',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              purple: '#a855f7',
+              sky: '#38bdf8'
+            }
+          },
+          fontFamily: {
+            mono: ['Cascadia Code', 'Fira Code', 'Consolas', 'monospace'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- MathJax Configuration with single-dollar inline math and KaTeX compatibility -->
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/color', '[tex]/configmacros'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        packages: {'[+]': ['color', 'configmacros', 'ams']},
+        macros: {
+          color: ['\\\\textcolor{#1}{#2}', 2]
+        }
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.mermaid) {
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'dark',
+          themeVariables: {
+            darkMode: true,
+            background: '#0a0e1a',
+            primaryColor: '#00e5ff',
+            primaryBorderColor: '#00e5ff',
+            primaryTextColor: '#e2e8f0',
+            lineColor: '#38bdf8',
+            secondaryColor: '#1e293b',
+            tertiaryColor: '#0f172a'
+          }
+        });
+      }
+    });
+  </script>
+
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #060911; }
+    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+
+    .card-bio, .card-chemiosmotic {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .card-digital, .card-silicon {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.4);
+    }
+    .card-margin, .card-analogy {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+    .card-experiment, .card-paleo {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+    }
+    .svg-container {
+      background: #090e15;
+      border: 1px solid #1e2c4a;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      overflow-x: auto;
+    }
+
+    /* Citation & Note Target Highlighting & Interactive Navigation */
+    html { scroll-behavior: auto; }
+    li[id^="ref-"], li[id^="note-"], div[id^="note-"] {
+      scroll-margin-top: 6rem;
+      position: relative;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    @keyframes refTargetPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.95), 0 0 40px rgba(0, 229, 255, 0.85), inset 0 0 15px rgba(0, 229, 255, 0.35);
+        border-color: #22d3ee;
+        background-color: rgba(8, 51, 68, 0.95);
+        transform: scale(1.02);
+      }
+      30% {
+        box-shadow: 0 0 0 6px rgba(0, 229, 255, 0.45), 0 0 50px rgba(0, 229, 255, 0.7), inset 0 0 20px rgba(0, 229, 255, 0.25);
+        border-color: #38bdf8;
+        background-color: rgba(8, 51, 68, 0.92);
+        transform: scale(1.015);
+      }
+      100% {
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.6), 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 12px rgba(0, 229, 255, 0.15);
+        border-color: #00e5ff;
+        background-color: rgba(8, 51, 68, 0.88);
+        transform: scale(1);
+      }
+    }
+    @keyframes badgePopIn {
+      0% { opacity: 0; transform: translateY(6px) scale(0.8); }
+      60% { opacity: 1; transform: translateY(-2px) scale(1.06); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    li[id^="ref-"]:target,
+    li[id^="ref-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #22d3ee !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
+    }
+    li[id^="note-"]:target,
+    li[id^="note-"].active-citation-target,
+    div[id^="note-"]:target,
+    div[id^="note-"].active-citation-target {
+      animation: refTargetPulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border-color: #38bdf8 !important;
+      background-color: rgba(8, 51, 68, 0.88) !important;
+      z-index: 20;
+    }
+    li[id^="ref-"]:target::after,
+    li[id^="ref-"].active-citation-target::after {
+      content: "CITED IN TEXT 🎯";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0891b2, #0284c7);
+      color: #ffffff;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+    li[id^="note-"]:target::after,
+    li[id^="note-"].active-citation-target::after,
+    div[id^="note-"]:target::after,
+    div[id^="note-"].active-citation-target::after {
+      content: "ANNOTATED NOTE 📝";
+      position: absolute;
+      top: -12px;
+      right: 14px;
+      font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #ffffff;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid #38bdf8;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.85);
+      animation: badgePopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+
+    /* Highlight reference number [n] */
+    li[id^="ref-"]:target > span:first-child,
+    li[id^="ref-"].active-citation-target > span:first-child,
+    li[id^="note-"]:target > span:first-child,
+    li[id^="note-"].active-citation-target > span:first-child {
+      color: #38bdf8 !important;
+      text-shadow: 0 0 12px rgba(56, 189, 248, 1);
+      transform: scale(1.15);
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    sup a[href^="#ref-"], sup a[href^="#note-"] {
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 0 1px;
+    }
+    sup a[href^="#ref-"]:hover, sup a[href^="#note-"]:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 8px #22d3ee;
+      transform: translateY(-1px);
+    }
+    sup[id^="fnref-"]:target, a[id^="fnref-"]:target,
+    sup[id^="cite_ref-"]:target, sup[id^="cite_ref-"].active-backlink-target,
+    sup.active-backlink-target {
+      animation: backlinkTargetFlash 2.5s ease-out;
+      outline: 2px solid #00e5ff;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    section[id], div[id], h2[id], h3[id] {
+      scroll-margin-top: 5.5rem;
+    }
+    @keyframes backlinkTargetFlash {
+      0% { outline: 3px solid rgba(0, 229, 255, 0.9); outline-offset: 4px; }
+      100% { outline: 3px solid transparent; outline-offset: 4px; }
+    }
+    section[id]:target, div[id]:target {
+      animation: backlinkTargetFlash 2.5s ease-out;
+    }
+  </style>
+
+  <script id="citation-navigator">
+    document.addEventListener('DOMContentLoaded', function() {
+      function highlightRefCard(targetId) {
+        if (!targetId || (!targetId.startsWith('ref-') && !targetId.startsWith('note-'))) return;
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        document.querySelectorAll('li[id^="ref-"].active-citation-target, li[id^="note-"].active-citation-target, div[id^="note-"].active-citation-target').forEach(function(item) {
+          item.classList.remove('active-citation-target');
+        });
+        el.classList.remove('active-citation-target');
+        void el.offsetWidth;
+        el.classList.add('active-citation-target');
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      function scrollToTarget(targetId) {
+        if (!targetId) return;
+        if (targetId.startsWith('ref-') || targetId.startsWith('note-')) {
+          highlightRefCard(targetId);
+          return;
+        }
+        const el = document.getElementById(targetId) || document.querySelector('[name="' + targetId + '"]');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.remove('active-backlink-target');
+          void el.offsetWidth;
+          el.classList.add('active-backlink-target');
+          setTimeout(() => el.classList.remove('active-backlink-target'), 2500);
+        }
+      }
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href && href.includes('#')) {
+            const hash = href.substring(href.indexOf('#') + 1);
+            if (hash.startsWith('ref-') || hash.startsWith('note-')) {
+              highlightRefCard(hash);
+            } else if (hash.startsWith('cite_ref-') || hash.startsWith('fnref-')) {
+              e.preventDefault();
+              history.pushState(null, '', '#' + hash);
+              scrollToTarget(hash);
+            }
+          }
+        }
+      });
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) scrollToTarget(hash);
+      });
+      function checkInitialHash() {
+        if (window.location.hash) {
+          const hash = window.location.hash.replace('#', '');
+          scrollToTarget(hash);
+        }
+      }
+      checkInitialHash();
+      setTimeout(checkInitialHash, 150);
+      setTimeout(checkInitialHash, 500);
+      window.addEventListener('load', function() {
+        setTimeout(checkInitialHash, 100);
+      });
+      if (window.MathJax && window.MathJax.startup) {
+        window.MathJax.startup.promise = window.MathJax.startup.promise.then(function() {
+          setTimeout(checkInitialHash, 100);
+        });
+      }
+
+      // Sidebar & Dropdown Controller
+      const toggleBtn = document.getElementById('sidebar-toggle-btn');
+      const closeBtn = document.getElementById('sidebar-close-btn');
+      const sidebar = document.getElementById('doc-sidebar');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      const dropdownBtn = document.getElementById('nav-dropdown-btn');
+      const dropdownMenu = document.getElementById('nav-dropdown-menu');
+
+      function openSidebar() {
+        if (sidebar && backdrop) {
+          sidebar.classList.remove('-translate-x-full');
+          backdrop.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+      function closeSidebar() {
+        if (sidebar && backdrop) {
+          sidebar.classList.add('-translate-x-full');
+          backdrop.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      }
+
+      if (toggleBtn) toggleBtn.addEventListener('click', openSidebar);
+      if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+      if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+      if (dropdownBtn && dropdownMenu) {
+        dropdownBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          dropdownMenu.classList.toggle('hidden');
+        });
+        document.addEventListener('click', function(e) {
+          if (!dropdownMenu.contains(e.target) && e.target !== dropdownBtn) {
+            dropdownMenu.classList.add('hidden');
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
+
+  <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
+  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <!-- Mobile/Drawer Toggle Button -->
+        <button id="sidebar-toggle-btn" class="lg:hidden p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 transition-colors font-mono text-xs flex items-center gap-1.5 shrink-0" aria-label="Toggle Navigation">
+          <span>☰</span>
+          <span class="hidden sm:inline">Docs Menu</span>
+        </button>
+
+        <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
+          <a href="../docs/index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
+            <img src="../docs/assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
+            <span class="hidden sm:inline">Siliquarium</span>
+            <span class="sm:hidden">Portal</span>
+          </a>
+          <span class="text-slate-600">/</span>
+          <span class="text-cyan-400 font-semibold truncate">Siliquarium UX/UI Architecture Audit &amp; Complete Interface Redesign Specification</span>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- Quick Mega-Menu Dropdown Button -->
+        <div class="relative">
+          <button id="nav-dropdown-btn" class="px-2.5 py-1 bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-300 hover:border-cyan-700/60 rounded-lg text-xs font-mono transition-all flex items-center gap-1.5 shadow-sm">
+            <span>🧭</span>
+            <span>Explore Docs</span>
+            <span class="text-[10px] text-slate-500">▾</span>
+          </button>
+          <!-- Mega-Menu Overlay -->
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+            <div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🌋</span>
+        <span>Volume I: Prebiotic Biophysics</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../docs/THEORETICAL_MODEL.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">1. Theoretical Model</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">21 sealed sections & thermodynamic laws</div>
+        </div>
+      </a><a href="../docs/EPISTEMIC_FOUNDATIONS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">2. Epistemic Foundations</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Howard Pattee's Epistemic Cut & defenses</div>
+        </div>
+      </a><a href="../docs/REALITY_TO_SIMULATION_TRANSLATION_MATRIX.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔄</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">3. Translation Matrix (Reality ↔ Sim)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Grounding physical metaphors to computational invariants</div>
+        </div>
+      </a><a href="../docs/DEEP_SEA_PROTO_COGNITION_AND_VENT_BIOPHYSICS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧠</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">4. Proto-Cognition & Vent Biophysics</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Sensory-motor coupling, temporal derivatives & biophysics</div>
+        </div>
+      </a><a href="../docs/THE_GENETIC_BOOK_OF_THE_DEAD.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">5. Book of the Dead</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Dawkins, Adami & Environmental Info</div>
+        </div>
+      </a><a href="../docs/curriculum/unit1_prebiotic_threshold.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">6. Unit 1: Prebiotic Vents</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Alkaline vents, chemiosmosis & Pattee's cut</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🧬</span>
+        <span>Volume II: Gene Regulatory Networks</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../docs/GENE_REGULATORY_NETWORKS_VOLUME.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">1. GRNs & Attractors (Vol II)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Biological & digital GRNs, attractors & Waddington</div>
+        </div>
+      </a><a href="../docs/curriculum/unit2_logic_of_life.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚡</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">2. Unit 2: Logic of Life</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Primitive enzymes & XOR impossibility proof</div>
+        </div>
+      </a><a href="../docs/curriculum/unit3_systems_biology_motifs.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🕸️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">3. Unit 3: Systems Motifs</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Uri Alon motifs & Weisfeiler-Lehman hashes</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🌸</span>
+        <span>Volume III: Multicellular Morphology</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../docs/MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌸</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">1. Multicellular Morphology (Vol III)</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Graph theory, 3-cliques & 5 body topologies</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🦕</span>
+        <span>Volume IV: Circuit Paleontology</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../docs/CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Field Guide</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Master taxonomy, philosophy & WL hash overview</div>
+        </div>
+      </a><a href="../docs/curriculum/unit4_evolutionary_dynamics.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Unit 4: Macro-Evolution</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Kimura drift, convergent homoplasy & LTEE</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_01_bistable_latch.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔒</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 1: Bistable Latch</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">1-bit memory latch & SR flip-flop</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_02_repressilator.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔄</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 2: Repressilator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Odd-inverter ring oscillator & clock</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_03_coherent_ffl.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⏳</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 3: Coherent FFL</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Sign-sensitive delay & persistence filter</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_04_incoherent_ffl.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚡</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 4: Incoherent FFL</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Fold-change adaptation & pulse generator</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_05_negative_autoregulation.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎚️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 5: Negative Autoreg</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Homeostatic clamp & response accelerator</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_06_binary_half_adder.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧮</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 6: Binary Half-Adder</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Arithmetic sum (XOR) & carry (AND)</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_07_allosteric_inverter.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🛡️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 7: Allosteric NOT</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Toxin defense & inverter shielding</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_08_endosymbiotic_cassette.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 8: Endosymbiont</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Organelle cassette & metabolic boost</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_09_syncytial_multicellularity.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🕸️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 9: Syncytium</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Multi-pore fusion & cytoplasmic sharing</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_10_pelagic_sporulation.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 10: Pelagic Spores</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Buoyant dispersal & benthic escape</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_11_chemiosmotic_autotroph.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌋</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 11: Apex Autotroph</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Mitchell PMF & hydrothermal plume coupling</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_12_basalt_lithotroph.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🪨</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 12: Basalt Lithotroph</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Deep subterranean starvation & Landauer thrift</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_13_trophic_predator.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🩸</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 13: Trophic Predator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Lytic enzymatic siphoning & heterotrophy</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_14_detrital_scavenger.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🍂</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 14: Detrital Scavenger</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Carcass necromass & mineral mass recycling</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_15_patriarch_lineage.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 15: Patriarch Ancestor</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Conserved primordial genome & LTEE anchor</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_16_temporal_derivative_chemotaxis.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧭</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 16: Chemotaxis Engine</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Purcell-Berg fold-change dS/dt gradient sensor</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_17_predictive_pavlovian.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔮</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 17: Pavlovian Regulator</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Tagkopoulos anticipatory precursor feedforward shield</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_18_entrained_pacemaker.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⏱️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 18: Entrained Pacemaker</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Johnson-Rust phase-locked KaiABC vent clock</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_19_steiner_vascular_network.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌿</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 19: Steiner Vascular Net</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Nakagaki Physarum minimal tree conduit router</div>
+        </div>
+      </a><a href="../docs/paleontology/specimen_20_cryptobiotic_dormancy_clamp.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🛡️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Specimen 20: Dormancy Clamp</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Balaban HipAB zero-burn cryptobiosis gate</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🛠️</span>
+        <span>Volume V: Systems Operations</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../docs/USER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Illustrated Systems Manual</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">10-chapter illustrated manual & tutorials</div>
+        </div>
+      </a><a href="../docs/curriculum/practicums_lab_manual.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧪</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Laboratory Practicums 1–5</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5 hands-on labs & formative assessments</div>
+        </div>
+      </a><a href="../docs/PHASE_3_VISUALIZER_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">3D Seafloor Visualizer</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Bathymetry, orbit camera & circuit microscope</div>
+        </div>
+      </a><a href="../docs/PHASE_4_PALEONTOLOGY_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🦕</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology & Motifs</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Weisfeiler-Lehman hashes & fossil freezer</div>
+        </div>
+      </a><a href="../docs/PHASE_5_PELAGIC_SPORES_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌊</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Pelagic Spores & Controls</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Buoyant spore drift & God-suite parameters</div>
+        </div>
+      </a><a href="../docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Phylogeny & Dynamics</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Multi-lineage clades & Lenski benchmarks</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>📚</span>
+        <span>Volume VI: Academic References</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../docs/index.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Master Library Portal</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Curriculum portal & modular index</div>
+        </div>
+      </a><a href="../docs/companion/glossary.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Systems Biology Glossary</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">70-term systems biology lexicon</div>
+        </div>
+      </a><a href="../docs/companion/study_guides.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧭</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Study Guides & Master Decoders</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">8 equation decoders & derivations</div>
+        </div>
+      </a><a href="../docs/companion/bibliography.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Annotated Master Bibliography</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">22 foundational primary papers</div>
+        </div>
+      </a><a href="../docs/curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎓</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Full-Year University Syllabus</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">30-week university curriculum & syllabus</div>
+        </div>
+      </a><a href="../docs/CIRCUIT_PALEONTOLOGY_NOTES.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📝</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Critical Scientific Notes</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">36 in-depth derivations, proofs & justifications</div>
+        </div>
+      </a><a href="../docs/CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📖</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Glossary</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">50-term lexicon of evolved circuits</div>
+        </div>
+      </a><a href="../docs/CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Paleontology Bibliography</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">25+ landmark peer-reviewed papers</div>
+        </div>
+      </a><a href="../docs/PEDAGOGICAL_COMPANION_SUITE.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Companion Portal</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Master portal & assessment rubrics</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>📏</span>
+        <span>Standards & Architecture</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../standards/DEVELOPMENT_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">⚙️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Engineering Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Architecture, TypeScript & design principles</div>
+        </div>
+      </a><a href="../standards/QA_AND_TESTING_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🧪</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">QA & Testing Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Verification, CI & unit test frameworks</div>
+        </div>
+      </a><a href="../standards/DOCUMENTATION_STANDARDS.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">📚</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Pedagogical Standards</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5-Dimension rubric & equation decoders</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🔍</span>
+        <span>QA & Field Evaluations</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="QA_CODING_STANDARDS_FULL_AUDIT_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">QA Coding Standards Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Comprehensive audit against DEVELOPMENT, QA & DOCS standards</div>
+        </div>
+      </a><a href="UX_ARCHITECTURE_AUDIT_AND_REDESIGN.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 bg-cyan-950/80 border border-cyan-700/60 text-cyan-300">
+        <span class="text-sm shrink-0 mt-0.5">📐</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-cyan-300">UX Architecture Audit & Redesign</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">5D HCI audit, domain integrity & interface redesign</div>
+        </div>
+      </a><a href="PANEL_UX_EVALUATION_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏛️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Panel Evaluation Report</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Expert & tester panel 4x 1-hour journeys</div>
+        </div>
+      </a><a href="DESIGN_STUDIO_UX_AUDIT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🏗️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Design Studio UX Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">CAD sculpting & world builder evaluation</div>
+        </div>
+      </a><a href="FIELD_GUIDE_NATURALIST_EVALUATION.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🌿</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Naturalist Field Evaluation</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Field guide & safari co-pilot audit</div>
+        </div>
+      </a><a href="NAIVE_USER_VISUAL_AUDIT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">👁️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Naive User Visual Audit</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Visual clarity & cognitive ergonomics audit</div>
+        </div>
+      </a><a href="STUDENT_UX_REPORT.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🔍</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Student QA Report</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">12th-grade usability audit & screenshots</div>
+        </div>
+      </a></div></div><div class="space-y-1.5">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
+        <span>🎨</span>
+        <span>Visuals & Identity</span>
+      </div>
+      <div class="grid grid-cols-1 gap-1"><a href="../docs/BRAND_IDENTITY.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🎨</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Brand Identity</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">Visual philosophy & biomorphic styling</div>
+        </div>
+      </a><a href="../docs/logos.html" class="p-2 rounded-lg transition-colors flex items-start gap-2.5 hover:bg-slate-900 text-slate-300">
+        <span class="text-sm shrink-0 mt-0.5">🖼️</span>
+        <div class="min-w-0">
+          <div class="font-bold text-xs text-slate-200">Logo Gallery</div>
+          <div class="text-[10px] text-slate-500 truncate font-sans">High-res Fibonacci nautilus asset suite</div>
+        </div>
+      </a></div></div>
+          </div>
+        </div>
+
+        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🚀</span>
+          <span class="hidden md:inline">Live Simulator</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MASTER 2-COLUMN VIEWPORT (Sidebar + Content) -->
+  <div class="max-w-7xl mx-auto flex-1 w-full flex">
+    <!-- LEFT CATEGORIZED SIDEBAR (Desktop Sticky + Mobile Off-Canvas) -->
+    <aside id="doc-sidebar" class="fixed lg:sticky top-0 lg:top-[45px] z-50 lg:z-10 h-screen lg:h-[calc(100vh-45px)] w-72 bg-[#060911]/95 lg:bg-transparent backdrop-blur-xl lg:backdrop-blur-none border-r border-slate-800/80 p-5 space-y-6 overflow-y-auto shrink-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-200">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800 lg:hidden">
+        <div class="flex items-center gap-2">
+          <img src="../docs/assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
+          <span class="text-xs font-mono font-bold text-cyan-400">Documentation Index</span>
+        </div>
+        <button id="sidebar-close-btn" class="text-slate-400 hover:text-white text-base font-mono p-1">✕</button>
+      </div>
+      <div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🌋</span>
+        <span>Volume I: Prebiotic Biophysics</span>
+      </div>
+      <div class="space-y-0.5"><a href="../docs/THEORETICAL_MODEL.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">1. Theoretical Model</span>
+      </a><a href="../docs/EPISTEMIC_FOUNDATIONS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">2. Epistemic Foundations</span>
+      </a><a href="../docs/REALITY_TO_SIMULATION_TRANSLATION_MATRIX.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔄</span>
+        <span class="truncate">3. Translation Matrix (Reality ↔ Sim)</span>
+      </a><a href="../docs/DEEP_SEA_PROTO_COGNITION_AND_VENT_BIOPHYSICS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧠</span>
+        <span class="truncate">4. Proto-Cognition & Vent Biophysics</span>
+      </a><a href="../docs/THE_GENETIC_BOOK_OF_THE_DEAD.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">5. Book of the Dead</span>
+      </a><a href="../docs/curriculum/unit1_prebiotic_threshold.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌋</span>
+        <span class="truncate">6. Unit 1: Prebiotic Vents</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🧬</span>
+        <span>Volume II: Gene Regulatory Networks</span>
+      </div>
+      <div class="space-y-0.5"><a href="../docs/GENE_REGULATORY_NETWORKS_VOLUME.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">1. GRNs & Attractors (Vol II)</span>
+      </a><a href="../docs/curriculum/unit2_logic_of_life.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚡</span>
+        <span class="truncate">2. Unit 2: Logic of Life</span>
+      </a><a href="../docs/curriculum/unit3_systems_biology_motifs.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🕸️</span>
+        <span class="truncate">3. Unit 3: Systems Motifs</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🌸</span>
+        <span>Volume III: Multicellular Morphology</span>
+      </div>
+      <div class="space-y-0.5"><a href="../docs/MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌸</span>
+        <span class="truncate">1. Multicellular Morphology (Vol III)</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🦕</span>
+        <span>Volume IV: Circuit Paleontology</span>
+      </div>
+      <div class="space-y-0.5"><a href="../docs/CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Paleontology Field Guide</span>
+      </a><a href="../docs/curriculum/unit4_evolutionary_dynamics.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Unit 4: Macro-Evolution</span>
+      </a><a href="../docs/paleontology/specimen_01_bistable_latch.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔒</span>
+        <span class="truncate">Specimen 1: Bistable Latch</span>
+      </a><a href="../docs/paleontology/specimen_02_repressilator.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔄</span>
+        <span class="truncate">Specimen 2: Repressilator</span>
+      </a><a href="../docs/paleontology/specimen_03_coherent_ffl.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⏳</span>
+        <span class="truncate">Specimen 3: Coherent FFL</span>
+      </a><a href="../docs/paleontology/specimen_04_incoherent_ffl.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚡</span>
+        <span class="truncate">Specimen 4: Incoherent FFL</span>
+      </a><a href="../docs/paleontology/specimen_05_negative_autoregulation.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎚️</span>
+        <span class="truncate">Specimen 5: Negative Autoreg</span>
+      </a><a href="../docs/paleontology/specimen_06_binary_half_adder.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧮</span>
+        <span class="truncate">Specimen 6: Binary Half-Adder</span>
+      </a><a href="../docs/paleontology/specimen_07_allosteric_inverter.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🛡️</span>
+        <span class="truncate">Specimen 7: Allosteric NOT</span>
+      </a><a href="../docs/paleontology/specimen_08_endosymbiotic_cassette.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔋</span>
+        <span class="truncate">Specimen 8: Endosymbiont</span>
+      </a><a href="../docs/paleontology/specimen_09_syncytial_multicellularity.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🕸️</span>
+        <span class="truncate">Specimen 9: Syncytium</span>
+      </a><a href="../docs/paleontology/specimen_10_pelagic_sporulation.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">Specimen 10: Pelagic Spores</span>
+      </a><a href="../docs/paleontology/specimen_11_chemiosmotic_autotroph.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌋</span>
+        <span class="truncate">Specimen 11: Apex Autotroph</span>
+      </a><a href="../docs/paleontology/specimen_12_basalt_lithotroph.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🪨</span>
+        <span class="truncate">Specimen 12: Basalt Lithotroph</span>
+      </a><a href="../docs/paleontology/specimen_13_trophic_predator.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🩸</span>
+        <span class="truncate">Specimen 13: Trophic Predator</span>
+      </a><a href="../docs/paleontology/specimen_14_detrital_scavenger.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🍂</span>
+        <span class="truncate">Specimen 14: Detrital Scavenger</span>
+      </a><a href="../docs/paleontology/specimen_15_patriarch_lineage.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Specimen 15: Patriarch Ancestor</span>
+      </a><a href="../docs/paleontology/specimen_16_temporal_derivative_chemotaxis.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧭</span>
+        <span class="truncate">Specimen 16: Chemotaxis Engine</span>
+      </a><a href="../docs/paleontology/specimen_17_predictive_pavlovian.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔮</span>
+        <span class="truncate">Specimen 17: Pavlovian Regulator</span>
+      </a><a href="../docs/paleontology/specimen_18_entrained_pacemaker.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⏱️</span>
+        <span class="truncate">Specimen 18: Entrained Pacemaker</span>
+      </a><a href="../docs/paleontology/specimen_19_steiner_vascular_network.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌿</span>
+        <span class="truncate">Specimen 19: Steiner Vascular Net</span>
+      </a><a href="../docs/paleontology/specimen_20_cryptobiotic_dormancy_clamp.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🛡️</span>
+        <span class="truncate">Specimen 20: Dormancy Clamp</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🛠️</span>
+        <span>Volume V: Systems Operations</span>
+      </div>
+      <div class="space-y-0.5"><a href="../docs/USER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Illustrated Systems Manual</span>
+      </a><a href="../docs/curriculum/practicums_lab_manual.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧪</span>
+        <span class="truncate">Laboratory Practicums 1–5</span>
+      </a><a href="../docs/PHASE_3_VISUALIZER_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔬</span>
+        <span class="truncate">3D Seafloor Visualizer</span>
+      </a><a href="../docs/PHASE_4_PALEONTOLOGY_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🦕</span>
+        <span class="truncate">Paleontology & Motifs</span>
+      </a><a href="../docs/PHASE_5_PELAGIC_SPORES_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌊</span>
+        <span class="truncate">Pelagic Spores & Controls</span>
+      </a><a href="../docs/PHASE_6_EVOLUTIONARY_DYNAMICS_GUIDE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧬</span>
+        <span class="truncate">Phylogeny & Dynamics</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>📚</span>
+        <span>Volume VI: Academic References</span>
+      </div>
+      <div class="space-y-0.5"><a href="../docs/index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Master Library Portal</span>
+      </a><a href="../docs/companion/glossary.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Systems Biology Glossary</span>
+      </a><a href="../docs/companion/study_guides.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧭</span>
+        <span class="truncate">Study Guides & Master Decoders</span>
+      </a><a href="../docs/companion/bibliography.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Annotated Master Bibliography</span>
+      </a><a href="../docs/curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎓</span>
+        <span class="truncate">Full-Year University Syllabus</span>
+      </a><a href="../docs/CIRCUIT_PALEONTOLOGY_NOTES.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📝</span>
+        <span class="truncate">Critical Scientific Notes</span>
+      </a><a href="../docs/CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📖</span>
+        <span class="truncate">Paleontology Glossary</span>
+      </a><a href="../docs/CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Paleontology Bibliography</span>
+      </a><a href="../docs/PEDAGOGICAL_COMPANION_SUITE.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Companion Portal</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>📏</span>
+        <span>Standards & Architecture</span>
+      </div>
+      <div class="space-y-0.5"><a href="../standards/DEVELOPMENT_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">⚙️</span>
+        <span class="truncate">Engineering Standards</span>
+      </a><a href="../standards/QA_AND_TESTING_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🧪</span>
+        <span class="truncate">QA & Testing Standards</span>
+      </a><a href="../standards/DOCUMENTATION_STANDARDS.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">📚</span>
+        <span class="truncate">Pedagogical Standards</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🔍</span>
+        <span>QA & Field Evaluations</span>
+      </div>
+      <div class="space-y-0.5"><a href="QA_CODING_STANDARDS_FULL_AUDIT_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">QA Coding Standards Audit</span>
+      </a><a href="UX_ARCHITECTURE_AUDIT_AND_REDESIGN.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all bg-cyan-950/80 text-cyan-300 border border-cyan-700/80 font-bold shadow-sm">
+        <span class="text-xs shrink-0">📐</span>
+        <span class="truncate">UX Architecture Audit & Redesign</span>
+      </a><a href="PANEL_UX_EVALUATION_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏛️</span>
+        <span class="truncate">Panel Evaluation Report</span>
+      </a><a href="DESIGN_STUDIO_UX_AUDIT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🏗️</span>
+        <span class="truncate">Design Studio UX Audit</span>
+      </a><a href="FIELD_GUIDE_NATURALIST_EVALUATION.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🌿</span>
+        <span class="truncate">Naturalist Field Evaluation</span>
+      </a><a href="NAIVE_USER_VISUAL_AUDIT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">👁️</span>
+        <span class="truncate">Naive User Visual Audit</span>
+      </a><a href="STUDENT_UX_REPORT.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🔍</span>
+        <span class="truncate">Student QA Report</span>
+      </a></div></div><div class="space-y-1">
+      <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
+        <span>🎨</span>
+        <span>Visuals & Identity</span>
+      </div>
+      <div class="space-y-0.5"><a href="../docs/BRAND_IDENTITY.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🎨</span>
+        <span class="truncate">Brand Identity</span>
+      </a><a href="../docs/logos.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-850/60">
+        <span class="text-xs shrink-0">🖼️</span>
+        <span class="truncate">Logo Gallery</span>
+      </a></div></div>
+    </aside>
+
+    <!-- Mobile Drawer Backdrop -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+    <!-- MAIN CONTENT VIEWPORT (Centered, Responsive, Zero Horizontal Scrollbars) -->
+    <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-10 py-8 md:py-10">
+      <div class="max-w-4xl mx-auto space-y-8">
+        <h1 id="siliquarium-uxui-architecture-audit-complete-interface-redesign-specification" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">📐 Siliquarium UX/UI Architecture Audit & Complete Interface Redesign Specification</h1>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Document ID:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">QA/UX_ARCHITECTURE_AUDIT_AND_REDESIGN.md</code></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Date:</strong> October 3, 2026</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Auditor:</strong> Principal UX/UI Architect & Human-Computer Interaction (HCI) Scientist</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Subject:</strong> Exhaustive 5-Dimension Usability Audit, Forensic Root-Cause Analysis, Domain Realignment, and Interface Redesign Specification for Siliquarium</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Evaluated Artifacts:</strong></p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><a href="file:///C:/Users/ianoh/.gemini/antigravity/brain/a2eae1fb-c38a-4ad8-833b-f05072f6b5a9/.user_uploaded/media_1791060535872.png" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Image 1: Design Studio Redundancy &amp; Mystery Cutoff</code></a> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">media_1791060535872.png</code>)  </li>
+<li><a href="file:///C:/Users/ianoh/.gemini/antigravity/brain/a2eae1fb-c38a-4ad8-833b-f05072f6b5a9/.user_uploaded/media_1791060777404.png" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Image 2: Laboratory Domain Fracture &amp; Tab Truncation</code></a> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">media_1791060777404.png</code>)  </li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Target Codebase:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/ui/LabFlyout.ts</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/main.ts</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/engine/environment/GeologicalPressuresEngine.ts</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/engine/storage/EnvironmentPresetRegistry.ts</code></p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="executive-summary" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">📋 Executive Summary</h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A comprehensive, forensic human-computer interaction (HCI) audit was executed on <strong class="text-slate-100 font-semibold">Siliquarium</strong> following direct tester reports regarding visual clutter, duplicate palettes, overlapping layout elements, and severe conceptual domain fractures. Siliquarium is a premier computational biophysics and open-ended digital life simulation modeled on Howard Pattee’s Epistemic Cut, Mitchell chemiosmotic proton motive force, and Uri Alon gene regulatory network motifs.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">While its underlying simulation engine exhibits world-class mathematical and thermodynamic rigor, the user interface currently exhibits <strong class="text-slate-100 font-semibold">critical architectural defects</strong> that compromise cognitive ergonomics, violate fundamental principles of orthogonality, and disorient both student naturalists and senior researchers.</p>
+<div class="p-4 rounded-xl bg-purple-950/30 border-l-4 border-purple-400 my-4 text-sm text-slate-300"><div class="font-mono text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">IMPORTANT</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">📋 Core Audit Findings at a Glance</div>
+<ol class="list-decimal pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Duplicate CAD Palettes (Image 1):</strong> The left viewport hosts a floating "CAD BRUSHES [1-7]" palette, while the right docked Design Studio drawer hosts an identical "WORLD SCULPTOR & CAD TERRAIN PALETTE" containing the exact same 7 tools, 3 radius buttons, 4 height buttons, and stratum selector. This wastes 380px of vertical space, forces unnecessary scrolling, and creates confusion.</li>
+<li><strong class="text-slate-100 font-semibold">Cutoff Mystery Button Collision (Image 1):</strong> Beneath the floating CAD brush palette at <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">bottom: 14px, left: 14px</code>, an unknown element (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#floating-btn-visual-key</code>) is partially occluded and clipped, appearing as an orphaned, unlabeled mystery tab.</li>
+<li><strong class="text-slate-100 font-semibold">Conceptual Domain Fracture (Images 1 & 2):</strong> In Design Studio (World Building), the Geodynamics feature is completely missing! Users cannot configure geothermal event rates when architecting an environment. Instead, event rates are erroneously housed inside the Laboratory panel, violating domain integrity. Environment dynamics belong to the World Builder; the Laboratory belongs to scientific experimentation, biophysical constants, Lenski cryo-vault, and First-Law balance.</li>
+<li><strong class="text-slate-100 font-semibold">Tab Bar Grid Blowout & Truncation (Image 2):</strong> The 4-tab bar in the Laboratory panel collapses into an unreadable string: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">&quot;Lenski Bio-Vaulisual Clarity &amp; L Telemetry &amp; Ledg&quot;</code> due to CSS Grid item min-width blowout and excessive label lengths within a fixed 440px drawer width.</li>
+</ol></div></div>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This specification establishes an authoritative <strong class="text-slate-100 font-semibold">5-Dimension UX/UI Rubric</strong>, delivers quantitative scorecards for every surface, details the forensic root causes, presents complete wireframe and architectural redesigns, and supplies an itemized engineering implementation plan.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="1-the-authoritative-5-dimension-uxui-rubric" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">🧭 1. The Authoritative 5-Dimension UX/UI Rubric</h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To evaluate complex scientific workstations, computer-aided design (CAD) suites, and simulation environments, interfaces are benchmarked against five orthogonal HCI dimensions:</p>
+<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart TD
+    subgraph Rubric[&quot;5-Dimension Scientific HCI Rubric&quot;]
+        D1[&quot;D1: Conceptual Domain Integrity (CDI)&lt;br/&gt;&lt;i&gt;Ontological correctness &amp; domain separation&lt;/i&gt;&quot;]
+        D2[&quot;D2: Redundancy Elimination &amp; Orthogonality (REO)&lt;br/&gt;&lt;i&gt;Single source of truth &amp; zero duplicate controls&lt;/i&gt;&quot;]
+        D3[&quot;D3: Information Hierarchy &amp; Order of Presentation (IHO)&lt;br/&gt;&lt;i&gt;Natural causal flow: Macro Geology → Dynamics → Life&lt;/i&gt;&quot;]
+        D4[&quot;D4: Progressive Disclosure &amp; Spatial Ergonomics (PDE)&lt;br/&gt;&lt;i&gt;Collision-free viewports, zero cutoff/overlap&lt;/i&gt;&quot;]
+        D5[&quot;D5: Multi-Module Workflow Continuity (MWC)&lt;br/&gt;&lt;i&gt;Smooth transitions across Observatory, Safari, Lab, Studio&lt;/i&gt;&quot;]
+    end</div>
+<h3 id="d1-conceptual-domain-integrity-cdi" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">D1: Conceptual Domain Integrity (CDI)</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Definition:</em> Every control, slider, and readout must reside within its natural ontological home.</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">World Building Domain (Design Studio):</strong> Defines the abiotic boundary conditions, lithosphere bathymetry, hydrothermal vent architecture, and baseline geodynamic volatility (background rates of magmatic tremors, pillow lava extrusion, boiling surges, spalling, toxins, tidal shear, marine snow, and cryogenic incursions).</li>
+<li><strong class="text-slate-100 font-semibold">Experimental Science Domain (Laboratory):</strong> Defines in-situ manipulation, biophysical constants (mutation rate, gene duplication, Landauer thrift deletion, Landauer limit multiplier), Lenski cryo-vault strain management, manual stress-testing perturbations (instant triggers), and First-Law thermodynamic conservation telemetry ($\Delta E = 0.000$, $\Delta M = 0.000$).</li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Anti-Pattern:</em> Placing abiotic planetary boundary rate settings inside an experimental biotechnology laboratory.</p>
+<h3 id="d2-redundancy-elimination-orthogonality-reo" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">D2: Redundancy Elimination & Orthogonality (REO)</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Definition:</em> Every user action must possess exactly one canonical invocation point. Controls must not compete for screen space or present divergent naming for identical operations.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Anti-Pattern:</em> Simultaneously displaying a floating palette and an in-drawer palette with the same 7 tools, where one tool is labeled "🧹 Clear (7)" on the left and "🧹 Vacuum" on the right.</p>
+<h3 id="d3-information-hierarchy-order-of-presentation-iho" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">D3: Information Hierarchy & Order of Presentation (IHO)</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Definition:</em> Information must flow logically from macro-scale foundations to micro-scale details:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\text{Macro Bathymetry \& Lithosphere} \longrightarrow \text{Hydrothermal Vent Spire Architecture} \longrightarrow \text{Geodynamic Waves \& Pressures} \longrightarrow \text{Life Seeding \& Inoculation} \longrightarrow \text{Simulation Launch}$$</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Anti-Pattern:</em> Forcing users to scroll past 400px of duplicate brush buttons to reach basic seafloor scale and vent position sliders.</p>
+<h3 id="d4-progressive-disclosure-spatial-ergonomics-pde" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">D4: Progressive Disclosure & Spatial Ergonomics (PDE)</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Definition:</em> Primary tools remain immediately accessible; secondary parameters disclose progressively. Viewport overlays must maintain strict collision margins.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Anti-Pattern:</em> Fixed positioning collisions where a 550px vertical CAD palette overlaps a bottom-left utility pill (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#floating-btn-visual-key</code>), or a CSS grid layout where items lack <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">min-width: 0</code>, causing horizontal text overlapping.</p>
+<h3 id="d5-multi-module-workflow-continuity-mwc" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">D5: Multi-Module Workflow Continuity (MWC)</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Definition:</em> Switching between the 4 workspace modules (Observatory, Safari, Laboratory, Design Studio) must maintain user orientation, preserve specimen selection, respect simulation play/pause state, and avoid jarring visual jumps.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Anti-Pattern:</em> Losing camera focus, desynchronizing selected pores, or leaving orphaned UI indicators when toggling between CAD editing and live observation.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="2-quantitative-evaluation-scorecard" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">📊 2. Quantitative Evaluation Scorecard</h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Each interface surface is evaluated across the 5 dimensions on a 0–100 scale:</p>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Workspace Surface / Module</th><th class="p-3.5 font-semibold">CDI (0–100)</th><th class="p-3.5 font-semibold">REO (0–100)</th><th class="p-3.5 font-semibold">IHO (0–100)</th><th class="p-3.5 font-semibold">PDE (0–100)</th><th class="p-3.5 font-semibold">MWC (0–100)</th><th class="p-3.5 font-semibold">Composite Score</th><th class="p-3.5 font-semibold">Grade</th><th class="p-3.5 font-semibold">Critical Failure Mode</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Module 4: Design Studio (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-drawer</code>)</strong></td><td class="p-3.5 leading-relaxed">42</td><td class="p-3.5 leading-relaxed">30</td><td class="p-3.5 leading-relaxed">50</td><td class="p-3.5 leading-relaxed">55</td><td class="p-3.5 leading-relaxed">78</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">51.0 / 100</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">F</strong></td><td class="p-3.5 leading-relaxed">Duplicate CAD palettes; Geodynamics rates entirely missing; 380px vertical scroll waste.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Module 3: Bio-CAD Laboratory (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#lab-drawer</code>)</strong></td><td class="p-3.5 leading-relaxed">35</td><td class="p-3.5 leading-relaxed">70</td><td class="p-3.5 leading-relaxed">60</td><td class="p-3.5 leading-relaxed">40</td><td class="p-3.5 leading-relaxed">80</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">57.0 / 100</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">F</strong></td><td class="p-3.5 leading-relaxed">Geodynamics misfiled in Lab; 4-tab bar severely squished and overlapping ("Lenski Bio-Vaul...").</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Module 1: Observatory Mode (Ambient View)</strong></td><td class="p-3.5 leading-relaxed">92</td><td class="p-3.5 leading-relaxed">80</td><td class="p-3.5 leading-relaxed">85</td><td class="p-3.5 leading-relaxed">65</td><td class="p-3.5 leading-relaxed">90</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">82.4 / 100</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">B-</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#floating-btn-visual-key</code> at <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">bottom:14px</code> collides with left-docked studio palette.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Module 2: Safari Mode (Co-Pilot & Dossier)</strong></td><td class="p-3.5 leading-relaxed">95</td><td class="p-3.5 leading-relaxed">92</td><td class="p-3.5 leading-relaxed">90</td><td class="p-3.5 leading-relaxed">88</td><td class="p-3.5 leading-relaxed">92</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">91.4 / 100</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">A-</strong></td><td class="p-3.5 leading-relaxed">High domain integrity; minor horizontal squishing of Netlist canvas on screens $<1280\text{px}$.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Auxiliary Modals & Floating Pills</strong></td><td class="p-3.5 leading-relaxed">88</td><td class="p-3.5 leading-relaxed">75</td><td class="p-3.5 leading-relaxed">80</td><td class="p-3.5 leading-relaxed">58</td><td class="p-3.5 leading-relaxed">85</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">77.2 / 100</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">C+</strong></td><td class="p-3.5 leading-relaxed">Redundant Visual Key entry points; Modal backdrop clipping without escape key dismissal.</td></tr></tbody></table></div>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">System Aggregate Usability Index:</strong> <strong class="text-slate-100 font-semibold">71.8 / 100 (Grade: C-)</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Diagnosis:</em> Severe architectural flaws in Design Studio and Laboratory depress an otherwise high-fidelity biophysics simulation platform.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="3-forensic-root-cause-analysis-of-primary-failures" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">🔍 3. Forensic Root-Cause Analysis of Primary Failures</h2>
+<h3 id="31-failure-1-the-duplicate-cad-palettes-image-1" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.1 Failure 1: The Duplicate CAD Palettes (Image 1)</h3>
+<div class="my-6 p-4 rounded-xl bg-slate-950 border border-rose-900/60 font-mono text-xs shadow-xl">
+<div class="text-rose-400 font-bold text-xs uppercase tracking-wider mb-3">⚠️ Current State: Colliding Redundancy</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Left Floating Palette -->
+<div class="p-3 rounded-lg bg-slate-900 border border-slate-800 space-y-2">
+<div class="text-cyan-400 font-bold border-b border-slate-800 pb-1 flex items-center justify-between">
+<span>[FLOATING CAD BRUSHES [1-7]]</span>
+<span class="text-rose-400 text-[10px]">Left Viewport</span>
+</div>
+<div class="text-slate-300 text-[11px] space-y-0.5">
+<div>• Select (1) • Basalt (2) • Excavate (3)</div>
+<div>• Trench (4) • Vent Spire (5) • Inoculate (6) • Clear (7)</div>
+<div class="text-slate-400 pt-1">• Footprint: 1x, 2x, 3x</div>
+<div class="text-slate-400">• Wall Height: H1, H2, H3, H4</div>
+<div class="text-slate-400">• Vertical Stratum: Auto-Stack</div>
+</div>
+</div>
+<!-- Right Drawer Palette -->
+<div class="p-3 rounded-lg bg-slate-900 border border-slate-800 space-y-2">
+<div class="text-emerald-400 font-bold border-b border-slate-800 pb-1 flex items-center justify-between">
+<span>[#studio-drawer (Right Docked)]</span>
+<span class="text-rose-400 text-[10px]">Duplicate Controls</span>
+</div>
+<div class="text-slate-300 text-[11px] space-y-0.5">
+<div>🧱 WORLD SCULPTOR &amp; CAD TERRAIN PALETTE</div>
+<div>[Select] [Basalt Wall] [Excavate] [Trench]</div>
+<div>[Vent Spire] [Inoculate] <span class="text-rose-400 font-bold">[Vacuum] (Naming mismatch!)</span></div>
+<div class="text-slate-400 pt-1">• Radius: 1x, 2x, 3x • Height: H1-H4</div>
+<div class="text-rose-400/80 text-[10px] italic">Procedural sliders buried 380px below fold!</div>
+</div>
+</div>
+</div>
+</div>
+<h4 id="forensic-code-evidence" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Forensic Code Evidence</h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code>, lines 6014–6086 instantiate the floating palette:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;!-- Floating CAD Tool Palette (Wireframe Studio Left Deck) --&gt;
+&lt;div id=&quot;studio-cad-palette&quot; class=&quot;studio-cad-palette&quot;&gt;
+  &lt;div class=&quot;cad-palette-header&quot;&gt;
+    &lt;span&gt;CAD BRUSHES [1-7]&lt;/span&gt;
+    &lt;button id=&quot;btn-close-cad-palette&quot;&gt;✕&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;cad-palette-tools&quot;&gt;
+    &lt;button class=&quot;cad-tool-btn active&quot; data-mode=&quot;select&quot;&gt;&lt;span&gt;🔍&lt;/span&gt;&lt;span&gt;Select (1)&lt;/span&gt;&lt;/button&gt;
+    &lt;button class=&quot;cad-tool-btn&quot; data-mode=&quot;basalt&quot;&gt;&lt;span&gt;🧱&lt;/span&gt;&lt;span&gt;Basalt (2)&lt;/span&gt;&lt;/button&gt;
+    &lt;button class=&quot;cad-tool-btn&quot; data-mode=&quot;excavate&quot;&gt;&lt;span&gt;⛏️&lt;/span&gt;&lt;span&gt;Excavate (3)&lt;/span&gt;&lt;/button&gt;
+    &lt;button class=&quot;cad-tool-btn&quot; data-mode=&quot;trench&quot;&gt;&lt;span&gt;🌊&lt;/span&gt;&lt;span&gt;Trench (4)&lt;/span&gt;&lt;/button&gt;
+    &lt;button class=&quot;cad-tool-btn&quot; data-mode=&quot;vent&quot;&gt;&lt;span&gt;🌋&lt;/span&gt;&lt;span&gt;Vent Spire (5)&lt;/span&gt;&lt;/button&gt;
+    &lt;button class=&quot;cad-tool-btn&quot; data-mode=&quot;inoculate&quot;&gt;&lt;span&gt;🧬&lt;/span&gt;&lt;span&gt;Inoculate (6)&lt;/span&gt;&lt;/button&gt;
+    &lt;button class=&quot;cad-tool-btn&quot; data-mode=&quot;clear&quot;&gt;&lt;span&gt;🧹&lt;/span&gt;&lt;span&gt;Clear (7)&lt;/span&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  ...
+&lt;/div&gt;</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Simultaneously, lines 5876–5933 in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-drawer</code> define:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;div id=&quot;pane-geomorphology&quot;&gt;
+  &lt;div class=&quot;drawer-subtitle&quot;&gt;🧱 World Sculptor &amp;amp; CAD Terrain Palette&lt;/div&gt;
+  &lt;div class=&quot;brush-toolbar&quot;&gt;
+    &lt;button id=&quot;brush-select&quot; class=&quot;brush-btn brush-active&quot; data-mode=&quot;select&quot;&gt;🔍 Select&lt;/button&gt;
+    &lt;button id=&quot;brush-basalt&quot; class=&quot;brush-btn&quot; data-mode=&quot;basalt&quot;&gt;🧱 Basalt Wall&lt;/button&gt;
+    &lt;button id=&quot;brush-excavate&quot; class=&quot;brush-btn&quot; data-mode=&quot;excavate&quot;&gt;⛏️ Excavate&lt;/button&gt;
+    &lt;button id=&quot;brush-trench&quot; class=&quot;brush-btn&quot; data-mode=&quot;trench&quot;&gt;🌊 Trench&lt;/button&gt;
+    &lt;button id=&quot;brush-vent&quot; class=&quot;brush-btn&quot; data-mode=&quot;vent&quot;&gt;🌋 Vent Spire&lt;/button&gt;
+    &lt;button id=&quot;brush-inoculate&quot; class=&quot;brush-btn&quot; data-mode=&quot;inoculate&quot;&gt;🌱 Inoculate&lt;/button&gt;
+    &lt;button id=&quot;brush-clear&quot; class=&quot;brush-btn&quot; data-mode=&quot;clear&quot;&gt;🧹 Vacuum&lt;/button&gt;
+  &lt;/div&gt;
+  ...
+&lt;/div&gt;</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/ui/LabFlyout.ts</code> (lines 1100–1165), event listeners are bound separately to both sets of elements.</p>
+<h4 id="impact" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Impact</h4>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Cognitive Split Attention:</strong> Users do not know whether the floating palette or the drawer palette is canonical.</li>
+<li><strong class="text-slate-100 font-semibold">Divergent Affordances:</strong> The left palette refers to tool 7 as "Clear", while the right panel calls it "Vacuum". The left uses hotkey badges <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1-7]</code>; the right does not.</li>
+<li><strong class="text-slate-100 font-semibold">Massive Vertical Space Waste:</strong> The duplicate controls consume 380px of vertical space inside <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-drawer</code>, pushing procedural parameters (seafloor scale, basalt density, relief roughness, vent coordinates) completely below the viewport fold.</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="32-failure-2-the-cutoff-mystery-button-collision-image-1" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.2 Failure 2: The Cutoff Mystery Button Collision (Image 1)</h3>
+<h4 id="forensic-code-evidence" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Forensic Code Evidence</h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code> line 6133:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;!-- Floating Visual Key Button (Quick Access HUD Decoder) --&gt;
+&lt;button id=&quot;floating-btn-visual-key&quot; class=&quot;floating-visual-key-pill&quot; title=&quot;Open Visual Grammar Key &amp;amp; HUD Decoder (Hotkey: K or ?)&quot;&gt;
+  &lt;span&gt;💡&lt;/span&gt;
+  &lt;span&gt;Visual Key (K)&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The stylesheet in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code> (lines 3902–3922) specifies:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-css">.floating-visual-key-pill {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(10, 16, 32, 0.85);
+  ...
+}</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">And for <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.studio-cad-palette</code> (lines 1287–1305):</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-css">.studio-cad-palette {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 14px;
+  width: 170px;
+  height: auto; /* expands to ~540px based on content */
+  z-index: 26;
+}</code></pre>
+<h4 id="impact" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Impact</h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Because <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.studio-cad-palette</code> begins at <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">top: 60px</code> and extends ~540px downwards, on viewports under 768px in height (or standard 1080p displays with browser chrome and status strips), the bottom edge of <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.studio-cad-palette</code> lands directly over <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">bottom: 14px; left: 14px</code>.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Because <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.floating-visual-key-pill</code> was never hidden in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">body.mode-studio</code>, its top border and glyph peek out from behind the CAD palette. Users cannot read its text, cannot identify its function, and perceive it as an unclickable broken artifact.</p>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="33-failure-3-the-conceptual-domain-fracture-images-1-2" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.3 Failure 3: The Conceptual Domain Fracture (Images 1 & 2)</h3>
+<h4 id="the-ontological-error" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">The Ontological Error</h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The user's direct critique exposes an epistemological flaw in the interface architecture:</p>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">"These are not in the same conceptual domain. The laboratory has a function that has nothing to do with the dynamics or the design or layout of the Siliquarium. The environment dynamics and event frequencies belong to the Design Studio (World Building)."</em></p></blockquote>
+<div class="my-6 p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs shadow-xl">
+<div class="text-cyan-400 font-bold text-xs uppercase tracking-wider mb-3">Ontological Split: Studio vs. Laboratory</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Design Studio -->
+<div class="p-3.5 rounded-lg bg-slate-900 border border-cyan-900/60 space-y-2">
+<div class="text-cyan-300 font-bold border-b border-cyan-950 pb-1 flex items-center justify-between">
+<span>🏗️ DESIGN STUDIO (WORLD BUILDER)</span>
+<span class="text-[10px] text-slate-400">Abiotic Vessel</span>
+</div>
+<div class="text-slate-300 text-[11px] space-y-1">
+<div>• <strong>Geomorphology &amp; Bathymetry:</strong> Radius, MinZ, MaxZ</div>
+<div>• <strong>Basalt Lithosphere:</strong> Wall heights, trench excavation</div>
+<div>• <strong>Vent Architecture:</strong> Chimney spires, wandering plumes</div>
+<div>• <strong>Geodynamic Pressures:</strong> Tremors, lava, spalling, megasurges, toxins</div>
+<div>• <strong>Initial Seeding:</strong> Prebiotic soup % / founder strains</div>
+</div>
+</div>
+<!-- Bio-CAD Lab -->
+<div class="p-3.5 rounded-lg bg-slate-900 border border-emerald-900/60 space-y-2">
+<div class="text-emerald-300 font-bold border-b border-emerald-950 pb-1 flex items-center justify-between">
+<span>🔬 BIO-CAD LABORATORY (SCIENTIFIC RIG)</span>
+<span class="text-[10px] text-slate-400">Living Life</span>
+</div>
+<div class="text-slate-300 text-[11px] space-y-1">
+<div>• <strong>Biophysical Constants:</strong> Mutation, duplication, deletion, Landauer</div>
+<div>• <strong>Lenski Cryo-Vault:</strong> Frozen strains, pipette inoculation</div>
+<div>• <strong>In-Situ Assays:</strong> Manual shock trigger buttons &amp; ticker</div>
+<div>• <strong>First-Law Telemetry:</strong> Conservation ledger (ΔE = 0, ΔM = 0)</div>
+<div>• <strong>Optical Clarity:</strong> Spores, conduits, auras, bedrock isolation</div>
+</div>
+</div>
+</div>
+</div>
+<h4 id="forensic-code-evidence" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Forensic Code Evidence</h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code> lines 5517 and 5528–5642, the entire <strong class="text-slate-100 font-semibold">Deep-Sea Vent Dynamics & Pressures</strong> section—consisting of:</p>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">slider-geo-master</code> (Master Event Volatility)</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">slider-rate-earthquake</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">slider-rate-lava</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">slider-rate-spalling</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">slider-rate-surge</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">slider-rate-toxin</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">slider-rate-tidal</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">slider-rate-marinesnow</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">slider-rate-migration</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">slider-rate-cryogenic</code></li>
+</ul>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">resides inside <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#pane-geodynamics</code> inside <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#lab-drawer</code>!</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Meanwhile, in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-drawer</code> (lines 5874–6006), there is <strong class="text-slate-100 font-semibold">zero access</strong> to geodynamics. When creating or editing an environment, the user is completely blocked from tuning the rates of volcanic eruptions or hydrothermal surges.</p>
+<h4 id="impact" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Impact</h4>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li>When designing an environment preset (e.g. saving a <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.siliquarium</code> preset), the user cannot define whether it is a tranquil alkaline mound or a cataclysmic volcanic rift.</li>
+<li>In the Laboratory, the presence of background world rates clutters what should be an in-vitro experiment bench.</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="34-failure-4-tab-bar-grid-blowout-truncation-image-2" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.4 Failure 4: Tab Bar Grid Blowout & Truncation (Image 2)</h3>
+<h4 id="forensic-code-evidence" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Forensic Code Evidence</h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code> lines 1059–1091:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-css">.lab-tab-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #060a14;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 3px;
+  gap: 3px;
+  overflow-x: hidden !important;
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lab-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #94a3b8;
+  padding: 6px 2px;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  ...
+}</code></pre>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The HTML defines 4 buttons (lines 5516–5521):</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🌋 Geodynamics</code> (14 chars)</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🧬 Lenski Bio-Vault</code> (18 chars)</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">👁️ Visual Clarity &amp; Layers</code> (27 chars!)</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">📊 Telemetry &amp; Ledger</code> (20 chars!)</li>
+</ol>
+<h4 id="css-grid-specification-analysis" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">CSS Grid Specification Analysis</h4>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In the CSS Grid specification, grid items default to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">min-width: auto</code>. This means a grid track set to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1fr</code> <strong class="text-slate-100 font-semibold">will not shrink below the minimum content size of its children unless <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">min-width: 0</code> is explicitly declared on the grid item</strong>!</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">With a fixed drawer width of 440px (minus padding and borders, approximately 410px total usable width), each track receives $\approx 102\text{px}$.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Because buttons 2, 3, and 4 contain long non-breaking strings with emojis, their min-content widths exceed 102px. The grid items expand, force track blowout, overlap adjacent siblings, and truncate with clipping artifacts, rendering the text as:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Lenski Bio-Vaulisual Clarity &amp; L Telemetry &amp; Ledg</code> (as captured in Image 2).</p>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="4-complete-interface-architecture-redesign" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">🏗️ 4. Complete Interface Architecture Redesign</h2>
+<h3 id="41-global-domain-realignment" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.1 Global Domain Realignment</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The architectural redesign strictly segregates <strong class="text-slate-100 font-semibold">World Building</strong> from <strong class="text-slate-100 font-semibold">Laboratory Experimentation</strong>:</p>
+<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">graph LR
+    subgraph ModeStudio[&quot;MODE 4: DESIGN STUDIO (WORLD BUILDER)&quot;]
+        direction TB
+        S1[&quot;1. Top Ribbon &amp; Presets&quot;]
+        S2[&quot;2. Lithosphere &amp; Bathymetry CAD&quot;]
+        S3[&quot;3. Hydrothermal Vent Architecture&quot;]
+        S4[&quot;4. Geodynamic Waves &amp; Pressures (MOVED HERE)&quot;]
+        S5[&quot;5. Life Seeding Strategy&quot;]
+        S6[&quot;6. Simulation Launch &amp; Apply&quot;]
+    end
+
+    subgraph ModeLab[&quot;MODE 3: BIO-CAD LABORATORY (SCIENTIFIC RIG)&quot;]
+        direction TB
+        L1[&quot;Tab 1: Biophysical Constants (Mutation, Duplication, Landauer)&quot;]
+        L2[&quot;Tab 2: Lenski Cryo-Vault (Strains, Pipette, Dual-Basin)&quot;]
+        L3[&quot;Tab 3: In-Situ Perturbation Assays (Manual Shock Triggers)&quot;]
+        L4[&quot;Tab 4: Optical Layers &amp; Conservation Ledger (ΔE=0, ΔM=0)&quot;]
+    end
+
+    ModeStudio -.-&gt;|&quot;Establishes World Boundary Conditions&quot;| ModeLab</div>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="42-module-4-siliquarium-design-studio-redesign" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.2 Module 4: Siliquarium Design Studio Redesign</h3>
+<h4 id="architectural-directives" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Architectural Directives</h4>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Single Canonical CAD Tool Deck:</strong> Remove the redundant 7 tool buttons from <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-drawer</code>. The floating palette <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-cad-palette</code> on the left is the <strong class="text-slate-100 font-semibold">sole, canonical CAD tool deck</strong>.</li>
+<li><strong class="text-slate-100 font-semibold">Compact Tool Context Card in Drawer:</strong> Inside <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-drawer</code>, replace the duplicate buttons with a sleek, 48px-high <strong class="text-slate-100 font-semibold">CAD Tool Status Card</strong> displaying the currently active tool, radius, and elevation, with quick keybinding reminders <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1-7]</code>.</li>
+<li><strong class="text-slate-100 font-semibold">Dedicated Geodynamics Section in Studio:</strong> Integrate the complete <strong class="text-slate-100 font-semibold">Geodynamic Pressures & Event Volatility</strong> controls directly into <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-drawer</code>, positioned logically after Vent Architecture and before Life Seeding.</li>
+<li><strong class="text-slate-100 font-semibold">Collision Suppression:</strong> Ensure that when <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">body.mode-studio</code> is active, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#floating-btn-visual-key</code> is set to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">display: none !important;</code>.</li>
+</ol>
+<h4 id="wireframe-schematic-design-studio-redesign" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Wireframe Schematic: Design Studio Redesign</h4>
+<div class="my-6 p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs shadow-2xl space-y-3">
+<!-- Header Bar -->
+<div class="flex flex-wrap items-center justify-between pb-2 border-b border-slate-800 text-[11px]">
+<div class="flex items-center gap-2">
+<span class="text-cyan-400 font-bold">🌊 SILIQUARIUM</span>
+<span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">Observatory</span>
+<span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">Safari</span>
+<span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">Laboratory</span>
+<span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700 font-bold">Design Studio*</span>
+</div>
+<div class="text-slate-400">Epoch: 0 • <span class="text-emerald-400 font-bold">ΔE: 0.000</span></div>
+</div>
+<!-- Main Work Area -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+<!-- Left CAD Floating Palette -->
+<div class="lg:col-span-3 p-3 rounded-lg bg-slate-900 border border-cyan-800/60 space-y-2">
+<div class="flex justify-between items-center text-cyan-300 font-bold border-b border-slate-800 pb-1">
+<span>CAD BRUSHES [1-7]</span>
+<span class="text-slate-500">✕</span>
+</div>
+<div class="space-y-1 text-[11px]">
+<div class="p-1 rounded bg-slate-800 text-slate-200">🔍 Select (1)</div>
+<div class="p-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-semibold">🧱 Basalt Wall (2)</div>
+<div class="p-1 rounded bg-slate-800 text-slate-200">⛏️ Excavate (3)</div>
+<div class="p-1 rounded bg-slate-800 text-slate-200">🌊 Trench (4)</div>
+<div class="p-1 rounded bg-slate-800 text-slate-200">🌋 Vent Spire (5)</div>
+<div class="p-1 rounded bg-slate-800 text-slate-200">🌱 Inoculate (6)</div>
+<div class="p-1 rounded bg-slate-800 text-slate-200">🧹 Clear (7)</div>
+</div>
+<div class="pt-2 border-t border-slate-800 text-[10.5px] space-y-1 text-slate-400">
+<div>RADIUS: [1x] [2x] [3x]</div>
+<div>HEIGHT: [1] [2] [3] [4]</div>
+<div>STRATUM: Auto-Stack ▾</div>
+</div>
+</div>
+<!-- Center 3D Viewport Placeholder -->
+<div class="lg:col-span-4 p-4 rounded-lg bg-slate-950/80 border border-dashed border-slate-800 flex flex-col items-center justify-center text-center text-slate-500 min-h-[220px]">
+<div class="text-2xl mb-1">🌐</div>
+<div class="font-bold text-slate-400 text-xs">3D SEAFLOOR VIEWPORT</div>
+<div class="text-[10px] mt-1">Real-time Raycasting &amp; Sculpting Surface</div>
+</div>
+<!-- Right Docked Studio Drawer -->
+<div class="lg:col-span-5 p-3 rounded-lg bg-slate-900 border border-amber-900/40 space-y-2.5">
+<div class="flex justify-between items-center text-amber-300 font-bold border-b border-slate-800 pb-1">
+<span>🏗️ DESIGN STUDIO &amp; WORLD BUILDER</span>
+<div class="flex gap-1 text-[10px]">
+<span class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">➕ New</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">💾 Save</span>
+</div>
+</div>
+<!-- Active Brush Status -->
+<div class="p-2 rounded bg-slate-950 border border-slate-800 text-[11px] text-slate-300">
+<span class="text-slate-400">Active Tool:</span> <span class="text-cyan-300 font-bold">🧱 Basalt</span> • Radius: <span class="text-amber-400">1x</span> • H: <span class="text-emerald-400">3</span>
+</div>
+<!-- Sections -->
+<div class="space-y-1.5 text-[11px] text-slate-300">
+<div class="font-semibold text-slate-400">🗺️ 1. Lithosphere &amp; Bathymetry</div>
+<div class="text-slate-400 pl-2">Radius: R=8 • Basalt Density: 12% • Relief: 30%</div>
+<div class="font-semibold text-slate-400 pt-1">🌋 2. Hydrothermal Vent Architecture</div>
+<div class="text-slate-400 pl-2">Nozzle: [0, 0] • Height: z=4 • Offshoots: 0</div>
+<div class="font-semibold text-amber-400 pt-1">🌋 3. Geodynamic Pressures (Integrated!)</div>
+<div class="text-slate-400 pl-2">• Tremors: 25% • Lava: 15% • Megasurges: 35%</div>
+<div class="font-semibold text-slate-400 pt-1">🌱 4. Life Seeding &amp; Initiation</div>
+</div>
+<div class="pt-2 border-t border-slate-800 flex gap-2">
+<span class="px-3 py-1 rounded bg-gradient-to-r from-cyan-600 to-emerald-600 text-white font-bold text-[10.5px]">🚀 Begin Simulation</span>
+<span class="px-2 py-1 rounded bg-slate-800 text-slate-300 text-[10.5px]">⚡ Apply</span>
+</div>
+</div>
+</div>
+<!-- Bottom Status Strip -->
+<div class="pt-2 border-t border-slate-800 flex justify-between items-center text-[10.5px] text-slate-400">
+<span>CURSOR: [2, -1, 0] | TOOL: BASALT (1x)</span>
+<span>LATTICE: R=8 • 1,141 Pores • 2 Hydrothermal Vents</span>
+</div>
+</div>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="43-module-3-bio-cad-laboratory-redesign" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.3 Module 3: Bio-CAD Laboratory Redesign</h3>
+<h4 id="architectural-directives" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Architectural Directives</h4>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Pristine 4-Tab Navigation Bar:</strong></li>
+<li>Migrate background geodynamic rate sliders out of the Laboratory.</li>
+<li>Reconfigure the tab bar into 4 clearly demarcated, single-word or tight two-word tabs with <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">minmax(0, 1fr)</code> track sizing and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">min-width: 0</code>:</li>
+<li><strong class="text-slate-100 font-semibold">Tab 1: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🧬 Biophysics</code></strong> (Biophysical constants, replication physics, Landauer limits)</li>
+<li><strong class="text-slate-100 font-semibold">Tab 2: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">❄️ Bio-Vault</code></strong> (Lenski cryo-vault, pipette strain arming, dual-basin trials)</li>
+<li><strong class="text-slate-100 font-semibold">Tab 3: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">⚡ In-Situ</code></strong> (Real-time manual perturbation shock triggers & tectonic event ticker)</li>
+<li><strong class="text-slate-100 font-semibold">Tab 4: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">📊 Telemetry</code></strong> (First-Law conservation ledger, optical clarity layer toggles, CSV/JSON export)</li>
+<li><strong class="text-slate-100 font-semibold">Zero Text Overlapping Guarantee:</strong></li>
+<li>Use CSS Grid with <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">grid-template-columns: repeat(4, minmax(0, 1fr));</code>.</li>
+<li>Apply <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">overflow: hidden; text-overflow: ellipsis; white-space: nowrap;</code> to every tab button.</li>
+<li>Include full semantic descriptions in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">title=&quot;...&quot;</code> attributes for instant tooltip disclosure.</li>
+</ol>
+<h4 id="wireframe-schematic-bio-cad-laboratory-redesign" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Wireframe Schematic: Bio-CAD Laboratory Redesign</h4>
+<div class="my-6 p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs shadow-2xl space-y-3">
+<!-- Header Bar -->
+<div class="flex flex-wrap items-center justify-between pb-2 border-b border-slate-800 text-[11px]">
+<div class="flex items-center gap-2">
+<span class="text-cyan-400 font-bold">🌊 SILIQUARIUM</span>
+<span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">Observatory</span>
+<span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">Safari</span>
+<span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold">Laboratory*</span>
+<span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">Design Studio</span>
+</div>
+<div class="text-slate-400">Epoch: 1,420 • <span class="text-emerald-400 font-bold">ΔE: 0.000</span></div>
+</div>
+<!-- Main Work Area -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+<!-- Left Docked Bio-CAD Drawer -->
+<div class="lg:col-span-6 p-3.5 rounded-lg bg-slate-900 border border-emerald-800/60 space-y-2.5">
+<div class="flex justify-between items-center text-emerald-300 font-bold border-b border-slate-800 pb-1">
+<span>🔬 BIO-CAD LABORATORY &amp; GOD-SUITE</span>
+<span class="text-slate-500 hover:text-slate-300 cursor-pointer">[✕ CLOSE]</span>
+</div>
+<div class="text-slate-400 text-[10.5px]">Biophysical Constants • Cryo-Vault • First-Law Ledger</div>
+<!-- 4-Column Responsive Tab Grid -->
+<div class="grid grid-cols-4 gap-1 pt-1">
+<span class="px-1.5 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-bold text-center text-[10px] truncate">🧬 Biophysics</span>
+<span class="px-1.5 py-1 rounded bg-slate-800 text-slate-300 text-center text-[10px] truncate">❄️ Bio-Vault</span>
+<span class="px-1.5 py-1 rounded bg-slate-800 text-slate-300 text-center text-[10px] truncate">⚡ In-Situ</span>
+<span class="px-1.5 py-1 rounded bg-slate-800 text-slate-300 text-center text-[10px] truncate">📊 Telemetry</span>
+</div>
+<!-- Tab Pane 1 Content -->
+<div class="p-2.5 rounded bg-slate-950 border border-slate-800 space-y-2 text-[11px]">
+<div class="text-cyan-400 font-semibold uppercase text-[10px] tracking-wide">Biophysical Constants &amp; Replication</div>
+<div class="space-y-1 text-slate-300">
+<div class="flex justify-between"><span>Point Mutation Rate:</span> <span class="text-cyan-300 font-mono">0.10%</span></div>
+<div class="flex justify-between"><span>Gene Duplication Rate:</span> <span class="text-purple-300 font-mono">0.50%</span></div>
+<div class="flex justify-between"><span>Landauer Deletion Rate:</span> <span class="text-amber-300 font-mono">0.50%</span></div>
+<div class="flex justify-between"><span>Prebiotic Soup Density:</span> <span class="text-emerald-300 font-mono">20%</span></div>
+<div class="flex justify-between"><span>Landauer Dissipation:</span> <span class="text-rose-400 font-mono">1.000× Base</span></div>
+</div>
+</div>
+<!-- Live Event Ticker -->
+<div class="p-2 rounded bg-slate-950/80 border border-slate-800 text-[10.5px] text-slate-400 flex items-center gap-1.5">
+<span class="text-amber-400">📡 Ticker:</span>
+<span class="text-slate-300">[Tick 1,418] 🔥 Boiling Megasurge active (+40% PMF boost)</span>
+</div>
+</div>
+<!-- Right 3D Viewport Placeholder -->
+<div class="lg:col-span-6 p-4 rounded-lg bg-slate-950/80 border border-dashed border-slate-800 flex flex-col items-center justify-center text-center text-slate-500 min-h-[220px]">
+<div class="text-2xl mb-1">🌊</div>
+<div class="font-bold text-slate-400 text-xs">3D ACTIVE SEAFLOOR VIEWPORT</div>
+<div class="text-[10px] mt-1">Real-time Microbial Evolution &amp; In-Situ Assays</div>
+</div>
+</div>
+<!-- Bottom Transport Bar -->
+<div class="pt-2 border-t border-slate-800 flex flex-wrap justify-between items-center gap-2 text-[11px] text-slate-400">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">⚙️ Lab</span>
+<span class="px-2 py-0.5 rounded bg-cyan-700 text-white font-bold border border-cyan-500">▶ Play</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800">1x</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800">2x</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800">5x</span>
+</div>
+<div class="flex items-center gap-2 text-[10.5px]">
+<span class="text-amber-400">🟡 Spores: ON</span>
+<span class="text-cyan-400">💧 Water: ON</span>
+<span class="text-emerald-400">🎯 Focus Locked</span>
+</div>
+</div>
+</div>
+<hr class="border-t border-slate-800 my-8" />
+<h3 id="44-spatial-collision-matrix-viewport-clearance" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.4 Spatial Collision Matrix & Viewport Clearance</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To eliminate collision traps between floating palettes and HUD pills, viewports adhere to a strict spatial occupancy matrix:</p>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Screen Region</th><th class="p-3.5 font-semibold">Left Edge</th><th class="p-3.5 font-semibold">Center Viewport</th><th class="p-3.5 font-semibold">Right Edge</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Top Row</strong><br><em class="text-slate-200 italic">(Fixed Header, Z: 20)</em></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Brand Logo & Title</strong><br>Siliquarium abyssal icon</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Workspace Mode Switcher</strong><br>Pill selector (Observatory, Safari, Lab, Studio)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Telemetry Header Row</strong><br>Ticks, Clades, Shannon H, Docs</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Mid Row</strong><br><em class="text-slate-200 italic">(Active Workspace)</em></td><td class="p-3.5 leading-relaxed">• <strong class="text-slate-100 font-semibold">Observatory:</strong> Camera navigation<br>• <strong class="text-slate-100 font-semibold">Studio:</strong> Canonical CAD Tool Deck<br>• <strong class="text-slate-100 font-semibold">Lab:</strong> Bio-CAD Drawer (slides from left)</td><td class="p-3.5 leading-relaxed">• <strong class="text-slate-100 font-semibold">Interactive 3D Seafloor</strong><br>• Raycast hover & selection reticle<br>• Organism render pipeline</td><td class="p-3.5 leading-relaxed">• <strong class="text-slate-100 font-semibold">Safari:</strong> Co-Pilot Panel<br>• <strong class="text-slate-100 font-semibold">Studio:</strong> Design Studio Drawer<br>• <strong class="text-slate-100 font-semibold">Lab:</strong> Clear for canvas</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Bottom Row</strong><br><em class="text-slate-200 italic">(Transport & Status)</em></td><td class="p-3.5 leading-relaxed">• <strong class="text-slate-100 font-semibold">Observatory:</strong> Visual Key pill<br>• <strong class="text-slate-100 font-semibold">Studio:</strong> CLEAR (Pill suppressed)<br>• <strong class="text-slate-100 font-semibold">Lab:</strong> CLEAR (Pill in bar)</td><td class="p-3.5 leading-relaxed">• <strong class="text-slate-100 font-semibold">Observatory/Lab/Safari:</strong> Glassmorphic transport bar<br>• <strong class="text-slate-100 font-semibold">Studio:</strong> Bottom CAD status strip</td><td class="p-3.5 leading-relaxed">• <strong class="text-slate-100 font-semibold">Studio:</strong> Status actions<br>• Fullscreen & Docs shortcut</td></tr></tbody></table></div>
+<h4 id="collision-rule-enforcement" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Collision Rule Enforcement</h4>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Rule 1 (Studio Left Deck Exclusivity):</strong> When <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">body.mode-studio</code> is present, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.floating-visual-key-pill</code> is set to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">display: none !important;</code>. The CAD palette <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-cad-palette</code> owns the left viewport edge exclusively.</li>
+<li><strong class="text-slate-100 font-semibold">Rule 2 (Transport Bar Unification):</strong> The Visual Key is always accessible via the persistent bottom transport bar button (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#btn-open-visual-key</code>), the top Docs menu, or keyboard shortcut <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">K</code> or <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">?</code>.</li>
+<li><strong class="text-slate-100 font-semibold">Rule 3 (Palette Height Clamping):</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-cad-palette</code> receives <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">max-height: calc(100vh - 120px); overflow-y: auto;</code>, preventing it from ever spilling into the bottom status bar regardless of screen resolution.</li>
+</ol>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="5-concrete-dom-hierarchy-css-specifications" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">💻 5. Concrete DOM Hierarchy & CSS Specifications</h2>
+<h3 id="51-css-fix-for-laboratory-tab-bar-zero-truncation-grid" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.1 CSS Fix for Laboratory Tab Bar (Zero-Truncation Grid)</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Replace lines 1059–1091 in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code>:</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-css">/* ==========================================================================
+   LAB DRAWER TAB BAR - ZERO BLOWOUT RESPONSIVE CSS GRID
+   ========================================================================== */
+.lab-tab-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* minmax(0, 1fr) prevents track blowout */
+  background: #060a14;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 3px;
+  gap: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lab-tab-btn {
+  min-width: 0; /* MANDATORY: Allows text-overflow: ellipsis to function properly */
+  background: transparent;
+  border: 1px solid transparent;
+  color: #94a3b8;
+  padding: 6px 4px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, monospace;
+}
+
+.lab-tab-btn:hover {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(56, 189, 248, 0.2);
+}
+
+.lab-tab-btn.active {
+  background: rgba(14, 165, 233, 0.22);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+}</code></pre>
+<h3 id="52-css-fix-for-studio-palette-visual-key-collision" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.2 CSS Fix for Studio Palette & Visual Key Collision</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Add to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code> mode rules (lines 4386–4405):</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-css">/* ==========================================================================
+   STUDIO MODE SPATIAL CLEARANCE &amp; COLLISION PREVENTION
+   ========================================================================== */
+body.mode-studio .floating-visual-key-pill,
+body.mode-laboratory .floating-visual-key-pill {
+  display: none !important; /* Suppress bottom-left pill to prevent CAD palette collision */
+}
+
+body.mode-observatory .floating-visual-key-pill {
+  display: inline-flex !important;
+  animation: pulseSubtleGlow 3s infinite ease-in-out;
+}
+
+.studio-cad-palette {
+  position: absolute;
+  top: 70px;
+  left: 14px;
+  width: 176px;
+  max-height: calc(100vh - 130px); /* Strict clearance above bottom technical status strip */
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: rgba(9, 14, 26, 0.96);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 12px;
+  padding: 10px;
+  z-index: 26;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+  scrollbar-width: thin;
+}</code></pre>
+<h3 id="53-dom-hierarchy-restructured-design-studio-drawer" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.3 DOM Hierarchy: Restructured Design Studio Drawer</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Inside <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-drawer-content</code> (replacing lines 5874–6006):</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;!-- Scrollable Studio Content: Geomorphology &amp; World Sculptor Tools --&gt;
+&lt;div id=&quot;studio-drawer-content&quot;&gt;
+  &lt;div id=&quot;pane-geomorphology&quot;&gt;
+    
+    &lt;!-- 1. Active CAD Tool Context Card (Replaces 380px duplicate palette) --&gt;
+    &lt;div class=&quot;studio-tool-context-card&quot;&gt;
+      &lt;div style=&quot;display:flex;align-items:center;justify-content:space-between;&quot;&gt;
+        &lt;div style=&quot;display:flex;align-items:center;gap:6px;&quot;&gt;
+          &lt;span id=&quot;studio-active-tool-icon&quot; style=&quot;font-size:1.1rem;&quot;&gt;🔍&lt;/span&gt;
+          &lt;div&gt;
+            &lt;div style=&quot;font-size:0.65rem;color:#94a3b8;text-transform:uppercase;font-weight:700;&quot;&gt;Active CAD Brush:&lt;/div&gt;
+            &lt;div id=&quot;studio-active-tool-title&quot; style=&quot;font-size:0.80rem;font-weight:800;color:#38bdf8;&quot;&gt;Select &amp;amp; Orbit (1)&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div style=&quot;font-size:0.65rem;font-family:monospace;color:#64748b;text-align:right;&quot;&gt;
+          Radius: &lt;strong id=&quot;studio-context-radius&quot; style=&quot;color:#e2e8f0;&quot;&gt;1x&lt;/strong&gt;&lt;br&gt;
+          Wall: &lt;strong id=&quot;studio-context-height&quot; style=&quot;color:#e2e8f0;&quot;&gt;H=3&lt;/strong&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;p style=&quot;font-size:0.65rem;color:#94a3b8;margin-top:4px;line-height:1.3;&quot;&gt;
+        Use the &lt;strong&gt;floating CAD palette&lt;/strong&gt; on the left or hotkeys &lt;kbd&gt;[1-7]&lt;/kbd&gt; to switch tools. Click canvas pores to sculpt.
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 2. Seafloor Dimensions &amp; Macro Topography --&gt;
+    &lt;div class=&quot;drawer-subtitle&quot; style=&quot;margin-top:10px;&quot;&gt;🗺️ 1. Seafloor Scale &amp;amp; Topography&lt;/div&gt;
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;Seafloor Scale Resolution&lt;/span&gt;
+        &lt;span id=&quot;label-scale-val&quot; class=&quot;slider-val&quot;&gt;R=8 (1141 Pores)&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;scale-selector&quot;&gt;
+        &lt;button id=&quot;scale-r5&quot; class=&quot;scale-btn&quot; data-radius=&quot;5&quot;&gt;R=5&lt;/button&gt;
+        &lt;button id=&quot;scale-r8&quot; class=&quot;scale-btn scale-active&quot; data-radius=&quot;8&quot;&gt;R=8&lt;/button&gt;
+        &lt;button id=&quot;scale-r10&quot; class=&quot;scale-btn&quot; data-radius=&quot;10&quot;&gt;R=10&lt;/button&gt;
+        &lt;button id=&quot;scale-r12&quot; class=&quot;scale-btn&quot; data-radius=&quot;12&quot;&gt;R=12&lt;/button&gt;
+        &lt;button id=&quot;scale-r14&quot; class=&quot;scale-btn&quot; data-radius=&quot;14&quot;&gt;R=14&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;Basalt Barrier Density&lt;/span&gt;
+        &lt;span id=&quot;label-basalt-val&quot; class=&quot;slider-val&quot;&gt;12%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-basalt&quot; min=&quot;0.00&quot; max=&quot;0.35&quot; step=&quot;0.01&quot; value=&quot;0.12&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;Topographic Relief &amp;amp; Ridges&lt;/span&gt;
+        &lt;span id=&quot;label-roughness-val&quot; class=&quot;slider-val&quot;&gt;30%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-roughness&quot; min=&quot;0.00&quot; max=&quot;1.00&quot; step=&quot;0.05&quot; value=&quot;0.30&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 3. Hydrothermal Vent Architecture --&gt;
+    &lt;div class=&quot;drawer-subtitle&quot; style=&quot;margin-top:10px;&quot;&gt;🌋 2. Hydrothermal Vent Architecture&lt;/div&gt;
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;Primary Vent Nozzle (Q, R)&lt;/span&gt;
+        &lt;span id=&quot;label-vent-coord&quot; class=&quot;slider-val&quot;&gt;[0, 0]&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div style=&quot;display:flex;gap:6px;&quot;&gt;
+        &lt;input type=&quot;range&quot; id=&quot;slider-vent-q&quot; min=&quot;-14&quot; max=&quot;14&quot; step=&quot;1&quot; value=&quot;0&quot; title=&quot;Vent Q&quot;&gt;
+        &lt;input type=&quot;range&quot; id=&quot;slider-vent-r&quot; min=&quot;-14&quot; max=&quot;14&quot; step=&quot;1&quot; value=&quot;0&quot; title=&quot;Vent R&quot;&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;Chimney Spire Height (z)&lt;/span&gt;
+        &lt;span id=&quot;label-spire-height-val&quot; class=&quot;slider-val&quot;&gt;z=4&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-spire-height&quot; min=&quot;2&quot; max=&quot;8&quot; step=&quot;1&quot; value=&quot;4&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;Satellite Vent Offshoots&lt;/span&gt;
+        &lt;span id=&quot;label-offshoots-val&quot; class=&quot;slider-val&quot;&gt;0 Offshoots&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-offshoots&quot; min=&quot;0&quot; max=&quot;4&quot; step=&quot;1&quot; value=&quot;0&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div style=&quot;display:flex;flex-direction:column;gap:4px;margin-top:4px;&quot;&gt;
+      &lt;label class=&quot;drawer-checkbox-label&quot;&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;chk-plume-wandering&quot; checked&gt; Convective Plume Wandering
+      &lt;/label&gt;
+      &lt;label class=&quot;drawer-checkbox-label&quot;&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;chk-regime-cycling&quot; checked&gt; Geochemical Eras (Regime Cycles)
+      &lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 4. Deep-Sea Geodynamics &amp; Planetary Pressures (INTEGRATED HOME) --&gt;
+    &lt;div class=&quot;drawer-subtitle&quot; style=&quot;margin-top:10px;&quot;&gt;🌋 3. Deep-Sea Geodynamics &amp;amp; Event Frequencies&lt;/div&gt;
+    &lt;p style=&quot;font-size:0.70rem;color:#94a3b8;line-height:1.4;margin:0 0 6px 0;&quot;&gt;
+      Define background tectonic waveforms. Perturbations reset biological dead zones and drive allosteric gate evolution without fitness smuggling.
+    &lt;/p&gt;
+
+    &lt;div class=&quot;slider-row&quot; style=&quot;background:#090e1a;padding:8px 10px;border-radius:8px;border:1px solid #1e293b;&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span style=&quot;font-weight:700;color:#38bdf8;&quot;&gt;Master Event Volatility&lt;/span&gt;
+        &lt;span id=&quot;label-geo-master-val&quot; class=&quot;slider-val&quot;&gt;20% (Moderate)&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-geo-master&quot; min=&quot;0.00&quot; max=&quot;1.00&quot; step=&quot;0.05&quot; value=&quot;0.20&quot;&gt;
+      &lt;div style=&quot;display:flex;justify-content:space-between;font-size:0.62rem;color:#64748b;font-family:monospace;margin-top:2px;&quot;&gt;
+        &lt;span&gt;0% Static&lt;/span&gt;
+        &lt;span&gt;20% Geologic&lt;/span&gt;
+        &lt;span&gt;100% Cataclysmic&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;💥 Magmatic Tremor / Rifting&lt;/span&gt;
+        &lt;span id=&quot;label-rate-earthquake-val&quot; class=&quot;slider-val&quot;&gt;25%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-rate-earthquake&quot; min=&quot;0.00&quot; max=&quot;1.00&quot; step=&quot;0.05&quot; value=&quot;0.25&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;🌋 Pillow Lava Extrusion&lt;/span&gt;
+        &lt;span id=&quot;label-rate-lava-val&quot; class=&quot;slider-val&quot;&gt;15%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-rate-lava&quot; min=&quot;0.00&quot; max=&quot;1.00&quot; step=&quot;0.05&quot; value=&quot;0.15&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;🏚️ Chimney Wall Spalling&lt;/span&gt;
+        &lt;span id=&quot;label-rate-spalling-val&quot; class=&quot;slider-val&quot;&gt;20%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-rate-spalling&quot; min=&quot;0.00&quot; max=&quot;1.00&quot; step=&quot;0.05&quot; value=&quot;0.20&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;🔥 Boiling Megasurge&lt;/span&gt;
+        &lt;span id=&quot;label-rate-surge-val&quot; class=&quot;slider-val&quot;&gt;35%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-rate-surge&quot; min=&quot;0.00&quot; max=&quot;1.00&quot; step=&quot;0.05&quot; value=&quot;0.35&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;🧪 Toxic Acid / Heavy Metal Surge&lt;/span&gt;
+        &lt;span id=&quot;label-rate-toxin-val&quot; class=&quot;slider-val&quot;&gt;30%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-rate-toxin&quot; min=&quot;0.00&quot; max=&quot;1.00&quot; step=&quot;0.05&quot; value=&quot;0.30&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;🌊 Baroclinic Tidal Current Shear&lt;/span&gt;
+        &lt;span id=&quot;label-rate-tidal-val&quot; class=&quot;slider-val&quot;&gt;40%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-rate-tidal&quot; min=&quot;0.00&quot; max=&quot;1.00&quot; step=&quot;0.05&quot; value=&quot;0.40&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;❄️ Organic Marine Snow Storm&lt;/span&gt;
+        &lt;span id=&quot;label-rate-marinesnow-val&quot; class=&quot;slider-val&quot;&gt;30%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-rate-marinesnow&quot; min=&quot;0.00&quot; max=&quot;1.00&quot; step=&quot;0.05&quot; value=&quot;0.30&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;📍 Vent Orifice Migration&lt;/span&gt;
+        &lt;span id=&quot;label-rate-migration-val&quot; class=&quot;slider-val&quot;&gt;10%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-rate-migration&quot; min=&quot;0.00&quot; max=&quot;1.00&quot; step=&quot;0.05&quot; value=&quot;0.10&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;🧊 Cryogenic Downwelling&lt;/span&gt;
+        &lt;span id=&quot;label-rate-cryogenic-val&quot; class=&quot;slider-val&quot;&gt;20%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-rate-cryogenic&quot; min=&quot;0.00&quot; max=&quot;1.00&quot; step=&quot;0.05&quot; value=&quot;0.20&quot;&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h3 id="54-dom-hierarchy-restructured-bio-cad-laboratory-drawer" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.4 DOM Hierarchy: Restructured Bio-CAD Laboratory Drawer</h3>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Inside <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#lab-drawer</code> (replacing lines 5515–5807):</p>
+<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-html">&lt;!-- Navigation Tabs (Pristine 4-Vector Scientific Rig) --&gt;
+&lt;div class=&quot;lab-tab-bar&quot; style=&quot;margin-top: 4px;&quot;&gt;
+  &lt;button class=&quot;lab-tab-btn active&quot; data-tab=&quot;biophysics&quot; title=&quot;Biophysical Constants &amp;amp; Replication Physics&quot;&gt;
+    &lt;span&gt;🧬&lt;/span&gt;&lt;span&gt;Biophysics&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class=&quot;lab-tab-btn&quot; data-tab=&quot;vault&quot; title=&quot;Lenski Bio-Library &amp;amp; Cryo-Vault Strains&quot;&gt;
+    &lt;span&gt;❄️&lt;/span&gt;&lt;span&gt;Bio-Vault&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class=&quot;lab-tab-btn&quot; data-tab=&quot;triggers&quot; title=&quot;In-Situ Perturbation Assays &amp;amp; Instant Shocks&quot;&gt;
+    &lt;span&gt;⚡&lt;/span&gt;&lt;span&gt;In-Situ&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class=&quot;lab-tab-btn&quot; data-tab=&quot;telemetry&quot; title=&quot;First-Law Ledger &amp;amp; Optical Layers&quot;&gt;
+    &lt;span&gt;📊&lt;/span&gt;&lt;span&gt;Telemetry&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Scrollable Parameter Body with 4 Clean Tab Panes --&gt;
+&lt;div id=&quot;lab-drawer-content&quot;&gt;
+
+  &lt;!-- TAB PANE 1: BIOPHYSICAL CONSTANTS &amp; REPLICATION PHYSICS --&gt;
+  &lt;div class=&quot;lab-tab-pane active&quot; data-pane=&quot;biophysics&quot; id=&quot;pane-biophysics&quot;&gt;
+    &lt;div class=&quot;drawer-subtitle&quot;&gt;🧬 Biophysical Constants &amp;amp; Replication Physics&lt;/div&gt;
+    &lt;p style=&quot;font-size:0.72rem;color:#94a3b8;line-height:1.45;margin:0 0 6px 0;&quot;&gt;
+      Howard Pattee Epistemic Cut constants governing genetic fidelity, Susumu Ohno gene duplication, and Landauer erasure limits.
+    &lt;/p&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;Point Mutation Rate&lt;/span&gt;
+        &lt;span id=&quot;label-mutation-val&quot; class=&quot;slider-val&quot;&gt;0.10%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-mutation&quot; min=&quot;0.0005&quot; max=&quot;0.05&quot; step=&quot;0.0005&quot; value=&quot;0.001&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;Susumu Ohno Gene Duplication&lt;/span&gt;
+        &lt;span id=&quot;label-duplication-val&quot; class=&quot;slider-val&quot;&gt;0.50%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-duplication&quot; min=&quot;0.00&quot; max=&quot;0.05&quot; step=&quot;0.001&quot; value=&quot;0.005&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;Landauer Thrift Deletion Rate&lt;/span&gt;
+        &lt;span id=&quot;label-deletion-val&quot; class=&quot;slider-val&quot;&gt;0.50%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-deletion&quot; min=&quot;0.00&quot; max=&quot;0.05&quot; step=&quot;0.001&quot; value=&quot;0.005&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;slider-row&quot;&gt;
+      &lt;div class=&quot;slider-header&quot;&gt;
+        &lt;span&gt;Primordial Prebiotic Soup Density&lt;/span&gt;
+        &lt;span id=&quot;label-soup-val&quot; class=&quot;slider-val&quot;&gt;20%&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;range&quot; id=&quot;slider-soup&quot; min=&quot;0.05&quot; max=&quot;0.60&quot; step=&quot;0.05&quot; value=&quot;0.20&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Conservation Status Preview --&gt;
+    &lt;div style=&quot;background:#090e1a;padding:8px 10px;border-radius:8px;border:1px solid #1e293b;margin-top:6px;&quot;&gt;
+      &lt;div style=&quot;font-size:0.68rem;color:#38bdf8;font-weight:700;text-transform:uppercase;&quot;&gt;Thermodynamic Operating Point&lt;/div&gt;
+      &lt;div style=&quot;display:flex;justify-content:space-between;font-size:0.70rem;font-family:monospace;margin-top:4px;&quot;&gt;
+        &lt;span style=&quot;color:#94a3b8;&quot;&gt;Landauer Cost:&lt;/span&gt;
+        &lt;span style=&quot;color:#10b981;&quot;&gt;1.000× kT ln(2)&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- TAB PANE 2: LENSKI BIO-LIBRARY &amp; CRYO-VAULT --&gt;
+  &lt;div class=&quot;lab-tab-pane&quot; data-pane=&quot;vault&quot; id=&quot;pane-vault&quot;&gt;
+    &lt;div class=&quot;drawer-subtitle&quot;&gt;❄️ Lenski Bio-Library &amp;amp; Cryo-Vault&lt;/div&gt;
+    &lt;p style=&quot;font-size:0.72rem;color:#94a3b8;line-height:1.45;margin:0 0 6px 0;&quot;&gt;
+      Pipette frozen silicoid founder strains into designated benthic pores. Conduct competition assays across geologic time.
+    &lt;/p&gt;
+
+    &lt;!-- Active Pipette Tool Card --&gt;
+    &lt;div class=&quot;dual-basin-card&quot; style=&quot;border-color:#10b981;&quot;&gt;
+      &lt;div style=&quot;display:flex;align-items:center;justify-content:space-between;&quot;&gt;
+        &lt;div style=&quot;font-size:0.75rem;font-weight:700;color:#6ee7b7;&quot;&gt;🌱 Active Inoculant Pipette&lt;/div&gt;
+        &lt;button id=&quot;btn-arm-pipette&quot; class=&quot;brush-btn&quot; data-mode=&quot;inoculate&quot; style=&quot;padding:2px 8px;font-size:0.68rem;&quot; title=&quot;Arm Pipette Tool&quot;&gt;Arm Pipette&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div id=&quot;pipette-status-desc&quot; style=&quot;font-size:0.68rem;color:#94a3b8;font-family:monospace;margin-top:2px;&quot;&gt;
+        No frozen strain loaded. Select a strain from the vault below or arm to inject prebiotic soup.
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Head-to-Head Dual-Basin Competition --&gt;
+    &lt;div class=&quot;dual-basin-card&quot; style=&quot;margin-top:8px;border-color:#a855f7;&quot;&gt;
+      &lt;div style=&quot;font-size:0.75rem;font-weight:700;color:#d8b4fe;&quot;&gt;⚔️ Head-to-Head Dual-Basin Competition&lt;/div&gt;
+      &lt;p style=&quot;font-size:0.68rem;color:#cbd5e1;line-height:1.35;margin:0;&quot;&gt;
+        Inoculate two distinct lineages on opposite sides of a central basalt ridge to evaluate evolutionary fitness:
+      &lt;/p&gt;
+      &lt;button id=&quot;btn-inoculate-dual-basin&quot; class=&quot;studio-btn btn-founder-reset&quot; style=&quot;padding:6px 10px;justify-content:center;margin-top:4px;&quot;&gt;
+        ⚡ Inoculate North Basin vs. South Basin
+      &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Frozen Strains Catalog --&gt;
+    &lt;div class=&quot;drawer-subtitle&quot; style=&quot;display:flex;justify-content:space-between;align-items:center;margin-top:8px;&quot;&gt;
+      &lt;span&gt;❄️ Frozen Strains Vault&lt;/span&gt;
+      &lt;span id=&quot;biobank-status-badge&quot; style=&quot;font-size:0.65rem;color:#38bdf8;font-family:monospace;&quot;&gt;0 Strains&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;biobank-strain-list&quot; style=&quot;display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto;padding-right:4px;&quot;&gt;
+      &lt;!-- Dynamically populated from BioBank --&gt;
+    &lt;/div&gt;
+    &lt;div style=&quot;display:flex;gap:6px;margin-top:6px;&quot;&gt;
+      &lt;button id=&quot;btn-biobank-export&quot; class=&quot;drawer-btn&quot; style=&quot;flex:1;padding:4px 6px;font-size:0.72rem;background:#0369a1;color:#fff;border-color:#38bdf8;&quot;&gt;💾 Export Vault&lt;/button&gt;
+      &lt;button id=&quot;btn-biobank-import&quot; class=&quot;drawer-btn&quot; style=&quot;flex:1;padding:4px 6px;font-size:0.72rem;background:#334155;color:#e2e8f0;border-color:#64748b;&quot;&gt;📂 Import Vault&lt;/button&gt;
+      &lt;input type=&quot;file&quot; id=&quot;biobank-file-input&quot; accept=&quot;.json&quot; style=&quot;display:none;&quot;&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- TAB PANE 3: IN-SITU PERTURBATION ASSAYS &amp; INSTANT SHOCKS --&gt;
+  &lt;div class=&quot;lab-tab-pane&quot; data-pane=&quot;triggers&quot; id=&quot;pane-triggers&quot;&gt;
+    &lt;div class=&quot;drawer-subtitle&quot;&gt;⚡ In-Situ Perturbation Assays &amp;amp; Shock Testing&lt;/div&gt;
+    &lt;p style=&quot;font-size:0.72rem;color:#94a3b8;line-height:1.45;margin:0 0 6px 0;&quot;&gt;
+      Inject instantaneous geological shocks into the live simulation to evaluate strain resilience, allosteric shield activation, and niche recovery.
+    &lt;/p&gt;
+
+    &lt;div class=&quot;geo-trigger-grid&quot;&gt;
+      &lt;button id=&quot;btn-trigger-earthquake&quot; class=&quot;geo-trigger-btn&quot;&gt;&lt;span&gt;💥&lt;/span&gt;&lt;span&gt;Magmatic Tremor&lt;/span&gt;&lt;/button&gt;
+      &lt;button id=&quot;btn-trigger-lava&quot; class=&quot;geo-trigger-btn&quot;&gt;&lt;span&gt;🌋&lt;/span&gt;&lt;span&gt;Pillow Lava&lt;/span&gt;&lt;/button&gt;
+      &lt;button id=&quot;btn-trigger-spalling&quot; class=&quot;geo-trigger-btn&quot;&gt;&lt;span&gt;🏚️&lt;/span&gt;&lt;span&gt;Chimney Spall&lt;/span&gt;&lt;/button&gt;
+      &lt;button id=&quot;btn-trigger-surge&quot; class=&quot;geo-trigger-btn&quot;&gt;&lt;span&gt;🔥&lt;/span&gt;&lt;span&gt;Boiling Surge&lt;/span&gt;&lt;/button&gt;
+      &lt;button id=&quot;btn-trigger-toxin&quot; class=&quot;geo-trigger-btn&quot;&gt;&lt;span&gt;🧪&lt;/span&gt;&lt;span&gt;Toxic Spike&lt;/span&gt;&lt;/button&gt;
+      &lt;button id=&quot;btn-trigger-tidal&quot; class=&quot;geo-trigger-btn&quot;&gt;&lt;span&gt;🌊&lt;/span&gt;&lt;span&gt;Tidal Shift&lt;/span&gt;&lt;/button&gt;
+      &lt;button id=&quot;btn-trigger-marinesnow&quot; class=&quot;geo-trigger-btn&quot;&gt;&lt;span&gt;❄️&lt;/span&gt;&lt;span&gt;Marine Snow&lt;/span&gt;&lt;/button&gt;
+      &lt;button id=&quot;btn-trigger-migration&quot; class=&quot;geo-trigger-btn&quot;&gt;&lt;span&gt;📍&lt;/span&gt;&lt;span&gt;Vent Avulsion&lt;/span&gt;&lt;/button&gt;
+      &lt;button id=&quot;btn-trigger-cryogenic&quot; class=&quot;geo-trigger-btn&quot; style=&quot;grid-column: span 2;&quot;&gt;&lt;span&gt;🧊&lt;/span&gt;&lt;span&gt;Cryogenic Downwelling Incursion&lt;/span&gt;&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Live Event Ticker --&gt;
+    &lt;div class=&quot;drawer-subtitle&quot; style=&quot;margin-top:10px;&quot;&gt;📡 Active Perturbations &amp;amp; Event Ticker&lt;/div&gt;
+    &lt;div class=&quot;geo-event-ticker&quot; id=&quot;geo-event-ticker&quot;&gt;
+      &lt;div style=&quot;color:#64748b;font-style:italic;&quot;&gt;No active perturbations. Seafloor in steady state.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- TAB PANE 4: FIRST-LAW TELEMETRY &amp; OPTICAL LAYERS --&gt;
+  &lt;div class=&quot;lab-tab-pane&quot; data-pane=&quot;telemetry&quot; id=&quot;pane-telemetry&quot;&gt;
+    &lt;div class=&quot;drawer-subtitle&quot;&gt;📊 First-Law Telemetry &amp;amp; Conservation Ledger&lt;/div&gt;
+    &lt;p style=&quot;font-size:0.72rem;color:#94a3b8;line-height:1.45;margin:0 0 6px 0;&quot;&gt;
+      Pattee epistemic cut verification: strictly closed-universe thermodynamics, Landauer bit-erasure limits, and mass balance.
+    &lt;/p&gt;
+
+    &lt;!-- First-Law Invariant Readouts --&gt;
+    &lt;div style=&quot;background:#090e1a;padding:10px 12px;border-radius:8px;border:1px solid #1e293b;display:flex;flex-direction:column;gap:6px;&quot;&gt;
+      &lt;div style=&quot;display:flex;justify-content:space-between;font-family:monospace;font-size:0.72rem;&quot;&gt;
+        &lt;span style=&quot;color:#94a3b8;&quot;&gt;Energy Ledger Invariant:&lt;/span&gt;
+        &lt;span id=&quot;studio-tele-energy&quot; style=&quot;color:#10b981;font-weight:700;&quot;&gt;ΔE = 0.000 (Conserved)&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div style=&quot;display:flex;justify-content:space-between;font-family:monospace;font-size:0.72rem;&quot;&gt;
+        &lt;span style=&quot;color:#94a3b8;&quot;&gt;Matter Ledger Invariant:&lt;/span&gt;
+        &lt;span id=&quot;studio-tele-matter&quot; style=&quot;color:#10b981;font-weight:700;&quot;&gt;ΔM = 0.000 (Conserved)&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div style=&quot;display:flex;justify-content:space-between;font-family:monospace;font-size:0.72rem;&quot;&gt;
+        &lt;span style=&quot;color:#94a3b8;&quot;&gt;Landauer Cost (kT ln 2):&lt;/span&gt;
+        &lt;span id=&quot;studio-tele-landauer&quot; style=&quot;color:#38bdf8;&quot;&gt;1.000× Base Limit&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Viewport Clarity &amp; Multi-Layer Optical Isolation --&gt;
+    &lt;div class=&quot;drawer-subtitle&quot; style=&quot;margin-top:10px;&quot;&gt;👁️ Optical Isolation &amp;amp; Visual Layer Clarity&lt;/div&gt;
+    &lt;div style=&quot;background:#090e1a;padding:10px 12px;border-radius:8px;border:1px solid #1e293b;display:flex;flex-direction:column;gap:6px;&quot;&gt;
+      &lt;label class=&quot;drawer-checkbox-label&quot;&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;chk-spores&quot; checked&gt; Show Pelagic Spores (Hotkey: S)
+      &lt;/label&gt;
+      &lt;label class=&quot;drawer-checkbox-label&quot;&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;chk-water&quot; checked&gt; Show Water Column (Hotkey: W)
+      &lt;/label&gt;
+      &lt;label class=&quot;drawer-checkbox-label&quot;&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;chk-bedrock&quot; checked&gt; Show Basalt Bedrock (Hotkey: B)
+      &lt;/label&gt;
+      &lt;label class=&quot;drawer-checkbox-label&quot;&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;chk-filter-conduits&quot; checked&gt; Show Syncytial Transport Lines (🟣)
+      &lt;/label&gt;
+      &lt;label class=&quot;drawer-checkbox-label&quot;&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;chk-filter-auras&quot; checked&gt; Show Metabolic &amp;amp; Trophic Auras (✨)
+      &lt;/label&gt;
+      &lt;label class=&quot;drawer-checkbox-label&quot;&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;chk-filter-trophic&quot; checked&gt; Show Predation Rays &amp;amp; Beacons (⚡)
+      &lt;/label&gt;
+      &lt;label class=&quot;drawer-checkbox-label&quot;&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;chk-calm-motion&quot;&gt; Calm Visual Motion (Slower pulsing)
+      &lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Data Export --&gt;
+    &lt;div class=&quot;drawer-subtitle&quot; style=&quot;margin-top:10px;&quot;&gt;📜 Scientific Data Export&lt;/div&gt;
+    &lt;div style=&quot;display:flex;gap:6px;&quot;&gt;
+      &lt;button id=&quot;btn-export-history-json&quot; class=&quot;drawer-btn&quot; style=&quot;flex:1;background:rgba(168,85,247,0.15);border-color:#a855f7;color:#d8b4fe;font-weight:700;&quot;&gt;
+        📥 Export JSON Log
+      &lt;/button&gt;
+      &lt;button id=&quot;btn-export-history-csv&quot; class=&quot;drawer-btn&quot; style=&quot;flex:1;background:rgba(6,182,212,0.15);border-color:#06b6d4;color:#22d3ee;font-weight:700;&quot;&gt;
+        📊 Export CSV
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="6-itemized-step-by-step-engineering-implementation-plan" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">🛠️ 6. Itemized Step-by-Step Engineering Implementation Plan</h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To execute this architectural overhaul with zero downtime and regression-free stability, the refactoring is sequenced into 5 distinct engineering phases:</p>
+<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart LR
+    P1[&quot;Phase 1: Quick Fixes&lt;br/&gt;• CSS Grid min-width:0&lt;br/&gt;• Hide bottom-left pill in Studio/Lab&lt;br/&gt;• Clamp CAD palette height&quot;]
+    P2[&quot;Phase 2: Domain Realignment&lt;br/&gt;• Relocate Geodynamics rates to Studio&lt;br/&gt;• Bind rate sliders in LabFlyout.ts&quot;]
+    P3[&quot;Phase 3: CAD Redundancy&lt;br/&gt;• Remove duplicate 7 brushes from Studio&lt;br/&gt;• Inject Active Tool Context Card&quot;]
+    P4[&quot;Phase 4: Lab Pure Rig&lt;br/&gt;• Implement 4 pristine tabs&lt;br/&gt;• Biophysics, Vault, In-Situ, Telemetry&quot;]
+    P5[&quot;Phase 5: Verification&lt;br/&gt;• Dual Markdown/HTML build&lt;br/&gt;• Automated unit tests&lt;br/&gt;• Visual regression checks&quot;]
+
+    P1 --&gt; P2 --&gt; P3 --&gt; P4 --&gt; P5</div>
+<h3 id="phase-1-viewport-collision-css-grid-blowout-remediation-p0-quick-wins" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 1: Viewport Collision & CSS Grid Blowout Remediation (P0 Quick Wins)</h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Target Files:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code></li>
+<li><strong class="text-slate-100 font-semibold">Actions:</strong></li>
+<li>Add <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">min-width: 0</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">grid-template-columns: repeat(4, minmax(0, 1fr))</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.lab-tab-bar</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.lab-tab-btn</code> in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code>.</li>
+<li>Add <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">body.mode-studio .floating-visual-key-pill { display: none !important; }</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">body.mode-laboratory .floating-visual-key-pill { display: none !important; }</code> to eliminate the bottom-left collision with <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.studio-cad-palette</code>.</li>
+<li>Add <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">max-height: calc(100vh - 130px); overflow-y: auto;</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.studio-cad-palette</code>.</li>
+</ul>
+<h3 id="phase-2-conceptual-domain-realignment-migrating-geodynamics-rates-to-studio" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 2: Conceptual Domain Realignment — Migrating Geodynamics Rates to Studio</h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Target Files:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/ui/LabFlyout.ts</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/engine/storage/EnvironmentPresetRegistry.ts</code></li>
+<li><strong class="text-slate-100 font-semibold">Actions:</strong></li>
+<li>Move the markup for <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">slider-geo-master</code> and the 9 phenomenon rate sliders from <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#pane-geodynamics</code> inside <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#lab-drawer</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#pane-geomorphology</code> inside <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-drawer</code>.</li>
+<li>In <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/ui/LabFlyout.ts</code>, update slider change listeners to ensure adjustments directly update the environment preset configuration and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GeologicalPressuresEngine</code>.</li>
+<li>Ensure that when custom presets are saved via <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">btnStudioSave</code> or exported via <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">btnStudioExport</code>, the active geodynamic rates are serialized into the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.siliquarium</code> JSON payload under <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">environment.geodynamics</code>.</li>
+</ul>
+<h3 id="phase-3-single-source-of-truth-cad-brush-architecture" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 3: Single-Source-of-Truth CAD Brush Architecture</h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Target Files:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/ui/LabFlyout.ts</code></li>
+<li><strong class="text-slate-100 font-semibold">Actions:</strong></li>
+<li>Deprecate the duplicate <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#brush-select</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#brush-basalt</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#brush-excavate</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#brush-trench</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#brush-vent</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#brush-inoculate</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#brush-clear</code> buttons inside <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#pane-geomorphology</code>.</li>
+<li>Replace them with the lightweight <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.studio-tool-context-card</code> that displays the current active tool from <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-cad-palette</code>.</li>
+<li>In <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/ui/LabFlyout.ts</code>, ensure <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">setBrushMode(mode)</code> updates <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-active-tool-title</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#studio-active-tool-icon</code>, and the left palette state synchronously.</li>
+</ul>
+<h3 id="phase-4-laboratory-restructuring-into-a-pure-scientific-rig" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 4: Laboratory Restructuring into a Pure Scientific Rig</h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Target Files:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">index.html</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">src/ui/LabFlyout.ts</code></li>
+<li><strong class="text-slate-100 font-semibold">Actions:</strong></li>
+<li>Restructure the Laboratory tabs to:</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">data-tab=&quot;biophysics&quot;</code> (Biophysical Constants & Replication Physics)</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">data-tab=&quot;vault&quot;</code> (Lenski Bio-Library & Strains)</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">data-tab=&quot;triggers&quot;</code> (In-Situ Perturbation Assays & Instant Triggers)</li>
+<li><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">data-tab=&quot;telemetry&quot;</code> (First-Law Telemetry & Optical Layers)</li>
+<li>Update <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">switchTab(tabId)</code> in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LabFlyout.ts</code> to support these 4 clean tabs. Default the Laboratory flyout opening tab to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">biophysics</code>.</li>
+<li>Keep the instant trigger shock buttons (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">btn-trigger-earthquake</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">btn-trigger-surge</code>, etc.) and the tectonic telemetry ticker inside the <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">triggers</code> tab for real-time experimental stress testing.</li>
+</ul>
+<h3 id="phase-5-verification-dual-build-and-validation" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Phase 5: Verification, Dual Build, and Validation</h3>
+<ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Target Files:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">scripts/build_docs_html.mjs</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">tests/</code></li>
+<li><strong class="text-slate-100 font-semibold">Actions:</strong></li>
+<li>Register <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">QA/UX_ARCHITECTURE_AUDIT_AND_REDESIGN.md</code> in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">scripts/build_docs_html.mjs</code> under <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NAV_CATEGORIES</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">DOCS_MAP</code>.</li>
+<li>Execute <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">node scripts/build_docs_html.mjs</code> to generate the HTML documentation twin.</li>
+<li>Run the complete Vitest automated test suite (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">npm test</code>) to guarantee zero functional regressions.</li>
+<li>Perform visual validation across 1920×1080 and 1366×768 resolutions.</li>
+</ul>
+<hr class="border-t border-slate-800 my-8" />
+<h2 id="conclusion-architectural-verdict" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">🎯 Conclusion & Architectural Verdict</h2>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">By implementing this comprehensive specification:</p>
+<ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
+<li><strong class="text-slate-100 font-semibold">Redundancy is completely eliminated:</strong> CAD brushes have one canonical floating deck, reclaiming 380px of vertical space in Design Studio.</li>
+<li><strong class="text-slate-100 font-semibold">Mystery collisions disappear:</strong> Viewport overlays maintain clean, non-overlapping bounding boxes with zero clipping.</li>
+<li><strong class="text-slate-100 font-semibold">Conceptual domains are restored:</strong> Planetary geodynamics belongs to the World Builder; the Laboratory belongs to scientific experimentation.</li>
+<li><strong class="text-slate-100 font-semibold">Tab bars are restored to pristine clarity:</strong> CSS Grid blowout is solved through proper <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">minmax(0, 1fr)</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">min-width: 0</code> constraints, eliminating all label truncation.</li>
+</ol>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The resulting interface aligns Siliquarium with the gold standard of professional CAD workstations and high-density scientific instruments, honoring Howard Pattee's Epistemic Cut in both computational theory and human-computer ergonomics.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- MASTER FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
+      <p>
+        <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
+        PolyForm Noncommercial License 1.0.0 •
+        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

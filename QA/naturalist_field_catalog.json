@@ -1,0 +1,240 @@
+{
+  "expeditionTimestamp": "2026-10-19T04:21:19.200Z",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+  "initialTelemetry": {
+    "ticks": "7",
+    "living": "28 Living",
+    "spores": "0 Spores",
+    "phylogeny": "Gen 0 • 28 Clades",
+    "conservation": "ΔE = 0.000"
+  },
+  "finalTelemetry": {
+    "ticks": "268",
+    "living": "45 Living",
+    "spores": "0 Spores",
+    "phylogeny": "Gen 10 • 4 Clades",
+    "conservation": "ΔE = 0.000"
+  },
+  "totalTicksObserved": 261,
+  "catalogedSilicoids": [
+    {
+      "binomialName": "Vampirotheke schnepfii",
+      "classification": "Schnepf's Organelle Kleptoplast",
+      "coordinate": "Pore [-5, 0, 0]",
+      "activityStatus": "Active Respiration",
+      "batteryPMF": "81 mV",
+      "matterPool": "72 M",
+      "generation": "Gen 1",
+      "landauerDissipation": "1 T",
+      "circuitArchitecture": "2 Gates: NOT · OR",
+      "autopsyTruthTable": "Stream A\n          Stream B\n          Toxin T\n          Logic Out\n          Yield\n        \n      \n      \n        0\n        0\n        0\n        1 (HIGH)\n        2.0×\n      \n        0\n        1\n        0\n        0 (LOW)\n        0.0×\n      \n        1\n        0\n        0\n        1 (HIGH)\n        2.0×\n      \n        1\n        1\n        0\n        1 (HIGH)\n        2.0×\n      \n        1\n        1\n        1\n        1 (HIGH)\n        2.0×",
+      "autopsyMotifs": "Dual-Substrate Promiscuous Generalist",
+      "cladeId": "org-2"
+    },
+    {
+      "binomialName": "Syncytiocladus bonnerii",
+      "classification": "Bonner's Multicellular Syncytium",
+      "coordinate": "Pore [-2, -1, 0]",
+      "activityStatus": "Active Respiration",
+      "batteryPMF": "65 mV",
+      "matterPool": "543 M",
+      "generation": "Gen 5",
+      "landauerDissipation": "2 T",
+      "circuitArchitecture": "2 Gates: AND · NOT",
+      "autopsyTruthTable": "Stream A\n          Stream B\n          Toxin T\n          Logic Out\n          Yield\n        \n      \n      \n        0\n        0\n        0\n        1 (HIGH)\n        2.0×\n      \n        0\n        1\n        0\n        1 (HIGH)\n        2.0×\n      \n        1\n        0\n        0\n        1 (HIGH)\n        2.0×\n      \n        1\n        1\n        0\n        1 (HIGH)\n        2.0×\n      \n        1\n        1\n        1\n        1 (HIGH)\n        0.0×",
+      "autopsyMotifs": "Allosteric Toxin Clamping Netlist",
+      "cladeId": "org-5"
+    },
+    {
+      "binomialName": "Metazoicladus wolpertii",
+      "classification": "Wolpert's Differentiated Metazoan",
+      "coordinate": "Pore [-2, 5, 0]",
+      "activityStatus": "Active Respiration",
+      "batteryPMF": "49 mV",
+      "matterPool": "31 M",
+      "generation": "Gen 7",
+      "landauerDissipation": "1 T",
+      "circuitArchitecture": "4 Gates: OR · AND · NOT · OR",
+      "autopsyTruthTable": "Stream A\n          Stream B\n          Toxin T\n          Logic Out\n          Yield\n        \n      \n      \n        0\n        0\n        0\n        1 (HIGH)\n        0.0×\n      \n        0\n        1\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        0\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        1\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        1\n        1\n        1 (HIGH)\n        0.0×",
+      "autopsyMotifs": "Incoherent Feed-Forward Loop (I-FFL Type 1)",
+      "cladeId": "clade-org-89-g6"
+    },
+    {
+      "binomialName": "Metazoicladus wolpertii",
+      "classification": "Wolpert's Differentiated Metazoan",
+      "coordinate": "Pore [-1, 0, 0]",
+      "activityStatus": "Active Respiration",
+      "batteryPMF": "85 mV",
+      "matterPool": "17 M",
+      "generation": "Gen 6",
+      "landauerDissipation": "1 T",
+      "circuitArchitecture": "4 Gates: OR · AND · NOT · OR",
+      "autopsyTruthTable": "Stream A\n          Stream B\n          Toxin T\n          Logic Out\n          Yield\n        \n      \n      \n        0\n        0\n        0\n        1 (HIGH)\n        0.0×\n      \n        0\n        1\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        0\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        1\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        1\n        1\n        1 (HIGH)\n        0.0×",
+      "autopsyMotifs": "Incoherent Feed-Forward Loop (I-FFL Type 1)",
+      "cladeId": "org-26"
+    }
+  ],
+  "trophicPyramid": {
+    "primaryProducers": [],
+    "lithotrophs": [],
+    "syntrophsAndBiofilms": [],
+    "detritivores": [],
+    "predatorsAndKleptoplasts": [
+      {
+        "binomialName": "Vampirotheke schnepfii",
+        "classification": "Schnepf's Organelle Kleptoplast",
+        "coordinate": "Pore [-5, 0, 0]",
+        "activityStatus": "Active Respiration",
+        "batteryPMF": "81 mV",
+        "matterPool": "72 M",
+        "generation": "Gen 1",
+        "landauerDissipation": "1 T",
+        "circuitArchitecture": "2 Gates: NOT · OR",
+        "autopsyTruthTable": "Stream A\n          Stream B\n          Toxin T\n          Logic Out\n          Yield\n        \n      \n      \n        0\n        0\n        0\n        1 (HIGH)\n        2.0×\n      \n        0\n        1\n        0\n        0 (LOW)\n        0.0×\n      \n        1\n        0\n        0\n        1 (HIGH)\n        2.0×\n      \n        1\n        1\n        0\n        1 (HIGH)\n        2.0×\n      \n        1\n        1\n        1\n        1 (HIGH)\n        2.0×",
+        "autopsyMotifs": "Dual-Substrate Promiscuous Generalist",
+        "cladeId": "org-2"
+      }
+    ],
+    "multicellularSyncytia": [
+      {
+        "binomialName": "Syncytiocladus bonnerii",
+        "classification": "Bonner's Multicellular Syncytium",
+        "coordinate": "Pore [-2, -1, 0]",
+        "activityStatus": "Active Respiration",
+        "batteryPMF": "65 mV",
+        "matterPool": "543 M",
+        "generation": "Gen 5",
+        "landauerDissipation": "2 T",
+        "circuitArchitecture": "2 Gates: AND · NOT",
+        "autopsyTruthTable": "Stream A\n          Stream B\n          Toxin T\n          Logic Out\n          Yield\n        \n      \n      \n        0\n        0\n        0\n        1 (HIGH)\n        2.0×\n      \n        0\n        1\n        0\n        1 (HIGH)\n        2.0×\n      \n        1\n        0\n        0\n        1 (HIGH)\n        2.0×\n      \n        1\n        1\n        0\n        1 (HIGH)\n        2.0×\n      \n        1\n        1\n        1\n        1 (HIGH)\n        0.0×",
+        "autopsyMotifs": "Allosteric Toxin Clamping Netlist",
+        "cladeId": "org-5"
+      },
+      {
+        "binomialName": "Metazoicladus wolpertii",
+        "classification": "Wolpert's Differentiated Metazoan",
+        "coordinate": "Pore [-2, 5, 0]",
+        "activityStatus": "Active Respiration",
+        "batteryPMF": "49 mV",
+        "matterPool": "31 M",
+        "generation": "Gen 7",
+        "landauerDissipation": "1 T",
+        "circuitArchitecture": "4 Gates: OR · AND · NOT · OR",
+        "autopsyTruthTable": "Stream A\n          Stream B\n          Toxin T\n          Logic Out\n          Yield\n        \n      \n      \n        0\n        0\n        0\n        1 (HIGH)\n        0.0×\n      \n        0\n        1\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        0\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        1\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        1\n        1\n        1 (HIGH)\n        0.0×",
+        "autopsyMotifs": "Incoherent Feed-Forward Loop (I-FFL Type 1)",
+        "cladeId": "clade-org-89-g6"
+      },
+      {
+        "binomialName": "Metazoicladus wolpertii",
+        "classification": "Wolpert's Differentiated Metazoan",
+        "coordinate": "Pore [-1, 0, 0]",
+        "activityStatus": "Active Respiration",
+        "batteryPMF": "85 mV",
+        "matterPool": "17 M",
+        "generation": "Gen 6",
+        "landauerDissipation": "1 T",
+        "circuitArchitecture": "4 Gates: OR · AND · NOT · OR",
+        "autopsyTruthTable": "Stream A\n          Stream B\n          Toxin T\n          Logic Out\n          Yield\n        \n      \n      \n        0\n        0\n        0\n        1 (HIGH)\n        0.0×\n      \n        0\n        1\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        0\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        1\n        0\n        1 (HIGH)\n        0.0×\n      \n        1\n        1\n        1\n        1 (HIGH)\n        0.0×",
+        "autopsyMotifs": "Incoherent Feed-Forward Loop (I-FFL Type 1)",
+        "cladeId": "org-26"
+      }
+    ]
+  },
+  "protoCognitiveBehaviors": [
+    {
+      "behavior": "Predictive Pavlovian Precursor Regulation",
+      "taxon": "Predictovibrio pavlovii",
+      "mechanics": "Feedforward regulation sensing acoustic/precursor tremors (M_2) to pre-repress catalytic intake before boiling eruption.",
+      "status": "CONFIRMED"
+    },
+    {
+      "behavior": "Autonomous Travelling-Wave Circadian Clock",
+      "taxon": "Chronobacterium johnsonii / Oscillocladus elowitzii",
+      "mechanics": "Contiguous 3-inverter limit cycle ring oscillator maintaining 6-state periodic pacing without external inputs.",
+      "status": "CONFIRMED"
+    },
+    {
+      "behavior": "Bistable Latch Epigenetic State Memory",
+      "taxon": "Bistabilus collinsii",
+      "mechanics": "Cross-coupled feedback retaining 1-bit memory of nutrient abundance across multi-tick famine intervals.",
+      "status": "CONFIRMED"
+    },
+    {
+      "behavior": "Vampiric Kleptoplastic Organelle Theft",
+      "taxon": "Vampirotheke schnepfii",
+      "mechanics": "Contact lysis predation assimilating victim metabolic organelle cassettes into predator cytoplasm.",
+      "status": "CONFIRMED"
+    },
+    {
+      "behavior": "Paracrine Syntrophy & Mutualistic DIET Transfer",
+      "taxon": "Syntrophobacter westii",
+      "mechanics": "Direct interspecies electron transfer donating surplus battery tokens to heterospecific neighbors.",
+      "status": "CONFIRMED"
+    },
+    {
+      "behavior": "Epigenetic Multicellular Caste Differentiation",
+      "taxon": "Metazoicladus wolpertii",
+      "mechanics": "Clonal syncytium differentiating into feeding trophocytes, somatic shields, and pacemaker sensory poles.",
+      "status": "CONFIRMED"
+    }
+  ],
+  "morphologicalTopologies": [
+    {
+      "type": "Solitary Porous Cell",
+      "description": "Hexagonal basal lithotrophic or autotrophic unit in mineral pore."
+    },
+    {
+      "type": "Columnar Spire",
+      "description": "Vertical hexagonal pillar extending into pelagic current for plume interception."
+    },
+    {
+      "type": "Dendritic Coral",
+      "description": "Branching syncytial colony maximizing surface-to-volume ratio across basalt ridges."
+    },
+    {
+      "type": "Rosette Flower",
+      "description": "Circumferential radial cluster with central feeding trophocyte and peripheral shields."
+    },
+    {
+      "type": "Syncytial Plasmodium",
+      "description": "Continuous crawling slime hull exhibiting directional treadmilling & apoptosis halos."
+    }
+  ],
+  "geodynamicPerturbationImpact": {
+    "eventTriggered": "Hydrothermal Boiling Surge",
+    "tickerFeedback": "No active perturbations. Seafloor in steady state.",
+    "postShockLiving": "45 Living"
+  },
+  "guidedTourObservations": [
+    {
+      "stopIndex": 0,
+      "category": "🌊 SLIME MOTILITY",
+      "title": "Multicellular Slime Mold Treadmilling",
+      "narrativeSnippet": "Observe macroscopic syncytial motility emerging strictly from local rules! Forward trophocytes project protoplasmic pseudopodia toward vent nutrients (🌊 Slime ..."
+    },
+    {
+      "stopIndex": 1,
+      "category": "🧬 FRENCH FLAG GRN",
+      "title": "Spatial Gene Regulation (Wolpert's French Flag)",
+      "narrativeSnippet": "Every member cell in this metazoan organism shares the exact identical 60-bit DNA sequence. Yet, cells adjacent to the hydrothermal nozzle express feeding opero..."
+    },
+    {
+      "stopIndex": 2,
+      "category": "⚔️ TROPHIC WARFARE",
+      "title": "Predation Strike & Enzymatic Siphon",
+      "narrativeSnippet": "An aggressive heterotroph armed with allosteric NOT/XOR gates strikes an adjacent prey pore. A piercing crimson laser ray siphon breaches the prey's membrane, d..."
+    },
+    {
+      "stopIndex": 3,
+      "category": "🦴 NECROMASS RECYCLING",
+      "title": "Detrital Necromass Scavenging",
+      "narrativeSnippet": "When silicoids perish through senescence or predation, their structural shells form detrital carcasses. Evolved scavengers detect nearby detritus and project go..."
+    },
+    {
+      "stopIndex": 4,
+      "category": "⚡ CHEMIOSMOTIC INFLUX",
+      "title": "Chemiosmotic Primary Production",
+      "narrativeSnippet": "Witness primary abiogenic energy harvesting. Autotrophic silicoids stationed near the hydrothermal chimney absorb dissolved chemical potential from fluid redox ..."
+    }
+  ]
+}

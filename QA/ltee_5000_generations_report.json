@@ -1,0 +1,328 @@
+{
+  "experiment": "Siliquarium 5,000-Generation Long-Term Evolution Experiment (LTEE)",
+  "completedAt": "2026-10-19T04:44:09.902Z",
+  "elapsedSeconds": 18.98,
+  "totalGenerations": 5000,
+  "populationSize": 25,
+  "milestones": [
+    {
+      "generation": 1,
+      "individualId": "org-gen0-0",
+      "cladeId": "clade-prime-0",
+      "name": "Phase-Locked Entrained Pacemaker",
+      "type": "ENTRAINED_PACEMAKER",
+      "gatesCount": 14,
+      "confidence": 0.95
+    },
+    {
+      "generation": 1,
+      "individualId": "org-gen0-7",
+      "cladeId": "clade-prime-7",
+      "name": "Temporal Derivative Chemotaxis Engine",
+      "type": "TEMPORAL_DERIVATIVE_CHEMOTAXIS",
+      "gatesCount": 3,
+      "confidence": 0.9
+    },
+    {
+      "generation": 1,
+      "individualId": "org-gen0-11",
+      "cladeId": "clade-prime-11",
+      "name": "Incoherent Feed-Forward Loop (I-FFL Type 1)",
+      "type": "INCOHERENT_FFL",
+      "gatesCount": 9,
+      "confidence": 0.8
+    },
+    {
+      "generation": 1,
+      "individualId": "org-gen0-22",
+      "cladeId": "clade-prime-22",
+      "name": "Negative Autoregulation Clamp",
+      "type": "NEGATIVE_AUTOREGULATION",
+      "gatesCount": 1,
+      "confidence": 0.85
+    },
+    {
+      "generation": 20,
+      "individualId": "org-g19-18",
+      "cladeId": "clade-g18-13-g18",
+      "name": "Anticipatory Pavlovian Regulator",
+      "type": "PREDICTIVE_PAVLOVIAN",
+      "gatesCount": 7,
+      "confidence": 0.92
+    },
+    {
+      "generation": 60,
+      "individualId": "org-g59-23",
+      "cladeId": "clade--g55-9-g55",
+      "name": "Cryptobiotic Dormancy Clamp",
+      "type": "CRYPTOBIOTIC_DORMANCY_CLAMP",
+      "gatesCount": 6,
+      "confidence": 0.88
+    },
+    {
+      "generation": 160,
+      "individualId": "org-g159-24",
+      "cladeId": "clade-159-24-g159",
+      "name": "Odd-Inverter Ring Oscillator",
+      "type": "RING_OSCILLATOR",
+      "gatesCount": 16,
+      "confidence": 0.9
+    },
+    {
+      "generation": 653,
+      "individualId": "org-g652-16",
+      "cladeId": "clade-652-16-g652",
+      "name": "Bistable Memory Latch (SR Flip-Flop)",
+      "type": "BISTABLE_LATCH",
+      "gatesCount": 13,
+      "confidence": 0.85
+    },
+    {
+      "generation": 1071,
+      "individualId": "org-g1070-8",
+      "cladeId": "clade-1046-2-g1046",
+      "name": "Steiner Vascular Transport Network",
+      "type": "STEINER_VASCULAR_NETWORK",
+      "gatesCount": 7,
+      "confidence": 0.9
+    },
+    {
+      "generation": 2013,
+      "individualId": "org-g2012-11",
+      "cladeId": "clade-2002-1-g2002",
+      "name": "Coherent Feed-Forward Loop (C-FFL Type 1)",
+      "type": "COHERENT_FFL",
+      "gatesCount": 3,
+      "confidence": 0.8
+    }
+  ],
+  "generationalSnapshots": [
+    {
+      "generation": 1,
+      "bestFitness": 32.7,
+      "tapeLength": 360,
+      "gateCount": 4,
+      "gates": [
+        "NOT",
+        "OR",
+        "AND",
+        "NOT"
+      ],
+      "taxonBinomial": "Polyoperon ohnoi",
+      "taxonCommon": "Ohno's Duplicated Silicoid",
+      "cladeId": "clade-prime-3",
+      "tape": "111001011100001001100111110011001101011000100010111111011111110111110101101111000011000100001010100000101011110000111111110100101000110101110110100110010110011100111000101011010110111100101000010101110110001001010111000001000101101001101110111101111000011101101101001001010001001000000011010010011100100100101101110010110010001100101010100001011100011110011101"
+    },
+    {
+      "generation": 10,
+      "bestFitness": 40.3,
+      "tapeLength": 360,
+      "gateCount": 5,
+      "gates": [
+        "NOT",
+        "OR",
+        "AND",
+        "AND",
+        "NOT"
+      ],
+      "taxonBinomial": "Syncytiocladus bonnerii",
+      "taxonCommon": "Bonner's Multicellular Syncytium",
+      "cladeId": "clade-prime-3",
+      "tape": "111001011100001001100011110011001101011000100010111111011111110111110101101111000011000101001010100010101011110000111111110100101000110111110110100110010110011100111000101011010110101101101000010101110110000001010111000001000101101001101110111101111000011101101101001011000000001000000011011010011100100100101101110010110010001100101010100001011100011110011101"
+    },
+    {
+      "generation": 50,
+      "bestFitness": 36.5,
+      "tapeLength": 360,
+      "gateCount": 1,
+      "gates": [
+        "NOT"
+      ],
+      "taxonBinomial": "Syncytiocladus bonnerii",
+      "taxonCommon": "Bonner's Multicellular Syncytium",
+      "cladeId": "clade--g43-8-g43",
+      "tape": "111001010001001001100011110011001101101100100101111111011111110111110101101011110011000111101010100000101010110000111011010100101010010111110101100111010110011110111000101011010110101101111000010111110110100101000111000001001001101001100011110001111000011101101101001011110100001000000101011010011100100000101101100010110001001100001010001001011100011000011101"
+    },
+    {
+      "generation": 100,
+      "bestFitness": 42.5,
+      "tapeLength": 360,
+      "gateCount": 2,
+      "gates": [
+        "AND",
+        "NOT"
+      ],
+      "taxonBinomial": "Syncytiocladus bonnerii",
+      "taxonCommon": "Bonner's Multicellular Syncytium",
+      "cladeId": "clade--g88-1-g88",
+      "tape": "110000010001001000001011000001001101110100100011100111111111100101100101001111010011010101001010000000101010110000111010010001101010011111110100100110000010011010011000111011010111101101101000010111110110101101100101001101011001101010101010111001111000010000101010101001111000011000100101001110011110000010100100001100110001101101101100001001001100110000010111"
+    },
+    {
+      "generation": 250,
+      "bestFitness": 43.5,
+      "tapeLength": 360,
+      "gateCount": 3,
+      "gates": [
+        "AND",
+        "AND",
+        "NOT"
+      ],
+      "taxonBinomial": "Syncytiocladus bonnerii",
+      "taxonCommon": "Bonner's Multicellular Syncytium",
+      "cladeId": "clade-g249-0-g249",
+      "tape": "100100110001000011000100101011001101110010110001011011111111000001010110001001010010100111000111001100110001010001111010110110010000100000110101001010001010011011111000111000000111101101101010001001100111010001010010110111100000101010101111001011010010000110001011011010111001011011000001101110101111000011101100101000111011001100010010000110110111011101011101"
+    },
+    {
+      "generation": 500,
+      "bestFitness": 43.5,
+      "tapeLength": 366,
+      "gateCount": 2,
+      "gates": [
+        "AND",
+        "NOT"
+      ],
+      "taxonBinomial": "Syncytiocladus bonnerii",
+      "taxonCommon": "Bonner's Multicellular Syncytium",
+      "cladeId": "clade-g496-4-g496",
+      "tape": "000000110000001010101011101111001111111001110010110001111111001011111001111011010110101111110110001000000101101101011001000001011111100000110101010111100100110001000001100000101111110110011111111011100110100001001111100001011110100110001111011010000111000100101100001010010011100001011011001110000101100111100001111000111011011011001111100000001111101011001101100101"
+    },
+    {
+      "generation": 1000,
+      "bestFitness": 43.5,
+      "tapeLength": 366,
+      "gateCount": 3,
+      "gates": [
+        "AND",
+        "AND",
+        "NOT"
+      ],
+      "taxonBinomial": "Syncytiocladus bonnerii",
+      "taxonCommon": "Bonner's Multicellular Syncytium",
+      "cladeId": "clade-g972-4-g972",
+      "tape": "001011000011110001000000101111001100111111111111110111111010111010000111101000100111111001000100100101000000110100001110001111001100110010110100101001000000000101010000000100100010100011111001100010010000010111011001010000100110100111110101101000110011001010000101000111010110110011011000001101100011010011001011010100110110101100011100110011011001001110110100100111"
+    },
+    {
+      "generation": 2000,
+      "bestFitness": 43.5,
+      "tapeLength": 354,
+      "gateCount": 1,
+      "gates": [
+        "NOT"
+      ],
+      "taxonBinomial": "Syncytiocladus bonnerii",
+      "taxonCommon": "Bonner's Multicellular Syncytium",
+      "cladeId": "clade-1999-1-g1999",
+      "tape": "110100110001011011110001110001001101100010100100111111101000111010101010001001010010001100101101000011100000011000010110111111001000000010010010001111100101001101100111100010111001110111011101001100010000110001101001110101011011110010101010100101100001010001111111100001100010100101100100111011000101110110110000000101110100010010000100101000110111010100"
+    },
+    {
+      "generation": 3500,
+      "bestFitness": 43.5,
+      "tapeLength": 366,
+      "gateCount": 1,
+      "gates": [
+        "NOT"
+      ],
+      "taxonBinomial": "Syncytiocladus bonnerii",
+      "taxonCommon": "Bonner's Multicellular Syncytium",
+      "cladeId": "clade-496-15-g3496",
+      "tape": "001011001000101111100001110001001111101010101100111111100100000100001101101000010001010110001010010111010000111111011010110010100000110000111111010010011000100010100110011111110011100010100111010011000000000000010010010010101111011001011001010111101111101110100010010111110111011011111111001011000111110100100100000110110011001110010011000100001100110000101000011010"
+    },
+    {
+      "generation": 5000,
+      "bestFitness": 43.5,
+      "tapeLength": 372,
+      "gateCount": 3,
+      "gates": [
+        "AND",
+        "AND",
+        "NOT"
+      ],
+      "taxonBinomial": "Syncytiocladus bonnerii",
+      "taxonCommon": "Bonner's Multicellular Syncytium",
+      "cladeId": "clade-998-14-g4998",
+      "tape": "001011001010110000000010000011111011001101111111110111111011011100100011010010011001101110001111011100010101000010001010100111010011101101001000011011100100011011110000110000000010100010101101001110001101100010000000100110100100010110011000101110000100111001010010100010011100011110110100010011010101011100100011001000011101100110001001000101111011001100001100001011100000"
+    }
+  ],
+  "ultimateChampion": {
+    "generation": 5000,
+    "cladeId": "clade-4995-0-g4995",
+    "tape": "010011000101110000000010000101111011001100011010101011110000111111101111011011011101111110011011111000100111000010000000000111011010000010101001011111110011010101011010110101010010010000011100000110101111101011001100000011100001011111110100111010110000000000010000100011001010011101110100011110010101110111010111001001010111100111010100110001111010101000001111001011100000",
+    "length": 372,
+    "gateCount": 4,
+    "gates": [
+      "GATE_AND",
+      "GATE_AND",
+      "GATE_AND",
+      "GATE_NOT"
+    ],
+    "taxon": {
+      "binomialName": "Syncytiocladus bonnerii",
+      "commonName": "Bonner's Multicellular Syncytium",
+      "honoree": "John Tyler Bonner",
+      "field": "Evolution of Multicellularity & Morphogenesis",
+      "citation": "Bonner, J. T. (1998). The Origins of Multicellularity. Integr. Biol. 1(1), 27-36.",
+      "auraColor": "#8b5cf6",
+      "accentColor": "#a78bfa",
+      "description": "Clonal multicellular macro-organism exhibiting directed morphogenetic cleavage and syncytial cytoplasmic streaming."
+    }
+  },
+  "finalPopulationSample": [
+    {
+      "id": "org-g5000-0",
+      "cladeId": "clade-991-14-g4991",
+      "length": 372,
+      "gateCount": 2,
+      "gates": [
+        "GATE_AND",
+        "GATE_NOT"
+      ],
+      "tape": "010001101001110000001001000001111011001110111110101110101100001101110011010011000101111110001001010100110001000010010101001111010010001001001000101101100101011101010011110101010010101100110111000110001101100011100100110100101000011110110000101111000110010011000010110010101101011111010101011110011101011110000011111001001101101111000101100100111011101100001111011011100010"
+    },
+    {
+      "id": "org-g5000-1",
+      "cladeId": "clade-992-12-g4992",
+      "length": 372,
+      "gateCount": 3,
+      "gates": [
+        "GATE_AND",
+        "GATE_AND",
+        "GATE_NOT"
+      ],
+      "tape": "001011001010110000000010000011111011001101111111110111111000111100100011010010011001101110001111011101010101000010000010000111010011101101001000111011100100011011110000110000000010100010101101000110001101100010000000100100100100010110011000001110000100110011010010110010011101011110110100010011010101011101100011001000011101100110001001000100111011001100001101001011100000"
+    },
+    {
+      "id": "org-g5000-2",
+      "cladeId": "clade-998-14-g4998",
+      "length": 372,
+      "gateCount": 3,
+      "gates": [
+        "GATE_AND",
+        "GATE_AND",
+        "GATE_NOT"
+      ],
+      "tape": "011011001010100000000010000011111011001101111111110111111011011100100011010010011001101010001111011100010101000010001010100111010011101101001000011011100100011011110000110000000010100010101101001110001101100010000000100110100100010110011000101110000100111001010010100010011100011110110100010011010101011100100011001000011101100110001001000101111011001100001100001011100000"
+    },
+    {
+      "id": "org-g5000-3",
+      "cladeId": "clade-4992-5-g4992",
+      "length": 372,
+      "gateCount": 2,
+      "gates": [
+        "GATE_AND",
+        "GATE_NOT"
+      ],
+      "tape": "010001100001110000010001000011111011001110111110101111101000101100101011010011100101111110001001010100110001000010000011001111010010001101001000001111101101011101010011110101010010100000111011000110000101100111100000110101101000011110110000101011000110010011000010110110011101011111110101011110011110011101011111000011111001100010000101100111011011101110001111011011100010"
+    },
+    {
+      "id": "org-g5000-4",
+      "cladeId": "clade-4992-5-g4992",
+      "length": 372,
+      "gateCount": 2,
+      "gates": [
+        "GATE_AND",
+        "GATE_NOT"
+      ],
+      "tape": "010001101001110000010001000011111011001110111110101111101000101100101011010011000101111110001001010100110001000010010011001111010010001101001000001111101101011101010011110101010010100000111011000110000101100011100000010101101000011110110000101011000110010011000010110110001101011111110101011110011111011101011111000011111001100010000101100111011011101110001111011011100010"
+    }
+  ]
+}

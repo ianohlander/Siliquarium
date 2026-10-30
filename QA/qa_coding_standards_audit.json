@@ -1,0 +1,122 @@
+{
+  "timestamp": "2026-10-30T05:33:28.247Z",
+  "totalFiles": 92,
+  "forbiddenFileViolations": [],
+  "zeroDomViolations": [],
+  "anyTypeUsages": [],
+  "fileLengthViolations": [
+    {
+      "file": "src/visualizers/SeafloorRenderer3D.ts",
+      "lineCount": 3121,
+      "overBudget": 2821
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "lineCount": 3105,
+      "overBudget": 2805
+    },
+    {
+      "file": "src/main.ts",
+      "lineCount": 2719,
+      "overBudget": 2419
+    },
+    {
+      "file": "src/ui/ChronicleTourGuide.ts",
+      "lineCount": 2607,
+      "overBudget": 2307
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "lineCount": 2355,
+      "overBudget": 2055
+    },
+    {
+      "file": "src/ui/NaturalistAssistant.ts",
+      "lineCount": 2138,
+      "overBudget": 1838
+    },
+    {
+      "file": "src/ui/ChroniclePlaybackBar.ts",
+      "lineCount": 1079,
+      "overBudget": 779
+    },
+    {
+      "file": "src/visualizers/KinematicsOverlay.ts",
+      "lineCount": 1037,
+      "overBudget": 737
+    },
+    {
+      "file": "src/ui/EvolutionaryBranchModal.ts",
+      "lineCount": 954,
+      "overBudget": 654
+    },
+    {
+      "file": "src/core/domain/PoreWorkshop.ts",
+      "lineCount": 922,
+      "overBudget": 622
+    },
+    {
+      "file": "src/ui/CircuitAutopsyModal.ts",
+      "lineCount": 894,
+      "overBudget": 594
+    },
+    {
+      "file": "src/visualizers/CircuitMicroscopeView.ts",
+      "lineCount": 812,
+      "overBudget": 512
+    },
+    {
+      "file": "src/engine/kinematics/ColonyKinematicsRecorder.ts",
+      "lineCount": 705,
+      "overBudget": 405
+    },
+    {
+      "file": "src/engine/environment/GeologicalPressuresEngine.ts",
+      "lineCount": 685,
+      "overBudget": 385
+    },
+    {
+      "file": "src/engine/storage/SiliquariumDB.ts",
+      "lineCount": 642,
+      "overBudget": 342
+    },
+    {
+      "file": "src/ui/InteractiveControls.ts",
+      "lineCount": 578,
+      "overBudget": 278
+    },
+    {
+      "file": "src/core/paleontology/TaxonomyNomenclature.ts",
+      "lineCount": 532,
+      "overBudget": 232
+    },
+    {
+      "file": "src/engine/storage/EnvironmentPresetRegistry.ts",
+      "lineCount": 527,
+      "overBudget": 227
+    },
+    {
+      "file": "src/core/domain/PoreCell.ts",
+      "lineCount": 519,
+      "overBudget": 219
+    },
+    {
+      "file": "src/ui/AbyssalArenaController.ts",
+      "lineCount": 486,
+      "overBudget": 186
+    },
+    {
+      "file": "src/ui/HUDController.ts",
+      "lineCount": 479,
+      "overBudget": 179
+    },
+    {
+      "file": "src/ui/ChronicleAnalysisLabModal.ts",
+      "lineCount": 453,
+      "overBudget": 153
+    }
+  ],
+  "highParameterFunctions": [],
+  "thermodynamicLedgerStatus": null,
+  "summary": {}
+}
