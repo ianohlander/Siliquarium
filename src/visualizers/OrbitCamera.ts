@@ -4,6 +4,8 @@
  * Pure vector/matrix math with zero external dependencies.
  */
 
+import { Matrix4Math } from './Matrix4Math.js';
+
 export interface IVector3 {
   x: number;
   y: number;
@@ -13,6 +15,12 @@ export interface IVector3 {
 export interface IRay3D {
   origin: IVector3;
   direction: IVector3;
+}
+
+export interface IFlyToOptions {
+  distance?: number;
+  elevation?: number;
+  azimuth?: number;
 }
 
 export class OrbitCamera {
@@ -26,17 +34,31 @@ export class OrbitCamera {
   public minDistance: number = 3.0;
   public maxDistance: number = 80.0;
 
+  // Continuous auto-orbit / spin around target axis
+  public autoSpin: boolean = false;
+  public autoSpinSpeed: number = 0.15; // Radians per second
+
   // Cached matrices (4x4 column-major)
   private readonly viewMatrix: Float32Array = new Float32Array(16);
   private readonly projMatrix: Float32Array = new Float32Array(16);
+  private readonly viewProjMatrix: Float32Array = new Float32Array(16);
   private readonly invViewProjMatrix: Float32Array = new Float32Array(16);
 
+  // Smooth camera destination targets
+  private destTarget: IVector3 | null = null;
+  private destDistance: number | null = null;
+  private destElevation: number | null = null;
+  private destAzimuth: number | null = null;
+
   public rotate(deltaAzimuth: number, deltaElevation: number): void {
+    this.destAzimuth = null;
+    this.destElevation = null;
     this.azimuth += deltaAzimuth;
     this.elevation = Math.max(this.minElevation, Math.min(this.maxElevation, this.elevation + deltaElevation));
   }
 
   public pan(deltaScreenX: number, deltaScreenY: number): void {
+    this.destTarget = null;
     const cosA = Math.cos(this.azimuth);
     const sinA = Math.sin(this.azimuth);
     const scale = this.distance * 0.002;
@@ -46,12 +68,98 @@ export class OrbitCamera {
   }
 
   public setTarget(x: number, y: number, z: number): void {
+    this.destTarget = null;
     this.target.x = x;
     this.target.y = y;
     this.target.z = z;
   }
 
+  public smoothFlyTo(target: IVector3, options?: IFlyToOptions): void;
+  public smoothFlyTo(x: number, y: number, z: number, options?: IFlyToOptions | number): void;
+  public smoothFlyTo(
+    targetOrX: IVector3 | number,
+    yOrOptions?: number | IFlyToOptions,
+    z?: number,
+    optionsOrDistance?: IFlyToOptions | number
+  ): void {
+    if (typeof targetOrX === 'object') {
+      this.destTarget = { x: targetOrX.x, y: targetOrX.y, z: targetOrX.z };
+      const opts = typeof yOrOptions === 'object' ? yOrOptions : undefined;
+      if (opts?.distance !== undefined) this.destDistance = Math.max(this.minDistance, Math.min(this.maxDistance, opts.distance));
+      if (opts?.elevation !== undefined) this.destElevation = Math.max(this.minElevation, Math.min(this.maxElevation, opts.elevation));
+      if (opts?.azimuth !== undefined) this.destAzimuth = opts.azimuth;
+    } else {
+      this.destTarget = { x: targetOrX, y: typeof yOrOptions === 'number' ? yOrOptions : 0, z: z ?? 0 };
+      if (typeof optionsOrDistance === 'object') {
+        if (optionsOrDistance?.distance !== undefined) this.destDistance = Math.max(this.minDistance, Math.min(this.maxDistance, optionsOrDistance.distance));
+        if (optionsOrDistance?.elevation !== undefined) this.destElevation = Math.max(this.minElevation, Math.min(this.maxElevation, optionsOrDistance.elevation));
+        if (optionsOrDistance?.azimuth !== undefined) this.destAzimuth = optionsOrDistance.azimuth;
+      } else {
+        if (typeof optionsOrDistance === 'number') this.destDistance = Math.max(this.minDistance, Math.min(this.maxDistance, optionsOrDistance));
+        const elev = typeof arguments[4] === 'number' ? arguments[4] : undefined;
+        if (elev !== undefined) this.destElevation = Math.max(this.minElevation, Math.min(this.maxElevation, elev));
+        const azim = typeof arguments[5] === 'number' ? arguments[5] : undefined;
+        if (azim !== undefined) this.destAzimuth = azim;
+      }
+    }
+  }
+
+  public update(dt: number = 0.016): void {
+    const ease = Math.min(1.0, 10.0 * dt);
+    if (this.destTarget) {
+      this.target.x += (this.destTarget.x - this.target.x) * ease;
+      this.target.y += (this.destTarget.y - this.target.y) * ease;
+      this.target.z += (this.destTarget.z - this.target.z) * ease;
+      if (Math.hypot(this.destTarget.x - this.target.x, this.destTarget.y - this.target.y, this.destTarget.z - this.target.z) < 0.01) {
+        this.target.x = this.destTarget.x;
+        this.target.y = this.destTarget.y;
+        this.target.z = this.destTarget.z;
+        this.destTarget = null;
+      }
+    }
+    if (this.destDistance !== null) {
+      this.distance += (this.destDistance - this.distance) * ease;
+      if (Math.abs(this.destDistance - this.distance) < 0.05) {
+        this.distance = this.destDistance;
+        this.destDistance = null;
+      }
+    }
+    if (this.destElevation !== null) {
+      this.elevation += (this.destElevation - this.elevation) * ease;
+      if (Math.abs(this.destElevation - this.elevation) < 0.01) {
+        this.elevation = this.destElevation;
+        this.destElevation = null;
+      }
+    }
+    if (this.destAzimuth !== null) {
+      this.azimuth += (this.destAzimuth - this.azimuth) * ease;
+      if (Math.abs(this.destAzimuth - this.azimuth) < 0.01) {
+        this.azimuth = this.destAzimuth;
+        this.destAzimuth = null;
+      }
+    } else if (this.autoSpin) {
+      this.azimuth += this.autoSpinSpeed * dt;
+    }
+  }
+
+  public toggleAutoSpin(): boolean {
+    this.autoSpin = !this.autoSpin;
+    return this.autoSpin;
+  }
+
+  public setAutoSpin(enabled: boolean, speed?: number): void {
+    this.autoSpin = enabled;
+    if (speed !== undefined) {
+      this.autoSpinSpeed = speed;
+    }
+  }
+
+  public setAutoSpinSpeed(speed: number): void {
+    this.autoSpinSpeed = speed;
+  }
+
   public zoom(deltaDistance: number): void {
+    this.destDistance = null;
     this.distance = Math.max(this.minDistance, Math.min(this.maxDistance, this.distance + deltaDistance));
   }
 
@@ -83,6 +191,10 @@ export class OrbitCamera {
     return this.projMatrix;
   }
 
+  public getViewProjMatrix(): Float32Array {
+    return this.viewProjMatrix;
+  }
+
   public screenToRay(screenX: number, screenY: number, width: number, height: number): IRay3D {
     const ndcX = (screenX / width) * 2 - 1;
     const ndcY = 1 - (screenY / height) * 2;
@@ -99,6 +211,21 @@ export class OrbitCamera {
       origin: nearPt,
       direction: { x: dx / len, y: dy / len, z: dz / len }
     };
+  }
+
+  public projectPoint(pt: IVector3, w: number, h: number): { x: number; y: number; depth: number } | null {
+    const vp = this.viewProjMatrix;
+    const cx = pt.x * vp[0] + pt.y * vp[4] + pt.z * vp[8]  + vp[12];
+    const cy = pt.x * vp[1] + pt.y * vp[5] + pt.z * vp[9]  + vp[13];
+    const cz = pt.x * vp[2] + pt.y * vp[6] + pt.z * vp[10] + vp[14];
+    const cw = pt.x * vp[3] + pt.y * vp[7] + pt.z * vp[11] + vp[15] || 1;
+    if (cw <= 0.45) return null;
+
+    return { x: ((cx / cw) * 0.5 + 0.5) * w, y: (1.0 - ((cy / cw) * 0.5 + 0.5)) * h, depth: cz / cw };
+  }
+
+  public project(pt: IVector3, w: number, h: number): { x: number; y: number; depth: number } | null {
+    return this.projectPoint(pt, w, h);
   }
 
   private computeViewMatrix(eye: IVector3, target: IVector3, up: IVector3): void {
@@ -126,80 +253,19 @@ export class OrbitCamera {
   }
 
   private computePerspectiveMatrix(fovY: number, aspect: number, near: number, far: number): void {
-    const f = 1.0 / Math.tan(fovY / 2);
-    const nf = 1.0 / (near - far);
-    const m = this.projMatrix;
-
-    m[0] = f / aspect; m[4] = 0; m[8] = 0;                  m[12] = 0;
-    m[1] = 0;          m[5] = f; m[9] = 0;                  m[13] = 0;
-    m[2] = 0;          m[6] = 0; m[10] = (far + near) * nf; m[14] = (2 * far * near) * nf;
-    m[3] = 0;          m[7] = 0; m[11] = -1;                m[15] = 0;
+    Matrix4Math.computePerspective(this.projMatrix, fovY, aspect, { near, far });
   }
 
   private computeInverseViewProj(): void {
-    // Multiply proj * view
-    const vp = new Float32Array(16);
-    const p = this.projMatrix;
-    const v = this.viewMatrix;
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 4; j++) {
-        let sum = 0;
-        for (let k = 0; k < 4; k++) sum += p[k * 4 + j] * v[i * 4 + k];
-        vp[i * 4 + j] = sum;
-      }
-    }
-    // Invert vp
-    OrbitCamera.invert4x4(vp, this.invViewProjMatrix);
+    Matrix4Math.multiply(this.viewProjMatrix, this.projMatrix, this.viewMatrix);
+    Matrix4Math.invert(this.viewProjMatrix, this.invViewProjMatrix);
   }
 
   private transformPointWithMatrix(pt: IVector3, m: Float32Array): IVector3 {
-    const x = pt.x * m[0] + pt.y * m[4] + pt.z * m[8]  + m[12];
-    const y = pt.x * m[1] + pt.y * m[5] + pt.z * m[9]  + m[13];
-    const z = pt.x * m[2] + pt.y * m[6] + pt.z * m[10] + m[14];
-    const w = pt.x * m[3] + pt.y * m[7] + pt.z * m[11] + m[15] || 1;
-    return { x: x / w, y: y / w, z: z / w };
+    return Matrix4Math.transformPoint(pt, m);
   }
 
   public static invert4x4(src: Float32Array, dst: Float32Array): boolean {
-    const s = src;
-    const a00 = s[0], a01 = s[1], a02 = s[2], a03 = s[3];
-    const a10 = s[4], a11 = s[5], a12 = s[6], a13 = s[7];
-    const a20 = s[8], a21 = s[9], a22 = s[10], a23 = s[11];
-    const a30 = s[12], a31 = s[13], a32 = s[14], a33 = s[15];
-
-    const b00 = a00 * a11 - a01 * a10;
-    const b01 = a00 * a12 - a02 * a10;
-    const b02 = a00 * a13 - a03 * a10;
-    const b03 = a01 * a12 - a02 * a11;
-    const b04 = a01 * a13 - a03 * a11;
-    const b05 = a02 * a13 - a03 * a12;
-    const b06 = a20 * a31 - a21 * a30;
-    const b07 = a20 * a32 - a22 * a30;
-    const b08 = a20 * a33 - a23 * a30;
-    const b09 = a21 * a32 - a22 * a31;
-    const b10 = a21 * a33 - a23 * a31;
-    const b11 = a22 * a33 - a23 * a32;
-
-    const det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
-    if (Math.abs(det) < 1e-8) return false;
-    const invDet = 1.0 / det;
-
-    dst[0] = (a11 * b11 - a12 * b10 + a13 * b09) * invDet;
-    dst[1] = (-a01 * b11 + a02 * b10 - a03 * b09) * invDet;
-    dst[2] = (a31 * b05 - a32 * b04 + a33 * b03) * invDet;
-    dst[3] = (-a21 * b05 + a22 * b04 - a23 * b03) * invDet;
-    dst[4] = (-a10 * b11 + a12 * b08 - a13 * b07) * invDet;
-    dst[5] = (a00 * b11 - a02 * b08 + a03 * b07) * invDet;
-    dst[6] = (-a30 * b05 + a32 * b02 - a33 * b01) * invDet;
-    dst[7] = (a20 * b05 - a22 * b02 + a23 * b01) * invDet;
-    dst[8] = (a10 * b10 - a11 * b08 + a13 * b06) * invDet;
-    dst[9] = (-a00 * b10 + a01 * b08 - a03 * b06) * invDet;
-    dst[10] = (a30 * b04 - a31 * b02 + a33 * b00) * invDet;
-    dst[11] = (-a20 * b04 + a21 * b02 - a23 * b00) * invDet;
-    dst[12] = (-a10 * b09 + a11 * b07 - a12 * b06) * invDet;
-    dst[13] = (a00 * b09 - a01 * b07 + a02 * b06) * invDet;
-    dst[14] = (-a30 * b03 + a31 * b01 - a32 * b00) * invDet;
-    dst[15] = (a20 * b03 - a21 * b01 + a22 * b00) * invDet;
-    return true;
+    return Matrix4Math.invert(src, dst);
   }
 }
