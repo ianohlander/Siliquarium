@@ -6,6 +6,8 @@
 
 import { HexCoord3D } from '../../core/spatial/HexCoord3D.js';
 import { IPoreTelemetry } from '../SimulationTelemetry.js';
+import { PHYSICAL_CONSTANTS } from '../../core/physics/PhysicalConstants.js';
+import { SiliquariumDB } from '../storage/SiliquariumDB.js';
 
 export interface IFossilRecord {
   readonly coord: HexCoord3D;
@@ -32,14 +34,19 @@ export interface IBitMutationAutopsy {
 
 export class FossilFreezer {
   public static readonly DEFAULT_CHECKPOINT_INTERVAL = 100;
+  public static readonly MAX_PERIODIC_SNAPSHOTS = 25;
+  public static readonly MAX_MILESTONE_SNAPSHOTS = 30;
+
   private readonly snapshots: Map<string, IFossilSnapshot> = new Map();
+  private readonly periodicSnapshotIds: string[] = [];
+  private readonly milestoneSnapshotIds: string[] = [];
   private snapshotCounter: number = 1;
 
   public freeze(tick: number, pores: readonly IPoreTelemetry[], reason: string = 'CHECKPOINT'): IFossilSnapshot {
     const livingFossils: IFossilRecord[] = [];
 
     for (const p of pores) {
-      if (p.state === 'OCCUPIED' && p.tapeBitstring.length >= 60) {
+      if (p.state === 'OCCUPIED' && p.tapeBitstring.length >= PHYSICAL_CONSTANTS.GENOME_MIN_BITS) {
         livingFossils.push({
           coord: p.coord,
           tape: p.tapeBitstring,
@@ -60,6 +67,40 @@ export class FossilFreezer {
     };
 
     this.snapshots.set(id, snapshot);
+
+    // Evict oldest snapshots beyond capacity to strictly bound RAM usage
+    if (reason.startsWith('MILESTONE')) {
+      this.milestoneSnapshotIds.push(id);
+      if (this.milestoneSnapshotIds.length > FossilFreezer.MAX_MILESTONE_SNAPSHOTS) {
+        const evictedId = this.milestoneSnapshotIds.shift();
+        if (evictedId) this.snapshots.delete(evictedId);
+      }
+    } else {
+      this.periodicSnapshotIds.push(id);
+      if (this.periodicSnapshotIds.length > FossilFreezer.MAX_PERIODIC_SNAPSHOTS) {
+        const evictedId = this.periodicSnapshotIds.shift();
+        if (evictedId) this.snapshots.delete(evictedId);
+      }
+    }
+
+    // Stream to IndexedDB persistent cold storage
+    SiliquariumDB.getInstance().saveFossilSnapshot({
+      id: snapshot.id,
+      tick: snapshot.tick,
+      reason: snapshot.reason,
+      livingCount: livingFossils.length,
+      fossils: livingFossils.map(f => ({
+        q: f.coord.q,
+        r: f.coord.r,
+        z: f.coord.z,
+        tape: f.tape,
+        energy: f.energy,
+        matter: f.matter,
+        generation: f.generation,
+        age: f.age
+      }))
+    }).catch(() => {});
+
     return snapshot;
   }
 
@@ -97,6 +138,8 @@ export class FossilFreezer {
 
   public clear(): void {
     this.snapshots.clear();
+    this.periodicSnapshotIds.length = 0;
+    this.milestoneSnapshotIds.length = 0;
     this.snapshotCounter = 1;
   }
 }

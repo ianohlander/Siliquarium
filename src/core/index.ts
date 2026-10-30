@@ -27,3 +27,9 @@ export * from './domain/Pore.js';
 export * from './physics/PhysicalConstants.js';
 export * from './physics/VentPhysics.js';
 export * from './physics/ThermodynamicLedger.js';
+
+// Analysis Subsystem
+export * from './analysis/CircuitAdvantageAnalyzer.js';
+
+// Paleontology Subsystem
+export * from './paleontology/TaxonomyNomenclature.js';

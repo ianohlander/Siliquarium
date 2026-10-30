@@ -6,6 +6,8 @@
 import assert from 'node:assert';
 import { SimulationWorld } from '../dist/engine/SimulationWorld.js';
 import { SimulationLoop } from '../dist/engine/SimulationLoop.js';
+import { Pore } from '../dist/core/domain/Pore.js';
+import { HexCoord3D } from '../dist/core/spatial/HexCoord3D.js';
 
 export function runStage8() {
   // Test 1: SimulationWorld creation and terrain building
@@ -50,4 +52,64 @@ export function runStage8() {
 
   const stepResult = loop.step(2);
   assert.strictEqual(stepResult.tick, 17, 'Loop step must advance ticks');
+
+  // Test 6: Multicellular Body Topology Classification
+  const pA = new Pore(new HexCoord3D(0, 0, 0));
+  const pB = new Pore(new HexCoord3D(1, 0, 0));
+  const pC = new Pore(new HexCoord3D(2, 0, 0));
+  assert.strictEqual(world.classifyColonyTopology([pA, pB, pC]), 'FILAMENTOUS', 'Linear 3-cell chain must be FILAMENTOUS');
+
+  // Triangle Rosette: (0,0), (1,0), (0,1)
+  const pR1 = new Pore(new HexCoord3D(0, 0, 0));
+  const pR2 = new Pore(new HexCoord3D(1, 0, 0));
+  const pR3 = new Pore(new HexCoord3D(0, 1, 0));
+  assert.strictEqual(world.classifyColonyTopology([pR1, pR2, pR3]), 'ROSETTE', 'Triangle 3-cell cluster must be ROSETTE');
+
+  // Dendritic Tree: center (0,0) connected to 3 non-mutually adjacent branches (120 degrees apart)
+  const pD0 = new Pore(new HexCoord3D(0, 0, 0));
+  const pD1 = new Pore(new HexCoord3D(1, 0, 0));  // East (0 deg)
+  const pD2 = new Pore(new HexCoord3D(0, -1, 0)); // Northwest (120 deg)
+  const pD3 = new Pore(new HexCoord3D(-1, 1, 0)); // Southwest (240 deg)
+  assert.strictEqual(world.classifyColonyTopology([pD0, pD1, pD2, pD3]), 'DENDRITIC', '3-branch 120-degree star junction must be DENDRITIC');
+
+  // Hexagonal Ring: 6 pores around a central void
+  const pRing = [
+    new Pore(new HexCoord3D(1, 0, 0)),
+    new Pore(new HexCoord3D(1, -1, 0)),
+    new Pore(new HexCoord3D(0, -1, 0)),
+    new Pore(new HexCoord3D(-1, 0, 0)),
+    new Pore(new HexCoord3D(-1, 1, 0)),
+    new Pore(new HexCoord3D(0, 1, 0))
+  ];
+  assert.strictEqual(world.classifyColonyTopology(pRing), 'RING', '6-cell perimeter enclosing void must be RING');
+
+  // Test 7: Subterranean Stratum (minZ = -1), Sunken Rift Trenches & First-Law Conservation
+  const subWorld = new SimulationWorld({
+    radius: 4,
+    minZ: -1,
+    maxZ: 3,
+    seed: 7771,
+    soupDensity: 0.25,
+    basaltDensity: 0.15,
+    terrainRoughness: 0.40
+  });
+
+  const subPores = subWorld.getAllPores();
+  const neg1Pores = subPores.filter(p => p.coord.z === -1);
+  assert.ok(neg1Pores.length > 0, 'Subterranean stratum z = -1 must exist');
+
+  // Verify presence of solid subterranean bedrock and habitable trench alcoves
+  const subBasalt = neg1Pores.filter(p => p.isBasalt());
+  const subHabitable = neg1Pores.filter(p => !p.isBasalt() && !p.isAqueous());
+  assert.ok(subBasalt.length > 0, 'Solid subterranean bedrock must anchor the tectonic foundation');
+  assert.ok(subHabitable.length > 0, 'Sunken rift trenches must provide habitable benthic rock cavities at z = -1');
+
+  // Execute steps on subterranean world and verify First-Law conservation invariant (ΔE = 0, ΔM = 0)
+  for (let t = 1; t <= 10; t++) {
+    subWorld.step();
+    const subTele = subWorld.exportTelemetry();
+    assert.strictEqual(subTele.ledger.energyBalanceDelta, 0, `Subterranean energy leak detected at tick ${t}!`);
+    assert.strictEqual(subTele.ledger.matterBalanceDelta, 0, `Subterranean matter leak detected at tick ${t}!`);
+  }
 }
+

@@ -22,3 +22,8 @@ Thumbs.db
 scratch/
 coverage/
 .temp/
+tempmediaStorage/
+*test_shot*.png
+lab_operon_verified.png
+found_ascii_diagrams.json
+broken_links_report.txt

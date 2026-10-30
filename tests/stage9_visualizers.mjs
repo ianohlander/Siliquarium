@@ -56,4 +56,26 @@ export function runStage9() {
     const dist = origin.distanceTo(n);
     assert.strictEqual(dist, 1, 'Hex neighbor distance in axial metric must be exactly 1');
   }
+
+  // Test 6: OrbitCamera Auto-Spin & Speed Adjustment (User Observation Support)
+  assert.strictEqual(camera.autoSpin, false, 'Auto-spin must default to false');
+  camera.toggleAutoSpin();
+  assert.strictEqual(camera.autoSpin, true, 'toggleAutoSpin() must enable autoSpin');
+
+  const startAzimuth = camera.azimuth;
+  camera.setAutoSpinSpeed(0.2);
+  camera.update(0.1); // dt = 0.1s
+  assert.ok(Math.abs(camera.azimuth - (startAzimuth + 0.2 * 0.1)) < 1e-6, 'Auto-spin must advance azimuth clockwise');
+
+  // Test counter-clockwise (negative speed)
+  const prevAzimuth = camera.azimuth;
+  camera.setAutoSpinSpeed(-0.3);
+  camera.update(0.1);
+  assert.ok(Math.abs(camera.azimuth - (prevAzimuth - 0.3 * 0.1)) < 1e-6, 'Negative speed must rotate counter-clockwise');
+
+  // Disable auto-spin
+  camera.setAutoSpin(false);
+  const frozenAzimuth = camera.azimuth;
+  camera.update(0.5);
+  assert.strictEqual(camera.azimuth, frozenAzimuth, 'Camera must not rotate when autoSpin is disabled');
 }

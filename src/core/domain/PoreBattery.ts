@@ -49,6 +49,13 @@ export class PoreBattery {
     return this.energy - oldEnergy;
   }
 
+  public drainEnergy(amount: number): number {
+    if (amount <= 0) return 0;
+    const drained = Math.min(this.energy, amount);
+    this.energy -= drained;
+    return drained;
+  }
+
   public addMatter(amount: number): void {
     if (amount > 0) {
       this.matter += amount;

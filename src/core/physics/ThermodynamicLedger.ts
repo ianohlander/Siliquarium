@@ -20,6 +20,14 @@ export interface ILedgerReport {
   readonly isMatterConserved: boolean;
 }
 
+export interface IThermodynamicLedgerState {
+  readonly totalEnergyInjected: number;
+  readonly totalEnergyBurnedLandauer: number;
+  readonly totalEnergyDissipatedHeat: number;
+  readonly totalMatterInjected: number;
+  readonly totalMatterSediment: number;
+}
+
 export class ThermodynamicLedger {
   private totalEnergyInjected: number = 0;
   private totalEnergyBurnedLandauer: number = 0;
@@ -27,6 +35,24 @@ export class ThermodynamicLedger {
 
   private totalMatterInjected: number = 0;
   private totalMatterSediment: number = 0;
+
+  public exportState(): IThermodynamicLedgerState {
+    return {
+      totalEnergyInjected: this.totalEnergyInjected,
+      totalEnergyBurnedLandauer: this.totalEnergyBurnedLandauer,
+      totalEnergyDissipatedHeat: this.totalEnergyDissipatedHeat,
+      totalMatterInjected: this.totalMatterInjected,
+      totalMatterSediment: this.totalMatterSediment
+    };
+  }
+
+  public importState(state: IThermodynamicLedgerState): void {
+    this.totalEnergyInjected = state.totalEnergyInjected;
+    this.totalEnergyBurnedLandauer = state.totalEnergyBurnedLandauer;
+    this.totalEnergyDissipatedHeat = state.totalEnergyDissipatedHeat;
+    this.totalMatterInjected = state.totalMatterInjected;
+    this.totalMatterSediment = state.totalMatterSediment;
+  }
 
   public recordEnergyInjection(amount: number): void {
     if (amount > 0) this.totalEnergyInjected += amount;

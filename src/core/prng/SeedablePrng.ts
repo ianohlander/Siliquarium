@@ -9,6 +9,8 @@ export interface IPrng {
   nextInt(min: number, max: number): number;
   nextBit(): 0 | 1;
   fork(): IPrng;
+  getState(): number;
+  setState(state: number): void;
 }
 
 export class Mulberry32Prng implements IPrng {
@@ -18,6 +20,14 @@ export class Mulberry32Prng implements IPrng {
   constructor(seed: number) {
     this.initialSeed = seed >>> 0;
     this.state = this.initialSeed;
+  }
+
+  public getState(): number {
+    return this.state;
+  }
+
+  public setState(state: number): void {
+    this.state = state >>> 0;
   }
 
   public getInitialSeed(): number {

@@ -56,8 +56,16 @@ export class HexCoord3D implements IHexCoord3D {
 
   public getVerticalNeighbors(): [HexCoord3D, HexCoord3D] {
     return [
-      new HexCoord3D(this.q, this.r, this.z + 1), // Above (water column plume)
-      new HexCoord3D(this.q, this.r, this.z - 1)  // Below (bedrock floor)
+      new HexCoord3D(this.q, this.r, this.z + 1), // Above (water column plume or higher ledge)
+      new HexCoord3D(this.q, this.r, this.z - 1)  // Below (bedrock floor or deep fissure)
+    ];
+  }
+
+  public getNeighbors3D(): HexCoord3D[] {
+    return [
+      ...this.getPlanarNeighbors(),
+      new HexCoord3D(this.q, this.r, this.z + 1),
+      new HexCoord3D(this.q, this.r, this.z - 1)
     ];
   }
 

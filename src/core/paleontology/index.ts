@@ -5,3 +5,4 @@
 export * from './NetworkMotif.js';
 export * from './WeisfeilerLehmanHasher.js';
 export * from './MotifScanner.js';
+export * from './TaxonomyNomenclature.js';

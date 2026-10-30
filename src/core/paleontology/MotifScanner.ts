@@ -4,9 +4,12 @@
  * Purely descriptive external voltmeter with zero simulation smuggling.
  */
 
-import { PoreWorkshop } from '../domain/PoreWorkshop.js';
+import { PoreWorkshop, IGateNode } from '../domain/PoreWorkshop.js';
 import { CodonType } from '../codons/CodonTable.js';
-import { MotifType, IMotifDefinition, NetworkMotifRegistry } from './NetworkMotif.js';
+import { IOperon } from '../codons/CodonTranslator.js';
+import { IMotifDefinition } from './NetworkMotif.js';
+import { CanonicalMotifDetector } from './CanonicalMotifDetector.js';
+import { AdaptiveMotifDetector } from './AdaptiveMotifDetector.js';
 
 export interface IMotifMatch {
   readonly motif: IMotifDefinition;
@@ -14,110 +17,118 @@ export interface IMotifMatch {
   readonly confidence: number;
 }
 
+export interface IWorkshopScanTarget {
+  getBuiltGates?(): readonly IGateNode[];
+  getGates?(): readonly IGateNode[];
+  toBitstring?(): string;
+  getOperons?(): readonly IOperon[];
+  getOperonStates?(): readonly boolean[];
+}
+
 export class MotifScanner {
-  public static scanWorkshop(workshop: PoreWorkshop): IMotifMatch[] {
-    const gates = workshop.getGates();
+  public static scanWorkshop(workshop: PoreWorkshop | IWorkshopScanTarget): IMotifMatch[] {
+    const rawGates = typeof workshop.getBuiltGates === 'function'
+      ? workshop.getBuiltGates()
+      : (typeof workshop.getGates === 'function' ? workshop.getGates() : []);
+    const gates = rawGates.filter(g => g.isExpressed !== false);
     if (gates.length === 0) return [];
+
+    const tape = typeof workshop.toBitstring === 'function' ? workshop.toBitstring() : '';
+
+    const expressedPorins = new Set<CodonType>();
+    const expressedSinks = new Set<CodonType>();
+    let expressedOperonCount = 0;
+
+    if (tape.length > 0 && typeof workshop.getOperons === 'function') {
+      const ops = workshop.getOperons();
+      const opStates = typeof workshop.getOperonStates === 'function' ? workshop.getOperonStates() : [];
+      for (let idx = 0; idx < ops.length; idx++) {
+        if (opStates[idx] !== false) {
+          expressedOperonCount++;
+          for (const p of ops[idx].inputPorins) {
+            expressedPorins.add(p.definition.type);
+          }
+          for (const s of ops[idx].sinkNodes) {
+            expressedSinks.add(s.definition.type);
+          }
+        }
+      }
+      // A cell with zero expressed membrane porins cannot transduce environmental signals
+      if (expressedPorins.size === 0) {
+        return [];
+      }
+    }
 
     const matches: IMotifMatch[] = [];
 
-    const halfAdder = MotifScanner.detectHalfAdder(gates);
+    const halfAdder = CanonicalMotifDetector.detectHalfAdder(gates, tape);
     if (halfAdder) matches.push(halfAdder);
 
-    const ringOsc = MotifScanner.detectRingOscillator(gates);
+    const ringOsc = CanonicalMotifDetector.detectRingOscillator(gates, tape);
     if (ringOsc) matches.push(ringOsc);
 
-    const bistable = MotifScanner.detectBistableLatch(gates);
+    const bistable = CanonicalMotifDetector.detectBistableLatch(gates, tape);
     if (bistable) matches.push(bistable);
 
-    const cffl = MotifScanner.detectCoherentFFL(gates);
+    const cffl = CanonicalMotifDetector.detectCoherentFFL(gates, tape);
     if (cffl) matches.push(cffl);
 
-    const iffl = MotifScanner.detectIncoherentFFL(gates);
+    const iffl = CanonicalMotifDetector.detectIncoherentFFL(gates);
     if (iffl) matches.push(iffl);
 
-    const autoReg = MotifScanner.detectAutoregulation(gates);
+    const autoReg = CanonicalMotifDetector.detectAutoregulation(gates);
     if (autoReg) matches.push(autoReg);
+
+    const chemotaxis = AdaptiveMotifDetector.detectTemporalDerivativeChemotaxis(
+      gates,
+      tape,
+      expressedPorins,
+      expressedOperonCount
+    );
+    if (chemotaxis) matches.push(chemotaxis);
+
+    const pavlovian = AdaptiveMotifDetector.detectPredictivePavlovian(gates, tape, expressedPorins);
+    if (pavlovian) matches.push(pavlovian);
+
+    const pacemaker = AdaptiveMotifDetector.detectEntrainedPacemaker(gates, tape, expressedPorins);
+    if (pacemaker) matches.push(pacemaker);
+
+    const steiner = AdaptiveMotifDetector.detectSteinerVascularNetwork(
+      gates,
+      tape,
+      expressedPorins,
+      expressedSinks
+    );
+    if (steiner) matches.push(steiner);
+
+    const dormancy = AdaptiveMotifDetector.detectCryptobioticDormancyClamp(
+      gates,
+      tape,
+      expressedPorins,
+      expressedOperonCount
+    );
+    if (dormancy) matches.push(dormancy);
 
     return matches;
   }
 
-  private static detectHalfAdder(gates: readonly { type: CodonType; id: number }[]): IMotifMatch | null {
-    const hasXor = gates.some(g => g.type === CodonType.GATE_XOR);
-    const hasAnd = gates.some(g => g.type === CodonType.GATE_AND);
-
-    if (hasXor && hasAnd) {
-      const ids = gates.filter(g => g.type === CodonType.GATE_XOR || g.type === CodonType.GATE_AND).map(g => g.id);
-      return {
-        motif: NetworkMotifRegistry.getDefinition(MotifType.HALF_ADDER),
-        involvedGateIds: ids,
-        confidence: 0.95
-      };
+  /**
+   * Bidirectional Hypercube Metric (BooleanGA Strategy 2.1):
+   * Computes min(Hamming(V, T), Hamming(V, ~T)) normalized to [0, 1] potential,
+   * recognizing that an inverted-phase Boolean response is 1 NOT codon away from exact phase.
+   */
+  public static computeBidirectionalHypercubePotential(
+    actualVector: readonly boolean[],
+    targetVector: readonly boolean[]
+  ): number {
+    const len = Math.min(actualVector.length, targetVector.length);
+    if (len === 0) return 0;
+    let directHits = 0;
+    let invertedHits = 0;
+    for (let i = 0; i < len; i++) {
+      if (actualVector[i] === targetVector[i]) directHits++;
+      else invertedHits++;
     }
-    return null;
-  }
-
-  private static detectRingOscillator(gates: readonly { type: CodonType; id: number }[]): IMotifMatch | null {
-    const notGates = gates.filter(g => g.type === CodonType.GATE_NOT);
-    if (notGates.length >= 3 && notGates.length % 2 === 1) {
-      return {
-        motif: NetworkMotifRegistry.getDefinition(MotifType.RING_OSCILLATOR),
-        involvedGateIds: notGates.map(g => g.id),
-        confidence: 0.90
-      };
-    }
-    return null;
-  }
-
-  private static detectBistableLatch(gates: readonly { type: CodonType; id: number }[]): IMotifMatch | null {
-    // Cross-coupled memory motif (e.g. 2 NOR/NAND or complementary gates with >= 2 gates)
-    if (gates.length >= 2 && gates.some(g => g.type === CodonType.GATE_AND || g.type === CodonType.GATE_OR)) {
-      const hasFeedback = gates.some(g => g.type === CodonType.GATE_NOT);
-      if (hasFeedback) {
-        return {
-          motif: NetworkMotifRegistry.getDefinition(MotifType.BISTABLE_LATCH),
-          involvedGateIds: [gates[0].id, gates[1].id],
-          confidence: 0.85
-        };
-      }
-    }
-    return null;
-  }
-
-  private static detectCoherentFFL(gates: readonly { type: CodonType; id: number }[]): IMotifMatch | null {
-    const andCount = gates.filter(g => g.type === CodonType.GATE_AND).length;
-    const bufCount = gates.filter(g => g.type === CodonType.GATE_BUF || g.type === CodonType.GATE_OR).length;
-    if (andCount >= 1 && bufCount >= 1) {
-      return {
-        motif: NetworkMotifRegistry.getDefinition(MotifType.COHERENT_FFL),
-        involvedGateIds: gates.map(g => g.id).slice(0, 3),
-        confidence: 0.80
-      };
-    }
-    return null;
-  }
-
-  private static detectIncoherentFFL(gates: readonly { type: CodonType; id: number }[]): IMotifMatch | null {
-    const hasAnd = gates.some(g => g.type === CodonType.GATE_AND);
-    const hasNot = gates.some(g => g.type === CodonType.GATE_NOT);
-    if (hasAnd && hasNot && gates.length >= 3) {
-      return {
-        motif: NetworkMotifRegistry.getDefinition(MotifType.INCOHERENT_FFL),
-        involvedGateIds: gates.map(g => g.id).slice(0, 3),
-        confidence: 0.80
-      };
-    }
-    return null;
-  }
-
-  private static detectAutoregulation(gates: readonly { type: CodonType; id: number }[]): IMotifMatch | null {
-    if (gates.length === 1 && gates[0].type === CodonType.GATE_NOT) {
-      return {
-        motif: NetworkMotifRegistry.getDefinition(MotifType.NEGATIVE_AUTOREGULATION),
-        involvedGateIds: [gates[0].id],
-        confidence: 0.85
-      };
-    }
-    return null;
+    return Math.max(directHits, invertedHits) / len;
   }
 }

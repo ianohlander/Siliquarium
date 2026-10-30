@@ -28,24 +28,59 @@ export class EvolutionaryFlightRecorder {
   }
 
   public recordBirth(
-    id: string,
-    parentId: string | null,
-    birthTick: number,
-    coord: HexCoord3D,
-    genomeTape: string,
-    generation: number,
-    motifs: readonly IMotifMatch[]
+    nodeOrId: ILineageNode | string,
+    parentId?: string | null,
+    specOrBirthTick?: {
+      birthTick?: number;
+      coord?: HexCoord3D;
+      genomeTape?: string;
+      generation?: number;
+      motifs?: readonly IMotifMatch[];
+    } | number,
+    coord?: HexCoord3D
   ): ILineageNode {
+    if (typeof nodeOrId === 'object') {
+      this.nodes.set(nodeOrId.id, nodeOrId);
+      return nodeOrId;
+    }
+
+    let birthTick = 0;
+    let nodeCoord = coord ?? new HexCoord3D(0, 0, 0);
+    let genomeTape = '';
+    let generation = 0;
+    let motifs: readonly IMotifMatch[] = [];
+
+    if (typeof specOrBirthTick === 'object' && specOrBirthTick !== null) {
+      birthTick = specOrBirthTick.birthTick ?? 0;
+      nodeCoord = specOrBirthTick.coord ?? nodeCoord;
+      genomeTape = specOrBirthTick.genomeTape ?? '';
+      generation = specOrBirthTick.generation ?? 0;
+      motifs = specOrBirthTick.motifs ?? [];
+    } else {
+      if (typeof specOrBirthTick === 'number') {
+        birthTick = specOrBirthTick;
+      }
+      if (arguments.length > 4 && typeof arguments[4] === 'string') {
+        genomeTape = arguments[4];
+      }
+      if (arguments.length > 5 && typeof arguments[5] === 'number') {
+        generation = arguments[5];
+      }
+      if (arguments.length > 6 && Array.isArray(arguments[6])) {
+        motifs = arguments[6];
+      }
+    }
+
     const node: ILineageNode = {
-      id,
-      parentId,
+      id: nodeOrId,
+      parentId: parentId ?? null,
       birthTick,
-      coord,
+      coord: nodeCoord,
       genomeTape,
       generation,
       motifs
     };
-    this.nodes.set(id, node);
+    this.nodes.set(nodeOrId, node);
     return node;
   }
 

@@ -4,7 +4,8 @@
  * Generates canonical graph hashes invariant under gate index permutation or codon ordering.
  */
 
-import { IGateNode } from '../domain/PoreWorkshop.js';
+import { IGateNode, IAstDirectedEdge } from '../domain/PoreWorkshop.js';
+import { CodonType } from '../codons/CodonTable.js';
 
 export interface IGraphWire {
   readonly fromNodeId: number;
@@ -12,30 +13,79 @@ export interface IGraphWire {
 }
 
 export class WeisfeilerLehmanHasher {
-  public static hashNetlist(gates: readonly IGateNode[], rounds: number = 2): string {
+  public static hashNetlist(
+    gates: readonly IGateNode[],
+    rounds: number = 2,
+    astEdges?: readonly IAstDirectedEdge[]
+  ): string {
     if (gates.length === 0) return 'EMPTY_NETLIST';
 
-    // Round 0: Initialize colors with gate types
+    // Round 0: Initialize colors with gate types and terminal bindings
     const colors: Map<number, string> = new Map();
-    const adj: Map<number, number[]> = new Map();
+    const adj: Map<number, string[]> = new Map();
 
     for (let i = 0; i < gates.length; i++) {
       const g = gates[i];
-      colors.set(g.id, g.type);
+      const termSig = g.boundTerminalA || g.boundTerminalB
+        ? `(${g.boundTerminalA ?? ''},${g.boundTerminalB ?? ''})`
+        : '';
+      colors.set(g.id, `${g.type}${termSig}`);
       adj.set(g.id, []);
     }
 
-    // Default sequential/chained wires
-    for (let i = 0; i < gates.length - 1; i++) {
-      adj.get(gates[i].id)?.push(gates[i + 1].id);
+    if (astEdges && astEdges.length > 0) {
+      for (const edge of astEdges) {
+        adj.get(edge.fromGateId)?.push(`${edge.inputPin}->${edge.toGateId}`);
+      }
+    } else {
+      // Infer directed AST edges from gate child pointers or canonical Stack-AST structure
+      let hasExplicitPointers = false;
+      for (const g of gates) {
+        if (g.leftChildGateId != null) {
+          adj.get(g.leftChildGateId)?.push(`A->${g.id}`);
+          hasExplicitPointers = true;
+        }
+        if (g.rightChildGateId != null) {
+          adj.get(g.rightChildGateId)?.push(`B->${g.id}`);
+          hasExplicitPointers = true;
+        }
+      }
+
+      if (!hasExplicitPointers) {
+        for (let i = 1; i < gates.length; i++) {
+          const g = gates[i];
+          if (
+            i >= 3 &&
+            gates[i - 1].type === CodonType.GATE_NOT &&
+            (gates[i - 2].type === CodonType.GATE_AND || gates[i - 2].type === CodonType.GATE_OR) &&
+            (gates[i - 3].type === CodonType.GATE_AND || gates[i - 3].type === CodonType.GATE_OR)
+          ) {
+            adj.get(gates[i - 3].id)?.push(`A->${g.id}`);
+            adj.get(gates[i - 1].id)?.push(`B->${g.id}`);
+          } else if (
+            i === 1 &&
+            gates.length >= 4 &&
+            (g.type === CodonType.GATE_AND || g.type === CodonType.GATE_OR) &&
+            (gates[0].type === CodonType.GATE_AND || gates[0].type === CodonType.GATE_OR)
+          ) {
+            // Parallel leaf branch in >=4-gate AST
+          } else {
+            adj.get(gates[i - 1].id)?.push(`A->${g.id}`);
+          }
+        }
+      }
     }
 
-    // Weisfeiler-Lehman color refinement rounds
+    // Weisfeiler-Lehman directed graph color refinement rounds
     for (let r = 0; r < rounds; r++) {
       const nextColors: Map<number, string> = new Map();
       for (const [id, color] of colors.entries()) {
-        const neighborIds = adj.get(id) ?? [];
-        const neighborColors = neighborIds.map(nid => colors.get(nid) ?? '').sort();
+        const outLinks = adj.get(id) ?? [];
+        const neighborColors = outLinks.map(link => {
+          const [pin, targetStr] = link.split('->');
+          const targetId = Number(targetStr);
+          return `${pin}:${colors.get(targetId) ?? ''}`;
+        }).sort();
         const signature = `${color}:[${neighborColors.join(',')}]`;
         nextColors.set(id, WeisfeilerLehmanHasher.simpleHash(signature));
       }

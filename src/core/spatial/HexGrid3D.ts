@@ -64,6 +64,15 @@ export class HexGrid3D<TItem> {
     }
   }
 
+  public removeBasaltObstacle(coord: IHexCoord3D): void {
+    const key = `${coord.q},${coord.r},${coord.z}`;
+    this.basaltObstacles.delete(key);
+  }
+
+  public getAllBasaltObstacles(): HexCoord3D[] {
+    return Array.from(this.basaltObstacles).map(k => HexCoord3D.fromKey(k));
+  }
+
   public isBasaltObstacle(coord: IHexCoord3D): boolean {
     const key = `${coord.q},${coord.r},${coord.z}`;
     return this.basaltObstacles.has(key);
@@ -77,6 +86,18 @@ export class HexGrid3D<TItem> {
 
   public getEmptyPlanarNeighbors(coord: HexCoord3D): HexCoord3D[] {
     return this.getValidPlanarNeighbors(coord).filter(neighbor =>
+      !this.hasItem(neighbor)
+    );
+  }
+
+  public getValidNeighbors3D(coord: HexCoord3D): HexCoord3D[] {
+    return coord.getNeighbors3D().filter(neighbor =>
+      this.isInBounds(neighbor) && !this.isBasaltObstacle(neighbor)
+    );
+  }
+
+  public getEmptyNeighbors3D(coord: HexCoord3D): HexCoord3D[] {
+    return this.getValidNeighbors3D(coord).filter(neighbor =>
       !this.hasItem(neighbor)
     );
   }
