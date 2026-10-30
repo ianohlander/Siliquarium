@@ -78,8 +78,13 @@ The simulation kernel (`src/core/`, `src/engine/`, `src/server/`) must maintain 
 ## 6. Build, Verification & Git Push Protocol
 
 For **every** coding task or modification:
-1. **Compile & Typecheck:** Ensure clean build via `node scripts/tsc.mjs`.
+1. **Compile & Typecheck:** Ensure clean build via `node scripts/tsc.mjs` (0 errors, 0 warnings).
 2. **Verify Full Test Suite:** Run `npm test` (or `node tests/run_tests.mjs`) and verify all 25 test stages pass.
-3. **Audit Code Quality:** Run `node scripts/audit_codebase_standards.mjs`.
-4. **Commit to Git:** Create a structured conventional commit (`feat:`, `fix:`, `refactor:`, `test:`, `docs:`).
-5. **Push to Remote:** Execute `git push origin main`. Every build must be pushed to GitHub before ending the session.
+3. **Audit Code Quality & Technical Debt (Zero Debt Accumulation):**
+   - Run `node scripts/audit_codebase_standards.mjs` (0 generic filenames, 0 DOM tokens in core/engine, 0 `any` types, 0 parameter budget violations).
+   - Run `node scripts/comprehensive_coding_qa_audit.mjs` to measure technical debt metrics.
+   - Enforce all budgets on modified code: cyclomatic complexity $\le 7$, function length $\le 50\text{--}60$ lines, file length $\le 250\text{--}300$ lines, nesting depth $\le 3$.
+   - **Zero New Technical Debt:** Commits that introduce new complexity debt or exceed budgets are strictly barred.
+4. **Adversarial Falsification Verification:** Run `node "Adversarial QA/falsification_suite*.mjs"` when physics, simulation, or paleontology logic is modified.
+5. **Commit to Git:** Create a structured conventional commit (`feat:`, `fix:`, `refactor:`, `test:`, `docs:`).
+6. **Push to Remote:** Execute `git push origin main`. Every build must be pushed to GitHub before ending the session.
