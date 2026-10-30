@@ -15,8 +15,8 @@
     },
     {
       "file": "src/engine/SimulationWorld.ts",
-      "lines": 2926,
-      "overBudget": 2626
+      "lines": 2938,
+      "overBudget": 2638
     },
     {
       "file": "src/main.ts",
@@ -30,8 +30,8 @@
     },
     {
       "file": "src/ui/LabFlyout.ts",
-      "lines": 2323,
-      "overBudget": 2023
+      "lines": 2324,
+      "overBudget": 2024
     },
     {
       "file": "src/ui/NaturalistAssistant.ts",
@@ -90,8 +90,8 @@
     },
     {
       "file": "src/core/paleontology/TaxonomyNomenclature.ts",
-      "lines": 532,
-      "overBudget": 232
+      "lines": 547,
+      "overBudget": 247
     },
     {
       "file": "src/engine/storage/EnvironmentPresetRegistry.ts",
@@ -112,6 +112,11 @@
       "file": "src/ui/HUDController.ts",
       "lines": 479,
       "overBudget": 179
+    },
+    {
+      "file": "src/visualizers/CircuitTopology.ts",
+      "lines": 303,
+      "overBudget": 3
     }
   ],
   "functionLengthViolations": [
@@ -195,7 +200,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "exportTelemetry",
-      "line": 1200,
+      "line": 1212,
       "lines": 292,
       "overBudget": 232
     },
@@ -258,7 +263,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 2358,
+      "line": 2370,
       "lines": 201,
       "overBudget": 141
     },
@@ -321,7 +326,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "loadEnvironmentPreset",
-      "line": 2140,
+      "line": 2152,
       "lines": 157,
       "overBudget": 97
     },
@@ -433,7 +438,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateStagedSpecimen",
-      "line": 1957,
+      "line": 1958,
       "lines": 114,
       "overBudget": 54
     },
@@ -457,6 +462,13 @@
       "line": 124,
       "lines": 111,
       "overBudget": 51
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepReproduction",
+      "line": 957,
+      "lines": 104,
+      "overBudget": 44
     },
     {
       "file": "src/ui/NaturalistAssistant.ts",
@@ -501,13 +513,6 @@
       "overBudget": 32
     },
     {
-      "file": "src/engine/SimulationWorld.ts",
-      "function": "stepReproduction",
-      "line": 957,
-      "lines": 92,
-      "overBudget": 32
-    },
-    {
       "file": "src/core/domain/PoreWorkshop.ts",
       "function": "assembleFromTranslation",
       "line": 131,
@@ -543,6 +548,13 @@
       "overBudget": 27
     },
     {
+      "file": "src/engine/kinematics/TreadmillingEngine.ts",
+      "function": "for",
+      "line": 97,
+      "lines": 87,
+      "overBudget": 27
+    },
+    {
       "file": "src/visualizers/SeafloorRenderer3D.ts",
       "function": "findPoreAtScreenCoord",
       "line": 2621,
@@ -552,7 +564,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepSyncytialHomeostasis",
-      "line": 1077,
+      "line": 1089,
       "lines": 86,
       "overBudget": 26
     },
@@ -620,13 +632,6 @@
       "overBudget": 14
     },
     {
-      "file": "src/engine/kinematics/TreadmillingEngine.ts",
-      "function": "for",
-      "line": 92,
-      "lines": 72,
-      "overBudget": 12
-    },
-    {
       "file": "src/ui/LabFlyout.ts",
       "function": "syncUIWithPreset",
       "line": 397,
@@ -650,7 +655,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateGeologicalTicker",
-      "line": 1886,
+      "line": 1887,
       "lines": 70,
       "overBudget": 10
     },
@@ -692,7 +697,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateBrushIndicator",
-      "line": 2202,
+      "line": 2203,
       "lines": 65,
       "overBudget": 5
     },
@@ -918,7 +923,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "loadEnvironmentPreset",
-      "line": 2140,
+      "line": 2152,
       "complexity": 53,
       "overBudget": 46
     },
@@ -995,7 +1000,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "exportTelemetry",
-      "line": 1200,
+      "line": 1212,
       "complexity": 44,
       "overBudget": 37
     },
@@ -1016,7 +1021,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateStagedSpecimen",
-      "line": 1957,
+      "line": 1958,
       "complexity": 38,
       "overBudget": 31
     },
@@ -1077,6 +1082,13 @@
       "overBudget": 26
     },
     {
+      "file": "src/engine/kinematics/TreadmillingEngine.ts",
+      "function": "for",
+      "line": 97,
+      "complexity": 33,
+      "overBudget": 26
+    },
+    {
       "file": "src/ui/ChronicleAnalysisLabHtmlTemplate.ts",
       "function": "buildChronicleLabTabContent",
       "line": 23,
@@ -1112,6 +1124,13 @@
       "overBudget": 22
     },
     {
+      "file": "src/engine/SimulationWorld.ts",
+      "function": "stepReproduction",
+      "line": 957,
+      "complexity": 29,
+      "overBudget": 22
+    },
+    {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "update",
       "line": 388,
@@ -1128,7 +1147,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "setTargetZLayer",
-      "line": 2157,
+      "line": 2158,
       "complexity": 27,
       "overBudget": 20
     },
@@ -1190,15 +1209,8 @@
     },
     {
       "file": "src/engine/SimulationWorld.ts",
-      "function": "stepReproduction",
-      "line": 957,
-      "complexity": 23,
-      "overBudget": 16
-    },
-    {
-      "file": "src/engine/SimulationWorld.ts",
       "function": "stepSyncytialHomeostasis",
-      "line": 1077,
+      "line": 1089,
       "complexity": 23,
       "overBudget": 16
     },
@@ -1226,14 +1238,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 2358,
-      "complexity": 22,
-      "overBudget": 15
-    },
-    {
-      "file": "src/engine/kinematics/TreadmillingEngine.ts",
-      "function": "for",
-      "line": 92,
+      "line": 2370,
       "complexity": 22,
       "overBudget": 15
     },
@@ -1247,7 +1252,7 @@
     {
       "file": "src/core/paleontology/WeisfeilerLehmanHasher.ts",
       "function": "if",
-      "line": 36,
+      "line": 38,
       "complexity": 21,
       "overBudget": 14
     },
@@ -1282,7 +1287,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "setPoreBasalt",
-      "line": 1543,
+      "line": 1555,
       "complexity": 19,
       "overBudget": 12
     },
@@ -1366,7 +1371,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "restoreWorldSnapshot",
-      "line": 2783,
+      "line": 2795,
       "complexity": 17,
       "overBudget": 10
     },
@@ -1376,6 +1381,13 @@
       "line": 29,
       "complexity": 17,
       "overBudget": 10
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateTelemetryPane",
+      "line": 1831,
+      "complexity": 16,
+      "overBudget": 9
     },
     {
       "file": "src/ui/InteractiveControls.ts",
@@ -1439,13 +1451,6 @@
       "line": 1611,
       "complexity": 16,
       "overBudget": 9
-    },
-    {
-      "file": "src/ui/LabFlyout.ts",
-      "function": "updateTelemetryPane",
-      "line": 1831,
-      "complexity": 15,
-      "overBudget": 8
     },
     {
       "file": "src/ui/DiscoveryHistoryModal.ts",
@@ -1548,7 +1553,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "restartWithConfig",
-      "line": 1832,
+      "line": 1844,
       "complexity": 14,
       "overBudget": 7
     },
@@ -1632,7 +1637,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 2326,
+      "line": 2338,
       "complexity": 13,
       "overBudget": 6
     },
@@ -1672,16 +1677,23 @@
       "overBudget": 5
     },
     {
+      "file": "src/visualizers/CircuitTopology.ts",
+      "function": "if",
+      "line": 64,
+      "complexity": 12,
+      "overBudget": 5
+    },
+    {
       "file": "src/engine/SimulationWorld.ts",
       "function": "gougeTrench",
-      "line": 1930,
+      "line": 1942,
       "complexity": 12,
       "overBudget": 5
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "placeVent",
-      "line": 2055,
+      "line": 2067,
       "complexity": 12,
       "overBudget": 5
     },
@@ -1737,7 +1749,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateBioBankUI",
-      "line": 2268,
+      "line": 2269,
       "complexity": 11,
       "overBudget": 4
     },
@@ -1777,13 +1789,6 @@
       "overBudget": 4
     },
     {
-      "file": "src/visualizers/CircuitTopology.ts",
-      "function": "if",
-      "line": 64,
-      "complexity": 11,
-      "overBudget": 4
-    },
-    {
       "file": "src/engine/SimulationWorld.ts",
       "function": "triggerEnvironmentalAction",
       "line": 693,
@@ -1793,7 +1798,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "buildBasaltWall",
-      "line": 1996,
+      "line": 2008,
       "complexity": 11,
       "overBudget": 4
     },
@@ -1826,6 +1831,20 @@
       "overBudget": 4
     },
     {
+      "file": "src/core/domain/GenomeRecombinationEngine.ts",
+      "function": "createChimeric",
+      "line": 40,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
+      "file": "src/core/paleontology/WeisfeilerLehmanHasher.ts",
+      "function": "for",
+      "line": 88,
+      "complexity": 10,
+      "overBudget": 3
+    },
+    {
       "file": "src/core/paleontology/AdaptiveMotifDetector.ts",
       "function": "if",
       "line": 107,
@@ -1856,14 +1875,14 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "syncClarityCheckboxes",
-      "line": 1869,
+      "line": 1870,
       "complexity": 10,
       "overBudget": 3
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateGeologicalTicker",
-      "line": 1886,
+      "line": 1887,
       "complexity": 10,
       "overBudget": 3
     },
@@ -1994,13 +2013,6 @@
       "overBudget": 2
     },
     {
-      "file": "src/core/domain/GenomeRecombinationEngine.ts",
-      "function": "createChimeric",
-      "line": 40,
-      "complexity": 9,
-      "overBudget": 2
-    },
-    {
       "file": "src/core/paleontology/TaxonomyNomenclature.ts",
       "function": "if",
       "line": 396,
@@ -2010,7 +2022,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateBrushIndicator",
-      "line": 2202,
+      "line": 2203,
       "complexity": 9,
       "overBudget": 2
     },
@@ -2024,7 +2036,7 @@
     {
       "file": "src/visualizers/CircuitTopology.ts",
       "function": "for",
-      "line": 171,
+      "line": 182,
       "complexity": 9,
       "overBudget": 2
     },
@@ -2045,7 +2057,7 @@
     {
       "file": "src/engine/kinematics/TreadmillingEngine.ts",
       "function": "if",
-      "line": 223,
+      "line": 243,
       "complexity": 9,
       "overBudget": 2
     },
@@ -2094,7 +2106,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "setBrushMode",
-      "line": 2080,
+      "line": 2081,
       "complexity": 8,
       "overBudget": 1
     },
@@ -2199,14 +2211,14 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "for",
-      "line": 1653,
+      "line": 1665,
       "complexity": 8,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 1675,
+      "line": 1687,
       "complexity": 8,
       "overBudget": 1
     },
@@ -2264,8 +2276,15 @@
     },
     {
       "file": "src/engine/SimulationWorld.ts",
+      "function": "stepReproduction",
+      "line": 957,
+      "depth": 7,
+      "overBudget": 4
+    },
+    {
+      "file": "src/engine/SimulationWorld.ts",
       "function": "exportTelemetry",
-      "line": 1200,
+      "line": 1212,
       "depth": 7,
       "overBudget": 4
     },
@@ -2355,15 +2374,8 @@
     },
     {
       "file": "src/engine/SimulationWorld.ts",
-      "function": "stepReproduction",
-      "line": 957,
-      "depth": 6,
-      "overBudget": 3
-    },
-    {
-      "file": "src/engine/SimulationWorld.ts",
       "function": "stepSyncytialHomeostasis",
-      "line": 1077,
+      "line": 1089,
       "depth": 6,
       "overBudget": 3
     },
@@ -2419,7 +2431,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateStagedSpecimen",
-      "line": 1957,
+      "line": 1958,
       "depth": 5,
       "overBudget": 2
     },
@@ -2538,28 +2550,28 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "setPoreBasalt",
-      "line": 1543,
+      "line": 1555,
       "depth": 5,
       "overBudget": 2
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "gougeTrench",
-      "line": 1930,
+      "line": 1942,
       "depth": 5,
       "overBudget": 2
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "buildBasaltWall",
-      "line": 1996,
+      "line": 2008,
       "depth": 5,
       "overBudget": 2
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "loadEnvironmentPreset",
-      "line": 2140,
+      "line": 2152,
       "depth": 5,
       "overBudget": 2
     },
@@ -2678,7 +2690,7 @@
     {
       "file": "src/core/paleontology/WeisfeilerLehmanHasher.ts",
       "function": "if",
-      "line": 36,
+      "line": 38,
       "depth": 4,
       "overBudget": 1
     },
@@ -2727,28 +2739,28 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "setBrushMode",
-      "line": 2080,
+      "line": 2081,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "setTargetZLayer",
-      "line": 2157,
+      "line": 2158,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateBrushIndicator",
-      "line": 2202,
+      "line": 2203,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateBioBankUI",
-      "line": 2268,
+      "line": 2269,
       "depth": 4,
       "overBudget": 1
     },
@@ -2923,49 +2935,49 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepCarcassDecay",
-      "line": 1187,
+      "line": 1199,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "setVentConfiguration",
-      "line": 1780,
+      "line": 1792,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "expandMinZToNegativeOne",
-      "line": 1878,
+      "line": 1890,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "recomputeNeighborPointersForColumn",
-      "line": 1909,
+      "line": 1921,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "placeVent",
-      "line": 2055,
+      "line": 2067,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 2358,
+      "line": 2370,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "restoreWorldSnapshot",
-      "line": 2783,
+      "line": 2795,
       "depth": 4,
       "overBudget": 1
     },
