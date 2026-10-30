@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-30T05:58:04.120Z",
-  "totalFiles": 92,
+  "timestamp": "2026-10-30T07:15:45.275Z",
+  "totalFiles": 99,
   "forbiddenFileViolations": [],
   "zeroDomViolations": [],
   "anyTypeUsages": [],
@@ -12,8 +12,8 @@
     },
     {
       "file": "src/engine/SimulationWorld.ts",
-      "lineCount": 3105,
-      "overBudget": 2805
+      "lineCount": 2926,
+      "overBudget": 2626
     },
     {
       "file": "src/main.ts",
@@ -22,18 +22,18 @@
     },
     {
       "file": "src/ui/ChronicleTourGuide.ts",
-      "lineCount": 2607,
-      "overBudget": 2307
+      "lineCount": 2496,
+      "overBudget": 2196
     },
     {
       "file": "src/ui/LabFlyout.ts",
-      "lineCount": 2355,
-      "overBudget": 2055
+      "lineCount": 2323,
+      "overBudget": 2023
     },
     {
       "file": "src/ui/NaturalistAssistant.ts",
-      "lineCount": 2138,
-      "overBudget": 1838
+      "lineCount": 2051,
+      "overBudget": 1751
     },
     {
       "file": "src/ui/ChroniclePlaybackBar.ts",

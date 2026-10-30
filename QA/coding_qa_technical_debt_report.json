@@ -1,10 +1,10 @@
 {
-  "totalFiles": 91,
+  "totalFiles": 98,
   "filesBySubsystem": {
     "core": 23,
-    "engine": 28,
+    "engine": 32,
     "server": 3,
-    "ui": 28,
+    "ui": 31,
     "visualizers": 8
   },
   "fileLengthViolations": [
@@ -15,8 +15,8 @@
     },
     {
       "file": "src/engine/SimulationWorld.ts",
-      "lines": 3105,
-      "overBudget": 2805
+      "lines": 2926,
+      "overBudget": 2626
     },
     {
       "file": "src/main.ts",
@@ -25,18 +25,18 @@
     },
     {
       "file": "src/ui/ChronicleTourGuide.ts",
-      "lines": 2607,
-      "overBudget": 2307
+      "lines": 2496,
+      "overBudget": 2196
     },
     {
       "file": "src/ui/LabFlyout.ts",
-      "lines": 2355,
-      "overBudget": 2055
+      "lines": 2323,
+      "overBudget": 2023
     },
     {
       "file": "src/ui/NaturalistAssistant.ts",
-      "lines": 2138,
-      "overBudget": 1838
+      "lines": 2051,
+      "overBudget": 1751
     },
     {
       "file": "src/ui/ChroniclePlaybackBar.ts",
@@ -118,14 +118,14 @@
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "discoverTourStops",
-      "line": 694,
+      "line": 583,
       "lines": 1912,
       "overBudget": 1852
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "bindEvents",
-      "line": 468,
+      "line": 469,
       "lines": 1173,
       "overBudget": 1113
     },
@@ -139,7 +139,7 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "scanExemplars",
-      "line": 762,
+      "line": 763,
       "lines": 530,
       "overBudget": 470
     },
@@ -181,7 +181,7 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "bindEvents",
-      "line": 316,
+      "line": 317,
       "lines": 301,
       "overBudget": 241
     },
@@ -195,7 +195,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "exportTelemetry",
-      "line": 1379,
+      "line": 1200,
       "lines": 292,
       "overBudget": 232
     },
@@ -258,7 +258,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 2537,
+      "line": 2358,
       "lines": 201,
       "overBudget": 141
     },
@@ -279,7 +279,7 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "updateSafariCoPilotDOM",
-      "line": 1530,
+      "line": 1531,
       "lines": 181,
       "overBudget": 121
     },
@@ -321,7 +321,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "loadEnvironmentPreset",
-      "line": 2319,
+      "line": 2140,
       "lines": 157,
       "overBudget": 97
     },
@@ -356,7 +356,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "initElements",
-      "line": 233,
+      "line": 234,
       "lines": 143,
       "overBudget": 83
     },
@@ -377,9 +377,16 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepCellMetabolism",
-      "line": 815,
+      "line": 816,
       "lines": 140,
       "overBudget": 80
+    },
+    {
+      "file": "src/ui/ChronicleTourGuideHtmlTemplate.ts",
+      "function": "buildTourHUDHtml",
+      "line": 21,
+      "lines": 137,
+      "overBudget": 77
     },
     {
       "file": "src/main.ts",
@@ -391,16 +398,9 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 279,
+      "line": 280,
       "lines": 135,
       "overBudget": 75
-    },
-    {
-      "file": "src/ui/ChronicleTourGuide.ts",
-      "function": "renderTourHUD",
-      "line": 501,
-      "lines": 134,
-      "overBudget": 74
     },
     {
       "file": "src/ui/ChroniclePlaybackBar.ts",
@@ -433,7 +433,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateStagedSpecimen",
-      "line": 1956,
+      "line": 1957,
       "lines": 114,
       "overBudget": 54
     },
@@ -459,16 +459,9 @@
       "overBudget": 51
     },
     {
-      "file": "src/engine/SimulationWorld.ts",
-      "function": "stepEndosymbiosis",
-      "line": 1068,
-      "lines": 100,
-      "overBudget": 40
-    },
-    {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "ensureElements",
-      "line": 216,
+      "line": 217,
       "lines": 99,
       "overBudget": 39
     },
@@ -478,6 +471,13 @@
       "line": 119,
       "lines": 97,
       "overBudget": 37
+    },
+    {
+      "file": "src/engine/ecology/EndosymbiosisEngine.ts",
+      "function": "step",
+      "line": 25,
+      "lines": 96,
+      "overBudget": 36
     },
     {
       "file": "src/engine/paleontology/EvolutionaryBarrierAuditor.ts",
@@ -503,7 +503,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepReproduction",
-      "line": 956,
+      "line": 957,
       "lines": 92,
       "overBudget": 32
     },
@@ -536,13 +536,6 @@
       "overBudget": 27
     },
     {
-      "file": "src/ui/LabFlyout.ts",
-      "function": "updateBioBankUI",
-      "line": 2267,
-      "lines": 87,
-      "overBudget": 27
-    },
-    {
       "file": "src/visualizers/SeafloorRenderer3D.ts",
       "function": "rebuildMantleFacets",
       "line": 519,
@@ -559,7 +552,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepSyncytialHomeostasis",
-      "line": 1169,
+      "line": 1077,
       "lines": 86,
       "overBudget": 26
     },
@@ -636,7 +629,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "syncUIWithPreset",
-      "line": 396,
+      "line": 397,
       "lines": 71,
       "overBudget": 11
     },
@@ -657,14 +650,14 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateGeologicalTicker",
-      "line": 1885,
+      "line": 1886,
       "lines": 70,
       "overBudget": 10
     },
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "update",
-      "line": 387,
+      "line": 388,
       "lines": 70,
       "overBudget": 10
     },
@@ -690,13 +683,6 @@
       "overBudget": 7
     },
     {
-      "file": "src/engine/SimulationWorld.ts",
-      "function": "stepLysisAndScavenging",
-      "line": 1299,
-      "lines": 66,
-      "overBudget": 6
-    },
-    {
       "file": "src/main.ts",
       "function": "initMicroscopeTabsAndFont",
       "line": 1244,
@@ -706,7 +692,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateBrushIndicator",
-      "line": 2201,
+      "line": 2202,
       "lines": 65,
       "overBudget": 5
     },
@@ -720,7 +706,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "step",
-      "line": 734,
+      "line": 735,
       "lines": 65,
       "overBudget": 5
     },
@@ -753,6 +739,13 @@
       "overBudget": 4
     },
     {
+      "file": "src/engine/ecology/ScavengingEngine.ts",
+      "function": "step",
+      "line": 28,
+      "lines": 64,
+      "overBudget": 4
+    },
+    {
       "file": "src/ui/ChronicleAnalysisLabHtmlTemplate.ts",
       "function": "buildChronicleLabDialog",
       "line": 235,
@@ -762,7 +755,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 480,
+      "line": 481,
       "lines": 62,
       "overBudget": 2
     },
@@ -783,7 +776,7 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "openFieldScope",
-      "line": 1310,
+      "line": 1311,
       "lines": 61,
       "overBudget": 1
     },
@@ -813,21 +806,21 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "bindEvents",
-      "line": 468,
+      "line": 469,
       "complexity": 274,
       "overBudget": 267
     },
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "discoverTourStops",
-      "line": 694,
+      "line": 583,
       "complexity": 205,
       "overBudget": 198
     },
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "scanExemplars",
-      "line": 762,
+      "line": 763,
       "complexity": 120,
       "overBudget": 113
     },
@@ -876,7 +869,7 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "bindEvents",
-      "line": 316,
+      "line": 317,
       "complexity": 70,
       "overBudget": 63
     },
@@ -925,14 +918,14 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "loadEnvironmentPreset",
-      "line": 2319,
+      "line": 2140,
       "complexity": 53,
       "overBudget": 46
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepCellMetabolism",
-      "line": 815,
+      "line": 816,
       "complexity": 51,
       "overBudget": 44
     },
@@ -960,7 +953,7 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "updateSafariCoPilotDOM",
-      "line": 1530,
+      "line": 1531,
       "complexity": 47,
       "overBudget": 40
     },
@@ -974,7 +967,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 279,
+      "line": 280,
       "complexity": 47,
       "overBudget": 40
     },
@@ -1002,7 +995,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "exportTelemetry",
-      "line": 1379,
+      "line": 1200,
       "complexity": 44,
       "overBudget": 37
     },
@@ -1023,7 +1016,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateStagedSpecimen",
-      "line": 1956,
+      "line": 1957,
       "complexity": 38,
       "overBudget": 31
     },
@@ -1105,9 +1098,9 @@
       "overBudget": 23
     },
     {
-      "file": "src/engine/SimulationWorld.ts",
-      "function": "stepEndosymbiosis",
-      "line": 1068,
+      "file": "src/engine/ecology/EndosymbiosisEngine.ts",
+      "function": "step",
+      "line": 25,
       "complexity": 30,
       "overBudget": 23
     },
@@ -1121,7 +1114,7 @@
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "update",
-      "line": 387,
+      "line": 388,
       "complexity": 28,
       "overBudget": 21
     },
@@ -1135,7 +1128,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "setTargetZLayer",
-      "line": 2156,
+      "line": 2157,
       "complexity": 27,
       "overBudget": 20
     },
@@ -1156,7 +1149,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "syncUIWithPreset",
-      "line": 396,
+      "line": 397,
       "complexity": 26,
       "overBudget": 19
     },
@@ -1198,14 +1191,14 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepReproduction",
-      "line": 956,
+      "line": 957,
       "complexity": 23,
       "overBudget": 16
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepSyncytialHomeostasis",
-      "line": 1169,
+      "line": 1077,
       "complexity": 23,
       "overBudget": 16
     },
@@ -1233,7 +1226,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 2537,
+      "line": 2358,
       "complexity": 22,
       "overBudget": 15
     },
@@ -1259,13 +1252,6 @@
       "overBudget": 14
     },
     {
-      "file": "src/ui/LabFlyout.ts",
-      "function": "updateBioBankUI",
-      "line": 2267,
-      "complexity": 21,
-      "overBudget": 14
-    },
-    {
       "file": "src/ui/ChroniclePlaybackBar.ts",
       "function": "bindEvents",
       "line": 318,
@@ -1282,7 +1268,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 480,
+      "line": 481,
       "complexity": 20,
       "overBudget": 13
     },
@@ -1296,7 +1282,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "setPoreBasalt",
-      "line": 1722,
+      "line": 1543,
       "complexity": 19,
       "overBudget": 12
     },
@@ -1315,13 +1301,6 @@
       "overBudget": 11
     },
     {
-      "file": "src/ui/ChronicleTourGuide.ts",
-      "function": "renderTourHUD",
-      "line": 501,
-      "complexity": 18,
-      "overBudget": 11
-    },
-    {
       "file": "src/ui/ChronicleAnalysisLabModal.ts",
       "function": "bindEvents",
       "line": 102,
@@ -1331,7 +1310,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 428,
+      "line": 429,
       "complexity": 18,
       "overBudget": 11
     },
@@ -1366,7 +1345,7 @@
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "initDOM",
-      "line": 161,
+      "line": 162,
       "complexity": 17,
       "overBudget": 10
     },
@@ -1387,7 +1366,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "restoreWorldSnapshot",
-      "line": 2962,
+      "line": 2783,
       "complexity": 17,
       "overBudget": 10
     },
@@ -1415,7 +1394,7 @@
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "goToStop",
-      "line": 301,
+      "line": 302,
       "complexity": 16,
       "overBudget": 9
     },
@@ -1436,7 +1415,7 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "constructor",
-      "line": 134,
+      "line": 135,
       "complexity": 16,
       "overBudget": 9
     },
@@ -1464,7 +1443,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateTelemetryPane",
-      "line": 1830,
+      "line": 1831,
       "complexity": 15,
       "overBudget": 8
     },
@@ -1478,7 +1457,7 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "syncSimulationRunningUI",
-      "line": 662,
+      "line": 663,
       "complexity": 15,
       "overBudget": 8
     },
@@ -1504,13 +1483,6 @@
       "overBudget": 8
     },
     {
-      "file": "src/engine/SimulationWorld.ts",
-      "function": "stepSpores",
-      "line": 1256,
-      "complexity": 15,
-      "overBudget": 8
-    },
-    {
       "file": "src/engine/paleontology/EvolutionaryFlightRecorder.ts",
       "function": "if",
       "line": 53,
@@ -1521,6 +1493,13 @@
       "file": "src/engine/environment/GeologicalPressuresEngine.ts",
       "function": "executeMagmaticTremor",
       "line": 240,
+      "complexity": 15,
+      "overBudget": 8
+    },
+    {
+      "file": "src/engine/ecology/PelagicSporeEngine.ts",
+      "function": "step",
+      "line": 25,
       "complexity": 15,
       "overBudget": 8
     },
@@ -1548,7 +1527,7 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "updateTelemetry",
-      "line": 692,
+      "line": 693,
       "complexity": 14,
       "overBudget": 7
     },
@@ -1562,21 +1541,14 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "for",
-      "line": 546,
-      "complexity": 14,
-      "overBudget": 7
-    },
-    {
-      "file": "src/engine/SimulationWorld.ts",
-      "function": "stepLysisAndScavenging",
-      "line": 1299,
+      "line": 547,
       "complexity": 14,
       "overBudget": 7
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "restartWithConfig",
-      "line": 2011,
+      "line": 1832,
       "complexity": 14,
       "overBudget": 7
     },
@@ -1584,6 +1556,13 @@
       "file": "src/engine/paleontology/EvolutionaryBarrierAuditor.ts",
       "function": "auditBarriers",
       "line": 20,
+      "complexity": 14,
+      "overBudget": 7
+    },
+    {
+      "file": "src/engine/ecology/ScavengingEngine.ts",
+      "function": "step",
+      "line": 28,
       "complexity": 14,
       "overBudget": 7
     },
@@ -1618,7 +1597,7 @@
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "freezeCurrentSpecimen",
-      "line": 461,
+      "line": 462,
       "complexity": 13,
       "overBudget": 6
     },
@@ -1626,6 +1605,13 @@
       "file": "src/ui/EvolutionaryBranchModal.ts",
       "function": "renderForkWizard",
       "line": 807,
+      "complexity": 13,
+      "overBudget": 6
+    },
+    {
+      "file": "src/ui/ChronicleTourGuideHtmlTemplate.ts",
+      "function": "buildTourHUDHtml",
+      "line": 21,
       "complexity": 13,
       "overBudget": 6
     },
@@ -1639,14 +1625,14 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "step",
-      "line": 734,
+      "line": 735,
       "complexity": 13,
       "overBudget": 6
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 2505,
+      "line": 2326,
       "complexity": 13,
       "overBudget": 6
     },
@@ -1688,14 +1674,14 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "gougeTrench",
-      "line": 2109,
+      "line": 1930,
       "complexity": 12,
       "overBudget": 5
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "placeVent",
-      "line": 2234,
+      "line": 2055,
       "complexity": 12,
       "overBudget": 5
     },
@@ -1744,7 +1730,14 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "switchTab",
-      "line": 1722,
+      "line": 1723,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/ui/LabFlyout.ts",
+      "function": "updateBioBankUI",
+      "line": 2268,
       "complexity": 11,
       "overBudget": 4
     },
@@ -1758,7 +1751,7 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "syncSafariCoPilotVitals",
-      "line": 724,
+      "line": 725,
       "complexity": 11,
       "overBudget": 4
     },
@@ -1772,7 +1765,14 @@
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "bindHUDEvents",
-      "line": 636,
+      "line": 525,
+      "complexity": 11,
+      "overBudget": 4
+    },
+    {
+      "file": "src/ui/LabFlyoutHtmlTemplate.ts",
+      "function": "buildBioBankListHtml",
+      "line": 21,
       "complexity": 11,
       "overBudget": 4
     },
@@ -1786,14 +1786,14 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "triggerEnvironmentalAction",
-      "line": 692,
+      "line": 693,
       "complexity": 11,
       "overBudget": 4
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "buildBasaltWall",
-      "line": 2175,
+      "line": 1996,
       "complexity": 11,
       "overBudget": 4
     },
@@ -1849,21 +1849,21 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "refreshPresetDropdown",
-      "line": 377,
+      "line": 378,
       "complexity": 10,
       "overBudget": 3
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "syncClarityCheckboxes",
-      "line": 1868,
+      "line": 1869,
       "complexity": 10,
       "overBudget": 3
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateGeologicalTicker",
-      "line": 1885,
+      "line": 1886,
       "complexity": 10,
       "overBudget": 3
     },
@@ -2010,7 +2010,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateBrushIndicator",
-      "line": 2201,
+      "line": 2202,
       "complexity": 9,
       "overBudget": 2
     },
@@ -2080,21 +2080,21 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "syncStudioPanelToggleUI",
-      "line": 1703,
+      "line": 1704,
       "complexity": 8,
       "overBudget": 1
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateCursorStatus",
-      "line": 1786,
+      "line": 1787,
       "complexity": 8,
       "overBudget": 1
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "setBrushMode",
-      "line": 2079,
+      "line": 2080,
       "complexity": 8,
       "overBudget": 1
     },
@@ -2136,14 +2136,14 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "selectRoleHighlight",
-      "line": 148,
+      "line": 149,
       "complexity": 8,
       "overBudget": 1
     },
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "cycleRoleHighlight",
-      "line": 184,
+      "line": 185,
       "complexity": 8,
       "overBudget": 1
     },
@@ -2199,14 +2199,14 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "for",
-      "line": 1832,
+      "line": 1653,
       "complexity": 8,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 1854,
+      "line": 1675,
       "complexity": 8,
       "overBudget": 1
     },
@@ -2251,21 +2251,21 @@
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "discoverTourStops",
-      "line": 694,
+      "line": 583,
       "depth": 8,
       "overBudget": 5
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepCellMetabolism",
-      "line": 815,
+      "line": 816,
       "depth": 8,
       "overBudget": 5
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "exportTelemetry",
-      "line": 1379,
+      "line": 1200,
       "depth": 7,
       "overBudget": 4
     },
@@ -2286,7 +2286,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "bindEvents",
-      "line": 468,
+      "line": 469,
       "depth": 6,
       "overBudget": 3
     },
@@ -2300,14 +2300,14 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "bindEvents",
-      "line": 316,
+      "line": 317,
       "depth": 6,
       "overBudget": 3
     },
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "updateSafariCoPilotDOM",
-      "line": 1530,
+      "line": 1531,
       "depth": 6,
       "overBudget": 3
     },
@@ -2335,42 +2335,42 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 279,
+      "line": 280,
       "depth": 6,
       "overBudget": 3
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 480,
+      "line": 481,
       "depth": 6,
       "overBudget": 3
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "for",
-      "line": 546,
+      "line": 547,
       "depth": 6,
       "overBudget": 3
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepReproduction",
-      "line": 956,
+      "line": 957,
       "depth": 6,
       "overBudget": 3
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepSyncytialHomeostasis",
-      "line": 1169,
+      "line": 1077,
       "depth": 6,
       "overBudget": 3
     },
     {
-      "file": "src/engine/SimulationWorld.ts",
-      "function": "stepLysisAndScavenging",
-      "line": 1299,
+      "file": "src/engine/ecology/ScavengingEngine.ts",
+      "function": "step",
+      "line": 28,
       "depth": 6,
       "overBudget": 3
     },
@@ -2419,7 +2419,7 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateStagedSpecimen",
-      "line": 1956,
+      "line": 1957,
       "depth": 5,
       "overBudget": 2
     },
@@ -2433,7 +2433,7 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "scanExemplars",
-      "line": 762,
+      "line": 763,
       "depth": 5,
       "overBudget": 2
     },
@@ -2447,21 +2447,21 @@
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "initDOM",
-      "line": 161,
+      "line": 162,
       "depth": 5,
       "overBudget": 2
     },
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "update",
-      "line": 387,
+      "line": 388,
       "depth": 5,
       "overBudget": 2
     },
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "bindHUDEvents",
-      "line": 636,
+      "line": 525,
       "depth": 5,
       "overBudget": 2
     },
@@ -2531,42 +2531,35 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 428,
-      "depth": 5,
-      "overBudget": 2
-    },
-    {
-      "file": "src/engine/SimulationWorld.ts",
-      "function": "stepEndosymbiosis",
-      "line": 1068,
+      "line": 429,
       "depth": 5,
       "overBudget": 2
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "setPoreBasalt",
-      "line": 1722,
+      "line": 1543,
       "depth": 5,
       "overBudget": 2
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "gougeTrench",
-      "line": 2109,
+      "line": 1930,
       "depth": 5,
       "overBudget": 2
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "buildBasaltWall",
-      "line": 2175,
+      "line": 1996,
       "depth": 5,
       "overBudget": 2
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "loadEnvironmentPreset",
-      "line": 2319,
+      "line": 2140,
       "depth": 5,
       "overBudget": 2
     },
@@ -2630,6 +2623,13 @@
       "file": "src/engine/remote/RemoteSimulationClient.ts",
       "function": "connect",
       "line": 55,
+      "depth": 5,
+      "overBudget": 2
+    },
+    {
+      "file": "src/engine/ecology/EndosymbiosisEngine.ts",
+      "function": "step",
+      "line": 25,
       "depth": 5,
       "overBudget": 2
     },
@@ -2727,28 +2727,28 @@
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "setBrushMode",
-      "line": 2079,
+      "line": 2080,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "setTargetZLayer",
-      "line": 2156,
+      "line": 2157,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateBrushIndicator",
-      "line": 2201,
+      "line": 2202,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/ui/LabFlyout.ts",
       "function": "updateBioBankUI",
-      "line": 2267,
+      "line": 2268,
       "depth": 4,
       "overBudget": 1
     },
@@ -2783,7 +2783,7 @@
     {
       "file": "src/ui/NaturalistAssistant.ts",
       "function": "freezeActiveSpecimenToBioBank",
-      "line": 1712,
+      "line": 1713,
       "depth": 4,
       "overBudget": 1
     },
@@ -2839,14 +2839,14 @@
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "loadStops",
-      "line": 240,
+      "line": 241,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/ui/ChronicleTourGuide.ts",
       "function": "goToStop",
-      "line": 301,
+      "line": 302,
       "depth": 4,
       "overBudget": 1
     },
@@ -2902,70 +2902,70 @@
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 257,
+      "line": 258,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "triggerEnvironmentalAction",
-      "line": 692,
+      "line": 693,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepMetaboliteDiffusion",
-      "line": 800,
+      "line": 801,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "stepCarcassDecay",
-      "line": 1366,
+      "line": 1187,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "setVentConfiguration",
-      "line": 1959,
+      "line": 1780,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "expandMinZToNegativeOne",
-      "line": 2057,
+      "line": 1878,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "recomputeNeighborPointersForColumn",
-      "line": 2088,
+      "line": 1909,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "placeVent",
-      "line": 2234,
+      "line": 2055,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "if",
-      "line": 2537,
+      "line": 2358,
       "depth": 4,
       "overBudget": 1
     },
     {
       "file": "src/engine/SimulationWorld.ts",
       "function": "restoreWorldSnapshot",
-      "line": 2962,
+      "line": 2783,
       "depth": 4,
       "overBudget": 1
     },

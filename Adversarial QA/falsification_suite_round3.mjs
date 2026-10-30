@@ -16,7 +16,7 @@ import { CodonType } from '../dist/core/codons/CodonTable.js';
 import { GenomeSafe } from '../dist/core/domain/GenomeSafe.js';
 import { PoreWorkshop } from '../dist/core/domain/PoreWorkshop.js';
 import { PoreCell } from '../dist/core/domain/PoreCell.js';
-import { Pore } from '../dist/core/domain/Pore.js';
+import { Pore, PoreMedium } from '../dist/core/domain/Pore.js';
 import { HexCoord3D } from '../dist/core/spatial/HexCoord3D.js';
 import { MotifScanner } from '../dist/core/paleontology/MotifScanner.js';
 import { MotifType } from '../dist/core/paleontology/NetworkMotif.js';
@@ -486,7 +486,7 @@ console.log('[PROOF 5A] Endosymbiosis Donor Genome Preservation & Sporulation Or
   rockPore.setBasalt(false);
   const upFluidPore = world.getPore(new HexCoord3D(0, 0, 1));
   upFluidPore.setBasalt(false);
-  upFluidPore.medium = 'AQUEOUS_FLUID';
+  upFluidPore.setMedium(PoreMedium.AQUEOUS_FLUID);
 
   const sporulatingTape = makeTape([
     CodonType.PORIN_STREAM_A,
