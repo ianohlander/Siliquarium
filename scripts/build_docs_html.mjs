@@ -76,6 +76,7 @@ const NAV_CATEGORIES = [
     name: 'Volume V: Systems Operations',
     icon: '🛠️',
     items: [
+      { id: 'intro-course', title: 'Introductory Course Tutorial', href: 'docs/curriculum/INTRODUCTORY_COURSE_TUTORIAL.html', icon: '🏛️', desc: 'BIO/CS 101 Introductory course & lab guide' },
       { id: 'user-guide', title: 'Illustrated Systems Manual', href: 'docs/USER_GUIDE.html', icon: '📖', desc: '10-chapter illustrated manual & tutorials' },
       { id: 'practicums', title: 'Laboratory Practicums 1–5', href: 'docs/curriculum/practicums_lab_manual.html', icon: '🧪', desc: '5 hands-on labs & formative assessments' },
       { id: 'phase3', title: '3D Seafloor Visualizer', href: 'docs/PHASE_3_VISUALIZER_GUIDE.html', icon: '🔬', desc: 'Bathymetry, orbit camera & circuit microscope' },
@@ -1242,6 +1243,13 @@ const DOCS_MAP = [
     srcMd: 'docs/curriculum/unit4_evolutionary_dynamics.md',
     destHtml: 'docs/curriculum/unit4_evolutionary_dynamics.html',
     title: 'Unit 4: Macro-Evolutionary Dynamics & Lenski LTEE',
+    relativeRoot: '../'
+  },
+  {
+    docId: 'intro-course',
+    srcMd: 'docs/curriculum/INTRODUCTORY_COURSE_TUTORIAL.md',
+    destHtml: 'docs/curriculum/INTRODUCTORY_COURSE_TUTORIAL.html',
+    title: 'BIO/CS 101: Introduction to Silicon Abiogenesis & Digital Biophysics',
     relativeRoot: '../'
   },
   {
