@@ -1048,197 +1048,452 @@
 <h2 id="a-plain-english-conceptual-guide-to-how-nature-logic-and-siliquarium-connect" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80"><em class="text-slate-200 italic">A Plain-English Conceptual Guide to How Nature, Logic, and Siliquarium Connect</em></h2>
 <hr class="border-t border-slate-800 my-8" />
 <div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">💡 What Is This Guide?</div>
-<p class="leading-relaxed font-sans text-xs my-1.5">When you watch Siliquarium, you are looking at a living simulation where <strong class="text-slate-100 font-semibold">every single element exists simultaneously in three worlds</strong>:</p>
+<p class="leading-relaxed font-sans text-xs my-1.5">When you observe Siliquarium, you are looking at a living computational universe where <strong class="text-slate-100 font-semibold">every single phenomenon exists simultaneously in three worlds</strong>:</p>
 <ol class="list-decimal pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li>💡 <strong class="text-slate-100 font-semibold">The Abstract Behavior (The General Concept):</strong> The universal idea or pattern—such as <em class="text-slate-200 italic">filtering out brief noise</em>, <em class="text-slate-200 italic">remembering a past event</em>, <em class="text-slate-200 italic">sharing resources</em>, or <em class="text-slate-200 italic">surviving a sudden shock</em>.</li>
 <li>🌿 <strong class="text-slate-100 font-semibold">In Nature (The Biological Mirror):</strong> How real living cells, bacteria, and ancient deep-sea hydrothermal vents accomplish this using chemistry, enzymes, and cell membranes.</li>
 <li>⚡ <strong class="text-slate-100 font-semibold">In Siliquarium (The Digital Reality):</strong> Exactly what is happening inside the computer—the logic gates, energy tokens, and code executing beneath the visual surface.</li>
 </ol>
-<p class="leading-relaxed font-sans text-xs my-1.5">You do not need a degree in biochemistry or computer engineering to understand Siliquarium. This guide explains each concept in plain, gentle language with concrete examples across all three domains.</p></div></div>
+<p class="leading-relaxed font-sans text-xs my-1.5">This guide explains each concept in plain language, accompanied by clear vector schematics showing how information and energy flow.</p></div></div>
 <hr class="border-t border-slate-800 my-8" />
-<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart TD
-    subgraph Rosetta[&quot;The Three Worlds of Siliquarium&quot;]
-        direction TB
-        D1[&quot;&lt;b&gt;1. The Abstract Concept&lt;/b&gt;&lt;br/&gt;The universal pattern or behavior&lt;br/&gt;&lt;i&gt;(e.g., Filtering Noise, Remembering Past Events, Pacing a Rhythm)&lt;/i&gt;&quot;]
-        D2[&quot;&lt;b&gt;2. How Nature Does It&lt;/b&gt;&lt;br/&gt;Real biological chemistry &amp; cellular biology&lt;br/&gt;&lt;i&gt;(e.g., Enzymes, Bacterial Chemotaxis, Mitchell Proton Batteries)&lt;/i&gt;&quot;]
-        D3[&quot;&lt;b&gt;3. How Siliquarium Does It&lt;/b&gt;&lt;br/&gt;Concrete digital rules running in the CPU&lt;br/&gt;&lt;i&gt;(e.g., Logic Gate Netlists, Landauer Heat Tokens, Pore Hexagons)&lt;/i&gt;&quot;]
-        
-        D1 --&gt;|&quot;Realized in Chemistry&quot;| D2
-        D1 --&gt;|&quot;Realized in Code&quot;| D3
-        D2 -.-&gt;|&quot;Mirror of Reality&quot;| D3
-    end
-    
-    style D1 fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
-    style D2 fill:#0f172a,stroke:#10b981,stroke-width:2px,color:#f8fafc
-    style D3 fill:#0f172a,stroke:#a855f7,stroke-width:2px,color:#f8fafc</div>
+<!-- Figure 0.1: The Three Worlds of Siliquarium Vector Graphic -->
+<div class="my-6 p-5 rounded-xl bg-slate-950/90 border border-slate-800 shadow-xl flex flex-col items-center">
+<div class="text-xs font-semibold text-cyan-400 mb-2 tracking-wider uppercase font-mono">Figure 0.1: The Three Worlds of Siliquarium</div>
+<svg viewBox="0 0 760 210" class="w-full max-w-3xl" style="font-family: system-ui, -apple-system, sans-serif;">
+<defs>
+<linearGradient id="gradAbstract" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#0f172a" />
+<stop offset="100%" stop-color="#1e293b" />
+</linearGradient>
+<linearGradient id="gradBio" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#062d27" />
+<stop offset="100%" stop-color="#064e3b" />
+</linearGradient>
+<linearGradient id="gradDigital" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#1e1035" />
+<stop offset="100%" stop-color="#3b0764" />
+</linearGradient>
+<marker id="arrowCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8" />
+</marker>
+<marker id="arrowEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#34d399" />
+</marker>
+</defs>
+<!-- Card 1: The Abstract Concept -->
+<rect x="15" y="20" width="220" height="170" rx="12" fill="url(#gradAbstract)" stroke="#38bdf8" stroke-width="1.8" />
+<circle cx="45" cy="50" r="14" fill="#0284c7" fill-opacity="0.25" stroke="#38bdf8" stroke-width="1.5" />
+<text x="45" y="55" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">💡</text>
+<text x="70" y="46" fill="#f8fafc" font-size="13" font-weight="bold">1. Abstract Concept</text>
+<text x="70" y="62" fill="#38bdf8" font-size="10" font-family="monospace">Universal Pattern</text>
+<text x="28" y="92" fill="#cbd5e1" font-size="11" line-height="1.4">The underlying challenge:</text>
+<text x="28" y="112" fill="#94a3b8" font-size="10.5">• How to filter brief noise?</text>
+<text x="28" y="130" fill="#94a3b8" font-size="10.5">• How to remember a past event?</text>
+<text x="28" y="148" fill="#94a3b8" font-size="10.5">• How to pace a steady rhythm?</text>
+<rect x="28" y="162" width="90" height="18" rx="4" fill="#0369a1" fill-opacity="0.3" stroke="#0ea5e9" stroke-width="0.8" />
+<text x="73" y="174" fill="#7dd3fc" font-size="9" font-weight="bold" text-anchor="middle">SUBSTRATE-NEUTRAL</text>
+<!-- Connector 1 -> 2 -->
+<path d="M 235 75 L 265 75" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowCyan)" />
+<text x="250" y="66" fill="#7dd3fc" font-size="8.5" font-family="monospace" text-anchor="middle">REALIZED</text>
+<!-- Card 2: In Nature (Biology) -->
+<rect x="270" y="20" width="220" height="170" rx="12" fill="url(#gradBio)" stroke="#10b981" stroke-width="1.8" />
+<circle cx="300" cy="50" r="14" fill="#059669" fill-opacity="0.25" stroke="#10b981" stroke-width="1.5" />
+<text x="300" y="55" fill="#34d399" font-size="14" font-weight="bold" text-anchor="middle">🌿</text>
+<text x="325" y="46" fill="#f8fafc" font-size="13" font-weight="bold">2. How Nature Does It</text>
+<text x="325" y="62" fill="#34d399" font-size="10" font-family="monospace">Prebiotic Biochemistry</text>
+<text x="283" y="92" fill="#cbd5e1" font-size="11">Molecular solutions:</text>
+<text x="283" y="112" fill="#a7f3d0" font-size="10.5">• Allosteric enzyme locks</text>
+<text x="283" y="130" fill="#a7f3d0" font-size="10.5">• Mitchell proton gradients (PMF)</text>
+<text x="283" y="148" fill="#a7f3d0" font-size="10.5">• Slime mold protoplasmic veins</text>
+<rect x="283" y="162" width="100" height="18" rx="4" fill="#065f46" fill-opacity="0.3" stroke="#10b981" stroke-width="0.8" />
+<text x="333" y="174" fill="#6ee7b7" font-size="9" font-weight="bold" text-anchor="middle">CARBON CHEMISTRY</text>
+<!-- Connector 2 -> 3 -->
+<path d="M 490 75 L 520 75" fill="none" stroke="#34d399" stroke-width="2" marker-end="url(#arrowEmerald)" />
+<text x="505" y="66" fill="#6ee7b7" font-size="8.5" font-family="monospace" text-anchor="middle">MIRRORED</text>
+<!-- Card 3: In Siliquarium (Digital Reality) -->
+<rect x="525" y="20" width="220" height="170" rx="12" fill="url(#gradDigital)" stroke="#c084fc" stroke-width="1.8" />
+<circle cx="555" cy="50" r="14" fill="#7e22ce" fill-opacity="0.25" stroke="#c084fc" stroke-width="1.5" />
+<text x="555" y="55" fill="#e9d5ff" font-size="14" font-weight="bold" text-anchor="middle">⚡</text>
+<text x="580" y="46" fill="#f8fafc" font-size="13" font-weight="bold">3. How Siliquarium Does It</text>
+<text x="580" y="62" fill="#c084fc" font-size="10" font-family="monospace">Silicon CPU Simulation</text>
+<text x="538" y="92" fill="#cbd5e1" font-size="11">Computational execution:</text>
+<text x="538" y="112" fill="#e9d5ff" font-size="10.5">• CMOS logic gate AST netlists</text>
+<text x="538" y="130" fill="#e9d5ff" font-size="10.5">• Landauer heat token ledger</text>
+<text x="538" y="148" fill="#e9d5ff" font-size="10.5">• Hexagonal rock pore matrices</text>
+<rect x="538" y="162" width="105" height="18" rx="4" fill="#581c87" fill-opacity="0.3" stroke="#a855f7" stroke-width="0.8" />
+<text x="590.5" y="174" fill="#d8b4fe" font-size="9" font-weight="bold" text-anchor="middle">SILICON PHYSICS</text>
+</svg>
+</div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="1-decision-making-logic-the-cellular-brain" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Decision-Making & Logic: The Cellular Brain</h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Before life had complex brains, single cells had to make intelligent decisions: <em class="text-slate-200 italic">When should I eat? How do I avoid poison? How do I know when it is time to divide?</em></p>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In biology, cells make decisions using <strong class="text-slate-100 font-semibold">protein enzymes</strong>. In Siliquarium, cells make decisions using <strong class="text-slate-100 font-semibold">electronic logic gates</strong>. Both do the exact same job.</p>
-<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart LR
-    subgraph LogicRow[&quot;The Four Basic Decision Gates&quot;]
-        direction LR
-        G1[&quot;&lt;b&gt;NOT Gate&lt;/b&gt;&lt;br/&gt;Inversion &amp; Veto&lt;br/&gt;Blocks Poison&quot;]
-        G2[&quot;&lt;b&gt;AND Gate&lt;/b&gt;&lt;br/&gt;Cooperation&lt;br/&gt;Couples Fuel &amp; Cofactor&quot;]
-        G3[&quot;&lt;b&gt;OR Gate&lt;/b&gt;&lt;br/&gt;Flexibility&lt;br/&gt;Alternative Fuel Path&quot;]
-        G4[&quot;&lt;b&gt;XOR Circuit&lt;/b&gt;&lt;br/&gt;Difference&lt;br/&gt;Detects Mismatch&quot;]
-    end</div>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Before life evolved complex nervous systems, single cells had to make critical operational decisions: <em class="text-slate-200 italic">When should I absorb nutrients? When must I block poison? When is it safe to replicate?</em></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In biology, cells make decisions using <strong class="text-slate-100 font-semibold">protein enzymes</strong>. In Siliquarium, cells make decisions using <strong class="text-slate-100 font-semibold">electronic logic gates</strong>. Both execute the exact same logical decision-making.</p>
+<!-- Figure 1.0: The Four Basic Decision Gates Vector Graphic -->
+<div class="my-6 p-5 rounded-xl bg-slate-950/90 border border-slate-800 shadow-xl flex flex-col items-center">
+<div class="text-xs font-semibold text-cyan-400 mb-2 tracking-wider uppercase font-mono">Figure 1.0: The Four Basic Decision Gates</div>
+<svg viewBox="0 0 760 210" class="w-full max-w-3xl" style="font-family: system-ui, -apple-system, sans-serif;">
+<!-- Gate 1: NOT -->
+<rect x="15" y="15" width="170" height="180" rx="10" fill="#0f172a" stroke="#f43f5e" stroke-width="1.5" />
+<rect x="25" y="25" width="60" height="20" rx="4" fill="#9f1239" fill-opacity="0.3" stroke="#f43f5e" stroke-width="1" />
+<text x="55" y="39" fill="#fca5a5" font-size="10" font-weight="bold" text-anchor="middle">NOT GATE</text>
+<!-- NOT Symbol: Triangle + Circle -->
+<path d="M 60 70 L 60 110 L 100 90 Z" fill="#1e293b" stroke="#f43f5e" stroke-width="1.8" />
+<circle cx="106" cy="90" r="4.5" fill="#0f172a" stroke="#f43f5e" stroke-width="1.8" />
+<line x1="35" y1="90" x2="60" y2="90" stroke="#f43f5e" stroke-width="2" />
+<line x1="111" y1="90" x2="145" y2="90" stroke="#f43f5e" stroke-width="2" />
+<text x="100" y="132" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">VETO / INVERT</text>
+<text x="100" y="150" fill="#cbd5e1" font-size="9.5" text-anchor="middle">Turns 1 to 0 • Turns 0 to 1</text>
+<text x="100" y="172" fill="#fb7185" font-size="9.5" font-weight="bold" text-anchor="middle">🛡️ Heavy-Metal Shield</text>
+<!-- Gate 2: AND -->
+<rect x="200" y="15" width="170" height="180" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+<rect x="210" y="25" width="60" height="20" rx="4" fill="#0369a1" fill-opacity="0.3" stroke="#38bdf8" stroke-width="1" />
+<text x="240" y="39" fill="#7dd3fc" font-size="10" font-weight="bold" text-anchor="middle">AND GATE</text>
+<!-- AND Symbol: D-Shape -->
+<path d="M 245 70 L 270 70 A 20 20 0 0 1 270 110 L 245 110 Z" fill="#1e293b" stroke="#38bdf8" stroke-width="1.8" />
+<line x1="220" y1="80" x2="245" y2="80" stroke="#38bdf8" stroke-width="2" />
+<line x1="220" y1="100" x2="245" y2="100" stroke="#38bdf8" stroke-width="2" />
+<line x1="290" y1="90" x2="325" y2="90" stroke="#38bdf8" stroke-width="2" />
+<text x="285" y="132" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">COUPLED INFLUX</text>
+<text x="285" y="150" fill="#cbd5e1" font-size="9.5" text-anchor="middle">Fires only if Both = 1</text>
+<text x="285" y="172" fill="#38bdf8" font-size="9.5" font-weight="bold" text-anchor="middle">⚡ Fuel + Oxygen Influx</text>
+<!-- Gate 3: OR -->
+<rect x="385" y="15" width="170" height="180" rx="10" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
+<rect x="395" y="25" width="60" height="20" rx="4" fill="#065f46" fill-opacity="0.3" stroke="#10b981" stroke-width="1" />
+<text x="425" y="39" fill="#6ee7b7" font-size="10" font-weight="bold" text-anchor="middle">OR GATE</text>
+<!-- OR Symbol: Curved Shield -->
+<path d="M 430 70 Q 450 70 465 90 Q 450 110 430 110 Q 442 90 430 70 Z" fill="#1e293b" stroke="#10b981" stroke-width="1.8" />
+<line x1="410" y1="80" x2="435" y2="80" stroke="#10b981" stroke-width="2" />
+<line x1="410" y1="100" x2="435" y2="100" stroke="#10b981" stroke-width="2" />
+<line x1="465" y1="90" x2="505" y2="90" stroke="#10b981" stroke-width="2" />
+<text x="470" y="132" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">BACKUP DIET</text>
+<text x="470" y="150" fill="#cbd5e1" font-size="9.5" text-anchor="middle">Fires if Either = 1</text>
+<text x="470" y="172" fill="#34d399" font-size="9.5" font-weight="bold" text-anchor="middle">🔄 Redundant Pathways</text>
+<!-- Gate 4: XOR -->
+<rect x="570" y="15" width="175" height="180" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" />
+<rect x="580" y="25" width="60" height="20" rx="4" fill="#78350f" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1" />
+<text x="610" y="39" fill="#fcd34d" font-size="10" font-weight="bold" text-anchor="middle">XOR CIRCUIT</text>
+<!-- XOR Symbol: Double Curved Shield -->
+<path d="M 610 70 Q 622 90 610 110" fill="none" stroke="#f59e0b" stroke-width="1.8" />
+<path d="M 618 70 Q 638 70 653 90 Q 638 110 618 110 Q 630 90 618 70 Z" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8" />
+<line x1="595" y1="80" x2="618" y2="80" stroke="#f59e0b" stroke-width="2" />
+<line x1="595" y1="100" x2="618" y2="100" stroke="#f59e0b" stroke-width="2" />
+<line x1="653" y1="90" x2="695" y2="90" stroke="#f59e0b" stroke-width="2" />
+<text x="657" y="132" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">PARITY CHECK</text>
+<text x="657" y="150" fill="#cbd5e1" font-size="9.5" text-anchor="middle">Fires only if Inputs Differ</text>
+<text x="657" y="172" fill="#fbbf24" font-size="9.5" font-weight="bold" text-anchor="middle">⚖️ Voltage Gradient</text>
+</svg>
+</div>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="11-the-switch-inverter-saying-no-blocking-poison" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.1 The Switch / Inverter ("Saying No / Blocking Poison")</h3>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">   Input Signal (Toxin) ────► [ NOT GATE ] ────► Output (Uptake Clamp)
-       If 1 (Poison)    ────►    Inverts   ────►      0 (Closed)
-       If 0 (Clean)     ────►    Inverts   ────►      1 (Open)</code></pre>
+<!-- Vector Schematic: NOT Gate -->
+<div class="my-4 p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex justify-center">
+<svg viewBox="0 0 520 90" class="w-full max-w-lg" style="font-family: system-ui, -apple-system, sans-serif;">
+<defs>
+<marker id="arr1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#f43f5e" />
+</marker>
+</defs>
+<!-- Input Wire -->
+<line x1="30" y1="45" x2="190" y2="45" stroke="#f43f5e" stroke-width="2.5" marker-end="url(#arr1)" />
+<text x="100" y="35" fill="#fda4af" font-size="11" font-weight="bold" text-anchor="middle">Toxin Signal (1 = Poison)</text>
+<!-- Gate: NOT Triangle + Bubble -->
+<path d="M 200 20 L 200 70 L 260 45 Z" fill="#1e293b" stroke="#f43f5e" stroke-width="2" />
+<circle cx="268" cy="45" r="6" fill="#0f172a" stroke="#f43f5e" stroke-width="2" />
+<text x="225" y="49" fill="#fff" font-size="11" font-weight="bold">NOT</text>
+<!-- Output Wire -->
+<line x1="276" y1="45" x2="450" y2="45" stroke="#10b981" stroke-width="2.5" marker-end="url(#arr1)" />
+<text x="370" y="35" fill="#6ee7b7" font-size="11" font-weight="bold" text-anchor="middle">Uptake Clamp (0 = Closed)</text>
+</svg>
+</div>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>💡 <strong class="text-slate-100 font-semibold">The Abstract Behavior:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Inversion & Veto Power.</strong> Doing the exact opposite of what an incoming signal dictates. When an alert arrives, the system immediately shuts down access to prevent damage.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Inversion & Veto Power.</strong> Doing the opposite of what an incoming signal dictates. When an alert arrives, the system immediately shuts down access to prevent damage.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>🌿 <strong class="text-slate-100 font-semibold">In Nature (Biology):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Allosteric Enzyme Inhibition.</strong> In bacteria, when a toxic heavy-metal atom (like cadmium or lead) touches a receptor, the protein physically twists into a locked shape, instantly closing the door so poison cannot flood the cytoplasm.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Allosteric Enzyme Inhibition.</strong> In bacteria, when a toxic heavy-metal atom (like cadmium or lead) touches a receptor, the protein twists into a locked shape, instantly closing the door so poison cannot enter.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>⚡ <strong class="text-slate-100 font-semibold">In Siliquarium (Digital Reality):</strong>  </li>
 </ul>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code> Gate.</strong> When geothermal poison (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream T = 1</code>) pulses on the pore wall, an internal <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code> gate turns the signal into <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code>. This keeps the toxic valve shut. If a cell has not evolved a <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code> gate, poison flows into its battery, draining $5$ energy tokens every tick until the cell dies.</p>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="12-the-partnership-both-must-be-present" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.2 The Partnership ("Both Must Be Present")</h3>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">   Fuel Influx (Stream A) ───┐
-                             ├────► [ AND GATE ] ────► Output (+2 Energy Tokens)
-   Oxygen Influx (Stream B) ──┘</code></pre>
+<!-- Vector Schematic: AND Gate -->
+<div class="my-4 p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex justify-center">
+<svg viewBox="0 0 520 110" class="w-full max-w-lg" style="font-family: system-ui, -apple-system, sans-serif;">
+<defs>
+<marker id="arr2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8" />
+</marker>
+</defs>
+<!-- Inputs -->
+<line x1="30" y1="35" x2="190" y2="35" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr2)" />
+<text x="100" y="27" fill="#7dd3fc" font-size="11" font-weight="bold" text-anchor="middle">Stream A (Hydrogen Fuel)</text>
+<line x1="30" y1="75" x2="190" y2="75" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr2)" />
+<text x="100" y="93" fill="#7dd3fc" font-size="11" font-weight="bold" text-anchor="middle">Stream B (Oxidizer Cofactor)</text>
+<!-- Gate: AND D-Shape -->
+<path d="M 200 20 L 235 20 A 35 35 0 0 1 235 90 L 200 90 Z" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
+<text x="225" y="60" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">AND</text>
+<!-- Output -->
+<line x1="270" y1="55" x2="450" y2="55" stroke="#34d399" stroke-width="2.5" marker-end="url(#arr2)" />
+<text x="365" y="45" fill="#6ee7b7" font-size="11" font-weight="bold" text-anchor="middle">+2 Battery Energy Tokens</text>
+</svg>
+</div>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>💡 <strong class="text-slate-100 font-semibold">The Abstract Behavior:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Cooperation.</strong> Requiring two separate conditions to be true before taking action. If either piece is missing, nothing happens.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Cooperation.</strong> Requiring two separate conditions to be met before taking action. If either piece is missing, nothing happens.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>🌿 <strong class="text-slate-100 font-semibold">In Nature (Biology):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Two-Substrate Enzymes.</strong> In your own cells, the enzyme <em class="text-slate-200 italic">citrate synthase</em> cannot make energy if it only has sugar; it also requires an energy cofactor (acetyl-CoA). Both chemical keys must fit into the enzyme's lock simultaneously before the reaction can spark.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Two-Substrate Enzymes.</strong> In cellular respiration, <em class="text-slate-200 italic">citrate synthase</em> cannot generate energy with sugar alone; it also requires an energy cofactor (acetyl-CoA). Both chemical keys must fit into the active site simultaneously for catalysis to occur.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>⚡ <strong class="text-slate-100 font-semibold">In Siliquarium (Digital Reality):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> Gate.</strong> In Siliquarium's hydrothermal plume, fuel arrives in two streams: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream A</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream B</code>. When an organism's <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate detects both streams at once ($A=1 \text{ and } B=1$), it fires, depositing $+2$ energy tokens into the cellular battery. If only one stream is present, it does not fire.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> Gate.</strong> In Siliquarium's hydrothermal plume, fuel arrives in two streams: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream A</code> and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream B</code>. When an organism's <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate detects both streams at once ($A=1 \text{ and } B=1$), it fires, depositing $+2$ energy tokens into the cellular battery.</p>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="13-the-alternative-pathway-either-one-works" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.3 The Alternative Pathway ("Either One Works")</h3>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">   Primary Fuel (Glucose)   ───┐
-                               ├────► [ OR GATE ] ────► Output (Metabolism Stays On)
-   Backup Fuel (Fatty Acid) ───┘</code></pre>
+<!-- Vector Schematic: OR Gate -->
+<div class="my-4 p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex justify-center">
+<svg viewBox="0 0 520 110" class="w-full max-w-lg" style="font-family: system-ui, -apple-system, sans-serif;">
+<defs>
+<marker id="arr3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#10b981" />
+</marker>
+</defs>
+<!-- Inputs -->
+<line x1="30" y1="35" x2="190" y2="35" stroke="#10b981" stroke-width="2" marker-end="url(#arr3)" />
+<text x="100" y="27" fill="#6ee7b7" font-size="11" font-weight="bold" text-anchor="middle">Primary Fuel (Stream A)</text>
+<line x1="30" y1="75" x2="190" y2="75" stroke="#10b981" stroke-width="2" marker-end="url(#arr3)" />
+<text x="100" y="93" fill="#6ee7b7" font-size="11" font-weight="bold" text-anchor="middle">Backup Fuel (Stream B)</text>
+<!-- Gate: OR Curved Shield -->
+<path d="M 200 20 Q 230 20 255 55 Q 230 90 200 90 Q 215 55 200 20 Z" fill="#1e293b" stroke="#10b981" stroke-width="2" />
+<text x="225" y="60" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">OR</text>
+<!-- Output -->
+<line x1="255" y1="55" x2="450" y2="55" stroke="#10b981" stroke-width="2.5" marker-end="url(#arr3)" />
+<text x="355" y="45" fill="#6ee7b7" font-size="11" font-weight="bold" text-anchor="middle">Metabolic Intake Stays Active</text>
+</svg>
+</div>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>💡 <strong class="text-slate-100 font-semibold">The Abstract Behavior:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Flexibility & Redundancy.</strong> Having a backup plan. As long as at least one source of help is available, the system keeps operating.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Flexibility & Redundancy.</strong> Having a fallback plan. As long as at least one source of nourishment is available, the system continues operating.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>🌿 <strong class="text-slate-100 font-semibold">In Nature (Biology):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Backup Enzymes & Flexible Diet.</strong> Many microbes have backup genes (<em class="text-slate-200 italic">isoenzymes</em>). If glucose is exhausted, the microbe instantly switches to eating fructose or lactic acid without skipping a beat.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Backup Enzymes & Promiscuous Pathways.</strong> Microbes possess backup enzymes (<em class="text-slate-200 italic">isoenzymes</em>). If glucose is exhausted, the cell switches to eating fructose or lactic acid without halting growth.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>⚡ <strong class="text-slate-100 font-semibold">In Siliquarium (Digital Reality):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code> Gate.</strong> Hydrothermal currents can flutter, causing Stream A to briefly drop out. A cell with an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code> gate wired to its battery charger will keep harvesting energy as long as <em class="text-slate-200 italic">either</em> Stream A or Stream B is pulsing. This provides resilience during turbulent ocean currents.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code> Gate.</strong> Hydrothermal currents flutter, causing Stream A to periodically drop out. A cell with an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code> gate wired to its battery charger will keep harvesting energy as long as <em class="text-slate-200 italic">either</em> Stream A or Stream B is pulsing.</p>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="14-detecting-a-difference-the-mismatch-detector" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.4 Detecting a Difference ("The Mismatch Detector")</h3>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">   Inside Voltage  ───┐
-                      ├────► [ XOR CIRCUIT ] ────► Output (Pump Activated)
-   Outside Voltage ───┘</code></pre>
+<!-- Vector Schematic: XOR Composite Circuit -->
+<div class="my-4 p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex justify-center">
+<svg viewBox="0 0 540 130" class="w-full max-w-lg" style="font-family: system-ui, -apple-system, sans-serif;">
+<defs>
+<marker id="arr4" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#f59e0b" />
+</marker>
+</defs>
+<!-- Inputs -->
+<line x1="20" y1="45" x2="120" y2="45" stroke="#f59e0b" stroke-width="2" marker-end="url(#arr4)" />
+<text x="65" y="35" fill="#fcd34d" font-size="10.5" font-weight="bold">Channel 1</text>
+<line x1="20" y1="85" x2="120" y2="85" stroke="#f59e0b" stroke-width="2" marker-end="url(#arr4)" />
+<text x="65" y="103" fill="#fcd34d" font-size="10.5" font-weight="bold">Channel 2</text>
+<!-- Composite Box representing the 4-gate discovery -->
+<rect x="130" y="20" width="180" height="90" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8" />
+<text x="220" y="46" fill="#fcd34d" font-size="11.5" font-weight="bold" text-anchor="middle">XOR COMPOSITE</text>
+<text x="220" y="66" fill="#cbd5e1" font-size="9" text-anchor="middle">{ OR, AND, NOT, AND }</text>
+<text x="220" y="86" fill="#94a3b8" font-size="9" text-anchor="middle">Discovered via Evolution</text>
+<!-- Output -->
+<line x1="310" y1="65" x2="480" y2="65" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arr4)" />
+<text x="395" y="55" fill="#fcd34d" font-size="10.5" font-weight="bold" text-anchor="middle">Fires only if 1 ≠ 2</text>
+</svg>
+</div>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>💡 <strong class="text-slate-100 font-semibold">The Abstract Behavior:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Disparity Sensing.</strong> Firing only when two signals disagree. If both signals are high or both signals are low, the output stays silent.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Disparity Sensing.</strong> Firing only when two signals disagree. If both signals are high or both are low, the output remains silent.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>🌿 <strong class="text-slate-100 font-semibold">In Nature (Biology):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Membrane Potential Sensors.</strong> Cells constantly compare the electrical charge inside their membrane with the charge outside. If the charges become identical, the cell sounds an alarm and fires ion pumps to restore the difference.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Membrane Polarity Sensors.</strong> Cells constantly compare the electrical charge inside their membrane with the charge outside. If the charges become identical, the cell sounds an alarm and fires ion pumps to restore the gradient.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>⚡ <strong class="text-slate-100 font-semibold">In Siliquarium (Digital Reality):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code> Composite Circuit.</strong> Siliquarium does not give creatures a free, pre-packaged XOR gate in their genome ribbon. An evolving lineage must construct a 4-gate combination ($\text{OR} \to \text{AND} \to \text{NOT} \to \text{AND}$) to discover XOR behavior. When evolved, it acts as a phase detector that harvests energy during alternating vent rhythms.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code> Composite Circuit.</strong> Siliquarium does not hand organisms a pre-packaged XOR gate in their genome. An evolving lineage must construct a 4-gate combination ($\text{OR} \to \text{AND} \to \text{NOT} \to \text{AND}$) to compute XOR behavior, allowing it to harvest energy during alternating vent rhythms.</p>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="2-smart-survival-circuits-natures-wiring-tricks" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Smart Survival Circuits: Nature's Wiring Tricks</h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 2002, systems biologist <strong class="text-slate-100 font-semibold">Uri Alon</strong> discovered that throughout billions of years of evolution, nature kept rediscovering the exact same small circuits over and over again. Siliquarium cells discover these exact same circuits on their own.</p>
-<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart TD
-    subgraph SmartCircuits[&quot;Uri Alon&#39;s Common Biological Circuits&quot;]
-        M1[&quot;&lt;b&gt;The &#39;Is It Real?&#39; Filter&lt;/b&gt;&lt;br/&gt;Ignores brief brownian blips&quot;]
-        M2[&quot;&lt;b&gt;The &#39;Did It Change?&#39; Detector&lt;/b&gt;&lt;br/&gt;Pulses only when conditions improve&quot;]
-        M3[&quot;&lt;b&gt;The Memory Latch&lt;/b&gt;&lt;br/&gt;Remembers a past pulse&quot;]
-        M4[&quot;&lt;b&gt;The Biological Clock&lt;/b&gt;&lt;br/&gt;Keeps a steady rhythmic beat&quot;]
-    end</div>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 2002, systems biologist <strong class="text-slate-100 font-semibold">Uri Alon</strong> demonstrated that across billions of years of evolution, living organisms repeatedly converge on identical small circuit motifs. Siliquarium cells discover these exact same motifs autonomously.</p>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="21-the-is-it-real-filter-coherent-feed-forward-loop" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 The "Is It Real?" Filter (Coherent Feed-Forward Loop)</h3>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">   Food Sensor (X) ──────┬────────────────► [ AND GATE ] ────► Output (Digestive Enzyme)
-                         │                      ▲
-                         └─► [ 1-Tick Delay ] ──┘</code></pre>
+<!-- Vector Schematic: C1-FFL Noise Filter -->
+<div class="my-4 p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex justify-center">
+<svg viewBox="0 0 540 140" class="w-full max-w-lg" style="font-family: system-ui, -apple-system, sans-serif;">
+<defs>
+<marker id="arrCyan2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8" />
+</marker>
+</defs>
+<!-- Input Sensor -->
+<circle cx="40" cy="70" r="14" fill="#0284c7" stroke="#38bdf8" stroke-width="1.8" />
+<text x="40" y="74" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">X</text>
+<text x="40" y="105" fill="#7dd3fc" font-size="9.5" text-anchor="middle">Food Sensor</text>
+<!-- Path 1: Direct Line -->
+<path d="M 54 62 L 180 35 L 320 35" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan2)" />
+<text x="180" y="27" fill="#7dd3fc" font-size="9" text-anchor="middle">Direct Line (Immediate)</text>
+<!-- Path 2: Delayed Line through Buffer Y -->
+<path d="M 54 78 L 140 105 L 180 105" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan2)" />
+<rect x="180" y="90" width="80" height="30" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
+<text x="220" y="109" fill="#7dd3fc" font-size="10" font-weight="bold" text-anchor="middle">1-Tick Delay</text>
+<path d="M 260 105 L 320 75" fill="none" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan2)" />
+<!-- Terminal AND Gate -->
+<path d="M 325 25 L 350 25 A 30 30 0 0 1 350 85 L 325 85 Z" fill="#1e293b" stroke="#10b981" stroke-width="1.8" />
+<text x="345" y="60" fill="#fff" font-size="11" font-weight="bold">AND</text>
+<!-- Output -->
+<line x1="380" y1="55" x2="480" y2="55" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrCyan2)" />
+<text x="430" y="45" fill="#6ee7b7" font-size="10.5" font-weight="bold" text-anchor="middle">Output (Sustained Only)</text>
+</svg>
+</div>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>💡 <strong class="text-slate-100 font-semibold">The Abstract Behavior:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Noise Filtering.</strong> Refusing to react to a brief flash or hiccup. The system only reacts when an incoming signal stays turned on long enough to prove it is genuine.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Noise Filtering.</strong> Refusing to react to a brief flash or hiccup. The system only triggers when an incoming signal remains active long enough to prove it is genuine.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>🌿 <strong class="text-slate-100 font-semibold">In Nature (Biology):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">**The Arabinose Sugar Switch in <em class="text-slate-200 italic">E. coli</em>.** Synthesizing digestive enzymes is expensive. If a single random molecule of sugar drifts past a bacterium, it ignores it. It only turns on its digestion factories if sugar remains present for several minutes continuously.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">**The Arabinose Sugar Switch in <em class="text-slate-200 italic">E. coli</em>.** Synthesizing digestive enzymes is metabolically expensive. If a single random molecule of sugar drifts past a bacterium, it ignores it. It turns on its enzyme factories only if sugar remains present for several minutes continuously.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>⚡ <strong class="text-slate-100 font-semibold">In Siliquarium (Digital Reality):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The Coherent Feed-Forward Loop (C1-FFL).</strong> Water turbulence causes brief, random 1-tick flashes of Stream A. A cell with a C1-FFL splits the incoming wire: one line goes straight to an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate, while the other goes through a delay gate. If a vent spike lasts only 1 tick, the delayed signal arrives too late, and the gate never fires—saving the cell from burning wasted Landauer heat tokens!</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The Coherent Feed-Forward Loop (C1-FFL).</strong> Water turbulence causes brief, random 1-tick flashes of Stream A. A cell with a C1-FFL splits the incoming wire: one line goes straight to an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate, while the other goes through a delay gate. If a vent spike lasts only 1 tick, the delayed signal arrives too late, and the gate never fires—saving the cell from burning wasted Landauer heat tokens.</p>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="22-the-did-it-change-edge-detector-incoherent-feed-forward-loop" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 The "Did It Change?" Edge Detector (Incoherent Feed-Forward Loop)</h3>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">   Chemical Sensor (X) ──┬────────────────► [ AND GATE ] ────► Output (Chemotaxis Kick)
-                         │                      ▲
-                         └─► [ Invert + Delay ]─┘</code></pre>
+<!-- Vector Schematic: I1-FFL Edge Detector -->
+<div class="my-4 p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex justify-center">
+<svg viewBox="0 0 540 140" class="w-full max-w-lg" style="font-family: system-ui, -apple-system, sans-serif;">
+<defs>
+<marker id="arrPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#a855f7" />
+</marker>
+</defs>
+<!-- Input Sensor -->
+<circle cx="40" cy="70" r="14" fill="#6b21a8" stroke="#c084fc" stroke-width="1.8" />
+<text x="40" y="74" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">X</text>
+<text x="40" y="105" fill="#d8b4fe" font-size="9.5" text-anchor="middle">Chemical Input</text>
+<!-- Path 1: Direct Line -->
+<path d="M 54 62 L 180 35 L 320 35" fill="none" stroke="#c084fc" stroke-width="2" marker-end="url(#arrPurple)" />
+<text x="180" y="27" fill="#d8b4fe" font-size="9" text-anchor="middle">Direct Line (Immediate)</text>
+<!-- Path 2: Inverting Delay Line -->
+<path d="M 54 78 L 130 105 L 160 105" fill="none" stroke="#c084fc" stroke-width="2" marker-end="url(#arrPurple)" />
+<rect x="160" y="90" width="115" height="30" rx="6" fill="#1e293b" stroke="#f43f5e" stroke-width="1.5" />
+<text x="217" y="109" fill="#fda4af" font-size="10" font-weight="bold" text-anchor="middle">Delay + NOT Invert</text>
+<path d="M 275 105 L 320 75" fill="none" stroke="#f43f5e" stroke-width="2" marker-end="url(#arrPurple)" />
+<!-- Terminal AND Gate -->
+<path d="M 325 25 L 350 25 A 30 30 0 0 1 350 85 L 325 85 Z" fill="#1e293b" stroke="#c084fc" stroke-width="1.8" />
+<text x="345" y="60" fill="#fff" font-size="11" font-weight="bold">AND</text>
+<!-- Output -->
+<line x1="380" y1="55" x2="495" y2="55" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrPurple)" />
+<text x="435" y="45" fill="#7dd3fc" font-size="10.5" font-weight="bold" text-anchor="middle">Pulse on Rise (dC/dt)</text>
+</svg>
+</div>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>💡 <strong class="text-slate-100 font-semibold">The Abstract Behavior:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Rate-of-Change Detection ($dc/dt$).</strong> Celebrating improvement while tuning out constant background levels. Firing a brief celebratory pulse whenever conditions get better, then immediately quieting down.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Rate-of-Change Detection ($dc/dt$).</strong> Responding to relative improvement while tuning out constant background levels. Firing a brief pulse whenever conditions get better, then immediately quieting down.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>🌿 <strong class="text-slate-100 font-semibold">In Nature (Biology):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Bacterial Navigation (Chemotaxis).</strong> A single bacterium is too tiny to feel a difference between its front and back. Instead, it measures time: <em class="text-slate-200 italic">"Is there more food right now than there was 1 second ago?"</em> If yes, it swims straight. If no, it tumbles randomly to find a new heading.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Bacterial Navigation (Chemotaxis).</strong> A bacterium is too small to sense concentration differences across its microscopic length. Instead, it measures time: <em class="text-slate-200 italic">"Is nutrient concentration higher right now than it was one second ago?"</em> If yes, it swims straight. If no, it tumbles to seek a new heading.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>⚡ <strong class="text-slate-100 font-semibold">In Siliquarium (Digital Reality):</strong>  </li>
 </ul>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The Incoherent Feed-Forward Loop (I1-FFL).</strong> An input wire splits: one path goes directly to an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate, while the other goes through an inverter that takes 1 tick to respond. When a nutrient pulse arrives, the output fires for exactly 1 tick before the delayed inverter clamps it shut. This creates a temporal derivative pulse used by mobile clades to steer toward the hydrothermal chimney.</p>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="23-the-cellular-memory-latch-bistable-flip-flop" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.3 The Cellular Memory Latch (Bistable Flip-Flop)</h3>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">   Set (Nutrient Pulse)   ───► [ GATE 1 ] ───┬──► State Output Q (Remembers ON)
-                                ▲            │
-                                └── Feedback ┘</code></pre>
+<!-- Vector Schematic: Bistable Latch -->
+<div class="my-4 p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex justify-center">
+<svg viewBox="0 0 520 150" class="w-full max-w-lg" style="font-family: system-ui, -apple-system, sans-serif;">
+<defs>
+<marker id="arrLatch" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#f59e0b" />
+</marker>
+</defs>
+<!-- Set Line -->
+<line x1="30" y1="40" x2="160" y2="40" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrLatch)" />
+<text x="90" y="30" fill="#fcd34d" font-size="10.5" font-weight="bold">Set Pulse</text>
+<!-- Gate 1 (Top) -->
+<rect x="170" y="25" width="80" height="35" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8" />
+<text x="210" y="47" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">GATE 1</text>
+<!-- Gate 2 (Bottom) -->
+<rect x="170" y="90" width="80" height="35" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8" />
+<text x="210" y="112" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">GATE 2</text>
+<!-- Cross Feedback Wires -->
+<path d="M 250 42 L 290 42 L 150 112 L 165 112" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="4 2" />
+<path d="M 250 108 L 290 108 L 150 48 L 165 48" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="4 2" />
+<!-- Output Line -->
+<line x1="250" y1="42" x2="450" y2="42" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrLatch)" />
+<text x="350" y="32" fill="#6ee7b7" font-size="11" font-weight="bold" text-anchor="middle">State Q (Locked = 1)</text>
+</svg>
+</div>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>💡 <strong class="text-slate-100 font-semibold">The Abstract Behavior:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Memory & Commitment.</strong> Locking into a new state and holding that memory forever, even after the event that triggered it has completely vanished.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Memory & Commitment.</strong> Locking into a new state and holding that memory indefinitely, even after the event that triggered it has completely vanished.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>🌿 <strong class="text-slate-100 font-semibold">In Nature (Biology):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Cell Differentiation & Bacterial Scars.</strong> When an embryonic cell decides to become a nerve cell, it stays a nerve cell for the rest of its life, even when the original chemical signal is washed away. Similarly, bacteria remember encounters with dangerous viral attacks.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Cell Differentiation & Epigenetic Locks.</strong> When an embryonic cell commits to becoming a skin cell, it remains a skin cell for the rest of its life, even when the original chemical signal has dissipated.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>⚡ <strong class="text-slate-100 font-semibold">In Siliquarium (Digital Reality):</strong>  </li>
 </ul>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The Cross-Coupled Latch.</strong> Two logic gates feed their outputs back into each other's inputs. When a single momentary fuel pulse arrives, the circuit flips its internal memory bit from <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">0</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code> and locks it there. This lets the organism "remember" food was found, keeping its metabolic pumps primed across long, quiet droughts.</p>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="24-the-biological-clock-the-repressilator-ring-oscillator" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.4 The Biological Clock (The Repressilator / Ring Oscillator)</h3>
-<pre class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-slate-200 shadow-inner"><code class="language-text">   [ NOT Gate 1 ] ────► [ NOT Gate 2 ] ────► [ NOT Gate 3 ]
-         ▲                                         │
-         └───────────── Circular Feedback ─────────┘</code></pre>
+<!-- Vector Schematic: Ring Oscillator -->
+<div class="my-4 p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex justify-center">
+<svg viewBox="0 0 520 140" class="w-full max-w-lg" style="font-family: system-ui, -apple-system, sans-serif;">
+<defs>
+<marker id="arrRing" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#10b981" />
+</marker>
+</defs>
+<!-- Gate 1 -->
+<rect x="50" y="35" width="70" height="30" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1.5" />
+<text x="85" y="54" fill="#6ee7b7" font-size="11" font-weight="bold" text-anchor="middle">NOT 1</text>
+<line x1="120" y1="50" x2="185" y2="50" stroke="#10b981" stroke-width="2" marker-end="url(#arrRing)" />
+<!-- Gate 2 -->
+<rect x="190" y="35" width="70" height="30" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1.5" />
+<text x="225" y="54" fill="#6ee7b7" font-size="11" font-weight="bold" text-anchor="middle">NOT 2</text>
+<line x1="260" y1="50" x2="325" y2="50" stroke="#10b981" stroke-width="2" marker-end="url(#arrRing)" />
+<!-- Gate 3 -->
+<rect x="330" y="35" width="70" height="30" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1.5" />
+<text x="365" y="54" fill="#6ee7b7" font-size="11" font-weight="bold" text-anchor="middle">NOT 3</text>
+<!-- Circular Feedback Wire -->
+<path d="M 400 50 L 440 50 L 440 105 L 25 105 L 25 50 L 45 50" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#arrRing)" />
+<text x="232" y="122" fill="#6ee7b7" font-size="10" font-family="monospace" text-anchor="middle">Endless Circular Inversion (Limit Cycle)</text>
+<!-- Output Ticker -->
+<line x1="400" y1="50" x2="480" y2="50" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrRing)" />
+<text x="450" y="40" fill="#7dd3fc" font-size="10" font-weight="bold">Clock Out</text>
+</svg>
+</div>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>💡 <strong class="text-slate-100 font-semibold">The Abstract Behavior:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Autonomous Rhythmic Pacing.</strong> Generating a steady heartbeat or metronome pulse without needing any outside clock to tell it when to tick.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Autonomous Rhythmic Pacing.</strong> Generating a steady heartbeat or metronome pulse without needing an external clock to tell it when to tick.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>🌿 <strong class="text-slate-100 font-semibold">In Nature (Biology):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Circadian Day/Night Rhythms & Heart Pacemakers.</strong> Cyanobacteria in the ocean predict sunrise hours before dawn using a molecular ring clock (<em class="text-slate-200 italic">KaiABC</em>), ramping up photosynthetic proteins right as the first light strikes.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Circadian Day/Night Rhythms & Heart Pacemakers.</strong> Cyanobacteria in the ocean anticipate dawn hours before sunrise using a molecular clock (<em class="text-slate-200 italic">KaiABC</em>), ramping up photosynthetic proteins right as the first light strikes.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>⚡ <strong class="text-slate-100 font-semibold">In Siliquarium (Digital Reality):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The Odd-Inverter Ring Oscillator.</strong> An odd number of inverters (3, 5, or 7 <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code> gates) wired in a continuous circle. Because the number of inverters is odd, the circuit can never settle on a single stable answer—it endlessly chases its own tail, creating a rhythmic square-wave pulse. Cells use this clock to wake up their porins right before the geothermal chimney geysers.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The Odd-Inverter Ring Oscillator.</strong> An odd number of inverters (3, 5, or 7 <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code> gates) wired in a circle. Because the number of inverters is odd, the circuit can never settle on a single permanent state—it endlessly chases its own tail, creating a rhythmic square-wave pulse that cells use to anticipate hydrothermal geyser cycles.</p>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="3-energy-matter-living-costs-the-inviolable-rules" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Energy, Matter & Living Costs: The Inviolable Rules</h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium is not an arcade video game where creatures get bonus points for looking interesting. Every living pore is governed by the iron laws of <strong class="text-slate-100 font-semibold">thermodynamics</strong>.</p>
-<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart LR
-    subgraph RulesOfLife[&quot;The Physical Grounding Rules&quot;]
-        R1[&quot;&lt;b&gt;Mitchell Battery&lt;/b&gt;&lt;br/&gt;Proton Motive Force (PMF)&lt;br/&gt;Tokens 0 to 100&quot;]
-        R2[&quot;&lt;b&gt;Landauer Heat Tax&lt;/b&gt;&lt;br/&gt;1 Token per Bit Flip&lt;br/&gt;Thinking Burns Energy&quot;]
-        R3[&quot;&lt;b&gt;Pattee Epistemic Cut&lt;/b&gt;&lt;br/&gt;DNA Safe vs Active Workshop&lt;br/&gt;Blueprint Stays Safe&quot;]
-        R4[&quot;&lt;b&gt;Closed Universe&lt;/b&gt;&lt;br/&gt;Zero Smuggling (ΔE = 0)&lt;br/&gt;Every Joule Accounted For&quot;]
-    end</div>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium is an authentic biophysical simulation. Every living pore is governed by the universal laws of <strong class="text-slate-100 font-semibold">thermodynamics</strong>.</p>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="31-natures-battery-chemiosmotic-proton-gradients" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.1 Nature's Battery (Chemiosmotic Proton Gradients)</h3>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
@@ -1258,7 +1513,7 @@
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>💡 <strong class="text-slate-100 font-semibold">The Abstract Behavior:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Separating Instructions from Action.</strong> Keeping the master reference manual locked safely away in a fireproof archive where it experiences zero wear and tear, while disposable mechanical machines do the noisy, dangerous physical labor.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Separating Instructions from Action.</strong> Keeping the master reference manual locked safely away in an archive where it experiences zero wear and tear, while disposable mechanical machines do the noisy, dangerous physical labor.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>🌿 <strong class="text-slate-100 font-semibold">In Nature (Biology):</strong>  </li>
 </ul>
@@ -1294,18 +1549,10 @@
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>⚡ <strong class="text-slate-100 font-semibold">In Siliquarium (Digital Reality):</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The First-Law Invariant Badge ($\Delta E \equiv 0.000, \Delta M \equiv 0.000$).</strong> The simulation engine audits every single Joule and atom every single tick. Energy injected from the central plume minus energy stored in cellular batteries, carried in pelagic spores, or dissipated as Landauer heat must equal exactly $0.000$. If a bug created even $+0.001$ unphysical energy, all 25 automated test stages would immediately fail!</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The First-Law Invariant Badge ($\Delta E \equiv 0.000, \Delta M \equiv 0.000$).</strong> The simulation engine audits every single Joule and atom every single tick. Energy injected from the central plume minus energy stored in cellular batteries, carried in pelagic spores, or dissipated as Landauer heat must equal exactly $0.000$.</p>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="4-seafloor-ecology-cataclysms-what-the-geological-shocks-mean" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. Seafloor Ecology & Cataclysms: What the Geological Shocks Mean</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When you use the <strong class="text-slate-100 font-semibold">Geothermal Shaker</strong> or watch catastrophic events occur in the caldera, you are not just seeing visual eye-candy. Every geological shock represents a specific <strong class="text-slate-100 font-semibold">computational stress test</strong> on living genomes.</p>
-<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart TD
-    subgraph Cataclysms[&quot;Geological Shocks as Computational Stressors&quot;]
-        E1[&quot;&lt;b&gt;Magmatic Tremor&lt;/b&gt;&lt;br/&gt;Shatters pore walls • 80% mortality bottleneck&quot;]
-        E2[&quot;&lt;b&gt;Lava Incursion&lt;/b&gt;&lt;br/&gt;Pores sealed with basalt • Land lost permanently&quot;]
-        E3[&quot;&lt;b&gt;Boiling Thermal Surge&lt;/b&gt;&lt;br/&gt;Massive fuel burst + High bit-flip noise&quot;]
-        E4[&quot;&lt;b&gt;Cryogenic Incursion&lt;/b&gt;&lt;br/&gt;Clock speed drops 75% • Hibernation test&quot;]
-        E5[&quot;&lt;b&gt;Toxin Cloud&lt;/b&gt;&lt;br/&gt;Poison spikes • Punishes unshielded circuits&quot;]
-    end</div>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="41-magmatic-tremors-earthquakes-fault-fractures" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.1 Magmatic Tremors (Earthquakes & Fault Fractures)</h3>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
@@ -1339,7 +1586,7 @@
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>💡 <strong class="text-slate-100 font-semibold">The Abstract Behavior:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">A Golden Opportunity Combined with Chaos.</strong> A sudden flood of abundant resources accompanied by high static noise and the risk of overheating.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">A Resource Burst Accompanied by Noise.</strong> A sudden flood of abundant resources accompanied by high static noise and the risk of overheating.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>🌿 <strong class="text-slate-100 font-semibold">In Nature (Biology):</strong>  </li>
 </ul>
@@ -1379,13 +1626,6 @@
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="5-teamwork-multicellular-life-from-single-cells-to-colonies" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Teamwork & Multicellular Life: From Single Cells to Colonies</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Life did not remain solitary single cells forever. Living pores evolved to cooperate, form tissues, and coordinate multicellular bodies.</p>
-<div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">flowchart TD
-    subgraph Teamwork[&quot;Multicellular Morphogenesis &amp; Ecology&quot;]
-        C1[&quot;&lt;b&gt;Syncytial Conduits&lt;/b&gt;&lt;br/&gt;Sharing food across pores&quot;]
-        C2[&quot;&lt;b&gt;French Flag Patterning&lt;/b&gt;&lt;br/&gt;Different jobs based on location&quot;]
-        C3[&quot;&lt;b&gt;Slime Mold Treadmilling&lt;/b&gt;&lt;br/&gt;Crawling across the seafloor&quot;]
-        C4[&quot;&lt;b&gt;Trophic Predation&lt;/b&gt;&lt;br/&gt;Predators, prey, and detritivores&quot;]
-    end</div>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="51-sharing-pipelines-syncytial-conduits" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5.1 Sharing Pipelines (Syncytial Conduits)</h3>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
