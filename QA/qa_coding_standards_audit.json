@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-13T20:50:56.717Z",
-  "totalFiles": 99,
+  "timestamp": "2026-11-14T03:08:40.633Z",
+  "totalFiles": 102,
   "forbiddenFileViolations": [],
   "zeroDomViolations": [],
   "anyTypeUsages": [],
@@ -17,8 +17,8 @@
     },
     {
       "file": "src/main.ts",
-      "lineCount": 2719,
-      "overBudget": 2419
+      "lineCount": 2769,
+      "overBudget": 2469
     },
     {
       "file": "src/ui/ChronicleTourGuide.ts",
@@ -109,6 +109,16 @@
       "file": "src/ui/HUDController.ts",
       "lineCount": 479,
       "overBudget": 179
+    },
+    {
+      "file": "src/ui/PedagogicalCourseRegistry.ts",
+      "lineCount": 476,
+      "overBudget": 176
+    },
+    {
+      "file": "src/ui/PedagogicalCourseController.ts",
+      "lineCount": 303,
+      "overBudget": 3
     },
     {
       "file": "src/visualizers/CircuitTopology.ts",

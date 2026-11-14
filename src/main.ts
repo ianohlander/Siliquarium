@@ -40,6 +40,7 @@ import { TaxonomyNomenclature } from './core/paleontology/TaxonomyNomenclature.j
 import { RemoteSimulationClient } from './engine/remote/RemoteSimulationClient.js';
 import { AbyssalArenaController } from './ui/AbyssalArenaController.js';
 import { DeepLabController } from './ui/DeepLabController.js';
+import { PedagogicalCourseController } from './ui/PedagogicalCourseController.js';
 import { BrowserDownloadBridge } from './ui/BrowserDownloadBridge.js';
 import { BrowserLocalStorageProvider } from './ui/BrowserLocalStorageProvider.js';
 import { SimulationSnapshotManager } from './engine/storage/SimulationSnapshotManager.js';
@@ -68,6 +69,7 @@ class SiliquariumApp {
   private readonly branchModal: EvolutionaryBranchModal;
   private readonly arenaController: AbyssalArenaController;
   private readonly deepLabController: DeepLabController;
+  private readonly courseController: PedagogicalCourseController;
   private activePortal: 'deeplab' | 'arena' = 'deeplab';
 
   private readonly seafloorCanvas: HTMLCanvasElement;
@@ -663,6 +665,7 @@ class SiliquariumApp {
 
     this.deepLabController = new DeepLabController(this.world, this.naturalistAssistant);
     this.arenaController = new AbyssalArenaController(this.world, AudioSynthesizer.getInstance());
+    this.courseController = this.initCourseController();
 
     this.bindCanvasInteractions();
     this.bindResize();
@@ -1802,6 +1805,53 @@ class SiliquariumApp {
     if (this.activeWorkspaceMode !== 'safari') {
       this.closeMicroscope();
     }
+  }
+
+  private initCourseController(): PedagogicalCourseController {
+    const controller = new PedagogicalCourseController({
+      onFocusCaldera: () => {
+        this.camera.smoothFlyTo(0, 0, 1.5, 16.0);
+        this.camera.setTarget(0, 0, 0);
+      },
+      onSelectSampleCell: () => {
+        const occ = this.world.getAllPores().find(p => p.getState() === PoreState.OCCUPIED)?.coord;
+        if (occ) {
+          this.selectedPoreCoord = occ;
+          this.seafloorRenderer.setSelectedCoord(occ);
+          const worldPos = this.seafloorRenderer.axialToWorld(occ);
+          this.camera.smoothFlyTo(worldPos.x, worldPos.y, worldPos.z, 10.0);
+        }
+      },
+      onCinematicFocus: () => this.focusOnSelected(),
+      onOpenMicroscope: () => this.openMicroscope(),
+      onOpenStats: () => this.hud.toggleStatsPanel(),
+      onOpenNaturalist: () => this.naturalistAssistant.open(),
+      onOpenBranches: () => this.branchModal.open(),
+      onSetWorkspaceMode: (mode) => this.setWorkspaceMode(mode),
+      onCycleLenses: () => {
+        const recorder = this.world.getKinematicsRecorder();
+        const lenses: LensViewMode[] = ['hybrid', 'lattice', 'plasmodium', 'vascular', 'potential'];
+        const currentIdx = lenses.indexOf(recorder.getLensMode());
+        const nextLens = lenses[(currentIdx + 1) % lenses.length];
+        recorder.setLensMode(nextLens);
+        this.hud.updateActiveLens(nextLens);
+      },
+      onShowToast: (msg) => this.naturalistAssistant.showToast(msg)
+    });
+
+    document.getElementById('hud-course-btn')?.addEventListener('click', () => {
+      controller.toggle();
+    });
+    document.getElementById('docs-item-open-course')?.addEventListener('click', () => {
+      this.hud.closeDocsPanel();
+      controller.show();
+    });
+
+    return controller;
+  }
+
+  public getCourseController(): PedagogicalCourseController {
+    return this.courseController;
   }
 
   private initWorkspaceModes(): void {

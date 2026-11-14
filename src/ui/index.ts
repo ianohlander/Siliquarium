@@ -19,3 +19,6 @@ export * from './ChronicleTourGuide.js';
 export * from './ChronicleAnalysisLabModal.js';
 export * from './AbyssalArenaController.js';
 export * from './DeepLabController.js';
+export * from './PedagogicalCourseRegistry.js';
+export * from './PedagogicalCourseHtmlTemplate.js';
+export * from './PedagogicalCourseController.js';
