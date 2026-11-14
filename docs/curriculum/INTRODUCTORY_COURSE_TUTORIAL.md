@@ -17,6 +17,12 @@
 >
 > Each laboratory module employs the **Predict–Observe–Explain (POE)** framework: formulating explicit hypotheses based on thermodynamic constraints, testing them empirically within the 3D lattice, and analyzing the resulting phenotypic behaviors.
 
+![Figure 0.1: Interactive Pedagogical Course Curriculum Modal & Practicum Navigator](./images/tutorial_course_modal.png)
+
+> [!NOTE]
+> **Observational Callout 0.1: Interactive Laboratory Course Controller**  
+> The on-board pedagogical curriculum modal provides direct access to structured modules across digital biophysics, Boolean genomics, closed-universe thermodynamics, and spatial morphogenesis. Each module integrates structured theoretical introductions, step-by-step action dispatchers linked to live simulation DOM hooks, and empirical Predict–Observe–Explain (POE) formative checkpoints.
+
 ---
 
 ```mermaid
@@ -157,9 +163,22 @@ Step 4: Select an emerald green pore; press [F] for Cinematic Focus.
      - **Emerald Green:** Healthy, homeostatic living silicoid ($E > 60$).
      - **Amber Gold:** Starving silicoid under energetic stress ($E < 30$).
      - **Muted Grey:** Inert detrital carcass (dead silicoid undergoing remineralization).
+
+![Figure 1.1: 3D Abyssal Bathymetric Caldera & Hydrothermal Chimney Complex at Coordinates (0, 0, 0)](./images/practicum1_seafloor_overview.png)
+
+> [!NOTE]
+> **Observational Callout 1.1: Hydrothermal Chimney & Spatial Zonation**  
+> The 3D abyssal seabed view reveals the central hydrothermal caldera at coordinates $[0, 0, 0]$ venting high-enthalpy thermal plumes upward into the water column. The surrounding hexagonal lattice displays mineralized basalt barriers ($z \le 0$), permeable fluid columns ($z \ge 1$), and emergent lithotrophic silicoid colonies graded by thermal flux.
+
 4. **Cinematic Inspection:** Click directly on an emerald green pore. Notice the pulsing gold targeting reticle and floating pin badge. Press <kbd>F</kbd> on your keyboard:
    - The camera glides forward in a smooth cinematic ease-in flight.
    - Surrounding walls dissolve into proximity transparency, revealing the logic gate chips embedded inside the stone!
+
+![Figure 1.2: High-Resolution Cinematic Pore Focus with In-Situ Logic Gate Visualization and Target Reticle](./images/practicum1_pore_focus.png)
+
+> [!NOTE]
+> **Observational Callout 1.2: Cinematic Silicoid Inspection Reticle**  
+> Engaging Cinematic Focus (<kbd>F</kbd>) smoothly glides the camera directly onto the targeted silicoid pore. Subsurface basalt barriers fade into proximity transparency, highlighting the glowing gold targeting reticle, live pore coordination badge, and embedded CMOS logic gate netlist operating within the mineral chamber.
 
 > [!TIP]
 > **Predict–Observe–Explain Exercise 1.1**  
@@ -185,6 +204,13 @@ Step 4: Manually toggle Stream A, Stream B, and Toxin T to record output respons
    - **Input Porins (Left):** Chemical receptor gates sensitive to vent bitstreams (`Stream A`, `Stream B`, and toxic `Stream T`).
    - **Catalytic Gates (Center):** Evolved Boolean gates (`AND`, `OR`, `NOT`, `XOR`). Watch the animated electron dots traveling along the interconnect wires.
    - **Output Sinks (Right):** Metabolic drivers (`Battery Charge`, `Biomass Synthesis`, and `Septum Cleavage`).
+
+![Figure 2.1: Docked Circuit Microscope: Quiescent Genome Tape & Active Boolean Netlist](./images/practicum2_microscope_schematic.png)
+
+> [!NOTE]
+> **Observational Callout 2.1: Circuit Microscope Schematic & Epistemic Cut**  
+> The docked Circuit Microscope displays Howard Pattee's Epistemic Cut in real time: the quiescent 60-bit genome tape remains unmutated and inert at the top ribbon, while the lower workshop actively evaluates input porins (`Stream A`, `Stream B`, toxic `Stream T`), catalytic Boolean logic gates (`AND`, `OR`, `NOT`, `XOR`), and metabolic battery sinks.
+
 3. **Switch to Dynamics & Testbench:** Click the **Dynamics & Testbench** tab at the top of the microscope.
 4. **Conduct Signal Injection:**
    - Click the `Stream A` button to toggle its simulated value from `0` to `1`.
@@ -194,6 +220,12 @@ Step 4: Manually toggle Stream A, Stream B, and Toxin T to record output respons
    - Observe how the output channels respond to each input permutation.
    - Record the **Energy Yield Multiplier** and the **Landauer Power Dissipation Rating**.
    - Note the **Weisfeiler-Lehman (WL) Graph Hash**—the unique topological fingerprint of this circuit's wiring.
+
+![Figure 2.2: Interactive Signal Injection Testbench & Live Boolean Truth Table Analysis](./images/practicum2_microscope_testbench.png)
+
+> [!NOTE]
+> **Observational Callout 2.2: Signal Injection Testbench & Truth Table Evaluation**  
+> The Dynamics & Testbench pane allows manual toggling of chemical bitstreams (`Stream A`, `Stream B`, `Toxin T`). Live signal propagation reveals instantaneous output states, metabolic battery charge deltas, Landauer power dissipation ratings, and the Weisfeiler-Lehman (WL) graph topological fingerprint.
 
 > [!IMPORTANT]
 > **Predict–Observe–Explain Exercise 2.1**  
@@ -225,6 +257,12 @@ Step 4: Explain why Landauer heat dissipation prevents runaway exponential explo
    - Energy is stored as discrete integer tokens in `PoreBattery`.
    - Energy is consumed during cytokinesis (building daughter pore walls).
    - Energy is permanently dissipated as Landauer thermodynamic heat whenever gates toggle.
+
+![Figure 3.1: Ecosystem Telemetry Panel & Inviolable First-Law Conservation Audit](./images/practicum3_ecosystem_stats_invariant.png)
+
+> [!NOTE]
+> **Observational Callout 3.1: Closed-Universe First-Law Invariant Telemetry**  
+> The Ecosystem Statistics panel provides continuous macro-biomass census tracking (living cells, pelagic spores, detrital carcasses) and audits the closed-universe thermodynamic ledger. The highlighted conservation invariant ($\Delta E \equiv 0.000$, $\Delta M \equiv 0.000$) mathematically guarantees that zero unphysical energy or matter is smuggled into the simulation.
 
 > [!NOTE]
 > **Formative Concept Check 3.1**  
@@ -258,6 +296,12 @@ Step 4: Toggle to 'Guided Safari' mode to observe multicellular behaviors.
    - Observe its specialized morphology (e.g., purple syncytial streaming conduits connecting sister pores).
 5. **Switch to Guided Safari Mode:** In the top workspace mode bar, click **Guided Safari** (`btn-mode-safari`). Relax and watch curated viewpoints showcase emerging clades across the seabed.
 
+![Figure 4.1: Naturalist Assistant Dashboard: Phenotypic Motif Gallery & Shannon Entropy Radar](./images/practicum4_naturalist_assistant.png)
+
+> [!NOTE]
+> **Observational Callout 4.1: Autonomous Paleontological Paleocensus & Phenotypic Discovery**  
+> The Naturalist Assistant aggregates macro-evolutionary metrics, including current geological era, Shannon phenotypic diversity entropy ($H$), and an exemplar card gallery of evolved adaptations. Selecting **Fly To** executes an automated camera trajectory directly to living specimens exhibiting specialized motifs such as bistable flip-flops or syncytial multi-pore networks.
+
 ---
 
 ## Part III: Advanced Macro-Evolution, Paleontology & Bio-CAD
@@ -282,6 +326,12 @@ Step 4: Analyze phenotypic divergence across historical epochs.
    - **Stop 2: Lewis Wolpert's French Flag Morphogen Gradient (`DIFFERENTIATION`):** Observe how cells in the same clonal colony express different logic circuits based on their distance from the vent signal source.
    - **Stop 3: Trophic Predation Warfare:** Witness a predatory clade deploying catabolic lysis beams to drain energy from neighboring lithotrophs.
 4. **Stephen Jay Gould's Thought Experiment:** Can life repeat itself? Scrub back to tick 500, fork the simulation, and observe whether the exact same clades emerge.
+
+![Figure 5.1: Chronicle Flight Recorder: Bidirectional Scrubber & Evolutionary Milestone Tour Stops](./images/practicum5_chronicle_playback.png)
+
+> [!NOTE]
+> **Observational Callout 5.1: Historical Kinematics & Temporal Rewind**  
+> Operating the Chronicle flight recorder scrubber docks the playback transport bar across the viewport. The bidirectional historical buffer allows exact temporal scrubbing to revisit critical macro-evolutionary milestones, including multicellular slime mold motility, Lewis Wolpert morphogen gradients, and trophic predation divergence.
 
 ---
 
@@ -311,6 +361,12 @@ Step 4: Use the Inoculator Tool to seed synthetic Lenski strains into your custo
    - Click inside your subterranean trench to deposit a living founder cell.
 5. **Observe Micro-Allopatric Speciation:** Unpause the simulation. Watch the isolated chasm colony diverge genetically from the open-seafloor clades!
 
+![Figure 6.1: Siliquarium Design Studio: 3D Multi-Layer Bathymetric CAD Palette & Geomorphology Sculpting](./images/practicum6_design_studio.png)
+
+> [!NOTE]
+> **Observational Callout 6.1: 3D Bathymetric CAD & Environmental Stratification**  
+> The Siliquarium Design Studio empowers experimental manipulation of seafloor geology. The palette provides multi-layer brushes from subterranean fault excavation ($z=-1$) to vertical seamount spire stacking ($z=0 \dots 7$), alongside synthetic inoculators to test ecological isolation and allopatric speciation.
+
 ---
 
 ### Practicum 7: Counterfactual Branching & Academic Data Export
@@ -332,12 +388,25 @@ Step 4: In the Deep Lab portal, export Telemetry CSV, World JSON, and Practicum 
 3. **Switch Between Parallel Universes:**
    - Use the branch manager to switch back and forth between `main` and `experiment-hyperthermal`.
    - Observe how evolutionary adaptation diverges under different environmental histories.
+
+![Figure 7.1: Evolutionary Version Control: Directed Acyclic Graph (DAG) Timeline Branching](./images/practicum7_evolutionary_branching.png)
+
+> [!NOTE]
+> **Observational Callout 7.1: Counterfactual DAG Branching & Git-for-Alife**  
+> The Evolutionary Version Control dialog visualizes simulation trajectories as a Directed Acyclic Graph (DAG). Users can create named historical checkpoints, branch into alternative environmental regimes (e.g. baseline vs boiling thermal crisis), and switch between parallel evolutionary universes without state pollution.
+
 4. **Export Scientific Artifacts:**
    - Switch to **The Deep Lab Portal** (`btn-portal-deeplab`).
    - Click **Export Research Artifacts**:
      - `Export Telemetry CSV`: Downloads high-resolution time-series data (population count, Shannon entropy, enthalpy flux, Landauer dissipation).
      - `Export World State JSON`: Full serialized snapshot of the 3D lattice for external analysis in Python/R.
      - `Export Practicum Report`: Auto-generates a formatted academic laboratory report summarizing your session.
+
+![Figure 7.2: Deep Lab Academic Data Export Toolbar: High-Resolution Telemetry CSV, World JSON & Practicum Reports](./images/practicum7_deeplab_export.png)
+
+> [!NOTE]
+> **Observational Callout 7.2: Deep Lab Research Artifact Export Suite**  
+> The Deep Lab portal export suite generates publication-grade data deliverables, including time-series telemetry CSV logs, complete serialized world state snapshots in JSON format, and auto-compiled academic laboratory reports suitable for downstream statistical computation in Python and R.
 
 ---
 
