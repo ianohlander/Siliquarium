@@ -1368,6 +1368,7 @@ export class NaturalistAssistant {
     `;
 
     this.fieldScopeEl.classList.remove('hidden');
+    document.body.classList.add('has-field-scope-active');
   }
 
   public closeFieldScope(): void {
@@ -1377,6 +1378,7 @@ export class NaturalistAssistant {
       this.fieldScopeEl.style.top = '';
       this.fieldScopeEl.style.right = '';
     }
+    document.body.classList.remove('has-field-scope-active');
     this.currentScopeExemplar = null;
     if (this.wasRunningBeforeOpen && this.loop && !this.loop.isRunning()) {
       this.loop.start();

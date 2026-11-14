@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-14T20:46:43.150Z",
+  "timestamp": "2026-11-14T22:25:38.218Z",
   "totalFiles": 102,
   "forbiddenFileViolations": [],
   "zeroDomViolations": [],
@@ -32,8 +32,8 @@
     },
     {
       "file": "src/ui/NaturalistAssistant.ts",
-      "lineCount": 2051,
-      "overBudget": 1751
+      "lineCount": 2053,
+      "overBudget": 1753
     },
     {
       "file": "src/ui/ChroniclePlaybackBar.ts",

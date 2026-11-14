@@ -5040,12 +5040,23 @@
     body.mode-safari #lab-drawer,
     body.mode-safari #lab-backdrop,
     body.mode-safari #microscope-panel,
-    body.mode-safari .mode-lab-only {
+    body.mode-safari .mode-lab-only,
+    body.mode-safari .floating-visual-key-pill,
+    body.has-field-scope-active .floating-visual-key-pill,
+    body:has(#naturalist-field-scope:not(.hidden)) .floating-visual-key-pill {
       display: none !important;
     }
 
     body.mode-safari .mode-safari-cluster {
       display: flex !important;
+    }
+
+    body.mode-safari .transport-bar {
+      left: calc((100vw - 50vw) / 2) !important;
+      transform: translateX(-50%) !important;
+      max-width: calc(50vw - 32px) !important;
+      bottom: 12px !important;
+      z-index: 20 !important;
     }
 
     @media (max-width: 1120px) {

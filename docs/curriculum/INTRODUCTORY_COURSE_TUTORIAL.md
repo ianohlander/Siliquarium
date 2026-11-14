@@ -119,6 +119,10 @@ How does an electronic logic gate represent biochemistry? Consider an allosteric
 
 In Siliquarium, an organism's metabolism is an interconnected directed graph of CMOS logic gates. When environmental pulses pass through porin channels in the pore wall, they propagate through this catalytic circuit. If the circuit's Boolean logic matches the hydrothermal rhythm, it generates chemical work.
 
+> [!TIP]
+> **Comprehensive Tri-Domain Reference Guide**  
+> For an exhaustive, formal mapping of all logic gates, Uri Alon network motifs (C1-FFLs, I1-FFLs, bistable latches, repressilators), tectonic stressors, and multicellular structures across **Abstract Algebra**, **Prebiotic Biochemistry**, and **Digital CPU Physics**, see the dedicated [Tri-Domain Translation Matrix](../REALITY_TO_SIMULATION_TRANSLATION_MATRIX.html).
+
 #### 2.2 The Peter Mitchell Chemiosmotic Battery
 In 1961, Peter Mitchell discovered that life powers itself using an electrochemical capacitor called the **Proton Motive Force** ($\Delta p \approx 200\text{ mV}$). In Siliquarium, every pore contains a `PoreBattery` register ($0 \dots 100\text{ tokens}$):
 - **Basal Metabolic Tax:** Maintaining cellular integrity consumes $1\text{ token}$ every 10 ticks.
