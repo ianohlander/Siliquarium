@@ -1,33 +1,31 @@
-# 🏛️ The Tri-Domain Translation Matrix
-## *Grounding Biological Metaphor in Abstract Algebra, Non-Equilibrium Thermodynamics, and Digital Computation*
+# 🗺️ The Tri-Domain Translation Matrix
+## *A Plain-English Conceptual Guide to How Nature, Logic, and Siliquarium Connect*
 
 ---
 
 > [!NOTE]
-> ### 🔬 Foundational Epistemic Philosophy: The Tri-Domain Modeling Paradigm
-> In computational artificial life and theoretical biophysics, a pervasive hazard is the conflation of **biological metaphor** with **computational execution**. In *Siliquarium*, there is no literal liquid water, no thermodynamic Kelvin temperature, and no physical polypeptide chain.
-> 
-> However, as theoretical biophysicist Howard Pattee (1972) and information theorist Christoph Adami (2002) established, the fundamental principles of life—autopoiesis, symbolic memory, non-equilibrium thermodynamic dissipation, homeostatic regulation, and natural selection—are **substrate-neutral**. 
+> ### 💡 What Is This Guide?
+> When you watch Siliquarium, you are looking at a living simulation where **every single element exists simultaneously in three worlds**:
 >
-> Just as **abstract algebra** studies mathematical structures (groups, rings, fields, and morphisms) that instantiate identically across number theory, geometry, and cryptography, living computation comprises formal informational and dynamical operators that instantiate across both **carbon biochemistry** and **silicon simulation**.
+> 1. 💡 **The Abstract Behavior (The General Concept):** The universal idea or pattern—such as *filtering out brief noise*, *remembering a past event*, *sharing resources*, or *surviving a sudden shock*.
+> 2. 🌿 **In Nature (The Biological Mirror):** How real living cells, bacteria, and ancient deep-sea hydrothermal vents accomplish this using chemistry, enzymes, and cell membranes.
+> 3. ⚡ **In Siliquarium (The Digital Reality):** Exactly what is happening inside the computer—the logic gates, energy tokens, and code executing beneath the visual surface.
 >
-> This document formalizes the **Tri-Domain Translation Matrix**, mapping every element of the simulation across three distinct, rigorously defined realms:
-> 1. **Domain 1: The Abstract / Formal Concept:** The mathematical structure, algebraic operator, state-space manifold, or thermodynamic conservation law.
-> 2. **Domain 2: The Biological Instantiation:** The physical, prebiotic, or biochemical realization in deep-sea alkaline hydrothermal chimneys (*Michael J. Russell*), chemiosmotic capacitors (*Peter Mitchell*), and gene regulatory networks (*Uri Alon*).
-> 3. **Domain 3: The Digital Simulation Actuality:** The exact memory layout, AST graph traversal, token balance, and algorithmic execution in the Siliquarium CPU kernel.
+> You do not need a degree in biochemistry or computer engineering to understand Siliquarium. This guide explains each concept in plain, gentle language with concrete examples across all three domains.
 
 ---
 
 ```mermaid
 flowchart TD
-    subgraph Triad["The Tri-Domain Translation Architecture"]
-        D1["<b>Domain 1: Abstract Structure</b><br/>Algebraic Operators • State-Space Attractors<br/>Thermodynamic Monoids • Graph Invariants"]
-        D2["<b>Domain 2: Biological Nature</b><br/>Enzyme Kinetics • Alkaline Vents (Russell)<br/>Proton Motive Force (Mitchell) • GRN Motifs (Alon)"]
-        D3["<b>Domain 3: Digital Reality</b><br/>Hexagonal Pointers • CMOS Logic ASTs<br/>Landauer Ledgers (ΔE = 0.000) • WL Hashes"]
+    subgraph Rosetta["The Three Worlds of Siliquarium"]
+        direction TB
+        D1["<b>1. The Abstract Concept</b><br/>The universal pattern or behavior<br/><i>(e.g., Filtering Noise, Remembering Past Events, Pacing a Rhythm)</i>"]
+        D2["<b>2. How Nature Does It</b><br/>Real biological chemistry & cellular biology<br/><i>(e.g., Enzymes, Bacterial Chemotaxis, Mitchell Proton Batteries)</i>"]
+        D3["<b>3. How Siliquarium Does It</b><br/>Concrete digital rules running in the CPU<br/><i>(e.g., Logic Gate Netlists, Landauer Heat Tokens, Pore Hexagons)</i>"]
         
-        D1 <===>|"Biochemical Instantiation"| D2
-        D1 <===>|"Algorithmic Instantiation"| D3
-        D2 <.-.->|"Substrate-Neutral Isomorphism"| D3
+        D1 -->|"Realized in Chemistry"| D2
+        D1 -->|"Realized in Code"| D3
+        D2 -.->|"Mirror of Reality"| D3
     end
     
     style D1 fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
@@ -37,352 +35,384 @@ flowchart TD
 
 ---
 
-## 1. Elementary Logic Gates & Catalytic Operators (Digital Enzymes)
+## 1. Decision-Making & Logic: The Cellular Brain
 
-In classical biochemistry, enzymes are not mystical fluids; they are spatial molecular logic gates that modulate activation barriers. In Siliquarium, Boolean logic gates serve as **digital enzymes** operating on discrete bitstreams.
+Before life had complex brains, single cells had to make intelligent decisions: *When should I eat? How do I avoid poison? How do I know when it is time to divide?* 
 
-```mermaid
-flowchart LR
-    subgraph LogicEnzymes["Elementary Catalytic Operations"]
-        direction TB
-        E1["<b>NOT Gate</b><br/>Allosteric Inversion • Poison Filter"]
-        E2["<b>AND Gate</b><br/>Co-Factor Substrate Coupling"]
-        E3["<b>OR Gate</b><br/>Promiscuous Isoenzyme Redundancy"]
-        E4["<b>XOR Gate</b><br/>Parity Check & Dynamic Switch"]
-    end
-```
-
-### 1.1 The Identity / Buffer Operation (Passive Porin Conductance)
-- **Domain 1: Abstract Structure:** The identity morphism $\text{id}: \{0, 1\} \to \{0, 1\}$ where $\text{id}(x) = x$. Represents passive signal propagation without logical transformation.
-- **Domain 2: Biological Nature:** Non-gated membrane porin channels (such as outer membrane OmpF channels in bacteria) that permit passive diffusion of small hydrophilic nutrients down electrochemical concentration gradients.
-- **Domain 3: Digital Actuality:** A direct pointer reference or wire node copying the current bit value of an environmental porin pin (`Stream A` or `Stream B`) directly into an internal circuit bus without toggling an intermediate logic gate. Burns $0$ Landauer switching tokens.
-
-### 1.2 The NOT / Inverter Operation (Allosteric Inhibition & Chemical Antitoxin Clamping)
-- **Domain 1: Abstract Structure:** The unary Boolean negation operator $\neg: \{0, 1\} \to \{1, 0\}$, defined as $\neg x = 1 - x$. In dynamical systems, it acts as a negative sign inversion creating inhibitory control.
-- **Domain 2: Biological Nature:** Allosteric enzyme inhibition. An effector molecule binds to an allosteric regulatory site, inducing a conformational shift that deactivates the catalytic domain. Crucial for heavy-metal and toxin resistance: when toxic species ($\text{Cu}^{2+}, \text{Cd}^{2+}, \text{H}_2\text{S}$) are detected, the cell down-regulates or shuts uptake porins.
-- **Domain 3: Digital Actuality:** An evaluated `NOT` gate node in `PoreWorkshop.ts`. When `toxinT = 1` pulses on the boundary pin, the inverter outputs `0`, preventing high-voltage clamp discharge into the metabolic sink. If the input flips ($0 \to 1$ or $1 \to 0$), the gate debits exactly $1$ Landauer switching token from `PoreBattery`.
-
-### 1.3 The AND / Conjunction Operation (Multi-Substrate Enzymes & Co-Factor Gating)
-- **Domain 1: Abstract Structure:** The binary conjunction operator $\land: \{0, 1\} \times \{0, 1\} \to \{0, 1\}$, where $x \land y = 1 \iff x = y = 1$. In probability theory, it represents the joint intersection of independent events.
-- **Domain 2: Biological Nature:** Bi-substrate catalytic enzymes (e.g., citrate synthase, ATP synthases) that require both an organic substrate (oxaloacetate) and an energy-rich cofactor (acetyl-CoA) bound simultaneously in the active site before the transition state can be stabilized.
-- **Domain 3: Digital Actuality:** An `AND` gate node in the circuit netlist evaluated during `PoreWorkshop.evaluate()`. It requires simultaneous high states on both input wires (e.g. `Stream A = 1` and `Stream B = 1`). When satisfied, its output fires to activate `BatteryChargeSink`, crediting $+2$ energy tokens into `PoreBattery`.
-
-### 1.4 The OR / Disjunction Operation (Isoenzymes & Promiscuous Metabolic Pathways)
-- **Domain 1: Abstract Structure:** The binary disjunction operator $\lor: \{0, 1\} \times \{0, 1\} \to \{0, 1\}$, where $x \lor y = 0 \iff x = y = 0$. Represents alternative functional pathways.
-- **Domain 2: Biological Nature:** Promiscuous metabolic enzymes and redundant isoenzymes (e.g., hexokinase and glucokinase). If glucose is unavailable, the cell can metabolize fructose or galactose via alternative enzymatic pathways to sustain glycolysis.
-- **Domain 3: Digital Actuality:** An `OR` gate node in `PoreWorkshop.ts`. Fires high if *either* upstream channel pulses high. This provides metabolic robustness against fluctuating hydrothermal vent rhythms, ensuring battery charging continues even if one geochemical stream fails.
-
-### 1.5 The XOR / Exclusive-OR Operation (Parity Checkers & Phase-Locked Switches)
-- **Domain 1: Abstract Structure:** The modulo-2 addition operator $\oplus: \{0, 1\} \times \{0, 1\} \to \{0, 1\}$, where $x \oplus y = (x \land \neg y) \lor (\neg x \land y)$. A non-linearly separable function representing disparity, phase difference, and parity.
-- **Domain 2: Biological Nature:** Dialectical regulatory switches and phase detectors in bacterial two-component signal transduction systems (e.g., EnvZ-OmpR osmolarity sensing), where an enzyme is activated by an environmental disparity but inhibited by symmetric saturation.
-- **Domain 3: Digital Actuality:** In strict accordance with the Zero-Smuggling Mandate, XOR is *never* provided as a primitive codon opcode. Instead, the evolutionary engine must discover a 4-gate composite AST subgraph $\{ \text{OR}, \text{AND}, \text{NOT}, \text{AND} \}$ to compute the XOR truth table. Toggling fires multiple intermediate gates, incurring a higher Landauer thermodynamic cost ($3\text{–}4\text{ tokens}$).
-
----
-
-## 2. Systems Biology Network Motifs (Uri Alon Gene Regulatory Circuits)
-
-In molecular systems biology (*Uri Alon, An Introduction to Systems Biology*), gene regulatory networks repeatedly assemble into modular subgraphs called **network motifs**. These identical dynamical subgraphs evolve spontaneously in Siliquarium:
-
-```mermaid
-flowchart TD
-    subgraph Motifs["Uri Alon Network Motifs in Siliquarium"]
-        M1["<b>Coherent Feed-Forward (C1-FFL)</b><br/>Sign-Sensitive Noise Filter"]
-        M2["<b>Incoherent Feed-Forward (I1-FFL)</b><br/>Pulse Generator & Temporal Derivative"]
-        M3["<b>Bistable Memory Latch</b><br/>Epigenetic Switch & Hysteresis"]
-        M4["<b>Ring Oscillator (Repressilator)</b><br/>Autonomous Circadian Pacemaker"]
-    end
-```
-
-### 2.1 Coherent Type-1 Feed-Forward Loop (C1-FFL)
-- **Domain 1: Abstract Structure:** A directed acyclic graph with three nodes $\{X, Y, Z\}$ where $X$ activates $Z$ directly, and $X$ also activates $Y$, which in turn activates $Z$ via an `AND` gate:
-  $$Z(t) = X(t) \land Y(t), \quad Y(t) = X(t - \tau)$$
-  Acts mathematically as a **sign-sensitive delay filter**.
-- **Domain 2: Biological Nature:** The arabinose (*araBAD*) operon in *E. coli*. Prevents wasteful synthesis of expensive digestive enzymes in response to brief, spurious brownian pulses of sugar.
-- **Domain 3: Digital Actuality:** Porin $X$ splits into two wires: one direct line to an `AND` gate, and one routed through an intermediate buffer gate $Y$ introducing a 1-tick delay. If $X$ fires for only a single tick, $Y$ does not arrive in time, and $Z$ remains $0$. Filters out single-tick hydrothermal noise, saving Landauer switching costs.
-
-### 2.2 Incoherent Type-1 Feed-Forward Loop (I1-FFL)
-- **Domain 1: Abstract Structure:** A bipartite graph where node $X$ activates output $Z$, while simultaneously activating an intermediate repressor $Y$ that inhibits $Z$:
-  $$Z(t) = X(t) \land \neg Y(t), \quad Y(t) = X(t - \tau)$$
-  Acts as a **temporal derivative edge detector** ($dC/dt$) and non-monotonic pulse generator.
-- **Domain 2: Biological Nature:** Chemotaxis receptor methylation in *E. coli* (CheR/CheB adaptation) and galactose regulatory systems. Enables cells to adapt to background concentrations and respond strictly to temporal changes in chemical gradients.
-- **Domain 3: Digital Actuality:** Evolved sub-circuit connecting porin $X$ directly to an `AND` gate, while a branch passes through an inverter `NOT` with a 1-tick delay. When a nutrient pulse arrives ($0 \to 1$), $Z$ fires for exactly 1 tick before the inverted line clamps it shut. Enables Siliquarium cells to perform temporal derivative navigation toward vent orifices.
-
-### 2.3 Bistable Memory Latch (SR Flip-Flop)
-- **Domain 1: Abstract Structure:** A dynamical system with two stable equilibrium fixed points separated by an unstable separatrix:
-  $$\dot{Q} = f(Q, \bar{Q}), \quad \text{characterized by hysteresis: } Q(t) = \text{Latch}(S, R)$$
-- **Domain 2: Biological Nature:** The $\lambda$-phage bistable genetic toggle switch (*cI* vs *Cro* repressor) and eukaryotic stem cell differentiation. Retains permanent memory of past inductive signals.
-- **Domain 3: Digital Actuality:** Two cross-coupled `NOR` or `NAND` logic gates where the output of gate 1 feeds into input 2 of gate 2, and vice versa. When a single-tick `Set` pulse arrives, the circuit locks into state $Q = 1$ and sustains it across indefinite lean ticks without requiring external input.
-
-### 2.4 The Repressilator / Ring Oscillator (Circadian Pacemaker)
-- **Domain 1: Abstract Structure:** A cyclic directed graph with an odd number of inhibitory nodes $N \in \{3, 5, 7\}$ satisfying the Poincaré-Bendixson theorem for stable limit cycles:
-  $$\dot{x}_i = \beta \frac{1}{1 + x_{i-1}^n} - \alpha x_i, \quad i \in \{1, \dots, N\}, \quad x_0 \equiv x_N$$
-- **Domain 2: Biological Nature:** The synthetic Repressilator (Elowitz & Leibler 2000) and the cyanobacterial KaiABC post-translational circadian oscillator.
-- **Domain 3: Digital Actuality:** An odd-length closed cycle of `NOT` inverters in `PoreWorkshop`. Generates autonomous, periodic square-wave clock pulses. Cells synchronize this internal oscillator to the hydrothermal geysering period, powering up catalytic porins precisely when the plume discharges.
-
-### 2.5 Negative Autoregulation (NAR)
-- **Domain 1: Abstract Structure:** A 1-node feedback loop where an operator's output inhibits its own synthesis:
-  $$X(t+1) = \neg X(t) \land \text{Input}$$
-  Reduces response time and linearizes non-linear inputs.
-- **Domain 2: Biological Nature:** Present in over $40\%$ of all known bacterial transcription factors (e.g., LexA SOS response repressor). Speeds up recovery and suppresses gene expression stochastic noise.
-- **Domain 3: Digital Actuality:** An inverted feedback wire connected from a gate's output pin back to its own secondary input pin. Stabilizes internal metabolic charging against erratic vent pressure fluctuations.
-
-### 2.6 Bi-Fan Network Motif
-- **Domain 1: Abstract Structure:** A fully connected bipartite subgraph $K_{2,2}$ where two regulatory inputs $\{X_1, X_2\}$ jointly coordinate two functional sinks $\{Z_1, Z_2\}$.
-- **Domain 2: Biological Nature:** Combinatorial operon control in microbial metabolism where two distinct nutrient sensors simultaneously regulate carbon utilization and flagellar motility.
-- **Domain 3: Digital Actuality:** Two porin inputs wired into a cross-coupled gate lattice driving both `BatteryChargeSink` and `BiomassSynthesisSink`. Coordinates metabolic storage and cellular cytokinesis in lockstep.
-
----
-
-## 3. Non-Equilibrium Thermodynamics & Closed-Universe Invariants
+In biology, cells make decisions using **protein enzymes**. In Siliquarium, cells make decisions using **electronic logic gates**. Both do the exact same job.
 
 ```mermaid
 flowchart LR
-    subgraph ThermoInvariants["Thermodynamic Invariant Ledger"]
-        direction TB
-        T1["<b>First-Law Conservation</b><br/>ΔE = 0.000 • ΔM = 0.000"]
-        T2["<b>Rolf Landauer Limit</b><br/>Q ≥ kB T ln 2 per bit flip"]
-        T3["<b>Howard Pattee Cut</b><br/>Symbolic Safe vs Dynamic Plant"]
-        T4["<b>Peter Mitchell Battery</b><br/>Proton Motive Force (PMF) Δp"]
+    subgraph LogicRow["The Four Basic Decision Gates"]
+        direction LR
+        G1["<b>NOT Gate</b><br/>Inversion & Veto<br/>Blocks Poison"]
+        G2["<b>AND Gate</b><br/>Cooperation<br/>Couples Fuel & Cofactor"]
+        G3["<b>OR Gate</b><br/>Flexibility<br/>Alternative Fuel Path"]
+        G4["<b>XOR Circuit</b><br/>Difference<br/>Detects Mismatch"]
     end
 ```
 
-### 3.1 The Chemiosmotic Battery ($\Delta p \approx 200\text{ mV}$)
-- **Domain 1: Abstract Structure:** A bounded scalar energy reservoir $E \in [0, E_{\max}]$ acting as an electrostatic capacitor governed by charging and leakage differentials:
-  $$\frac{dE}{dt} = \Phi_{\text{in}} - \Phi_{\text{out}} - \lambda_{\text{leak}} E$$
-- **Domain 2: Biological Nature:** The Peter Mitchell Proton Motive Force (PMF):
-  $$\Delta p = \Delta\psi - \frac{2.3 RT}{F} \Delta\text{pH} \approx 200\text{ mV}$$
-  Generated across prebiotic iron-sulfur mineral membranes separating acidic ocean water ($pH \sim 6$) from alkaline vent fluid ($pH \sim 9\text{–}11$).
-- **Domain 3: Digital Actuality:** `PoreBattery.ts` tracking integer tokens ($0\dots100$). Basal metabolic tax drains $1\text{ token}$ every 10 ticks. Reaching $E \le 0$ triggers autolysis; reaching $E \ge 100 \land M \ge 40$ enables cytokinesis.
+---
 
-### 3.2 Howard Pattee's Epistemic Cut
-- **Domain 1: Abstract Structure:** The formal separation between **rate-independent symbolic constraints** (quiescent formal syntax) and **rate-dependent physical dynamics** (time-dependent differential mechanics):
-  $$S_{\text{inert}} \xrightarrow{\text{Translation}} \mathcal{D}_{\text{active}}(t)$$
-- **Domain 2: Biological Nature:** The division between inert DNA genomic memory (dissipating zero thermodynamic heat during cellular runtime) and active catalytic proteins/ribozymes conducting chemical work.
-- **Domain 3: Digital Actuality:** The structural boundary between `GenomeSafe` and `PoreWorkshop`. `GenomeSafe` maintains an immutable 60-bit binary string that conducts zero runtime current and mutates strictly during cytokinesis. `PoreWorkshop` translates that string into active CMOS gates that execute tick-by-tick and burn Landauer heat.
+### 1.1 The Switch / Inverter ("Saying No / Blocking Poison")
 
-### 3.3 Rolf Landauer's Thermodynamic Price of Information
-- **Domain 1: Abstract Structure:** Landauer's Principle: Any logically irreversible manipulation of information (such as erasing a bit or merging state paths) dissipates a minimum thermodynamic entropy:
-  $$Q \ge k_B T \ln 2$$
-- **Domain 2: Biological Nature:** Energetic cost of proofreading, transcription turnover, and kinetic dissipation in RNA/DNA polymerases and allosteric switches.
-- **Domain 3: Digital Actuality:** In `PoreBattery.ts`, every time any logic gate flips its output state ($0 \to 1$ or $1 \to 0$), exactly **1 Landauer energy token** is debited from the cell's battery and transferred into the global dissipated heat ledger ($Q_{\text{Landauer}}$). Prevents genome bloat: redundant gates burn fatal metabolic drag.
+```
+   Input Signal (Toxin) ────► [ NOT GATE ] ────► Output (Uptake Clamp)
+       If 1 (Poison)    ────►    Inverts   ────►      0 (Closed)
+       If 0 (Clean)     ────►    Inverts   ────►      1 (Open)
+```
 
-### 3.4 The Inviolable Universal Balance Ledger
-- **Domain 1: Abstract Structure:** Inviolable First-Law conservation monoids:
-  $$\sum \Delta E \equiv 0.000, \quad \sum \Delta M \equiv 0.000$$
-- **Domain 2: Biological Nature:** First Law of Thermodynamics: Energy and matter can neither be created nor destroyed in a closed universe.
-- **Domain 3: Digital Actuality:** Audited every tick across all 25 test stages:
-  $$\Delta E = E_{\text{vent\_injected}} - (E_{\text{living}} + E_{\text{spores}} + Q_{\text{Landauer}}) \equiv 0.000$$
-  $$\Delta M = M_{\text{vent\_injected}} - (M_{\text{living}} + M_{\text{carcasses}} + M_{\text{spores}}) \equiv 0.000$$
+- 💡 **The Abstract Behavior:**  
+  **Inversion & Veto Power.** Doing the exact opposite of what an incoming signal dictates. When an alert arrives, the system immediately shuts down access to prevent damage.
+- 🌿 **In Nature (Biology):**  
+  **Allosteric Enzyme Inhibition.** In bacteria, when a toxic heavy-metal atom (like cadmium or lead) touches a receptor, the protein physically twists into a locked shape, instantly closing the door so poison cannot flood the cytoplasm.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **The `NOT` Gate.** When geothermal poison (`Stream T = 1`) pulses on the pore wall, an internal `NOT` gate turns the signal into `0`. This keeps the toxic valve shut. If a cell has not evolved a `NOT` gate, poison flows into its battery, draining $5$ energy tokens every tick until the cell dies.
 
 ---
 
-## 4. Geophysical Cataclysms & Tectonic Stressors
+### 1.2 The Partnership ("Both Must Be Present")
+
+```
+   Fuel Influx (Stream A) ───┐
+                             ├────► [ AND GATE ] ────► Output (+2 Energy Tokens)
+   Oxygen Influx (Stream B) ──┘
+```
+
+- 💡 **The Abstract Behavior:**  
+  **Cooperation.** Requiring two separate conditions to be true before taking action. If either piece is missing, nothing happens.
+- 🌿 **In Nature (Biology):**  
+  **Two-Substrate Enzymes.** In your own cells, the enzyme *citrate synthase* cannot make energy if it only has sugar; it also requires an energy cofactor (acetyl-CoA). Both chemical keys must fit into the enzyme's lock simultaneously before the reaction can spark.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **The `AND` Gate.** In Siliquarium's hydrothermal plume, fuel arrives in two streams: `Stream A` and `Stream B`. When an organism's `AND` gate detects both streams at once ($A=1 \text{ and } B=1$), it fires, depositing $+2$ energy tokens into the cellular battery. If only one stream is present, it does not fire.
+
+---
+
+### 1.3 The Alternative Pathway ("Either One Works")
+
+```
+   Primary Fuel (Glucose)   ───┐
+                               ├────► [ OR GATE ] ────► Output (Metabolism Stays On)
+   Backup Fuel (Fatty Acid) ───┘
+```
+
+- 💡 **The Abstract Behavior:**  
+  **Flexibility & Redundancy.** Having a backup plan. As long as at least one source of help is available, the system keeps operating.
+- 🌿 **In Nature (Biology):**  
+  **Backup Enzymes & Flexible Diet.** Many microbes have backup genes (*isoenzymes*). If glucose is exhausted, the microbe instantly switches to eating fructose or lactic acid without skipping a beat.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **The `OR` Gate.** Hydrothermal currents can flutter, causing Stream A to briefly drop out. A cell with an `OR` gate wired to its battery charger will keep harvesting energy as long as *either* Stream A or Stream B is pulsing. This provides resilience during turbulent ocean currents.
+
+---
+
+### 1.4 Detecting a Difference ("The Mismatch Detector")
+
+```
+   Inside Voltage  ───┐
+                      ├────► [ XOR CIRCUIT ] ────► Output (Pump Activated)
+   Outside Voltage ───┘
+```
+
+- 💡 **The Abstract Behavior:**  
+  **Disparity Sensing.** Firing only when two signals disagree. If both signals are high or both signals are low, the output stays silent.
+- 🌿 **In Nature (Biology):**  
+  **Membrane Potential Sensors.** Cells constantly compare the electrical charge inside their membrane with the charge outside. If the charges become identical, the cell sounds an alarm and fires ion pumps to restore the difference.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **The `XOR` Composite Circuit.** Siliquarium does not give creatures a free, pre-packaged XOR gate in their genome ribbon. An evolving lineage must construct a 4-gate combination ($\text{OR} \to \text{AND} \to \text{NOT} \to \text{AND}$) to discover XOR behavior. When evolved, it acts as a phase detector that harvests energy during alternating vent rhythms.
+
+---
+
+## 2. Smart Survival Circuits: Nature's Wiring Tricks
+
+In 2002, systems biologist **Uri Alon** discovered that throughout billions of years of evolution, nature kept rediscovering the exact same small circuits over and over again. Siliquarium cells discover these exact same circuits on their own.
 
 ```mermaid
 flowchart TD
-    subgraph Tectonics["Geological Perturbation Operators"]
-        G1["<b>Magmatic Tremor</b><br/>Structural Fracture • Niche Bottleneck"]
-        G2["<b>Thermal Surge</b><br/>Enthalpy Influx • Landauer Heat Stress"]
-        G3["<b>Toxin Plume</b><br/>Heavy Metal Alkylation • Inverter Clamping"]
-        G4["<b>Cryogenic Shock</b><br/>Fluid Freezing • Metabolic Quenching"]
+    subgraph SmartCircuits["Uri Alon's Common Biological Circuits"]
+        M1["<b>The 'Is It Real?' Filter</b><br/>Ignores brief brownian blips"]
+        M2["<b>The 'Did It Change?' Detector</b><br/>Pulses only when conditions improve"]
+        M3["<b>The Memory Latch</b><br/>Remembers a past pulse"]
+        M4["<b>The Biological Clock</b><br/>Keeps a steady rhythmic beat"]
     end
 ```
 
-### 4.1 Magmatic Tremor / Seismic Fracture
-- **Domain 1: Abstract Structure:** A stochastic topological perturbation operator $\mathcal{T}_{\text{rupture}}: \mathcal{G}_{\text{lattice}} \to \mathcal{G}'_{\text{lattice}}$ that severs adjacent graph edges and introduces null boundary conditions.
-- **Domain 2: Biological Nature:** Subsea volcanic earthquakes ($M_w \sim 3\text{–}5$) fracturing brittle hydrothermal chimneys, creating physical barrier blockages, and exposing fresh mineral surfaces.
-- **Domain 3: Digital Actuality:** `GeologicalPressures.trigger('MAGMATIC_TREMOR')` toggles pore adjacency flags, shatters cell boundaries with an 80% mortality shock, and opens subterranean fault trenches ($z=-1$).
+---
 
-### 4.2 Pillow Lava Incursion
-- **Domain 1: Abstract Structure:** A state-replacement operator that overwrites permeable coordinates with immutable Dirichlet boundary conditions ($\text{Conductance} = 0$).
-- **Domain 2: Biological Nature:** Effusive eruptions of molten basaltic pillow lava covering seafloor colonies, encasing biological pores in impermeable solid rock.
-- **Domain 3: Digital Actuality:** Flags lattice pores with `isBasalt: true`, forces resident cell autolysis into detrital necromass, and resets fluid columns into solid bedrock barriers.
+### 2.1 The "Is It Real?" Filter (Coherent Feed-Forward Loop)
 
-### 4.3 Hydrothermal Boiling Surge
-- **Domain 1: Abstract Structure:** High-enthalpy scalar amplification ($\Phi_{\text{in}} \uparrow$) coupled with elevated stochastic noise injection ($\sigma_{\text{noise}} \uparrow$).
-- **Domain 2: Biological Nature:** Supercritical hydrothermal fluid bursts ($>400^\circ\text{C}$) flooding chimneys with intense heat, accelerating enzymatic reaction velocity while destabilizing tertiary protein conformations.
-- **Domain 3: Digital Actuality:** Sets `activeSurgeEnergyBoost = 250` and forces `Stream A = true` and `Stream B = true` for 40 ticks, while increasing bit-flip error rates on all gate interconnects. Bloated circuits dissipate catastrophic Landauer heat and lyse from hyperthermia.
+```
+   Food Sensor (X) ──────┬────────────────► [ AND GATE ] ────► Output (Digestive Enzyme)
+                         │                      ▲
+                         └─► [ 1-Tick Delay ] ──┘
+```
 
-### 4.4 Cryogenic Deep-Water Incursion
-- **Domain 1: Abstract Structure:** Kinetic rate parameter damping: $\beta_{\text{clock}} \to 0.25 \beta_0$.
-- **Domain 2: Biological Nature:** Downwelling of abyssal arctic bottom water ($2^\circ\text{C}$), dropping local temperatures and halting metabolic enzyme cascades.
-- **Domain 3: Digital Actuality:** Slows simulation clock pacing by $75\%$, halving porin pulse frequency and testing cryptobiotic dormancy clamps in evolved genomes.
-
-### 4.5 Chemical Toxin & Heavy-Metal Plume
-- **Domain 1: Abstract Structure:** Influx of an antagonistic chemical signal ($T = 1$) that imposes an additive negative penalty unless inverted by a Boolean nullifier.
-- **Domain 2: Biological Nature:** Plumes of heavy metals ($\text{Cd}^{2+}, \text{Hg}^{2+}, \text{Pb}^{2+}$) and acidic sulfur species alkylating protein thiols and collapsing membrane proton gradients.
-- **Domain 3: Digital Actuality:** `Stream T = 1` evaluates across all porins. If a cell lacks an evolved `NOT` inverter gate on its toxin channel, its battery is drained by $-5\text{ tokens}$ per tick.
+- 💡 **The Abstract Behavior:**  
+  **Noise Filtering.** Refusing to react to a brief flash or hiccup. The system only reacts when an incoming signal stays turned on long enough to prove it is genuine.
+- 🌿 **In Nature (Biology):**  
+  **The Arabinose Sugar Switch in *E. coli*.** Synthesizing digestive enzymes is expensive. If a single random molecule of sugar drifts past a bacterium, it ignores it. It only turns on its digestion factories if sugar remains present for several minutes continuously.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **The Coherent Feed-Forward Loop (C1-FFL).** Water turbulence causes brief, random 1-tick flashes of Stream A. A cell with a C1-FFL splits the incoming wire: one line goes straight to an `AND` gate, while the other goes through a delay gate. If a vent spike lasts only 1 tick, the delayed signal arrives too late, and the gate never fires—saving the cell from burning wasted Landauer heat tokens!
 
 ---
 
-## 5. Supracellular Morphogenesis, Multicellularity & Ecology
+### 2.2 The "Did It Change?" Edge Detector (Incoherent Feed-Forward Loop)
+
+```
+   Chemical Sensor (X) ──┬────────────────► [ AND GATE ] ────► Output (Chemotaxis Kick)
+                         │                      ▲
+                         └─► [ Invert + Delay ]─┘
+```
+
+- 💡 **The Abstract Behavior:**  
+  **Rate-of-Change Detection ($dc/dt$).** Celebrating improvement while tuning out constant background levels. Firing a brief celebratory pulse whenever conditions get better, then immediately quieting down.
+- 🌿 **In Nature (Biology):**  
+  **Bacterial Navigation (Chemotaxis).** A single bacterium is too tiny to feel a difference between its front and back. Instead, it measures time: *"Is there more food right now than there was 1 second ago?"* If yes, it swims straight. If no, it tumbles randomly to find a new heading.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **The Incoherent Feed-Forward Loop (I1-FFL).** An input wire splits: one path goes directly to an `AND` gate, while the other goes through an inverter that takes 1 tick to respond. When a nutrient pulse arrives, the output fires for exactly 1 tick before the delayed inverter clamps it shut. This creates a temporal derivative pulse used by mobile clades to steer toward the hydrothermal chimney.
+
+---
+
+### 2.3 The Cellular Memory Latch (Bistable Flip-Flop)
+
+```
+   Set (Nutrient Pulse)   ───► [ GATE 1 ] ───┬──► State Output Q (Remembers ON)
+                                ▲            │
+                                └── Feedback ┘
+```
+
+- 💡 **The Abstract Behavior:**  
+  **Memory & Commitment.** Locking into a new state and holding that memory forever, even after the event that triggered it has completely vanished.
+- 🌿 **In Nature (Biology):**  
+  **Cell Differentiation & Bacterial Scars.** When an embryonic cell decides to become a nerve cell, it stays a nerve cell for the rest of its life, even when the original chemical signal is washed away. Similarly, bacteria remember encounters with dangerous viral attacks.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **The Cross-Coupled Latch.** Two logic gates feed their outputs back into each other's inputs. When a single momentary fuel pulse arrives, the circuit flips its internal memory bit from `0` to `1` and locks it there. This lets the organism "remember" food was found, keeping its metabolic pumps primed across long, quiet droughts.
+
+---
+
+### 2.4 The Biological Clock (The Repressilator / Ring Oscillator)
+
+```
+   [ NOT Gate 1 ] ────► [ NOT Gate 2 ] ────► [ NOT Gate 3 ]
+         ▲                                         │
+         └───────────── Circular Feedback ─────────┘
+```
+
+- 💡 **The Abstract Behavior:**  
+  **Autonomous Rhythmic Pacing.** Generating a steady heartbeat or metronome pulse without needing any outside clock to tell it when to tick.
+- 🌿 **In Nature (Biology):**  
+  **Circadian Day/Night Rhythms & Heart Pacemakers.** Cyanobacteria in the ocean predict sunrise hours before dawn using a molecular ring clock (*KaiABC*), ramping up photosynthetic proteins right as the first light strikes.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **The Odd-Inverter Ring Oscillator.** An odd number of inverters (3, 5, or 7 `NOT` gates) wired in a continuous circle. Because the number of inverters is odd, the circuit can never settle on a single stable answer—it endlessly chases its own tail, creating a rhythmic square-wave pulse. Cells use this clock to wake up their porins right before the geothermal chimney geysers.
+
+---
+
+## 3. Energy, Matter & Living Costs: The Inviolable Rules
+
+Siliquarium is not an arcade video game where creatures get bonus points for looking interesting. Every living pore is governed by the iron laws of **thermodynamics**.
+
+```mermaid
+flowchart LR
+    subgraph RulesOfLife["The Physical Grounding Rules"]
+        R1["<b>Mitchell Battery</b><br/>Proton Motive Force (PMF)<br/>Tokens 0 to 100"]
+        R2["<b>Landauer Heat Tax</b><br/>1 Token per Bit Flip<br/>Thinking Burns Energy"]
+        R3["<b>Pattee Epistemic Cut</b><br/>DNA Safe vs Active Workshop<br/>Blueprint Stays Safe"]
+        R4["<b>Closed Universe</b><br/>Zero Smuggling (ΔE = 0)<br/>Every Joule Accounted For"]
+    end
+```
+
+---
+
+### 3.1 Nature's Battery (Chemiosmotic Proton Gradients)
+- 💡 **The Abstract Behavior:**  
+  **The Charge Reservoir.** Storing potential energy across a physical barrier, like water held behind a hydroelectric dam, and releasing it in controlled increments to do useful work.
+- 🌿 **In Nature (Biology):**  
+  **Peter Mitchell's Proton Motive Force ($\Delta p$).** In 1961, Peter Mitchell discovered that all life on Earth is powered by electrical voltage across cell membranes ($\sim 200\text{ mV}$). At ancient alkaline hydrothermal vents, the ocean water outside the rock was mildly acidic, while the volcanic fluid inside was alkaline. This natural battery powered the very first metabolic enzymes before cells had evolved their own membranes.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **The `PoreBattery` Register ($0\dots100\text{ Tokens}$).** Every living pore has an internal battery register. Living burns a continuous background tax: $1\text{ token}$ leaks away every 10 ticks. If battery energy hits $0$, the cell starves and autolyses into dead rock detritus. If energy reaches $100$ and biomass reaches $40$, the cell divides into an adjacent pore.
+
+---
+
+### 3.2 The Blueprint vs The Workshop (Howard Pattee's Epistemic Cut)
+- 💡 **The Abstract Behavior:**  
+  **Separating Instructions from Action.** Keeping the master reference manual locked safely away in a fireproof archive where it experiences zero wear and tear, while disposable mechanical machines do the noisy, dangerous physical labor.
+- 🌿 **In Nature (Biology):**  
+  **DNA vs Protein Enzymes.** DNA is a quiescent, chemically stable storage tape. It carries no electrical current and conducts no chemical reactions during life. Protein enzymes and ribosomes do all the heavy, catalytic lifting. Only when reproducing is the DNA unzipped and copied.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **`GenomeSafe` vs `PoreWorkshop`.** In Siliquarium, `GenomeSafe` holds an inert 60-bit binary ribbon. It never mutates during daily life, conducts zero current, and burns zero heat. The `PoreWorkshop` translates those bits into CMOS logic gates that rattle, switch, and burn energy every tick. Mutation happens strictly on the inert tape during cytokinesis.
+
+---
+
+### 3.3 The Electric Bill of Thinking (Rolf Landauer's Limit)
+- 💡 **The Abstract Behavior:**  
+  **Information Has a Physical Price.** You cannot compute, process signals, or erase information without paying an unavoidable energetic fee that dissipates into the environment as heat.
+- 🌿 **In Nature (Biology):**  
+  **Metabolic Cost of Gene Expression.** Proofreading DNA, cycling transcription factors, and clearing old messenger RNA costs real ATP. Bacteria with bloated, messy genomes full of useless proteins get outcompeted by lean, streamlined cells that only synthesize what they need.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **The Landauer Switching Cost ($-1\text{ Token / Toggle}$).** In Siliquarium, **there is zero free lunch**. Every time a logic gate flips its output from `0` to `1` or `1` to `0`, exactly $1\text{ energy token}$ is deducted from `PoreBattery` and dumped into the environment as waste heat. If a mutation introduces 20 useless, flickering gates, the organism will experience massive metabolic drag and starve to death.
+
+---
+
+### 3.4 The Closed Universe (The Zero-Smuggling Mandate)
+- 💡 **The Abstract Behavior:**  
+  **Absolute Conservation.** Nothing can appear out of thin air, and nothing can disappear without a trace. The sum total of energy and matter must balance with mathematical perfection.
+- 🌿 **In Nature (Biology):**  
+  **The First Law of Thermodynamics.** Every atom in a whale's body and every calorie in an oak tree came from somewhere—absorbed from sunlight, hydrothermal vents, or mineral rocks. Nature never cheats its balance sheet.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **The First-Law Invariant Badge ($\Delta E \equiv 0.000, \Delta M \equiv 0.000$).** The simulation engine audits every single Joule and atom every single tick. Energy injected from the central plume minus energy stored in cellular batteries, carried in pelagic spores, or dissipated as Landauer heat must equal exactly $0.000$. If a bug created even $+0.001$ unphysical energy, all 25 automated test stages would immediately fail!
+
+---
+
+## 4. Seafloor Ecology & Cataclysms: What the Geological Shocks Mean
+
+When you use the **Geothermal Shaker** or watch catastrophic events occur in the caldera, you are not just seeing visual eye-candy. Every geological shock represents a specific **computational stress test** on living genomes.
 
 ```mermaid
 flowchart TD
-    subgraph Morphogenesis["Supracellular Tissue Morphogenesis"]
-        S1["<b>Syncytial Conduits</b><br/>Plasmodial Resource Sharing"]
-        S2["<b>French Flag Model</b><br/>Morphogen Positional Differentiation"]
-        S3["<b>Slime Mold Treadmilling</b><br/>Collective Benthic Motility"]
-        S4["<b>Trophic Warfare</b><br/>Catabolic Predation & Siderophores"]
+    subgraph Cataclysms["Geological Shocks as Computational Stressors"]
+        E1["<b>Magmatic Tremor</b><br/>Shatters pore walls • 80% mortality bottleneck"]
+        E2["<b>Lava Incursion</b><br/>Pores sealed with basalt • Land lost permanently"]
+        E3["<b>Boiling Thermal Surge</b><br/>Massive fuel burst + High bit-flip noise"]
+        E4["<b>Cryogenic Incursion</b><br/>Clock speed drops 75% • Hibernation test"]
+        E5["<b>Toxin Cloud</b><br/>Poison spikes • Punishes unshielded circuits"]
     end
 ```
 
-### 5.1 Cytokinesis & Mineral Chamber Budding
-- **Domain 1: Abstract Structure:** Cellular division operator $\mathcal{C}: \text{Pore}_i \to (\text{Pore}_i, \text{Pore}_j)$ triggered when state variables cross bifurcation thresholds:
-  $$E \ge \theta_E \land M \ge \theta_M \implies \text{Cytokinesis}$$
-- **Domain 2: Biological Nature:** Prebiotic cell division within adjacent mineral honeycombs. A mother cell accumulates critical mass and energy, replicating its genetic template and budding into a vacant adjoining rock cavity.
-- **Domain 3: Digital Actuality:** When `battery >= 100` and `matter >= 40`, the simulation finds a vacant adjacent pore in `HexGrid3D`, copies the 60-bit genome tape (subject to blind copy mutations), and initializes a daughter `PoreCell` with 50% split energy.
+---
 
-### 5.2 Syncytial Conduits (Plasmodial Resource Sharing)
-- **Domain 1: Abstract Structure:** A diffusive network graph where connected vertices share conserved scalar quantities across edges with finite conductance:
-  $$\frac{dE_i}{dt} = \sum_{j \in \mathcal{N}(i)} G_{ij} (E_j - E_i)$$
-- **Domain 2: Biological Nature:** *Physarum polycephalum* plasmodial cytoplasmic streaming and plant plasmodesmata. Clonal cells maintain open cytoplasmic channels to equalize metabolite reserves across the colony.
-- **Domain 3: Digital Actuality:** Septal pore flags establish shared boundary pins (`syncytialConduit = true`). Pores exposed directly to the vent caldera function as "stomachs," transmitting surplus energy tokens through purple cytoplasmic channels to sheltered interior cells.
-
-### 5.3 Lewis Wolpert's French Flag Morphogen Gradient
-- **Domain 1: Abstract Structure:** Positional information encoding: A spatial concentration gradient $C(x)$ determines discrete cell fate boundaries $\mathcal{F}$ via fixed concentration thresholds $\{\theta_1, \theta_2\}$:
-  $$\text{Fate}(x) = \begin{cases} \text{Blue} & C(x) \ge \theta_1 \\ \text{White} & \theta_2 \le C(x) < \theta_1 \\ \text{Red} & C(x) < \theta_2 \end{cases}$$
-- **Domain 2: Biological Nature:** Morphogen gradients (e.g., Bicoid in *Drosophila*, Shh in vertebrate limb buds) directing identical clonal genomes to express distinct anatomical structures.
-- **Domain 3: Digital Actuality:** Clonal cells sharing identical 60-bit genomes express different active gates depending on distance from the hydrothermal nozzle. Proximity cells activate heat-clamp pacemakers; perimeter cells activate trophic scavenging gates.
-
-### 5.4 Slime Mold Treadmilling (Physarum Benthic Motility)
-- **Domain 1: Abstract Structure:** Collective directed translation of a multi-vertex cluster via coordinated spatial asymmetry: leading-edge cytokinesis synchronized with trailing-edge autolysis:
-  $$\vec{v}_{\text{colony}} = \vec{x}_{\text{front}} \cdot \mathcal{C} - \vec{x}_{\text{rear}} \cdot \mathcal{L}$$
-- **Domain 2: Biological Nature:** *Dictyostelium discoideum* slug streaming and amoeboid treadmilling across substrates.
-- **Domain 3: Digital Actuality:** Demonstrated in historical tour stops (`MULTICELLULAR_MOTILITY`). The syncytial colony continuously buds into open cavities ahead while dissolving starving rear cells, effectively crawling across the 3D seafloor without legs or cilia.
-
-### 5.5 Trophic Predation & Necromass Scavenging
-- **Domain 1: Abstract Structure:** Coupled Lotka-Volterra non-equilibrium mass-transfer dynamics:
-  $$\dot{E}_{\text{prey}} = -\kappa E_{\text{prey}} E_{\text{pred}}, \quad \dot{E}_{\text{pred}} = +\gamma \kappa E_{\text{prey}} E_{\text{pred}} - \delta E_{\text{pred}}$$
-- **Domain 2: Biological Nature:** Microbial predation (e.g. *Bdellovibrio bacteriovorus*) deploying catabolic enzymes to lyse prey cell walls, and saprophytic detritivores scavenging detrital necromass.
-- **Domain 3: Digital Actuality:** Evolved predatory clades emit directional trophic lysis rays into neighboring pores. If the target lacks structural lithotrophic armor, energy tokens are siphoned directly into the predator's battery; lysed remnants become detrital carcass tokens.
+### 4.1 Magmatic Tremors (Earthquakes & Fault Fractures)
+- 💡 **The Abstract Behavior:**  
+  **Structural Disruption & Population Bottlenecks.** Randomly severing existing communication routes and destroying established infrastructure, forcing survivors to rebuild from scratch.
+- 🌿 **In Nature (Biology):**  
+  **Seismic Rifting at Ocean Spreads.** Underwater tectonic quakes shatter brittle mineral chimneys, crushing colonies and fragmenting continuous biofilms into isolated survivors.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **Lattice Rupture & Excavation.** An 80% mortality shock hits the caldera. Pores tear open into deep subterranean fault trenches ($z=-1$), cutting off surface colonies and triggering rapid adaptive speciation among the few surviving clades.
 
 ---
 
-## 6. Evolutionary Information Geometry & Paleontology
+### 4.2 Pillow Lava Incursions (Substrate Reset)
+- 💡 **The Abstract Behavior:**  
+  **Permanent Boundary Overwriting.** Sealing off a region of territory with an impenetrable barrier that can no longer be entered or traversed.
+- 🌿 **In Nature (Biology):**  
+  **Volcanic Lava Eruptions.** Sheet lava floods the seafloor, smothering all organic life in its path and instantly hardening into fresh, sterile basalt bedrock.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **Basalt Barrier Overwrite.** Targeted lattice cells have their state flipped to `isBasalt: true`. Resident cells autolyse into detrital necromass, and fluid columns become impassable stone walls, reshaping the bathymetry.
+
+---
+
+### 4.3 Hydrothermal Boiling Surges
+- 💡 **The Abstract Behavior:**  
+  **A Golden Opportunity Combined with Chaos.** A sudden flood of abundant resources accompanied by high static noise and the risk of overheating.
+- 🌿 **In Nature (Biology):**  
+  **Volcanic Steam Venting ($>400^\circ\text{C}$).** Superheated volcanic fluid charges the chimney with massive chemical energy, but the violent turbulence shakes protein bonds apart.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **Energy Injection + Landauer Noise.** The caldera injects $+250$ bonus energy tokens, but simultaneously increases the rate of random bit-flips on all circuit wires. Genomes with bloated circuits toggle wildly, dumping fatal Landauer heat into their batteries until they explode from metabolic fever!
+
+---
+
+### 4.4 Cryogenic Incursions (The Abyssal Deep Freeze)
+- 💡 **The Abstract Behavior:**  
+  **Extreme Slowdown.** Freezing all activity and testing whether a system can power down into dormancy without dying.
+- 🌿 **In Nature (Biology):**  
+  **Polar Deep-Water Downwelling ($2^\circ\text{C}$).** Frigid bottom currents drop temperatures to near freezing, slowing bacterial enzymes to a crawl. Cells survive only if they possess cryptobiotic dormancy clamps.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **Clock Pacing Reduction.** The simulation clock speed is cut by $75\%$, drastically reducing fuel pulse frequency. Cells without low-power sleep circuits burn their basal maintenance tokens and starve before the next pulse arrives.
+
+---
+
+### 4.5 Chemical Toxin Spikes
+- 💡 **The Abstract Behavior:**  
+  **Antagonistic Infiltration.** A destructive input that inflicts damage unless the system has an active filter to detect and nullify it.
+- 🌿 **In Nature (Biology):**  
+  **Acidic Heavy-Metal Bursts.** Sudden clouds of volcanic sulfur and heavy metals that corrode unprotected cellular membranes and denature catalytic proteins.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **`Stream T = 1` Influx.** Poison pulses across all porins. Any cell that has not evolved an allosteric `NOT` inverter on its toxin channel suffers a non-negotiable $-5$ token penalty every tick until it dies.
+
+---
+
+## 5. Teamwork & Multicellular Life: From Single Cells to Colonies
+
+Life did not remain solitary single cells forever. Living pores evolved to cooperate, form tissues, and coordinate multicellular bodies.
 
 ```mermaid
 flowchart TD
-    subgraph EvolutionTheory["Evolutionary Dynamics & Information Operators"]
-        I1["<b>Richard Lenski LTEE</b><br/>Cryo-Vault • Relative Fitness Assays"]
-        I2["<b>Stephen Jay Gould Contingency</b><br/>Replaying Life's Tape • DAG Branching"]
-        I3["<b>Dembski Zero Information</b><br/>I+ = 0 • Blind Replication"]
-        I4["<b>Shannon Diversity & WL Hashes</b><br/>Information-Theoretic Ecospace Radar"]
+    subgraph Teamwork["Multicellular Morphogenesis & Ecology"]
+        C1["<b>Syncytial Conduits</b><br/>Sharing food across pores"]
+        C2["<b>French Flag Patterning</b><br/>Different jobs based on location"]
+        C3["<b>Slime Mold Treadmilling</b><br/>Crawling across the seafloor"]
+        C4["<b>Trophic Predation</b><br/>Predators, prey, and detritivores"]
     end
 ```
 
-### 6.1 Richard Lenski Long-Term Evolution & Cryo-Vault
-- **Domain 1: Abstract Structure:** A discrete state-space archive storing immutable historical points along an evolutionary trajectory:
-  $$\mathcal{A} = \{ \mathbf{x}(t_0), \mathbf{x}(t_1), \dots, \mathbf{x}(t_k) \}$$
-- **Domain 2: Biological Nature:** Richard Lenski's *E. coli* Long-Term Evolution Experiment (LTEE), freezing bacterial generations at $-80^\circ\text{C}$ to create a living fossil record for competitive fitness assays across time.
-- **Domain 3: Digital Actuality:** The **Lenski BioBank Cryo-Vault** (`#pane-biobank`). Snap-freezes living silicoid genomes, gate topologies, and generation indices. Users arm the micro-pipette to reseed ancestral clades directly into modern ecosystems to measure relative evolutionary fitness.
+---
 
-### 6.2 Stephen Jay Gould's Contingency & Replaying Life's Tape
-- **Domain 1: Abstract Structure:** Directed Acyclic Graph (DAG) timeline branching. Evaluating path dependency vs convergent attractor dynamics:
-  $$\Psi(t_0) \xrightarrow[\mathcal{S}_1]{} \Omega_1(t), \quad \Psi(t_0) \xrightarrow[\mathcal{S}_2]{} \Omega_2(t)$$
-- **Domain 2: Biological Nature:** Stephen Jay Gould's thought experiment (*Wonderful Life*, 1989): If the tape of life were rewound to the Burgess Shale and replayed, would identical body plans emerge?
-- **Domain 3: Digital Actuality:** The **Evolutionary Version Control DAG** (`#branch-modal` / key <kbd>B</kbd>). Users checkpoint simulations at tick 500, fork parallel timelines, introduce perturbations, and switch between branches to test historical contingency without state cross-contamination.
-
-### 6.3 Dembski-Marks Zero Active Information Principle ($I_+ = 0$)
-- **Domain 1: Abstract Structure:** Conservation of information in search algorithms:
-  $$I_+ = U(\Omega) - U(\Omega \mid \text{operator}) \equiv 0$$
-- **Domain 2: Biological Nature:** The absence of teleological foresight or guided mutation in biological evolution. Genetic variation is blind to environmental telemetry; adaptation emerges strictly from differential mortality.
-- **Domain 3: Digital Actuality:** Audited in Stage 24 of the test suite. Replication mutations in `GenomeSafe.replicate()` are strictly blind: zero inspection of vent telemetry, zero hardcoded logic gate insertion, and zero fitness beacons.
-
-### 6.4 Shannon Phenotypic Diversity & Weisfeiler-Lehman Hashes
-- **Domain 1: Abstract Structure:** Shannon Information Entropy ($H$) over topological isomorphism classes:
-  $$H = -\sum_{i=1}^K p_i \log_2 p_i$$
-- **Domain 2: Biological Nature:** Ecological biodiversity indices measuring structural and behavioral differentiation across an ecosystem.
-- **Domain 3: Digital Actuality:** The **Naturalist Assistant** computes Weisfeiler-Lehman (WL) graph hashes of all living netlists each tick. Identical circuit topologies share hash classes; Shannon entropy $H$ is computed from the relative population share of each hash.
+### 5.1 Sharing Pipelines (Syncytial Conduits)
+- 💡 **The Abstract Behavior:**  
+  **Networked Resource Sharing.** Linking individual units together with open pipelines so that units with a surplus can automatically feed units in deficit.
+- 🌿 **In Nature (Biology):**  
+  **Slime Mold Veins (*Physarum*) & Plant Plasmodesmata.** Slime molds build networks of pulsing cytoplasmic tubes. Veins near food pump sugar through directional pipelines to feed parts of the colony that are exploring barren rock.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **Shared Boundary Pins & Purple Conduits.** Clonal cells establish open septal conduits (`syncytialConduit = true`). Pores sitting directly in the volcanic plume act as "digestive stomachs," pumping their surplus energy tokens through glowing purple channels into sheltered nursery pores on the perimeter.
 
 ---
 
-## 7. Master Translation Rosetta Stone
+### 5.2 Division of Labor (Lewis Wolpert's French Flag Model)
+- 💡 **The Abstract Behavior:**  
+  **Positional Differentiation.** Identical units executing completely different tasks based on where they sit relative to an environmental beacon.
+- 🌿 **In Nature (Biology):**  
+  **Embryonic Morphogen Gradients.** In a developing embryo, every cell has identical DNA. Cells close to a chemical source become brain tissue; cells in the middle become bone; cells furthest away become skin.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **Spatial Gene Regulatory Network (GRN) Expression.** Clonal pores sharing the exact same 60-bit genome tape activate different logic gates depending on their distance from the vent caldera. Chimney pores activate thermal heat-clamp gates; outer pores activate predatory or scavenging gates.
 
-The table below compiles the complete, substrate-neutral translation mapping across the Siliquarium universe:
+---
 
-| System Component | Domain 1: Abstract Formal Structure | Domain 2: Biological Nature (Hydrothermal Ecosystem) | Domain 3: Digital Simulation Actuality (Siliquarium Engine) |
+### 5.3 Moving Without Feet (Slime Mold Treadmilling)
+- 💡 **The Abstract Behavior:**  
+  **Cluster Treadmilling.** Moving an entire cluster across a surface by constantly building new units at the front while dissolving old units at the back.
+- 🌿 **In Nature (Biology):**  
+  **Cellular Slime Mold Migration (*Dictyostelium*).** When food is scarce, thousands of solitary amoebae combine into a single "slug" that crawls across the forest floor by recycling its own body mass as it moves.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **Asymmetric Cytokinesis & Autolysis.** Demonstrated in the Chronicle flight recorder. The leading edge of a colony divides into vacant pores toward a food plume, while starving rear pores dissolve into detritus, allowing the multicellular colony to trek across the 3D seabed.
+
+---
+
+### 5.4 Hunters & Scavengers (Trophic Ecology)
+- 💡 **The Abstract Behavior:**  
+  **Food Webs & Nutrient Recycling.** Instead of manufacturing energy directly from the environment, specialized agents harvest energy by consuming other agents or recycling dead matter.
+- 🌿 **In Nature (Biology):**  
+  **Predatory Microbes & Detritivores.** Predatory bacteria (like *Bdellovibrio*) drill into prey bacteria to consume their contents; saprophytic fungi decompose dead carcasses to recycle minerals.
+- ⚡ **In Siliquarium (Digital Reality):**  
+  **Catabolic Lysis Rays & Detrital Tokens.** Predatory clades evolve directional lysis beams that drain energy tokens directly from neighboring living cells. When cells die, their unspent matter becomes grey carcass tokens that detrital scavengers vacuum up.
+
+---
+
+## 6. Master Summary Table: The Quick Reference Rosetta Stone
+
+| Phenomenon | 💡 The Abstract Concept | 🌿 In Nature (Biology) | ⚡ In Siliquarium (Digital Reality) |
 | :--- | :--- | :--- | :--- |
-| **Water Column** | Permeable 3D manifold ($\text{Resistance} = 0$) | Saline deep ocean column ($P \sim 25\text{ MPa}$) | Lattice cells with `medium === PoreMedium.AQUEOUS_FLUID` |
-| **Basalt Bedrock** | Zero-conductance Dirichlet boundary | Quenched pillow basalt barrier rock | Pores with `isBasalt: true`, conductance = 0 |
-| **Hydrothermal Vent** | High-enthalpy periodic oscillator source | Subsea alkaline hydrothermal chimney | Central caldera at $[0,0,0]$ venting `Stream A` & `Stream B` |
-| **Living Silicoid** | Autopoietic non-equilibrium dissipative unit | Lithotrophic proto-microbe inhabiting mineral pore | Living `PoreCell` instance with active CMOS workshop |
-| **Genome Safe** | Rate-independent quiescent symbolic string | Inert 1D double-stranded DNA chromosome | Immutable 60-bit string in `GenomeSafe.ts` |
-| **Pore Workshop** | Rate-dependent non-linear dynamical engine | Catalytic enzyme network in mineral cavity | Directed Boolean AST graph in `PoreWorkshop.ts` |
-| **Cellular Battery** | Bounded scalar electrochemical capacitor | Transmembrane Proton Motive Force ($\Delta p \approx 200\text{ mV}$) | Integer token register ($0\dots100$) in `PoreBattery.ts` |
-| **Cellular Biomass** | Conserved material structural reservoir | Amino acid / mineral structural atom pool | Integer token register ($0\dots40$) in `PoreBattery.ts` |
-| **Landauer Cost** | Minimum entropy tax ($Q \ge k_B T \ln 2$) | Proofreading and state-transition heat loss | $-1\text{ energy token}$ burned per logic gate toggle |
-| **Autolysis (Death)**| Relaxation of non-equilibrium state to entropy | Cellular lysis into scavengeable necromass | State transition to `LYSIS`; carcass detritus token deposit |
-| **Cytokinesis** | Symmetrical cluster division operator | Asexual binary fission into adjoining pore | Budding into adjacent hex pore when $E \ge 100 \land M \ge 40$ |
-| **Syncytial Conduits**| High-conductance edge linking vertices | Plasmodial cytoplasmic streaming conduits | Shared boundary pins transmitting tokens across pores |
-| **French Flag GRN** | Threshold-gated spatial concentration field | Morphogen concentration gradient (Wolpert) | Positional gate expression divergence across clonal pores |
-| **Allosteric NOT** | Unary Boolean inversion ($\neg x = 1 - x$) | Heavy-metal repressor / toxin inhibitor | Evaluated `NOT` gate preventing battery discharge |
-| **Catalytic AND** | Binary conjunction ($x \land y$) | Bi-substrate allosteric enzyme coupling | Evaluated `AND` gate crediting $+2\text{ tokens}$ on resonance |
-| **Feed-Forward Loop**| Sign-sensitive delay filter graph | Coherent/Incoherent FFL gene circuit (Alon) | Multi-branch logic path filtering single-tick vent noise |
-| **Bistable Latch** | Dual-attractor dynamical switch with hysteresis | Epigenetic toggle switch ($\lambda$-phage *cI/Cro*) | Cross-coupled `NOR` gates retaining internal bit memory |
-| **Circadian Clock** | Limit-cycle odd-inverter loop | Synthetic Repressilator / KaiABC oscillator | Closed ring of odd `NOT` gates generating timing pulses |
-| **Seismic Tremor** | Topological lattice breakage operator | Volcanic earthquake ($M_w \sim 3\text{–}5$) | 80% population mortality shock; graben fault opening |
-| **Thermal Surge** | High-enthalpy pulse + elevated noise rate | Supercritical fluid discharge ($>400^\circ\text{C}$) | $+250\text{ energy}$ surge; elevated bit-flip noise rate |
-| **Toxin Plume** | Antagonistic signal imposing negative debit | Plume of toxic heavy metals ($\text{Cu}^{2+}, \text{Cd}^{2+}$) | `Stream T = 1`; drains unshielded batteries by $-5\text{ tokens}$ |
-| **Cryogenic Incursion**| Kinetic clock deceleration ($\beta \to 0.25\beta_0$) | Abyssal deep-water downwelling ($2^\circ\text{C}$) | 75% tick pacing reduction; tests dormancy clamps |
-| **BioBank Vault** | Discrete historical state archive | Richard Lenski LTEE liquid nitrogen record | Serialized genome tapes stored for re-inoculation |
-| **Branching DAG** | Multiverse bifurcation graph | Stephen Jay Gould's "Replaying Life's Tape" | Counterfactual timeline forks without state pollution |
-| **First-Law Ledger**| Conserved energy/matter monoid | First Law of Thermodynamics | Automated audit: $\Delta E \equiv 0.000, \Delta M \equiv 0.000$ |
+| **Water Column** | Permeable space with zero movement resistance | Saline deep-ocean fluid ($P \sim 25\text{ MPa}$) | Clear cells with `medium === AQUEOUS_FLUID` |
+| **Basalt Bedrock** | Solid, impenetrable barrier boundary | Quenched volcanic pillow basalt rock | Impassable hexagonal pores with `isBasalt: true` |
+| **Hydrothermal Vent** | Point-source periodic fuel oscillator | Alkaline deep-sea volcanic hydrothermal chimney | Central caldera $[0,0,0]$ venting `Stream A` & `Stream B` |
+| **Living Silicoid** | Self-maintaining, energy-harvesting agent | Lithotrophic single-celled proto-microbe | Active `PoreCell` instance with CMOS netlist |
+| **Genome Safe** | Inert, protected instruction archive | Quiescent double-stranded DNA chromosome | Immutable 60-bit string in `GenomeSafe.ts` |
+| **Pore Workshop** | Active catalytic machine doing physical work | Catalytic enzyme network in rock cavity | Evaluated directed logic graph in `PoreWorkshop.ts` |
+| **Cell Battery** | Finite capacitor storing usable work | Proton Motive Force ($\Delta p \approx 200\text{ mV}$) | Integer token register ($0\dots100$) in `PoreBattery.ts` |
+| **Landauer Cost** | Physical heat fee for changing information | Energetic cost of proofreading & turnover | $-1\text{ energy token}$ burned per gate flip |
+| **Cell Death (Lysis)**| Relaxation of structured order into entropy | Autolysis into scavengeable detrital corpse | Pore state $\to \text{LYSIS}$; carcass tokens left on seafloor |
+| **Cell Division** | Symmetrical replication into open space | Asexual mitosis into adjacent rock cavity | Budding into adjacent pore when $E \ge 100 \land M \ge 40$ |
+| **NOT Gate** | Inversion and veto clamp | Allosteric inhibition / poison shutdown | Inverter turning toxic bit $1 \to 0$ to prevent damage |
+| **AND Gate** | Requiring two conditions simultaneously | Multi-substrate enzyme (fuel + cofactor) | Logic gate crediting $+2\text{ tokens}$ when $A=1 \land B=1$ |
+| **OR Gate** | Backup plan / alternative pathway | Redundant isoenzymes (glucose vs fat) | Gate firing if *either* fuel stream is active |
+| **Noise Filter (FFL)**| Refusing to react to momentary blips | Arabinose operon in *E. coli* bacteria | Delayed dual-line circuit ignoring 1-tick vent spikes |
+| **Memory Latch** | Locking in state and remembering it | Genetic toggle switch / stem cell identity | Cross-coupled gates holding state $Q=1$ across lean droughts |
+| **Internal Clock** | Rhythmic pacing without an external clock | Circadian KaiABC clock in cyanobacteria | Odd-inverter ring oscillator pulsing periodically |
+| **Syncytial Conduit** | Sharing surplus across connected units | Slime mold veins (*Physarum*) & plasmodesmata | Shared boundary pins passing energy tokens between pores |
+| **French Flag GRN** | Doing different jobs based on location | Morphogen gradient embryo patterning | Clonal cells firing different gates based on distance to vent |
+| **Tectonic Tremor** | Structural destruction & bottleneck shock | Undersea volcanic earthquake ($M_w \sim 4$) | 80% mortality shock; subterranean fault trenches ($z=-1$) |
+| **Boiling Surge** | High fuel influx combined with chaos/noise | Supercritical fluid venting ($>400^\circ\text{C}$) | $+250\text{ energy}$ burst; bit-flip noise weeds out bloated circuits |
+| **Cryogenic Incursion**| Deep freeze testing dormancy clamps | Frigid polar deep-water downwelling ($2^\circ\text{C}$) | Simulation clock slows $75\%$; tests low-power survival |
+| **Toxin Cloud** | Hostile chemical invasion | Heavy-metal plumes ($\text{Cd}^{2+}, \text{H}_2\text{S}$) | `Stream T = 1`; drains unshielded batteries by $-5\text{ tokens}$ |
+| **First-Law Ledger** | Absolute physical conservation | First Law of Thermodynamics | Automated audit: $\Delta E \equiv 0.000, \Delta M \equiv 0.000$ |
 
 ---
 
-<!-- COMPLETE ACADEMIC REFERENCES & CITATIONS -->
-<section id="references" class="mt-16 pt-8 border-t border-slate-800 space-y-6">
-<div class="flex items-center justify-between border-b border-slate-800 pb-3">
-<div class="flex items-center gap-3">
-<span class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-800 text-cyan-400 font-mono font-bold text-xs flex items-center justify-center">📚</span>
-<h2 class="text-lg md:text-xl font-mono font-bold text-slate-100">References &amp; Grounding Literature</h2>
-</div>
-<span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Academic Citations</span>
-</div>
-<p class="text-xs text-slate-400 leading-relaxed font-sans">The physical metaphors, computational mappings, and thermodynamic equations in this translation matrix are derived from the following foundational literature:</p>
-<ol class="space-y-3.5 text-xs font-mono text-slate-300">
-    <li id="ref-1" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
-      <span class="text-cyan-400 font-bold shrink-0">[1]</span>
-      <div class="space-y-1">
-        <div><span class="text-slate-100 font-bold">Pattee, H. H.</span> (1972). <em class="text-cyan-300">The nature of hierarchical controls in living matter</em>. <span class="text-slate-400">Foundations of Mathematical Biology, 1, 1–22</span>.</div>
-        <div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">The Epistemic Cut:</strong> The necessary distinction between rate-independent symbolic memory (genomes) and rate-dependent physical dynamics.</div>
-      </div>
-    </li>
-    <li id="ref-2" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
-      <span class="text-cyan-400 font-bold shrink-0">[2]</span>
-      <div class="space-y-1">
-        <div><span class="text-slate-100 font-bold">Landauer, R.</span> (1961). <em class="text-cyan-300">Irreversibility and heat generation in the computing process</em>. <span class="text-slate-400">IBM Journal of Research and Development, 5(3), 183–191</span>.</div>
-        <div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Thermodynamics of Information:</strong> Logical irreversibility and state switching requires dissipation of $Q \ge k_B T \ln 2$.</div>
-      </div>
-    </li>
-    <li id="ref-3" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
-      <span class="text-cyan-400 font-bold shrink-0">[3]</span>
-      <div class="space-y-1">
-        <div><span class="text-slate-100 font-bold">Russell, M. J., & Hall, A. J.</span> (1997). <em class="text-cyan-300">The emergence of life from iron monosulphide bubbles at a submarine hydrothermal spring</em>. <span class="text-slate-400">Journal of the Geological Society, 154(3), 377–402</span>.</div>
-        <div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Inorganic Rock Pores:</strong> Alkaline hydrothermal FeS cavities provided nature's first cell walls, resolving the prebiotic dilution catastrophe.</div>
-      </div>
-    </li>
-    <li id="ref-4" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
-      <span class="text-cyan-400 font-bold shrink-0">[4]</span>
-      <div class="space-y-1">
-        <div><span class="text-slate-100 font-bold">Mitchell, P.</span> (1961). <em class="text-cyan-300">Coupling of phosphorylation to electron and hydrogen transfer by a chemi-osmotic type of mechanism</em>. <span class="text-slate-400">Nature, 191(4784), 144–148</span>.</div>
-        <div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Chemiosmosis:</strong> Life powers itself via electrochemical proton gradients ($\Delta p$) across insulating membranes.</div>
-      </div>
-    </li>
-    <li id="ref-5" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
-      <span class="text-cyan-400 font-bold shrink-0">[5]</span>
-      <div class="space-y-1">
-        <div><span class="text-slate-100 font-bold">Alon, U.</span> (2019). <em class="text-cyan-300">An Introduction to Systems Biology: Design Principles of Biological Networks (2nd ed.)</em>. <span class="text-slate-400">CRC Press. ISBN: 978-1439837016</span>.</div>
-        <div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">Network Motifs:</strong> Structural subgraphs (FFLs, autoregulation, latches) performing discrete mathematical computations in cellular GRNs.</div>
-      </div>
-    </li>
-    <li id="ref-6" class="p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/90 transition-colors flex items-start gap-3">
-      <span class="text-cyan-400 font-bold shrink-0">[6]</span>
-      <div class="space-y-1">
-        <div><span class="text-slate-100 font-bold">Wolpert, L.</span> (1969). <em class="text-cyan-300">Positional information and the spatial pattern of cellular differentiation</em>. <span class="text-slate-400">Journal of Theoretical Biology, 25(1), 1–47</span>.</div>
-        <div class="text-[11px] text-slate-400 font-sans leading-relaxed pt-0.5"><strong class="text-slate-200">French Flag Model:</strong> Spatial morphogen concentration gradients providing positional cues for differential gene expression in clonal cells.</div>
-      </div>
-    </li>
-</ol>
-</section>
+*(End of Translation Matrix • Siliquarium Theoretical Biology Series)*
