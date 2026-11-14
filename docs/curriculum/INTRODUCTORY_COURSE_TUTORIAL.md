@@ -45,8 +45,8 @@ flowchart LR
 
     subgraph Part3["Part III: Macro-Evolution & Geomorphology"]
         direction TB
-        P6["P6: Naturalist Assistant & Safari Copilot"]
-        P7["P7: Historical Kinematics & Life's Tape"]
+        P6["P6: Dual Safari Guides: Naturalist & Safari Copilot"]
+        P7["P7: Chronicle Tour Guide & Life's Tape"]
         P8["P8: Geothermal Shaker & Tectonics"]
         P9["P9: Siliquarium Design Studio & 3D CAD"]
     end
@@ -356,67 +356,137 @@ Step 4: Explain why Landauer heat dissipation prevents runaway exponential explo
 
 ---
 
-### Practicum 6: Autonomous Paleontologist, Naturalist Assistant & Guided Safari Copilot
-*Objective: Deploy on-board AI evolutionary paleontology to discover emergent adaptations and track multicellular behaviors in Guided Safari mode.*
+### Practicum 6: The Dual Safari Guides: Naturalist Discovery Tour & In-Situ Safari Copilot
+*Objective: Master both autonomous field guides in Siliquarium—operating the Naturalist Discovery Tour Hub for macro-evolutionary paleocensus and deploying the In-Situ Guided Safari Copilot for real-time multicellular tracking, live netlist analysis, and 1-click cryo-preservation.*
 
 ```
-Step 1: Press [A] (or click 'Assistant' in the header) to open the Naturalist Assistant.
-Step 2: Examine the Macro-Evolutionary Radar, Era Classification, and Shannon Entropy (H).
-Step 3: Browse discovered specimens and click 'Fly To' on an exemplar card.
-Step 4: Switch to 'Guided Safari' mode to observe multicellular behaviors and live specimen tracking cards.
+Step 1: Open the Naturalist Discovery Tour Hub (press [A] or click 'Assistant' in the header).
+Step 2: Filter specimens by category (All, Super, Trophic, Circuits) and review the Shannon Entropy radar.
+Step 3: Click 'Fly To' on an exemplar card or engage the floating In-Situ Field Scope HUD.
+Step 4: Launch Guided Safari Mode (click 'Guided Safari' or press [#btn-guided-safari]).
+Step 5: Master the Safari Copilot: toggle 12-second Auto-Tour cycling, step with hotkeys [ and ],
+        adjust netlist canvas zoom, filter multicellular roles, and snap-freeze specimens to the BioBank.
 ```
 
 #### Detailed Laboratory Protocol:
-1. **Launch the Assistant:** Press <kbd>A</kbd> on your keyboard (or click **Assistant** in the header).
-2. **Read the Evolutionary Overview:**
-   - **Current Era:** (e.g., *Prebiotic Soup Era*, *Primitive Enzyme Dawn*, or *Multicellular Metazoan Radiation*).
-   - **Shannon Diversity Entropy ($H$):** Measures the phenotypic diversity of logic motifs currently coexisting in the caldera.
-3. **Scan Discovered Phenotypes:** In the specimen gallery, look for landmark adaptations:
-   - *Specimen 01: Bistable Memory Latch (SR Flip-Flop)*
-   - *Specimen 08: Endosymbiotic Organelle Satellite*
-   - *Specimen 09: Syncytial Multicellular Colony*
-4. **Execute an Automated Field Excursion:** Click the purple **Fly To** button on any discovered specimen card.
-   - The assistant smoothly dismisses itself.
-   - The camera glides directly to that living specimen on the seafloor.
-   - Observe its specialized morphology (e.g., purple syncytial streaming conduits connecting sister pores).
 
-![Figure 6.1: Naturalist Assistant Dashboard: Phenotypic Motif Gallery & Shannon Entropy Radar](./images/practicum4_naturalist_assistant.png)
-
-> [!NOTE]
-> **Observational Callout 6.1: Autonomous Paleontological Paleocensus & Phenotypic Discovery**  
-> The Naturalist Assistant aggregates macro-evolutionary metrics, including current geological era, Shannon phenotypic diversity entropy ($H$), and an exemplar card gallery of evolved adaptations. Selecting **Fly To** executes an automated camera trajectory directly to living specimens exhibiting specialized motifs such as bistable flip-flops or syncytial multi-pore networks.
-
-5. **Engage Guided Safari Mode:** Click **Guided Safari** (`#btn-mode-safari`) on the top mode ribbon.
-   - The viewport activates the **Safari Copilot Panel** (`#safari-copilot-panel`).
-   - The camera initiates automated cinematic tracking, panning between dominant clades and emergent colonial structures.
-   - The right-docked Copilot card displays real-time multicellular cohesion indices, syncytial pore counts, and lineage divergence clocks.
-
-![Figure 6.2: Guided Safari Copilot: Multicellular Tracking & In-Flight Specimen Telemetry Cards](./images/practicum4_guided_safari_copilot.png)
-
-> [!NOTE]
-> **Observational Callout 6.2: Guided Safari Mode & Colonial Tracking Copilot**  
-> Guided Safari mode provides hands-free autonomous exploration of the hydrothermal seabed. The docked Safari Copilot pane continuously computes multicellular clustering heuristics, highlights coordinated syncytial streaming fronts, and presents live biological telemetry cards for actively tracked lineages.
+Siliquarium provides **two complementary safari tour guides**, each specialized for a distinct scale of biological observation:
+1. **The Naturalist Discovery Tour Guide (Macro-Scale Paleocensus Hub):** Accessible from any workspace mode via <kbd>A</kbd>, this guide categorizes macro-evolutionary eras, monitors Shannon diversity entropy, provides a comprehensive specimen dossier library, and enables draggable in-situ Field Scope tracking.
+2. **The In-Situ Guided Safari Copilot (Micro-Scale Benthic Tracking Station):** Accessible via `#btn-mode-safari` or the Naturalist Hub, this guide locks onto living colonies in the 3D caldera, executing autonomous camera leaps every 12 seconds, rendering real-time CMOS netlist logic canvases, filtering multicellular castes, and supporting 1-click cryo-preservation.
 
 ---
 
-### Practicum 7: Historical Kinematics Flight Recorder & Replaying Life's Tape
-*Objective: Operate the Chronicle flight recorder to investigate historical evolutionary contingencies.*
+#### 6.1 Operating Safari Guide 1: The Naturalist Discovery Tour Hub (`#naturalist-modal`)
+
+1. **Launch the Naturalist Hub:** Press <kbd>A</kbd> on your keyboard (or click **Assistant** in the master header bar).
+2. **Interpret Macro-Evolutionary Telemetry:**
+   - **Era Classification Badge:** Displays the current geological epoch (e.g. *Prebiotic Soup*, *Primitive Enzyme Dawn*, *Multicellular Metazoan Radiation*).
+   - **Shannon Diversity Entropy ($H$):** Measures logic circuit variance across living clades. Higher entropy indicates ecological niche differentiation; sharp collapses signify selective sweeps or mass extinctions.
+   - **Barrier Diagnostic Auditor:** Tracks biophysical thresholds holding back evolutionary transitions (e.g., membrane leakage or thermal noise).
+3. **Filter Expeditions by Category:** Use the category filter pills at the top of the tour hub (`.tour-filter-pill`):
+   - **All Expeditions:** Shows all cataloged phenotypes currently living in the caldera.
+   - **Super Organisms (`super`):** Isolates syncytial metazoan colonies, endosymbiotic cassettes, and multicellular filaments.
+   - **Trophic Ecology (`trophic`):** Filters for apex trophic predators, detrital scavengers, and chemiosmotic autotrophs.
+   - **Circuits (`circuit`):** Focuses on evolved computational network motifs (Uri Alon Feed-Forward Loops, bistable latches, binary half-adders).
+4. **Navigate the Specimens Tour Tray (`#tour-specimens-tray`):**
+   - The horizontal tour tray displays quick-jump buttons for every active exemplar.
+   - Each button displays the specimen's colored taxonomic badge and functional moniker.
+   - Hovering over a specimen button reveals its biological role tooltip; clicking jumps immediately to its dossier card.
+5. **Execute Cinematic "Fly To" Trajectories:**
+   - On any exemplar card, click the purple **Fly To** button.
+   - The modal smoothly dismisses itself.
+   - The 3D camera glides along a cinematic spline directly onto the living organism at the hydrothermal seabed, activating proximity transparency on surrounding basalt.
+6. **Deploy the Draggable In-Situ Field Scope HUD (`.naturalist-field-scope`):**
+   - The floating Field Scope appears directly over the 3D viewport without occluding the bathymetry.
+   - **Drag and Position:** Click and drag the Field Scope header to reposition it anywhere on your display.
+   - **Step Through Active Specimens:** Use the previous (`#scope-prev-btn`) and next (`#scope-next-btn`) buttons to cycle camera focus across living exemplars.
+   - **Inspect Circuit:** Click `#scope-microscope-btn` to open the full Circuit Microscope centered on the tracked pore.
+   - **1-Click Cryo-Preservation:** Click `#scope-freeze-biobank-btn` to instantly archive the live specimen's 60-bit genome tape into the BioBank cryo-vault.
+7. **Export Expedition Findings:**
+   - Click `#tour-export-json` to export full specimen genotypes and telemetry as a structured JSON file.
+   - Click `#tour-export-csv` to export tabular morphometric and metabolic data.
+8. **Pause Exploration Hotkey:** Press <kbd>Space</kbd> (or click `#naturalist-pause-btn`) to freeze the simulation clock while studying delicate phenotypes, preventing specimens from lysing during inspection.
+9. **Seamless Handoff to Safari:** Click the prominent **Guided Safari ➔** button (`#btn-guided-safari`) to transition directly from the Naturalist Hub into the live benthic Safari Copilot.
+
+![Figure 6.1: Naturalist Assistant Dashboard: Phenotypic Motif Gallery, Expedition Category Pills & Shannon Entropy Radar](./images/practicum4_naturalist_assistant.png)
+
+> [!NOTE]
+> **Observational Callout 6.1: Autonomous Paleontological Paleocensus & Expedition Tour Hub**  
+> The Naturalist Assistant aggregates macro-evolutionary metrics, including current geological era, Shannon phenotypic diversity entropy ($H$), and an exemplar card gallery of evolved adaptations. Selecting **Fly To** executes an automated camera trajectory directly to living specimens exhibiting specialized motifs such as bistable flip-flops or syncytial multi-pore networks.
+
+---
+
+#### 6.2 Operating Safari Guide 2: The In-Situ Guided Safari Copilot (`#safari-copilot-panel`)
+
+1. **Activate Guided Safari Mode:** Click **Guided Safari** on the master mode ribbon (`#btn-mode-safari`) or launch it from the Naturalist Hub (`#btn-guided-safari`).
+2. **Autonomous Dynamic Camera Tracking:**
+   - Click `#safari-btn-auto` (or `#safari-bar-auto` on the transport bar) to activate **Autonomous Tour Mode**.
+   - The camera autonomously tracks the most energetic living clades, hopping smoothly between flourishing silicoids every 12 seconds.
+   - To manually step through specimens at your own pace, use hotkeys <kbd>[</kbd> (Previous) and <kbd>]</kbd> (Next), or click `#safari-btn-prev` and `#safari-btn-next`.
+3. **Monitor Live Biophysical Sensors & Vitals:**
+   - **Generation Counter:** Displays the cumulative reproductive lineage depth of the tracked cell.
+   - **Chemiosmotic Membrane Voltage ($\Delta p$):** Visualized via the dynamic voltage fill bar (`#safari-voltage-fill`), measuring real-time Proton Motive Force ($0\dots100\text{ mV}$).
+   - **Biomass Stock:** Current accumulated mineral mass tokens awaiting cytokinesis threshold ($M \ge 40$).
+   - **Metabolic Yield Multiplier:** Real-time energy harvesting efficiency relative to baseline geothermal flux.
+   - **Landauer Dissipation Rating:** Real-time thermodynamic switching heat ($Q_{\text{Landauer}}$) generated by internal logic gate toggling.
+4. **Inspect the Live In-Situ CMOS Logic Netlist Canvas (`#canvas-safari-netlist`):**
+   - The docked netlist canvas dynamically illustrates the living cell's computational wiring diagram in real time.
+   - Porin inputs (`Stream A`, `Stream B`, toxic `Stream T`) pulse on the left, propagating into central catalytic gates (`AND`, `OR`, `NOT`, `XOR`) and terminating in metabolic sinks.
+   - **Canvas Zoom Controls:** Use Zoom In (`#safari-netlist-zoom-in`) and Zoom Out (`#safari-netlist-zoom-out`) to inspect dense multi-gate networks.
+   - **Typography Toggle:** Click `#safari-netlist-font-toggle` (<kbd>Aa</kbd>) to enlarge pin labels for enhanced legibility.
+   - **Reset Layout:** Click `#safari-netlist-reset` (<kbd>⟲</kbd>) to instantly return the canvas to 1.0x centered zoom.
+   - **Fullscreen CAD Expansion:** Click `#safari-btn-expand-cad` to launch the comprehensive fullscreen Circuit Autopsy workbench without losing track of your safari subject.
+5. **Multicellular Caste & Metazoan Role Filtering:**
+   - Under the **Colonial Roles** section (`#safari-copilot-roles-list`), view identified cellular castes within syncytial colonies:
+     - *Pacemaker Cells:* Rhythm generators coordinating collective peristalsis.
+     - *Vascular Conduit Cells:* Porin-rich channels transporting metabolite tokens across sister pores.
+     - *Lithotrophic Armor Cells:* Dense basalt-bound boundary cells providing physical shield integrity.
+   - Click individual role pills to visually isolate or mute specific castes in the 3D viewport.
+   - Click `#safari-role-clear-btn` to reset all role isolation filters.
+6. **1-Click BioBank Cryo-Preservation:**
+   - When encountering a novel or resilient adaptation, click `#safari-btn-freeze`.
+   - The living cell's 60-bit genome tape, gate topology, generation index, and taxonomic classification are immediately snap-frozen into the Lenski BioBank cryo-vault (`#pane-biobank`).
+7. **Access Comprehensive Specimen Dossiers:**
+   - Click `#safari-btn-dossier` to open the complete, peer-reviewed scientific entry in the **Circuit Paleontology Field Guide** ([`docs/CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html`](../CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html)), providing theoretical analysis, truth tables, and evolutionary context for the tracked phenotype.
+8. **In-Flight Pause Control:**
+   - Click `#safari-copilot-pause-btn` to halt simulation ticks while maintaining full camera navigation and netlist inspection.
+
+![Figure 6.2: Guided Safari Copilot: Multicellular Tracking, Live Netlist Canvas & In-Flight Specimen Telemetry Cards](./images/practicum4_guided_safari_copilot.png)
+
+> [!NOTE]
+> **Observational Callout 6.2: Guided Safari Mode & Colonial Tracking Copilot**  
+> Guided Safari mode provides hands-free autonomous exploration of the hydrothermal seabed. The docked Safari Copilot pane continuously computes multicellular clustering heuristics, highlights coordinated syncytial streaming fronts, renders live in-situ logic netlists with zoom/font controls, and enables 1-click cryo-preservation directly to the Lenski BioBank.
+
+> [!TIP]
+> **Predict–Observe–Explain Exercise 6.1**  
+> - **Predict:** When tracking a 5-cell syncytial colony with the Safari Copilot, will all 5 cells show identical Landauer dissipation ratings?  
+> - **Observe:** Use hotkeys <kbd>[</kbd> and <kbd>]</kbd> to cycle between adjacent cells within the same multicellular colony and compare their Landauer ratings on the copilot sensor HUD.  
+> - **Explain:** Although clonal cells share identical 60-bit genomes, differential positional information (Lewis Wolpert's French Flag model) causes distinct gate activation patterns. Interior conduit cells firing metabolic transfer gates dissipate more Landauer switching heat than quiescent outer boundary cells.
+
+---
+
+### Practicum 7: Historical Kinematics, Chronicle Tour Guide & Replaying Life's Tape
+*Objective: Operate the Chronicle historical flight recorder and guided tour director to investigate macro-evolutionary milestones, A-B looping, and evolutionary contingencies.*
 
 ```
 Step 1: Press [C] to enter Chronicle Mode.
 Step 2: Operate the historical kinematics scrubber dock to move backward in time.
-Step 3: Select Stop 1 (Multicellular Treadmilling) and Stop 2 (Wolpert's French Flag).
-Step 4: Analyze phenotypic divergence across historical epochs.
+Step 3: Engage the Chronicle Tour Guide: select curated tour stops (Multicellular Treadmilling, Wolpert's French Flag).
+Step 4: Use A-B looping and camera tracking to analyze phenotypic divergence across historical epochs.
 ```
 
 #### Detailed Laboratory Protocol:
 1. **Enter Chronicle Mode:** Press <kbd>C</kbd> (or click **Chronicle** in the workspace mode selector). The bottom viewport docks the sleek **Historical Kinematics Flight Recorder**.
 2. **Scrubbing Time:** Drag the timeline scrubber backward. The entire 3D ecosystem rewinds tick-by-tick! Cells un-divide, carcasses reassemble into living cells, and pelagic spores return to their parent nozzles.
-3. **Explore Curated Tour Stops:** Use the stop selector to visit historical evolutionary milestones:
-   - **Stop 1: Multicellular Slime Mold Treadmilling (`MULTICELLULAR_MOTILITY`):** Observe a collective syncytial colony shifting across the basalt floor through coordinated asymmetric cytokinesis and detrital lysis.
-   - **Stop 2: Lewis Wolpert's French Flag Morphogen Gradient (`DIFFERENTIATION`):** Observe how cells in the same clonal colony express different logic circuits based on their distance from the vent signal source.
+3. **Engage the Chronicle Tour Guide:** In addition to the live seafloor safari guides, Siliquarium features the **Chronicle Tour Guide** (`ChronicleTourGuide.ts`), an interactive historical expedition director that scans recorded frames and curates structured pedagogical tour stops:
+   - **Stop 1: Multicellular Slime Mold Treadmilling (`MULTICELLULAR_MOTILITY`):** The guide automatically directs 3D camera flight to follow a collective syncytial colony shifting across the basalt floor through coordinated asymmetric cytokinesis and detrital lysis.
+   - **Stop 2: Lewis Wolpert's French Flag Morphogen Gradient (`DIFFERENTIATION`):** The guide sets an automated A-B loop replay demonstrating how clonal cells express differential logic based on their distance from the vent signal source.
    - **Stop 3: Trophic Predation Warfare:** Witness a predatory clade deploying catabolic lysis beams to drain energy from neighboring lithotrophs.
-4. **Stephen Jay Gould's Thought Experiment:** Can life repeat itself? Scrub back to tick 500, fork the simulation, and observe whether the exact same clades emerge.
+   - **Stop 4: Black Swan Novelties:** Experience de novo gate innovations (e.g., emergence of half-adders or deep trench vertical climbers).
+4. **Pause & Explore with Historical Cryo-Preservation:**
+   - While on any historical tour stop, click "Pause & Explore" to inspect histological stains.
+   - Click "Cryo-Preserve Fluke Specimen" to freeze an ancestral adaptation directly from the past into your modern BioBank.
+5. **Stephen Jay Gould's Thought Experiment:** Can life repeat itself? Scrub back to tick 500, fork the simulation, and observe whether the exact same clades emerge.
 
 ![Figure 7.1: Chronicle Flight Recorder: Bidirectional Scrubber & Evolutionary Milestone Tour Stops](./images/practicum5_chronicle_playback.png)
 
