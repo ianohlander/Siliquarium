@@ -1,6 +1,6 @@
 # 💳 Turnkey Monetization & Hosted SaaS Blueprint
 
-**Author:** Jack "The Closer" Vance, Chief Marketing Officer & Commercialization Strategist  
+**Author:** Siliquarium Commercial Strategy Team  
 **Target:** Ian Ohlander, Founder & Chief Architect of Siliquarium  
 **Purpose:** Zero-Tax Liability, Merchant of Record Setup, 5 High-Margin Hosted Tiers, and Technical Implementation  
 

@@ -95,7 +95,7 @@ DOCS_CONFIG = [
         "id": "step7",
         "num": "07",
         "title": "UI/UX Experience & The Abyssal Arena Gamer Blueprint",
-        "subtitle": "Julian Mercer & Jack Vance Review: Two-Portal Delineation & Gamer-Centric Battle HUD",
+        "subtitle": "Two-Portal Delineation: Deep Lab Academic Analysis & Abyssal Arena Tactile Dynamics",
         "icon": "🎮",
         "md_file": "07_UI_UX_GAMING_EXPERIENCE_AND_ARENA_BLUEPRINT.md",
         "html_file": "07_ui_ux_gaming_experience_and_arena_blueprint.html",
@@ -106,7 +106,7 @@ DOCS_CONFIG = [
         "id": "step8",
         "num": "08",
         "title": "LLC Formation, VPS Hosting & Deployment Strategy",
-        "subtitle": "Jack Vance's Unvarnished Reality Check: Umbrella LLC, Hostinger VPS, Domain Routing & Anti-Spam Email",
+        "subtitle": "Operational Infrastructure: Umbrella LLC, Hostinger VPS, Domain Routing & Deployment",
         "icon": "🏛️",
         "md_file": "08_LLC_INFRASTRUCTURE_HOSTING_AND_DEPLOYMENT_STRATEGY.md",
         "html_file": "08_llc_infrastructure_hosting_and_deployment_strategy.html",
@@ -351,7 +351,7 @@ def generate_step_html(doc_info, prev_doc, next_doc, all_docs):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Step {doc_info["num"]}: {doc_info["title"]} — Siliquarium Marketing</title>
-  <meta name="author" content="Ian Ohlander / Jack Vance">
+  <meta name="author" content="Siliquarium Commercial Operations">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -458,7 +458,7 @@ def generate_step_html(doc_info, prev_doc, next_doc, all_docs):
             Siliquarium Commercialization &bull; Step {doc_info["num"]}
           </span>
           <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-xs font-mono border border-slate-800">
-            Author: Jack "The Closer" Vance
+            Operations Strategy: Commercial Blueprint
           </span>
         </div>
         <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-white font-mono tracking-tight">
@@ -495,7 +495,7 @@ def generate_step_html(doc_info, prev_doc, next_doc, all_docs):
   <footer class="bg-[#050811] border-t border-[#1e293b] py-8 text-center text-xs text-gray-500 font-mono mt-16">
     <div class="max-w-7xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-bold">Siliquarium &bull; Open-Ended Digital Life &amp; Silicon Abiogenesis Platform</p>
-      <p class="text-slate-500">Commercial Architecture &amp; Hosted SaaS Blueprint by Jack "The Closer" Vance.</p>
+      <p class="text-slate-500">Commercial Architecture &amp; Hosted SaaS Blueprint.</p>
       <p class="text-slate-600 text-[11px]">&copy; 2026 Ian Ohlander. All rights reserved. Strict First-Law Conservation &bull; The Epistemic Cut &bull; Uri Alon Motifs.</p>
     </div>
   </footer>
@@ -566,7 +566,7 @@ def generate_index_html(all_docs, all_tocs):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Siliquarium — Master Commercial Operations Center</title>
-  <meta name="author" content="Ian Ohlander / Jack Vance">
+  <meta name="author" content="Siliquarium Commercial Operations">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -614,12 +614,12 @@ def generate_index_html(all_docs, all_tocs):
   <!-- Hero Banner -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full space-y-10">
 
-    <!-- Jack Vance Strategic Directive Banner -->
+    <!-- Strategic Directive Banner -->
     <section class="card-box p-6 md:p-8 space-y-6 border-l-4 border-l-cyan-500 shadow-2xl relative overflow-hidden">
       <div class="flex flex-wrap items-start justify-between gap-4 border-b border-[#1e293b] pb-4">
         <div>
           <span class="px-2.5 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[11px] font-mono font-bold uppercase tracking-wider">
-            Chief Marketing Officer &bull; Strategic Briefing
+            Commercial Architecture &bull; Strategic Briefing
           </span>
           <h2 class="text-2xl sm:text-3xl font-black text-white mt-2">
             "Zero Overhead. Zero Tax Liability. From Abiotic Vents to Autopoietic Life."
@@ -738,7 +738,7 @@ def generate_index_html(all_docs, all_tocs):
   <footer class="bg-[#050811] border-t border-[#1e293b] py-12 text-center text-xs text-gray-500 font-mono mt-20">
     <div class="max-w-6xl mx-auto px-4 space-y-3">
       <p class="text-slate-400 font-bold">Siliquarium &bull; Open-Ended Digital Life &amp; Silicon Abiogenesis Platform</p>
-      <p class="text-slate-500">Commercial Architecture &amp; Execution Playbook authored by Jack "The Closer" Vance.</p>
+      <p class="text-slate-500">Commercial Architecture &amp; Execution Playbook.</p>
       <p class="text-slate-600 text-[11px]">&copy; 2026 Ian Ohlander. All rights reserved. Zero-Smuggling Mandate &bull; 154 Primary Citations &bull; Hosted Persistent Cloud Engine.</p>
     </div>
   </footer>

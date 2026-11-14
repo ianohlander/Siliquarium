@@ -1,6 +1,6 @@
 # 📊 Financial Model & ROI Forecast: The Unit Economics of Hosted Digital Life
 
-**Author:** Jack "The Closer" Vance, Chief Marketing Officer & Commercialization Strategist  
+**Author:** Siliquarium Commercial Strategy Team  
 **Target:** Ian Ohlander, Founder & Chief Architect of Siliquarium  
 **Purpose:** Unit Economics, Conversion Funnel Metrics, Infrastructure Cost Audits, and 3-Year Revenue Projections  
 

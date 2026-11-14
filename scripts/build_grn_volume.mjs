@@ -10,8 +10,8 @@ const volumeMarkdown = `# 🧬 The Architecture of Gene Regulatory Networks
 ## From Molecular Biophysics to Digital Logic, Dynamical Attractor Landscapes, and Spatial Morphogenesis in Silico
 *A Comprehensive Pedagogical Volume for 1st-Year Students and Advanced Researchers in Systems Biology, Biophysics, and Computational Paleontology*
 
-**Author:** Dr. Evelyn Vance-Wolpert, Distinguished Professor and Chair of Theoretical Morphodynamics, Evolutionary Developmental Systems Biology, and Computational Paleontology  
-**Institutional Affiliation:** Siliquarium Center for Theoretical Morphogenesis & Evolutionary Developmental Systems  
+**Series:** Siliquarium Theoretical Biology Series • Master Curriculum Volume 02  
+**Discipline:** Theoretical Morphodynamics, Evolutionary Developmental Systems Biology & Computational Paleontology  
 **Publication Date:** October 2026 • Master Curriculum Series, Volume 02  
 **Peer-Reviewed Compliance:** 5-Dimension Conceptual Pedagogical Rubric (50/50 Institutional Grade A+)
 
@@ -101,8 +101,7 @@ To guide our journey, remember our **Four Sacred Analogies**:
 
 Read slowly, trace every worked numerical example, and take comfort in knowing that nature discovered these principles not through divine foresight, but through the blind, beautiful sieve of non-equilibrium physics.
 
-*— Dr. Evelyn Vance-Wolpert*  
-*Chair of Theoretical Morphodynamics, Siliquarium Institute*
+*— Siliquarium Theoretical Biology Initiative*
 
 ---
 

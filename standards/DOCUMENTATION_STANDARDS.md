@@ -116,18 +116,24 @@ Siliquarium stands on the shoulders of giants across biophysics, information the
 
 ---
 
-## 6. Strict Prohibition of Fictitious Persons and Institutions (Standing Mandate)
+## 6. Strict Prohibition of Fictitious Persons, Instructors & User Demographic Assumptions (Standing Mandate)
 
-> ### 📜 Standing Mandate: Objective Institutional Voice & Zero Fictitious Attribution
-> All documentation, specifications, tutorials, field guides, and QA audit reports in Siliquarium must be authored in an authoritative, objective, institutional voice. **The invention or referencing of fictitious persons, researchers, professors, students, instructors, universities, departments, or institutes is strictly prohibited.**
+> ### 📜 Standing Mandate: Professional Neutrality, Objective Institutional Voice & Zero Fictitious Attribution
+> All documentation, specifications, tutorials, field guides, application UI, and QA audit reports in Siliquarium must be authored in an authoritative, objective, professional, and neutral voice. **The invention or referencing of fictitious persons, imaginary researchers, fictional professors, instructors, guides, universities, departments, or institutes is strictly prohibited at all times.**
+>
+> Furthermore, all public-facing documentation and application UI must maintain strict professional neutrality across the board: **never assume any position, age, status, educational level, or other trait of users (do not assume students, hobbyists, or any other demographic).**
 
 1. **Zero Fictitious Personas or Characters:**  
-   - Never invent or reference fictional individuals (e.g., no fictional "Dr. Vance", "Alex Rivera", "Jordan Hayes", "Dr. Rostova", or similar character roleplays).
-   - In audits, usability reviews, and QA evaluations, describe observations strictly from the perspective of **functional user archetypes** and objective user stories (e.g., "Novice User / Student Archetype", "Systems & Network Modeler", "CAD Systems Ergonomist", "Domain Paleobiologist").
-2. **Academic Provenance & Scientific Integrity:**  
+   - At NO TIME will any public-facing documentation, curriculum, tutorial, marketing asset, or application UI contain the names of imaginary people. Never invent or pretend regarding professors, instructors, fictional guides, or personas (e.g., no fictional "Prof. Elena Vance", "Dr. Evelyn Vance-Wolpert", "Dr. Vance", "Alex Rivera", "Jordan Hayes", "Dr. Rostova", "Julian Mercer", "Jack Vance", or similar character roleplays).
+   - In audits, usability reviews, and QA evaluations, describe observations strictly from the perspective of objective user interactions, functional system workflows, and technical criteria.
+2. **Universal Professional Neutrality (Zero Demographic Assumptions):**
+   - Documentation and UI text must never assume the user's role, background, age, or status.
+   - Do not refer to users as "students", "scholars", "hobbyists", "undergraduates", or "gamers" unless describing a formal external academic course syllabus or game portal module.
+   - Address the reader/user with professional, objective, technical precision.
+3. **Academic Provenance & Scientific Integrity:**  
    - All historical foundations, mathematical models, and scientific citations must refer exclusively to **real, published peer-reviewed researchers and historical literature** (e.g., Howard Pattee, Rolf Landauer, Stuart Kauffman, Lewis Wolpert, Alan Turing, Uri Alon, Lynn Margulis, W. D. Hamilton, Motoo Kimura, Susumu Ohno, Michael Russell, Nick Lane).
    - Never fabricate academic papers, fictional institutional affiliations, or nonexistent departments.
-3. **Institutional Neutrality:**  
+4. **Institutional Neutrality:**  
    - Documentation speaks for the project directly ("The Siliquarium Project", "The Digital Paleontology Engine", "The Simulation Subsystem").
    - Authorship bylines, when present, must denote project roles or engineering teams, never fictional individuals or imaginary institutes.
 

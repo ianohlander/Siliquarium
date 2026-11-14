@@ -1,6 +1,6 @@
 # 📖 Positioning & Messaging Bible: The Dawkins Framework & The Science of Abiogenesis
 
-**Author:** Jack "The Closer" Vance, Chief Marketing Officer & Commercialization Strategist  
+**Author:** Siliquarium Commercial Strategy Team  
 **Target:** Ian Ohlander, Founder & Chief Architect of Siliquarium  
 **Purpose:** High-Converting Copy, Value Propositions, Elevator Pitches, Target Personas, and The Foundational Narrative  
 

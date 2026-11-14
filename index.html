@@ -3029,13 +3029,13 @@
       background: rgba(15, 23, 42, 0.95);
       border-bottom: 1px solid var(--panel-border);
     }
-    .course-professor-brand {
+    .course-header-brand {
       display: flex;
       align-items: center;
       gap: 12px;
     }
-    .course-prof-avatar {
-      font-size: 1.8rem;
+    .course-title-avatar {
+      font-size: 1.6rem;
       background: rgba(245, 158, 11, 0.15);
       border: 1px solid rgba(245, 158, 11, 0.35);
       border-radius: 10px;
@@ -3045,13 +3045,13 @@
       align-items: center;
       justify-content: center;
     }
-    .course-prof-title {
+    .course-title-main {
       font-size: 0.95rem;
       font-weight: 800;
       color: #fbbf24;
       font-family: monospace;
     }
-    .course-prof-subtitle {
+    .course-title-subtitle {
       font-size: 0.72rem;
       color: #94a3b8;
     }
@@ -8864,11 +8864,11 @@
 
     <!-- Telemetry Actions & Flyout Toggles -->
     <div class="telemetry-actions" id="telemetry-actions">
-      <div class="telemetry-item" id="hud-course-btn" style="cursor: pointer; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(245, 158, 11, 0.55); background: rgba(245, 158, 11, 0.16);" title="BIO/CS 101: Prof. Vance's Interactive Course &amp; Lab Tutorial (Hotkey: T)">
+      <div class="telemetry-item" id="hud-course-btn" style="cursor: pointer; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(245, 158, 11, 0.55); background: rgba(245, 158, 11, 0.16);" title="BIO/CS 101: Interactive Laboratory Tutorial &amp; Practical Guide (Hotkey: T)">
         <span class="telemetry-label" style="color: #fbbf24; font-weight: 700; display:flex; align-items:center; gap:3px;">
-          <span>🎓 Course Tutorial</span>
+          <span>🔬 Tutorial</span>
         </span>
-        <span class="telemetry-val" style="color: #fef3c7; font-size: 0.65rem;">Prof. Vance ▸</span>
+        <span class="telemetry-val" style="color: #fef3c7; font-size: 0.65rem;">Interactive ▸</span>
       </div>
 
       <div class="telemetry-item" id="hud-docs-btn" style="cursor: pointer; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.45); background: rgba(56, 189, 248, 0.14);" title="Open Documentation &amp; Field Guides">
@@ -8943,10 +8943,10 @@
 
     <div style="display:flex;flex-direction:column;gap:6px;">
       <div id="docs-item-open-course" class="docs-dropdown-item" style="cursor:pointer; display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:rgba(245,158,11,0.14);border:1px solid rgba(245,158,11,0.45);text-decoration:none;transition:all 0.15s ease;">
-        <span style="font-size:1.3rem;">🎓</span>
+        <span style="font-size:1.3rem;">🔬</span>
         <div style="flex:1;">
-          <div style="font-size:0.78rem;font-weight:800;color:#fbbf24;">BIO/CS 101 Course Tutorial</div>
-          <div style="font-size:0.66rem;color:#fef3c7;">Prof. Vance's interactive lectures, POE checks &amp; labs</div>
+          <div style="font-size:0.78rem;font-weight:800;color:#fbbf24;">Interactive Laboratory Tutorial</div>
+          <div style="font-size:0.66rem;color:#fef3c7;">Modular biophysical lectures, POE checks &amp; laboratory steps</div>
         </div>
         <span style="color:#fbbf24;font-size:0.8rem;">▶</span>
       </div>

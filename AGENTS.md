@@ -26,3 +26,9 @@ This repository enforces the strict coding, architectural, and QA requirements s
 
 3. **Mandatory Git Push:**
    - Every build must be committed with clean conventional commit messages and pushed to the repository (`git push origin main`) at the end of every task or session. Never leave unstaged or unpushed work.
+
+4. **Professional Neutrality & Zero Imaginary Persona Mandate:**
+   - At NO TIME will any public-facing documentation, curriculum, tutorial, marketing asset, or application UI contain the names of imaginary people. Never invent or pretend regarding professors, instructors, fictional guides, or personas (e.g., no "Prof. Elena Vance", "Dr. Evelyn Vance-Wolpert", "Jack Vance", "Julian Mercer", "Dr. Rostova", or fictional instructors).
+   - All documentation, guides, and application UI text must be written in a professional, rigorous, objective, and neutral scientific tone.
+   - Never assume any position, age, status, educational background, or other trait of users (do not assume students, hobbyists, academics, or any specific demographic). The tone must remain universally neutral across the board.
+

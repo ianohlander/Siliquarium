@@ -2,23 +2,20 @@
 ## BIO/CS 101: Introduction to Silicon Abiogenesis & Digital Biophysics
 *Foundations of Non-Equilibrium Thermodynamics, Howard Pattee's Epistemic Cut, and Open-Ended Digital Evolution*
 
-**Instructor:** Prof. Elena Vance  
-**Department:** Biophysical Cybernetics & Theoretical Evolutionary Biology  
-**Term:** Academic Year 2026–2027  
+**Discipline:** Systems Biology, Non-Equilibrium Thermodynamics & Artificial Life  
+**Framework:** Open-Ended Digital Abiogenesis & Silicon Biophysics  
 **Simulation Platform:** Siliquarium Engine (Autonomous Headless & WebGL 3D Visualizer)  
 **Access Portal:** [http://localhost:3000](http://localhost:3000) • Documentation: [`docs/index.html`](../index.html)
 
 ---
 
 > [!NOTE]
-> ### 👩‍🏫 A Welcome Letter from Prof. Vance to Her Students
-> *"Welcome to the laboratory, scholars. If your goal this semester is merely to click buttons, toggle random switches, and watch colorful glowing pixels dance across a 3D grid, you will miss the entire scientific revolution unfolding before you.*  
+> ### 🔬 Foundational Orientation & Methodological Framework
+> Siliquarium is an authentic, first-principles computational biophysics laboratory investigating the transition of matter from prebiotic geochemistry into autonomous living computation.
 >
-> *Siliquarium is not an arcade video game, nor is it an abstract toy model with arbitrary point scores. It is an authentic, first-principles computational biophysics laboratory. In this course, we investigate one of the deepest questions in human history: **How does matter transition from inert geochemistry into autonomous, living computation?***  
+> Every visual element in the simulation—every hexagonal boundary, pulsing signal wire, endosymbiont satellite, and syncytial conduit—corresponds directly to an inviolable biophysical principle: non-equilibrium thermodynamics, chemiosmotic proton gradients (Peter Mitchell), Howard Pattee's epistemic cut, and Rolf Landauer's thermodynamic price of information.
 >
-> *Every visual element you see on your screen—every green hexagon, every pulsing wire, every yellow satellite, and every purple bridge—corresponds directly to an inviolable biophysical law: non-equilibrium thermodynamics, chemiosmotic proton gradients, Howard Pattee's epistemic cut, and Rolf Landauer's thermodynamic price of information.*  
->
-> *Do not rush. Approach each exercise with the **Predict–Observe–Explain (POE)** framework. Always ask yourself: 'Why did the universe evolve this circuit motif instead of another?' Let us explore the primordial seafloor together."*
+> Each laboratory module employs the **Predict–Observe–Explain (POE)** framework: formulating explicit hypotheses based on thermodynamic constraints, testing them empirically within the 3D lattice, and analyzing the resulting phenotypic behaviors.
 
 ---
 
@@ -89,8 +86,8 @@ flowchart TD
 ```
 
 > [!IMPORTANT]
-> **Prof. Vance's Everyday Analogy: The Restaurant Kitchen**  
-> Imagine an executive chef running a bustling kitchen. The kitchen workshop is hot, greasy, and chaotic: pans sizzle, oil spatters, and pots dent (rate-dependent thermodynamic wear and tear). But the chef **never chops up the master recipe card** to fry an egg! The cookbook stays safely locked inside a fireproof office safe. Only when opening a second restaurant across town does the chef photocopy the recipe (reproduction with potential copying typos/mutations). In Siliquarium, `GenomeSafe` is the cookbook in the safe; `PoreWorkshop` is the busy kitchen.
+> **Biophysical Analogy: The Archive and the Workshop**  
+> Consider an industrial chemical refinery. The plant workshop is hot, pressurized, and dynamic: pipes rattle, valves cycle, and heat dissipates (rate-dependent thermodynamic wear and tear). But the engineering plant **never chops up the master blueprint or operating manual** to synthesize a chemical batch. The schematic remains safely archived, inert and protected. Only when building a new facility is the blueprint replicated (reproduction with potential copying mutations). In Siliquarium, `GenomeSafe` is the archived blueprint; `PoreWorkshop` is the active plant.
 
 ---
 
@@ -165,7 +162,7 @@ Step 4: Select an emerald green pore; press [F] for Cinematic Focus.
    - Surrounding walls dissolve into proximity transparency, revealing the logic gate chips embedded inside the stone!
 
 > [!TIP]
-> **Prof. Vance's Predict–Observe–Explain Exercise 1.1**  
+> **Predict–Observe–Explain Exercise 1.1**  
 > - **Predict:** Why do cells directly adjoining the vent caldera pulse with a rapid aura, while cells 4 hexes away pulse slowly?  
 > - **Observe:** Watch the pulsing breathing auras of the central cluster versus the perimeter.  
 > - **Explain:** Thermal flux decays with Euclidean distance: $Q(r) \propto 1/r$. Proximity to the nozzle accelerates internal electron clock rates, but also increases bit-flip thermal noise!
@@ -199,7 +196,7 @@ Step 4: Manually toggle Stream A, Stream B, and Toxin T to record output respons
    - Note the **Weisfeiler-Lehman (WL) Graph Hash**—the unique topological fingerprint of this circuit's wiring.
 
 > [!IMPORTANT]
-> **Prof. Vance's Predict–Observe–Explain Exercise 2.1**  
+> **Predict–Observe–Explain Exercise 2.1**  
 > - **Predict:** What happens to the circuit's battery charge when you inject `Toxin T = 1` into a wild-type cell lacking a `NOT` gate?  
 > - **Observe:** Injected toxin flows unhindered into the metabolic sink, triggering massive negative voltage clamping and discharging the battery.  
 > - **Explain:** Without an evolved allosteric inverter (`NOT` gate) to inhibit toxin uptake, environmental poisons short-circuit the Mitchell battery!
@@ -230,8 +227,8 @@ Step 4: Explain why Landauer heat dissipation prevents runaway exponential explo
    - Energy is permanently dissipated as Landauer thermodynamic heat whenever gates toggle.
 
 > [!NOTE]
-> **Prof. Vance's Formative Concept Check 3.1**  
-> *Question:* If an evil programmer edited the simulation code to give a favorite lineage $+500$ bonus energy tokens whenever it was starving, what would happen to the invariant badge?  
+> **Formative Concept Check 3.1**  
+> *Question:* If an unauthorized modification added $+500$ bonus energy tokens to an organism whenever it was starving, what would happen to the invariant badge?  
 > *Answer:* The badge would instantly turn crimson red, displaying $\Delta E = +500.000$ (Zero-Smuggling Violation), failing all 25 test stages!
 
 ---

@@ -1,6 +1,6 @@
 # 🚀 Content Roadmap & Community Launch Playbook
 
-**Author:** Jack "The Closer" Vance, Chief Marketing Officer & Commercialization Strategist  
+**Author:** Siliquarium Commercial Strategy Team  
 **Target:** Ian Ohlander, Founder & Chief Architect of Siliquarium  
 **Purpose:** Public Launch Day Strategy across Hacker News, 7 Targeted Subreddits, Twitter/X Mega-Thread, and Viral Video Scripts  
 

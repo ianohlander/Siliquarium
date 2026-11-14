@@ -9,13 +9,13 @@ export function buildCourseModalSkeleton(): string {
   return `
     <div class="pedagogical-course-backdrop" id="course-modal-backdrop"></div>
     <div class="pedagogical-course-dialog" role="dialog" aria-modal="true" aria-labelledby="course-modal-title">
-      <!-- Top Professor Header Strip -->
+      <!-- Top Header Strip -->
       <div class="course-header-strip">
-        <div class="course-professor-brand">
-          <div class="course-prof-avatar">👩‍🏫</div>
+        <div class="course-header-brand">
+          <div class="course-title-avatar">🔬</div>
           <div>
-            <div class="course-prof-title" id="course-modal-title">BIO/CS 101: Introduction to Silicon Abiogenesis</div>
-            <div class="course-prof-subtitle">Prof. Elena Vance • Dept of Biophysical Cybernetics</div>
+            <div class="course-title-main" id="course-modal-title">BIO/CS 101: Introduction to Silicon Abiogenesis</div>
+            <div class="course-title-subtitle">Interactive Laboratory Tutorial &amp; Biophysical Analysis Guide</div>
           </div>
         </div>
         <div class="course-header-actions">
@@ -116,10 +116,10 @@ export function buildActiveModuleHtml(
       </div>
       <div class="course-mod-tagline">${module.tagline}</div>
 
-      <!-- Professor Vance Lecture Box -->
+      <!-- Theoretical Context & Biophysical Foundations Box -->
       <div class="course-lecture-box">
         <div class="course-lecture-header">
-          <span>👩‍🏫 Lecture Notes &amp; Biophysical Context</span>
+          <span>🔬 Theoretical Context &amp; Biophysical Foundations</span>
         </div>
         <p class="course-lecture-text">${module.lectureIntro}</p>
         <div class="course-foundations-row">
@@ -151,7 +151,7 @@ export function buildActiveModuleHtml(
         </div>
         ${isAnswerSubmitted && selectedOpt ? `
           <div class="course-poe-feedback ${selectedOpt.isCorrect ? 'correct' : 'incorrect'}">
-            <strong>${selectedOpt.isCorrect ? '✅ Prof. Vance says:' : '❌ Correction:'}</strong> ${selectedOpt.feedback}
+            <strong>${selectedOpt.isCorrect ? '✅ Evaluation:' : '❌ Correction:'}</strong> ${selectedOpt.feedback}
           </div>
         ` : ''}
       </div>

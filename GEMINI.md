@@ -88,3 +88,12 @@ For **every** coding task or modification:
 4. **Adversarial Falsification Verification:** Run `node "Adversarial QA/falsification_suite*.mjs"` when physics, simulation, or paleontology logic is modified.
 5. **Commit to Git:** Create a structured conventional commit (`feat:`, `fix:`, `refactor:`, `test:`, `docs:`).
 6. **Push to Remote:** Execute `git push origin main`. Every build must be pushed to GitHub before ending the session.
+
+---
+
+## 7. Professional Neutrality & Zero Imaginary Persona Mandate
+
+- **Strict Ban on Imaginary People & Personas:** At NO TIME will any public-facing documentation, curriculum, tutorial, marketing asset, or application UI contain the names of imaginary people. Never invent or pretend regarding professors, instructors, fictional guides, or personas (e.g., no "Prof. Elena Vance", "Dr. Evelyn Vance-Wolpert", "Jack Vance", "Julian Mercer", "Dr. Rostova", or fictional instructors).
+- **Professional, Objective Tone:** All documentation, guides, and application UI text must be written in a professional, rigorous, objective, and neutral scientific tone.
+- **Zero Demographic / User Role Assumptions:** Never assume any position, age, status, educational background, or other trait of users. Do not assume students, hobbyists, academics, or any specific demographic. The tone and presentation must remain universally neutral and accessible across the board.
+

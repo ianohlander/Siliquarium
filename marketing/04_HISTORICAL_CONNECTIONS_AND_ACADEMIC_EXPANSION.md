@@ -1,6 +1,6 @@
 # 🎓 Historical Connections & Academic Expansion Playbook
 
-**Author:** Jack "The Closer" Vance, Chief Marketing Officer & Commercialization Strategist  
+**Author:** Siliquarium Commercial Strategy Team  
 **Target:** Ian Ohlander, Founder & Chief Architect of Siliquarium  
 **Purpose:** Reconnecting with Ian’s 4 Core Academic Mentors & Activating the $499–$1,499 University Site License Pipeline  
 

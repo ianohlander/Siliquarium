@@ -1,6 +1,6 @@
 # 🎙️ Creator & Influencer Outreach Playbook: The Dawkins Homage & Scientific Outreach
 
-**Author:** Jack "The Closer" Vance, Chief Marketing Officer & Commercialization Strategist  
+**Author:** Siliquarium Commercial Strategy Team  
 **Target:** Ian Ohlander, Founder & Chief Architect of Siliquarium  
 **Purpose:** Ready-to-Send Outreach Pitches for Richard Dawkins, Leading Biologists, and Tier-1 STEM Creators  
 
