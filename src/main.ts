@@ -1854,6 +1854,38 @@ class SiliquariumApp {
     return this.courseController;
   }
 
+  public getCircuitAutopsyModal(): CircuitAutopsyModal {
+    return this.circuitAutopsyModal;
+  }
+
+  public getNaturalistAssistant(): NaturalistAssistant {
+    return this.naturalistAssistant;
+  }
+
+  public getBranchModal(): EvolutionaryBranchModal {
+    return this.branchModal;
+  }
+
+  public getArenaController(): AbyssalArenaController {
+    return this.arenaController;
+  }
+
+  public getDeepLabController(): DeepLabController {
+    return this.deepLabController;
+  }
+
+  public getChroniclePlaybackBar(): ChroniclePlaybackBar {
+    return this.chroniclePlaybackBar;
+  }
+
+  public getSeafloorRenderer(): SeafloorRenderer3D {
+    return this.seafloorRenderer;
+  }
+
+  public getLoop(): SimulationLoop {
+    return this.loop;
+  }
+
   private initWorkspaceModes(): void {
     const obsBtn = document.getElementById('btn-mode-observatory');
     const safariBtn = document.getElementById('btn-mode-safari');

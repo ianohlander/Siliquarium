@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-14T08:49:44.593Z",
+  "timestamp": "2026-11-14T20:46:43.150Z",
   "totalFiles": 102,
   "forbiddenFileViolations": [],
   "zeroDomViolations": [],
@@ -17,8 +17,8 @@
     },
     {
       "file": "src/main.ts",
-      "lineCount": 2769,
-      "overBudget": 2469
+      "lineCount": 2801,
+      "overBudget": 2501
     },
     {
       "file": "src/ui/ChronicleTourGuide.ts",
