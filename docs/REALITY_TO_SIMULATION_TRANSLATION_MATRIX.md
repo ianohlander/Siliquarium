@@ -97,14 +97,18 @@ Before life evolved complex nervous systems, single cells had to make critical o
 
 In biology, cells make decisions using **protein enzymes**. In Siliquarium, cells make decisions using **electronic logic gates**. Both execute the exact same logical decision-making.
 
-<!-- Figure 1.0: The Four Basic Decision Gates Vector Graphic -->
+> [!NOTE]
+> **The Three Primitives & The Zero-Smuggling Mandate:**  
+> Siliquarium provides strictly **three primitive logic gates** in its prebiotic codon table: `AND`, `OR`, and `NOT`. The simulation engine never grants complex gates like `XOR`, `NAND`, or `NOR` as free primitives. Any higher-order logical operation—such as an `XOR` parity detector—**must be earned through blind mutation and natural selection**, evolved by assembling a 4-gate composite circuit from the three basic primitives.
+
+<!-- Figure 1.0: Three Primitive Gates & One Evolved Landmark -->
 <div class="my-6 p-5 rounded-xl bg-slate-950/90 border border-slate-800 shadow-xl flex flex-col items-center">
-  <div class="text-xs font-semibold text-cyan-400 mb-2 tracking-wider uppercase font-mono">Figure 1.0: The Four Basic Decision Gates</div>
+  <div class="text-xs font-semibold text-cyan-400 mb-2 tracking-wider uppercase font-mono">Figure 1.0: Three Primitive Gates & The Evolved XOR Landmark (Earned, Not Granted)</div>
   <svg viewBox="0 0 760 210" class="w-full max-w-3xl" style="font-family: system-ui, -apple-system, sans-serif;">
     <!-- Gate 1: NOT -->
     <rect x="15" y="15" width="170" height="180" rx="10" fill="#0f172a" stroke="#f43f5e" stroke-width="1.5" />
-    <rect x="25" y="25" width="60" height="20" rx="4" fill="#9f1239" fill-opacity="0.3" stroke="#f43f5e" stroke-width="1" />
-    <text x="55" y="39" fill="#fca5a5" font-size="10" font-weight="bold" text-anchor="middle">NOT GATE</text>
+    <rect x="25" y="25" width="95" height="20" rx="4" fill="#9f1239" fill-opacity="0.3" stroke="#f43f5e" stroke-width="1" />
+    <text x="72" y="39" fill="#fca5a5" font-size="9" font-weight="bold" text-anchor="middle">PRIMITIVE: NOT</text>
     <!-- NOT Symbol: Triangle + Circle -->
     <path d="M 60 70 L 60 110 L 100 90 Z" fill="#1e293b" stroke="#f43f5e" stroke-width="1.8" />
     <circle cx="106" cy="90" r="4.5" fill="#0f172a" stroke="#f43f5e" stroke-width="1.8" />
@@ -116,8 +120,8 @@ In biology, cells make decisions using **protein enzymes**. In Siliquarium, cell
 
     <!-- Gate 2: AND -->
     <rect x="200" y="15" width="170" height="180" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
-    <rect x="210" y="25" width="60" height="20" rx="4" fill="#0369a1" fill-opacity="0.3" stroke="#38bdf8" stroke-width="1" />
-    <text x="240" y="39" fill="#7dd3fc" font-size="10" font-weight="bold" text-anchor="middle">AND GATE</text>
+    <rect x="210" y="25" width="95" height="20" rx="4" fill="#0369a1" fill-opacity="0.3" stroke="#38bdf8" stroke-width="1" />
+    <text x="257" y="39" fill="#7dd3fc" font-size="9" font-weight="bold" text-anchor="middle">PRIMITIVE: AND</text>
     <!-- AND Symbol: D-Shape -->
     <path d="M 245 70 L 270 70 A 20 20 0 0 1 270 110 L 245 110 Z" fill="#1e293b" stroke="#38bdf8" stroke-width="1.8" />
     <line x1="220" y1="80" x2="245" y2="80" stroke="#38bdf8" stroke-width="2" />
@@ -129,8 +133,8 @@ In biology, cells make decisions using **protein enzymes**. In Siliquarium, cell
 
     <!-- Gate 3: OR -->
     <rect x="385" y="15" width="170" height="180" rx="10" fill="#0f172a" stroke="#10b981" stroke-width="1.5" />
-    <rect x="395" y="25" width="60" height="20" rx="4" fill="#065f46" fill-opacity="0.3" stroke="#10b981" stroke-width="1" />
-    <text x="425" y="39" fill="#6ee7b7" font-size="10" font-weight="bold" text-anchor="middle">OR GATE</text>
+    <rect x="395" y="25" width="95" height="20" rx="4" fill="#065f46" fill-opacity="0.3" stroke="#10b981" stroke-width="1" />
+    <text x="442" y="39" fill="#6ee7b7" font-size="9" font-weight="bold" text-anchor="middle">PRIMITIVE: OR</text>
     <!-- OR Symbol: Curved Shield -->
     <path d="M 430 70 Q 450 70 465 90 Q 450 110 430 110 Q 442 90 430 70 Z" fill="#1e293b" stroke="#10b981" stroke-width="1.8" />
     <line x1="410" y1="80" x2="435" y2="80" stroke="#10b981" stroke-width="2" />
@@ -140,10 +144,10 @@ In biology, cells make decisions using **protein enzymes**. In Siliquarium, cell
     <text x="470" y="150" fill="#cbd5e1" font-size="9.5" text-anchor="middle">Fires if Either = 1</text>
     <text x="470" y="172" fill="#34d399" font-size="9.5" font-weight="bold" text-anchor="middle">🔄 Redundant Pathways</text>
 
-    <!-- Gate 4: XOR -->
-    <rect x="570" y="15" width="175" height="180" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" />
-    <rect x="580" y="25" width="60" height="20" rx="4" fill="#78350f" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1" />
-    <text x="610" y="39" fill="#fcd34d" font-size="10" font-weight="bold" text-anchor="middle">XOR CIRCUIT</text>
+    <!-- Gate 4: XOR (Evolved) -->
+    <rect x="570" y="15" width="175" height="180" rx="10" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 2" />
+    <rect x="580" y="25" width="125" height="20" rx="4" fill="#78350f" fill-opacity="0.4" stroke="#f59e0b" stroke-width="1" />
+    <text x="642" y="39" fill="#fcd34d" font-size="8.5" font-weight="bold" text-anchor="middle">EVOLVED GATE: XOR</text>
     <!-- XOR Symbol: Double Curved Shield -->
     <path d="M 610 70 Q 622 90 610 110" fill="none" stroke="#f59e0b" stroke-width="1.8" />
     <path d="M 618 70 Q 638 70 653 90 Q 638 110 618 110 Q 630 90 618 70 Z" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8" />
@@ -151,8 +155,8 @@ In biology, cells make decisions using **protein enzymes**. In Siliquarium, cell
     <line x1="595" y1="100" x2="618" y2="100" stroke="#f59e0b" stroke-width="2" />
     <line x1="653" y1="90" x2="695" y2="90" stroke="#f59e0b" stroke-width="2" />
     <text x="657" y="132" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">PARITY CHECK</text>
-    <text x="657" y="150" fill="#cbd5e1" font-size="9.5" text-anchor="middle">Fires only if Inputs Differ</text>
-    <text x="657" y="172" fill="#fbbf24" font-size="9.5" font-weight="bold" text-anchor="middle">⚖️ Voltage Gradient</text>
+    <text x="657" y="149" fill="#fcd34d" font-size="9" font-weight="bold" text-anchor="middle">⚡ Earned, Not Granted</text>
+    <text x="657" y="170" fill="#cbd5e1" font-size="8.5" text-anchor="middle">Evolved from {OR, AND, NOT, AND}</text>
   </svg>
 </div>
 
@@ -256,7 +260,7 @@ In biology, cells make decisions using **protein enzymes**. In Siliquarium, cell
 
 ---
 
-### 1.4 Detecting a Difference ("The Mismatch Detector")
+### 1.4 Detecting a Difference ("The Mismatch Detector" — An Evolved Gate)
 
 <!-- Vector Schematic: XOR Composite Circuit -->
 <div class="my-4 p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex justify-center">
@@ -272,10 +276,11 @@ In biology, cells make decisions using **protein enzymes**. In Siliquarium, cell
     <line x1="20" y1="85" x2="120" y2="85" stroke="#f59e0b" stroke-width="2" marker-end="url(#arr4)" />
     <text x="65" y="103" fill="#fcd34d" font-size="10.5" font-weight="bold">Channel 2</text>
     <!-- Composite Box representing the 4-gate discovery -->
-    <rect x="130" y="20" width="180" height="90" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8" />
-    <text x="220" y="46" fill="#fcd34d" font-size="11.5" font-weight="bold" text-anchor="middle">XOR COMPOSITE</text>
-    <text x="220" y="66" fill="#cbd5e1" font-size="9" text-anchor="middle">{ OR, AND, NOT, AND }</text>
-    <text x="220" y="86" fill="#94a3b8" font-size="9" text-anchor="middle">Discovered via Evolution</text>
+    <rect x="130" y="20" width="180" height="90" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="4 2" />
+    <text x="220" y="44" fill="#fcd34d" font-size="11.5" font-weight="bold" text-anchor="middle">EVOLVED XOR GATE</text>
+    <text x="220" y="64" fill="#cbd5e1" font-size="9" text-anchor="middle">{ OR, AND, NOT, AND }</text>
+    <text x="220" y="84" fill="#fcd34d" font-size="9" font-weight="bold" text-anchor="middle">⚡ Earned via Evolution</text>
+    <text x="220" y="99" fill="#94a3b8" font-size="8" text-anchor="middle">(Not Granted as a Primitive)</text>
     <!-- Output -->
     <line x1="310" y1="65" x2="480" y2="65" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arr4)" />
     <text x="395" y="55" fill="#fcd34d" font-size="10.5" font-weight="bold" text-anchor="middle">Fires only if 1 ≠ 2</text>
@@ -287,7 +292,7 @@ In biology, cells make decisions using **protein enzymes**. In Siliquarium, cell
 - 🌿 **In Nature (Biology):**  
   **Membrane Polarity Sensors.** Cells constantly compare the electrical charge inside their membrane with the charge outside. If the charges become identical, the cell sounds an alarm and fires ion pumps to restore the gradient.
 - ⚡ **In Siliquarium (Digital Reality):**  
-  **The `XOR` Composite Circuit.** Siliquarium does not hand organisms a pre-packaged XOR gate in their genome. An evolving lineage must construct a 4-gate combination ($\text{OR} \to \text{AND} \to \text{NOT} \to \text{AND}$) to compute XOR behavior, allowing it to harvest energy during alternating vent rhythms.
+  **The `XOR` Composite Circuit (Earned, Not Granted).** Siliquarium does not grant XOR as a primitive. The genetic codon table provides strictly three primitives: `AND`, `OR`, and `NOT`. An XOR gate cannot be granted—it must be earned. An evolving lineage must construct a 4-gate combination ($\text{OR} \to \text{AND} \to \text{NOT} \to \text{AND}$) through blind variation and natural selection to compute XOR behavior, allowing it to harvest energy during alternating vent rhythms.
 
 ---
 
@@ -631,9 +636,10 @@ Life did not remain solitary single cells forever. Living pores evolved to coope
 | **Landauer Cost** | Physical heat fee for changing information | Energetic cost of proofreading & turnover | $-1\text{ energy token}$ burned per gate flip |
 | **Cell Death (Lysis)**| Relaxation of structured order into entropy | Autolysis into scavengeable detrital corpse | Pore state $\to \text{LYSIS}$; carcass tokens left on seafloor |
 | **Cell Division** | Symmetrical replication into open space | Asexual mitosis into adjacent rock cavity | Budding into adjacent pore when $E \ge 100 \land M \ge 40$ |
-| **NOT Gate** | Inversion and veto clamp | Allosteric inhibition / poison shutdown | Inverter turning toxic bit $1 \to 0$ to prevent damage |
-| **AND Gate** | Requiring two conditions simultaneously | Multi-substrate enzyme (fuel + cofactor) | Logic gate crediting $+2\text{ tokens}$ when $A=1 \land B=1$ |
-| **OR Gate** | Backup plan / alternative pathway | Redundant isoenzymes (glucose vs fat) | Gate firing if *either* fuel stream is active |
+| **NOT Gate** | Inversion and veto clamp | Allosteric inhibition / poison shutdown | Primitive inverter turning toxic bit $1 \to 0$ to prevent damage |
+| **AND Gate** | Requiring two conditions simultaneously | Multi-substrate enzyme (fuel + cofactor) | Primitive logic gate crediting $+2\text{ tokens}$ when $A=1 \land B=1$ |
+| **OR Gate** | Backup plan / alternative pathway | Redundant isoenzymes (glucose vs fat) | Primitive gate firing if *either* fuel stream is active |
+| **Evolved XOR Gate** | Difference & parity detection | Membrane electrical polarity sensor | **Earned, not granted**; 4-gate composite {OR, AND, NOT, AND} |
 | **Noise Filter (FFL)**| Refusing to react to momentary blips | Arabinose operon in *E. coli* bacteria | Delayed dual-line circuit ignoring 1-tick vent spikes |
 | **Memory Latch** | Locking in state and remembering it | Genetic toggle switch / stem cell identity | Cross-coupled gates holding state $Q=1$ across lean droughts |
 | **Internal Clock** | Rhythmic pacing without an external clock | Circadian KaiABC clock in cyanobacteria | Odd-inverter ring oscillator pulsing periodically |
