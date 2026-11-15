@@ -113,6 +113,7 @@ const NAV_CATEGORIES = [
     name: 'QA & Field Evaluations',
     icon: '🔍',
     items: [
+      { id: 'qa-edu-review', title: 'Educational & Cognitive Review', href: 'QA/EDUCATIONAL_DESIGN_COMPREHENSIVE_REVIEW.html', icon: '🎓', desc: 'Comprehensive learning sciences & cognitive ergonomics audit' },
       { id: 'qa-coding-standards', title: 'QA Coding Standards Audit', href: 'QA/QA_CODING_STANDARDS_FULL_AUDIT_REPORT.html', icon: '🏛️', desc: 'Comprehensive audit against DEVELOPMENT, QA & DOCS standards' },
       { id: 'qa-ux-audit', title: 'UX Architecture Audit & Redesign', href: 'QA/UX_ARCHITECTURE_AUDIT_AND_REDESIGN.html', icon: '📐', desc: '5D HCI audit, domain integrity & interface redesign' },
       { id: 'qa-panel-report', title: 'Panel Evaluation Report', href: 'QA/PANEL_UX_EVALUATION_REPORT.html', icon: '🏛️', desc: 'Expert & tester panel 4x 1-hour journeys' },
@@ -1584,6 +1585,13 @@ const DOCS_MAP = [
     destHtml: 'docs/BRAND_IDENTITY.html',
     title: 'Brand Identity & Visual Philosophy',
     relativeRoot: ''
+  },
+  {
+    docId: 'qa-edu-review',
+    srcMd: 'QA/EDUCATIONAL_DESIGN_COMPREHENSIVE_REVIEW.md',
+    destHtml: 'QA/EDUCATIONAL_DESIGN_COMPREHENSIVE_REVIEW.html',
+    title: 'Educational Publishing & Cognitive Ergonomics Comprehensive Review',
+    relativeRoot: '../docs/'
   },
   {
     docId: 'qa-coding-standards',
