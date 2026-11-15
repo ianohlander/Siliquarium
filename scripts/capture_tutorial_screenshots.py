@@ -165,7 +165,7 @@ def main():
         print('\n--- 0. Course Orientation Modal ---')
         cdp.eval('window.siliquariumApp.getCourseController().show();')
         time.sleep(1.5)
-        cdp.capture_screenshot(os.path.join(out_dir, 'tutorial_course_modal.png'), crop_box=(250, 40, 1670, 960))
+        cdp.capture_screenshot(os.path.join(out_dir, 'tutorial_course_modal.png'), crop_box=(230, 30, 1690, 970))
         cdp.eval('window.siliquariumApp.getCourseController().hide();')
         time.sleep(0.8)
 
@@ -294,7 +294,8 @@ def main():
         })()
         ''')
         time.sleep(2)
-        cdp.capture_screenshot(os.path.join(out_dir, 'practicum4_guided_safari_copilot.png'), crop_box=(20, 40, 1900, 1040))
+        # Crop directly to the right-hand Safari Copilot panel for maximum legibility
+        cdp.capture_screenshot(os.path.join(out_dir, 'practicum4_guided_safari_copilot.png'), crop_box=(940, 30, 1920, 1050))
         cdp.eval('document.getElementById("btn-mode-observatory")?.click();')
         time.sleep(0.8)
 
@@ -310,7 +311,8 @@ def main():
         print('\n--- 9. Chronicle Historical Kinematics ---')
         cdp.eval('document.getElementById("btn-mode-chronicle")?.click();')
         time.sleep(2)
-        cdp.capture_screenshot(os.path.join(out_dir, 'practicum5_chronicle_playback.png'), crop_box=(150, 680, 1770, 1050))
+        # Capture bottom transport bar plus historical trajectory in seafloor view above it
+        cdp.capture_screenshot(os.path.join(out_dir, 'practicum5_chronicle_playback.png'), crop_box=(150, 480, 1770, 1050))
         cdp.eval('document.getElementById("btn-mode-observatory")?.click();')
         time.sleep(0.8)
 
@@ -318,7 +320,8 @@ def main():
         print('\n--- 10. Design Studio 3D Bathymetric CAD ---')
         cdp.eval('document.getElementById("btn-mode-studio")?.click();')
         time.sleep(2)
-        cdp.capture_screenshot(os.path.join(out_dir, 'practicum6_design_studio.png'), crop_box=(20, 50, 1900, 1030))
+        # Crop to CAD sculpting tools, brush selectors, and central sculpted terrain
+        cdp.capture_screenshot(os.path.join(out_dir, 'practicum6_design_studio.png'), crop_box=(20, 40, 1500, 1040))
         cdp.eval('document.getElementById("btn-mode-observatory")?.click();')
         time.sleep(0.8)
 
@@ -355,7 +358,8 @@ def main():
         })()
         ''')
         time.sleep(1.5)
-        cdp.capture_screenshot(os.path.join(out_dir, 'practicum7_deeplab_export.png'), crop_box=(100, 0, 650, 350))
+        # Frame Deep Lab header bar and open export options cleanly
+        cdp.capture_screenshot(os.path.join(out_dir, 'practicum7_deeplab_export.png'), crop_box=(80, 10, 850, 480))
 
         # 14. Practicum 11: The Abyssal Arena Dual Portal Mode
         print('\n--- 14. Abyssal Arena Battler & Tactical HUD ---')

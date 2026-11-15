@@ -310,6 +310,7 @@
 
       // Sidebar & Dropdown Controller
       const toggleBtn = document.getElementById('sidebar-toggle-btn');
+      const floatingBtn = document.getElementById('floating-index-btn');
       const closeBtn = document.getElementById('sidebar-close-btn');
       const sidebar = document.getElementById('doc-sidebar');
       const backdrop = document.getElementById('sidebar-backdrop');
@@ -332,8 +333,23 @@
       }
 
       if (toggleBtn) toggleBtn.addEventListener('click', openSidebar);
+      if (floatingBtn) floatingBtn.addEventListener('click', openSidebar);
       if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
       if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && sidebar && !sidebar.classList.contains('-translate-x-full')) {
+          closeSidebar();
+        }
+      });
+
+      if (sidebar) {
+        sidebar.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            closeSidebar();
+          });
+        });
+      }
 
       if (dropdownBtn && dropdownMenu) {
         dropdownBtn.addEventListener('click', function(e) {
@@ -355,10 +371,10 @@
   <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
-        <!-- Mobile/Drawer Toggle Button -->
-        <button id="sidebar-toggle-btn" class="lg:hidden p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 transition-colors font-mono text-xs flex items-center gap-1.5 shrink-0" aria-label="Toggle Navigation">
-          <span>☰</span>
-          <span class="hidden sm:inline">Docs Menu</span>
+        <!-- Flyout Navigation Drawer Button (Always Available) -->
+        <button id="sidebar-toggle-btn" class="px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 hover:text-cyan-400 transition-colors font-mono text-xs flex items-center gap-1.5 shrink-0 cursor-pointer shadow-sm" aria-label="Toggle Navigation Index">
+          <span class="text-sm">☰</span>
+          <span class="font-bold tracking-wide">Index</span>
         </button>
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
@@ -799,16 +815,19 @@
     </div>
   </header>
 
-  <!-- MASTER 2-COLUMN VIEWPORT (Sidebar + Content) -->
-  <div class="max-w-7xl mx-auto flex-1 w-full flex">
-    <!-- LEFT CATEGORIZED SIDEBAR (Desktop Sticky + Mobile Off-Canvas) -->
-    <aside id="doc-sidebar" class="fixed lg:sticky top-0 lg:top-[45px] z-50 lg:z-10 h-screen lg:h-[calc(100vh-45px)] w-72 bg-[#060911]/95 lg:bg-transparent backdrop-blur-xl lg:backdrop-blur-none border-r border-slate-800/80 p-5 space-y-6 overflow-y-auto shrink-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-200">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800 lg:hidden">
+  <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
+  <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
+    <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
           <span class="text-xs font-mono font-bold text-cyan-400">Documentation Index</span>
         </div>
-        <button id="sidebar-close-btn" class="text-slate-400 hover:text-white text-base font-mono p-1">✕</button>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] text-slate-500 font-mono hidden sm:inline">Esc</span>
+          <button id="sidebar-close-btn" class="text-slate-400 hover:text-white text-base font-mono p-1 rounded hover:bg-slate-800 transition-colors" title="Close Flyout Index">✕</button>
+        </div>
       </div>
       <div class="space-y-1">
       <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold px-3 py-1 flex items-center gap-1.5">
@@ -1038,12 +1057,12 @@
       </a></div></div>
     </aside>
 
-    <!-- Mobile Drawer Backdrop -->
-    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+    <!-- Flyout Drawer Backdrop -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
 
-    <!-- MAIN CONTENT VIEWPORT (Centered, Responsive, Zero Horizontal Scrollbars) -->
-    <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-10 py-8 md:py-10">
-      <div class="max-w-4xl mx-auto space-y-8">
+    <!-- MAIN CONTENT VIEWPORT (Full Horizontal Space, Responsive) -->
+    <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-12 py-8 md:py-12">
+      <div class="max-w-6xl mx-auto space-y-8">
         <h1 id="advanced-systems-biology-silicon-abiogenesis-the-master-pedagogical-companion-suite" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🏛️ Advanced Systems Biology & Silicon Abiogenesis: The Master Pedagogical Companion Suite</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Theoretical Treatise, Modular Architecture Portal, Analytical Scaffolding, and Assessment Framework for Collegiate and Advanced Secondary STEM Education</em></p>
 <hr class="border-t border-slate-800 my-8" />
@@ -1202,6 +1221,12 @@
 <p class="leading-relaxed font-sans text-xs my-1.5"><a href="companion/glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Lexicon of Systems Biology & Silicon Abiogenesis</a> | <a href="companion/study_guides.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🧭 Study Guides & Equation Decoders</a> | <a href="companion/bibliography.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🎓 Curriculum & Syllabus</a></p></div></div>
       </div>
     </main>
+
+    <!-- Floating Quick-Index Pill for Long Scrolling Pages -->
+    <button id="floating-index-btn" class="fixed bottom-6 left-6 z-30 px-3.5 py-2 rounded-full bg-slate-900/95 hover:bg-slate-800 text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 shadow-2xl backdrop-blur-md font-mono text-xs flex items-center gap-2 cursor-pointer transition-all hover:scale-105" title="Open Documentation Index (Flyout)">
+      <span class="text-sm">☰</span>
+      <span class="font-bold">Index</span>
+    </button>
   </div>
 
   <!-- MASTER FOOTER -->
