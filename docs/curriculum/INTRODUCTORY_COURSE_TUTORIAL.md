@@ -95,8 +95,8 @@ flowchart TD
         subgraph Workshop["The Pore Workshop (Rate-Dependent)"]
             Netlist["CMOS Boolean Logic Netlist<br>Primitive gates (AND, OR, NOT) & evolved circuits (XOR)<br>Burns Landauer switching heat • Charges battery"]
         end
-        Safe ===>|"Cytokinesis (Template Replication)"| Safe
-        Safe -.->|"Translation (Codon Decoding)"| Workshop
+        Tape ===>|"Cytokinesis (Template Replication)"| Tape
+        Tape -.->|"Translation (Codon Decoding)"| Netlist
     end
 ```
 
