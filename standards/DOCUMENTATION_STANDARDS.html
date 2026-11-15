@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="../docs/index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="../docs/assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="../docs/assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Documentation &amp; Pedagogical Standards</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Documentation &amp; Pedagogical Standards</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="../docs/assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1077,10 +1091,10 @@
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="1-the-5-dimension-conceptual-pedagogical-rubric" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. The 5-Dimension Conceptual Pedagogical Rubric</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">All documentation, tutorials, and academic treatises in Siliquarium must meet institutional-grade teaching standards evaluated across five strict dimensions (targeting a perfect 50/50 score):</p>
-<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Dimension</th><th class="p-3.5 font-semibold">Standard</th><th class="p-3.5 font-semibold">How to Implement in Siliquarium</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D1: Visceral Intuition & Foundational Motivation</strong></td><td class="p-3.5 leading-relaxed">Never drop a student into formal mathematics without establishing the physical stakes and intuitive motivation first.</td><td class="p-3.5 leading-relaxed">Open every chapter by explaining <em class="text-slate-200 italic">why</em> an organism faces an existential crisis (e.g., the dilution catastrophe, the danger of thermal noise, the struggle for limited vent calories).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D2: The Gradient of Abstraction</strong></td><td class="p-3.5 leading-relaxed">Build a gentle, continuous bridge from everyday common sense to formal mechanics. Avoid "complexity cliffs."</td><td class="p-3.5 leading-relaxed">Never jump straight from a metaphor to a differential equation or measure-theoretic summation. Introduce a 2-bit toy example first, then generalize.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D3: Deconstructive Equation Anatomy</strong></td><td class="p-3.5 leading-relaxed">Every formula must be accompanied by a Multi-Color "Equation Decoder" breaking down each algebraic variable.</td><td class="p-3.5 leading-relaxed">Color-code terms in the formula using the standard multi-color palette (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#38bdf8}</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#34d399}</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#fbbf24}</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#f43f5e}</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#c084fc}</code>) and provide matching color swatches in the 3-part breakdown: (1) Colored formal symbol, (2) Plain-English meaning, (3) Physical biological consequence.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D4: Concrete Micro-Scaffolding & Toy Pre-Traces</strong></td><td class="p-3.5 leading-relaxed">Provide concrete, worked numerical traces before showing large-scale aggregate results.</td><td class="p-3.5 leading-relaxed">Include worked step-by-step trace tables showing a single pore over 5 ticks (e.g., Tick 1: Battery = 50, Vent pulse = 1, Gate toggles = 2, Net Tokens = +3).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D5: Conceptual Misconception Immunity</strong></td><td class="p-3.5 leading-relaxed">Proactively identify and dismantle common student and skeptic misunderstandings before they take root.</td><td class="p-3.5 leading-relaxed">Include explicit "Skeptic FAQ" callouts addressing teleology, "smuggled intelligence," and the difference between mutating code vs mutating bodies.</td></tr></tbody></table></div>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Dimension</th><th class="p-3.5 font-semibold">Standard</th><th class="p-3.5 font-semibold">How to Implement in Siliquarium</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D1: Visceral Intuition & Foundational Motivation</strong></td><td class="p-3.5 leading-relaxed">Never drop a investigator into formal mathematics without establishing the physical stakes and intuitive motivation first.</td><td class="p-3.5 leading-relaxed">Open every chapter by explaining <em class="text-slate-200 italic">why</em> an organism faces an existential crisis (e.g., the dilution catastrophe, the danger of thermal noise, the struggle for limited vent calories).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D2: The Gradient of Abstraction</strong></td><td class="p-3.5 leading-relaxed">Build a gentle, continuous bridge from everyday common sense to formal mechanics. Avoid "complexity cliffs."</td><td class="p-3.5 leading-relaxed">Never jump straight from a metaphor to a differential equation or measure-theoretic summation. Introduce a 2-bit toy example first, then generalize.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D3: Deconstructive Equation Anatomy</strong></td><td class="p-3.5 leading-relaxed">Every formula must be accompanied by a Multi-Color "Equation Decoder" breaking down each algebraic variable.</td><td class="p-3.5 leading-relaxed">Color-code terms in the formula using the standard multi-color palette (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#38bdf8}</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#34d399}</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#fbbf24}</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#f43f5e}</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">\color{#c084fc}</code>) and provide matching color swatches in the 3-part breakdown: (1) Colored formal symbol, (2) Plain-English meaning, (3) Physical biological consequence.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D4: Concrete Micro-Scaffolding & Toy Pre-Traces</strong></td><td class="p-3.5 leading-relaxed">Provide concrete, worked numerical traces before showing large-scale aggregate results.</td><td class="p-3.5 leading-relaxed">Include worked step-by-step trace tables showing a single pore over 5 ticks (e.g., Tick 1: Battery = 50, Vent pulse = 1, Gate toggles = 2, Net Tokens = +3).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D5: Conceptual Misconception Immunity</strong></td><td class="p-3.5 leading-relaxed">Proactively identify and dismantle common investigator and skeptic misunderstandings before they take root.</td><td class="p-3.5 leading-relaxed">Include explicit "Skeptic FAQ" callouts addressing teleology, "smuggled intelligence," and the difference between mutating code vs mutating bodies.</td></tr></tbody></table></div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="2-the-non-engineer-accessibility-mandate" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. The Non-Engineer Accessibility Mandate</h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium is designed to be understood by biologists, students, curious thinkers, and non-engineers. <strong class="text-slate-100 font-semibold">Engineering jargon must never be used as a substitute for clear explanation.</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium is designed to be understood by biologists, investigators, curious thinkers, and non-engineers. <strong class="text-slate-100 font-semibold">Engineering jargon must never be used as a substitute for clear explanation.</strong></p>
 <h3 id="the-four-sacred-analogies" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">The Four Sacred Analogies</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When explaining Siliquarium mechanics, always anchor explanations to these foundational metaphors:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
@@ -1100,7 +1114,7 @@
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="3-multi-color-equation-decoder-anatomy-format-standing-mandate" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Multi-Color Equation Decoder Anatomy Format (Standing Mandate)</h2>
 <blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🎨 Standing Mandate: Universal Multi-Color Visual Decoding</div>
-<p class="leading-relaxed font-sans text-xs my-1.5">Many students, naturalists, and non-mathematicians will not be proficient with abstract algebraic notation. Mathematical formulas must not act as barrier gates; they must tell a clear visual story about physical and biological relationships.</p>
+<p class="leading-relaxed font-sans text-xs my-1.5">Many investigators, naturalists, and non-mathematicians will not be proficient with abstract algebraic notation. Mathematical formulas must not act as barrier gates; they must tell a clear visual story about physical and biological relationships.</p>
 <p class="leading-relaxed font-sans text-xs my-1.5">Therefore, <strong class="text-slate-100 font-semibold">every equation across the entire documentation suite must use multiple distinct colors for each expression</strong>, and <strong class="text-slate-100 font-semibold">every decoder bullet must match its term's exact color</strong>. This allows any reader to effortlessly map mathematical symbols directly to their intuitive physical meanings.</p></blockquote>
 <h3 id="standard-color-palette" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Standard Color Palette</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">All equations and decoders must adhere to the standardized 5-color semantic palette:</p>
@@ -1183,14 +1197,14 @@
 <h2 id="6-strict-prohibition-of-fictitious-persons-instructors-user-demographic-assumptions-standing-mandate" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">6. Strict Prohibition of Fictitious Persons, Instructors & User Demographic Assumptions (Standing Mandate)</h2>
 <blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">📜 Standing Mandate: Professional Neutrality, Objective Institutional Voice & Zero Fictitious Attribution</div>
 <p class="leading-relaxed font-sans text-xs my-1.5">All documentation, specifications, tutorials, field guides, application UI, and QA audit reports in Siliquarium must be authored in an authoritative, objective, professional, and neutral voice. <strong class="text-slate-100 font-semibold">The invention or referencing of fictitious persons, imaginary researchers, fictional professors, instructors, guides, universities, departments, or institutes is strictly prohibited at all times.</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">Furthermore, all public-facing documentation and application UI must maintain strict professional neutrality across the board: <strong class="text-slate-100 font-semibold">never assume any position, age, status, educational level, or other trait of users (do not assume students, hobbyists, or any other demographic).</strong></p></blockquote>
+<p class="leading-relaxed font-sans text-xs my-1.5">Furthermore, all public-facing documentation and application UI must maintain strict professional neutrality across the board: <strong class="text-slate-100 font-semibold">never assume any position, age, status, educational level, or other trait of users (do not assume investigators, hobbyists, or any other demographic).</strong></p></blockquote>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Zero Fictitious Personas or Characters:</strong>  </li>
 <li>At NO TIME will any public-facing documentation, curriculum, tutorial, marketing asset, or application UI contain the names of imaginary people. Never invent or pretend regarding professors, instructors, fictional guides, or personas (e.g., no fictional "Prof. Elena Vance", "Dr. Evelyn Vance-Wolpert", "Dr. Vance", "Alex Rivera", "Jordan Hayes", "Dr. Rostova", "Julian Mercer", "Jack Vance", or similar character roleplays).</li>
 <li>In audits, usability reviews, and QA evaluations, describe observations strictly from the perspective of objective user interactions, functional system workflows, and technical criteria.</li>
 <li><strong class="text-slate-100 font-semibold">Universal Professional Neutrality (Zero Demographic Assumptions):</strong></li>
 <li>Documentation and UI text must never assume the user's role, background, age, or status.</li>
-<li>Do not refer to users as "students", "scholars", "hobbyists", "undergraduates", or "gamers" unless describing a formal external academic course syllabus or game portal module.</li>
+<li>Do not refer to users as "investigators", "scholars", "hobbyists", "investigators", or "gamers" unless describing a formal external academic course syllabus or game portal module.</li>
 <li>Address the reader/user with professional, objective, technical precision.</li>
 <li><strong class="text-slate-100 font-semibold">Academic Provenance & Scientific Integrity:</strong>  </li>
 <li>All historical foundations, mathematical models, and scientific citations must refer exclusively to <strong class="text-slate-100 font-semibold">real, published peer-reviewed researchers and historical literature</strong> (e.g., Howard Pattee, Rolf Landauer, Stuart Kauffman, Lewis Wolpert, Alan Turing, Uri Alon, Lynn Margulis, W. D. Hamilton, Motoo Kimura, Susumu Ohno, Michael Russell, Nick Lane).</li>
@@ -1219,7 +1233,7 @@
 <li><em class="text-slate-200 italic">Domain Scope:</em> Empirical taxonomy of evolved digital life, Weisfeiler-Lehman graph isomorphism hashing, fossil netlists, and the 15 canonical circuit archetypes.</li>
 <li><em class="text-slate-200 italic">Boundary Constraint:</em> Focuses on historical/fossil specimens; cross-references theoretical proofs in Volumes 1–3.</li>
 <li><strong class="text-slate-100 font-semibold">Volume 5: Illustrated Systems Manual & Laboratory Practicums</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/USER_GUIDE.md</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/curriculum/practicums_lab_manual.md</code>)</li>
-<li><em class="text-slate-200 italic">Domain Scope:</em> Operating the simulation software, camera controls, CAD terrain sculptors, live oscilloscope, God-suite parameters, and structured student laboratory exercises.</li>
+<li><em class="text-slate-200 italic">Domain Scope:</em> Operating the simulation software, camera controls, CAD terrain sculptors, live oscilloscope, God-suite parameters, and structured investigator laboratory exercises.</li>
 <li><em class="text-slate-200 italic">Boundary Constraint:</em> Focuses on software interactions and experiment procedures; relies on Volumes 1–4 for theoretical explanations.</li>
 <li><strong class="text-slate-100 font-semibold">Master Companion Suite</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/companion/glossary.md</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/companion/study_guides.md</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/companion/bibliography.md</code>)</li>
 <li><em class="text-slate-200 italic">Domain Scope:</em> Centralized reference repository providing the master 70+ term lexicon, comprehensive multi-color equation decoders, and primary literature citations.</li>
@@ -1249,13 +1263,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

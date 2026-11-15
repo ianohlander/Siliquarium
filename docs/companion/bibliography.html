@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="../index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="../assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="../assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Annotated Primary Literature Bibliography</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Annotated Primary Literature Bibliography</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="../assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1075,8 +1089,13 @@
         <h1 id="critical-academic-endnotes-exhaustive-annotated-primary-literature-bibliography" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">📚 Critical Academic Endnotes & Exhaustive Annotated Primary Literature Bibliography</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Authoritative Contextualization of 32 Landmark Peer-Reviewed Publications in Biophysics, Cybernetics, Synthetic Biology, Evolutionary Genetics, Developmental Systems Biology, and Evolutionary Information Theory</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Modular Companion Suite Navigation:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Companion Portal</a> | <a href="glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Lexicon & Glossary</a> | <a href="study_guides.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🧭 Study Guides & Equation Decoders</a> | <a href="../CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🎓 Curriculum & Syllabus</a></p></div></div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Modular Companion Suite Navigation:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5"><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Companion Portal</a> | <a href="glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Lexicon & Glossary</a> | <a href="study_guides.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🧭 Study Guides & Equation Decoders</a> | <a href="../CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🎓 Curriculum & Syllabus</a></p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="1-peter-mitchell-1961" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Peter Mitchell (1961) <span id="mitchell1961"></span><span id="ref-1"></span></h2>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
@@ -1084,7 +1103,7 @@
 <li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Biological energy transduction does not proceed via hypothetical high-energy chemical intermediates, but via a transmembrane electrochemical potential difference of protons (chemiosmosis).</li>
 <li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Mitchell established that biological membranes must be fundamentally impermeable to ions. Enzymes embedded in the membrane pump protons outward during electron transport, storing free energy electrostatically and chemically ($\Delta p = \Delta \psi - \frac{2.303 RT}{F} \Delta \text{pH}$). The return flux of protons through a reversible ATPase motor drives ATP synthesis from ADP and $P_i$.</li>
 <li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Embodied in the pore boundary bioenergetics of <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/physics/VentPhysics.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">VentPhysics.ts</code></a> and <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreBattery.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreBattery.ts</code></a>. Organisms do not receive energy from an abstract score; they extract free energy from the potential difference between incoming hydrothermal bit streams and the ocean sink.</li>
-<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Disabuses students of the misconception that ATP is a "magic fuel tablet." Replaces chemical mystique with physical circuit analysis: the membrane is a capacitor, the proton gradient is a voltage source, and metabolism is current flow.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Disabuses investigators of the misconception that ATP is a "magic fuel tablet." Replaces chemical mystique with physical circuit analysis: the membrane is a capacitor, the proton gradient is a voltage source, and metabolism is current flow.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="2-michael-j-russell-allan-j-hall-1997" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Michael J. Russell & Allan J. Hall (1997) <span id="russell1997"></span><span id="ref-2"></span></h2>
@@ -1115,7 +1134,7 @@
 <li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Life is uniquely defined in the physical universe by the <strong class="text-slate-100 font-semibold">Epistemic Cut</strong>—the non-reducible complementarity between rate-independent symbolic informational descriptions and rate-dependent continuous physical laws.</li>
 <li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Physical laws are inexorable, time-dependent, and governed by differential equations. A symbolic code (e.g., DNA or formal computer language) is rate-independent: its instructional meaning does not depend on the velocity of physical transcription. Physical dynamics cannot generate symbolic constraints without a measurement/reading apparatus, and symbolic codes cannot alter the world without rate-dependent physical actuators.</li>
 <li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> The architectural partition between <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/GenomeSafe.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GenomeSafe.ts</code></a> (inert, time-invariant 60-bit strings) and <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop.ts</code></a> (active, power-consuming, rate-dependent logic gate evaluations).</li>
-<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Serves as the antidote to naive reductionism. Teaches students that life cannot be understood purely as chemistry (which ignores symbolic code) or purely as software (which ignores thermodynamic constraints).</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Serves as the antidote to naive reductionism. Teaches investigators that life cannot be understood purely as chemistry (which ignores symbolic code) or purely as software (which ignores thermodynamic constraints).</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="5-john-von-neumann-1966" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. John von Neumann (1966) <span id="vonneumann1966"></span><span id="ref-5"></span></h2>
@@ -1144,7 +1163,7 @@
 <li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Biological networks are not random hairballs; they are constructed from small, recurring structural wiring patterns ("network motifs") that appear far more frequently than expected by chance because they perform fundamental, robust information processing tasks.</li>
 <li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Using graph comparison against randomized degree-preserved networks ($Z$-score analysis), Alon identified recurring subgraphs: negative autoregulation (accelerating response times), positive feedback (bistability and epigenetic memory), and feed-forward loops (sign-sensitive delays and pulse generators).</li>
 <li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> The core paleontology scanning engine in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">MotifScanner.ts</code></a>, which scans living and fossilized gate netlists for bistable toggle switches, ring oscillators, and feed-forward loops.</li>
-<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Provides students with a systematic framework for reverse-engineering complex biological systems into understandable functional building blocks.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Provides investigators with a systematic framework for reverse-engineering complex biological systems into understandable functional building blocks.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="8-timothy-s-gardner-charles-r-cantor-james-j-collins-2000" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">8. Timothy S. Gardner, Charles R. Cantor, & James J. Collins (2000) <span id="gardner2000"></span><span id="ref-8"></span></h2>
@@ -1174,7 +1193,7 @@
 <li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Macro-evolutionary adaptation decelerates asymptotically over generational time; complex novel features (such as citrate aerobic metabolism, $Cit^+$) depend strictly upon antecedent historical contingency and genetic potentiation.</li>
 <li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> By propagating 12 asexual populations of <em class="text-slate-200 italic">E. coli</em> since 1988 with periodic cryopreservation ("frozen fossil records"), Lenski proved that adaptation follows a power-law trajectory. Furthermore, replaying frozen ancestral strains from before Generation 31,500 proved that the evolution of citrate metabolism was historically contingent upon prior neutral or non-adaptive mutations that potentiated the genome.</li>
 <li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Directly instantiated in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LteeBenchmark.ts</code></a> and <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/FossilFreezer.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">FossilFreezer.ts</code></a>. The simulator maintains frozen snapshots of ancestral genomes, allowing counterfactual replays and single-bit autopsies.</li>
-<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Replaces abstract evolutionary debates with empirical experimental data, showing students that evolution is an open-ended, empirically testable physical process.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Replaces abstract evolutionary debates with empirical experimental data, showing investigators that evolution is an open-ended, empirically testable physical process.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="11-motoo-kimura-1968-1983" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">11. Motoo Kimura (1968 & 1983) <span id="kimura1968"></span><span id="kimura1983"></span><span id="ref-11"></span></h2>
@@ -1185,7 +1204,7 @@
 <li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> The vast majority of evolutionary substitutions at the molecular sequence level are selectively neutral or nearly neutral, governed by stochastic genetic drift rather than positive Darwinian selection.</li>
 <li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Kimura calculated that the molecular rate of amino acid substitution across mammalian lineages was extraordinarily rapid and constant across time. Under classical selectionism, this rate would impose an intolerable "cost of selection" (Haldane's dilemma). By proving that the neutral substitution rate $k = u$, Kimura demonstrated that molecular evolution is driven by random drift acting on neutral mutations.</li>
 <li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Implemented via non-coding introns (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">INTRON_SILENT</code>) and synonymous degenerate codons in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CodonTable.ts</code></a>. Lineages drift across neutral Hamming paths (blue edges in the fossil trajectory) without metabolic penalty.</li>
-<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Inoculates students against vulgar pan-selectionism, emphasizing that molecular diversity is largely the signature of neutral drift.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Inoculates investigators against vulgar pan-selectionism, emphasizing that molecular diversity is largely the signature of neutral drift.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="12-susumu-ohno-1970" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">12. Susumu Ohno (1970) <span id="ohno1970"></span><span id="ref-12"></span></h2>
@@ -1221,7 +1240,7 @@
 <li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> The genome does not generate biological information <em class="text-slate-200 italic">ex nihilo</em>; it is an ancestral palimpsest—an inverse photographic negative or physical carving sculpted by the environment that created it. The environment is the ultimate fountainhead of biological information.</li>
 <li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Every gene, physiological pathway, and anatomical organ in a living organism is an encoded physical description of ancestral worlds. Camels carry descriptions of Pleistocene dunes; deep-sea fish carry descriptions of abyssal pressures; extremophile enzymes carry descriptions of hydrothermal chimneys. Natural selection acts as the physical chisel: organisms possessing variations incongruent with environmental regularities are thermodynamically culled, leaving surviving genomes as high-fidelity mirrors of their selective histories.</li>
 <li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> The core thesis of the simulation and digital paleontology engine. Silicoid 60-bit genomes (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/GenomeSafe.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GenomeSafe.ts</code></a>) and gate circuits (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop.ts</code></a>) evolve not to satisfy arbitrary human fitness goals, but to survive thermodynamic hydrothermal pulses, diurnal fluctuations, and predator-prey dynamics (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationWorld.ts</code></a>). The Digital Paleontologist (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">MotifScanner.ts</code></a>) reads these circuits as physical chapters of the ancestral Book of the Dead.</li>
-<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Provides students with the ultimate philosophical resolution to creationist challenges: mutations provide raw entropy (noise), but the environment provides the information. Selection is the physical communication channel transcribing environmental order into symbolic code.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Provides investigators with the ultimate philosophical resolution to creationist challenges: mutations provide raw entropy (noise), but the environment provides the information. Selection is the physical communication channel transcribing environmental order into symbolic code.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="16-christoph-adami-charles-ofria-travis-c-collier-2000-2004-2012" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">16. Christoph Adami, Charles Ofria, & Travis C. Collier (2000, 2004, 2012) <span id="adami2000"></span><span id="adami2004"></span><span id="adami2012"></span><span id="ref-16"></span></h2>
@@ -1233,7 +1252,7 @@
 <li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Physical genomic complexity is mathematically identical to the <strong class="text-slate-100 font-semibold">mutual information</strong> between the genome sequence $X$ and the physical environment $E$: $C(X) = I(X; E) = H(E) - H(E \mid X)$. A random genome has zero complexity because it contains zero information about its niche.</li>
 <li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Adami reconciled Shannon information theory with evolutionary biology by proving that sequence length alone is an uninformative metric (the C-value enigma). True biological information is the amount by which an organism's genomic sequence reduces its conditional uncertainty regarding how to survive in environment $E$. In a static environment, selection drives $I(X; E) \to H(E)$ up to the informational capacity of the genome.</li>
 <li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Quantified in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/analysis/CircuitAdvantageAnalyzer.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CircuitAdvantageAnalyzer.ts</code></a> and <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LteeBenchmark.ts</code></a>. When abiotic hydrothermal bit-streams feature periodic or correlated statistical structure, evolved logic gates reduce conditional uncertainty, yielding higher metabolic token harvesting efficiency.</li>
-<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Equips students with a rigorous, quantifiable mathematical formula for biological complexity, stripping away theological and teleological ambiguity.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Equips investigators with a rigorous, quantifiable mathematical formula for biological complexity, stripping away theological and teleological ambiguity.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="17-motoo-kimura-1961" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">17. Motoo Kimura (1961) <span id="kimura1961"></span><span id="ref-17"></span></h2>
@@ -1365,7 +1384,7 @@
 <li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> The evolution of multicellular individuality requires the suppression of lower-level cell lineage competition; somatic sequestration and maternal developmental control evolved to police selfish cellular mutational variants.</li>
 <li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> In primitive multicellular organisms without sequestered germlines, mutant cell lineages that reproduce faster at the expense of somatic function act as cancers. True higher-level individuality emerges only when embryonic mechanisms enforce strict coordination and channel all reproductive potential through specialized reproductive propagules (spores or gametes).</li>
 <li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Codified in the transition between benthic clonal syncytia and pelagic sporulation (<a href="../paleontology/specimen_10_pelagic_sporulation.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">specimen_10_pelagic_sporulation.md</code></a>). Pelagic spores pass through a single-cell bottleneck, resetting genetic relatedness to $r = 1.0$ and purging somatic cheaters.</li>
-<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Teaches students that biological individuality is not an axiomatic starting condition, but an evolved historical achievement maintained by conflict-suppressing adaptations.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Teaches investigators that biological individuality is not an axiomatic starting condition, but an evolved historical achievement maintained by conflict-suppressing adaptations.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="31-lynn-margulis-1970" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">31. Lynn Margulis (1970) <span id="margulis1970"></span><span id="ref-31"></span></h2>
@@ -1374,7 +1393,7 @@
 <li><strong class="text-slate-100 font-semibold">Foundational Theoretical Thesis:</strong> Major evolutionary innovations occur through <strong class="text-slate-100 font-semibold">Serial Endosymbiosis</strong>, wherein distinct prokaryotic lineages merge into obligate mutually dependent composite super-organisms (eukaryotes).</li>
 <li><strong class="text-slate-100 font-semibold">Epistemological & Biophysical Mechanism:</strong> Margulis proved that mitochondria and chloroplasts originated as free-living alphaproteobacteria and cyanobacteria engulfed by an archaeal host. Over evolutionary time, horizontal gene transfer transferred organellar genes to the host nucleus, trapping both partners in an irreversible obligate metabolic mutualism.</li>
 <li><strong class="text-slate-100 font-semibold">Operational Realization in Siliquarium:</strong> Embodied in the endosymbiotic cassette mechanics of Specimen 08 (<a href="../paleontology/specimen_08_endosymbiotic_cassette.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">specimen_08_endosymbiotic_cassette.md</code></a>) and Volume II Chapter 9. Host pores host endosymbiont circuits that boost metabolic harvesting in exchange for shared cytoplasmic maintenance.</li>
-<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Broadens students' evolutionary perspective beyond solitary point mutations to cooperative genomic fusion and symbiotic synthesis.</li>
+<li><strong class="text-slate-100 font-semibold">Pedagogical Synthesis:</strong> Broadens investigators' evolutionary perspective beyond solitary point mutations to cooperative genomic fusion and symbiotic synthesis.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="32-john-maynard-smith-ers-szathmry-1995" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">32. John Maynard Smith & Eörs Szathmáry (1995) <span id="maynardsmith1995"></span><span id="ref-32"></span></h2>
@@ -1418,13 +1437,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

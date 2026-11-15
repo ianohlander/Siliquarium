@@ -12,7 +12,7 @@
 
 ---
 
-> ### 🧭 A Teacher's Orientation: The Logic of Living Silicon & The Genetic Book of the Dead
+> ### 🧭 Foundational Orientation: The Logic of Living Silicon & The Genetic Book of the Dead
 > If you have ever opened an electronic toy, a radio, or a smartphone, you have observed microscopic integrated silicon chips connected by copper traces on a circuit board. Those chips were designed by human electrical engineers who spent years in college drawing netlists, optimizing gate layouts, and verifying timing constraints.
 >
 > In **Siliquarium**, there are **no human engineers**. There is no designer placing chips or soldering wires. There is only an abyssal hydrothermal seafloor, volcanic energy pulses, and blind Darwinian natural selection operating on random mutations.

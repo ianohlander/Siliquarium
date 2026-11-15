@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Deep-Sea Proto-Cognition &amp; Hydrothermal Vent Biophysics: Evolutionary Pressures &amp; Systems Biology Motifs</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Deep-Sea Proto-Cognition &amp; Hydrothermal Vent Biophysics: Evolutionary Pressures &amp; Systems Biology Motifs</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1075,10 +1089,15 @@
         <h1 id="deep-sea-hydrothermal-vent-biophysics-prebiotic-geochemistry-and-proto-cognitive-systems-biology" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🌊 Deep-Sea Hydrothermal Vent Biophysics, Prebiotic Geochemistry, and Proto-Cognitive Systems Biology</h1>
 <h2 id="a-theoretical-and-biophysical-blueprint-for-open-ended-digital-life-simulation" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80"><em class="text-slate-200 italic">A Theoretical and Biophysical Blueprint for Open-Ended Digital Life Simulation</em></h2>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔬 Authorial & Scientific Scope</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔬 Authorial & Scientific Scope</div>
 <p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Specialization:</strong> Marine Evolutionary Biology, Deep-Sea Extremophilic Microbiology, Prebiotic Biophysics, Non-Equilibrium Thermodynamics, and Minimal Proto-Cognition (Proto-Intelligence).</p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Operational Domain:</strong> Translation of complex hydrothermal vent geochemistry, microfluidic physics, and primitive cellular cognitive architectures into rigorous, conservation-compliant mechanics for digital life engines (specifically aligned with the 3D stacked hexagonal prism lattice $(q, r, z)$, Landauer thermodynamic dissipation, dual-currency economies, and Howard Pattee's Epistemic Cut).</p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Primary Mandate:</strong> Provide an exhaustive, scientifically peer-grade treatise characterizing abyssal hydrothermal environments, the dynamic physical/chemical stresses they impose, the emergent proto-cognitive survival strategies evolved by real microbes and slime molds, and the exact systems-biology network motifs (Uri Alon) that govern them.</p></div></div>
+<p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Primary Mandate:</strong> Provide an exhaustive, scientifically peer-grade treatise characterizing abyssal hydrothermal environments, the dynamic physical/chemical stresses they impose, the emergent proto-cognitive survival strategies evolved by real microbes and slime molds, and the exact systems-biology network motifs (Uri Alon) that govern them.</p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="1-executive-summary-foundational-biophysical-axioms" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Executive Summary & Foundational Biophysical Axioms</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In classical evolutionary simulations, organisms are frequently dropped into isotropic, static, or artificially benevolent virtual environments, where fitness is judged against pre-engineered benchmarks (heteropoiesis). In nature, however, biological life is an <strong class="text-slate-100 font-semibold">autopoietic, self-maintaining non-equilibrium dissipative structure</strong> (Schrödinger 1944; Prigogine 1978; Maturana & Varela 1972). Life exists solely by coupling internal catalytic networks to steep, external thermodynamic gradients, constantly exporting entropy into its surroundings to forestall thermodynamic equilibrium (death).</p>
@@ -1096,7 +1115,7 @@
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Information processing is fundamentally physical. Erasing, updating, or toggling a physical bit within an organism's regulatory or metabolic network incurs a non-negotiable thermodynamic cost bounded by Landauer's limit:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#f43f5e}{\Delta Q} \ge \textcolor{#34d399}{k_B T} \ln \textcolor{#38bdf8}{2}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1114,7 +1133,7 @@
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A living genome contains no magical vitalistic information. The functional physical complexity $C(X)$ of a living genome $X$ is mathematically identical to the Shannon mutual information $I(X; E)$ shared between the genome and its selective environment $E$:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{C(X)} = \textcolor{#34d399}{I(X; E)} = \textcolor{#fbbf24}{H(E)} - \textcolor{#f43f5e}{H(E \mid X)}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1319,7 +1338,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In a seminal 1977 physical treatise, Howard Berg and Edward Purcell proved mathematically that <strong class="text-slate-100 font-semibold">spatial gradient sensing is physically impossible for single-celled microorganisms</strong> (Berg & Purcell 1977).</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">At the microscopic scale ($1\,\mu\text{m}$), molecular transport is entirely dominated by Brownian diffusion (low Reynolds number regime, $Re \sim 10^{-5}$, Purcell 1977). The rate of molecules colliding with a cell of radius $a$ in a concentration field $c$ is given by Smoluchowski flux $J = 4\pi D a c$, yielding total molecular encounters $N = 4\pi D a c \tau_{\text{meas}}$ over integration window $\tau_{\text{meas}}$. Because arrival events are governed by Poisson statistics ($\sigma_N = \sqrt{N}$), the fundamental lower bound on fractional measurement uncertainty is:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\frac{\delta c}{c}} = \frac{\textcolor{#c084fc}{1}}{\sqrt{\textcolor{#c084fc}{4\pi} \textcolor{#34d399}{D} \textcolor{#c084fc}{a} \textcolor{#fbbf24}{c} \textcolor{#f43f5e}{\tau_{\text{meas}}}}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1338,7 +1357,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Because spatial comparison across its body is physically precluded, life evolved an ingenious computational bypass: <strong class="text-slate-100 font-semibold">convert spatial sensing into temporal sensing</strong>.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Instead of measuring concentration across its cell body simultaneously, the organism moves through space at swimming velocity $v$, samples the environmental concentration at time $t_1$, waits an interval $\Delta t$, samples concentration at time $t_2$, and calculates the temporal derivative:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\frac{dc}{dt}} \approx \frac{\textcolor{#fbbf24}{c(t_2)} - \textcolor{#fbbf24}{c(t_1)}}{\textcolor{#c084fc}{\Delta t}} \approx \textcolor{#34d399}{v} \cdot \textcolor{#f43f5e}{\nabla c}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1364,7 +1383,7 @@
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The methylation state of the receptor array acts as an analog accumulator:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{M(t)} = \int_0^{\textcolor{#c084fc}{t}} \left( \textcolor{#34d399}{k_R} - \textcolor{#f43f5e}{k_B} \textcolor{#fbbf24}{[\text{CheB-P}](t')} \right) dt'$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1441,7 +1460,7 @@
 <h4 id="mathematical-entrainment-arnold-tongues" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Mathematical Entrainment & Arnol'd Tongues</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Any nonlinear biological oscillator with intrinsic natural frequency $\omega_0$ subjected to a periodic external environmental driving force of frequency $\omega_e$ and amplitude $K$ obeys the Adler phase-locking equation:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\frac{d\phi}{dt}} = \textcolor{#34d399}{\Delta\omega} - \textcolor{#fbbf24}{K} \sin \textcolor{#c084fc}{\phi}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1495,7 +1514,7 @@
 <h4 id="biophysical-mechanism-hagen-poiseuille-hydrodynamic-remodeling" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">Biophysical Mechanism: Hagen-Poiseuille Hydrodynamic Remodeling</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The cytoplasmic transport network of <em class="text-slate-200 italic">Physarum</em> consists of an interconnected web of cylindrical protoplasmic tubes. Fluid transport through each tube is governed by Hagen-Poiseuille fluid physics, coupled to Tero and Nakagaki's dynamic adaptation law:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{Q_{ij}} = \frac{\textcolor{#c084fc}{\pi} \textcolor{#34d399}{r_{ij}^4}}{\textcolor{#c084fc}{8} \textcolor{#94a3b8}{\eta} \textcolor{#c084fc}{L_{ij}}} (\textcolor{#fbbf24}{P_i} - \textcolor{#f43f5e}{P_j}), \qquad \textcolor{#38bdf8}{\frac{d r_{ij}}{dt}} = \textcolor{#34d399}{\gamma} \textcolor{#fbbf24}{|Q_{ij}|^\mu} - \textcolor{#f43f5e}{\alpha} \textcolor{#38bdf8}{r_{ij}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1576,7 +1595,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Why do organisms intentionally waste energy producing persisters during times of plenty?</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Edo Kussell and Stanislas Leibler (2005 <em class="text-slate-200 italic">Science</em>) proved that in fluctuating environments with catastrophic wipeouts, natural selection does not maximize the arithmetic mean growth rate; it maximizes the <strong class="text-slate-100 font-semibold">geometric mean growth rate</strong>:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\ln \lambda_{\text{geom}}} = \lim_{\textcolor{#c084fc}{T} \to \infty} \frac{\textcolor{#c084fc}{1}}{\textcolor{#c084fc}{T}} \sum_{\textcolor{#fbbf24}{t}=1}^{\textcolor{#c084fc}{T}} \ln \textcolor{#34d399}{W(t)}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1600,7 +1619,7 @@
 <li><strong class="text-slate-100 font-semibold">Environmental Thresholding:</strong> In open, flowing water, autoinducer molecules wash away instantly. However, when cells are densely clustered within a confined basalt pore, autoinducer concentration builds up proportional to cell density:</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{c_{\text{auto}}} = \frac{\textcolor{#fbbf24}{N} \cdot \textcolor{#34d399}{k_{\text{synth}}}}{\textcolor{#c084fc}{V_{\text{pore}}} \cdot \textcolor{#f43f5e}{\gamma_{\text{decay}}}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1719,7 +1738,7 @@
 <li>When input signal $S_x$ appears ($0 \to 1$), $X$ is activated immediately. However, $Z$ cannot turn on until $Y$ accumulates and crosses the binding threshold $K_{yz}$. The time delay $\tau_{\text{ON}}$ is governed by the degradation/dilution rate of $Y$ ($\alpha_y$):</li>
 </ul>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\tau_{\text{ON}}} = \frac{\textcolor{#c084fc}{1}}{\textcolor{#f43f5e}{\alpha_y}} \ln \left( \frac{\textcolor{#34d399}{\beta_y}}{\textcolor{#34d399}{\beta_y} - \textcolor{#f43f5e}{\alpha_y} \textcolor{#fbbf24}{K_{yz}}} \right)$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1748,7 +1767,7 @@
 <li>The dynamical rate equations are:</li>
 </ul>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#f43f5e}{\frac{dy}{dt}} = \textcolor{#34d399}{\beta_y} \theta(\textcolor{#fbbf24}{x} > \textcolor{#c084fc}{K_{xy}}) - \textcolor{#94a3b8}{\alpha_y} \textcolor{#f43f5e}{y}, \qquad \textcolor{#38bdf8}{\frac{dz}{dt}} = \textcolor{#34d399}{\beta_z} \theta(\textcolor{#fbbf24}{x} > \textcolor{#c084fc}{K_{xz}}) \theta(\textcolor{#f43f5e}{y} < \textcolor{#c084fc}{K_{yz}}) - \textcolor{#94a3b8}{\alpha_z} \textcolor{#38bdf8}{z}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1773,7 +1792,7 @@
 <li>Modeled by the Gardner, Cantor, & Collins (2000) dimensionless dynamical equations:</li>
 </ul>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\frac{du}{dt}} = \textcolor{#34d399}{\frac{\alpha_1}{1 + v^\beta}} - \textcolor{#94a3b8}{u}, \qquad \textcolor{#f43f5e}{\frac{dv}{dt}} = \textcolor{#fbbf24}{\frac{\alpha_2}{1 + u^\gamma}} - \textcolor{#94a3b8}{v}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1800,7 +1819,7 @@
 <li>In an unregulated gene with promoter strength $\beta$ and degradation rate $\alpha$, the steady state is $x_{\text{st}} = \beta / \alpha$, and the rise time to half-maximal expression is $t_{1/2}^{\text{unreg}} = \frac{\ln 2}{\alpha}$. In a negatively autoregulated gene, the promoter is engineered to be much stronger ($\beta' \gg \beta$), but is repressed once $x$ reaches $K$. The initial rate of production is massive ($\beta'$), but shuts off abruptly at steady state. The rise time is accelerated by a factor of 3 to 5:</li>
 </ul>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{t_{1/2}^{\text{NAR}}} \approx \textcolor{#fbbf24}{t_{1/2}^{\text{unreg}}} \cdot \frac{\textcolor{#c084fc}{K}}{\textcolor{#34d399}{\beta'} / \textcolor{#f43f5e}{\alpha}} = \frac{\ln \textcolor{#c084fc}{2}}{\textcolor{#f43f5e}{\alpha}} \cdot \frac{\textcolor{#c084fc}{K}}{\textcolor{#34d399}{\beta'} / \textcolor{#f43f5e}{\alpha}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1867,7 +1886,7 @@
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">An odd number of inverters (e.g. 3 NOT gates in a closed loop) creates an autonomous limit-cycle oscillation. Frequency is governed by the physical gate propagation delay:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{f_{\text{osc}}} = \frac{\textcolor{#c084fc}{1}}{\textcolor{#c084fc}{2} \cdot \textcolor{#34d399}{N} \cdot \textcolor{#f43f5e}{t_{\text{delay}}}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2014,13 +2033,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

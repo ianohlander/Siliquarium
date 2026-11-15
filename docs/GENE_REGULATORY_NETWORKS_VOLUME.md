@@ -1,6 +1,6 @@
 # 🧬 The Architecture of Gene Regulatory Networks
 ## From Molecular Biophysics to Digital Logic, Dynamical Attractor Landscapes, and Spatial Morphogenesis
-*A Concept-First Exploration of Biological and Digital Gene Regulation for Curious Explorers, Students, and Researchers*
+*A Concept-First Exploration of Biological and Digital Gene Regulation for Curious Explorers, Investigators, and Researchers*
 
 ---
 
@@ -8,13 +8,13 @@
 > ### 📜 Dedication & Pedagogical Creed
 > *Dedicated to **Anne Orme**, whose inspiring, foundational conversations ignited the passion to model the beauty and uncompromising logic of real biological evolution.*  
 > 
-> *"A student does not fail to understand because biology is difficult; a student fails when a teacher forgets what it felt like not to know. We banish all intellectual hazing, hand-waving, and complexity cliffs from these pages. Every equation shall have its decoder; every abstraction shall have its physical anchor."*
+> *"A investigator does not fail to understand because biology is difficult; a investigator fails when a teacher forgets what it felt like not to know. We banish all intellectual hazing, hand-waving, and complexity cliffs from these pages. Every equation shall have its decoder; every abstraction shall have its physical anchor."*
 
 ---
 
 ## Table of Contents
 
-- [Preface: A Teacher's Note to the Curious Reader](#preface-a-teachers-note-to-the-curious-reader)
+- [Preface: A Investigator Note to the Curious Reader](#preface-a-teachers-note-to-the-curious-reader)
 - [Chapter 1: The Foundational Dilemma — Why Do Cells Need Networks?](#chapter-1-the-foundational-dilemma-why-do-cells-need-networks)
   - [1.1 The Central Paradox of Development](#11-the-central-paradox-of-development)
   - [1.2 What is a "Network"? Nodes, Edges, and Directed Causality](#12-what-is-a-network-nodes-edges-and-directed-causality)
@@ -74,7 +74,7 @@
 
 ---
 
-## Preface: A Teacher's Note to the Curious Reader
+## Preface: A Investigator Note to the Curious Reader
 
 Welcome to the laboratory. If you have ever wondered how a living creature builds itself out of inanimate matter, you have arrived at one of the grandest questions in all of natural philosophy.
 
@@ -682,7 +682,7 @@ Now, let us watch *Metazoicladus wolpertii* (carrying its exact 48-bit genome ta
 | **9** | `[0, 0, 1]` | **2** (Op 0 & Op 1) | $0 \land 0 = \mathbf{0}$ 🔴 | $\neg(0) = \mathbf{1}$ 🟢 | `[0, 0, 1, 0]` | $54.70\text{T}$ | $0.05\text{T}$ (Leak) | Colony protected from corrosion |
 | **10**| `[0, 0, 1]` | **2** (Op 0 & Op 1) | $0 \land 0 = \mathbf{0}$ 🔴 | $\neg(0) = \mathbf{1}$ 🟢 | `[0, 0, 1, 0]` | $54.65\text{T}$ | $0.05\text{T}$ (Leak) | Stable defensive attractor |
 
-**Key Takeaways for 1st-Year Students:**
+**Key Takeaways for 1st-Year Investigators:**
 1. Notice what happened during Ticks 0–4: Gate 2 was **`[UNBUILT]`**. It was not sitting on the board consuming power; it did not exist in the workshop. Its Landauer tax was strictly **$0.00\text{T}$**!
 2. At Tick 5, the arrival of toxin ($T=1$) flipped regulatory channel $M_2 \to 1$. Operon 1 was induced. The cell synthesized Gate 2 (`GATE_NOT`).
 3. By Tick 6, Gate 2 fired HIGH ($\mathbf{1}$), inverting the toxic stress and neutralizing the corrosion penalty!

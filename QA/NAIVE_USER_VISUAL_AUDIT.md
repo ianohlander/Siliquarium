@@ -55,7 +55,7 @@ The visual interface was evaluated according to established visual communication
 flowchart LR
     HUD["<b>Top HUD Telemetry</b><br/>Pore [5, 0, 0] • Chimerococcus margulisiae<br/>Margulis's Multi-Gate Symbiont<br/>[ORGANELLE] [SYNCYTIUM]"]
     SEAF["<b>Seafloor 3D View (Visual Reality)</b><br/><i>'Which cell is [5, 0, 0]?!'</i><br/>20 identical hot-pink rings,<br/>spinning UFOs, and laser spiderwebs!"]
-    HUD <-.->|"Cognitive Disconnect"| SEAF
+    HUD <-->|"Cognitive Disconnect"| SEAF
 
     style HUD fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc
     style SEAF fill:#0f172a,stroke:#f43f5e,stroke-width:1.5px,color:#f8fafc

@@ -12,7 +12,7 @@
 
 This course is designed around an uncompromising epistemological principle: **true biological morphology is emergent, never pre-programmed.** In conventional computational biology, morphology is all too often treated as a computer-aided design (CAD) problem where an external loss function forces an algorithm to reproduce a target geometry. In contrast, this curriculum grounds every morphological transition in the autopoietic self-maintenance of closed thermodynamic systems.
 
-Our students do not manipulate abstract geometric wireframes. Instead, they study how rate-independent symbolic strings (Howard Pattee's Epistemic Cut) direct rate-dependent enzymatic logic gates (Landauer-dissipating CMOS switches) within discrete hexagonal rock cavities ($\mathbb{Z}^3_{\text{hex}}$), subject to non-equilibrium hydrothermal fluid dynamics, chemiosmotic proton gradients, and Darwinian natural selection.
+Our investigators do not manipulate abstract geometric wireframes. Instead, they study how rate-independent symbolic strings (Howard Pattee's Epistemic Cut) direct rate-dependent enzymatic logic gates (Landauer-dissipating CMOS switches) within discrete hexagonal rock cavities ($\mathbb{Z}^3_{\text{hex}}$), subject to non-equilibrium hydrothermal fluid dynamics, chemiosmotic proton gradients, and Darwinian natural selection.
 
 The curriculum is structured across two rigorous 15-week semesters:
 - **Semester I (Weeks 1–15):** *Prebiotic Energetics, Howard Pattee's Epistemic Cut, Logic Gates, and the Origin of Network Motifs*
@@ -23,7 +23,7 @@ Every single week is structured around six mandatory pedagogical pillars meeting
 2. **Theoretical & Mathematical Foundations:** Rigorous mathematical proofs, differential equations, and graph-theoretic formulations.
 3. **Pedagogical Intuition & Grounding Metaphors:** Visceral, non-engineer analogies that bridge everyday experience to formal mechanics.
 4. **Siliquarium In-Silico Laboratory Practicum:** Exact numerical experiments conducted on the active simulation engine.
-5. **Rigorous Problem Set & Analytic Proof:** Formally verifiable derivations assigned for student evaluation.
+5. **Rigorous Problem Set & Analytic Proof:** Formally verifiable derivations assigned for investigator evaluation.
 6. **Assigned Reading from the Master Academic Bibliography:** Primary peer-reviewed citations from biophysics, evolutionary theory, and systems biology.
 
 ---
@@ -169,7 +169,7 @@ Every single week is structured around six mandatory pedagogical pillars meeting
 
 ## Week 7: Uri Alon's Network Motifs: The Autopoietic Toolkit of Gene Circuits
 - **Lecture Title & Physical Stakes:** *Subgraphs That Matter: Statistical Significance and Network Topology.*  
-  If we assemble a million random logic gates, we get a chaotic tangled web with no predictive function. Yet real biological networks—from bacterial transcription to human neural connections—exhibit a tiny handful of recurrent wiring patterns. In this lecture, we introduce Uri Alon's theory of **network motifs**, teaching students how to distinguish genuine functional adaptations from random combinatorial noise.
+  If we assemble a million random logic gates, we get a chaotic tangled web with no predictive function. Yet real biological networks—from bacterial transcription to human neural connections—exhibit a tiny handful of recurrent wiring patterns. In this lecture, we introduce Uri Alon's theory of **network motifs**, teaching investigators how to distinguish genuine functional adaptations from random combinatorial noise.
 - **Theoretical & Mathematical Foundations:**  
   Subgraph census and the Erdős-Rényi random graph null model: Let $N_{\text{real}}$ be the count of an $m$-node subgraph in the biological network, and let $\langle N_{\text{rand}} \rangle$ and $\sigma_{\text{rand}}$ be the mean and standard deviation of its count across an ensemble of degree-preserving randomized graphs. The motif's statistical significance is quantified by its $Z$-score:
   $$Z = \frac{N_{\text{real}} - \langle N_{\text{rand}} \rangle}{\sigma_{\text{rand}}}$$
@@ -321,7 +321,7 @@ Every single week is structured around six mandatory pedagogical pillars meeting
 
 ## Week 14: Richard Lenski's Long-Term Evolution Experiment (LTEE) and Historical Contingency
 - **Lecture Title & Physical Stakes:** *Replaying Life's Tape: Determinism, Divergence, and the Dynamics of Fitness.*  
-  Is evolutionary adaptation deterministic and repeatable, or is it fundamentally contingent on rare, historical accidents? In this lecture, we examine Richard Lenski’s famous 75,000-generation *E. coli* experiment (LTEE). We teach students how fitness trajectories slow down into a universal power-law curve, and how "potentiating" neutral mutations open doors to sudden, irreversible evolutionary breakthroughs.
+  Is evolutionary adaptation deterministic and repeatable, or is it fundamentally contingent on rare, historical accidents? In this lecture, we examine Richard Lenski’s famous 75,000-generation *E. coli* experiment (LTEE). We teach investigators how fitness trajectories slow down into a universal power-law curve, and how "potentiating" neutral mutations open doors to sudden, irreversible evolutionary breakthroughs.
 - **Theoretical & Mathematical Foundations:**  
   The Lenski Power-Law Model of Adaptive Velocity: Mean relative fitness $W(t)$ over evolutionary time $t$ obeys:
   $$W(t) = (b t + 1)^a$$
@@ -344,9 +344,9 @@ Every single week is structured around six mandatory pedagogical pillars meeting
 
 ## Week 15: Semester I Synthesis, Mid-Year Examination & Grand Capstone Defense
 - **Lecture Title & Physical Stakes:** *The Threshold of Individuality: From Unicellular Logic to Multicellular Destiny.*  
-  Comprehensive oral defense and synthesis of Semester I. Students demonstrate mastery of prebiotic geochemistry, Pattee's Epistemic Cut, Landauer thermodynamics, Boolean enzymatic netlists, network motifs, and neutral evolutionary dynamics.
+  Comprehensive oral defense and synthesis of Semester I. Investigators demonstrate mastery of prebiotic geochemistry, Pattee's Epistemic Cut, Landauer thermodynamics, Boolean enzymatic netlists, network motifs, and neutral evolutionary dynamics.
 - **Capstone Practicum & Examination:**  
-  *The 4-Hour Unicellular Survival & Autotrophic Optimization Challenge:* Students are provided a randomized 60-bit genome tape in a sterile, low-flux hydrothermal environment ($J_{\text{in}} = 1.0\text{T/tick}$, toxic surges every 50 ticks). Over a 4-hour live simulation run, students must guide the population through purely Darwinian selection (no manual code editing) to evolve an autotrophic organism possessing:
+  *The 4-Hour Unicellular Survival & Autotrophic Optimization Challenge:* Investigators are provided a randomized 60-bit genome tape in a sterile, low-flux hydrothermal environment ($J_{\text{in}} = 1.0\text{T/tick}$, toxic surges every 50 ticks). Over a 4-hour live simulation run, investigators must guide the population through purely Darwinian selection (no manual code editing) to evolve an autotrophic organism possessing:
   1. A verified Coherent Feedforward Loop or Bistable Latch (proven via `WeisfeilerLehmanHasher`).
   2. A verified allosteric toxin-inversion NOT gate.
   3. A closed thermodynamic energy ledger with zero token leakage ($\Delta E = 0.000$).
@@ -462,7 +462,7 @@ Every single week is structured around six mandatory pedagogical pillars meeting
 
 ## Week 20: Objective Graph-Theoretic Classification of Multicellular Morphologies
 - **Lecture Title & Physical Stakes:** *Topological Invariants: Formalizing the Six Morphological Classes.*  
-  How does the Digital Paleontologist classify a living organism without human bias? In this lecture, we deconstruct the six discrete morphological invariants implemented in `SimulationWorld.classifyColonyTopology()`: `ROSETTE`, `COLUMNAR`, `DENDRITIC`, `RING`, `FILAMENTOUS`, and `AMORPHOUS`. We teach students how to map physical colonies into abstract graphs $G = (V, E)$, calculate adjacency matrix powers, and extract 3-cliques ($K_3$) via matrix traces.
+  How does the Digital Paleontologist classify a living organism without human bias? In this lecture, we deconstruct the six discrete morphological invariants implemented in `SimulationWorld.classifyColonyTopology()`: `ROSETTE`, `COLUMNAR`, `DENDRITIC`, `RING`, `FILAMENTOUS`, and `AMORPHOUS`. We teach investigators how to map physical colonies into abstract graphs $G = (V, E)$, calculate adjacency matrix powers, and extract 3-cliques ($K_3$) via matrix traces.
 - **Theoretical & Mathematical Foundations:**  
   Let a colony be represented by simple graph $G = (V, E)$ with adjacency matrix $\mathbf{A} \in \{0, 1\}^{n \times n}$.
   1. **3-Clique Index (Triangle Count $\tau(G)$):**
@@ -560,7 +560,7 @@ Every single week is structured around six mandatory pedagogical pillars meeting
   - If $s = 1$ ($K_c = 2$ for $p=0.5$): **Critical Boundary ("Edge of Chaos")** ($\lambda = 0$).
   At $K = 2$, the number of stable attractors scales as $\sqrt{N}$, exactly matching the number of distinct cell types in biological metazoans!
 - **Pedagogical Intuition & Analogies:**  
-  *The Classroom Rumor Mill:* Imagine a classroom of 30 students. If every student gossips with 10 people ($K = 10$), an accidental whisper about a pop quiz turns into a screaming panic that shuts down the school. If each student only talks to nobody ($K = 0$), the teacher can announce a fire drill and nobody moves. But if every student listens to exactly two friends ($K = 2$), information travels smoothly without causing hysteria.
+  *The Classroom Rumor Mill:* Imagine a classroom of 30 investigators. If every investigator gossips with 10 people ($K = 10$), an accidental whisper about a pop quiz turns into a screaming panic that shuts down the school. If each investigator only talks to nobody ($K = 0$), the teacher can announce a fire drill and nobody moves. But if every investigator listens to exactly two friends ($K = 2$), information travels smoothly without causing hysteria.
 - **Siliquarium In-Silico Laboratory Practicum:**  
   *Practicum 2.8: The Derrida Damage Spreading Experiment.* In `SimulationWorld`, extract 100 living genomes. For each genome, create a cloned twin state $\vec{y}(0)$ with exactly one bit flipped ($h(0) = 1/60$). Run both trajectories forward for 50 ticks. Plot $h(t)$ over time. Confirm that because Siliquarium catalytic gates have $K = 2$ inputs, $h(t)$ remains bounded and converges back toward zero, proving that the circuits operate at critical stability.
 - **Rigorous Problem Set Question / Proof:**  
@@ -690,7 +690,7 @@ Every single week is structured around six mandatory pedagogical pillars meeting
 
 ## Week 29: The Digital Paleontologist: Reconstructing Deep-Time Evolutionary Phylogenies in Silico
 - **Lecture Title & Physical Stakes:** *Reading the Genomic Fossil Record: Cladistics and Coalescent Theory.*  
-  When an archaeologist unearths a fossil, the flesh is gone; only the mineralized bones remain. In Siliquarium, the Digital Paleontologist unearths extinct genomes frozen in deep basalt strata. In this lecture, we teach students how to reconstruct deep-time phylogenetic trees from digital genomes using Maximum Parsimony, Maximum Likelihood, and Kingman's Coalescent.
+  When an archaeologist unearths a fossil, the flesh is gone; only the mineralized bones remain. In Siliquarium, the Digital Paleontologist unearths extinct genomes frozen in deep basalt strata. In this lecture, we teach investigators how to reconstruct deep-time phylogenetic trees from digital genomes using Maximum Parsimony, Maximum Likelihood, and Kingman's Coalescent.
 - **Theoretical & Mathematical Foundations:**  
   Fitch’s Maximum Parsimony Algorithm for discrete character states:
   Let $u$ be an ancestral node with children $v$ and $w$. The set of candidate states $S_u$ is:
@@ -725,7 +725,7 @@ Every single week is structured around six mandatory pedagogical pillars meeting
   A system exhibits unbounded **Open-Ended Evolution (OEE)** if the activity of adaptive components increases indefinitely:
   $$\lim_{t \to \infty} \frac{dA_{\text{total}}}{dt} > 0 \quad \text{and} \quad D_{\text{Shannon}}(t) > 0$$
 - **Final Capstone Defense & Practicum:**  
-  *The Grand 100,000-Epoch Clade Defense:* Each student team presents a formal, peer-reviewed monograph documenting the evolutionary chronicle of an evolved multicellular lineage across 100,000 epochs in Siliquarium. The defense must include:
+  *The Grand 100,000-Epoch Clade Defense:* Each investigator team presents a formal, peer-reviewed monograph documenting the evolutionary chronicle of an evolved multicellular lineage across 100,000 epochs in Siliquarium. The defense must include:
   1. Complete biophysical energy balance audited via `ThermodynamicLedger.ts`.
   2. Full graph-theoretic classification of all morphological transitions.
   3. 3D phase-space attractor landscape reconstruction of its developmental GRN.
@@ -753,7 +753,7 @@ Every single week is structured around six mandatory pedagogical pillars meeting
 | Dimension | Initial Score | Post-Expansion Target | Detailed Pedagogical Assessment |
 | :--- | :---: | :---: | :--- |
 | **D1: Visceral Intuition & Foundational Motivation** | 8.5 / 10 | **10.0 / 10** | The physical motivation (the dilution catastrophe, Fick's Second Law) is well stated. However, it currently lacks visceral framing for *why* allometric scaling restricts large colonies, why syncytial cytoplasmic streaming requires gap-junction conduits, and why multicellular individuality requires conflict suppression. |
-| **D2: The Gradient of Abstraction** | 7.5 / 10 | **10.0 / 10** | There is an abrupt complexity cliff between the simple 3-pore triad example and the multi-variable Boolean dynamical systems in Section 12. Students need a gentle, step-by-step bridge demonstrating how Waddington landscapes and Kauffman NK networks emerge from 2-input logic gates. |
+| **D2: The Gradient of Abstraction** | 7.5 / 10 | **10.0 / 10** | There is an abrupt complexity cliff between the simple 3-pore triad example and the multi-variable Boolean dynamical systems in Section 12. Investigators need a gentle, step-by-step bridge demonstrating how Waddington landscapes and Kauffman NK networks emerge from 2-input logic gates. |
 | **D3: Deconstructive Equation Anatomy** | 9.0 / 10 | **10.0 / 10** | Equation decoders are used effectively for the 3-clique metric and Betti numbers. However, crucial biophysical formulas are currently missing equation decoders: Hagen-Poiseuille conduit fluid resistance, Turing reaction-diffusion stability equations, West-Brown-Enquist allometric scaling laws, and Derrida annealed sensitivity formulas. |
 | **D4: Concrete Micro-Scaffolding & Toy Pre-Traces** | 8.0 / 10 | **10.0 / 10** | The coordinate tables for specimen examples are excellent. However, Section 12 needs a worked, step-by-step numerical trace across all 64 Boolean states, showing how a single cell falls into an attractor basin in under 5 ticks. |
 | **D5: Conceptual Misconception Immunity (Skeptic FAQ)** | 8.0 / 10 | **10.0 / 10** | The Skeptic FAQ answers four questions well, but fails to address the most critical misunderstandings: "Why isn't this just Turing patterns?", "Doesn't syncytial sharing invite cancer/cheaters?", "Is an organelle truly alive if it cannot replicate outside the host?", and "Are these shapes just pixel artifacts?" |

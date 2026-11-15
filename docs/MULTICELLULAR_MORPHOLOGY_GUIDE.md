@@ -1,6 +1,6 @@
 # 🌸 Multicellular Body Topologies & Morphometric Graph Theory
 ## Objective Graph-Theoretic Classification, 3-Clique Invariants, and Wolpertian Spatial Morphogenesis in Silico
-*A Concept-First Master Reference on Colonial Topology, Fluid Mechanics, and Graph Invariants for 1st-Year STEM Students and Evolutionary Biologists*
+*A Concept-First Master Reference on Colonial Topology, Fluid Mechanics, and Graph Invariants for 1st-Year STEM Investigators and Evolutionary Biologists*
 
 ---
 

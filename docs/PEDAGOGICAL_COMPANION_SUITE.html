@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Pedagogical Companion Suite: Systems Biology &amp; Silicon Abiogenesis</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Pedagogical Companion Suite: Systems Biology &amp; Silicon Abiogenesis</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1075,14 +1089,19 @@
         <h1 id="advanced-systems-biology-silicon-abiogenesis-the-master-pedagogical-companion-suite" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🏛️ Advanced Systems Biology & Silicon Abiogenesis: The Master Pedagogical Companion Suite</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Theoretical Treatise, Modular Architecture Portal, Analytical Scaffolding, and Assessment Framework for Collegiate and Advanced Secondary STEM Education</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Modular Multi-Page Architecture Directory:</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Modular Multi-Page Architecture Directory:</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5">To prevent vertical scrolling fatigue and provide focused reference volumes, the Pedagogical Companion Suite is partitioned into dedicated modular subpages:</p>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li>📖 <strong class="text-slate-100 font-semibold"><a href="companion/glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Lexicon of Systems Biology & Silicon Abiogenesis</a></strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/companion/glossary.md</code>): 55+ rigorously defined terms across Biophysics, Information Theory, Enzymatic Logic, Graph Theory, and Evolutionary Genetics.</li>
-<li>🧭 <strong class="text-slate-100 font-semibold"><a href="companion/study_guides.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Student Study Guides & Equation Decoders</a></strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/companion/study_guides.md</code>): Unit-by-unit theoretical scaffolding, 8 color-coordinated Equation Decoders with responsive grids and sacred analogies, mathematical derivations, and synthetic problem sets.</li>
+<li>🧭 <strong class="text-slate-100 font-semibold"><a href="companion/study_guides.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Investigator Study Guides & Equation Decoders</a></strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/companion/study_guides.md</code>): Unit-by-unit theoretical scaffolding, 8 color-coordinated Equation Decoders with responsive grids and sacred analogies, mathematical derivations, and synthetic problem sets.</li>
 <li>📚 <strong class="text-slate-100 font-semibold"><a href="companion/bibliography.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Annotated Primary Literature Bibliography</a></strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/companion/bibliography.md</code>): Exhaustive academic endnotes and publication-grade annotations of 14 landmark peer-reviewed publications (Mitchell, Russell, Lane, Pattee, Von Neumann, Landauer, Alon, Gardner, Elowitz, Lenski, Kimura, Ohno, Weisfeiler, Shannon).</li>
 <li>🎓 <strong class="text-slate-100 font-semibold"><a href="CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Curriculum & Laboratory Manual</a></strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/CURRICULUM_AND_SYLLABUS.md</code>): The core 4-unit syllabus and 5 hands-on laboratory practicums.</li>
-</ul></div></div>
+</ul></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="1-architectural-introduction-pedagogical-philosophy" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Architectural Introduction & Pedagogical Philosophy</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In the instruction of evolutionary biology, biophysics, and complex systems, educators confront a persistent epistemic hurdle: the conceptual bifurcation between physical dynamics and informational constraints. Biology curricula frequently reduce genetics to static Mendelian bookkeeping and evolutionary adaptation to teleological narratives. Conversely, computational sciences routinely employ genetic algorithms that optimize arbitrary human loss functions, inadvertently inculcating the misconception that evolution acts with foresight, intentionality, and global optimization.</p>
@@ -1092,11 +1111,11 @@
 <li><strong class="text-slate-100 font-semibold">The Zero-Smuggling Mandate:</strong> Life did not invent batteries, cell walls, or templates from scratch. The prebiotic Earth provided the battery (alkaline vent chemiosmosis), the cell walls (porous basalt micro-cavities), and the photocopy copier (surface-catalyzed mineral templating).</li>
 <li><strong class="text-slate-100 font-semibold">The Epistemic Cut:</strong> John von Neumann (1966) and Howard Pattee (1972) proved that open-ended evolution is mathematically impossible without separating rate-independent symbolic instructions (the genotype safe) from rate-dependent continuous dynamics (the metabolic workshop).</li>
 </ol>
-<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Pedagogical Component</th><th class="p-3.5 font-semibold">Focus & Modality</th><th class="p-3.5 font-semibold">Target Outcomes</th><th class="p-3.5 font-semibold">Core Architectural Artifacts</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🎓 Curriculum & Syllabus</strong></td><td class="p-3.5 leading-relaxed">4 Core Modular Units, 5 Hands-on Practicums</td><td class="p-3.5 leading-relaxed">Foundational biophysics, Pattee's cut, macro-evolution</td><td class="p-3.5 leading-relaxed"><a href="CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CURRICULUM_AND_SYLLABUS.md</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🏛️ Master Companion Suite</strong></td><td class="p-3.5 leading-relaxed">Epistemic grounding & XOR treatise (This Hub)</td><td class="p-3.5 leading-relaxed">Proof of XOR non-separability, pedagogical philosophy</td><td class="p-3.5 leading-relaxed"><a href="PEDAGOGICAL_COMPANION_SUITE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PEDAGOGICAL_COMPANION_SUITE.md</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">📖 Lexicon & Glossary</strong></td><td class="p-3.5 leading-relaxed">55+ Formal mathematical terms across 5 domains</td><td class="p-3.5 leading-relaxed">Theoretical rigor, eradication of teleological jargon</td><td class="p-3.5 leading-relaxed"><a href="companion/glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">companion/glossary.md</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🧭 Study Guides & Decoders</strong></td><td class="p-3.5 leading-relaxed">8 Color equation decoders, 12 formal derivations</td><td class="p-3.5 leading-relaxed">Mathematical fluency, Landauer dissipation bounds</td><td class="p-3.5 leading-relaxed"><a href="companion/study_guides.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">companion/study_guides.md</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">📚 Annotated Bibliography</strong></td><td class="p-3.5 leading-relaxed">14 Landmark primary papers (Mitchell, Landauer, Lenski)</td><td class="p-3.5 leading-relaxed">Scientific literacy & historical provenance</td><td class="p-3.5 leading-relaxed"><a href="companion/bibliography.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">companion/bibliography.md</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🔍 Student QA & Usability Audit</strong></td><td class="p-3.5 leading-relaxed">12th-grade usability report with browser screenshots</td><td class="p-3.5 leading-relaxed">Real student feedback, DOM interaction telemetry</td><td class="p-3.5 leading-relaxed"><a href="../QA/STUDENT_UX_REPORT.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">QA/STUDENT_UX_REPORT.md</code></a></td></tr></tbody></table></div>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Pedagogical Component</th><th class="p-3.5 font-semibold">Focus & Modality</th><th class="p-3.5 font-semibold">Target Outcomes</th><th class="p-3.5 font-semibold">Core Architectural Artifacts</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🎓 Curriculum & Syllabus</strong></td><td class="p-3.5 leading-relaxed">4 Core Modular Units, 5 Hands-on Practicums</td><td class="p-3.5 leading-relaxed">Foundational biophysics, Pattee's cut, macro-evolution</td><td class="p-3.5 leading-relaxed"><a href="CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CURRICULUM_AND_SYLLABUS.md</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🏛️ Master Companion Suite</strong></td><td class="p-3.5 leading-relaxed">Epistemic grounding & XOR treatise (This Hub)</td><td class="p-3.5 leading-relaxed">Proof of XOR non-separability, pedagogical philosophy</td><td class="p-3.5 leading-relaxed"><a href="PEDAGOGICAL_COMPANION_SUITE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PEDAGOGICAL_COMPANION_SUITE.md</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">📖 Lexicon & Glossary</strong></td><td class="p-3.5 leading-relaxed">55+ Formal mathematical terms across 5 domains</td><td class="p-3.5 leading-relaxed">Theoretical rigor, eradication of teleological jargon</td><td class="p-3.5 leading-relaxed"><a href="companion/glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">companion/glossary.md</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🧭 Study Guides & Decoders</strong></td><td class="p-3.5 leading-relaxed">8 Color equation decoders, 12 formal derivations</td><td class="p-3.5 leading-relaxed">Mathematical fluency, Landauer dissipation bounds</td><td class="p-3.5 leading-relaxed"><a href="companion/study_guides.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">companion/study_guides.md</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">📚 Annotated Bibliography</strong></td><td class="p-3.5 leading-relaxed">14 Landmark primary papers (Mitchell, Landauer, Lenski)</td><td class="p-3.5 leading-relaxed">Scientific literacy & historical provenance</td><td class="p-3.5 leading-relaxed"><a href="companion/bibliography.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">companion/bibliography.md</code></a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🔍 Investigator QA & Usability Audit</strong></td><td class="p-3.5 leading-relaxed">12th-grade usability report with browser screenshots</td><td class="p-3.5 leading-relaxed">Real investigator feedback, DOM interaction telemetry</td><td class="p-3.5 leading-relaxed"><a href="../QA/STUDENT_UX_REPORT.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">QA/STUDENT_UX_REPORT.md</code></a></td></tr></tbody></table></div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="2-theoretical-treatise-the-linear-non-separability-barrier-the-non-primitive-nature-of-xor" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Theoretical Treatise: The Linear Non-Separability Barrier & The Non-Primitive Nature of XOR</h2>
 <h3 id="21-the-common-pedagogical-misconception" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 The Common Pedagogical Misconception</h3>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In introductory computer science, the exclusive-OR (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code>) gate is routinely grouped alongside elementary logic gates (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>). This pedagogical convenience introduces a severe biochemical fallacy when students transition to computational systems biology: <strong class="text-slate-100 font-semibold">students assume that a living cell can evolve an "XOR enzyme" just as easily as an "AND enzyme."</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In introductory computer science, the exclusive-OR (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code>) gate is routinely grouped alongside elementary logic gates (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>). This pedagogical convenience introduces a severe biochemical fallacy when investigators transition to computational systems biology: <strong class="text-slate-100 font-semibold">investigators assume that a living cell can evolve an "XOR enzyme" just as easily as an "AND enzyme."</strong></p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Siliquarium's biophysical engine and genetic codon table (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CodonTable.ts</code></a>), <strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_XOR</code> is strictly non-primitive</strong>. It cannot be encoded by a single codon or executed by a single enzyme active site.</p>
 <h3 id="22-the-geometric-and-biochemical-proof" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 The Geometric and Biochemical Proof</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1969, Marvin Minsky and Seymour Papert published <em class="text-slate-200 italic">Perceptrons</em>, proving that single-layer linear decision units cannot compute the Boolean <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code> function because the truth table points $(0, 0)$, $(0, 1)$, $(1, 0)$, and $(1, 1)$ are <strong class="text-slate-100 font-semibold">linearly non-separable</strong> in 2D Euclidean input space.</p>
@@ -1156,7 +1175,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 2.1: The Three Primitive Catalytic Logic Gates vs. Composite XOR Logic</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1203,7 +1222,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When the Digital Paleontologist's <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">MotifScanner</code></a> detects the assembly of an XOR gate or a 1-bit half-adder, the lineage has crossed a profound evolutionary threshold: <strong class="text-slate-100 font-semibold">it has transitioned from simple single-enzyme metabolic foraging to distributed, non-linear network computation!</strong></p>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="3-pedagogical-rubrics-assessment-guide" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Pedagogical Rubrics & Assessment Guide <span id="4-pedagogical-rubrics--assessment-guide"></span><span id="pedagogical-rubrics"></span></h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To evaluate student mastery across laboratory inquiries, experimental design, and computational autopsies, instructors should employ the following four-tier analytic scoring rubrics.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To evaluate investigator mastery across laboratory inquiries, experimental design, and computational autopsies, instructors should employ the following four-tier analytic scoring rubrics.</p>
 <h3 id="31-analytic-scoring-rubric-1-laboratory-notebooks-empirical-telemetry-logging" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.1 Analytic Scoring Rubric 1: Laboratory Notebooks & Empirical Telemetry Logging</h3>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Dimension / Performance Level</th><th class="p-3.5 font-semibold">Exemplary (4 Points)</th><th class="p-3.5 font-semibold">Proficient (3 Points)</th><th class="p-3.5 font-semibold">Developing (2 Points)</th><th class="p-3.5 font-semibold">Novice (1 Point)</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">1. Pre-Lab Scaffolding & Conceptual Setup</strong></td><td class="p-3.5 leading-relaxed">Articulates biophysical mechanisms with mathematical precision. Grounded explicitly in Mitchell, Russell, or Landauer. Zero teleology or smuggled agency.</td><td class="p-3.5 leading-relaxed">Clearly explains theoretical principles with correct biophysical terminology. Minor lapses in formal mathematical expressions.</td><td class="p-3.5 leading-relaxed">Incomplete theoretical overview. Uses metaphorical or anthropomorphic phrasing (e.g., "cells want to adapt").</td><td class="p-3.5 leading-relaxed">Completely lacks theoretical scaffolding. Conflates simulation rules with arbitrary video game mechanics.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">2. Data Collection & Quantitative Rigor</strong></td><td class="p-3.5 leading-relaxed">Tabulates complete tick-by-tick telemetry across all experimental trials. Correctly logs inputs, gate states, energy tokens, and basal leak. Zero missing values.</td><td class="p-3.5 leading-relaxed">Records systematic data across trials. Minor logging omissions that do not compromise quantitative analysis.</td><td class="p-3.5 leading-relaxed">Inconsistent data collection. Skips intermediate ticks or omits critical variables (e.g., forgets Landauer toggle costs).</td><td class="p-3.5 leading-relaxed">Fragmentary, qualitative impressions without systematic numerical telemetry tables.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">3. Analytical Derivation & Ledger Balance</strong></td><td class="p-3.5 leading-relaxed">Derives exact mathematical equations for energy balances and starvation thresholds. Verifies $\Delta E_{\text{universe}} = 0.000$ to full numerical precision.</td><td class="p-3.5 leading-relaxed">Correctly executes metabolic budgeting formulas with minor arithmetic errors. Demonstrates energy conservation.</td><td class="p-3.5 leading-relaxed">Flawed algebraic derivations. Fails to account for basal leakage or dynamic switching dissipation.</td><td class="p-3.5 leading-relaxed">Unable to compute metabolic balances. Ignores thermodynamic ledger telemetry.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">4. Biophysical Isomorphism Grounding</strong></td><td class="p-3.5 leading-relaxed">Rigorously maps in silico artifacts (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreBattery</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">WL-Hash</code>) to real-world biophysical cognates (co-catalysis, mineral capacitance, contact maps).</td><td class="p-3.5 leading-relaxed">Clearly relates simulation features to biological counterparts with accurate examples.</td><td class="p-3.5 leading-relaxed">Superficial connections to biological systems; treats features as abstract computer science code.</td><td class="p-3.5 leading-relaxed">Fails to identify any biological cognates. Views simulation purely as an isolated synthetic exercise.</td></tr></tbody></table></div>
 <hr class="border-t border-slate-800 my-8" />
@@ -1226,8 +1245,13 @@
 <li><strong class="text-slate-100 font-semibold">F (< 70.0%):</strong> Unscientific submission. Pervasive smuggled teleology. Failure to collect quantitative data or execute required phylogenetic proofs.</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Explore the Modular Companion Volumes:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><a href="companion/glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Lexicon of Systems Biology & Silicon Abiogenesis</a> | <a href="companion/study_guides.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🧭 Study Guides & Equation Decoders</a> | <a href="companion/bibliography.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🎓 Curriculum & Syllabus</a></p></div></div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Explore the Modular Companion Volumes:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5"><a href="companion/glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Lexicon of Systems Biology & Silicon Abiogenesis</a> | <a href="companion/study_guides.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🧭 Study Guides & Equation Decoders</a> | <a href="companion/bibliography.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🎓 Curriculum & Syllabus</a></p></div>
+        </div>
       </div>
     </main>
 
@@ -1239,13 +1263,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

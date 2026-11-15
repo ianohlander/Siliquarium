@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Epistemic Foundations &amp; Prebiotic Justifications</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Epistemic Foundations &amp; Prebiotic Justifications</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1075,13 +1089,23 @@
         <h1 id="epistemic-foundations-prebiotic-justifications" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🧬 Epistemic Foundations & Prebiotic Justifications</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Addressing the Boundary Between Abiogenesis and Evolution: Why the Battery, Workshop, and Epistemic Cut Are Not Smuggled Biology</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">✨ Dedication</div>
-<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Dedicated to <strong class="text-slate-100 font-semibold">Anne Orme</strong> — for the deep and memorable conversations that probed the true nature of evolutionary emergence, inspiring this endeavor.</em></p></div></div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">✨ Dedication</div>
+<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Dedicated to <strong class="text-slate-100 font-semibold">Anne Orme</strong> — for the deep and memorable conversations that probed the true nature of evolutionary emergence, inspiring this endeavor.</em></p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-purple-950/30 border-l-4 border-purple-400 my-4 text-sm text-slate-300"><div class="font-mono text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">IMPORTANT</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Independent Scientific Instrument & Non-Accreditation Notice:</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-950/50 via-slate-900 to-slate-900 border border-purple-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-purple-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>⚡</span> Important &bull; Core Mechanism
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Independent Scientific Instrument & Non-Accreditation Notice:</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5">The Siliquarium application, theoretical model, and documentation are not designed, developed, peer-reviewed, or sponsored by any accredited university, government research agency, or academic accreditation board. Because this project represents an independent computational biophysics instrument, every statement, equation, and evolutionary claim is accompanied below by full mathematical derivations, thermodynamic proofs, and peer-reviewed scientific citations.</p>
 <p class="leading-relaxed font-sans text-xs my-1.5">📖 <strong class="text-slate-100 font-semibold">Circuit Paleontology Companion Reference Suite:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><a href="CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Paleontology Glossary</a> | <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="CIRCUIT_PALEONTOLOGY_NOTES.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📝 Critical Notes & Justifications</a> | <a href="index.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Documentation Portal</a></p></div></div>
+<p class="leading-relaxed font-sans text-xs my-1.5"><a href="CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Paleontology Glossary</a> | <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="CIRCUIT_PALEONTOLOGY_NOTES.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📝 Critical Notes & Justifications</a> | <a href="index.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Documentation Portal</a></p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="executive-summary-the-skeptics-challenge" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Executive Summary: The Skeptic's Challenge</h2>
 <blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">The Core Inquiry:</strong></p>
@@ -1122,7 +1146,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 1.2: Porous Hydrothermal Chimney Mineral Membrane and Abiotic Proton Motive Force (PMF)</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1154,7 +1178,7 @@
 <li><strong class="text-slate-100 font-semibold">Electrostatic Mineral Capacitance:</strong>  </li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{C} = \textcolor{#34d399}{\varepsilon} \frac{\textcolor{#fbbf24}{A}}{\textcolor{#c084fc}{d}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1175,7 +1199,7 @@
 <li><strong class="text-slate-100 font-semibold">Passive Thermal & Hydrolytic Decay ($E_{\text{leak}}$):</strong>  </li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If a pore is inactive, the inorganic charge leaks away through thermal relaxation ($k_B T$). To avoid dying (discharging to equilibrium), a circuit inside the pore must continually tap the incoming non-equilibrium flux.</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1207,7 +1231,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 1.1: The Dilution Catastrophe vs. Hydrothermal Micro-Pore Concentration</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1240,7 +1264,7 @@
 <li>If an organism reproduces by having its <strong class="text-slate-100 font-semibold">active machinery directly construct another copy of itself</strong> (dynamic self-inspection):</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{M} \xrightarrow{\textcolor{#34d399}{\text{inspects}}} \textcolor{#fbbf24}{M} \xrightarrow{\textcolor{#c084fc}{\text{builds}}} \textcolor{#f43f5e}{M'}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1270,7 +1294,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 1.3: Von Neumann&#39;s Self-Replication Architecture &amp; Howard Pattee&#39;s Epistemic Cut</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1314,7 +1338,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">"Why does the simulation feature a massive, flared lithospheric crust foundation and a subterranean stratum ($z = -1$)? Is this added geological complexity smuggling in biological shelter or pre-engineering evolutionary survival?"</strong></p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The answer from marine geophysics and deep geomicrobiology (<strong class="text-slate-100 font-semibold">Katrina Edwards 2012</strong><sup id="cite_ref-14b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-14">[14]</a></sup>, <strong class="text-slate-100 font-semibold">Beth Orcutt 2011</strong><sup id="cite_ref-15b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-15">[15]</a></sup>, <strong class="text-slate-100 font-semibold">Matthew Schrenk 2010</strong><sup id="cite_ref-16a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-16">[16]</a></sup>) is conclusive:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">The seabed is not an infinite, weightless 2D floating sheet suspended in a vacuum. It is anchored to the Penrose ophiolite stratigraphy of a dense oceanic tectonic plate, underlain by fractured subseafloor aquifers that hosted the primary crucible of Hadean abiogenesis.</strong></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1347,7 +1371,7 @@
 <li><strong class="text-slate-100 font-semibold">Gabbros & Ultramafic Mantle Peridotite (Foundation Slab):</strong> The dense, impermeable crystalline basement providing tectonic ballast and the geochemical engine of serpentinization.</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Siliquarium, rendering the monolithic lithospheric foundation with flared cliff facets and volcanic strata banding is not mere decorative ornament; it is the physical representation of this planetary ballast. Organisms residing in the subterranean stratum ($z = -1$) face the exact same physical laws—Landauer switching costs ($k_B T \ln 2$), First-Law energy conservation ($\Delta E = 0.000$), and template replication—as surface cells. The trench does not "hand them food"; it merely provides physical geometry.</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1407,7 +1431,7 @@
 <h3 id="92-christoph-adamis-mutual-information-proof" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">9.2 Christoph Adami's Mutual Information Proof</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Christoph Adami (2000)<sup id="cite_ref-12b" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-12">[12]</a></sup> formalized this mathematically. Genomic complexity is not raw Shannon entropy $H(X)$, but the <strong class="text-slate-100 font-semibold">Mutual Information</strong> between the genome ($X$) and its selective environment ($E$):</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{C(X)} = \textcolor{#34d399}{I(X; E)} = \textcolor{#fbbf24}{H(E)} - \textcolor{#f43f5e}{H(E \mid X)}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1602,13 +1626,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

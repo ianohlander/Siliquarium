@@ -9,17 +9,17 @@ All documentation, tutorials, and academic treatises in Siliquarium must meet in
 
 | Dimension | Standard | How to Implement in Siliquarium |
 | :--- | :--- | :--- |
-| **D1: Visceral Intuition & Foundational Motivation** | Never drop a student into formal mathematics without establishing the physical stakes and intuitive motivation first. | Open every chapter by explaining *why* an organism faces an existential crisis (e.g., the dilution catastrophe, the danger of thermal noise, the struggle for limited vent calories). |
+| **D1: Visceral Intuition & Foundational Motivation** | Never drop a investigator into formal mathematics without establishing the physical stakes and intuitive motivation first. | Open every chapter by explaining *why* an organism faces an existential crisis (e.g., the dilution catastrophe, the danger of thermal noise, the struggle for limited vent calories). |
 | **D2: The Gradient of Abstraction** | Build a gentle, continuous bridge from everyday common sense to formal mechanics. Avoid "complexity cliffs." | Never jump straight from a metaphor to a differential equation or measure-theoretic summation. Introduce a 2-bit toy example first, then generalize. |
 | **D3: Deconstructive Equation Anatomy** | Every formula must be accompanied by a Multi-Color "Equation Decoder" breaking down each algebraic variable. | Color-code terms in the formula using the standard multi-color palette (`\color{#38bdf8}`, `\color{#34d399}`, `\color{#fbbf24}`, `\color{#f43f5e}`, `\color{#c084fc}`) and provide matching color swatches in the 3-part breakdown: (1) Colored formal symbol, (2) Plain-English meaning, (3) Physical biological consequence. |
 | **D4: Concrete Micro-Scaffolding & Toy Pre-Traces** | Provide concrete, worked numerical traces before showing large-scale aggregate results. | Include worked step-by-step trace tables showing a single pore over 5 ticks (e.g., Tick 1: Battery = 50, Vent pulse = 1, Gate toggles = 2, Net Tokens = +3). |
-| **D5: Conceptual Misconception Immunity** | Proactively identify and dismantle common student and skeptic misunderstandings before they take root. | Include explicit "Skeptic FAQ" callouts addressing teleology, "smuggled intelligence," and the difference between mutating code vs mutating bodies. |
+| **D5: Conceptual Misconception Immunity** | Proactively identify and dismantle common investigator and skeptic misunderstandings before they take root. | Include explicit "Skeptic FAQ" callouts addressing teleology, "smuggled intelligence," and the difference between mutating code vs mutating bodies. |
 
 ---
 
 ## 2. The Non-Engineer Accessibility Mandate
 
-Siliquarium is designed to be understood by biologists, students, curious thinkers, and non-engineers. **Engineering jargon must never be used as a substitute for clear explanation.**
+Siliquarium is designed to be understood by biologists, investigators, curious thinkers, and non-engineers. **Engineering jargon must never be used as a substitute for clear explanation.**
 
 ### The Four Sacred Analogies
 When explaining Siliquarium mechanics, always anchor explanations to these foundational metaphors:
@@ -42,7 +42,7 @@ When explaining Siliquarium mechanics, always anchor explanations to these found
 ## 3. Multi-Color Equation Decoder Anatomy Format (Standing Mandate)
 
 > ### 🎨 Standing Mandate: Universal Multi-Color Visual Decoding
-> Many students, naturalists, and non-mathematicians will not be proficient with abstract algebraic notation. Mathematical formulas must not act as barrier gates; they must tell a clear visual story about physical and biological relationships.
+> Many investigators, naturalists, and non-mathematicians will not be proficient with abstract algebraic notation. Mathematical formulas must not act as barrier gates; they must tell a clear visual story about physical and biological relationships.
 >
 > Therefore, **every equation across the entire documentation suite must use multiple distinct colors for each expression**, and **every decoder bullet must match its term's exact color**. This allows any reader to effortlessly map mathematical symbols directly to their intuitive physical meanings.
 
@@ -121,14 +121,14 @@ Siliquarium stands on the shoulders of giants across biophysics, information the
 > ### 📜 Standing Mandate: Professional Neutrality, Objective Institutional Voice & Zero Fictitious Attribution
 > All documentation, specifications, tutorials, field guides, application UI, and QA audit reports in Siliquarium must be authored in an authoritative, objective, professional, and neutral voice. **The invention or referencing of fictitious persons, imaginary researchers, fictional professors, instructors, guides, universities, departments, or institutes is strictly prohibited at all times.**
 >
-> Furthermore, all public-facing documentation and application UI must maintain strict professional neutrality across the board: **never assume any position, age, status, educational level, or other trait of users (do not assume students, hobbyists, or any other demographic).**
+> Furthermore, all public-facing documentation and application UI must maintain strict professional neutrality across the board: **never assume any position, age, status, educational level, or other trait of users (do not assume investigators, hobbyists, or any other demographic).**
 
 1. **Zero Fictitious Personas or Characters:**  
    - At NO TIME will any public-facing documentation, curriculum, tutorial, marketing asset, or application UI contain the names of imaginary people. Never invent or pretend regarding professors, instructors, fictional guides, or personas (e.g., no fictional "Prof. Elena Vance", "Dr. Evelyn Vance-Wolpert", "Dr. Vance", "Alex Rivera", "Jordan Hayes", "Dr. Rostova", "Julian Mercer", "Jack Vance", or similar character roleplays).
    - In audits, usability reviews, and QA evaluations, describe observations strictly from the perspective of objective user interactions, functional system workflows, and technical criteria.
 2. **Universal Professional Neutrality (Zero Demographic Assumptions):**
    - Documentation and UI text must never assume the user's role, background, age, or status.
-   - Do not refer to users as "students", "scholars", "hobbyists", "undergraduates", or "gamers" unless describing a formal external academic course syllabus or game portal module.
+   - Do not refer to users as "investigators", "scholars", "hobbyists", "investigators", or "gamers" unless describing a formal external academic course syllabus or game portal module.
    - Address the reader/user with professional, objective, technical precision.
 3. **Academic Provenance & Scientific Integrity:**  
    - All historical foundations, mathematical models, and scientific citations must refer exclusively to **real, published peer-reviewed researchers and historical literature** (e.g., Howard Pattee, Rolf Landauer, Stuart Kauffman, Lewis Wolpert, Alan Turing, Uri Alon, Lynn Margulis, W. D. Hamilton, Motoo Kimura, Susumu Ohno, Michael Russell, Nick Lane).
@@ -160,7 +160,7 @@ Each document belongs to a single canonical ontological domain. Cross-domain con
    - *Domain Scope:* Empirical taxonomy of evolved digital life, Weisfeiler-Lehman graph isomorphism hashing, fossil netlists, and the 15 canonical circuit archetypes.
    - *Boundary Constraint:* Focuses on historical/fossil specimens; cross-references theoretical proofs in Volumes 1–3.
 5. **Volume 5: Illustrated Systems Manual & Laboratory Practicums** (`docs/USER_GUIDE.md`, `docs/curriculum/practicums_lab_manual.md`)
-   - *Domain Scope:* Operating the simulation software, camera controls, CAD terrain sculptors, live oscilloscope, God-suite parameters, and structured student laboratory exercises.
+   - *Domain Scope:* Operating the simulation software, camera controls, CAD terrain sculptors, live oscilloscope, God-suite parameters, and structured investigator laboratory exercises.
    - *Boundary Constraint:* Focuses on software interactions and experiment procedures; relies on Volumes 1–4 for theoretical explanations.
 6. **Master Companion Suite** (`docs/companion/glossary.md`, `docs/companion/study_guides.md`, `docs/companion/bibliography.md`)
    - *Domain Scope:* Centralized reference repository providing the master 70+ term lexicon, comprehensive multi-color equation decoders, and primary literature citations.

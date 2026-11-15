@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="../docs/index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="../docs/assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="../docs/assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Educational Publishing &amp; Cognitive Ergonomics Comprehensive Review</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Educational Publishing &amp; Cognitive Ergonomics Comprehensive Review</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="../docs/assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1127,9 +1141,14 @@
     end
 
     PortalView -.-&gt;|&quot;Taxonomic Inconsistency (Split-Brain)&quot;| CompilerView</div>
-<div class="p-4 rounded-xl bg-amber-950/30 border-l-4 border-amber-400 my-4 text-sm text-slate-300"><div class="font-mono text-amber-400 font-bold text-xs uppercase tracking-wider mb-1">WARNING</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Cognitive Friction: Taxonomy Conflict</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-950/50 via-slate-900 to-slate-900 border border-amber-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-amber-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>⚠️</span> Warning &bull; Physical Constraint
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Cognitive Friction: Taxonomy Conflict</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5">A reader navigating from <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/PORTAL.md</code> to <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/CURRICULUM_AND_SYLLABUS.md</code> and then into the HTML interface experiences disorientation: what is "Volume 01"? Is it the overall curriculum, the Morphology treatise, or the Prebiotic Biophysics suite?</p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Recommendation:</strong> Standardize all markdown headers, breadcrumbs, and compiler sidebar categories strictly to the 6-Volume Master Architecture defined in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">build_docs_html.mjs</code>.</p></div></div>
+<p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Recommendation:</strong> Standardize all markdown headers, breadcrumbs, and compiler sidebar categories strictly to the 6-Volume Master Architecture defined in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">build_docs_html.mjs</code>.</p></div>
+        </div>
 <h3 id="12-flyout-sidebar-two-column-layout-reading-experience" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.2 Flyout Sidebar, Two-Column Layout & Reading Experience</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The newly implemented two-column categorized sidebar and top dropdown flyout navigation in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">scripts/build_docs_html.mjs</code> represents an outstanding leap forward in reading ergonomics:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
@@ -1345,9 +1364,14 @@
     end</div>
 <h3 id="61-audit-of-practicums-in-introductory-course-tutorialmd" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">6.1 Audit of Practicums in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">INTRODUCTORY_COURSE_TUTORIAL.md</code></h3>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Practicum</th><th class="p-3.5 font-semibold">Title</th><th class="p-3.5 font-semibold">Dominant Cognitive Level</th><th class="p-3.5 font-semibold">POE Exercise Included?</th><th class="p-3.5 font-semibold">Assessment Quality & Cognitive Critique</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P1</strong></td><td class="p-3.5 leading-relaxed">Hydrothermal Bathymetry & Focus</td><td class="p-3.5 leading-relaxed">DoK 2 (Understand/Apply)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Yes</strong> (Ex 1.1: Vent distance vs. pulse speed)</td><td class="p-3.5 leading-relaxed">High. Bridges physical 3D navigation directly to thermal $1/r$ flux decay.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P2</strong></td><td class="p-3.5 leading-relaxed">Optical Histology & 5 Bio-Lenses</td><td class="p-3.5 leading-relaxed">DoK 3 (Analyze/Evaluate)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Yes</strong> (Ex 2.1: PMF vs. Lattice early warning)</td><td class="p-3.5 leading-relaxed">Excellent. Establishes functional diagnostic reasoning before morphological decay.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P3</strong></td><td class="p-3.5 leading-relaxed">Circuit Microscope & Testbench</td><td class="p-3.5 leading-relaxed">DoK 3 (Apply/Analyze)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Yes</strong> (Ex 3.1: Toxin injection without NOT gate)</td><td class="p-3.5 leading-relaxed">Outstanding. Interactive signal injection forces active causal mental modeling.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P4</strong></td><td class="p-3.5 leading-relaxed">Autopsy & Alon Network Motifs</td><td class="p-3.5 leading-relaxed">DoK 3 (Analyze)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Yes</strong> (Ex 4.1: C1-FFL noise rejection)</td><td class="p-3.5 leading-relaxed">High. Connects electrical oscilloscope waveforms to biological fitness in turbulent vents.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P5</strong></td><td class="p-3.5 leading-relaxed">Closed Thermodynamics Ledger</td><td class="p-3.5 leading-relaxed">DoK 2 (Understand)</td><td class="p-3.5 leading-relaxed">❌ <strong class="text-slate-100 font-semibold">No</strong> (Only Formative Check 5.1)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Deficiency:</strong> Reverts to a passive inspection of the $\Delta E = 0.000$ badge without an active experimental perturbation.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P6</strong></td><td class="p-3.5 leading-relaxed">Dual Safari Guides</td><td class="p-3.5 leading-relaxed">DoK 3 (Analyze/Apply)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Yes</strong> (Ex 6.1: Landauer dissipation in syncytium)</td><td class="p-3.5 leading-relaxed">Excellent. Scaffolds Lewis Wolpert French Flag positional variation across clonal cells.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P7</strong></td><td class="p-3.5 leading-relaxed">Chronicle Historical Kinematics</td><td class="p-3.5 leading-relaxed">DoK 2 (Apply)</td><td class="p-3.5 leading-relaxed">❌ <strong class="text-slate-100 font-semibold">No</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Deficiency:</strong> Purely procedural instructions on how to drag the scrubber without a formal hypothesis-testing prompt.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P8</strong></td><td class="p-3.5 leading-relaxed">Geothermal Shaker & Tectonics</td><td class="p-3.5 leading-relaxed">DoK 3 (Evaluate)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Yes</strong> (Ex 8.1: Shannon diversity bottleneck rebound)</td><td class="p-3.5 leading-relaxed">Outstanding. Captures macro-evolutionary adaptive radiation dynamics.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P9</strong></td><td class="p-3.5 leading-relaxed">Design Studio & 3D Bathymetric CAD</td><td class="p-3.5 leading-relaxed">DoK 3 (Create/Apply)</td><td class="p-3.5 leading-relaxed">❌ <strong class="text-slate-100 font-semibold">No</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Deficiency:</strong> Instructs user to build breakwaters and excavate trenches, but omits a structured POE predicting speciation rate.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P10</strong></td><td class="p-3.5 leading-relaxed">Lenski Cryo-Vault & Pipette</td><td class="p-3.5 leading-relaxed">DoK 2 (Apply)</td><td class="p-3.5 leading-relaxed">❌ <strong class="text-slate-100 font-semibold">No</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Deficiency:</strong> Procedural guide to thawing and arming the pipette; lacks an empirical comparison between ancestral and modern fitness.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P11</strong></td><td class="p-3.5 leading-relaxed">Counterfactual Branching & Export</td><td class="p-3.5 leading-relaxed">DoK 3 (Analyze)</td><td class="p-3.5 leading-relaxed">❌ <strong class="text-slate-100 font-semibold">No</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Deficiency:</strong> Guides DAG branching, but does not provide an inquiry task testing Stephen Jay Gould's contingency hypothesis.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">P12</strong></td><td class="p-3.5 leading-relaxed">Abyssal Arena & Tactical Cards</td><td class="p-3.5 leading-relaxed">DoK 3 (Evaluate/Strategize)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Yes</strong> (Ex 12.1: Magma surge vs bloated genomes)</td><td class="p-3.5 leading-relaxed">Excellent. Forces strategic evaluation of Landauer switching drag in bloated clades.</td></tr></tbody></table></div>
-<div class="p-4 rounded-xl bg-purple-950/30 border-l-4 border-purple-400 my-4 text-sm text-slate-300"><div class="font-mono text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">IMPORTANT</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Deficiency: The "Odd/Even" POE Scaffolding Gap</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-950/50 via-slate-900 to-slate-900 border border-purple-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-purple-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>⚡</span> Important &bull; Core Mechanism
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Deficiency: The "Odd/Even" POE Scaffolding Gap</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5">While Practicums 1, 2, 3, 4, 6, 8, and 12 feature rich, high-quality Predict–Observe–Explain exercises, Practicums 5, 7, 9, 10, and 11 completely omit them. In those practicums, the user simply follows mechanical steps ("Click button, drag scrubber, export file") without cognitive engagement.</p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Recommendation:</strong> Author and insert structured POE exercises for Practicums 5, 7, 9, 10, and 11 to achieve 100% inquiry parity across all 12 modules.</p></div></div>
+<p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Recommendation:</strong> Author and insert structured POE exercises for Practicums 5, 7, 9, 10, and 11 to achieve 100% inquiry parity across all 12 modules.</p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="7-tone-neutrality-inviolable-compliance-audit" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">7. Tone, Neutrality & Inviolable Compliance Audit</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The repository enforces strict, non-negotiable rules governing voice, personas, and demographic assumptions (Rule 4 of <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AGENTS.md</code> and Rule 7 of <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GEMINI.md</code>).</p>
@@ -1440,13 +1464,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">The Master Theoretical Model</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">The Master Theoretical Model</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1075,13 +1089,23 @@
         <h1 id="siliquarium-the-theoretical-model" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🌊 Siliquarium: The Theoretical Model</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Autopoietic Digital Life, Silicon Abiogenesis, and Spatial Ecosystem Dynamics</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">✨ Dedication</div>
-<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Dedicated to <strong class="text-slate-100 font-semibold">Anne Orme</strong>, whose meaningful and powerful conversations first inspired this pursuit of simulating evolution in its most authentic, biologically analogous form.</em></p></div></div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">✨ Dedication</div>
+<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Dedicated to <strong class="text-slate-100 font-semibold">Anne Orme</strong>, whose meaningful and powerful conversations first inspired this pursuit of simulating evolution in its most authentic, biologically analogous form.</em></p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-purple-950/30 border-l-4 border-purple-400 my-4 text-sm text-slate-300"><div class="font-mono text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">IMPORTANT</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Independent Scientific Instrument & Non-Accreditation Notice:</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-950/50 via-slate-900 to-slate-900 border border-purple-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-purple-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>⚡</span> Important &bull; Core Mechanism
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Independent Scientific Instrument & Non-Accreditation Notice:</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5">The Siliquarium application, theoretical model, and documentation are not designed, developed, peer-reviewed, or sponsored by any accredited university, government research agency, or academic accreditation board. Because this project represents an independent computational biophysics instrument, every statement, equation, and evolutionary claim is accompanied below by full mathematical derivations, thermodynamic proofs, and peer-reviewed scientific citations.</p>
 <p class="leading-relaxed font-sans text-xs my-1.5">📖 <strong class="text-slate-100 font-semibold">Circuit Paleontology Companion Reference Suite:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><a href="CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Paleontology Glossary</a> | <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="CIRCUIT_PALEONTOLOGY_NOTES.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📝 Critical Notes & Justifications</a> | <a href="../index.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Documentation Portal</a></p></div></div>
+<p class="leading-relaxed font-sans text-xs my-1.5"><a href="CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Paleontology Glossary</a> | <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="CIRCUIT_PALEONTOLOGY_NOTES.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📝 Critical Notes & Justifications</a> | <a href="../index.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Documentation Portal</a></p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="1-the-core-paradigm-the-genetic-book-of-the-dead-autopoietic-life" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. The Core Paradigm: The Genetic Book of the Dead & Autopoietic Life</h2>
 <h3 id="11-the-epistemological-leap-from-cad-to-autopoiesis" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.1 The Epistemological Leap: From CAD to Autopoiesis</h3>
@@ -1105,7 +1129,7 @@
 <li><strong class="text-slate-100 font-semibold">Adami's Mutual Information Theorem (Shannon Information Theory<sup id="cite_ref-21" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-21">[21]</a></sup>):</strong> Biological complexity is strictly the mutual information $I(X; E)$ between the genome ($X$) and the selective environment ($E$):</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{C(X)} = \textcolor{#34d399}{I(X; E)} = \textcolor{#fbbf24}{H(E)} - \textcolor{#f43f5e}{H(E \mid X)} = \textcolor{#fbbf24}{H(X)} - \textcolor{#f43f5e}{H(X \mid E)}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1123,7 +1147,7 @@
 <li><strong class="text-slate-100 font-semibold">Kimura's Transmission Rate:</strong> Motoo Kimura (1961) proved that the rate of environmental information accumulation per generation, $\Delta I$, is bounded by the genetic variance in reproductive fitness:</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\Delta I} \approx \frac{\textcolor{#34d399}{V_W}}{\textcolor{#c084fc}{2} (\textcolor{#fbbf24}{\bar{W}})^{\textcolor{#c084fc}{2}} \textcolor{#34d399}{\ln 2}} \quad \text{[bits/generation]}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1140,8 +1164,13 @@
 <li><strong class="text-slate-100 font-semibold">Circuits as Environmental Mirrors:</strong> When an evolved Silicoid expresses an <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate, an allosteric inverter (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code><sup id="cite_ref-14" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-14">[14]</a></sup>), or an Uri Alon<sup id="cite_ref-8" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-8">[8]</a></sup> Coherent Feed-Forward Loop (C-FFL<sup id="cite_ref-11" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-11">[11]</a></sup>), that circuit did not arise by accident. It is an open page in the Book of the Dead, physically recording that hydrothermal streams $A$ and $B$ pulsed concurrently, lethal heavy-metal toxins flared periodically, and fluid turbulence generated transient noise.</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">(For the complete mathematical treatise, derivations, and specimen-by-specimen mapping, see <a href="THE_GENETIC_BOOK_OF_THE_DEAD.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">The Genetic Book of the Dead: Environmental Information Injection</a>.)</em></p>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Theoretical Informational Grounding & Runtime Implementation:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">The Adami Mutual Information formulation $C(X) = I(X; E)$ and Kimura Transmission Velocity $\Delta I \approx V_W / (2 \bar{W}^2 \ln 2)$ provide the overarching theoretical framework and biophysical analogies motivating the simulation's design (differential survival transcribing environmental regularities into digital genomes). In the computational engine, these principles are operationalized via discrete individual mortality, Landauer metabolic dissipation penalties, and generational phylogenetic lineage recording, rather than continuous runtime numerical evaluation of population fitness variance ($V_W$) or environmental Shannon entropy ($H(E)$). Furthermore, discrete energy tokens represent abstract simulation currency units (millivolts of proton motive force / metabolic free energy scaled for cellular automaton dynamics), rather than direct physical equivalents of $k_B T \ln 2 \approx 2.87 \times 10^{-21}\text{ J}$. Under Howard Pattee's Epistemic Cut, the cellular metabolic circuit operates as a high-dimensional Deterministic Finite Automaton (DFA) whose symbolic tape is read-only during cellular life, with state transitions bounded by the cytoplasmic metabolite register. Continuous Hill-Langmuir cooperative binding ($n = 4, K_d = 0.5$) provides the continuous biophysical canalization from which discrete CMOS Boolean logic cleanly abstracts.</p></div></div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Theoretical Informational Grounding & Runtime Implementation:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">The Adami Mutual Information formulation $C(X) = I(X; E)$ and Kimura Transmission Velocity $\Delta I \approx V_W / (2 \bar{W}^2 \ln 2)$ provide the overarching theoretical framework and biophysical analogies motivating the simulation's design (differential survival transcribing environmental regularities into digital genomes). In the computational engine, these principles are operationalized via discrete individual mortality, Landauer metabolic dissipation penalties, and generational phylogenetic lineage recording, rather than continuous runtime numerical evaluation of population fitness variance ($V_W$) or environmental Shannon entropy ($H(E)$). Furthermore, discrete energy tokens represent abstract simulation currency units (millivolts of proton motive force / metabolic free energy scaled for cellular automaton dynamics), rather than direct physical equivalents of $k_B T \ln 2 \approx 2.87 \times 10^{-21}\text{ J}$. Under Howard Pattee's Epistemic Cut, the cellular metabolic circuit operates as a high-dimensional Deterministic Finite Automaton (DFA) whose symbolic tape is read-only during cellular life, with state transitions bounded by the cytoplasmic metabolite register. Continuous Hill-Langmuir cooperative binding ($n = 4, K_d = 0.5$) provides the continuous biophysical canalization from which discrete CMOS Boolean logic cleanly abstracts.</p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="13-the-reality-to-simulation-translation-matrix-grounding-theory-in-computational-components" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.3 The Reality-to-Simulation Translation Matrix: Grounding Theory in Computational Components</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To ensure that the theoretical model is never misunderstood as either an arbitrary arcade game or an intractable molecular dynamics calculation, every simulated element is formally grounded in deep-sea biophysical reality and mapped directly to discrete computational components under strict thermodynamic conservation laws ($\Delta E \equiv 0.000, \Delta M \equiv 0.000$).</p>
@@ -1246,7 +1275,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 1.2: Deep-Sea Hydrothermal Vent Matrix &amp; Inorganic Mineral Walls</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1354,7 +1383,7 @@
 <h4 id="1-spatio-temporal-phase-lags-traveling-waves" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">1. Spatio-Temporal Phase Lags & Traveling Waves</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Hydrothermal discharge radiates across the hexagonal basalt seafloor as dispersive advective waves. A metabolic fuel pulse released at vent coordinate $(0,0)$ does not strike all pore micro-compartments simultaneously; it sweeps across the grid as an advective traveling wave whose phase lag $\phi_{\text{wave}}$ depends strictly on spatial distance $\vec{x}$ and flow velocity:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\phi_{\text{wave}}(\vec{x}, t)} = \textcolor{#34d399}{\omega_{\text{vent}}} \textcolor{#fbbf24}{t} - \textcolor{#c084fc}{\vec{k}_{\text{wave}}} \cdot \textcolor{#f43f5e}{\vec{x}} + \textcolor{#94a3b8}{\theta_0}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1372,7 +1401,7 @@
 <h4 id="2-convective-precursor-wavefronts-pavlovian-pre-emption" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">2. Convective Precursor Wavefronts & Pavlovian Pre-Emption</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In deep-sea hydrothermal chimneys, catastrophic scalding thermal surges ($>350^\circ\text{C}$) and toxic heavy-metal bursts ($\text{Cd}^{2+}, \text{Pb}^{2+}, \text{As}^{3-}$) do not arrive without physical precursors. Because acoustic compression waves and low-temperature barocaloric micro-currents propagate through saturated basalt faster than convective thermal plumes, high-amplitude eruptive pulses are preceded by an asymmetric <strong class="text-slate-100 font-semibold">precursor warning wavefront</strong> $W_{\text{precursor}}$:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{W_{\text{precursor}}(t)} = \textcolor{#34d399}{A_p} \exp\left( - \frac{\textcolor{#fbbf24}{(t - t_{\text{surge}} + \tau_{\text{lead}})^2}}{\textcolor{#f43f5e}{2 \sigma_{\text{warn}}^2}} \right) \cdot \theta(\textcolor{#c084fc}{t_{\text{surge}} - t})$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1389,7 +1418,7 @@
 <h4 id="3-mineral-conduit-choking-hydrothermal-avulsion-and-vascular-rerouting" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">3. Mineral Conduit Choking, Hydrothermal Avulsion, and Vascular Rerouting</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Hydrothermal fluid contains supersaturated dissolved transition metal sulfides ($\text{FeS}, \text{FeS}_2, \text{CuFeS}_2$). When acidic vent effluent meets cold, alkaline seawater, rapid mineral precipitation occludes narrow channels. Conversely, high volumetric flux generates wall shear stress that scours conduits clear. The rate of mineral choking $C_{\text{conduit}}$ within a benthic rock pore channel obeys:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\frac{d C_{\text{conduit}}}{dt}} = \textcolor{#f43f5e}{k_{\text{precip}}} \textcolor{#fbbf24}{[M^{2+}]} \textcolor{#34d399}{\left( 1 - \frac{Q_{ij}}{Q_{\text{crit}}} \right)} - \textcolor{#38bdf8}{k_{\text{shear}}} \textcolor{#c084fc}{|Q_{ij}|} C_{\text{conduit}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1435,7 +1464,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 1.3: The Anatomy of a Rock Pore: Safe, Workshop, and Battery</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1539,7 +1568,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 2.3: Global Thermodynamic Energy Flow &amp; Landauer Dissipation</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1556,7 +1585,7 @@
 </ul></div>
         </div>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\sum \textcolor{#34d399}{E_{\text{vent input}}} = \sum \textcolor{#fbbf24}{E_{\text{stored in pores}}} + \sum \textcolor{#c084fc}{E_{\text{toggled gates}}} + \sum \textcolor{#f43f5e}{E_{\text{dissipated heat}}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1586,7 +1615,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 4.2: The Digital Paleontologist: Unbiased Real-Time Telemetry</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1670,7 +1699,7 @@
 <li><strong class="text-slate-100 font-semibold">Axial Coordinate Indexing:</strong> The grid is mathematically indexed using axial coordinates $(q, r)$, with 6 unit displacement vectors:</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\vec{\Delta}_{\text{hex}}} \in \left\{\textcolor{#c084fc}{(+1, 0), (+1, -1), (0, -1), (-1, 0), (-1, +1), (0, +1)}\right\}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1733,7 +1762,7 @@
 <li><strong class="text-slate-100 font-semibold">The Constant Energy Cap Invariant:</strong> The total energy emitted across the entire simulation is strictly bounded:</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{E_{\text{total}}} = \textcolor{#fbbf24}{E_{\text{central}}} + \sum_{i=1}^{\textcolor{#c084fc}{k}} \textcolor{#34d399}{E_{\text{branch}_i}} \equiv \mathbf{Constant}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1784,7 +1813,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 3.2: The Live Circuit Microscope &amp; Milestone Inspector</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1834,7 +1863,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 5.1: Abyssal Physical Force Fields: Gravity, Thermal Plumes &amp; Marine Snow</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1878,7 +1907,7 @@
 <li><strong class="text-slate-100 font-semibold">Ultramafic Mantle Peridotite ($y \le -2.0$):</strong> Harzburgite and lherzolite rocks rich in magnesium-iron silicates (olivine). When abyssal ocean water penetrates deep fault scarps, it reacts exothermically with peridotite in the process of <strong class="text-slate-100 font-semibold">serpentinization</strong>:</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#34d399}{\text{Olivine}} + \textcolor{#38bdf8}{\text{Water}} \longrightarrow \textcolor{#fbbf24}{\text{Serpentine}} + \textcolor{#c084fc}{\text{Magnetite}} + \textcolor{#f43f5e}{\text{Hydrogen } (H_2)}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1952,7 +1981,7 @@
 <h3 id="165-deconstructive-equation-anatomy-3d-stacked-hexagonal-prism-metrics" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">16.5 Deconstructive Equation Anatomy: 3D Stacked Hexagonal Prism Metrics</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To maintain strict physical rigor without continuous physics bloat, Siliquarium maps 3D spatial points using discrete stacked axial hexagonal coordinates $(q, r, z)$:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\mathbf{P}_{\text{world}}(q, r, z)} = \begin{bmatrix} \textcolor{#34d399}{R \sqrt{3}} \left(\textcolor{#fbbf24}{q} + \frac{\textcolor{#fbbf24}{r}}{\textcolor{#c084fc}{2}}\right) \\ \textcolor{#c084fc}{z \cdot \Delta z} \\ \textcolor{#34d399}{\frac{3}{2} R} \cdot \textcolor{#fbbf24}{r} \end{bmatrix}, \quad \textcolor{#38bdf8}{D_{3D}(\mathbf{p}_1, \mathbf{p}_2)} = \textcolor{#34d399}{\max}\big(\textcolor{#fbbf24}{|q_1 - q_2|}, \textcolor{#fbbf24}{|r_1 - r_2|}, \textcolor{#fbbf24}{|(q_1 + r_1) - (q_2 + r_2)|}\big) + \textcolor{#c084fc}{|z_1 - z_2|}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1990,7 +2019,7 @@
 <li><strong class="text-slate-100 font-semibold">Reproduction Threshold:</strong> Binary fission requires <strong class="text-slate-100 font-semibold">BOTH</strong> currencies:</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\text{Division Ready}} \iff \textcolor{#fbbf24}{E_{\text{battery}}} \ge \textcolor{#34d399}{100} \quad \mathbf{AND} \quad \textcolor{#fbbf24}{M_{\text{reservoir}}} \ge \textcolor{#34d399}{20}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2006,7 +2035,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A cell with 100 energy but 0 matter cannot reproduce; it must wait until it ingests enough physical mineral mass to construct the child's physical body.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\sum \textcolor{#34d399}{E_{\text{in}}} = \sum \textcolor{#fbbf24}{E_{\text{stored}}} + \sum \textcolor{#c084fc}{E_{\text{toggled}}} + \sum \textcolor{#f43f5e}{E_{\text{dissipated heat}}}, \quad \textcolor{#38bdf8}{\Delta E \equiv \mathbf{0.000}}$$</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\sum \textcolor{#34d399}{M_{\text{in}}} = \sum \textcolor{#fbbf24}{M_{\text{living bodies}}} + \sum \textcolor{#f43f5e}{M_{\text{carcasses}}} + \sum \textcolor{#c084fc}{M_{\text{seafloor sediment}}}, \quad \textcolor{#38bdf8}{\Delta M \equiv \mathbf{0.000}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2095,7 +2124,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 4.1: Neutral Saddles, Gene Duplication, and Adaptive Breakthroughs</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -2121,7 +2150,7 @@
 <li>The solution space is an $N$-dimensional Hamming hypercube $\{0,1\}^N$. Rather than inventing fictional 3D spatial points, the trajectory is projected onto a rigorous <strong class="text-slate-100 font-semibold">Hamming Distance vs. Metabolic Altitude Manifold</strong>:</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{d_H(\text{Lineage})} = \sum_{i=0}^{\textcolor{#c084fc}{k-1}} \textcolor{#34d399}{\text{popcount}}\big(\textcolor{#fbbf24}{G_i} \oplus \textcolor{#fbbf24}{G_{i+1}}\big)$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2168,7 +2197,7 @@
 <li><em class="text-slate-200 italic">The Step-Displacement Operator:</em> Every tick, a cell in the fluid column updates its position to an adjacent fluid hex based on ambient current plus any internal <strong class="text-slate-100 font-semibold">motility thrust</strong>:</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\vec{x}(t+1)} = \textcolor{#fbbf24}{\vec{x}(t)} + \textcolor{#34d399}{\vec{v}_{\text{current}}} + \textcolor{#f43f5e}{\vec{F}_{\text{thrust}}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2460,13 +2489,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

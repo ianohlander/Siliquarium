@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Phase 3 WebGL 3D Seafloor &amp; Circuit Microscope Guide</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Phase 3 WebGL 3D Seafloor &amp; Circuit Microscope Guide</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1091,7 +1105,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 3.1: The Macroscope — Volumetric 3D Hydrothermal Caldera</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1115,7 +1129,7 @@
         <span class="text-cyan-400">📷</span> <span>Figure 3.2: The Microscope — Real-Time Logic Workshop &amp; Reticle Lock</span>
       </figcaption>
     </figure></p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1126,7 +1140,7 @@
           <div class="space-y-2 text-slate-300 font-sans leading-relaxed text-xs"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🔬 Pedagogical Breakdown: Figure 3.2 — The In-Situ Circuit Microscope</div>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Visual Guide:</strong> Clicking any living pore activates the holographic 3D reticle and expands the live <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop</code> inspector drawer on the right. The panel displays real-time logic gate toggles (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>), active signal wires, current battery reserves, and the 60-bit decoded genome tape.</li>
-<li><strong class="text-slate-100 font-semibold">Biophysical Reality:</strong> Directly verifies Howard Pattee's Epistemic Cut: students observe the rate-independent symbolic genome tape resting safely on the library shelf, while rate-dependent CMOS logic gates toggle dynamically to process incoming vent pulses.</li>
+<li><strong class="text-slate-100 font-semibold">Biophysical Reality:</strong> Directly verifies Howard Pattee's Epistemic Cut: investigators observe the rate-independent symbolic genome tape resting safely on the library shelf, while rate-dependent CMOS logic gates toggle dynamically to process incoming vent pulses.</li>
 <li><strong class="text-slate-100 font-semibold">Digital Mapping:</strong> Dynamic Landauer power dissipation ($1\text{ token per toggle}$) and basal membrane leakage are metered in real time. If battery reserves hit zero, the cell undergoes immediate lysis into mineral rubble.</li>
 <li><strong class="text-slate-100 font-semibold">Core Principle:</strong> <em class="text-slate-200 italic">Observation without perturbation.</em> The microscope provides a non-invasive telemetry window into the living cell's internal state without altering its physical thermodynamics.</li>
 </ul></div>
@@ -1145,7 +1159,7 @@
 <h3 id="31-hexagonal-axial-to-3d-cartesian-coordinate-projection" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.1 Hexagonal Axial to 3D Cartesian Coordinate Projection</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium arranges pores in stacked 3D hexagonal prisms with axial coordinates $(q, r, z)$. To render these in 3D space, we project axial coordinates onto Cartesian coordinates $(x, y, z)$:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$x = R \sqrt{3} \left(q + \frac{r}{2}\right), \quad z = R \frac{3}{2} r, \quad y = z_{\text{elev}} \cdot \Delta z$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1168,7 +1182,7 @@ y_{\text{eye}} &= y_{\text{target}} + R_{\text{cam}} \sin(\theta) \\
 z_{\text{eye}} &= z_{\text{target}} + R_{\text{cam}} \cos(\theta) \cos(\phi)
 \end{aligned}$$</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\mathbf{P}_{\text{screen}} = \mathbf{M}_{\text{proj}} \cdot \mathbf{M}_{\text{view}} \cdot \mathbf{P}_{\text{world}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1203,7 +1217,7 @@ z_{\text{eye}} &= z_{\text{target}} + R_{\text{cam}} \cos(\theta) \cos(\phi)
 <h2 id="5-the-monolithic-lithospheric-mantle-subterranean-stratum-architecture" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. The Monolithic Lithospheric Mantle & Subterranean Stratum Architecture</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The abyssal hydrothermal field in Siliquarium is not an abstract, floating 2D plane suspended in empty space. In natural marine geology, hydrothermal vents sit atop a massive, dense <strong class="text-slate-100 font-semibold">oceanic tectonic plate</strong> founded upon the Penrose ophiolite sequence: basaltic lava terraces underlain by sheeted dikes, gabbros, and the ultramafic peridotite mantle.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To capture this biophysical reality, Siliquarium's 3D rendering engine (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/SeafloorRenderer3D.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SeafloorRenderer3D.ts</code></a>) implements a monolithic, flared lithospheric mantle foundation and deep subterranean stratigraphy ($z \in [-1, 4]$).</p>
-<div class="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 my-6 shadow-inner">
+<div class="p-5 rounded-2xl bg-slate-950 border border-cyan-500/40 text-xs font-mono space-y-3 my-6 shadow-xl">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <div class="flex items-center gap-2">
               <span class="text-cyan-400 text-sm">🔬</span>
@@ -1285,7 +1299,7 @@ z_{\text{eye}} &= z_{\text{target}} + R_{\text{cam}} \cos(\theta) \cos(\phi)
 <h3 id="q2-are-the-3d-physics-continuous-or-discrete" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q2: Are the 3D physics continuous or discrete?</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Discrete $O(1)$.</strong> As established in Section 20 of <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">THEORETICAL_MODEL.md</code>, continuous 3D rigid-body engines (like Havok or PhysX) introduce massive computational bloat. Siliquarium's 3D environment is a discrete stacked hexagonal lattice $(q, r, z)$. Movement and placement are instantaneous pointer operations taking $O(1)$ time per tick.</p>
 <h3 id="q3-why-use-an-interactive-html5-canvas-microscope-instead-of-static-charts" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q3: Why use an interactive HTML5 canvas microscope instead of static charts?</h3>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Because life is dynamic. Static truth tables cannot show whether a circuit is oscillating, whether an electron pulse arrived in time to catch an incoming substrate wave, or how Landauer heat accumulates. The interactive microscope lets educators and students watch <strong class="text-slate-100 font-semibold">computation as a living metabolism</strong>.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Because life is dynamic. Static truth tables cannot show whether a circuit is oscillating, whether an electron pulse arrived in time to catch an incoming substrate wave, or how Landauer heat accumulates. The interactive microscope lets educators and investigators watch <strong class="text-slate-100 font-semibold">computation as a living metabolism</strong>.</p>
 <h3 id="q4-does-the-flared-lithospheric-crust-mantle-impose-heavy-gpucpu-overhead" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q4: Does the flared lithospheric crust mantle impose heavy GPU/CPU overhead?</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">No.</strong> The 2D convex hull of the base stratum consists of at most 18 peripheral vertices. Rendering the flared facets, cooling striations, and bottom plate requires fewer than 25 2D canvas polygon draw operations per frame—taking less than $0.03\text{ ms}$, or less than $0.2\%$ of a standard $16.6\text{ ms}$ frame budget!</p>
 <h3 id="q5-does-the-pull-down-stats-drawer-poll-the-simulation-loop-continuously" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Q5: Does the pull-down stats drawer poll the simulation loop continuously?</h3>
@@ -1325,13 +1339,13 @@ z_{\text{eye}} &= z_{\text{target}} + R_{\text{cam}} \cos(\theta) \cos(\phi)
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

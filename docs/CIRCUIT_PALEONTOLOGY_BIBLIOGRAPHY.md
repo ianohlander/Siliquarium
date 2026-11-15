@@ -5,7 +5,7 @@
 
 > [!IMPORTANT]
 > **Independent Scientific Instrument & Non-Accreditation Notice:**  
-> The Siliquarium application, theoretical model, and documentation are not designed, developed, peer-reviewed, or sponsored by any accredited university, government research agency, or academic accreditation board. Because this project represents independent computational biophysics, every scientific assertion, network motif taxonomy, and bioenergetic rate equation is accompanied below by full peer-reviewed citations, empirical literature context, and transparent source code mappings so that researchers and students can independently audit and verify every claim from primary scientific sources.
+> The Siliquarium application, theoretical model, and documentation are not designed, developed, peer-reviewed, or sponsored by any accredited university, government research agency, or academic accreditation board. Because this project represents independent computational biophysics, every scientific assertion, network motif taxonomy, and bioenergetic rate equation is accompanied below by full peer-reviewed citations, empirical literature context, and transparent source code mappings so that researchers and investigators can independently audit and verify every claim from primary scientific sources.
 
 > [!NOTE]
 > **Circuit Paleontology Suite Navigation:**  

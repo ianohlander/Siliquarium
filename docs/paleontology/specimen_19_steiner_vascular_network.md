@@ -46,9 +46,9 @@
 
 > [!ANALOGY]
 > ### 💡 Everyday Analogy: The Footpaths Across the University Lawn
-> When a new college campus opens with a blank grass lawn, students do not walk along the rigid right-angle concrete sidewalks. Instead, hundreds of students walk along the direct diagonal lines between class buildings. Over weeks, the grass where people walk is trampled into dirt paths ("desire paths"), while the untouched grass stays green.
+> When a new college campus opens with a blank grass lawn, investigators do not walk along the rigid right-angle concrete sidewalks. Instead, hundreds of investigators walk along the direct diagonal lines between class buildings. Over weeks, the grass where people walk is trampled into dirt paths ("desire paths"), while the untouched grass stays green.
 >
-> Later, the university paves only the popular dirt trails with asphalt. The student body, without any central master planner, converged on the optimal minimal path network! *Physarocladus nakagakii* uses the exact same self-reinforcing rule to pave its cytoplasmic highways between hydrothermal pores.
+> Later, the university paves only the popular dirt trails with asphalt. The investigator body, without any central master planner, converged on the optimal minimal path network! *Physarocladus nakagakii* uses the exact same self-reinforcing rule to pave its cytoplasmic highways between hydrothermal pores.
 
 ---
 

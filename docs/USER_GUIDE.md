@@ -407,7 +407,7 @@ The **Naturalist Assistant** is an intelligent on-screen companion designed to b
 
 ```mermaid
 sequenceDiagram
-    participant User as User / Student
+    participant User as User / Investigator
     participant HUD as Top Bar / Transport
     participant Assistant as Naturalist Assistant
     participant Engine as Paleontology Engine
@@ -796,7 +796,7 @@ Displays axial coordinates $[q, r, z]$, substrate type, lineage generation numbe
 ![Siliquarium Design Studio](assets/screenshots/05_god_suite_lab_controls.png)
 *Figure UG.5: The Siliquarium Design Studio & World Builder open to Geomorphology, showcasing the Studio Ribbon, preset selector, CAD brush palette, footprint radius steppers, and seafloor scale controls.*
 
-The Design Studio transforms the legacy parameter drawer into a unified computational biology and geomorphic CAD engineering environment. Researchers and students can sculpt bespoke benthic topographies, plant hydrothermal chimney spires, gouge abyssal rift grabens, and inoculate competing frozen lineages for reproducible counterfactual Lenski LTEE trials.
+The Design Studio transforms the legacy parameter drawer into a unified computational biology and geomorphic CAD engineering environment. Researchers and investigators can sculpt bespoke benthic topographies, plant hydrothermal chimney spires, gouge abyssal rift grabens, and inoculate competing frozen lineages for reproducible counterfactual Lenski LTEE trials.
 
 #### The Studio Ribbon Bar
 - **Preset Dropdown:** Instantly loads pre-engineered geological templates (`twin-smokers`, `abyssal-trench`, `alkaline-mound`, `caldera-maze`, `lenski-chamber`) or user-created custom environments.
@@ -1337,7 +1337,7 @@ flowchart TD
 > *"If the tape of life were replayed from the Burgess Shale, would the same evolutionary outcomes emerge, or would the accidental contingencies of history yield an utterly unrecognizable biosphere?"*  
 > — **Stephen Jay Gould**, *Wonderful Life: The Burgess Shale and the Nature of History* (1989)
 
-Siliquarium integrates an authentic **Git-for-Artificial-Life Version Control Engine** (`EvolutionaryVersionManager` & `SimulationSnapshotManager`). It allows scientists, students, and educators to:
+Siliquarium integrates an authentic **Git-for-Artificial-Life Version Control Engine** (`EvolutionaryVersionManager` & `SimulationSnapshotManager`). It allows scientists, investigators, and educators to:
 1. **Export Full Simulation World States:** At any stage of abiogenesis, export the running simulation as a portable, self-contained `.silisave` JSON file preserving all living cells, 60-bit tapes, battery stores, operon states, somatic syncytia, buoyant spores, detrital carcasses, PRNG bit-state, and closed-universe thermodynamic ledger ($\Delta E \equiv 0.000, \Delta M \equiv 0.000$).
 2. **Instant Local Checkpointing:** Press <span class="key-badge">Ctrl</span> + <span class="key-badge">S</span> or click **`🔖 Save Checkpoint`** to bookmark the current simulation state in zero-latency IndexedDB cold storage (`SiliquariumDB`).
 3. **Phylogenetic Branch DAG Navigation:** Open the visual Timeline Branch modal (click **`🌿 Branches`** in the top header or press <span class="key-badge">B</span>) to explore divergent evolutionary lineages on an interactive tree.

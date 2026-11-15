@@ -9,7 +9,7 @@ In conventional computer science, genetic algorithms are treated as simple gradi
 
 In real evolutionary biology, fitness landscapes are not smooth hills; they are vast, hyper-dimensional plateaus, rugged canyons, and neutral saddles. More profoundly, living ecosystems are **non-stationary**: the environment itself shifts, and competing lineages alter the landscape through their own physical actions.
 
-To understand macro-evolution, students must explore three foundational pillars:
+To understand macro-evolution, investigators must explore three foundational pillars:
 1. **Motoo Kimura's Neutral Theory (1968):** Evolution proceeds largely through random drift along selectively neutral ridges, not relentless optimization.
 2. **Susumu Ohno's Gene Duplication<sup id="cite_ref-2" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup> (1970):** Innovation requires redundant genetic copies freed from purifying selection to explore novel functions.
 3. **Richard Lenski's Long-Term Evolution Experiment<sup id="cite_ref-3" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-3">[3]</a></sup> (LTEE, 1988–Present):** Adaptation is characterized by hyperbolic decelerating velocity punctuated by rare, historically contingent breakthrough innovations.

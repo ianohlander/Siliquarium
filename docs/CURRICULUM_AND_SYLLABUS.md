@@ -11,7 +11,7 @@
 
 ## 1. Course Architecture & Modular Portal
 
-To prevent vertical scrolling fatigue and provide a structured, college-level learning trajectory, this course is divided into **four core theoretical units** and an **interactive student laboratory manual**. Each module is published as an independent chapter equipped with high-resolution visual scaffolding, worked toy traces, BooleanGA Equation Decoders, and conceptual misconception immunity.
+To prevent vertical scrolling fatigue and provide a structured, college-level learning trajectory, this course is divided into **four core theoretical units** and an **interactive investigator laboratory manual**. Each module is published as an independent chapter equipped with high-resolution visual scaffolding, worked toy traces, BooleanGA Equation Decoders, and conceptual misconception immunity.
 
 | Curriculum Module | Core Theoretical Focus | Laboratory & Experimental Connections | Modular Link |
 | :--- | :--- | :--- | :---: |
@@ -19,9 +19,9 @@ To prevent vertical scrolling fatigue and provide a structured, college-level le
 | **Unit 2: The Logic of Life** | Primitive Catalysts (`AND`, `OR`, `NOT`), XOR Impossibility Proof, Codon Table, Landauer Bound | Lab 2: Landauer Dissipation; Lab 3: Toxin Shielding | [Open Unit 2 →](curriculum/unit2_logic_of_life.md) |
 | **Unit 3: Systems Biology Motifs** | Uri Alon Motifs (Latches, Repressilator, FFLs), Weisfeiler-Lehman Graph Hashes | Real-Time Milestone Detection & State Hysteresis | [Open Unit 3 →](curriculum/unit3_systems_biology_motifs.md) |
 | **Unit 4: Evolutionary Dynamics** | Kimura Neutral Drift, Ohno Duplications, Homology vs Homoplasy, Lenski LTEE | Lab 4: God-Suite Perturbations; Lab 5: Flight Recorder Autopsy | [Open Unit 4 →](curriculum/unit4_evolutionary_dynamics.md) |
-| **Volume 01: Morphology** | Multicellular Topologies, Maximal 3-Cliques ($K_3$), Betti Numbers, Kleiber's Law | In-Silico Syncytial Fusion & Cytoplasmic Streaming | [Open Volume 1 →](MULTICELLULAR_MORPHOLOGY_GUIDE.md) |
-| **Volume 02: GRNs & Attractors** | Waddington Landscapes, Kauffman $K_c=2$ Criticality, Hill Cooperativity, 10-Tick Trace | Live Circuit Microscope Gene Regulatory Viewer | [Open Volume 2 →](GENE_REGULATORY_NETWORKS_VOLUME.md) |
-| **Practicums: Student Lab Manual** | Five 90-Minute Block Practicums, Socratic Seminars, Formative Diagnostic Assessments | Interactive 3D WebGL Seamount & Single-Bit Autopsy | [Open Lab Manual →](curriculum/practicums_lab_manual.md) |
+| **Volume II: GRNs & Attractors** | Waddington Landscapes, Kauffman $K_c=2$ Criticality, Hill Cooperativity, 10-Tick Trace | Live Circuit Microscope Gene Regulatory Viewer | [Open Volume II →](GENE_REGULATORY_NETWORKS_VOLUME.md) |
+| **Volume III: Morphology** | Multicellular Topologies, Maximal 3-Cliques ($K_3$), Betti Numbers, Kleiber's Law | In-Silico Syncytial Fusion & Cytoplasmic Streaming | [Open Volume III →](MULTICELLULAR_MORPHOLOGY_GUIDE.md) |
+| **Volume V: Applied Practicums** | Five 90-Minute Block Practicums, Socratic Seminars, Formative Diagnostic Assessments | Interactive 3D WebGL Seamount & Single-Bit Autopsy | [Open Lab Manual →](curriculum/practicums_lab_manual.md) |
 | **Full-Year Syllabus** | Full-Year Graduate Curriculum (30 Weeks), Biophysical Foundations, & Multicellular Review | Comprehensive 30-Week Treatise & Visual Aid Blueprints | [Open Full Syllabus →](curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.md) |
 
 ---
@@ -30,22 +30,22 @@ To prevent vertical scrolling fatigue and provide a structured, college-level le
 
 | Chapter | Document Title | Primary Concepts Explored |
 | :---: | :--- | :--- |
+| **Volume II** | [**The Architecture of Gene Regulatory Networks & Epigenetic Landscapes**](GENE_REGULATORY_NETWORKS_VOLUME.md) | Conrad Waddington epigenetic landscapes, Stuart Kauffman $K_c=2$ Boolean criticality, Derrida sensitivity $s=1$, Hill cooperativity, 10-tick state machine trace, homeotic Hox-like saltations, and Live Circuit Microscope Gene Regulatory Viewer. |
+| **Volume III** | [**Multicellular Body Topologies & Morphometric Graph Theory Manual**](MULTICELLULAR_MORPHOLOGY_GUIDE.md) | Maximal 3-cliques ($K_3$), 5 canonical topologies (Rosette, Columnar, Dendritic, Ring, Filamentous), Hagen-Poiseuille syncytial hydrodynamic flow, Betti invariants, and 9 publication-grade SVGs. |
+| **Unit 1 (Vol I)** | [**The Prebiotic Threshold & Howard Pattee's Epistemic Cut**](curriculum/unit1_prebiotic_threshold.md) | Dilution catastrophe, alkaline hydrothermal vents, Mitchell proton motive force ($\Delta pH \approx 4.5 \implies \sim 200\text{ mV}$), von Neumann automata theorem, and Pattee's separation of symbolic Safe from active Workshop. |
+| **Unit 2 (Vol II)** | [**The Logic of Life & Primitive Enzymes**](curriculum/unit2_logic_of_life.md) | Enzymes as Boolean operators, active site biophysics, the **XOR Impossibility Proof** (linear non-separability), the 64-entry degenerate codon table, and Landauer dynamic switching dissipation ($1$ token/toggle). |
+| **Unit 3 (Vol II)** | [**Systems Biology & Uri Alon's Network Motifs**](curriculum/unit3_systems_biology_motifs.md) | Uri Alon motifs: Bistable Toggle Switches (cell fate & digestive memory), Repressilators (circadian limit cycles), C-FFL and I-FFL filters, and Weisfeiler-Lehman topological graph invariant hashing. |
+| **Unit 4 (Vol IV)** | [**Macro-Evolutionary Dynamics & Lenski LTEE**](curriculum/unit4_evolutionary_dynamics.md) | Motoo Kimura neutral drift saddles, Susumu Ohno gene duplication, mathematical proof of Homology vs. Homoplasy (Convergent Evolution) via Least Common Ancestor, Lenski LTEE hyperbolic velocity, and pelagic spore dispersal. |
+| **Practicums (Vol V)**| [**Investigator Hands-On Laboratory Manual & Assessments**](curriculum/practicums_lab_manual.md) | Five 90-minute hands-on investigator labs using Siliquarium's 3D WebGL seamount and Circuit Microscope, 3 Socratic Seminar discussion prompts, and formative diagnostic assessments. |
 | **Full-Year Syllabus** | [**Comprehensive Full-Year University Syllabus**](curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.md) | 30-week comprehensive curriculum, 6-pillar weekly modules, biophysical proofs, pedagogical review of multicellular morphology, and 13 SVG architectural blueprints. |
-| **Volume 01** | [**Multicellular Body Topologies & Morphometric Graph Theory Manual**](MULTICELLULAR_MORPHOLOGY_GUIDE.md) | Maximal 3-cliques ($K_3$), 5 canonical topologies (Rosette, Columnar, Dendritic, Ring, Filamentous), Hagen-Poiseuille syncytial hydrodynamic flow, Betti invariants, and 9 publication-grade SVGs. |
-| **Volume 02** | [**The Architecture of Gene Regulatory Networks & Epigenetic Landscapes**](GENE_REGULATORY_NETWORKS_VOLUME.md) | Conrad Waddington epigenetic landscapes, Stuart Kauffman $K_c=2$ Boolean criticality, Derrida sensitivity $s=1$, Hill cooperativity, 10-tick state machine trace, homeotic Hox-like saltations, and Live Circuit Microscope Gene Regulatory Viewer. |
-| **Unit 1** | [**The Prebiotic Threshold & Howard Pattee's Epistemic Cut**](curriculum/unit1_prebiotic_threshold.md) | Dilution catastrophe, alkaline hydrothermal vents, Mitchell proton motive force ($\Delta pH \approx 4.5 \implies \sim 200\text{ mV}$), von Neumann automata theorem, and Pattee's separation of symbolic Safe from active Workshop. |
-| **Unit 2** | [**The Logic of Life & Primitive Enzymes**](curriculum/unit2_logic_of_life.md) | Enzymes as Boolean operators, active site biophysics, the **XOR Impossibility Proof** (linear non-separability), the 64-entry degenerate codon table, and Landauer dynamic switching dissipation ($1$ token/toggle). |
-| **Unit 3** | [**Systems Biology & Uri Alon's Network Motifs**](curriculum/unit3_systems_biology_motifs.md) | Uri Alon motifs: Bistable Toggle Switches (cell fate & digestive memory), Repressilators (circadian limit cycles), C-FFL and I-FFL filters, and Weisfeiler-Lehman topological graph invariant hashing. |
-| **Unit 4** | [**Macro-Evolutionary Dynamics & Lenski LTEE**](curriculum/unit4_evolutionary_dynamics.md) | Motoo Kimura neutral drift saddles, Susumu Ohno gene duplication, mathematical proof of Homology vs. Homoplasy (Convergent Evolution) via Least Common Ancestor, Lenski LTEE hyperbolic velocity, and pelagic spore dispersal. |
-| **Practicums**| [**Student Hands-On Laboratory Manual & Assessments**](curriculum/practicums_lab_manual.md) | Five 90-minute hands-on student labs using Siliquarium's 3D WebGL seamount and Circuit Microscope, 3 Socratic Seminar discussion prompts, and formative diagnostic assessments. |
 
 ---
 
 ## 3. Pedagogical Philosophy: Autopoiesis vs. Heteropoietic CAD
 
-In conventional high school and undergraduate computer science, genetic algorithms are framed as **heteropoietic CAD optimizers**: an external programmer writes a target truth table (loss function) and terminates any circuit that fails to solve it. 
+In conventional introductory and advanced computer science, genetic algorithms are framed as **heteropoietic CAD optimizers**: an external programmer writes a target truth table (loss function) and terminates any circuit that fails to solve it. 
 
-This introduces a fatal pedagogical misconception: students assume evolution possesses goals, foresight, and an omniscient supervisor.
+This introduces a fatal pedagogical misconception: investigators assume evolution possesses goals, foresight, and an omniscient supervisor.
 
 | Architectural Dimension | Conventional Boolean-GA (Engineering CAD) | Siliquarium (Autopoietic Ecosystem) |
 | :--- | :--- | :--- |
@@ -58,7 +58,7 @@ This introduces a fatal pedagogical misconception: students assume evolution pos
 **Siliquarium** transitions from engineering CAD to **autopoiesis** (Humberto Maturana and Francisco Varela):
 - **Fitness is not an external score; fitness is persistence.**
 - An organism survives if and only if its physical circuit extracts sufficient chemical energy from hydrothermal fluids to pay its Landauer switching costs and basal maintenance before its battery hits zero.
-- Nature is blind; only the human student looking through the Circuit Microscope celebrates the discovery of complex logic!
+- Nature is blind; only the human investigator looking through the Circuit Microscope celebrates the discovery of complex logic!
 
 ---
 
@@ -70,7 +70,7 @@ All materials across Units 1–4 and the Laboratory Manual strictly adhere to ou
 2. **D2: The Gradient of Abstraction:** Concepts ramp gently from everyday analogies (the water tower, the leaky drain, the neighborhood gossip exchange) to discrete logic circuits and formal equations.
 3. **D3: Deconstructive Equation Anatomy:** Every formula is color-coordinated, paired with a term-by-term breakdown table, an *"Intuitive Truth Behind the Architecture"*, and an *"Everyday Analogy"*.
 4. **D4: Concrete Micro-Scaffolding & Worked Toy Traces:** Step-by-step numerical traces follow single cells across 5 to 25 discrete ticks, demystifying how discrete energy and matter tokens flow.
-5. **D5: Conceptual Misconception Immunity (Skeptic FAQ):** Proactively addresses student misunderstandings regarding smuggled biology, teleological goals, and the difference between mutating code vs mutating bodies.
+5. **D5: Conceptual Misconception Immunity (Skeptic FAQ):** Proactively addresses investigator misunderstandings regarding smuggled biology, teleological goals, and the difference between mutating code vs mutating bodies.
 
 ---
 

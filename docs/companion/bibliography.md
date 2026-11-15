@@ -14,7 +14,7 @@
 - **Foundational Theoretical Thesis:** Biological energy transduction does not proceed via hypothetical high-energy chemical intermediates, but via a transmembrane electrochemical potential difference of protons (chemiosmosis).
 - **Epistemological & Biophysical Mechanism:** Mitchell established that biological membranes must be fundamentally impermeable to ions. Enzymes embedded in the membrane pump protons outward during electron transport, storing free energy electrostatically and chemically ($\Delta p = \Delta \psi - \frac{2.303 RT}{F} \Delta \text{pH}$). The return flux of protons through a reversible ATPase motor drives ATP synthesis from ADP and $P_i$.
 - **Operational Realization in Siliquarium:** Embodied in the pore boundary bioenergetics of [`VentPhysics.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/physics/VentPhysics.ts) and [`PoreBattery.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreBattery.ts). Organisms do not receive energy from an abstract score; they extract free energy from the potential difference between incoming hydrothermal bit streams and the ocean sink.
-- **Pedagogical Synthesis:** Disabuses students of the misconception that ATP is a "magic fuel tablet." Replaces chemical mystique with physical circuit analysis: the membrane is a capacitor, the proton gradient is a voltage source, and metabolism is current flow.
+- **Pedagogical Synthesis:** Disabuses investigators of the misconception that ATP is a "magic fuel tablet." Replaces chemical mystique with physical circuit analysis: the membrane is a capacitor, the proton gradient is a voltage source, and metabolism is current flow.
 
 ---
 
@@ -45,7 +45,7 @@
 - **Foundational Theoretical Thesis:** Life is uniquely defined in the physical universe by the **Epistemic Cut**—the non-reducible complementarity between rate-independent symbolic informational descriptions and rate-dependent continuous physical laws.
 - **Epistemological & Biophysical Mechanism:** Physical laws are inexorable, time-dependent, and governed by differential equations. A symbolic code (e.g., DNA or formal computer language) is rate-independent: its instructional meaning does not depend on the velocity of physical transcription. Physical dynamics cannot generate symbolic constraints without a measurement/reading apparatus, and symbolic codes cannot alter the world without rate-dependent physical actuators.
 - **Operational Realization in Siliquarium:** The architectural partition between [`GenomeSafe.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/GenomeSafe.ts) (inert, time-invariant 60-bit strings) and [`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts) (active, power-consuming, rate-dependent logic gate evaluations).
-- **Pedagogical Synthesis:** Serves as the antidote to naive reductionism. Teaches students that life cannot be understood purely as chemistry (which ignores symbolic code) or purely as software (which ignores thermodynamic constraints).
+- **Pedagogical Synthesis:** Serves as the antidote to naive reductionism. Teaches investigators that life cannot be understood purely as chemistry (which ignores symbolic code) or purely as software (which ignores thermodynamic constraints).
 
 ---
 
@@ -74,7 +74,7 @@
 - **Foundational Theoretical Thesis:** Biological networks are not random hairballs; they are constructed from small, recurring structural wiring patterns ("network motifs") that appear far more frequently than expected by chance because they perform fundamental, robust information processing tasks.
 - **Epistemological & Biophysical Mechanism:** Using graph comparison against randomized degree-preserved networks ($Z$-score analysis), Alon identified recurring subgraphs: negative autoregulation (accelerating response times), positive feedback (bistability and epigenetic memory), and feed-forward loops (sign-sensitive delays and pulse generators).
 - **Operational Realization in Siliquarium:** The core paleontology scanning engine in [`MotifScanner.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts), which scans living and fossilized gate netlists for bistable toggle switches, ring oscillators, and feed-forward loops.
-- **Pedagogical Synthesis:** Provides students with a systematic framework for reverse-engineering complex biological systems into understandable functional building blocks.
+- **Pedagogical Synthesis:** Provides investigators with a systematic framework for reverse-engineering complex biological systems into understandable functional building blocks.
 
 ---
 
@@ -104,7 +104,7 @@
 - **Foundational Theoretical Thesis:** Macro-evolutionary adaptation decelerates asymptotically over generational time; complex novel features (such as citrate aerobic metabolism, $Cit^+$) depend strictly upon antecedent historical contingency and genetic potentiation.
 - **Epistemological & Biophysical Mechanism:** By propagating 12 asexual populations of *E. coli* since 1988 with periodic cryopreservation ("frozen fossil records"), Lenski proved that adaptation follows a power-law trajectory. Furthermore, replaying frozen ancestral strains from before Generation 31,500 proved that the evolution of citrate metabolism was historically contingent upon prior neutral or non-adaptive mutations that potentiated the genome.
 - **Operational Realization in Siliquarium:** Directly instantiated in [`LteeBenchmark.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts) and [`FossilFreezer.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/FossilFreezer.ts). The simulator maintains frozen snapshots of ancestral genomes, allowing counterfactual replays and single-bit autopsies.
-- **Pedagogical Synthesis:** Replaces abstract evolutionary debates with empirical experimental data, showing students that evolution is an open-ended, empirically testable physical process.
+- **Pedagogical Synthesis:** Replaces abstract evolutionary debates with empirical experimental data, showing investigators that evolution is an open-ended, empirically testable physical process.
 
 ---
 
@@ -115,7 +115,7 @@
 - **Foundational Theoretical Thesis:** The vast majority of evolutionary substitutions at the molecular sequence level are selectively neutral or nearly neutral, governed by stochastic genetic drift rather than positive Darwinian selection.
 - **Epistemological & Biophysical Mechanism:** Kimura calculated that the molecular rate of amino acid substitution across mammalian lineages was extraordinarily rapid and constant across time. Under classical selectionism, this rate would impose an intolerable "cost of selection" (Haldane's dilemma). By proving that the neutral substitution rate $k = u$, Kimura demonstrated that molecular evolution is driven by random drift acting on neutral mutations.
 - **Operational Realization in Siliquarium:** Implemented via non-coding introns (`INTRON_SILENT`) and synonymous degenerate codons in [`CodonTable.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts). Lineages drift across neutral Hamming paths (blue edges in the fossil trajectory) without metabolic penalty.
-- **Pedagogical Synthesis:** Inoculates students against vulgar pan-selectionism, emphasizing that molecular diversity is largely the signature of neutral drift.
+- **Pedagogical Synthesis:** Inoculates investigators against vulgar pan-selectionism, emphasizing that molecular diversity is largely the signature of neutral drift.
 
 ---
 
@@ -151,7 +151,7 @@
 - **Foundational Theoretical Thesis:** The genome does not generate biological information *ex nihilo*; it is an ancestral palimpsest—an inverse photographic negative or physical carving sculpted by the environment that created it. The environment is the ultimate fountainhead of biological information.
 - **Epistemological & Biophysical Mechanism:** Every gene, physiological pathway, and anatomical organ in a living organism is an encoded physical description of ancestral worlds. Camels carry descriptions of Pleistocene dunes; deep-sea fish carry descriptions of abyssal pressures; extremophile enzymes carry descriptions of hydrothermal chimneys. Natural selection acts as the physical chisel: organisms possessing variations incongruent with environmental regularities are thermodynamically culled, leaving surviving genomes as high-fidelity mirrors of their selective histories.
 - **Operational Realization in Siliquarium:** The core thesis of the simulation and digital paleontology engine. Silicoid 60-bit genomes ([`GenomeSafe.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/GenomeSafe.ts)) and gate circuits ([`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts)) evolve not to satisfy arbitrary human fitness goals, but to survive thermodynamic hydrothermal pulses, diurnal fluctuations, and predator-prey dynamics ([`SimulationWorld.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts)). The Digital Paleontologist ([`MotifScanner.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/MotifScanner.ts)) reads these circuits as physical chapters of the ancestral Book of the Dead.
-- **Pedagogical Synthesis:** Provides students with the ultimate philosophical resolution to creationist challenges: mutations provide raw entropy (noise), but the environment provides the information. Selection is the physical communication channel transcribing environmental order into symbolic code.
+- **Pedagogical Synthesis:** Provides investigators with the ultimate philosophical resolution to creationist challenges: mutations provide raw entropy (noise), but the environment provides the information. Selection is the physical communication channel transcribing environmental order into symbolic code.
 
 ---
 
@@ -163,7 +163,7 @@
 - **Foundational Theoretical Thesis:** Physical genomic complexity is mathematically identical to the **mutual information** between the genome sequence $X$ and the physical environment $E$: $C(X) = I(X; E) = H(E) - H(E \mid X)$. A random genome has zero complexity because it contains zero information about its niche.
 - **Epistemological & Biophysical Mechanism:** Adami reconciled Shannon information theory with evolutionary biology by proving that sequence length alone is an uninformative metric (the C-value enigma). True biological information is the amount by which an organism's genomic sequence reduces its conditional uncertainty regarding how to survive in environment $E$. In a static environment, selection drives $I(X; E) \to H(E)$ up to the informational capacity of the genome.
 - **Operational Realization in Siliquarium:** Quantified in [`CircuitAdvantageAnalyzer.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/analysis/CircuitAdvantageAnalyzer.ts) and [`LteeBenchmark.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts). When abiotic hydrothermal bit-streams feature periodic or correlated statistical structure, evolved logic gates reduce conditional uncertainty, yielding higher metabolic token harvesting efficiency.
-- **Pedagogical Synthesis:** Equips students with a rigorous, quantifiable mathematical formula for biological complexity, stripping away theological and teleological ambiguity.
+- **Pedagogical Synthesis:** Equips investigators with a rigorous, quantifiable mathematical formula for biological complexity, stripping away theological and teleological ambiguity.
 
 ---
 
@@ -293,7 +293,7 @@
 - **Foundational Theoretical Thesis:** The evolution of multicellular individuality requires the suppression of lower-level cell lineage competition; somatic sequestration and maternal developmental control evolved to police selfish cellular mutational variants.
 - **Epistemological & Biophysical Mechanism:** In primitive multicellular organisms without sequestered germlines, mutant cell lineages that reproduce faster at the expense of somatic function act as cancers. True higher-level individuality emerges only when embryonic mechanisms enforce strict coordination and channel all reproductive potential through specialized reproductive propagules (spores or gametes).
 - **Operational Realization in Siliquarium:** Codified in the transition between benthic clonal syncytia and pelagic sporulation ([`specimen_10_pelagic_sporulation.md`](../paleontology/specimen_10_pelagic_sporulation.md)). Pelagic spores pass through a single-cell bottleneck, resetting genetic relatedness to $r = 1.0$ and purging somatic cheaters.
-- **Pedagogical Synthesis:** Teaches students that biological individuality is not an axiomatic starting condition, but an evolved historical achievement maintained by conflict-suppressing adaptations.
+- **Pedagogical Synthesis:** Teaches investigators that biological individuality is not an axiomatic starting condition, but an evolved historical achievement maintained by conflict-suppressing adaptations.
 
 ---
 
@@ -302,7 +302,7 @@
 - **Foundational Theoretical Thesis:** Major evolutionary innovations occur through **Serial Endosymbiosis**, wherein distinct prokaryotic lineages merge into obligate mutually dependent composite super-organisms (eukaryotes).
 - **Epistemological & Biophysical Mechanism:** Margulis proved that mitochondria and chloroplasts originated as free-living alphaproteobacteria and cyanobacteria engulfed by an archaeal host. Over evolutionary time, horizontal gene transfer transferred organellar genes to the host nucleus, trapping both partners in an irreversible obligate metabolic mutualism.
 - **Operational Realization in Siliquarium:** Embodied in the endosymbiotic cassette mechanics of Specimen 08 ([`specimen_08_endosymbiotic_cassette.md`](../paleontology/specimen_08_endosymbiotic_cassette.md)) and Volume II Chapter 9. Host pores host endosymbiont circuits that boost metabolic harvesting in exchange for shared cytoplasmic maintenance.
-- **Pedagogical Synthesis:** Broadens students' evolutionary perspective beyond solitary point mutations to cooperative genomic fusion and symbiotic synthesis.
+- **Pedagogical Synthesis:** Broadens investigators' evolutionary perspective beyond solitary point mutations to cooperative genomic fusion and symbiotic synthesis.
 
 ---
 

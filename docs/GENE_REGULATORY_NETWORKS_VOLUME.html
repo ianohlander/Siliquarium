@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">The Architecture of Gene Regulatory Networks — Master Volume 02</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">The Architecture of Gene Regulatory Networks — Master Volume 02</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1074,15 +1088,20 @@
       <div class="max-w-6xl mx-auto space-y-8">
         <h1 id="the-architecture-of-gene-regulatory-networks" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🧬 The Architecture of Gene Regulatory Networks</h1>
 <h2 id="from-molecular-biophysics-to-digital-logic-dynamical-attractor-landscapes-and-spatial-morphogenesis" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">From Molecular Biophysics to Digital Logic, Dynamical Attractor Landscapes, and Spatial Morphogenesis</h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">A Concept-First Exploration of Biological and Digital Gene Regulation for Curious Explorers, Students, and Researchers</em></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">A Concept-First Exploration of Biological and Digital Gene Regulation for Curious Explorers, Investigators, and Researchers</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">📜 Dedication & Pedagogical Creed</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">📜 Dedication & Pedagogical Creed</div>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Dedicated to <strong class="text-slate-100 font-semibold">Anne Orme</strong>, whose inspiring, foundational conversations ignited the passion to model the beauty and uncompromising logic of real biological evolution.</em></p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">"A student does not fail to understand because biology is difficult; a student fails when a teacher forgets what it felt like not to know. We banish all intellectual hazing, hand-waving, and complexity cliffs from these pages. Every equation shall have its decoder; every abstraction shall have its physical anchor."</em></p></div></div>
+<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">"A investigator does not fail to understand because biology is difficult; a investigator fails when a teacher forgets what it felt like not to know. We banish all intellectual hazing, hand-waving, and complexity cliffs from these pages. Every equation shall have its decoder; every abstraction shall have its physical anchor."</em></p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="table-of-contents" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Table of Contents</h2>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
-<li><a href="#preface-a-teachers-note-to-the-curious-reader" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Preface: A Teacher's Note to the Curious Reader</a></li>
+<li><a href="#preface-a-teachers-note-to-the-curious-reader" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Preface: A Investigator Note to the Curious Reader</a></li>
 <li><a href="#chapter-1-the-foundational-dilemma-why-do-cells-need-networks" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Chapter 1: The Foundational Dilemma — Why Do Cells Need Networks?</a></li>
 <li><a href="#11-the-central-paradox-of-development" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">1.1 The Central Paradox of Development</a></li>
 <li><a href="#12-what-is-a-network-nodes-edges-and-directed-causality" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">1.2 What is a "Network"? Nodes, Edges, and Directed Causality</a></li>
@@ -1141,7 +1160,7 @@
 <li><a href="#chapter-12-foundations-further-reading" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Chapter 12: Foundations & Further Reading</a></li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
-<h2 id="preface-a-teachers-note-to-the-curious-reader" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Preface: A Teacher's Note to the Curious Reader</h2>
+<h2 id="preface-a-investigator-note-to-the-curious-reader" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Preface: A Investigator Note to the Curious Reader</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Welcome to the laboratory. If you have ever wondered how a living creature builds itself out of inanimate matter, you have arrived at one of the grandest questions in all of natural philosophy.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In standard high-school textbooks, genes are almost always introduced as <strong class="text-slate-100 font-semibold">"blueprints"</strong>—as if an embryo were an IKEA flat-pack bookshelf where Gene A builds the bottom shelf, Gene B screws in the left panel, and Gene C paints the wood white.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">I need you to gently set that metaphor aside. <strong class="text-slate-100 font-semibold">A genome is not an architectural drawing; it is a dynamic computer program executed by a chemical engine.</strong></p>
@@ -1240,7 +1259,11 @@
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="15-introducing-our-protagonist-the-odyssey-of-metazoicladus-wolpertii" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.5 Introducing Our Protagonist: The Odyssey of <em class="text-slate-200 italic">Metazoicladus wolpertii</em></h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To ensure you never get lost in mathematical abstractions, we will follow a single, living organism through every chapter of this volume:</p>
-<div class="p-4 rounded-xl bg-purple-950/30 border-l-4 border-purple-400 my-4 text-sm text-slate-300"><div class="font-mono text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">IMPORTANT</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🌸 Specimen MW-01: <em class="text-slate-200 italic">Metazoicladus wolpertii</em> (The Abyssal Rose / Wolpert's Flower)</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-950/50 via-slate-900 to-slate-900 border border-purple-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-purple-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>⚡</span> Important &bull; Core Mechanism
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🌸 Specimen MW-01: <em class="text-slate-200 italic">Metazoicladus wolpertii</em> (The Abyssal Rose / Wolpert's Flower)</div>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Lineage Clade:</strong> <em class="text-slate-200 italic">Metazoicladus</em> (Sub-caldera benthic clade)</li>
 <li><strong class="text-slate-100 font-semibold">Common Name:</strong> The Abyssal Rose (or Wolpert's Flower)</li>
@@ -1248,7 +1271,8 @@
 <li><strong class="text-slate-100 font-semibold">Genomic Architecture:</strong> A compact, 48-bit symbolic DNA tape stored in its <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GenomeSafe</code>.</li>
 <li><strong class="text-slate-100 font-semibold">The Existential Challenge:</strong> Surviving in an abyssal hydrothermal field where mineral food arrives in rhythmic pulses, but toxic heavy-metal surges threaten to corrode its machinery.</li>
 </ul>
-<p class="leading-relaxed font-sans text-xs my-1.5">Over the course of this volume, we will watch <em class="text-slate-200 italic">Metazoicladus wolpertii</em> evolve from a vulnerable single-cell autotroph into a differentiated, multicellular rosette with specialized feeding organs and protective shields. Every formula, every state transition table, and every circuit diagram in this guide is taken directly from the physical life history of <em class="text-slate-200 italic">Metazoicladus wolpertii</em>!</p></div></div>
+<p class="leading-relaxed font-sans text-xs my-1.5">Over the course of this volume, we will watch <em class="text-slate-200 italic">Metazoicladus wolpertii</em> evolve from a vulnerable single-cell autotroph into a differentiated, multicellular rosette with specialized feeding organs and protective shields. Every formula, every state transition table, and every circuit diagram in this guide is taken directly from the physical life history of <em class="text-slate-200 italic">Metazoicladus wolpertii</em>!</p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="chapter-2-biological-gene-regulation-how-nature-solved-the-problem" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Chapter 2: Biological Gene Regulation — How Nature Solved the Problem</h2>
 <h3 id="21-the-molecular-switch-promoters-operators-and-transcription-factors" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.1 The Molecular Switch: Promoters, Operators, and Transcription Factors</h3>
@@ -1275,7 +1299,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">E. coli</em> loves to eat glucose; it is simple and efficient to digest. Lactose is a complex double-sugar requiring heavy metabolic investment to break down. Synthesizing lactose-digesting enzymes when glucose is already abundant is a colossal waste of energy. Synthesizing them when no lactose is present is suicidal.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Therefore, natural selection wired the <em class="text-slate-200 italic">lac</em> operon to evaluate a strict logical proposition:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\text{Operon Expression}} = \textcolor{#34d399}{(\text{Lactose Present})} \;\mathbf{AND}\; \textcolor{#f43f5e}{\mathbf{NOT}(\text{Glucose Present})}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1301,7 +1325,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In biochemistry, cooperative enzymes possess multiple binding pockets. When the first ligand molecule binds to Subunit A, it slightly deforms the protein shape, making Subunit B bind its ligand a hundred times faster!</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This behavior is described mathematically by the <strong class="text-slate-100 font-semibold">Hill Equation</strong>:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\theta([X])} = \frac{\textcolor{#fbbf24}{[X]}^{\textcolor{#c084fc}{n}}}{\textcolor{#34d399}{K_d}^{\textcolor{#c084fc}{n}} + \textcolor{#fbbf24}{[X]}^{\textcolor{#c084fc}{n}}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1383,7 +1407,7 @@
 <li>Pattee termed this profound separation <strong class="text-slate-100 font-semibold">The Epistemic Cut</strong>:</li>
 </ul>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\text{Living System}} = \textcolor{#34d399}{\mathcal{S}_{\text{symbolic (Rate-Independent)}}} \;\textcolor{#c084fc}{\parallel}\; \textcolor{#fbbf24}{\mathcal{P}_{\text{physical (Rate-Dependent)}}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1459,7 +1483,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In real biology, an operator sequence does not come with a human label saying <em class="text-slate-200 italic">"I am for fuel"</em> or <em class="text-slate-200 italic">"I am for stress."</em> It is simply a physical sequence of nucleotides with chemical binding affinity for a specific regulatory molecule.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To eliminate all smuggled biological information, Siliquarium's operators (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OP_REG0</code> through <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OP_REG3</code>) are defined purely by <strong class="text-slate-100 font-semibold">syntactic sequence affinity</strong>:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\sigma_k(t)} = \begin{cases} \textcolor{#34d399}{1} & \text{if Regulatory Channel } \textcolor{#fbbf24}{M_k(t)} == \textcolor{#34d399}{1} \quad (\text{Promoter Open / Transcribed}) \\ \textcolor{#f43f5e}{0} & \text{if Regulatory Channel } \textcolor{#fbbf24}{M_k(t)} == \textcolor{#f43f5e}{0} \quad (\text{Promoter Blocked / Silenced}) \end{cases}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1609,7 +1633,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In everyday life, we think of "thinking" or "computing" as abstract and weightless. In physics, information is physical.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1961, physicist <strong class="text-slate-100 font-semibold">Rolf Landauer</strong> proved that whenever a physical system resets or erases one bit of information, it must release a minimum quantity of heat into its surroundings:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{Q} \ge \textcolor{#34d399}{k_B} \textcolor{#fbbf24}{T} \textcolor{#c084fc}{\ln 2}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1649,7 +1673,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">At any discrete simulation tick $t$, what is the physical state of <em class="text-slate-200 italic">Metazoicladus wolpertii</em>?</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Consider a standard silicoid cell with 2 active logic gates and 4 feedback metabolite registers. Its internal state is captured by a compact 6-bit binary vector:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\mathbf{x}(t)} = \big[ \textcolor{#34d399}{g_1(t),\, g_2(t)},\, \textcolor{#fbbf24}{m_0(t),\, m_1(t),\, m_2(t),\, m_3(t)} \big] \in \textcolor{#c084fc}{\{0, 1\}^6}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1664,7 +1688,7 @@
         </div>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Because each entry can only be $0$ or $1$, the total state space contains:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{|\Omega|} = \textcolor{#c084fc}{2}^{\textcolor{#fbbf24}{6}} = \textcolor{#34d399}{64} \text{ discrete cellular microstates}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1680,7 +1704,7 @@
 <h3 id="42-environmental-boundary-signals-plumes-poisons-and-food" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.2 Environmental Boundary Signals: Plumes, Poisons, and Food</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The cell does not live in a vacuum. Its outer porins continuously sample the surrounding ocean water:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\mathbf{u}(t)} = \big[ \textcolor{#34d399}{S_A(t)},\, \textcolor{#fbbf24}{S_B(t)},\, \textcolor{#f43f5e}{T_{\text{tox}}(t)} \big] \in \textcolor{#c084fc}{\{0, 1\}^3}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1696,7 +1720,7 @@
         </div>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The cellular state advances according to a deterministic update rule:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\mathbf{x}(t + 1)} = \textcolor{#34d399}{\mathbf{F}}\big(\textcolor{#fbbf24}{\mathbf{x}(t)},\, \textcolor{#f43f5e}{\mathbf{u}(t)}\big)$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1735,7 +1759,7 @@
 <li><strong class="text-slate-100 font-semibold">Ticks 5–10:</strong> A sudden pelagic heavy metal plume sweeps over the rock ($S_A=0, S_B=0, T=1$). Toxin induces Operon 1. <strong class="text-slate-100 font-semibold">Gate 2 (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code>) is transcribed and assembled</strong> into the active workshop!</li>
 </ul>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Tick $t$</th><th class="p-3.5 font-semibold">Environment $[S_A, S_B, T]$</th><th class="p-3.5 font-semibold">Active Gates Built</th><th class="p-3.5 font-semibold">Gate 1 (AND)</th><th class="p-3.5 font-semibold">Gate 2 (NOT)</th><th class="p-3.5 font-semibold">Registers $[M_0, M_1, M_2, M_3]$</th><th class="p-3.5 font-semibold">Battery ($E$)</th><th class="p-3.5 font-semibold">Landauer Tax</th><th class="p-3.5 font-semibold">Emergent State / Note</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">0</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1, 1, 0]</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">1</strong> (Op 0 only)</td><td class="p-3.5 leading-relaxed">$0$ (Init)</td><td class="p-3.5 leading-relaxed"><em class="text-slate-200 italic">[UNBUILT]</em></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1, 1, 0, 0]</code></td><td class="p-3.5 leading-relaxed">$50.0\text{T}$</td><td class="p-3.5 leading-relaxed">$0.0\text{T}$</td><td class="p-3.5 leading-relaxed">Quiescent start in clean water</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">1</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1, 1, 0]</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">1</strong> (Op 0 only)</td><td class="p-3.5 leading-relaxed">$1 \land 1 = \mathbf{1}$ 🟢</td><td class="p-3.5 leading-relaxed"><em class="text-slate-200 italic">[UNBUILT]</em></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1, 1, 0, 0]</code></td><td class="p-3.5 leading-relaxed">$51.0\text{T}$</td><td class="p-3.5 leading-relaxed">$1.0\text{T}$ (G1 toggle)</td><td class="p-3.5 leading-relaxed">Gate 1 fires; harvests $+2\text{T}$</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">2</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1, 1, 0]</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">1</strong> (Op 0 only)</td><td class="p-3.5 leading-relaxed">$1 \land 1 = \mathbf{1}$ 🟢</td><td class="p-3.5 leading-relaxed"><em class="text-slate-200 italic">[UNBUILT]</em></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1, 1, 0, 0]</code></td><td class="p-3.5 leading-relaxed">$52.95\text{T}$</td><td class="p-3.5 leading-relaxed">$0.05\text{T}$ (Leak)</td><td class="p-3.5 leading-relaxed">Stable Trophocyte charging</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">3</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1, 1, 0]</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">1</strong> (Op 0 only)</td><td class="p-3.5 leading-relaxed">$1 \land 1 = \mathbf{1}$ 🟢</td><td class="p-3.5 leading-relaxed"><em class="text-slate-200 italic">[UNBUILT]</em></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1, 1, 0, 0]</code></td><td class="p-3.5 leading-relaxed">$54.90\text{T}$</td><td class="p-3.5 leading-relaxed">$0.05\text{T}$ (Leak)</td><td class="p-3.5 leading-relaxed">Stable Trophocyte charging</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">4</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1, 1, 0]</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">1</strong> (Op 0 only)</td><td class="p-3.5 leading-relaxed">$1 \land 1 = \mathbf{1}$ 🟢</td><td class="p-3.5 leading-relaxed"><em class="text-slate-200 italic">[UNBUILT]</em></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[1, 1, 0, 0]</code></td><td class="p-3.5 leading-relaxed">$56.85\text{T}$</td><td class="p-3.5 leading-relaxed">$0.05\text{T}$ (Leak)</td><td class="p-3.5 leading-relaxed">Stable Trophocyte charging</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">5</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1]</code> ⚠️</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">2</strong> (Op 0 & Op 1)</td><td class="p-3.5 leading-relaxed">$0 \land 0 = \mathbf{0}$ 🔴</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">BUILT</strong> $\to \mathbf{0}$ (Init)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1, 0]</code></td><td class="p-3.5 leading-relaxed">$55.85\text{T}$</td><td class="p-3.5 leading-relaxed">$1.0\text{T}$ (G1 toggle)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">TOXIN SHOCK: Operon 1 Induced!</strong></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">6</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1]</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">2</strong> (Op 0 & Op 1)</td><td class="p-3.5 leading-relaxed">$0 \land 0 = \mathbf{0}$ 🔴</td><td class="p-3.5 leading-relaxed">$\neg(0) = \mathbf{1}$ 🟢</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1, 0]</code></td><td class="p-3.5 leading-relaxed">$54.85\text{T}$</td><td class="p-3.5 leading-relaxed">$1.0\text{T}$ (G2 toggle)</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Shield Deployed: Inverts Toxin</strong></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">7</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1]</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">2</strong> (Op 0 & Op 1)</td><td class="p-3.5 leading-relaxed">$0 \land 0 = \mathbf{0}$ 🔴</td><td class="p-3.5 leading-relaxed">$\neg(0) = \mathbf{1}$ 🟢</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1, 0]</code></td><td class="p-3.5 leading-relaxed">$54.80\text{T}$</td><td class="p-3.5 leading-relaxed">$0.05\text{T}$ (Leak)</td><td class="p-3.5 leading-relaxed">Steady Somatic Shield defense</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">8</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1]</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">2</strong> (Op 0 & Op 1)</td><td class="p-3.5 leading-relaxed">$0 \land 0 = \mathbf{0}$ 🔴</td><td class="p-3.5 leading-relaxed">$\neg(0) = \mathbf{1}$ 🟢</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1, 0]</code></td><td class="p-3.5 leading-relaxed">$54.75\text{T}$</td><td class="p-3.5 leading-relaxed">$0.05\text{T}$ (Leak)</td><td class="p-3.5 leading-relaxed">Zero heavy metal enters cell</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">9</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1]</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">2</strong> (Op 0 & Op 1)</td><td class="p-3.5 leading-relaxed">$0 \land 0 = \mathbf{0}$ 🔴</td><td class="p-3.5 leading-relaxed">$\neg(0) = \mathbf{1}$ 🟢</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1, 0]</code></td><td class="p-3.5 leading-relaxed">$54.70\text{T}$</td><td class="p-3.5 leading-relaxed">$0.05\text{T}$ (Leak)</td><td class="p-3.5 leading-relaxed">Colony protected from corrosion</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">10</strong></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1]</code></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">2</strong> (Op 0 & Op 1)</td><td class="p-3.5 leading-relaxed">$0 \land 0 = \mathbf{0}$ 🔴</td><td class="p-3.5 leading-relaxed">$\neg(0) = \mathbf{1}$ 🟢</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[0, 0, 1, 0]</code></td><td class="p-3.5 leading-relaxed">$54.65\text{T}$</td><td class="p-3.5 leading-relaxed">$0.05\text{T}$ (Leak)</td><td class="p-3.5 leading-relaxed">Stable defensive attractor</td></tr></tbody></table></div>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Key Takeaways for 1st-Year Students:</strong></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Key Takeaways for 1st-Year Investigators:</strong></p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>Notice what happened during Ticks 0–4: Gate 2 was <strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[UNBUILT]</code></strong>. It was not sitting on the board consuming power; it did not exist in the workshop. Its Landauer tax was strictly <strong class="text-slate-100 font-semibold">$0.00\text{T}$</strong>!</li>
 <li>At Tick 5, the arrival of toxin ($T=1$) flipped regulatory channel $M_2 \to 1$. Operon 1 was induced. The cell synthesized Gate 2 (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code>).</li>
@@ -1759,7 +1783,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When <em class="text-slate-200 italic">M. wolpertii</em>'s battery reaches $100\text{T}$, it triggers cytokinesis (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SINK_SEPTUM</code>). It divides, placing an identical clone into an adjacent basalt pore. The two cells remain fused by a cytoplasmic bridge, forming a 2-pore syncytium.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The hydrothermal vent chimney emits a warm mineral plume modeled as a Gaussian spatial gradient:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\phi(p)} = \textcolor{#34d399}{\phi_0} \cdot \exp\left( -\frac{\textcolor{#fbbf24}{d}^{\textcolor{#c084fc}{2}}}{\textcolor{#c084fc}{2} \textcolor{#f43f5e}{\sigma_{\text{plume}}^2}} \right)$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1820,7 +1844,7 @@
 <blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">"Why doesn't Sister Rim cheat? Why doesn't it shut down its expensive NOT gate to save its own battery tokens?"</em></p></blockquote>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The answer is explained by <strong class="text-slate-100 font-semibold">W.D. Hamilton's Rule of Kin Selection (1964)</strong><sup id="cite_ref-16a"><a href="#ref-16">[16]</a></sup>:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#c084fc}{r} \textcolor{#34d399}{B} > \textcolor{#f43f5e}{C}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1868,7 +1892,7 @@
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In 1986, physicist Bernard Derrida proved that the critical boundary occurs when average sensitivity $s = 1$:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{s} = \textcolor{#c084fc}{2} \textcolor{#34d399}{K} \textcolor{#fbbf24}{p} (\textcolor{#c084fc}{1} - \textcolor{#fbbf24}{p}) = \textcolor{#38bdf8}{1}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1900,7 +1924,7 @@
 <li>As the network evaluates its gates tick by tick, it rolls downhill into the nearest valley floor:</li>
 </ul>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\Delta V} \le \textcolor{#f43f5e}{0}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1918,7 +1942,7 @@
 <blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">"Why does multicellular differentiation emerge so quickly in Siliquarium (within 1,000–3,000 epochs) instead of requiring billions of years?"</em></p></blockquote>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The answer lies in <strong class="text-slate-100 font-semibold">attractor basin volume</strong>:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\mathcal{B}(A_k)} = \left\{ \textcolor{#fbbf24}{\mathbf{x}_0} \in \textcolor{#c084fc}{\Omega} \;\middle|\; \lim_{t \to \infty} \textcolor{#34d399}{\mathbf{F}}^t(\textcolor{#fbbf24}{\mathbf{x}_0}, \textcolor{#f43f5e}{\mathbf{u}}) \in \textcolor{#38bdf8}{A_k} \right\}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1969,7 +1993,7 @@
 <li>In Generation 412 of <em class="text-slate-200 italic">Metazoicladus wolpertii</em>, a single-bit point mutation flips bit 4 in an inert intron:</li>
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#f43f5e}{\texttt{111000}} \implies \textcolor{#34d399}{\texttt{001100}} \quad (\textcolor{#f43f5e}{\text{INTRON}} \to \textcolor{#34d399}{\text{GATE\_NOT}})$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2029,7 +2053,7 @@
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If the organelle's catalytic gate fires, its energy tokens are directly transferred into the host's <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreBattery</code>:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{E_{\text{host}}(t+1)} = \textcolor{#34d399}{E_{\text{host}}(t)} + \textcolor{#fbbf24}{\Delta E_{\text{organelle}}} - \textcolor{#f43f5e}{E_{\text{Landauer}}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2121,7 +2145,7 @@
 <h2 id="chapter-10-master-deconstructive-equation-decoders-suite" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Chapter 10: Master Deconstructive Equation Decoders Suite</h2>
 <h3 id="equation-1-the-discrete-boolean-state-transition-function" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Equation 1: The Discrete Boolean State Transition Function</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\mathbf{x}(t + 1)} = \textcolor{#34d399}{\mathbf{F}}\big(\textcolor{#fbbf24}{\mathbf{x}(t)},\, \textcolor{#f43f5e}{\mathbf{u}(t)}\big)$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2136,7 +2160,7 @@
         </div>
 <h3 id="equation-2-the-derrida-critical-sensitivity-condition" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Equation 2: The Derrida Critical Sensitivity Condition</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{s} = \textcolor{#c084fc}{2} \textcolor{#34d399}{K} \textcolor{#fbbf24}{p} (\textcolor{#c084fc}{1} - \textcolor{#fbbf24}{p}) = \textcolor{#38bdf8}{1}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2151,7 +2175,7 @@
         </div>
 <h3 id="equation-3-basin-of-attraction-volume-formula" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Equation 3: Basin of Attraction Volume Formula</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\mathcal{B}(A_k)} = \left\{ \textcolor{#fbbf24}{\mathbf{x}_0} \in \textcolor{#c084fc}{\{0, 1\}^6} \;\middle|\; \lim_{t \to \infty} \textcolor{#34d399}{\mathbf{F}}^t(\textcolor{#fbbf24}{\mathbf{x}_0}, \textcolor{#f43f5e}{\mathbf{u}}) \in \textcolor{#38bdf8}{A_k} \right\}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2168,7 +2192,7 @@
         </div>
 <h3 id="equation-4-landauers-thermodynamic-erasure-limit" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Equation 4: Landauer's Thermodynamic Erasure Limit</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{Q} \ge \textcolor{#34d399}{k_B} \textcolor{#fbbf24}{T} \textcolor{#c084fc}{\ln 2}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2183,7 +2207,7 @@
         </div>
 <h3 id="equation-5-hamiltonian-kin-selection-in-clonal-syncytia16" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Equation 5: Hamiltonian Kin Selection in Clonal Syncytia<sup id="cite_ref-16b"><a href="#ref-16">[16]</a></sup></h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#c084fc}{r} \textcolor{#34d399}{B} > \textcolor{#f43f5e}{C} \quad (\textcolor{#c084fc}{r = 1.000})$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2197,7 +2221,7 @@
         </div>
 <h3 id="equation-6-dynamic-operon-state-condition" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Equation 6: Dynamic Operon State Condition</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\sigma_k(t)} = \begin{cases} \textcolor{#34d399}{1} & \text{if } \textcolor{#fbbf24}{M_k(t)} == \textcolor{#34d399}{1} \\ \textcolor{#f43f5e}{0} & \text{if } \textcolor{#fbbf24}{M_k(t)} == \textcolor{#f43f5e}{0} \end{cases}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2286,13 +2310,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

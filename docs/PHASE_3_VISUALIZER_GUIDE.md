@@ -27,7 +27,7 @@ Before Phase 3, Siliquarium's digital ecosystem was locked inside numerical arra
 > [!ANALYSIS]
 > ### 🔬 Pedagogical Breakdown: Figure 3.2 — The In-Situ Circuit Microscope
 > - **Visual Guide:** Clicking any living pore activates the holographic 3D reticle and expands the live `PoreWorkshop` inspector drawer on the right. The panel displays real-time logic gate toggles (`AND`, `OR`, `NOT`), active signal wires, current battery reserves, and the 60-bit decoded genome tape.
-> - **Biophysical Reality:** Directly verifies Howard Pattee's Epistemic Cut: students observe the rate-independent symbolic genome tape resting safely on the library shelf, while rate-dependent CMOS logic gates toggle dynamically to process incoming vent pulses.
+> - **Biophysical Reality:** Directly verifies Howard Pattee's Epistemic Cut: investigators observe the rate-independent symbolic genome tape resting safely on the library shelf, while rate-dependent CMOS logic gates toggle dynamically to process incoming vent pulses.
 > - **Digital Mapping:** Dynamic Landauer power dissipation ($1\text{ token per toggle}$) and basal membrane leakage are metered in real time. If battery reserves hit zero, the cell undergoes immediate lysis into mineral rubble.
 > - **Core Principle:** *Observation without perturbation.* The microscope provides a non-invasive telemetry window into the living cell's internal state without altering its physical thermodynamics.
 
@@ -187,7 +187,7 @@ When a researcher clicks on an individual pore in the 3D seafloor canvas:
 **Discrete $O(1)$.** As established in Section 20 of `THEORETICAL_MODEL.md`, continuous 3D rigid-body engines (like Havok or PhysX) introduce massive computational bloat. Siliquarium's 3D environment is a discrete stacked hexagonal lattice $(q, r, z)$. Movement and placement are instantaneous pointer operations taking $O(1)$ time per tick.
 
 ### Q3: Why use an interactive HTML5 canvas microscope instead of static charts?
-Because life is dynamic. Static truth tables cannot show whether a circuit is oscillating, whether an electron pulse arrived in time to catch an incoming substrate wave, or how Landauer heat accumulates. The interactive microscope lets educators and students watch **computation as a living metabolism**.
+Because life is dynamic. Static truth tables cannot show whether a circuit is oscillating, whether an electron pulse arrived in time to catch an incoming substrate wave, or how Landauer heat accumulates. The interactive microscope lets educators and investigators watch **computation as a living metabolism**.
 
 ### Q4: Does the flared lithospheric crust mantle impose heavy GPU/CPU overhead?
 **No.** The 2D convex hull of the base stratum consists of at most 18 peripheral vertices. Rendering the flared facets, cooling striations, and bottom plate requires fewer than 25 2D canvas polygon draw operations per frame—taking less than $0.03\text{ ms}$, or less than $0.2\%$ of a standard $16.6\text{ ms}$ frame budget!

@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Multicellular Body Topologies &amp; Morphometric Graph Theory Manual</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Multicellular Body Topologies &amp; Morphometric Graph Theory Manual</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1074,17 +1088,26 @@
       <div class="max-w-6xl mx-auto space-y-8">
         <h1 id="multicellular-body-topologies-morphometric-graph-theory" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🌸 Multicellular Body Topologies & Morphometric Graph Theory</h1>
 <h2 id="objective-graph-theoretic-classification-3-clique-invariants-and-wolpertian-spatial-morphogenesis-in-silico" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Objective Graph-Theoretic Classification, 3-Clique Invariants, and Wolpertian Spatial Morphogenesis in Silico</h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">A Concept-First Master Reference on Colonial Topology, Fluid Mechanics, and Graph Invariants for 1st-Year STEM Students and Evolutionary Biologists</em></p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">A Concept-First Master Reference on Colonial Topology, Fluid Mechanics, and Graph Invariants for 1st-Year STEM Investigators and Evolutionary Biologists</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">📜 Pedagogical Orientation: The Unity of Circuit and Form</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">📜 Pedagogical Orientation: The Unity of Circuit and Form</div>
 <p class="leading-relaxed font-sans text-xs my-1.5">*"In our sister volume, <a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">The Architecture of Gene Regulatory Networks</a>, we watched how molecular switches and logic gates operate inside a single microscopic cell. But life does not remain a solitary dot. When cells fuse their bodies into colonies, a brand-new level of reality emerges: <strong class="text-slate-100 font-semibold">Morphology</strong>.</p>
-<p class="leading-relaxed font-sans text-xs my-1.5">Shape is not an artistic accident; shape is a mathematical machine for surviving fluid shear, sharing energy tokens, and defeating the dilution catastrophe. Here, we decode the graph theory of living architecture."*</p></div></div>
+<p class="leading-relaxed font-sans text-xs my-1.5">Shape is not an artistic accident; shape is a mathematical machine for surviving fluid shear, sharing energy tokens, and defeating the dilution catastrophe. Here, we decode the graph theory of living architecture."*</p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="executive-summary-the-heros-journey-metazoicladus-wolpertii" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Executive Summary & The Hero's Journey: <em class="text-slate-200 italic">Metazoicladus wolpertii</em></h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In the transition from solitary unicellular autotrophs to macroscopic metazoans, individual silicoid cells occupying adjacent volcanic rock pores fuse cytoplasmic conduits to form integrated syncytial colonies.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In the Siliquarium physics engine, morphology is <strong class="text-slate-100 font-semibold">strictly emergent</strong>: no organism possesses a magic gene labeled <em class="text-slate-200 italic">"grow as a rosette"</em> or <em class="text-slate-200 italic">"build a tower."</em> Rather, localized cytokinesis, environmental boundary conditions, and fluid drag interact to produce macroscopic geometries.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To bridge our two volumes seamlessly, we follow the physical and morphological evolution of our recurring case study organism:</p>
-<div class="p-4 rounded-xl bg-purple-950/30 border-l-4 border-purple-400 my-4 text-sm text-slate-300"><div class="font-mono text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">IMPORTANT</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🌸 Recurring Case Study: <em class="text-slate-200 italic">Metazoicladus wolpertii</em> (The Abyssal Rose)</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-950/50 via-slate-900 to-slate-900 border border-purple-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-purple-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>⚡</span> Important &bull; Core Mechanism
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🌸 Recurring Case Study: <em class="text-slate-200 italic">Metazoicladus wolpertii</em> (The Abyssal Rose)</div>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Lineage Clade:</strong> <em class="text-slate-200 italic">Metazoicladus</em> (Sub-caldera benthic clade)</li>
 <li><strong class="text-slate-100 font-semibold">Genotype Tape:</strong> The authentic 48-bit multi-operon sequence:</li>
@@ -1099,7 +1122,8 @@
 <li><strong class="text-slate-100 font-semibold">Phase 3 (The Minimal 3-Clique Triad):</strong> Forming a 3-pore triangular rosette on the basalt floor ($z = 0$), cutting diffusion latency by $900\%$!</li>
 <li><strong class="text-slate-100 font-semibold">Phase 4 (The 3D Multi-Stratum Rosette):</strong> Extending a vertical siphon conduit down into a subterranean basalt fissure ($z = -1$), creating a multi-tier organ system with subterranean pacemaker clocks driving seabed somatic shields!</li>
 <li><strong class="text-slate-100 font-semibold">Phase 5 (The Mature 7-Pore Abyssal Rose):</strong> Expanding into a symmetric 7-pore radial hex-flower with 6 mutual 3-cliques, achieving complete Wolpertian tissue differentiation!</li>
-</ol></div></div>
+</ol></div>
+        </div>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To enable objective naturalist observation without anthropomorphic bias, the <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/DigitalPaleontologist.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Digital Paleontologist</a> and <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">SimulationWorld</a> apply rigorous <strong class="text-slate-100 font-semibold">graph-theoretic invariant analysis</strong> ($G = (V, E)$) to classify emergent colonies into six discrete topological categories:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">🌸 ROSETTE (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">ROSETTE</code>):</strong> Mutual 3-pore triangular cliques minimizing diffusion distances.</li>
@@ -1137,7 +1161,7 @@
 <h3 id="12-the-quadratic-penalty-of-distance-ficks-second-law" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.2 The Quadratic Penalty of Distance: Fick's Second Law</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">How cells arrange their conduits determines how quickly ATP and informational pulses travel. By Fick's second law of diffusion, the time $t_{\text{diff}}$ required for a solute or signaling token to traverse an intra-colony path of length $L$ scales quadratically:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{t_{\text{diff}}} \approx \frac{\textcolor{#fbbf24}{L}^{\textcolor{#c084fc}{2}}}{\textcolor{#c084fc}{2} \textcolor{#34d399}{D_{\text{eff}}}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1154,7 +1178,7 @@
 <h3 id="13-hydrodynamic-shear-stress-seabed-boundary-layers" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.3 Hydrodynamic Shear Stress & Seabed Boundary Layers</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Fluid flowing over the basalt seabed develops a viscous boundary layer where velocity follows a logarithmic profile:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{u(z)} = \frac{\textcolor{#f43f5e}{u_*}}{\textcolor{#34d399}{\kappa}} \ln\left(\frac{\textcolor{#fbbf24}{z}}{\textcolor{#c084fc}{z_0}}\right)$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1173,7 +1197,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Lewis Wolpert (1969)<sup id="cite_ref-2a"><a href="#ref-2">[2]</a></sup> demonstrated that multicellular division of labor requires <strong class="text-slate-100 font-semibold">positional information</strong>: cells must know where they are relative to an environmental landmark to activate appropriate genetic fates.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Siliquarium, the primary landmark is the <strong class="text-slate-100 font-semibold">hydrothermal vent chimney</strong> $(q_{\text{vent}}, r_{\text{vent}}, z_{\text{vent}})$, which emits a Gaussian thermal and chemical plume:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\phi(p)} = \textcolor{#34d399}{\phi_0} \cdot \exp\left( -\frac{\textcolor{#fbbf24}{\|\mathbf{x}_p - \mathbf{x}_{\text{vent}}\|^2}}{\textcolor{#c084fc}{2} \textcolor{#f43f5e}{\sigma_{\text{plume}}^2}} \right)$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1202,7 +1226,7 @@
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\phi(\mathbf{x})} = \textcolor{#34d399}{\phi_0} \cdot \exp\left( -\frac{\textcolor{#fbbf24}{\|\mathbf{x} - \mathbf{x}_{\text{vent}}\|^2}}{\textcolor{#c084fc}{2} \textcolor{#f43f5e}{\sigma_{\text{plume}}^2}} \right)$$</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">where an external physical boundary condition imposes an absolute coordinate framework across which identical genomes read out distinct discrete fate thresholds.</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1235,7 +1259,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\mathbf{L}} = \textcolor{#34d399}{\mathbf{D}} - \textcolor{#fbbf24}{\mathbf{A}} = \begin{pmatrix} \textcolor{#38bdf8}{2} & \textcolor{#f43f5e}{-1} & \textcolor{#f43f5e}{-1} \\ \textcolor{#f43f5e}{-1} & \textcolor{#38bdf8}{2} & \textcolor{#f43f5e}{-1} \\ \textcolor{#f43f5e}{-1} & \textcolor{#f43f5e}{-1} & \textcolor{#38bdf8}{2} \end{pmatrix}$$</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The flow of energy tokens across the entire colony is governed by:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\frac{d\vec{E}}{dt}} = -\textcolor{#34d399}{D_{\text{eff}}} \textcolor{#c084fc}{\mathbf{L}} \textcolor{#fbbf24}{\vec{E}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1255,7 +1279,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{B} = \textcolor{#34d399}{B_0} \textcolor{#fbbf24}{M}^{\textcolor{#c084fc}{\beta}}, \quad \textcolor{#c084fc}{\beta} \approx \frac{\textcolor{#c084fc}{3}}{\textcolor{#c084fc}{4}} = \textcolor{#c084fc}{0.75}$$</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Geoffrey West, James Brown, and Brian Enquist (1997)<sup id="cite_ref-7a"><a href="#ref-7">[7]</a></sup> proved that this $3/4$ scaling exponent arises from the physical constraints of space-filling fractal distribution networks that minimize transport energy. On the discrete hexagonal lattice $\mathbb{Z}^3_{\text{hex}}$ of Siliquarium:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{B_{\text{colony}}} = \sum_{i=1}^{\textcolor{#c084fc}{n}} \textcolor{#fbbf24}{E_{\text{metabolic}}(i)} \propto \textcolor{#c084fc}{n}^{\textcolor{#34d399}{\beta_{\text{hex}}}}, \quad \textcolor{#34d399}{\beta_{\text{hex}}} = \textcolor{#34d399}{0.76 \pm 0.03}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1273,7 +1297,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In <em class="text-slate-200 italic">The Major Transitions in Evolution</em> (1995), John Maynard Smith and Eörs Szathmáry<sup id="cite_ref-4"><a href="#ref-4">[4]</a></sup> (see also Leo Buss<sup id="cite_ref-5"><a href="#ref-5">[5]</a></sup>; Lynn Margulis<sup id="cite_ref-11"><a href="#ref-11">[11]</a></sup>) identified the transition from single cells to multicellular organisms as a fundamental milestone: previously autonomous units surrender reproductive independence to form a higher-level evolutionary individual.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Why do peripheral Somatic Shield cells burn Landauer energy to invert toxins while only core Trophocytes reproduce? The evolutionary logic is governed by <strong class="text-slate-100 font-semibold">W.D. Hamilton’s Rule (1964)</strong><sup id="cite_ref-3"><a href="#ref-3">[3]</a></sup>:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#c084fc}{r} \textcolor{#34d399}{B} > \textcolor{#f43f5e}{C}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1308,7 +1332,7 @@
 <h3 id="22-the-3d-hexagonal-distance-metric" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 The 3D Hexagonal Distance Metric</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The shortest path distance between any two pores in the lattice is given by:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{d_{\text{3D}}(\mathbf{p}_1, \mathbf{p}_2)} = \frac{\textcolor{#fbbf24}{|q_1 - q_2| + |r_1 - r_2| + |(q_1 + r_1) - (q_2 + r_2)|}}{\textcolor{#c084fc}{2}} + \textcolor{#34d399}{|z_1 - z_2|}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1333,12 +1357,17 @@
 </ol>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="31-the-rosette-topology-rosette" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.1 🌸 The Rosette Topology (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">ROSETTE</code>)</h3>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🌸 ROSETTE: MUTUAL 3-PORE CLIQUE HUBS (RADIAL METAZOAN CLUSTERS)</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🌸 ROSETTE: MUTUAL 3-PORE CLIQUE HUBS (RADIAL METAZOAN CLUSTERS)</div>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Formal Invariant:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">triangleCount ≥ 1  (At least one mutually connected 3-clique exists in G)</code></li>
 <li><strong class="text-slate-100 font-semibold">Biophysical Role:</strong> High-speed metabolic pooling, Wolpertian cell fate differentiation, minimal radius</li>
 <li><strong class="text-slate-100 font-semibold">Natural Equivalents:</strong> <em class="text-slate-200 italic">Choanoflagellates (Salpingoeca rosetta), Volvox blastulae, Gonium pectorale</em></li>
-</ul></div></div>
+</ul></div>
+        </div>
 <h4 id="a-real-biological-context" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">A. Real Biological Context</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In evolutionary biology, the <strong class="text-slate-100 font-semibold">rosette</strong> represents the true threshold of complex animal multicellularity. In 2012, King et al.<sup id="cite_ref-10"><a href="#ref-10">[10]</a></sup> proved that the single-celled marine choanoflagellate <em class="text-slate-200 italic">Salpingoeca rosetta</em> triggers colonial rosette formation in response to bacterial lipid signals. Cells divide without separating, remaining fused by cytoplasmic bridges.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The evolutionary genius of a rosette is <strong class="text-slate-100 font-semibold">diffusion minimization</strong>: by curling into an equilateral cluster rather than extending as a filament, no cell is more than 2 or 3 conduit hops from any other, enabling synchronized collective feeding and specialized cell roles.</p>
@@ -1440,7 +1469,7 @@
 <hr class="border-t border-slate-800 my-8" />
 <h4 id="d-diagnostic-invariant-equation-decoder" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">D. Diagnostic Invariant & Equation Decoder</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\tau(G)} = \textcolor{#34d399}{\frac{1}{6} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n A_{ij} A_{jk} A_{ki}} = \textcolor{#fbbf24}{\frac{1}{6} \text{Tr}(\mathbf{A}^3)} \ge \mathbf{1}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1472,12 +1501,17 @@
     style S5 fill:#0f172a,stroke:#34d399,stroke-width:2px,color:#f8fafc</div>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="32-the-columnar-topology-columnar" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.2 🏛️ The Columnar Topology (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">COLUMNAR</code>)</h3>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🏛️ COLUMNAR: VERTICAL 1D SIPHON SPIRES (HYDROTHERMAL UPWELLING STACKS)</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🏛️ COLUMNAR: VERTICAL 1D SIPHON SPIRES (HYDROTHERMAL UPWELLING STACKS)</div>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Formal Invariant:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">∀ i, j: q_i = q_j ∧ r_i = r_j  AND  (z_max - z_min) ≥ 1</code></li>
 <li><strong class="text-slate-100 font-semibold">Biophysical Role:</strong> Siphoning deep hot subterranean nutrients into colder, oxidized pelagic layers</li>
 <li><strong class="text-slate-100 font-semibold">Natural Equivalents:</strong> <em class="text-slate-200 italic">Glass sponges (Euplectella aspergillum), Precambrian columnar stromatolites</em></li>
-</ul></div></div>
+</ul></div>
+        </div>
 <h4 id="a-real-biological-context" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">A. Real Biological Context</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Columnar architectures appear wherever organisms must bridge steep vertical gradients. In deep-sea abyssal plains, hexactinellid glass sponges (<em class="text-slate-200 italic">Euplectella</em>) extrude vertical cylindrical glass spires anchored in soft benthic sediments that rise 30 to 100 cm into pelagic currents.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Precambrian oceans, cyanobacterial mats formed columnar stromatolites—vertical pillars rising from murky sea beds toward sunlight. In Siliquarium, Columnar colonies grow vertically out of hydrothermal chimney throats ($z = 0 \to z = 1 \to z = 2$), tapping 350°C vent fluid at their base while exposing their summit to cold, oxidized seawater.</p>
@@ -1538,7 +1572,7 @@
 <hr class="border-t border-slate-800 my-8" />
 <h4 id="d-diagnostic-invariant-equation-decoder" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">D. Diagnostic Invariant & Equation Decoder</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\sigma_q^2 = 0} \quad \land \quad \textcolor{#38bdf8}{\sigma_r^2 = 0} \quad \land \quad \textcolor{#34d399}{z_{\max} - z_{\min} \ge 1}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1551,12 +1585,17 @@
         </div>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="33-the-dendritic-topology-dendritic" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.3 🌲 The Dendritic Topology (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">DENDRITIC</code>)</h3>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🌲 DENDRITIC: FRACTAL BRANCHING ARBORIZATION (HIGH-SURFACE-AREA EXPLORATION)</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🌲 DENDRITIC: FRACTAL BRANCHING ARBORIZATION (HIGH-SURFACE-AREA EXPLORATION)</div>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Formal Invariant:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">maxDegree ≥ 3  AND  triangleCount = 0</code></li>
 <li><strong class="text-slate-100 font-semibold">Biophysical Role:</strong> Maximizing nutrient absorption surface area across heterogeneous seabed chemoclines</li>
 <li><strong class="text-slate-100 font-semibold">Natural Equivalents:</strong> <em class="text-slate-200 italic">Staghorn coral (Acropora), arborescent bryozoans (Bugula), mycorrhizal fungal hyphae</em></li>
-</ul></div></div>
+</ul></div>
+        </div>
 <h4 id="a-real-biological-context" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">A. Real Biological Context</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Where nutrients are diffuse and spread unpredictably across wide areas, natural selection favors <strong class="text-slate-100 font-semibold">fractal branching</strong> (arborization). Branching networks maximize the physical surface area of absorption while minimizing the volume of biomass required to build the structure (West, Brown, & Enquist, 1997<sup id="cite_ref-7b"><a href="#ref-7">[7]</a></sup>).</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In shallow oceans, staghorn corals (<em class="text-slate-200 italic">Acropora</em>) build branching calcified trees to catch passing plankton without shading their own lower polyps. In deep-sea ecosystems, dendritic colonies branch outward across the basalt floor to tap disparate micro-fissures leaking chemical fuel.</p>
@@ -1607,7 +1646,7 @@
 <hr class="border-t border-slate-800 my-8" />
 <h4 id="d-diagnostic-invariant-equation-decoder" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">D. Diagnostic Invariant & Equation Decoder</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\Delta(G) = \max_{v \in V} \text{deg}(v) \ge 3} \quad \land \quad \textcolor{#f43f5e}{\tau(G) = 0}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1620,12 +1659,17 @@
         </div>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="34-the-toroidal-ring-topology-ring" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.4 ⭕ The Toroidal Ring Topology (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">RING</code>)</h3>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">⭕ RING: CLOSED TOROIDAL CONDUIT LOOPS (CONTINUOUS CIRCULATORY NETWORKS)</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">⭕ RING: CLOSED TOROIDAL CONDUIT LOOPS (CONTINUOUS CIRCULATORY NETWORKS)</div>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Formal Invariant:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">|E| ≥ |V|  AND  maxDegree ≤ 2</code></li>
 <li><strong class="text-slate-100 font-semibold">Biophysical Role:</strong> Continuous circular cytoplasmic streaming, zero dead-ends, fault-tolerant transport</li>
 <li><strong class="text-slate-100 font-semibold">Natural Equivalents:</strong> <em class="text-slate-200 italic">Coenobial algae (Pediastrum duplex), circular bacterial swarms, volvoxine rings</em></li>
-</ul></div></div>
+</ul></div>
+        </div>
 <h4 id="a-real-biological-context" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">A. Real Biological Context</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">A fundamental vulnerability of linear filaments and dendritic trees is the <strong class="text-slate-100 font-semibold">dead-end problem</strong>: if a terminal conduit is severed, all downstream cells starve. In a <strong class="text-slate-100 font-semibold">closed ring</strong>, resources circulate continuously without dead ends.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In freshwater ecosystems, the coenobial green alga <em class="text-slate-200 italic">Pediastrum</em> forms flat circular rings of cells with a hollow central lumen. In Siliquarium, Ring colonies often evolve around basalt boulders or volcanic spires, creating circular conveyor belts that shuttle energy tokens smoothly around obstacles.</p>
@@ -1662,7 +1706,7 @@
 <hr class="border-t border-slate-800 my-8" />
 <h4 id="d-diagnostic-invariant-equation-decoder" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">D. Diagnostic Invariant & Equation Decoder</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{|E| \ge |V|} \quad \land \quad \textcolor{#34d399}{\max_{v \in V} \text{deg}(v) \le 2}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1675,12 +1719,17 @@
         </div>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="35-the-filamentous-topology-filamentous" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.5 🧵 The Filamentous Topology (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">FILAMENTOUS</code>)</h3>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🧵 FILAMENTOUS: 1D LINEAR PATH CHAINS (CREEPING BASALT FISSURE FILAMENTS)</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🧵 FILAMENTOUS: 1D LINEAR PATH CHAINS (CREEPING BASALT FISSURE FILAMENTS)</div>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Formal Invariant:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">|E| = |V| - 1  AND  maxDegree ≤ 2  (Simple Path Graph P_n)</code></li>
 <li><strong class="text-slate-100 font-semibold">Biophysical Role:</strong> Creeping along narrow fault fractures, pioneering exploratory dispersal</li>
 <li><strong class="text-slate-100 font-semibold">Natural Equivalents:</strong> <em class="text-slate-200 italic">Filamentous cyanobacteria (Oscillatoria, Anabaena), hyphae, streptococcal chains</em></li>
-</ul></div></div>
+</ul></div>
+        </div>
 <h4 id="a-real-biological-context" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">A. Real Biological Context</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The earliest transitional multicellularity in Earth's fossil record consists of unbranched chains of cells called <strong class="text-slate-100 font-semibold">filaments</strong>. Filamentous cyanobacteria like <em class="text-slate-200 italic">Oscillatoria</em> glide along rock substrates using mucilage secretion.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In Siliquarium, Filamentous colonies evolve in subterranean fault fissures ($z = -1, -2$) where basalt barrier walls restrict growth to narrow 1D cracks.</p>
@@ -1711,7 +1760,7 @@
 <hr class="border-t border-slate-800 my-8" />
 <h4 id="c-diagnostic-invariant-equation-decoder" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">C. Diagnostic Invariant & Equation Decoder</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{|E| = |V| - 1} \quad \land \quad \textcolor{#34d399}{\max_{v \in V} \text{deg}(v) \le 2}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1724,12 +1773,17 @@
         </div>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="36-the-amorphous-syncytium-amorphous" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">3.6 🦠 The Amorphous Syncytium (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AMORPHOUS</code>)</h3>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🦠 AMORPHOUS: HIGH-GENUS RETICULATED SYNCYTIA (OPPORTUNISTIC SLIME MESHES)</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🦠 AMORPHOUS: HIGH-GENUS RETICULATED SYNCYTIA (OPPORTUNISTIC SLIME MESHES)</div>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Formal Invariant:</strong> <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Default fallback: Graph contains cycles and degree ≥ 3 but lacks compact 3-cliques</code></li>
 <li><strong class="text-slate-100 font-semibold">Biophysical Role:</strong> Opportunistic void filling, dense bio-fouling mat, nutrient scavenging meshwork</li>
 <li><strong class="text-slate-100 font-semibold">Natural Equivalents:</strong> <em class="text-slate-200 italic">Plasmodial slime mold (Physarum polycephalum), syncytial xenophyophores</em></li>
-</ul></div></div>
+</ul></div>
+        </div>
 <h4 id="a-real-biological-context-graph-mapping" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">A. Real Biological Context & Graph Mapping</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When a colony grows inside an irregular cavern with jagged rock obstacles, it may develop multiple cross-links and loops (forming a high-genus network, like the plasmodium of <em class="text-slate-200 italic">Physarum polycephalum</em>) without satisfying the strict symmetry of a Rosette or a Ring.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In graph theory, an <strong class="text-slate-100 font-semibold">Amorphous</strong> syncytium is a connected component that contains higher-order cycles (e.g. 4-cycles, 5-cycles) and branch nodes ($\Delta(G) \ge 3$), but lacks any mutual 3-cliques ($\tau(G) = 0$).</p>
@@ -1752,7 +1806,7 @@
 <h3 id="61-the-general-clustering-coefficient" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">6.1 The General Clustering Coefficient</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In network science, the clustering coefficient $C(G)$ measures how close a colony's neighbors are to being a complete clique:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{C(G)} = \frac{1}{\textcolor{#c084fc}{n}} \sum_{i=1}^{\textcolor{#c084fc}{n}} \frac{\textcolor{#34d399}{2 e_i}}{\textcolor{#fbbf24}{k_i (k_i - 1)}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1768,7 +1822,7 @@
 <h3 id="62-the-cyclomatic-number-first-betti-number" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">6.2 The Cyclomatic Number (First Betti Number)</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The topological genus or cycle count of the syncytium:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\gamma(G)} = \textcolor{#34d399}{|E|} - \textcolor{#fbbf24}{|V|} + \textcolor{#c084fc}{1}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1834,7 +1888,7 @@
 </ul>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\Delta E} = \left|\textcolor{#34d399}{E_{\text{before}}} - \left(\textcolor{#fbbf24}{E_{\text{after}}} + \textcolor{#f43f5e}{Q_{\text{Landauer}}}\right)\right| \equiv \textcolor{#38bdf8}{0.000}$$</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\Delta M} = \left|\textcolor{#34d399}{M_{\text{before}}} - \textcolor{#fbbf24}{M_{\text{after}}}\right| \equiv \textcolor{#38bdf8}{0.000}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1957,13 +2011,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

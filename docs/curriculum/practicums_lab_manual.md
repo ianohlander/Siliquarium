@@ -1,11 +1,11 @@
-# 🧪 Practicums 1–5: Hands-On Student Laboratory Manual
+# 🧪 Practicums 1–5: Hands-On Investigator Laboratory Manual
 *Interactive In-Silico Biophysics, Paleontology Autopsies, and Formative Senior Assessments*
 
 ---
 
 ## Laboratory Overview & Classroom Instructions
 
-This laboratory manual provides five rigorous, step-by-step practicums using the interactive Siliquarium application. Each practicum is designed for a standard 90-minute advanced high school block period or a 3-hour undergraduate laboratory session.
+This laboratory manual provides five rigorous, step-by-step practicums using the interactive Siliquarium application. Each practicum is designed for a standard 90-minute advanced foundational block period or a 3-hour foundational laboratory session.
 
 ### Software Access & Prerequisites
 - **Application URL:** Open `docs/index.html` or run the local development server via `npm run dev` (`http://localhost:3000`).
@@ -278,7 +278,7 @@ Review Unit 4, Section 5. Review Richard Lenski's discovery of the $Cit^+$ trait
 
 ### 4. Evolutionary Autopsy Record Sheet
 
-| Autopsy Dimension | Diagnostic Field | Student Laboratory Measurement |
+| Autopsy Dimension | Diagnostic Field | Investigator Laboratory Measurement |
 | :--- | :--- | :--- |
 | **Specimen Identification** | Specimen ID & Milestone | `______________________` \| `______________________` |
 | **Spatial Lineage** | Generation & Pore $(q, r, z)$ | `Gen: _______` \| `Coordinates: ( __, __, __ )` |

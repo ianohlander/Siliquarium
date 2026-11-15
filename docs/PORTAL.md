@@ -8,11 +8,11 @@
       </div>
       <div>
         <div class="text-[11px] font-mono text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-2">
-          <span>Siliquarium Master Curriculum Series • Volume 01</span>
-          <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Master Curriculum Portal &amp; Modular Chapter Index</span>
+          <span>Siliquarium Six-Volume Master Architecture Series</span>
+          <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 text-[10px]">Master Portal &amp; Modular Library</span>
         </div>
         <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight text-slate-100 font-mono mt-1">Systems Biology &amp; Silicon Abiogenesis</h1>
-        <p class="text-slate-400 text-xs md:text-sm mt-1 max-w-3xl">An Exhaustive First-Principles Treatise on Non-Equilibrium Thermodynamics, Howard Pattee's Epistemic Cut, Digital Logic Enzymes, and Macro-Evolutionary Dynamics — Modularized into 4 Core Units, 5 Laboratory Practicums, and a 70-Term Technical Lexicon.</p>
+        <p class="text-slate-400 text-xs md:text-sm mt-1 max-w-3xl">An Exhaustive First-Principles Treatise on Non-Equilibrium Thermodynamics, Howard Pattee's Epistemic Cut, Digital Logic Enzymes, and Macro-Evolutionary Dynamics — Spanning Six Master Volumes, 5 Applied Practicums, and a 70-Term Technical Lexicon.</p>
       </div>
     </div>
   </div>
@@ -35,19 +35,19 @@
   <!-- STATUS & PEDAGOGICAL COMPASS STRIP -->
   <div class="p-4 bg-slate-950/90 border border-slate-800 rounded-xl flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
     <div class="flex items-center gap-3">
-      <span class="px-2.5 py-1 rounded bg-cyan-950 border border-cyan-800 text-cyan-300 font-bold text-[11px]">4 Core Units • 5 Practicums</span>
+      <span class="px-2.5 py-1 rounded bg-cyan-950 border border-cyan-800 text-cyan-300 font-bold text-[11px]">6 Master Volumes • 5 Practicums</span>
       <span class="text-slate-400">Open in separate tabs &bull; Deep cross-linking &bull; Zero scrolling fatigue</span>
     </div>
     <div class="flex items-center gap-2">
-      <a href="#toc-curriculum" class="text-slate-400 hover:text-cyan-400 transition-colors">Part I (Units 1–4)</a>
+      <a href="#toc-curriculum" class="text-slate-400 hover:text-cyan-400 transition-colors">Vol I: Prebiotic</a>
       <span class="text-slate-700">&bull;</span>
-      <a href="#toc-keystones" class="text-emerald-300 font-bold hover:text-emerald-200 transition-colors">Flagship Keystones</a>
+      <a href="#toc-morphodynamics" class="text-pink-300 font-bold hover:text-pink-200 transition-colors">Vol II &amp; III: GRNs &amp; Morphology</a>
       <span class="text-slate-700">&bull;</span>
-      <a href="#toc-morphodynamics" class="text-pink-300 font-bold hover:text-pink-200 transition-colors">Volumes 01 &amp; 02</a>
+      <a href="#toc-keystones" class="text-emerald-300 font-bold hover:text-emerald-200 transition-colors">Vol IV: Paleontology</a>
       <span class="text-slate-700">&bull;</span>
-      <a href="#toc-practicums" class="text-slate-400 hover:text-amber-400 transition-colors">Lab Practicums</a>
+      <a href="#toc-practicums" class="text-slate-400 hover:text-amber-400 transition-colors">Vol V: Practicums</a>
       <span class="text-slate-700">&bull;</span>
-      <a href="#toc-companion" class="text-slate-400 hover:text-purple-400 transition-colors">Lexicon &amp; Literature</a>
+      <a href="#toc-companion" class="text-slate-400 hover:text-purple-400 transition-colors">Vol VI: References</a>
     </div>
   </div>
 
@@ -57,13 +57,13 @@
       <div class="flex items-center gap-3">
         <div class="w-11 h-11 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center font-bold text-xl">🌱</div>
         <div>
-          <div class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">A Teacher's Orientation</div>
+          <div class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">Foundational Orientation</div>
           <h2 class="text-lg md:text-xl font-mono font-bold text-slate-100">The Unsupervised Sea: Why Non-Equilibrium Thermodynamics Must Precede Loss Functions</h2>
         </div>
       </div>
 
       <p class="text-sm text-slate-300 leading-relaxed font-sans">
-        Welcome, student of nature and computation. If you open almost any computer science textbook on artificial intelligence or evolutionary algorithms, you will be greeted by a sterile world of mathematical shortcuts: artificial fitness functions, predetermined optimization benchmarks, and teleological target bitstrings. While these engineering tools are useful for building ALUs or sorting arrays (the mission of our sister project, <a href="https://github.com/ianohlander/BooleanGA" target="_blank" rel="noopener" class="text-cyan-400 hover:underline font-semibold">BooleanGA</a>), they smuggle the very secret they claim to explain: <em>how purposeful life emerges spontaneously in an indifferent physical universe</em>.
+        Welcome, investigator of nature and computation. If you open almost any computer science textbook on artificial intelligence or evolutionary algorithms, you will be greeted by a sterile world of mathematical shortcuts: artificial fitness functions, predetermined optimization benchmarks, and teleological target bitstrings. While these engineering tools are useful for building ALUs or sorting arrays (the mission of our sister project, <a href="https://github.com/ianohlander/BooleanGA" target="_blank" rel="noopener" class="text-cyan-400 hover:underline font-semibold">BooleanGA</a>), they smuggle the very secret they claim to explain: <em>how purposeful life emerges spontaneously in an indifferent physical universe</em>.
       </p>
       <p class="text-sm text-slate-300 leading-relaxed font-sans">
         In natural biophysics, life does not compute an external score; it extracts free energy from non-equilibrium chemical and thermal gradients, maintains its internal state against Rolf Landauer's thermodynamic dissipation ($k_B T \ln 2$), and reproduces before its battery runs dry. Information is not a floating number in memory; it is a physical, rate-independent polymer governed by quantum chemistry and enzyme kinetics.
@@ -570,9 +570,9 @@
         <div class="space-y-2">
           <div class="flex items-center justify-between">
             <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono font-bold text-[10px]">Experiential Labs</span>
-            <span class="text-[11px] font-mono text-slate-500">5 Student Practicums</span>
+            <span class="text-[11px] font-mono text-slate-500">5 Investigator Practicums</span>
           </div>
-          <h3 class="text-base font-mono font-bold text-slate-100">Hands-On Interactive Student Laboratory Practicums</h3>
+          <h3 class="text-base font-mono font-bold text-slate-100">Hands-On Interactive Investigator Laboratory Practicums</h3>
           <p class="text-xs text-slate-400 leading-relaxed font-sans">
             Structured experiential labs executed directly inside the live application: Micro-Survey &amp; Circuit Inspection, Landauer Power Dissipation, Phenotypic Redox Adaptation, God-Suite Perturbations, and Lenski LTEE Flight Recorder Autopsies.
           </p>
@@ -600,24 +600,51 @@
       </div>
 
   <!-- ========================================================================= -->
-  <!-- MASTER VOLUMES: MULTICELLULAR MORPHOGENESIS & GENE REGULATORY NETWORKS -->
+  <!-- MASTER VOLUMES II & III: GENE REGULATORY NETWORKS & MULTICELLULAR MORPHOLOGY -->
   <!-- ========================================================================= -->
   <section id="toc-morphodynamics" class="space-y-6 pt-6">
     <div class="flex items-center justify-between border-b border-slate-800 pb-3">
       <div class="flex items-center gap-2">
         <span class="text-xl">🌸</span>
-        <h2 class="text-lg md:text-xl font-mono font-bold text-pink-400">Master Morphodynamics &amp; Gene Regulatory Volumes</h2>
+        <h2 class="text-lg md:text-xl font-mono font-bold text-pink-400">Master Volumes: Gene Regulatory Networks &amp; Multicellular Morphology</h2>
       </div>
-      <span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Volumes 01 &amp; 02</span>
+      <span class="text-xs font-mono text-slate-500 uppercase tracking-wider">Volumes II &amp; III</span>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
 
-      <!-- VOLUME 01: MULTICELLULAR MORPHOLOGY -->
+      <!-- VOLUME II: GENE REGULATORY NETWORKS -->
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-cyan-950/40 via-slate-900 to-purple-950/40 border border-cyan-500/40 hover:border-cyan-400/80 transition-all flex flex-col justify-between space-y-4 shadow-xl group">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono font-bold text-[11px]">Master Volume II</span>
+            <span class="text-xs font-mono text-slate-400">Dynamical Systems &amp; Attractors</span>
+          </div>
+          <h3 class="text-lg font-mono font-bold text-slate-100 group-hover:text-cyan-300 transition-colors">The Architecture of Gene Regulatory Networks &amp; Epigenetic Landscapes</h3>
+          <p class="text-xs text-slate-300 font-sans leading-relaxed">
+            The definitive theoretical and operational volume on biological and digital GRNs. Conrad Waddington's epigenetic landscape, Stuart Kauffman's $K_c = 2$ critical boundary at the edge of chaos, Derrida sensitivity $s = 1$, Hill cooperativity, 10-tick microstate state machine trace, homeotic Hox-like saltations, and Live Circuit Microscope Gene Regulatory Viewer.
+          </p>
+          <div class="flex flex-wrap items-center gap-1.5 text-[10px] font-mono text-slate-400 pt-1">
+            <span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">Kauffman Criticality Kc=2</span>
+            <span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">Waddington Basins &gt;85%</span>
+            <span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">10-Tick State Machine</span>
+            <span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">8 Publication SVGs</span>
+          </div>
+        </div>
+        <div class="pt-3 border-t border-cyan-800/40 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-slate-400">Volume II Treatise</span>
+          <a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-cyan-950 border border-cyan-600 hover:bg-cyan-900 text-cyan-200 font-mono font-bold text-xs transition-colors shadow-md">
+            <span>Read Volume II</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- VOLUME III: MULTICELLULAR MORPHOLOGY -->
       <div class="p-6 rounded-2xl bg-gradient-to-br from-pink-950/40 via-slate-900 to-slate-950 border border-pink-500/40 hover:border-pink-400/80 transition-all flex flex-col justify-between space-y-4 shadow-xl group">
         <div class="space-y-3">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded bg-pink-950 text-pink-300 border border-pink-800 font-mono font-bold text-[11px]">Master Volume 01</span>
+            <span class="px-2.5 py-0.5 rounded bg-pink-950 text-pink-300 border border-pink-800 font-mono font-bold text-[11px]">Master Volume III</span>
             <span class="text-xs font-mono text-slate-400">Graph Theory &amp; Topologies</span>
           </div>
           <h3 class="text-lg font-mono font-bold text-slate-100 group-hover:text-pink-300 transition-colors">Multicellular Body Topologies &amp; Morphometric Graph Theory Manual</h3>
@@ -632,36 +659,9 @@
           </div>
         </div>
         <div class="pt-3 border-t border-pink-800/40 flex items-center justify-between">
-          <span class="text-[11px] font-mono text-slate-400">Volume 01 Treatise</span>
+          <span class="text-[11px] font-mono text-slate-400">Volume III Treatise</span>
           <a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-pink-950 border border-pink-600 hover:bg-pink-900 text-pink-200 font-mono font-bold text-xs transition-colors shadow-md">
-            <span>Read Volume 01</span>
-            <span>&rarr;</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- VOLUME 02: GENE REGULATORY NETWORKS -->
-      <div class="p-6 rounded-2xl bg-gradient-to-br from-cyan-950/40 via-slate-900 to-purple-950/40 border border-cyan-500/40 hover:border-cyan-400/80 transition-all flex flex-col justify-between space-y-4 shadow-xl group">
-        <div class="space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono font-bold text-[11px]">Master Volume 02</span>
-            <span class="text-xs font-mono text-slate-400">Dynamical Systems &amp; Attractors</span>
-          </div>
-          <h3 class="text-lg font-mono font-bold text-slate-100 group-hover:text-cyan-300 transition-colors">The Architecture of Gene Regulatory Networks &amp; Epigenetic Landscapes</h3>
-          <p class="text-xs text-slate-300 font-sans leading-relaxed">
-            The definitive theoretical and pedagogical volume on biological and digital GRNs. Conrad Waddington's epigenetic landscape, Stuart Kauffman's $K_c = 2$ critical boundary at the edge of chaos, Derrida sensitivity $s = 1$, Hill cooperativity, 10-tick microstate state machine trace, homeotic Hox-like saltations, and Live Circuit Microscope Gene Regulatory Viewer.
-          </p>
-          <div class="flex flex-wrap items-center gap-1.5 text-[10px] font-mono text-slate-400 pt-1">
-            <span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">Kauffman Criticality Kc=2</span>
-            <span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">Waddington Basins &gt;85%</span>
-            <span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">10-Tick State Machine</span>
-            <span class="px-2 py-0.5 rounded bg-slate-950/80 border border-slate-800">8 Publication SVGs</span>
-          </div>
-        </div>
-        <div class="pt-3 border-t border-cyan-800/40 flex items-center justify-between">
-          <span class="text-[11px] font-mono text-slate-400">Volume 02 Treatise</span>
-          <a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-cyan-950 border border-cyan-600 hover:bg-cyan-900 text-cyan-200 font-mono font-bold text-xs transition-colors shadow-md">
-            <span>Read Volume 02</span>
+            <span>Read Volume III</span>
             <span>&rarr;</span>
           </a>
         </div>
@@ -797,12 +797,12 @@
     <div class="p-6 rounded-2xl bg-gradient-to-r from-slate-950 to-purple-950/30 border border-slate-800 flex items-center justify-between gap-4 shadow-lg">
       <div class="space-y-2">
         <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800 text-[10px] font-mono font-bold uppercase">Authentic Testing</span>
-        <h3 class="text-base font-mono font-bold text-slate-100">12th Grade Student QA Audit Report</h3>
+        <h3 class="text-base font-mono font-bold text-slate-100">12th Grade Investigator QA Audit Report</h3>
         <p class="text-xs text-slate-400 font-sans leading-relaxed">
-          A 90-minute hands-on student usability testing report across Practicums 1–4, featuring 6 real browser screenshots and friction analyses.
+          A 90-minute hands-on investigator usability testing report across Practicums 1–4, featuring 6 real browser screenshots and friction analyses.
         </p>
         <div class="pt-2">
-          <a href="../QA/STUDENT_UX_REPORT.html" class="text-purple-400 hover:underline text-xs font-mono font-semibold">Read Student QA Report &rarr;</a>
+          <a href="../QA/STUDENT_UX_REPORT.html" class="text-purple-400 hover:underline text-xs font-mono font-semibold">Read Investigator QA Report &rarr;</a>
         </div>
       </div>
       <div class="w-20 h-20 rounded-xl bg-purple-950/50 border border-purple-800/60 flex items-center justify-center text-3xl font-mono text-purple-300 hidden sm:flex">

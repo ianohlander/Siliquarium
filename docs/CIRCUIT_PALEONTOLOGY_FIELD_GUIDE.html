@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Digital Circuit Paleontology: Master Taxonomy &amp; Field Guide Hub</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Digital Circuit Paleontology: Master Taxonomy &amp; Field Guide Hub</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1075,12 +1089,17 @@
         <h1 id="digital-circuit-paleontology-field-guide-to-biological-logic-networks" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">⚡ Digital Circuit Paleontology: Field Guide to Biological Logic Networks</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">The Complete Illustrated Taxonomy of 10 Evolved Micro-Circuits and Macro-Adaptations Recognized by the Siliquarium Paleontologist</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-purple-950/30 border-l-4 border-purple-400 my-4 text-sm text-slate-300"><div class="font-mono text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">IMPORTANT</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Independent Scientific Instrument & Non-Accreditation Notice:</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-950/50 via-slate-900 to-slate-900 border border-purple-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-purple-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>⚡</span> Important &bull; Core Mechanism
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Independent Scientific Instrument & Non-Accreditation Notice:</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5">The Siliquarium application, theoretical model, and documentation are not designed, developed, peer-reviewed, or sponsored by any accredited university, government research agency, or academic accreditation board. Because this project represents an independent computational biophysics instrument, every statement, equation, and evolutionary claim is accompanied below by full mathematical derivations, thermodynamic proofs, and peer-reviewed scientific citations.</p>
 <p class="leading-relaxed font-sans text-xs my-1.5">📖 <strong class="text-slate-100 font-semibold">Circuit Paleontology Companion Reference Suite:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><a href="CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Paleontology Glossary</a> | <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="CIRCUIT_PALEONTOLOGY_NOTES.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📝 Critical Notes & Justifications</a> | <a href="index.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Documentation Portal</a></p></div></div>
+<p class="leading-relaxed font-sans text-xs my-1.5"><a href="CIRCUIT_PALEONTOLOGY_GLOSSARY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Paleontology Glossary</a> | <a href="CIRCUIT_PALEONTOLOGY_BIBLIOGRAPHY.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="CIRCUIT_PALEONTOLOGY_NOTES.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📝 Critical Notes & Justifications</a> | <a href="index.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Documentation Portal</a></p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
-<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🧭 A Teacher's Orientation: The Logic of Living Silicon & The Genetic Book of the Dead</div>
+<blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🧭 Foundational Orientation: The Logic of Living Silicon & The Genetic Book of the Dead</div>
 <p class="leading-relaxed font-sans text-xs my-1.5">If you have ever opened an electronic toy, a radio, or a smartphone, you have observed microscopic integrated silicon chips connected by copper traces on a circuit board. Those chips were designed by human electrical engineers who spent years in college drawing netlists, optimizing gate layouts, and verifying timing constraints.</p>
 <p class="leading-relaxed font-sans text-xs my-1.5">In <strong class="text-slate-100 font-semibold">Siliquarium</strong>, there are <strong class="text-slate-100 font-semibold">no human engineers</strong>. There is no designer placing chips or soldering wires. There is only an abyssal hydrothermal seafloor, volcanic energy pulses, and blind Darwinian natural selection operating on random mutations.</p>
 <p class="leading-relaxed font-sans text-xs my-1.5">Yet when you point the <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/visualizers/CircuitMicroscopeView.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Circuit Microscope</a> at living silicoid cells, you will discover the exact same circuit motifs that electrical engineers use to build computers—and that living bacteria use to survive in hostile ponds!</p>
@@ -1091,9 +1110,9 @@
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="1-the-four-sacred-foundations-why-circuits-evolve-in-deep-sea-rocks" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. The Four Sacred Foundations: Why Circuits Evolve in Deep-Sea Rocks</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Before examining individual circuits, we must understand the physical world in which these silicoids live. Every circuit in this guide evolved to solve a brutal, life-or-death physical crisis on the prebiotic seafloor.</p>
-<div class="card-analogy p-5 rounded-2xl border border-amber-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
-          <div class="font-mono text-amber-400 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
-            <span>🌍</span> Everyday Analogy
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌍</span> Intuitive Anchor &bull; Everyday Analogy
           </div>
           <div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🏛️ The Four Sacred Everyday Analogies of Silicon Abiogenesis</div>
 <p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">1. The Safe and the Workshop (The Epistemic Cut)</strong> <sup id="cite_ref-2a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup>:</p>
@@ -1108,14 +1127,19 @@
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="2-paleontological-philosophy-the-external-voltmeter" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Paleontological Philosophy: The External Voltmeter</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Before touring the circuits, an essential scientific distinction must be established:</p>
-<div class="p-4 rounded-xl bg-purple-950/30 border-l-4 border-purple-400 my-4 text-sm text-slate-300"><div class="font-mono text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">IMPORTANT</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🛑 No Smuggled Intelligence (The Voltmeter Principle) <sup id="cite_ref-1" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-1">[1]</a></sup> <sup id="cite_ref-2c" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup></div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-950/50 via-slate-900 to-slate-900 border border-purple-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-purple-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>⚡</span> Important &bull; Core Mechanism
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">🛑 No Smuggled Intelligence (The Voltmeter Principle) <sup id="cite_ref-1" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-1">[1]</a></sup> <sup id="cite_ref-2c" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-2">[2]</a></sup></div>
 <p class="leading-relaxed font-sans text-xs my-1.5">The <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/DigitalPaleontologist.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Digital Paleontologist</a> is <strong class="text-slate-100 font-semibold">100% descriptive and 0% prescriptive</strong>.</p>
 <p class="leading-relaxed font-sans text-xs my-1.5">In many naive computer simulations, the programmer creates an artificial "fitness function" that explicitly awards bonus points if an organism builds a clock or an adder. <strong class="text-slate-100 font-semibold">Siliquarium strictly prohibits this.</strong></p>
 <ol class="list-decimal pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li>The simulation physics engine (<a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/SimulationWorld.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationWorld.ts</code></a>) has no concept of an "adder" or an "oscillator." It only evaluates physical voltage wires, codon translation, and battery levels.</li>
 <li>The Paleontologist is like a <strong class="text-slate-100 font-semibold">voltmeter connected across two terminals by an outside observer</strong>. The voltmeter watches the circuit run and says: <em class="text-slate-200 italic">"Aha! That wiring pattern is identical to the toggle switch Tim Gardner built at Boston University in 2000!"</em></li>
 <li>The organism receives <strong class="text-slate-100 font-semibold">zero bonus points, zero extra energy, and zero guidance</strong>. If the circuit survives, it is solely because its wiring captured genuine vent energy on the seafloor.</li>
-</ol></div></div>
+</ol></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="3-master-taxonomy-of-the-15-evolved-circuits-ecological-taxa-3" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Master Taxonomy of the 15 Evolved Circuits & Ecological Taxa <sup id="cite_ref-3a" class="text-cyan-400 font-mono text-[10px]"><a href="#ref-3">[3]</a></sup></h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The table below catalogs all 26 circuits, motifs, and macro-evolutionary adaptations recognized by <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/NetworkMotif.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NetworkMotifRegistry.ts</code></a>, <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/TaxonomyNomenclature.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">TaxonomyNomenclature.ts</code></a>, and scanned by <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/ui/NaturalistAssistant.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NaturalistAssistant.ts</code></a>:</p>
@@ -1749,7 +1773,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Yet when wired in the workshop, they execute the exact same circuit! Simple string comparison fails.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/WeisfeilerLehmanHasher.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">WeisfeilerLehmanHasher</code></a> executes multi-round <strong class="text-slate-100 font-semibold">1-WL Color Refinement</strong>:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{c_v^{(t+1)}} = \textcolor{#34d399}{\text{HASH}}\left(\textcolor{#fbbf24}{c_v^{(t)}}, \; \textcolor{#34d399}{\text{SORT}}\left(\left\{\textcolor{#fbbf24}{c_u^{(t)}} : u \in \textcolor{#c084fc}{\mathcal{N}(v)}\right\}\right)\right)$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1779,7 +1803,11 @@
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="7-multicellular-body-topologies-diagnostic-morphometrics" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">7. Multicellular Body Topologies & Diagnostic Morphometrics</h2>
 <a id="multicellular-body-topologies-and-morphometrics"></a>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5">Master Multicellular Morphology Treatise (Volume III)</p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5">Master Multicellular Morphology Treatise (Volume III)</p>
 <p class="leading-relaxed font-sans text-xs my-1.5">In strict accordance with the project's zero cross-domain redundancy standards, the formal graph-theoretic proofs, 3D hexagonal coordinate metrics $(q, r, z)$, $\tau(G)$ 3-clique algebraic derivations, and Wolpertian reaction-diffusion morphogen kinetics are housed in their dedicated canonical volume:</p>
 <p class="leading-relaxed font-sans text-xs my-1.5">🌸 <strong class="text-slate-100 font-semibold"><a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Volume III: Multicellular Morphology & Graph-Theoretic Morphometrics</a></strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5">Consult Volume III for:</p>
@@ -1790,7 +1818,8 @@
 <li><strong class="text-slate-100 font-semibold">Section 4.4:</strong> The Toroidal Ring Topology (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">RING</code>): Closed 1D cytoplasmic loop cyclomatic number $\textcolor{#38bdf8}{\gamma(G) = 1}$.</li>
 <li><strong class="text-slate-100 font-semibold">Section 4.5:</strong> The Filamentous Topology (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">FILAMENTOUS</code>): Simple unbranched path metric $\textcolor{#38bdf8}{|E| = |V| - 1}$.</li>
 <li><strong class="text-slate-100 font-semibold">Section 5:</strong> Graph Laplacian syncytial transport $\textcolor{#38bdf8}{\frac{d\vec{E}}{dt}} = -\textcolor{#34d399}{D_{\text{eff}}}\textcolor{#c084fc}{\mathbf{L}}\textcolor{#fbbf24}{\vec{E}}$ and Kleiber allometric scaling.</li>
-</ul></div></div>
+</ul></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="8-conceptual-misconception-immunity-skeptic-faq" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">8. Conceptual Misconception Immunity (Skeptic FAQ)</h2>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
@@ -2608,13 +2637,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

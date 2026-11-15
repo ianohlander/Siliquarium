@@ -58,7 +58,7 @@
   $$C(r, t) = \frac{M}{(4\pi D t)^{3/2}} \exp\left(-\frac{r^2}{4Dt}\right) \implies \lim_{t \to \infty} C(r, t) = 0$$
 - **In Silico Realization in Siliquarium:** Confining catalytic logic gates strictly within closed hexagonal pore boundaries; circuits drifting outside pores without a safe cannot maintain concentration.
 - **Biological Cognate:** The failure of prebiotic synthesis models predicated upon an open "warm little pond" without physical micro-compartments.
-- **Epistemic Significance:** Eliminates the student misconception that life could spontaneously self-assemble in an open, unconfined liquid ocean.
+- **Epistemic Significance:** Eliminates the investigator misconception that life could spontaneously self-assemble in an open, unconfined liquid ocean.
 
 ### 7. Inorganic Micro-Compartmentation
 - **Formal Definition:** Semi-permeable micro-cavities within precipitated iron-sulfide or silica mineral structures that physically confine organic reactants, serving as abiotic precursors to lipid membranes (*Russell & Hall, 1997; Martin & Russell, 2003*).
@@ -83,7 +83,7 @@
   $$C = \varepsilon_r \varepsilon_0 \frac{A}{d}, \quad U_E = \frac{1}{2} C V^2$$
 - **In Silico Realization in Siliquarium:** Implemented in [`PoreBattery.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreBattery.ts#L10-L45) with a default storage ceiling of $E_{\text{cap}} = 100$ tokens.
 - **Biological Cognate:** Natural double-layer electrostatic capacitance across thin iron monosulfide membranes.
-- **Epistemic Significance:** Disabuses students of the assumption that batteries require complex modern chemical engineering or evolved proteins.
+- **Epistemic Significance:** Disabuses investigators of the assumption that batteries require complex modern chemical engineering or evolved proteins.
 
 ### 10. Pyrophosphate ($PP_i$) & Acetyl Phosphate ($AcP$)
 - **Formal Definition:** Simple inorganic and organic phosphoanhydride molecules that served as the primary geochemical thermodynamic currencies prior to the enzymatic synthesis of adenosine triphosphate (ATP) (*Lipmann, 1941; Russell, 2007*).
@@ -138,7 +138,7 @@
   $$\text{Genotype: } \mathcal{I} = \{s_1, s_2, \dots, s_n\} \quad (\tau\text{-invariant}), \qquad \text{Phenotype: } \frac{d\vec{x}}{dt} = \vec{f}(\vec{x}, \mathcal{I})$$
 - **In Silico Realization in Siliquarium:** The strict segregation between the inert 60-bit string in [`GenomeSafe.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/GenomeSafe.ts) and the active logic network in [`PoreWorkshop.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts).
 - **Biological Cognate:** The separation between double-stranded DNA (chemically inert repository) and folded enzymatic proteins (active catalysts).
-- **Epistemic Significance:** Prevents students from conflating genetic sequences with enzymatic kinetics.
+- **Epistemic Significance:** Prevents investigators from conflating genetic sequences with enzymatic kinetics.
 
 ### 16. Rate-Independent Information
 - **Formal Definition:** Informational sequences whose semiotic meaning and instructional content are invariant under arbitrary changes in the temporal rate of transcription, reading, or physical transit.
@@ -333,7 +333,7 @@
   $$\mathcal{P}^{(t+1)} \preceq \mathcal{P}^{(t)}$$
 - **In Silico Realization in Siliquarium:** The 2-pass iterative refinement step executed inside [`WeisfeilerLehmanHasher.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/WeisfeilerLehmanHasher.ts#L45-L60).
 - **Biological Cognate:** Identifying equivalent enzymatic roles within divergent metabolic pathways.
-- **Epistemic Significance:** Provides students with a hands-on intuition for isomorphism testing.
+- **Epistemic Significance:** Provides investigators with a hands-on intuition for isomorphism testing.
 
 ### 39. Topological Graph Invariant
 - **Formal Definition:** A mathematical property or hash computed on a graph that is strictly invariant under any bijective relabeling or permutation of vertex indices.
@@ -434,7 +434,7 @@
   $$\text{Trait}(A) \cong \text{Trait}(B) \land \text{Trait}(\text{LCA}(A, B)) \cong \text{Trait}(A)$$
 - **In Silico Realization in Siliquarium:** When [`EvolutionaryFlightRecorder.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/EvolutionaryFlightRecorder.ts#L105-L115) traces two cells with identical WL hashes back to an LCA that already possessed that motif.
 - **Biological Cognate:** The pentadactyl limb architecture shared by bats, whales, and humans.
-- **Epistemic Significance:** Gives students a mathematically rigorous criterion for establishing genuine phylogenetic descent.
+- **Epistemic Significance:** Gives investigators a mathematically rigorous criterion for establishing genuine phylogenetic descent.
 
 ### 51. Homoplasy / Convergent Evolution
 - **Formal Definition:** The independent evolutionary emergence of similar or identical structural, physiological, or computational features in distinct lineages that do not share a common ancestor possessing that trait.
@@ -451,7 +451,7 @@
   *Where $p_i = N_i / N_{\text{total}}$ is the proportional abundance of clade $i$.*
 - **In Silico Realization in Siliquarium:** Computed in real time and displayed on the telemetry HUD in [`LteeBenchmark.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts).
 - **Biological Cognate:** Species diversity indices used in coral reef and microbial ecology.
-- **Epistemic Significance:** Teaches students to monitor ecological collapse, selective sweeps, and biodiversity recovery quantitatively.
+- **Epistemic Significance:** Teaches investigators to monitor ecological collapse, selective sweeps, and biodiversity recovery quantitatively.
 
 ### 53. Pelagic Spore Advection
 - **Formal Definition:** The hydrodynamic transport of dormant biological propagules or spores by fluid advection and buoyancy plumes across marine water columns, enabling colonization of distant habitats.

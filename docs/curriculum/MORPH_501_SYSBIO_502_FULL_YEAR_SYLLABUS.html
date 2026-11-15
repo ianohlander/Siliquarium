@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="../index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="../assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="../assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Computational Morphogenesis &amp; Gene Regulatory Networks (Full-Year Syllabus)</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Computational Morphogenesis &amp; Gene Regulatory Networks (Full-Year Syllabus)</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="../assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1082,7 +1096,7 @@
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="pedagogical-philosophy-institutional-framework" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Pedagogical Philosophy & Institutional Framework</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This course is designed around an uncompromising epistemological principle: <strong class="text-slate-100 font-semibold">true biological morphology is emergent, never pre-programmed.</strong> In conventional computational biology, morphology is all too often treated as a computer-aided design (CAD) problem where an external loss function forces an algorithm to reproduce a target geometry. In contrast, this curriculum grounds every morphological transition in the autopoietic self-maintenance of closed thermodynamic systems.</p>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Our students do not manipulate abstract geometric wireframes. Instead, they study how rate-independent symbolic strings (Howard Pattee's Epistemic Cut) direct rate-dependent enzymatic logic gates (Landauer-dissipating CMOS switches) within discrete hexagonal rock cavities ($\mathbb{Z}^3_{\text{hex}}$), subject to non-equilibrium hydrothermal fluid dynamics, chemiosmotic proton gradients, and Darwinian natural selection.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Our investigators do not manipulate abstract geometric wireframes. Instead, they study how rate-independent symbolic strings (Howard Pattee's Epistemic Cut) direct rate-dependent enzymatic logic gates (Landauer-dissipating CMOS switches) within discrete hexagonal rock cavities ($\mathbb{Z}^3_{\text{hex}}$), subject to non-equilibrium hydrothermal fluid dynamics, chemiosmotic proton gradients, and Darwinian natural selection.</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The curriculum is structured across two rigorous 15-week semesters:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Semester I (Weeks 1–15):</strong> <em class="text-slate-200 italic">Prebiotic Energetics, Howard Pattee's Epistemic Cut, Logic Gates, and the Origin of Network Motifs</em></li>
@@ -1094,7 +1108,7 @@
 <li><strong class="text-slate-100 font-semibold">Theoretical & Mathematical Foundations:</strong> Rigorous mathematical proofs, differential equations, and graph-theoretic formulations.</li>
 <li><strong class="text-slate-100 font-semibold">Pedagogical Intuition & Grounding Metaphors:</strong> Visceral, non-engineer analogies that bridge everyday experience to formal mechanics.</li>
 <li><strong class="text-slate-100 font-semibold">Siliquarium In-Silico Laboratory Practicum:</strong> Exact numerical experiments conducted on the active simulation engine.</li>
-<li><strong class="text-slate-100 font-semibold">Rigorous Problem Set & Analytic Proof:</strong> Formally verifiable derivations assigned for student evaluation.</li>
+<li><strong class="text-slate-100 font-semibold">Rigorous Problem Set & Analytic Proof:</strong> Formally verifiable derivations assigned for investigator evaluation.</li>
 <li><strong class="text-slate-100 font-semibold">Assigned Reading from the Master Academic Bibliography:</strong> Primary peer-reviewed citations from biophysics, evolutionary theory, and systems biology.</li>
 </ol>
 <hr class="border-t border-slate-800 my-8" />
@@ -1300,7 +1314,7 @@
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Lecture Title & Physical Stakes:</strong> <em class="text-slate-200 italic">Subgraphs That Matter: Statistical Significance and Network Topology.</em>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If we assemble a million random logic gates, we get a chaotic tangled web with no predictive function. Yet real biological networks—from bacterial transcription to human neural connections—exhibit a tiny handful of recurrent wiring patterns. In this lecture, we introduce Uri Alon's theory of <strong class="text-slate-100 font-semibold">network motifs</strong>, teaching students how to distinguish genuine functional adaptations from random combinatorial noise.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">If we assemble a million random logic gates, we get a chaotic tangled web with no predictive function. Yet real biological networks—from bacterial transcription to human neural connections—exhibit a tiny handful of recurrent wiring patterns. In this lecture, we introduce Uri Alon's theory of <strong class="text-slate-100 font-semibold">network motifs</strong>, teaching investigators how to distinguish genuine functional adaptations from random combinatorial noise.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Theoretical & Mathematical Foundations:</strong>  </li>
 </ul>
@@ -1522,7 +1536,7 @@
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Lecture Title & Physical Stakes:</strong> <em class="text-slate-200 italic">Replaying Life's Tape: Determinism, Divergence, and the Dynamics of Fitness.</em>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Is evolutionary adaptation deterministic and repeatable, or is it fundamentally contingent on rare, historical accidents? In this lecture, we examine Richard Lenski’s famous 75,000-generation <em class="text-slate-200 italic">E. coli</em> experiment (LTEE). We teach students how fitness trajectories slow down into a universal power-law curve, and how "potentiating" neutral mutations open doors to sudden, irreversible evolutionary breakthroughs.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Is evolutionary adaptation deterministic and repeatable, or is it fundamentally contingent on rare, historical accidents? In this lecture, we examine Richard Lenski’s famous 75,000-generation <em class="text-slate-200 italic">E. coli</em> experiment (LTEE). We teach investigators how fitness trajectories slow down into a universal power-law curve, and how "potentiating" neutral mutations open doors to sudden, irreversible evolutionary breakthroughs.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Theoretical & Mathematical Foundations:</strong>  </li>
 </ul>
@@ -1555,11 +1569,11 @@
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Lecture Title & Physical Stakes:</strong> <em class="text-slate-200 italic">The Threshold of Individuality: From Unicellular Logic to Multicellular Destiny.</em>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Comprehensive oral defense and synthesis of Semester I. Students demonstrate mastery of prebiotic geochemistry, Pattee's Epistemic Cut, Landauer thermodynamics, Boolean enzymatic netlists, network motifs, and neutral evolutionary dynamics.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Comprehensive oral defense and synthesis of Semester I. Investigators demonstrate mastery of prebiotic geochemistry, Pattee's Epistemic Cut, Landauer thermodynamics, Boolean enzymatic netlists, network motifs, and neutral evolutionary dynamics.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Capstone Practicum & Examination:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">The 4-Hour Unicellular Survival & Autotrophic Optimization Challenge:</em> Students are provided a randomized 60-bit genome tape in a sterile, low-flux hydrothermal environment ($J_{\text{in}} = 1.0\text{T/tick}$, toxic surges every 50 ticks). Over a 4-hour live simulation run, students must guide the population through purely Darwinian selection (no manual code editing) to evolve an autotrophic organism possessing:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">The 4-Hour Unicellular Survival & Autotrophic Optimization Challenge:</em> Investigators are provided a randomized 60-bit genome tape in a sterile, low-flux hydrothermal environment ($J_{\text{in}} = 1.0\text{T/tick}$, toxic surges every 50 ticks). Over a 4-hour live simulation run, investigators must guide the population through purely Darwinian selection (no manual code editing) to evolve an autotrophic organism possessing:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>A verified Coherent Feedforward Loop or Bistable Latch (proven via <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">WeisfeilerLehmanHasher</code>).</li>
 <li>A verified allosteric toxin-inversion NOT gate.</li>
@@ -1718,7 +1732,7 @@
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Lecture Title & Physical Stakes:</strong> <em class="text-slate-200 italic">Topological Invariants: Formalizing the Six Morphological Classes.</em>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">How does the Digital Paleontologist classify a living organism without human bias? In this lecture, we deconstruct the six discrete morphological invariants implemented in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationWorld.classifyColonyTopology()</code>: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">ROSETTE</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">COLUMNAR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">DENDRITIC</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">RING</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">FILAMENTOUS</code>, and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AMORPHOUS</code>. We teach students how to map physical colonies into abstract graphs $G = (V, E)$, calculate adjacency matrix powers, and extract 3-cliques ($K_3$) via matrix traces.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">How does the Digital Paleontologist classify a living organism without human bias? In this lecture, we deconstruct the six discrete morphological invariants implemented in <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationWorld.classifyColonyTopology()</code>: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">ROSETTE</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">COLUMNAR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">DENDRITIC</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">RING</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">FILAMENTOUS</code>, and <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AMORPHOUS</code>. We teach investigators how to map physical colonies into abstract graphs $G = (V, E)$, calculate adjacency matrix powers, and extract 3-cliques ($K_3$) via matrix traces.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Theoretical & Mathematical Foundations:</strong>  </li>
 </ul>
@@ -1862,7 +1876,7 @@
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Pedagogical Intuition & Analogies:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">The Classroom Rumor Mill:</em> Imagine a classroom of 30 students. If every student gossips with 10 people ($K = 10$), an accidental whisper about a pop quiz turns into a screaming panic that shuts down the school. If each student only talks to nobody ($K = 0$), the teacher can announce a fire drill and nobody moves. But if every student listens to exactly two friends ($K = 2$), information travels smoothly without causing hysteria.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">The Classroom Rumor Mill:</em> Imagine a classroom of 30 investigators. If every investigator gossips with 10 people ($K = 10$), an accidental whisper about a pop quiz turns into a screaming panic that shuts down the school. If each investigator only talks to nobody ($K = 0$), the teacher can announce a fire drill and nobody moves. But if every investigator listens to exactly two friends ($K = 2$), information travels smoothly without causing hysteria.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Siliquarium In-Silico Laboratory Practicum:</strong>  </li>
 </ul>
@@ -2048,7 +2062,7 @@
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Lecture Title & Physical Stakes:</strong> <em class="text-slate-200 italic">Reading the Genomic Fossil Record: Cladistics and Coalescent Theory.</em>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When an archaeologist unearths a fossil, the flesh is gone; only the mineralized bones remain. In Siliquarium, the Digital Paleontologist unearths extinct genomes frozen in deep basalt strata. In this lecture, we teach students how to reconstruct deep-time phylogenetic trees from digital genomes using Maximum Parsimony, Maximum Likelihood, and Kingman's Coalescent.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">When an archaeologist unearths a fossil, the flesh is gone; only the mineralized bones remain. In Siliquarium, the Digital Paleontologist unearths extinct genomes frozen in deep basalt strata. In this lecture, we teach investigators how to reconstruct deep-time phylogenetic trees from digital genomes using Maximum Parsimony, Maximum Likelihood, and Kingman's Coalescent.</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Theoretical & Mathematical Foundations:</strong>  </li>
 </ul>
@@ -2097,7 +2111,7 @@
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Final Capstone Defense & Practicum:</strong>  </li>
 </ul>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">The Grand 100,000-Epoch Clade Defense:</em> Each student team presents a formal, peer-reviewed monograph documenting the evolutionary chronicle of an evolved multicellular lineage across 100,000 epochs in Siliquarium. The defense must include:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">The Grand 100,000-Epoch Clade Defense:</em> Each investigator team presents a formal, peer-reviewed monograph documenting the evolutionary chronicle of an evolved multicellular lineage across 100,000 epochs in Siliquarium. The defense must include:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>Complete biophysical energy balance audited via <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">ThermodynamicLedger.ts</code>.</li>
 <li>Full graph-theoretic classification of all morphological transitions.</li>
@@ -2118,7 +2132,7 @@
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Evaluation Standard:</strong> 5-Dimension Conceptual Pedagogical Rubric (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">standards/DOCUMENTATION_STANDARDS.md</code>)</p>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="1-executive-evaluation-against-the-5-dimension-rubric" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Executive Evaluation Against the 5-Dimension Rubric</h2>
-<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Dimension</th><th class="p-3.5 font-semibold">Initial Score</th><th class="p-3.5 font-semibold">Post-Expansion Target</th><th class="p-3.5 font-semibold">Detailed Pedagogical Assessment</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D1: Visceral Intuition & Foundational Motivation</strong></td><td class="p-3.5 leading-relaxed">8.5 / 10</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">10.0 / 10</strong></td><td class="p-3.5 leading-relaxed">The physical motivation (the dilution catastrophe, Fick's Second Law) is well stated. However, it currently lacks visceral framing for <em class="text-slate-200 italic">why</em> allometric scaling restricts large colonies, why syncytial cytoplasmic streaming requires gap-junction conduits, and why multicellular individuality requires conflict suppression.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D2: The Gradient of Abstraction</strong></td><td class="p-3.5 leading-relaxed">7.5 / 10</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">10.0 / 10</strong></td><td class="p-3.5 leading-relaxed">There is an abrupt complexity cliff between the simple 3-pore triad example and the multi-variable Boolean dynamical systems in Section 12. Students need a gentle, step-by-step bridge demonstrating how Waddington landscapes and Kauffman NK networks emerge from 2-input logic gates.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D3: Deconstructive Equation Anatomy</strong></td><td class="p-3.5 leading-relaxed">9.0 / 10</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">10.0 / 10</strong></td><td class="p-3.5 leading-relaxed">Equation decoders are used effectively for the 3-clique metric and Betti numbers. However, crucial biophysical formulas are currently missing equation decoders: Hagen-Poiseuille conduit fluid resistance, Turing reaction-diffusion stability equations, West-Brown-Enquist allometric scaling laws, and Derrida annealed sensitivity formulas.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D4: Concrete Micro-Scaffolding & Toy Pre-Traces</strong></td><td class="p-3.5 leading-relaxed">8.0 / 10</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">10.0 / 10</strong></td><td class="p-3.5 leading-relaxed">The coordinate tables for specimen examples are excellent. However, Section 12 needs a worked, step-by-step numerical trace across all 64 Boolean states, showing how a single cell falls into an attractor basin in under 5 ticks.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D5: Conceptual Misconception Immunity (Skeptic FAQ)</strong></td><td class="p-3.5 leading-relaxed">8.0 / 10</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">10.0 / 10</strong></td><td class="p-3.5 leading-relaxed">The Skeptic FAQ answers four questions well, but fails to address the most critical misunderstandings: "Why isn't this just Turing patterns?", "Doesn't syncytial sharing invite cancer/cheaters?", "Is an organelle truly alive if it cannot replicate outside the host?", and "Are these shapes just pixel artifacts?"</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">OVERALL COMPOSITE SCORE</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">41.0 / 50</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">50.0 / 50</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Institutional Grade A+ Target Achieved with Prescribed Expansions.</strong></td></tr></tbody></table></div>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Dimension</th><th class="p-3.5 font-semibold">Initial Score</th><th class="p-3.5 font-semibold">Post-Expansion Target</th><th class="p-3.5 font-semibold">Detailed Pedagogical Assessment</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D1: Visceral Intuition & Foundational Motivation</strong></td><td class="p-3.5 leading-relaxed">8.5 / 10</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">10.0 / 10</strong></td><td class="p-3.5 leading-relaxed">The physical motivation (the dilution catastrophe, Fick's Second Law) is well stated. However, it currently lacks visceral framing for <em class="text-slate-200 italic">why</em> allometric scaling restricts large colonies, why syncytial cytoplasmic streaming requires gap-junction conduits, and why multicellular individuality requires conflict suppression.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D2: The Gradient of Abstraction</strong></td><td class="p-3.5 leading-relaxed">7.5 / 10</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">10.0 / 10</strong></td><td class="p-3.5 leading-relaxed">There is an abrupt complexity cliff between the simple 3-pore triad example and the multi-variable Boolean dynamical systems in Section 12. Investigators need a gentle, step-by-step bridge demonstrating how Waddington landscapes and Kauffman NK networks emerge from 2-input logic gates.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D3: Deconstructive Equation Anatomy</strong></td><td class="p-3.5 leading-relaxed">9.0 / 10</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">10.0 / 10</strong></td><td class="p-3.5 leading-relaxed">Equation decoders are used effectively for the 3-clique metric and Betti numbers. However, crucial biophysical formulas are currently missing equation decoders: Hagen-Poiseuille conduit fluid resistance, Turing reaction-diffusion stability equations, West-Brown-Enquist allometric scaling laws, and Derrida annealed sensitivity formulas.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D4: Concrete Micro-Scaffolding & Toy Pre-Traces</strong></td><td class="p-3.5 leading-relaxed">8.0 / 10</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">10.0 / 10</strong></td><td class="p-3.5 leading-relaxed">The coordinate tables for specimen examples are excellent. However, Section 12 needs a worked, step-by-step numerical trace across all 64 Boolean states, showing how a single cell falls into an attractor basin in under 5 ticks.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">D5: Conceptual Misconception Immunity (Skeptic FAQ)</strong></td><td class="p-3.5 leading-relaxed">8.0 / 10</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">10.0 / 10</strong></td><td class="p-3.5 leading-relaxed">The Skeptic FAQ answers four questions well, but fails to address the most critical misunderstandings: "Why isn't this just Turing patterns?", "Doesn't syncytial sharing invite cancer/cheaters?", "Is an organelle truly alive if it cannot replicate outside the host?", and "Are these shapes just pixel artifacts?"</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">OVERALL COMPOSITE SCORE</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">41.0 / 50</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">50.0 / 50</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Institutional Grade A+ Target Achieved with Prescribed Expansions.</strong></td></tr></tbody></table></div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="2-seven-mandatory-academic-expansion-mandates" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Seven Mandatory Academic Expansion Mandates</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To bring <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/MULTICELLULAR_MORPHOLOGY_GUIDE.md</code> to university-grade pedagogical perfection, the following seven sections must be systematically incorporated:</p>
@@ -2401,13 +2415,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

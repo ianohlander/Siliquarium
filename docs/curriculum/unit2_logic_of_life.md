@@ -5,7 +5,7 @@
 
 ## 1. Visceral Intuition: The Living Breadboard
 
-When students study digital logic in computer science, they picture flat silicon chips etched with copper traces, computing abstract zeros and ones. When they study biochemistry in biology, they picture floppy, three-dimensional protein globules folding in liquid water.
+When investigators study digital logic in computer science, they picture flat silicon chips etched with copper traces, computing abstract zeros and ones. When they study biochemistry in biology, they picture floppy, three-dimensional protein globules folding in liquid water.
 
 In biophysics and synthetic biology, these two views are **mathematical isomorphisms**:
 - An electrical wire conducting electrons is functionally equivalent to a diffusion channel carrying solute molecules.
@@ -64,7 +64,7 @@ In prebiotic chemistry, catalytic molecules (whether ribozymes or iron-sulfur pe
 
 ## 3. The XOR Impossibility Proof: Why XOR Cannot Be a Primitive Catalyst
 
-Students frequently ask: *"If AND, OR, and NOT are primitive gates, why isn't XOR (Exclusive OR) also a primitive gate?"*
+Investigators frequently ask: *"If AND, OR, and NOT are primitive gates, why isn't XOR (Exclusive OR) also a primitive gate?"*
 
 The answer is a foundational principle of biophysics, neurobiology, and machine learning: **The Principle of Linear Non-Separability**.
 

@@ -7,7 +7,7 @@
 > **Modular Multi-Page Architecture Directory:**  
 > To prevent vertical scrolling fatigue and provide focused reference volumes, the Pedagogical Companion Suite is partitioned into dedicated modular subpages:
 > - 📖 **[Lexicon of Systems Biology & Silicon Abiogenesis](companion/glossary.md)** (`docs/companion/glossary.md`): 55+ rigorously defined terms across Biophysics, Information Theory, Enzymatic Logic, Graph Theory, and Evolutionary Genetics.
-> - 🧭 **[Student Study Guides & Equation Decoders](companion/study_guides.md)** (`docs/companion/study_guides.md`): Unit-by-unit theoretical scaffolding, 8 color-coordinated Equation Decoders with responsive grids and sacred analogies, mathematical derivations, and synthetic problem sets.
+> - 🧭 **[Investigator Study Guides & Equation Decoders](companion/study_guides.md)** (`docs/companion/study_guides.md`): Unit-by-unit theoretical scaffolding, 8 color-coordinated Equation Decoders with responsive grids and sacred analogies, mathematical derivations, and synthetic problem sets.
 > - 📚 **[Annotated Primary Literature Bibliography](companion/bibliography.md)** (`docs/companion/bibliography.md`): Exhaustive academic endnotes and publication-grade annotations of 14 landmark peer-reviewed publications (Mitchell, Russell, Lane, Pattee, Von Neumann, Landauer, Alon, Gardner, Elowitz, Lenski, Kimura, Ohno, Weisfeiler, Shannon).
 > - 🎓 **[Curriculum & Laboratory Manual](CURRICULUM_AND_SYLLABUS.md)** (`docs/CURRICULUM_AND_SYLLABUS.md`): The core 4-unit syllabus and 5 hands-on laboratory practicums.
 
@@ -29,14 +29,14 @@ This **Pedagogical Companion Suite** resolves this deficit. Grounded in non-equi
 | **📖 Lexicon & Glossary** | 55+ Formal mathematical terms across 5 domains | Theoretical rigor, eradication of teleological jargon | [`companion/glossary.md`](companion/glossary.md) |
 | **🧭 Study Guides & Decoders** | 8 Color equation decoders, 12 formal derivations | Mathematical fluency, Landauer dissipation bounds | [`companion/study_guides.md`](companion/study_guides.md) |
 | **📚 Annotated Bibliography** | 14 Landmark primary papers (Mitchell, Landauer, Lenski) | Scientific literacy & historical provenance | [`companion/bibliography.md`](companion/bibliography.md) |
-| **🔍 Student QA & Usability Audit** | 12th-grade usability report with browser screenshots | Real student feedback, DOM interaction telemetry | [`QA/STUDENT_UX_REPORT.md`](../QA/STUDENT_UX_REPORT.md) |
+| **🔍 Investigator QA & Usability Audit** | 12th-grade usability report with browser screenshots | Real investigator feedback, DOM interaction telemetry | [`QA/STUDENT_UX_REPORT.md`](../QA/STUDENT_UX_REPORT.md) |
 
 ---
 
 ## 2. Theoretical Treatise: The Linear Non-Separability Barrier & The Non-Primitive Nature of XOR
 
 ### 2.1 The Common Pedagogical Misconception
-In introductory computer science, the exclusive-OR (`XOR`) gate is routinely grouped alongside elementary logic gates (`AND`, `OR`, `NOT`). This pedagogical convenience introduces a severe biochemical fallacy when students transition to computational systems biology: **students assume that a living cell can evolve an "XOR enzyme" just as easily as an "AND enzyme."**
+In introductory computer science, the exclusive-OR (`XOR`) gate is routinely grouped alongside elementary logic gates (`AND`, `OR`, `NOT`). This pedagogical convenience introduces a severe biochemical fallacy when investigators transition to computational systems biology: **investigators assume that a living cell can evolve an "XOR enzyme" just as easily as an "AND enzyme."**
 
 In Siliquarium's biophysical engine and genetic codon table ([`CodonTable.ts`](file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts)), **`GATE_XOR` is strictly non-primitive**. It cannot be encoded by a single codon or executed by a single enzyme active site.
 
@@ -147,7 +147,7 @@ When the Digital Paleontologist's [`MotifScanner`](file:///h:/My%20Drive/Repos/S
 
 ## 3. Pedagogical Rubrics & Assessment Guide <span id="4-pedagogical-rubrics--assessment-guide"></span><span id="pedagogical-rubrics"></span>
 
-To evaluate student mastery across laboratory inquiries, experimental design, and computational autopsies, instructors should employ the following four-tier analytic scoring rubrics.
+To evaluate investigator mastery across laboratory inquiries, experimental design, and computational autopsies, instructors should employ the following four-tier analytic scoring rubrics.
 
 ### 3.1 Analytic Scoring Rubric 1: Laboratory Notebooks & Empirical Telemetry Logging
 

@@ -244,7 +244,7 @@ Step 5: Manually toggle Stream A, Stream B, and Toxin T to record output respons
 ```
 
 #### Detailed Laboratory Protocol:
-1. **Enter Laboratory Mode:** Click **Laboratory** on the master workspace mode selector (`#btn-mode-laboratory` or press <kbd>L</kbd>).
+1. **Enter Laboratory Mode:** Click **Laboratory** on the master workspace mode selector (or press <kbd>L</kbd>).
 2. **Open the Microscope:** With an active silicoid selected, the **Circuit Microscope** drawer docks on the right.
 3. **Inspect the Schematic Tab:**
    - **Input Porins (Left):** Chemical receptor gates sensitive to vent bitstreams (`Stream A`, `Stream B`, and toxic `Stream T`).
@@ -349,6 +349,12 @@ Step 4: Explain why Landauer heat dissipation prevents runaway exponential explo
 > **Observational Callout 5.1: Closed-Universe First-Law Invariant Telemetry**  
 > The Ecosystem Statistics panel provides continuous macro-biomass census tracking (living cells, pelagic spores, detrital carcasses) and audits the closed-universe thermodynamic ledger. The highlighted conservation invariant ($\Delta E \equiv 0.000$, $\Delta M \equiv 0.000$) mathematically guarantees that zero unphysical energy or matter is smuggled into the simulation.
 
+> [!CHECKPOINT]
+> **Predict-Observe-Explain Exercise 5.1**  
+> - **Predict:** When cell density peaks and fuels become scarce, will total universe energy $E_{\text{total}}$ decrease as organisms die?  
+> - **Observe:** Monitor `Total Biosphere Energy` in the Ecosystem Stats panel (<kbd>S</kbd>) through a severe population crash.  
+> - **Explain:** No. By the First Law of Thermodynamics, energy is strictly conserved. Cellular batteries discharge into thermal dissipation ($Q = k_B T \ln 2$) and mineral detritus, keeping $\Delta E \equiv 0.000$ perfectly invariant.
+
 > [!NOTE]
 > **Formative Concept Check 5.1**  
 > *Question:* If an unauthorized modification added $+500$ bonus energy tokens to an organism whenever it was starving, what would happen to the invariant badge?  
@@ -367,7 +373,7 @@ Step 4: Explain why Landauer heat dissipation prevents runaway exponential explo
 Step 1: Open the Naturalist Discovery Tour Hub (press [A] or click 'Assistant' in the header).
 Step 2: Filter specimens by category (All, Super, Trophic, Circuits) and review the Shannon Entropy radar.
 Step 3: Click 'Fly To' on an exemplar card or engage the floating In-Situ Field Scope HUD.
-Step 4: Launch Guided Safari Mode (click 'Guided Safari' or press [#btn-guided-safari]).
+Step 4: Launch Guided Safari Mode (click 'Guided Safari' in the header or hub).
 Step 5: Master the Safari Copilot: toggle 12-second Auto-Tour cycling, step with hotkeys [ and ],
         adjust netlist canvas zoom, filter multicellular roles, and snap-freeze specimens to the BioBank.
 ```
@@ -376,23 +382,23 @@ Step 5: Master the Safari Copilot: toggle 12-second Auto-Tour cycling, step with
 
 Siliquarium provides **two complementary safari tour guides**, each specialized for a distinct scale of biological observation:
 1. **The Naturalist Discovery Tour Guide (Macro-Scale Paleocensus Hub):** Accessible from any workspace mode via <kbd>A</kbd>, this guide categorizes macro-evolutionary eras, monitors Shannon diversity entropy, provides a comprehensive specimen dossier library, and enables draggable in-situ Field Scope tracking.
-2. **The In-Situ Guided Safari Copilot (Micro-Scale Benthic Tracking Station):** Accessible via `#btn-mode-safari` or the Naturalist Hub, this guide locks onto living colonies in the 3D caldera, executing autonomous camera leaps every 12 seconds, rendering real-time CMOS netlist logic canvases, filtering multicellular castes, and supporting 1-click cryo-preservation.
+2. **The In-Situ Guided Safari Copilot (Micro-Scale Benthic Tracking Station):** Accessible via the **Guided Safari** mode button or the Naturalist Hub, this guide locks onto living colonies in the 3D caldera, executing autonomous camera leaps every 12 seconds, rendering real-time CMOS netlist logic canvases, filtering multicellular castes, and supporting 1-click cryo-preservation.
 
 ---
 
-#### 6.1 Operating Safari Guide 1: The Naturalist Discovery Tour Hub (`#naturalist-modal`)
+#### 6.1 Operating Safari Guide 1: The Naturalist Discovery Tour Hub
 
 1. **Launch the Naturalist Hub:** Press <kbd>A</kbd> on your keyboard (or click **Assistant** in the master header bar).
 2. **Interpret Macro-Evolutionary Telemetry:**
    - **Era Classification Badge:** Displays the current geological epoch (e.g. *Prebiotic Soup*, *Primitive Enzyme Dawn*, *Multicellular Metazoan Radiation*).
    - **Shannon Diversity Entropy ($H$):** Measures logic circuit variance across living clades. Higher entropy indicates ecological niche differentiation; sharp collapses signify selective sweeps or mass extinctions.
    - **Barrier Diagnostic Auditor:** Tracks biophysical thresholds holding back evolutionary transitions (e.g., membrane leakage or thermal noise).
-3. **Filter Expeditions by Category:** Use the category filter pills at the top of the tour hub (`.tour-filter-pill`):
+3. **Filter Expeditions by Category:** Use the category filter pills at the top of the tour hub:
    - **All Expeditions:** Shows all cataloged phenotypes currently living in the caldera.
    - **Super Organisms (`super`):** Isolates syncytial metazoan colonies, endosymbiotic cassettes, and multicellular filaments.
    - **Trophic Ecology (`trophic`):** Filters for apex trophic predators, detrital scavengers, and chemiosmotic autotrophs.
    - **Circuits (`circuit`):** Focuses on evolved computational network motifs (Uri Alon Feed-Forward Loops, bistable latches, binary half-adders).
-4. **Navigate the Specimens Tour Tray (`#tour-specimens-tray`):**
+4. **Navigate the Specimens Tour Tray:**
    - The horizontal tour tray displays quick-jump buttons for every active exemplar.
    - Each button displays the specimen's colored taxonomic badge and functional moniker.
    - Hovering over a specimen button reveals its biological role tooltip; clicking jumps immediately to its dossier card.
@@ -400,17 +406,17 @@ Siliquarium provides **two complementary safari tour guides**, each specialized 
    - On any exemplar card, click the purple **Fly To** button.
    - The modal smoothly dismisses itself.
    - The 3D camera glides along a cinematic spline directly onto the living organism at the hydrothermal seabed, activating proximity transparency on surrounding basalt.
-6. **Deploy the Draggable In-Situ Field Scope HUD (`.naturalist-field-scope`):**
+6. **Deploy the Draggable In-Situ Field Scope HUD:**
    - The floating Field Scope appears directly over the 3D viewport without occluding the bathymetry.
    - **Drag and Position:** Click and drag the Field Scope header to reposition it anywhere on your display.
-   - **Step Through Active Specimens:** Use the previous (`#scope-prev-btn`) and next (`#scope-next-btn`) buttons to cycle camera focus across living exemplars.
-   - **Inspect Circuit:** Click `#scope-microscope-btn` to open the full Circuit Microscope centered on the tracked pore.
-   - **1-Click Cryo-Preservation:** Click `#scope-freeze-biobank-btn` to instantly archive the live specimen's 60-bit genome tape into the BioBank cryo-vault.
+   - **Step Through Active Specimens:** Use the previous (<kbd>[</kbd>) and next (<kbd>]</kbd>) buttons to cycle camera focus across living exemplars.
+   - **Inspect Circuit:** Click **Inspect Circuit** to open the full Circuit Microscope centered on the tracked pore.
+   - **1-Click Cryo-Preservation:** Click **Snap-Freeze Specimen ❄️** to instantly archive the live specimen's 60-bit genome tape into the BioBank cryo-vault.
 7. **Export Expedition Findings:**
-   - Click `#tour-export-json` to export full specimen genotypes and telemetry as a structured JSON file.
-   - Click `#tour-export-csv` to export tabular morphometric and metabolic data.
-8. **Pause Exploration Hotkey:** Press <kbd>Space</kbd> (or click `#naturalist-pause-btn`) to freeze the simulation clock while studying delicate phenotypes, preventing specimens from lysing during inspection.
-9. **Seamless Handoff to Safari:** Click the prominent **Guided Safari ➔** button (`#btn-guided-safari`) to transition directly from the Naturalist Hub into the live benthic Safari Copilot.
+   - Click **Export JSON** to export full specimen genotypes and telemetry as a structured JSON file.
+   - Click **Export CSV** to export tabular morphometric and metabolic data.
+8. **Pause Exploration Hotkey:** Press <kbd>Space</kbd> (or click **Pause Simulation**) to freeze the simulation clock while studying delicate phenotypes, preventing specimens from lysing during inspection.
+9. **Seamless Handoff to Safari:** Click the prominent **Guided Safari ➔** button to transition directly from the Naturalist Hub into the live benthic Safari Copilot.
 
 ![Figure 6.1: Naturalist Assistant Dashboard: Phenotypic Motif Gallery, Expedition Category Pills & Shannon Entropy Radar](./images/practicum4_naturalist_assistant.png)
 
@@ -420,40 +426,40 @@ Siliquarium provides **two complementary safari tour guides**, each specialized 
 
 ---
 
-#### 6.2 Operating Safari Guide 2: The In-Situ Guided Safari Copilot (`#safari-copilot-panel`)
+#### 6.2 Operating Safari Guide 2: The In-Situ Guided Safari Copilot
 
-1. **Activate Guided Safari Mode:** Click **Guided Safari** on the master mode ribbon (`#btn-mode-safari`) or launch it from the Naturalist Hub (`#btn-guided-safari`).
+1. **Activate Guided Safari Mode:** Click **Guided Safari** on the master mode ribbon or launch it from the Naturalist Hub.
 2. **Autonomous Dynamic Camera Tracking:**
-   - Click `#safari-btn-auto` (or `#safari-bar-auto` on the transport bar) to activate **Autonomous Tour Mode**.
+   - Click **Auto-Tour** on the transport bar to activate **Autonomous Tour Mode**.
    - The camera autonomously tracks the most energetic living clades, hopping smoothly between flourishing silicoids every 12 seconds.
-   - To manually step through specimens at your own pace, use hotkeys <kbd>[</kbd> (Previous) and <kbd>]</kbd> (Next), or click `#safari-btn-prev` and `#safari-btn-next`.
+   - To manually step through specimens at your own pace, use hotkeys <kbd>[</kbd> (Previous) and <kbd>]</kbd> (Next), or click the Previous/Next arrow buttons on the copilot bar.
 3. **Monitor Live Biophysical Sensors & Vitals:**
    - **Generation Counter:** Displays the cumulative reproductive lineage depth of the tracked cell.
-   - **Chemiosmotic Membrane Voltage ($\Delta p$):** Visualized via the dynamic voltage fill bar (`#safari-voltage-fill`), measuring real-time Proton Motive Force ($0\dots100\text{ mV}$).
+   - **Chemiosmotic Membrane Voltage ($\Delta p$):** Visualized via the dynamic voltage fill bar, measuring real-time Proton Motive Force ($0\dots100\text{ mV}$).
    - **Biomass Stock:** Current accumulated mineral mass tokens awaiting cytokinesis threshold ($M \ge 40$).
    - **Metabolic Yield Multiplier:** Real-time energy harvesting efficiency relative to baseline geothermal flux.
    - **Landauer Dissipation Rating:** Real-time thermodynamic switching heat ($Q_{\text{Landauer}}$) generated by internal logic gate toggling.
-4. **Inspect the Live In-Situ CMOS Logic Netlist Canvas (`#canvas-safari-netlist`):**
+4. **Inspect the Live In-Situ CMOS Logic Netlist Canvas:**
    - The docked netlist canvas dynamically illustrates the living cell's computational wiring diagram in real time.
    - Porin inputs (`Stream A`, `Stream B`, toxic `Stream T`) pulse on the left, propagating into central catalytic gates (primitives `AND`, `OR`, `NOT`, and evolved circuits like `XOR`) and terminating in metabolic sinks.
-   - **Canvas Zoom Controls:** Use Zoom In (`#safari-netlist-zoom-in`) and Zoom Out (`#safari-netlist-zoom-out`) to inspect dense multi-gate networks.
-   - **Typography Toggle:** Click `#safari-netlist-font-toggle` (<kbd>Aa</kbd>) to enlarge pin labels for enhanced legibility.
-   - **Reset Layout:** Click `#safari-netlist-reset` (<kbd>⟲</kbd>) to instantly return the canvas to 1.0x centered zoom.
-   - **Fullscreen CAD Expansion:** Click `#safari-btn-expand-cad` to launch the comprehensive fullscreen Circuit Autopsy workbench without losing track of your safari subject.
+   - **Canvas Zoom Controls:** Use Zoom In (<kbd>+</kbd>) and Zoom Out (<kbd>-</kbd>) to inspect dense multi-gate networks.
+   - **Typography Toggle:** Click the typography icon (<kbd>Aa</kbd>) to enlarge pin labels for enhanced legibility.
+   - **Reset Layout:** Click the reset icon (<kbd>⟲</kbd>) to instantly return the canvas to 1.0x centered zoom.
+   - **Fullscreen CAD Expansion:** Click **Expand CAD** to launch the comprehensive fullscreen Circuit Autopsy workbench without losing track of your safari subject.
 5. **Multicellular Caste & Metazoan Role Filtering:**
-   - Under the **Colonial Roles** section (`#safari-copilot-roles-list`), view identified cellular castes within syncytial colonies:
+   - Under the **Colonial Roles** section, view identified cellular castes within syncytial colonies:
      - *Pacemaker Cells:* Rhythm generators coordinating collective peristalsis.
      - *Vascular Conduit Cells:* Porin-rich channels transporting metabolite tokens across sister pores.
      - *Lithotrophic Armor Cells:* Dense basalt-bound boundary cells providing physical shield integrity.
    - Click individual role pills to visually isolate or mute specific castes in the 3D viewport.
-   - Click `#safari-role-clear-btn` to reset all role isolation filters.
+   - Click **Clear Roles** to reset all role isolation filters.
 6. **1-Click BioBank Cryo-Preservation:**
-   - When encountering a novel or resilient adaptation, click `#safari-btn-freeze`.
-   - The living cell's 60-bit genome tape, gate topology, generation index, and taxonomic classification are immediately snap-frozen into the Lenski BioBank cryo-vault (`#pane-biobank`).
+   - When encountering a novel or resilient adaptation, click **Freeze Clade ❄️**.
+   - The living cell's 60-bit genome tape, gate topology, generation index, and taxonomic classification are immediately snap-frozen into the Lenski BioBank cryo-vault (**BioBank** tab).
 7. **Access Comprehensive Specimen Dossiers:**
-   - Click `#safari-btn-dossier` to open the complete, peer-reviewed scientific entry in the **Circuit Paleontology Field Guide** ([`docs/CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html`](../CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html)), providing theoretical analysis, truth tables, and evolutionary context for the tracked phenotype.
+   - Click **Field Dossier** to open the complete, peer-reviewed scientific entry in the **Circuit Paleontology Field Guide** ([`docs/CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html`](../CIRCUIT_PALEONTOLOGY_FIELD_GUIDE.html)), providing theoretical analysis, truth tables, and evolutionary context for the tracked phenotype.
 8. **In-Flight Pause Control:**
-   - Click `#safari-copilot-pause-btn` to halt simulation ticks while maintaining full camera navigation and netlist inspection.
+   - Click **Pause Safari** to halt simulation ticks while maintaining full camera navigation and netlist inspection.
 
 ![Figure 6.2: Guided Safari Copilot: Multicellular Tracking, Live Netlist Canvas & In-Flight Specimen Telemetry Cards](./images/practicum4_guided_safari_copilot.png)
 
@@ -498,6 +504,12 @@ Step 4: Use A-B looping and camera tracking to analyze phenotypic divergence acr
 > **Observational Callout 7.1: Historical Kinematics & Temporal Rewind**  
 > Operating the Chronicle flight recorder scrubber docks the playback transport bar across the viewport. The bidirectional historical buffer allows exact temporal scrubbing to revisit critical macro-evolutionary milestones, including multicellular slime mold motility, Lewis Wolpert morphogen gradients, and trophic predation divergence.
 
+> [!CHECKPOINT]
+> **Predict-Observe-Explain Exercise 7.1**  
+> - **Predict:** If you rewind the simulation 500 ticks and allow it to run forward again with identical parameters, will the exact same mutant silicoids evolve?  
+> - **Observe:** Scrub backward 500 ticks in Chronicle Mode, resume execution, and monitor the Weisfeiler-Lehman circuit hashes of newly emerging lineages.  
+> - **Explain:** In a deterministic PRNG seed environment, identical trajectories unfold. However, if micro-thermal perturbations occur, Stephen Jay Gould's contingency principle applies: historical bifurcation points amplify micro-stochastic variations into completely distinct macro-evolutionary clades.
+
 ---
 
 ### Practicum 8: Geothermal Shaker & Tectonic Perturbations
@@ -505,7 +517,7 @@ Step 4: Use A-B looping and camera tracking to analyze phenotypic divergence acr
 
 ```
 Step 1: Switch to Observatory Mode (click 'Observatory' or press hotkey).
-Step 2: Locate the Geothermal Shaker panel on the right sidebar (#observatory-shaker-panel).
+Step 2: Locate the Geothermal Shaker panel on the right sidebar.
 Step 3: Trigger a 'Magmatic Tremor' or 'Thermal Surge' to destabilize the central caldera.
 Step 4: Observe population bottlenecks, selective sweeps, and adaptive rebound.
 ```
@@ -574,6 +586,12 @@ Step 4: Use the Inoculator Tool to seed synthetic Lenski strains into your custo
 > **Observational Callout 9.1: 3D Bathymetric CAD & Environmental Stratification**  
 > The Siliquarium Design Studio empowers experimental manipulation of seafloor geology. The palette provides multi-layer brushes from subterranean fault excavation ($z=-1$) to vertical seamount spire stacking ($z=0 \dots 7$), alongside synthetic inoculators to test ecological isolation and allopatric speciation.
 
+> [!CHECKPOINT]
+> **Predict-Observe-Explain Exercise 9.1**  
+> - **Predict:** When a subterranean graben trench ($z = -1$) is excavated and isolated by basalt spires ($z = 3$), how will the mutation accumulation rate compare to open-floor lineages?  
+> - **Observe:** Inoculate identical clonal silicoids into the trench and the open caldera, then inspect their Weisfeiler-Lehman circuit hashes after 1,000 ticks.  
+> - **Explain:** Physical barriers impose strict allopatric isolation (Ernst Mayr). Shielded from external pelagic spore drift and toxin surges, the trench colony experiences genetic drift and localized selection, rapidly diverging into an endemic sister species with novel circuit topologies.
+
 ---
 
 ## Part IV: Advanced Experimental Genetics, Branching & Arenas
@@ -585,13 +603,13 @@ Step 4: Use the Inoculator Tool to seed synthetic Lenski strains into your custo
 
 ```
 Step 1: Open the Lab Flyout (press [L] or click 'Lab Flyout' on the left edge).
-Step 2: Switch to the 'BioBank' tab (#pane-biobank).
+Step 2: Switch to the 'BioBank' tab.
 Step 3: Inspect the Lenski Cryo-Vault catalogue of archived clades.
 Step 4: Select an archived strain, arm the Inoculation Pipette, and click a rock pore to seed life.
 ```
 
 #### Detailed Laboratory Protocol:
-1. **Historical Context:** In 1988, evolutionary biologist Richard Lenski initiated the Long-Term Evolution Experiment (LTEE) with *Escherichia coli*, periodically freezing bacterial generations in liquid nitrogen at $-80^\circ\text{C}$ to create a "frozen fossil record" that could be revived centuries later. Siliquarium implements this in the **Lenski BioBank Cryo-Vault** (`#pane-biobank`).
+1. **Historical Context:** In 1988, evolutionary biologist Richard Lenski initiated the Long-Term Evolution Experiment (LTEE) with *Escherichia coli*, periodically freezing bacterial generations in liquid nitrogen at $-80^\circ\text{C}$ to create a "frozen fossil record" that could be revived centuries later. Siliquarium implements this in the **Lenski BioBank Cryo-Vault** (**BioBank** tab in the Lab Flyout).
 2. **Access the BioBank:** Open the left laboratory flyout (<kbd>L</kbd>) and navigate to the **BioBank** tab.
 3. **Inspect the Frozen Strain Archive:**
    - Review archived strains showcasing key evolutionary milestones (e.g., *Ancestral Progenote*, *Hyper-Metabolic Oscillator*, *Toxic Inverter Clade*).
@@ -608,6 +626,12 @@ Step 4: Select an archived strain, arm the Inoculation Pipette, and click a rock
 > [!NOTE]
 > **Observational Callout 10.1: Lenski Cryo-Vault Strain Preservation & Micro-Pipette**  
 > The BioBank Cryo-Vault pane preserves digital strains in an immutable frozen state. Users can inspect historical genotypes, compare metabolic ratings across evolutionary epochs, and arm the micro-inoculation pipette to seed precise founder clades into targeted hydrothermal zones.
+
+> [!CHECKPOINT]
+> **Predict-Observe-Explain Exercise 10.1**  
+> - **Predict:** When an ancestral strain frozen at generation 50 is inoculated into a mature, resource-depleted generation 1,000 ecosystem, how will its competitive fitness compare to the native population?  
+> - **Observe:** Inoculate an ancestral founder cell directly into an active modern colony and monitor its battery charge over 500 ticks.  
+> - **Explain:** The ancestral strain will struggle or face extinction. Modern lineages have undergone thousands of generations of competitive selection, evolving streamlined logic gates, metabolic buffers, and noise filters that out-compete primitive ancestors under lean nutrient regimes.
 
 ---
 
@@ -637,8 +661,14 @@ Step 4: In the Deep Lab portal, export Telemetry CSV, World JSON, and Practicum 
 > **Observational Callout 11.1: Counterfactual DAG Branching & Git-for-Alife**  
 > The Evolutionary Version Control dialog visualizes simulation trajectories as a Directed Acyclic Graph (DAG). Users can create named historical checkpoints, branch into alternative environmental regimes (e.g. baseline vs boiling thermal crisis), and switch between parallel evolutionary universes without state pollution.
 
+> [!CHECKPOINT]
+> **Predict-Observe-Explain Exercise 11.1**  
+> - **Predict:** If a baseline population is forked into two branches where Branch A undergoes continuous steady flux while Branch B undergoes extreme diurnal temperature oscillation, which branch will evolve higher Shannon genomic entropy?  
+> - **Observe:** Run both DAG branches for 1,500 ticks, export the Telemetry CSV via Deep Lab, and compare the Shannon diversity indices.  
+> - **Explain:** Branch B experiences fluctuating selection pressures requiring multi-modal adaptations (such as battery buffers and sensory switches), which sustains higher genomic polymorphism and Shannon entropy than the stabilizing selection of Branch A.
+
 4. **Export Scientific Artifacts:**
-   - Switch to **The Deep Lab Portal** (`btn-portal-deeplab`).
+   - Switch to **The Deep Lab Portal** (click the **Deep Lab** button in the header).
    - Click **Export Research Artifacts**:
      - `Export Telemetry CSV`: Downloads high-resolution time-series data (population count, Shannon entropy, enthalpy flux, Landauer dissipation).
      - `Export World State JSON`: Full serialized snapshot of the 3D lattice for external analysis in Python/R.
@@ -663,8 +693,8 @@ Step 4: Deploy the 7 Tactical Disaster Action Cards to shift ecological advantag
 ```
 
 #### Detailed Laboratory Protocol:
-1. **Enter the Abyssal Arena:** Click **Abyssal Arena** on the top portal navigation bar (`#btn-portal-arena`).
-2. **Examine the Arena HUD (`#abyssal-arena-hud`):**
+1. **Enter the Abyssal Arena:** Click **Abyssal Arena** on the top portal navigation bar.
+2. **Examine the Arena HUD:**
    - **Clade Biomass Tug-of-War Bar:** The top bar tracks the real-time fraction of total living biomass contested between **Clade Alpha (Gold Lithotrophs)** and **Clade Beta (Violet Chemoautotrophs)**.
    - **TAP Mana Energy Valve:** Tactical Action Points (TAP) recharge continuously as a function of thermal dissipation from the central volcanic plume.
 3. **Master the 7 Tactical Disaster Action Cards:**

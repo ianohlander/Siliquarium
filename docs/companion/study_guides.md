@@ -1,4 +1,4 @@
-# 🧭 Deep-Dive Student Study Guides & Analytical Companion
+# 🧭 Deep-Dive Investigator Study Guides & Analytical Companion
 *Unit-by-Unit Theoretical Scaffolding, Guided Mathematical Derivations, 8 Comprehensive Equation Decoders, and Synthetic Problem Sets*
 
 ---
@@ -23,7 +23,7 @@ Unit 1 addresses the foundational boundary condition of abiogenesis: how living 
 
 > [!CAUTION]
 > **Pitfall 1: Smuggled Teleology & External Fitness Functions**  
-> *The Trap:* Students frequently imagine that evolutionary simulations evaluate organisms against a human benchmark (e.g., maximizing a math function).  
+> *The Trap:* Investigators frequently imagine that evolutionary simulations evaluate organisms against a human benchmark (e.g., maximizing a math function).  
 > *The Reality:* Natural evolution possesses zero objective functions. In Siliquarium, **fitness is not a score; fitness is persistence**. An organism survives if and only if its physical wiring extracts enough free energy from incoming hydrothermal bit streams to pay its Landauer switching costs and basal maintenance before its battery hits zero. If the battery hits zero, the cell undergoes irreversible lysis.
 
 > [!CAUTION]
@@ -33,7 +33,7 @@ Unit 1 addresses the foundational boundary condition of abiogenesis: how living 
 
 > [!CAUTION]
 > **Pitfall 3: Conflating the Symbolic Safe with Dynamic Catalysts**  
-> *The Trap:* Students assume DNA or the 60-bit genome tape directly conducts electricity or acts as an enzyme.  
+> *The Trap:* Investigators assume DNA or the 60-bit genome tape directly conducts electricity or acts as an enzyme.  
 > *The Reality:* DNA is an unreactive, rate-independent storage medium. If the hereditary tape conducted power during routine metabolism, thermal noise would corrupt the instructions within seconds. Genetic information is conserved precisely because it is kept safely inert in the safe!
 
 ---
@@ -133,7 +133,7 @@ Unit 2 unifies biochemistry and digital electronics through the formal isomorphi
 
 > [!CAUTION]
 > **Pitfall 1: The "Free Computation" Fallacy**  
-> *The Trap:* Students assume evaluating Boolean logic has zero physical cost.  
+> *The Trap:* Investigators assume evaluating Boolean logic has zero physical cost.  
 > *The Reality:* Rolf Landauer proved that information processing is fundamentally physical. Erasing a bit or flipping a physical gate dissipates real heat into the environment. In Siliquarium, every gate toggle burns 1 token. Circuits that evolve uncontrolled feedback loops burn through their battery and starve.
 
 > [!CAUTION]
@@ -317,10 +317,10 @@ $$\textcolor{#38bdf8}{c_v^{(t+1)}} = \textcolor{#34d399}{\text{HASH}}\left(\text
 ## 4. Unit 4: Macro-Evolutionary Dynamics, Lenski LTEE & Pelagic Dispersal
 
 ### 4.1 Architectural & Epistemic Synthesis
-Unit 4 elevates student inquiry to macro-evolutionary timescales, addressing population genetics, long-term experimental evolution (Richard Lenski's LTEE), and spatial biogeography:
+Unit 4 elevates investigator inquiry to macro-evolutionary timescales, addressing population genetics, long-term experimental evolution (Richard Lenski's LTEE), and spatial biogeography:
 - **Kimura's Neutral Theory:** Mutations in non-coding introns (`INTRON_SILENT`) or synonymous degenerate codons do not alter metabolic phenotype ($\Delta W = 0$). Lineages wander randomly through neutral Hamming sequence space, enabling them to traverse fitness saddles without dying.
 - **Gene Duplication as the Engine of Innovation:** Following Susumu Ohno (1970), complex motifs rarely arise from single base modifications of essential enzymes. They emerge when redundant duplications free a second copy to explore radical mutations (neofunctionalization).
-- **Rigorous Homology vs. Homoplasy Proofs:** By walking ancestral parent pointers back to the Least Common Ancestor (LCA), students execute mathematical proofs verifying whether shared motifs represent divergent descent (**Homology**) or independent convergent discovery (**Homoplasy**).
+- **Rigorous Homology vs. Homoplasy Proofs:** By walking ancestral parent pointers back to the Least Common Ancestor (LCA), investigators execute mathematical proofs verifying whether shared motifs represent divergent descent (**Homology**) or independent convergent discovery (**Homoplasy**).
 
 ---
 

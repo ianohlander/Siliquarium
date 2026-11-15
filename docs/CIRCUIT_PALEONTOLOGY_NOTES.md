@@ -5,7 +5,7 @@
 
 > [!IMPORTANT]
 > **Independent Scientific Instrument & Non-Accreditation Notice:**  
-> The Siliquarium application, theoretical model, and documentation are not designed, developed, peer-reviewed, or sponsored by any accredited university, government research agency, or academic accreditation board. Because this project represents an independent computational biophysics instrument, every statement, equation, and evolutionary claim is accompanied below by full mathematical derivations, thermodynamic proofs, and peer-reviewed scientific citations so that students, educators, and researchers can independently audit and verify every assertion from first principles.
+> The Siliquarium application, theoretical model, and documentation are not designed, developed, peer-reviewed, or sponsored by any accredited university, government research agency, or academic accreditation board. Because this project represents an independent computational biophysics instrument, every statement, equation, and evolutionary claim is accompanied below by full mathematical derivations, thermodynamic proofs, and peer-reviewed scientific citations so that investigators, educators, and researchers can independently audit and verify every assertion from first principles.
 
 > [!NOTE]
 > **Circuit Paleontology Suite Navigation:**  

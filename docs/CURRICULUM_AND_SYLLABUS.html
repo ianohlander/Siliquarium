@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Curriculum &amp; Lab Manual: Systems Biology &amp; Silicon Abiogenesis</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Curriculum &amp; Lab Manual: Systems Biology &amp; Silicon Abiogenesis</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1075,25 +1089,30 @@
         <h1 id="advanced-systems-biology-computational-biophysics-curriculum-syllabus" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🎓 Advanced Systems Biology & Computational Biophysics: Curriculum & Syllabus</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">A Modular Course, Theoretical Scaffolding, and Laboratory Observatory for Open-Ended Evolution & Silicon Abiogenesis</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">✨ Dedication</div>
-<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Dedicated to <strong class="text-slate-100 font-semibold">Anne Orme</strong>, whose inspiring, foundational conversations ignited the passion to model the beauty and uncompromising logic of real biological evolution.</em></p></div></div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1">✨ Dedication</div>
+<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Dedicated to <strong class="text-slate-100 font-semibold">Anne Orme</strong>, whose inspiring, foundational conversations ignited the passion to model the beauty and uncompromising logic of real biological evolution.</em></p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="1-course-architecture-modular-portal" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Course Architecture & Modular Portal</h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To prevent vertical scrolling fatigue and provide a structured, college-level learning trajectory, this course is divided into <strong class="text-slate-100 font-semibold">four core theoretical units</strong> and an <strong class="text-slate-100 font-semibold">interactive student laboratory manual</strong>. Each module is published as an independent chapter equipped with high-resolution visual scaffolding, worked toy traces, BooleanGA Equation Decoders, and conceptual misconception immunity.</p>
-<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Curriculum Module</th><th class="p-3.5 font-semibold">Core Theoretical Focus</th><th class="p-3.5 font-semibold">Laboratory & Experimental Connections</th><th class="p-3.5 font-semibold">Modular Link</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 1: Prebiotic Threshold</strong></td><td class="p-3.5 leading-relaxed">Dilution Catastrophe, Russell-Hall Alkaline Chimneys, Mitchell PMF, Epistemic Cut</td><td class="p-3.5 leading-relaxed">Lab 1: Seafloor Navigation & Circuit Microscope</td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit1_prebiotic_threshold.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Unit 1 →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 2: The Logic of Life</strong></td><td class="p-3.5 leading-relaxed">Primitive Catalysts (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>), XOR Impossibility Proof, Codon Table, Landauer Bound</td><td class="p-3.5 leading-relaxed">Lab 2: Landauer Dissipation; Lab 3: Toxin Shielding</td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit2_logic_of_life.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Unit 2 →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 3: Systems Biology Motifs</strong></td><td class="p-3.5 leading-relaxed">Uri Alon Motifs (Latches, Repressilator, FFLs), Weisfeiler-Lehman Graph Hashes</td><td class="p-3.5 leading-relaxed">Real-Time Milestone Detection & State Hysteresis</td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit3_systems_biology_motifs.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Unit 3 →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 4: Evolutionary Dynamics</strong></td><td class="p-3.5 leading-relaxed">Kimura Neutral Drift, Ohno Duplications, Homology vs Homoplasy, Lenski LTEE</td><td class="p-3.5 leading-relaxed">Lab 4: God-Suite Perturbations; Lab 5: Flight Recorder Autopsy</td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit4_evolutionary_dynamics.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Unit 4 →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Volume 01: Morphology</strong></td><td class="p-3.5 leading-relaxed">Multicellular Topologies, Maximal 3-Cliques ($K_3$), Betti Numbers, Kleiber's Law</td><td class="p-3.5 leading-relaxed">In-Silico Syncytial Fusion & Cytoplasmic Streaming</td><td class="p-3.5 leading-relaxed"><a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Volume 1 →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Volume 02: GRNs & Attractors</strong></td><td class="p-3.5 leading-relaxed">Waddington Landscapes, Kauffman $K_c=2$ Criticality, Hill Cooperativity, 10-Tick Trace</td><td class="p-3.5 leading-relaxed">Live Circuit Microscope Gene Regulatory Viewer</td><td class="p-3.5 leading-relaxed"><a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Volume 2 →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Practicums: Student Lab Manual</strong></td><td class="p-3.5 leading-relaxed">Five 90-Minute Block Practicums, Socratic Seminars, Formative Diagnostic Assessments</td><td class="p-3.5 leading-relaxed">Interactive 3D WebGL Seamount & Single-Bit Autopsy</td><td class="p-3.5 leading-relaxed"><a href="curriculum/practicums_lab_manual.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Lab Manual →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Full-Year Syllabus</strong></td><td class="p-3.5 leading-relaxed">Full-Year Graduate Curriculum (30 Weeks), Biophysical Foundations, & Multicellular Review</td><td class="p-3.5 leading-relaxed">Comprehensive 30-Week Treatise & Visual Aid Blueprints</td><td class="p-3.5 leading-relaxed"><a href="curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Full Syllabus →</a></td></tr></tbody></table></div>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To prevent vertical scrolling fatigue and provide a structured, college-level learning trajectory, this course is divided into <strong class="text-slate-100 font-semibold">four core theoretical units</strong> and an <strong class="text-slate-100 font-semibold">interactive investigator laboratory manual</strong>. Each module is published as an independent chapter equipped with high-resolution visual scaffolding, worked toy traces, BooleanGA Equation Decoders, and conceptual misconception immunity.</p>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Curriculum Module</th><th class="p-3.5 font-semibold">Core Theoretical Focus</th><th class="p-3.5 font-semibold">Laboratory & Experimental Connections</th><th class="p-3.5 font-semibold">Modular Link</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 1: Prebiotic Threshold</strong></td><td class="p-3.5 leading-relaxed">Dilution Catastrophe, Russell-Hall Alkaline Chimneys, Mitchell PMF, Epistemic Cut</td><td class="p-3.5 leading-relaxed">Lab 1: Seafloor Navigation & Circuit Microscope</td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit1_prebiotic_threshold.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Unit 1 →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 2: The Logic of Life</strong></td><td class="p-3.5 leading-relaxed">Primitive Catalysts (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>), XOR Impossibility Proof, Codon Table, Landauer Bound</td><td class="p-3.5 leading-relaxed">Lab 2: Landauer Dissipation; Lab 3: Toxin Shielding</td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit2_logic_of_life.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Unit 2 →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 3: Systems Biology Motifs</strong></td><td class="p-3.5 leading-relaxed">Uri Alon Motifs (Latches, Repressilator, FFLs), Weisfeiler-Lehman Graph Hashes</td><td class="p-3.5 leading-relaxed">Real-Time Milestone Detection & State Hysteresis</td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit3_systems_biology_motifs.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Unit 3 →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 4: Evolutionary Dynamics</strong></td><td class="p-3.5 leading-relaxed">Kimura Neutral Drift, Ohno Duplications, Homology vs Homoplasy, Lenski LTEE</td><td class="p-3.5 leading-relaxed">Lab 4: God-Suite Perturbations; Lab 5: Flight Recorder Autopsy</td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit4_evolutionary_dynamics.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Unit 4 →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Volume II: GRNs & Attractors</strong></td><td class="p-3.5 leading-relaxed">Waddington Landscapes, Kauffman $K_c=2$ Criticality, Hill Cooperativity, 10-Tick Trace</td><td class="p-3.5 leading-relaxed">Live Circuit Microscope Gene Regulatory Viewer</td><td class="p-3.5 leading-relaxed"><a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Volume II →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Volume III: Morphology</strong></td><td class="p-3.5 leading-relaxed">Multicellular Topologies, Maximal 3-Cliques ($K_3$), Betti Numbers, Kleiber's Law</td><td class="p-3.5 leading-relaxed">In-Silico Syncytial Fusion & Cytoplasmic Streaming</td><td class="p-3.5 leading-relaxed"><a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Volume III →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Volume V: Applied Practicums</strong></td><td class="p-3.5 leading-relaxed">Five 90-Minute Block Practicums, Socratic Seminars, Formative Diagnostic Assessments</td><td class="p-3.5 leading-relaxed">Interactive 3D WebGL Seamount & Single-Bit Autopsy</td><td class="p-3.5 leading-relaxed"><a href="curriculum/practicums_lab_manual.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Lab Manual →</a></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Full-Year Syllabus</strong></td><td class="p-3.5 leading-relaxed">Full-Year Graduate Curriculum (30 Weeks), Biophysical Foundations, & Multicellular Review</td><td class="p-3.5 leading-relaxed">Comprehensive 30-Week Treatise & Visual Aid Blueprints</td><td class="p-3.5 leading-relaxed"><a href="curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Open Full Syllabus →</a></td></tr></tbody></table></div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="2-navigational-directory-direct-chapter-links" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">2. Navigational Directory: Direct Chapter Links</h2>
-<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Chapter</th><th class="p-3.5 font-semibold">Document Title</th><th class="p-3.5 font-semibold">Primary Concepts Explored</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Full-Year Syllabus</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">Comprehensive Full-Year University Syllabus</strong></a></td><td class="p-3.5 leading-relaxed">30-week comprehensive curriculum, 6-pillar weekly modules, biophysical proofs, pedagogical review of multicellular morphology, and 13 SVG architectural blueprints.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Volume 01</strong></td><td class="p-3.5 leading-relaxed"><a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">Multicellular Body Topologies & Morphometric Graph Theory Manual</strong></a></td><td class="p-3.5 leading-relaxed">Maximal 3-cliques ($K_3$), 5 canonical topologies (Rosette, Columnar, Dendritic, Ring, Filamentous), Hagen-Poiseuille syncytial hydrodynamic flow, Betti invariants, and 9 publication-grade SVGs.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Volume 02</strong></td><td class="p-3.5 leading-relaxed"><a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">The Architecture of Gene Regulatory Networks & Epigenetic Landscapes</strong></a></td><td class="p-3.5 leading-relaxed">Conrad Waddington epigenetic landscapes, Stuart Kauffman $K_c=2$ Boolean criticality, Derrida sensitivity $s=1$, Hill cooperativity, 10-tick state machine trace, homeotic Hox-like saltations, and Live Circuit Microscope Gene Regulatory Viewer.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 1</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit1_prebiotic_threshold.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">The Prebiotic Threshold & Howard Pattee's Epistemic Cut</strong></a></td><td class="p-3.5 leading-relaxed">Dilution catastrophe, alkaline hydrothermal vents, Mitchell proton motive force ($\Delta pH \approx 4.5 \implies \sim 200\text{ mV}$), von Neumann automata theorem, and Pattee's separation of symbolic Safe from active Workshop.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 2</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit2_logic_of_life.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">The Logic of Life & Primitive Enzymes</strong></a></td><td class="p-3.5 leading-relaxed">Enzymes as Boolean operators, active site biophysics, the <strong class="text-slate-100 font-semibold">XOR Impossibility Proof</strong> (linear non-separability), the 64-entry degenerate codon table, and Landauer dynamic switching dissipation ($1$ token/toggle).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 3</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit3_systems_biology_motifs.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">Systems Biology & Uri Alon's Network Motifs</strong></a></td><td class="p-3.5 leading-relaxed">Uri Alon motifs: Bistable Toggle Switches (cell fate & digestive memory), Repressilators (circadian limit cycles), C-FFL and I-FFL filters, and Weisfeiler-Lehman topological graph invariant hashing.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 4</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit4_evolutionary_dynamics.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">Macro-Evolutionary Dynamics & Lenski LTEE</strong></a></td><td class="p-3.5 leading-relaxed">Motoo Kimura neutral drift saddles, Susumu Ohno gene duplication, mathematical proof of Homology vs. Homoplasy (Convergent Evolution) via Least Common Ancestor, Lenski LTEE hyperbolic velocity, and pelagic spore dispersal.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Practicums</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/practicums_lab_manual.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">Student Hands-On Laboratory Manual & Assessments</strong></a></td><td class="p-3.5 leading-relaxed">Five 90-minute hands-on student labs using Siliquarium's 3D WebGL seamount and Circuit Microscope, 3 Socratic Seminar discussion prompts, and formative diagnostic assessments.</td></tr></tbody></table></div>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Chapter</th><th class="p-3.5 font-semibold">Document Title</th><th class="p-3.5 font-semibold">Primary Concepts Explored</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Volume II</strong></td><td class="p-3.5 leading-relaxed"><a href="GENE_REGULATORY_NETWORKS_VOLUME.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">The Architecture of Gene Regulatory Networks & Epigenetic Landscapes</strong></a></td><td class="p-3.5 leading-relaxed">Conrad Waddington epigenetic landscapes, Stuart Kauffman $K_c=2$ Boolean criticality, Derrida sensitivity $s=1$, Hill cooperativity, 10-tick state machine trace, homeotic Hox-like saltations, and Live Circuit Microscope Gene Regulatory Viewer.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Volume III</strong></td><td class="p-3.5 leading-relaxed"><a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">Multicellular Body Topologies & Morphometric Graph Theory Manual</strong></a></td><td class="p-3.5 leading-relaxed">Maximal 3-cliques ($K_3$), 5 canonical topologies (Rosette, Columnar, Dendritic, Ring, Filamentous), Hagen-Poiseuille syncytial hydrodynamic flow, Betti invariants, and 9 publication-grade SVGs.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 1 (Vol I)</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit1_prebiotic_threshold.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">The Prebiotic Threshold & Howard Pattee's Epistemic Cut</strong></a></td><td class="p-3.5 leading-relaxed">Dilution catastrophe, alkaline hydrothermal vents, Mitchell proton motive force ($\Delta pH \approx 4.5 \implies \sim 200\text{ mV}$), von Neumann automata theorem, and Pattee's separation of symbolic Safe from active Workshop.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 2 (Vol II)</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit2_logic_of_life.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">The Logic of Life & Primitive Enzymes</strong></a></td><td class="p-3.5 leading-relaxed">Enzymes as Boolean operators, active site biophysics, the <strong class="text-slate-100 font-semibold">XOR Impossibility Proof</strong> (linear non-separability), the 64-entry degenerate codon table, and Landauer dynamic switching dissipation ($1$ token/toggle).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 3 (Vol II)</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit3_systems_biology_motifs.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">Systems Biology & Uri Alon's Network Motifs</strong></a></td><td class="p-3.5 leading-relaxed">Uri Alon motifs: Bistable Toggle Switches (cell fate & digestive memory), Repressilators (circadian limit cycles), C-FFL and I-FFL filters, and Weisfeiler-Lehman topological graph invariant hashing.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Unit 4 (Vol IV)</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/unit4_evolutionary_dynamics.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">Macro-Evolutionary Dynamics & Lenski LTEE</strong></a></td><td class="p-3.5 leading-relaxed">Motoo Kimura neutral drift saddles, Susumu Ohno gene duplication, mathematical proof of Homology vs. Homoplasy (Convergent Evolution) via Least Common Ancestor, Lenski LTEE hyperbolic velocity, and pelagic spore dispersal.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Practicums (Vol V)</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/practicums_lab_manual.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">Investigator Hands-On Laboratory Manual & Assessments</strong></a></td><td class="p-3.5 leading-relaxed">Five 90-minute hands-on investigator labs using Siliquarium's 3D WebGL seamount and Circuit Microscope, 3 Socratic Seminar discussion prompts, and formative diagnostic assessments.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Full-Year Syllabus</strong></td><td class="p-3.5 leading-relaxed"><a href="curriculum/MORPH_501_SYSBIO_502_FULL_YEAR_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><strong class="text-slate-100 font-semibold">Comprehensive Full-Year University Syllabus</strong></a></td><td class="p-3.5 leading-relaxed">30-week comprehensive curriculum, 6-pillar weekly modules, biophysical proofs, pedagogical review of multicellular morphology, and 13 SVG architectural blueprints.</td></tr></tbody></table></div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="3-pedagogical-philosophy-autopoiesis-vs-heteropoietic-cad" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">3. Pedagogical Philosophy: Autopoiesis vs. Heteropoietic CAD</h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In conventional high school and undergraduate computer science, genetic algorithms are framed as <strong class="text-slate-100 font-semibold">heteropoietic CAD optimizers</strong>: an external programmer writes a target truth table (loss function) and terminates any circuit that fails to solve it.</p>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This introduces a fatal pedagogical misconception: students assume evolution possesses goals, foresight, and an omniscient supervisor.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In conventional introductory and advanced computer science, genetic algorithms are framed as <strong class="text-slate-100 font-semibold">heteropoietic CAD optimizers</strong>: an external programmer writes a target truth table (loss function) and terminates any circuit that fails to solve it.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This introduces a fatal pedagogical misconception: investigators assume evolution possesses goals, foresight, and an omniscient supervisor.</p>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Architectural Dimension</th><th class="p-3.5 font-semibold">Conventional Boolean-GA (Engineering CAD)</th><th class="p-3.5 font-semibold">Siliquarium (Autopoietic Ecosystem)</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">System Classification</strong></td><td class="p-3.5 leading-relaxed">Heteropoietic Optimization</td><td class="p-3.5 leading-relaxed">Autopoietic Self-Maintenance</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Fitness Criterion</strong></td><td class="p-3.5 leading-relaxed">Target Truth Table (Loss Function Error)</td><td class="p-3.5 leading-relaxed">Blind Thermodynamic Persistence (Battery $> 0$)</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Supervision</strong></td><td class="p-3.5 leading-relaxed">Omniscient External Supervisor</td><td class="p-3.5 leading-relaxed">Zero Supervisor; Autonomous Physical Laws</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Time Execution</strong></td><td class="p-3.5 leading-relaxed">Generational Batch Cadence</td><td class="p-3.5 leading-relaxed">Continuous Asynchronous Spatial Mesh</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Hereditary Structure</strong></td><td class="p-3.5 leading-relaxed">Monolithic String Vector</td><td class="p-3.5 leading-relaxed">Howard Pattee Epistemic Cut (Safe vs. Workshop)</td></tr></tbody></table></div>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><strong class="text-slate-100 font-semibold">Siliquarium</strong> transitions from engineering CAD to <strong class="text-slate-100 font-semibold">autopoiesis</strong> (Humberto Maturana and Francisco Varela):</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Fitness is not an external score; fitness is persistence.</strong></li>
 <li>An organism survives if and only if its physical circuit extracts sufficient chemical energy from hydrothermal fluids to pay its Landauer switching costs and basal maintenance before its battery hits zero.</li>
-<li>Nature is blind; only the human student looking through the Circuit Microscope celebrates the discovery of complex logic!</li>
+<li>Nature is blind; only the human investigator looking through the Circuit Microscope celebrates the discovery of complex logic!</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="4-the-5-dimension-conceptual-pedagogical-rubric" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. The 5-Dimension Conceptual Pedagogical Rubric</h2>
@@ -1103,7 +1122,7 @@
 <li><strong class="text-slate-100 font-semibold">D2: The Gradient of Abstraction:</strong> Concepts ramp gently from everyday analogies (the water tower, the leaky drain, the neighborhood gossip exchange) to discrete logic circuits and formal equations.</li>
 <li><strong class="text-slate-100 font-semibold">D3: Deconstructive Equation Anatomy:</strong> Every formula is color-coordinated, paired with a term-by-term breakdown table, an <em class="text-slate-200 italic">"Intuitive Truth Behind the Architecture"</em>, and an <em class="text-slate-200 italic">"Everyday Analogy"</em>.</li>
 <li><strong class="text-slate-100 font-semibold">D4: Concrete Micro-Scaffolding & Worked Toy Traces:</strong> Step-by-step numerical traces follow single cells across 5 to 25 discrete ticks, demystifying how discrete energy and matter tokens flow.</li>
-<li><strong class="text-slate-100 font-semibold">D5: Conceptual Misconception Immunity (Skeptic FAQ):</strong> Proactively addresses student misunderstandings regarding smuggled biology, teleological goals, and the difference between mutating code vs mutating bodies.</li>
+<li><strong class="text-slate-100 font-semibold">D5: Conceptual Misconception Immunity (Skeptic FAQ):</strong> Proactively addresses investigator misunderstandings regarding smuggled biology, teleological goals, and the difference between mutating code vs mutating bodies.</li>
 </ol>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="5-master-codebase-architecture-symbol-index" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">5. Master Codebase Architecture & Symbol Index</h2>
@@ -1177,13 +1196,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

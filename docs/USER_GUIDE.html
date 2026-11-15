@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Siliquarium Comprehensive User Guide &amp; Interactive Lab Tutorial</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Siliquarium Comprehensive User Guide &amp; Interactive Lab Tutorial</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1075,14 +1089,19 @@
         <h1 id="siliquarium-comprehensive-user-guide-interactive-lab-tutorial" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">📖 Siliquarium Comprehensive User Guide & Interactive Lab Tutorial</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">A Master Operating Manual for Autonomous Silicon Abiogenesis, 3D Geodynamics, and Digital Circuit Paleontology</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><div class="text-base font-bold font-mono text-cyan-300 mt-3 mb-1.5">🧭 Foundational Orientation: The Reality-to-Simulation Rosetta Stone</div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><div class="text-base font-bold font-mono text-cyan-300 mt-3 mb-1.5">🧭 Foundational Orientation: The Reality-to-Simulation Rosetta Stone</div>
 <div class="text-sm font-semibold font-mono text-amber-300 mt-2 mb-1"><em class="text-slate-200 italic">Grounding Deep-Sea Biophysics in Digital Silicon Components</em></div>
 <p class="leading-relaxed font-sans text-xs my-1.5">When opening Siliquarium, an explorer faces a profound conceptual question:</p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">"Is this a video game? An abstract mathematical graph? Or a simulation of real physics and biology?"</em></p>
 <p class="leading-relaxed font-sans text-xs my-1.5">The answer is: <strong class="text-slate-100 font-semibold">Siliquarium is an authentic computational biophysics laboratory.</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5">However, unlike conventional molecular dynamics simulations that attempt to compute trillions of continuous water molecules and freeze after three picoseconds, Siliquarium abstracts physical reality into <strong class="text-slate-100 font-semibold">rate-independent symbolic code and rate-dependent digital components</strong>.</p>
 <p class="leading-relaxed font-sans text-xs my-1.5">There is no literal liquid water inside the computer; there is a traversable 3D lattice of open fluid cells. There is no physical hydrogen sulfide gas; there is a discrete toxic bitstream channel (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Stream T</code>). There are no organic polypeptide chains; there are physical CMOS Boolean logic gates (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">XOR</code>) printed on the mineral floor of rock cavities.</p>
-<p class="leading-relaxed font-sans text-xs my-1.5">This opening orientation bridges the two worlds: allowing you to view Siliquarium simultaneously as an <strong class="text-slate-100 font-semibold">ancient deep-sea hydrothermal ecosystem</strong> and as an <strong class="text-slate-100 font-semibold">integrated digital computer where electronic components interact under strict thermodynamic conservation laws</strong>.</p></div></div>
+<p class="leading-relaxed font-sans text-xs my-1.5">This opening orientation bridges the two worlds: allowing you to view Siliquarium simultaneously as an <strong class="text-slate-100 font-semibold">ancient deep-sea hydrothermal ecosystem</strong> and as an <strong class="text-slate-100 font-semibold">integrated digital computer where electronic components interact under strict thermodynamic conservation laws</strong>.</p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="the-four-sacred-foundations-why-silicon-abiogenesis-mirrors-prebiotic-earth" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">The Four Sacred Foundations: Why Silicon Abiogenesis Mirrors Prebiotic Earth</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">To navigate Siliquarium with biophysical intuition without being overwhelmed by technical jargon, keep these four foundational pillars in mind:</p>
@@ -1353,7 +1372,7 @@
 <h4 id="2-zoomed-in-zero-border-cutaway-dynamics" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">2. Zoomed-In Zero-Border Cutaway Dynamics</h4>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">As the camera glides into the subterranean chamber ($R \le 18.0 \to 7.5$), all intervening overhead rock, ceiling cells, and front framing basalt walls dissolve smoothly to $100\%$ complete transparency ($\alpha = 0.00$):</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\alpha_{\text{ceiling}}} = \textcolor{#34d399}{\max}\left(\mathbf{0.0},\, \textcolor{#fbbf24}{1.0} - \textcolor{#c084fc}{\zeta} \cdot \textcolor{#f43f5e}{1.65}\right) \quad \text{where} \quad \textcolor{#c084fc}{\zeta} = \textcolor{#34d399}{\text{clamp}}\left(\frac{\textcolor{#f43f5e}{18.0} - \textcolor{#fbbf24}{R}}{\textcolor{#f43f5e}{18.0} - \textcolor{#34d399}{7.5}},\, \mathbf{0},\, \mathbf{1}\right)$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1380,8 +1399,13 @@
 <li><strong class="text-slate-100 font-semibold">⭕ Toroidal Ring (Loop):</strong> Closed 1D loop permitting continuous cytoplasmic streaming with zero dead ends.</li>
 <li><strong class="text-slate-100 font-semibold">🧵 Filamentous (Linear Chain):</strong> 1D path of pores creeping through narrow basalt fissures.</li>
 </ol>
-<div class="p-4 rounded-xl bg-emerald-950/30 border-l-4 border-emerald-400 my-4 text-sm text-slate-300"><div class="font-mono text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">TIP</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Complete Mathematical & Graph Theory Guide:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">For an exhaustive mathematical deconstruction of multicellular morphologies, worked adjacency matrix traces ($\mathbf{A}^3$), Betti number invariants ($\gamma(G)$), Wolpert French Flag gradients, and worked in-silico specimen dossiers, refer to the <a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Multicellular Morphology & Graph Theory Guide</a>.</p></div></div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌿</span> Tip &bull; Best Practice
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Complete Mathematical & Graph Theory Guide:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">For an exhaustive mathematical deconstruction of multicellular morphologies, worked adjacency matrix traces ($\mathbf{A}^3$), Betti number invariants ($\gamma(G)$), Wolpert French Flag gradients, and worked in-silico specimen dossiers, refer to the <a href="MULTICELLULAR_MORPHOLOGY_GUIDE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">Multicellular Morphology & Graph Theory Guide</a>.</p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="27-the-biological-representation-lenses-the-5-multi-scale-perspectives" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.7 The Biological Representation Lenses (The 5 Multi-Scale Perspectives)</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">In structural molecular biology, researchers do not view a protein through a single static depiction. To answer different scientific questions, they seamlessly switch representations:</p>
@@ -1406,8 +1430,13 @@
     MultiScaleReality --&gt; L5[&quot;✨ Hybrid Lens (5)&lt;br&gt;Integrated Multi-Scale Synthesis&quot;]</div>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium brings this multi-scale structural paradigm to artificial life. Underneath every view, the identical biophysical simulation runs: 60-bit genomes, CMOS logic gates, Mitchell proton-motive batteries, and closed-universe thermodynamic conservation ($\Delta E \equiv 0.000$). The <strong class="text-slate-100 font-semibold">Biological Lenses</strong> provide five variant optical instruments to inspect this reality:</p>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Biological Lens</th><th class="p-3.5 font-semibold">Key / Hotkey</th><th class="p-3.5 font-semibold">Visual Hallmarks on 3D Seafloor</th><th class="p-3.5 font-semibold">Biophysical Focus & Meaning</th><th class="p-3.5 font-semibold">Ideal Investigation Scenario</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🔬 Lattice</strong><br><em class="text-slate-200 italic">(Discrete Pores)</em></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">1</code><br><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">O Lattice</code></td><td class="p-3.5 leading-relaxed">Discrete circular pore rings; 6 perimeter porin channel nodule dots; rigid rock boundaries.</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Inorganic Substrate & Compartmentation:</strong> Highlights individual mineral rock cavities, porin gate interfaces, and discrete physical barriers.</td><td class="p-3.5 leading-relaxed">Inspecting single-cell pore occupation, bedrock containment, and individual gate locations.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🦠 Plasmodium</strong><br><em class="text-slate-200 italic">(Physarum Slime)</em></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">2</code><br><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🦠 Plasmodium</code></td><td class="p-3.5 leading-relaxed">Bio-smoothed undulating syncytial envelopes; continuous protoplasmic borders; traveling peristaltic contraction waves; dynamic leading-edge pseudopodial fan ruffles.</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Whole-Organism Gestalt & Amoeboid Motility:</strong> Suppresses intracellular clutter to reveal the organism as an integrated macroscopic animal crawling via treadmilling.</td><td class="p-3.5 leading-relaxed">Observing slime mold migration, collective amoeboid chemotaxis, and multicellular coalescence.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🧬 Vascular</strong><br><em class="text-slate-200 italic">(Tubular Conduits)</em></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">3</code><br><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🧬 Vascular</code></td><td class="p-3.5 leading-relaxed">Quadratic Bézier inter-pore conduits; central hydraulic pumping nodes; animated directional streaming chevrons ($\ggg$); conduit width proportional to token flux.</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Internal Circulatory Physiology:</strong> Illuminates the active vascular transport network pumping energy and matter tokens across syncytial gap junctions.</td><td class="p-3.5 leading-relaxed">Tracing nutrient distribution from vent-facing feeder cells to distal structural anchors.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">🔋 Potential</strong><br><em class="text-slate-200 italic">(Scalar Gradient)</em></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">4</code><br><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🔋 Potential</code></td><td class="p-3.5 leading-relaxed">Diffused scalar potential clouds radiating from high-voltage pores; smooth spatial gradient transitions across neighboring cells.</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Thermodynamic Field Dynamics:</strong> Projects continuous electrochemical energy fields, illustrating cellular charge reservoirs and chemiosmotic polarity.</td><td class="p-3.5 leading-relaxed">Analyzing electrical voltage gradients, energy pooling, and starvation risk across large colonies.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">✨ Hybrid</strong><br><em class="text-slate-200 italic">(Multi-Scale Composite)</em></td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">5</code><br><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">✨ Hybrid</code></td><td class="p-3.5 leading-relaxed">Composite overlay uniting the bio-smoothed syncytial slime envelope with interior porin reticula, hydraulic conduit ribbons, and metabolic gradients.</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Master Morphological Synthesis:</strong> The default visual experience, simultaneously displaying outer organismal boundaries and internal anatomy.</td><td class="p-3.5 leading-relaxed">General exploration, presentation, guided tours, and pedagogical demonstration.</td></tr></tbody></table></div>
-<div class="p-4 rounded-xl bg-emerald-950/30 border-l-4 border-emerald-400 my-4 text-sm text-slate-300"><div class="font-mono text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">TIP</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Instant Hotkey Switching:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">In Observatory mode, press keys <span class="key-badge">1</span>, <span class="key-badge">2</span>, <span class="key-badge">3</span>, <span class="key-badge">4</span>, or <span class="key-badge">5</span> to toggle directly between the 5 lenses with instantaneous smooth morphing. The active lens is also selectable via the floating pill docked at the top-center of the viewport (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#hud-lens-selector</code>).</p></div></div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌿</span> Tip &bull; Best Practice
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Instant Hotkey Switching:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">In Observatory mode, press keys <span class="key-badge">1</span>, <span class="key-badge">2</span>, <span class="key-badge">3</span>, <span class="key-badge">4</span>, or <span class="key-badge">5</span> to toggle directly between the 5 lenses with instantaneous smooth morphing. The active lens is also selectable via the floating pill docked at the top-center of the viewport (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">#hud-lens-selector</code>).</p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="28-the-histological-optical-stains-tissue-differentiation-markers" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.8 The Histological Optical Stains & Tissue Differentiation Markers</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Under ordinary brightfield illumination, an undifferentiated clone colony and a complex differentiated metazoan look superficially identical. In <strong class="text-slate-100 font-semibold">Chronicle Mode</strong>, Siliquarium introduces four non-invasive histological optical stains that light up specific physiological subsystems without disrupting the simulation:</p>
@@ -1423,7 +1452,7 @@
 <h2 id="chapter-3-the-naturalist-assistant-assistant-guide" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Chapter 3: The Naturalist Assistant ("Assistant Guide")</h2>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The <strong class="text-slate-100 font-semibold">Naturalist Assistant</strong> is an intelligent on-screen companion designed to bridge raw computational telemetry and intuitive biological understanding.</p>
 <div class="mermaid p-4 rounded-xl bg-slate-950/80 border border-slate-800 my-6 overflow-x-auto text-xs font-mono text-cyan-300">sequenceDiagram
-    participant User as User / Student
+    participant User as User / Investigator
     participant HUD as Top Bar / Transport
     participant Assistant as Naturalist Assistant
     participant Engine as Paleontology Engine
@@ -1447,7 +1476,7 @@
 </ol>
 <hr class="border-t border-slate-800 my-8" />
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\text{Micro (Workshop Netlist)}} \xrightarrow{\textcolor{#34d399}{\text{Emergence}}} \textcolor{#c084fc}{\text{Macro (Colonies \& Clades)}} \xrightarrow{\textcolor{#f43f5e}{\text{Selective Sieve}}} \textcolor{#fbbf24}{\text{Meso (Barriers \& Limiting Factors)}}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -1792,7 +1821,7 @@
       </figcaption>
     </figure></p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Figure UG.5: The Siliquarium Design Studio & World Builder open to Geomorphology, showcasing the Studio Ribbon, preset selector, CAD brush palette, footprint radius steppers, and seafloor scale controls.</em></p>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The Design Studio transforms the legacy parameter drawer into a unified computational biology and geomorphic CAD engineering environment. Researchers and students can sculpt bespoke benthic topographies, plant hydrothermal chimney spires, gouge abyssal rift grabens, and inoculate competing frozen lineages for reproducible counterfactual Lenski LTEE trials.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">The Design Studio transforms the legacy parameter drawer into a unified computational biology and geomorphic CAD engineering environment. Researchers and investigators can sculpt bespoke benthic topographies, plant hydrothermal chimney spires, gouge abyssal rift grabens, and inoculate competing frozen lineages for reproducible counterfactual Lenski LTEE trials.</p>
 <h4 id="the-studio-ribbon-bar" class="text-base font-semibold font-mono text-amber-400 mt-4 mb-2">The Studio Ribbon Bar</h4>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Preset Dropdown:</strong> Instantly loads pre-engineered geological templates (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">twin-smokers</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">abyssal-trench</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">alkaline-mound</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">caldera-maze</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">lenski-chamber</code>) or user-created custom environments.</li>
@@ -2324,7 +2353,7 @@
 <h3 id="46-evolutionary-version-control-timelines-simulation-saves-hotkey-b" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.6 🌿 Evolutionary Version Control, Timelines & Simulation Saves (Hotkey <span class="key-badge">B</span>)</h3>
 <blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">"If the tape of life were replayed from the Burgess Shale, would the same evolutionary outcomes emerge, or would the accidental contingencies of history yield an utterly unrecognizable biosphere?"</em></p>
 <p class="leading-relaxed font-sans text-xs my-1.5">— <strong class="text-slate-100 font-semibold">Stephen Jay Gould</strong>, <em class="text-slate-200 italic">Wonderful Life: The Burgess Shale and the Nature of History</em> (1989)</p></blockquote>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium integrates an authentic <strong class="text-slate-100 font-semibold">Git-for-Artificial-Life Version Control Engine</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">EvolutionaryVersionManager</code> & <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationSnapshotManager</code>). It allows scientists, students, and educators to:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Siliquarium integrates an authentic <strong class="text-slate-100 font-semibold">Git-for-Artificial-Life Version Control Engine</strong> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">EvolutionaryVersionManager</code> & <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SimulationSnapshotManager</code>). It allows scientists, investigators, and educators to:</p>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Export Full Simulation World States:</strong> At any stage of abiogenesis, export the running simulation as a portable, self-contained <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">.silisave</code> JSON file preserving all living cells, 60-bit tapes, battery stores, operon states, somatic syncytia, buoyant spores, detrital carcasses, PRNG bit-state, and closed-universe thermodynamic ledger ($\Delta E \equiv 0.000, \Delta M \equiv 0.000$).</li>
 <li><strong class="text-slate-100 font-semibold">Instant Local Checkpointing:</strong> Press <span class="key-badge">Ctrl</span> + <span class="key-badge">S</span> or click <strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">🔖 Save Checkpoint</code></strong> to bookmark the current simulation state in zero-latency IndexedDB cold storage (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">SiliquariumDB</code>).</li>
@@ -2460,7 +2489,7 @@
 </ol>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Look at the green <strong class="text-slate-100 font-semibold">Conservation Status</strong> badge:</p>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">$$\textcolor{#38bdf8}{\Delta E = 0.000}, \quad \textcolor{#34d399}{\Delta M = 0.000}$$</p>
-<div class="card-silicon p-5 rounded-2xl border border-cyan-500/40 my-6 space-y-3 text-xs shadow-lg">
+<div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 my-6 space-y-3 text-xs shadow-xl">
           <div class="font-mono text-cyan-300 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
             <span>🧭</span> Equation Decoder Apparatus
           </div>
@@ -2627,13 +2656,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

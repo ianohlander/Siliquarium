@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="../index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="../assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="../assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Practicums 1–5: Hands-On Student Laboratory Manual</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Practicums 1–5: Hands-On Student Laboratory Manual</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="../assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1072,11 +1086,11 @@
     <!-- MAIN CONTENT VIEWPORT (Full Horizontal Space, Responsive) -->
     <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-12 py-8 md:py-12">
       <div class="max-w-6xl mx-auto space-y-8">
-        <h1 id="practicums-15-hands-on-student-laboratory-manual" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🧪 Practicums 1–5: Hands-On Student Laboratory Manual</h1>
+        <h1 id="practicums-15-hands-on-investigator-laboratory-manual" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🧪 Practicums 1–5: Hands-On Investigator Laboratory Manual</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Interactive In-Silico Biophysics, Paleontology Autopsies, and Formative Senior Assessments</em></p>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="laboratory-overview-classroom-instructions" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">Laboratory Overview & Classroom Instructions</h2>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This laboratory manual provides five rigorous, step-by-step practicums using the interactive Siliquarium application. Each practicum is designed for a standard 90-minute advanced high school block period or a 3-hour undergraduate laboratory session.</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">This laboratory manual provides five rigorous, step-by-step practicums using the interactive Siliquarium application. Each practicum is designed for a standard 90-minute advanced foundational block period or a 3-hour foundational laboratory session.</p>
 <h3 id="software-access-prerequisites" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">Software Access & Prerequisites</h3>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Application URL:</strong> Open <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">docs/index.html</code> or run the local development server via <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">npm run dev</code> (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">http://localhost:3000</code>).</li>
@@ -1110,12 +1124,17 @@
         <span class="text-cyan-400">📷</span> <span>Figure L1.1: The Panoramic 3D Seafloor Seamount &amp; Interactive Lattice Key</span>
       </figcaption>
     </figure></p>
-<div class="p-4 rounded-xl bg-emerald-950/30 border-l-4 border-emerald-400 my-4 text-sm text-slate-300"><div class="font-mono text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">TIP</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Reading the 3D Seamount & Lattice States</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌿</span> Tip &bull; Best Practice
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Reading the 3D Seamount & Lattice States</strong></p>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Rock Bedrock ($z=0$):</strong> Dark hexagonal basalt matrix providing physical cavities.</li>
 <li><strong class="text-slate-100 font-semibold">Water Column ($z \ge 1$):</strong> Permeable cyan-tinted hexes allowing thermal plume convection and spore drift.</li>
 <li><strong class="text-slate-100 font-semibold">Silicoid Pores:</strong> Color-coded by state: Green (Active Homeostatic Silicoids), Amber (Starving cells $E < 20$), Grey (Mineralizing Carcasses).</li>
-</ul></div></div>
+</ul></div>
+        </div>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>Click on an occupied hexagonal pore immediately adjacent to the vent nozzle (e.g., coordinates $(1, 0, 0)$ or $(0, 1, 0)$).</li>
 <li>Observe the <strong class="text-slate-100 font-semibold">Electric Neon Targeting Reticle</strong> lock onto the selected pore.</li>
@@ -1132,12 +1151,17 @@
         <span class="text-cyan-400">📷</span> <span>Figure L1.2: Selected Silicoid with Neon Reticle and Live Circuit Microscope</span>
       </figcaption>
     </figure></p>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Anatomy of the Circuit Microscope</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Anatomy of the Circuit Microscope</strong></p>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Top Ribbon (Genome Safe):</strong> Displays the 10 codons (60 bits total) of inert genetic instructions. Notice zero electrical activity touches this tape.</li>
 <li><strong class="text-slate-100 font-semibold">Central Workshop Canvas:</strong> The translated 2D CMOS logic circuit showing logic gates (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">NOT</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">OR</code>) connected to input porins ($A$, $B$, $T$) and output sinks ($E$, $M$, Septum).</li>
 <li><strong class="text-slate-100 font-semibold">Telemetry Bar:</strong> Displays Real-Time Battery ($E$), Mineral Reserves ($M$), Lineage Generation, and Age.</li>
-</ul></div></div>
+</ul></div>
+        </div>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>Click the <strong class="text-slate-100 font-semibold">Pause</strong> button (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">❚❚</code>) on the bottom transport bar. Use the <strong class="text-slate-100 font-semibold">Step Forward</strong> button (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Step ►</code>) to advance the simulation clock cycle by clock cycle ($\pm 1$ tick).</li>
 <li>Observe how gate pins light up when vent pulses enter the pore, and track whether the battery charges or discharges.</li>
@@ -1150,10 +1174,15 @@
         <span class="text-cyan-400">📷</span> <span>Figure L1.3: Deep Zoom into In-Situ Hexagonal Logic Gate Netlist</span>
       </figcaption>
     </figure></p>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: In-Situ Micro-Pore Inspection</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: In-Situ Micro-Pore Inspection</strong></p>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li>Zooming directly into an occupied basalt pore reveals the physical gate chips rendered in-situ on the seafloor floor. Wires glow when signals propagate, visually uniting the 3D physical world with the 2D schematic microscope.</li>
-</ul></div></div>
+</ul></div>
+        </div>
 <h3 id="4-data-collection-table" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4. Data Collection Table</h3>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Select three distinct occupied pores at varying distances from the vent nozzle and record their physiological metrics:</p>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Specimen Pore $(q, r, z)$</th><th class="p-3.5 font-semibold">Distance from Nozzle</th><th class="p-3.5 font-semibold">Active Gate Types</th><th class="p-3.5 font-semibold">Battery Level ($E$)</th><th class="p-3.5 font-semibold">Matter Reserve ($M$)</th><th class="p-3.5 font-semibold">Generation</th><th class="p-3.5 font-semibold">Age (Ticks)</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">Specimen 1</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">Specimen 2</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">Specimen 3</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr></tbody></table></div>
@@ -1196,11 +1225,16 @@
         <span class="text-cyan-400">📷</span> <span>Figure L2.1: Landauer Power Dissipation &amp; Dynamic CMOS Switching Ledger</span>
       </figcaption>
     </figure></p>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Reading the Thermodynamic Ledger</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Reading the Thermodynamic Ledger</strong></p>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li>Note the three ledger columns: Influx ($+3$), Dissipation ($-1$ per gate toggle), and Basal Leak ($-1$ per 10 ticks).</li>
 <li>Observe how uncoordinated circuits dissipate their battery to zero, triggering immediate lysis into a carcass.</li>
-</ul></div></div>
+</ul></div>
+        </div>
 <h3 id="4-data-collection-table" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4. Data Collection Table</h3>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Tick</th><th class="p-3.5 font-semibold">Stream A</th><th class="p-3.5 font-semibold">Stream B</th><th class="p-3.5 font-semibold">Gate Switches</th><th class="p-3.5 font-semibold">Landauer Burn ($E_L$)</th><th class="p-3.5 font-semibold">Catalytic Yield ($E_C$)</th><th class="p-3.5 font-semibold">Basal Leak ($E_{\text{leak}}$)</th><th class="p-3.5 font-semibold">Net Battery ($E$)</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">1</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">2</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">3</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">4</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed">5</td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td><td class="p-3.5 leading-relaxed"></td></tr></tbody></table></div>
 <h3 id="5-post-lab-synthesis-questions" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5. Post-Lab Synthesis Questions</h3>
@@ -1240,11 +1274,16 @@
         <span class="text-cyan-400">📷</span> <span>Figure L3.1: Primitive Catalytic Enzymes and Toxin Inhibition Motifs</span>
       </figcaption>
     </figure></p>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Codons to Catalytic Gates</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Codons to Catalytic Gates</strong></p>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li>Match your translated codon list against the three primitive enzymatic pockets shown above.</li>
 <li>Verify whether an inhibitory <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code> is wired downstream of <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PORIN_TOXIN_T</code> to protect against acidic bursts.</li>
-</ul></div></div>
+</ul></div>
+        </div>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>Compare this adapted specimen with a peripheral cell that died or has a low battery.</li>
 </ol>
@@ -1286,12 +1325,17 @@
         <span class="text-cyan-400">📷</span> <span>Figure L4.1: God-Suite Experimental Interventions Panel</span>
       </figcaption>
     </figure></p>
-<div class="p-4 rounded-xl bg-emerald-950/30 border-l-4 border-emerald-400 my-4 text-sm text-slate-300"><div class="font-mono text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">TIP</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Operating the God-Suite Drawer</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌿</span> Tip &bull; Best Practice
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Operating the God-Suite Drawer</strong></p>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li>The Lab Flyout drawer slides out from the left edge.</li>
 <li>Use the <strong class="text-slate-100 font-semibold">Thermal Surge Pulse</strong> (+200 tokens) to induce localized explosive division.</li>
 <li>Use the <strong class="text-slate-100 font-semibold">Extinction Pulse</strong> to wipe out dominant clades and trigger ecological succession.</li>
-</ul></div></div>
+</ul></div>
+        </div>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Catastrophic Extinction Pulse:</strong></li>
 <li>Select the center of the dominant monoculture colony.</li>
@@ -1307,11 +1351,16 @@
         <span class="text-cyan-400">📷</span> <span>Figure L4.2: Thermal Surge Pulse &amp; Catastrophic Extinction Shock</span>
       </figcaption>
     </figure></p>
-<div class="p-4 rounded-xl bg-amber-950/30 border-l-4 border-amber-400 my-4 text-sm text-slate-300"><div class="font-mono text-amber-400 font-bold text-xs uppercase tracking-wider mb-1">WARNING</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Post-Extinction Collapse & Rubble</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-950/50 via-slate-900 to-slate-900 border border-amber-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-amber-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>⚠️</span> Warning &bull; Physical Constraint
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Post-Extinction Collapse & Rubble</strong></p>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li>Notice the shockwave of red thermal dissipation and the sudden formation of grey carcass rubble.</li>
 <li>Watch the Shannon Diversity Index ($H$) plummet in the telemetry HUD as monocultures collapse.</li>
-</ul></div></div>
+</ul></div>
+        </div>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>Do not reset. Let the simulation run for $300$ ticks and watch <strong class="text-slate-100 font-semibold">secondary ecological succession</strong>:</li>
 <li>Observe whether dormant spores drifting in the water column land on the cleared rock cavities.</li>
@@ -1367,13 +1416,18 @@
         <span class="text-cyan-400">📷</span> <span>Figure L5.1: Richard Lenski LTEE Trajectory and Homology vs. Homoplasy Phylogeny</span>
       </figcaption>
     </figure></p>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Reading the Phylogenetic Audit</strong></p>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Field Guide Callout: Reading the Phylogenetic Audit</strong></p>
 <ul class="list-disc pl-5 space-y-1.5 my-2 text-xs text-slate-300 font-sans leading-relaxed">
 <li>Follow the Least Common Ancestor (LCA) decision rule in Figure L5.1.</li>
 <li>If the LCA possessed the motif, the verdict is <strong class="text-slate-100 font-semibold">HOMOLOGY</strong>. If the LCA lacked the motif, the verdict is <strong class="text-slate-100 font-semibold">HOMOPLASY (Convergent Evolution)</strong>.</li>
-</ul></div></div>
+</ul></div>
+        </div>
 <h3 id="4-evolutionary-autopsy-record-sheet" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4. Evolutionary Autopsy Record Sheet</h3>
-<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Autopsy Dimension</th><th class="p-3.5 font-semibold">Diagnostic Field</th><th class="p-3.5 font-semibold">Student Laboratory Measurement</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Specimen Identification</strong></td><td class="p-3.5 leading-relaxed">Specimen ID & Milestone</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">______________________</code> \| <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">______________________</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Spatial Lineage</strong></td><td class="p-3.5 leading-relaxed">Generation & Pore $(q, r, z)$</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Gen: _______</code> \| <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Coordinates: ( __, __, __ )</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Ancestral Hamming Trajectory</strong></td><td class="p-3.5 leading-relaxed">Total Generations & Cumulative $d_H$</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Generations: _____</code> \| <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Hamming Traverse: _____ bits</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Neutral Drift Fraction</strong></td><td class="p-3.5 leading-relaxed">Blue Edges (Kimura Drift)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">_____ neutral transitions</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Single-Bit Mutation</strong></td><td class="p-3.5 leading-relaxed">Inverted Bit Index & Codon Index</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Bit: ____ (0..59)</code> \| <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Codon: ____ (0..9)</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Allelic Transition</strong></td><td class="p-3.5 leading-relaxed">Parent Codon $\to$ Child Codon</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[ _ _ _ _ _ _ ]</code> $\to$ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[ _ _ _ _ _ _ ]</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Biophysical Impact</strong></td><td class="p-3.5 leading-relaxed">Functional Consequence</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">________________________________________________</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">LCA Audit</strong></td><td class="p-3.5 leading-relaxed">Least Common Ancestor ID & Gen</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LCA ID: ______________</code> \| <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Gen: _____</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">LCA Trait Check</strong></td><td class="p-3.5 leading-relaxed">Did LCA possess the motif?</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[ YES / NO ]</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Evolutionary Verdict</strong></td><td class="p-3.5 leading-relaxed">Phylogenetic Classification</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[ HOMOLOGY / HOMOPLASY (CONVERGENT) ]</code></strong></td></tr></tbody></table></div>
+<div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Autopsy Dimension</th><th class="p-3.5 font-semibold">Diagnostic Field</th><th class="p-3.5 font-semibold">Investigator Laboratory Measurement</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Specimen Identification</strong></td><td class="p-3.5 leading-relaxed">Specimen ID & Milestone</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">______________________</code> \| <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">______________________</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Spatial Lineage</strong></td><td class="p-3.5 leading-relaxed">Generation & Pore $(q, r, z)$</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Gen: _______</code> \| <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Coordinates: ( __, __, __ )</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Ancestral Hamming Trajectory</strong></td><td class="p-3.5 leading-relaxed">Total Generations & Cumulative $d_H$</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Generations: _____</code> \| <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Hamming Traverse: _____ bits</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Neutral Drift Fraction</strong></td><td class="p-3.5 leading-relaxed">Blue Edges (Kimura Drift)</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">_____ neutral transitions</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Single-Bit Mutation</strong></td><td class="p-3.5 leading-relaxed">Inverted Bit Index & Codon Index</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Bit: ____ (0..59)</code> \| <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Codon: ____ (0..9)</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Allelic Transition</strong></td><td class="p-3.5 leading-relaxed">Parent Codon $\to$ Child Codon</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[ _ _ _ _ _ _ ]</code> $\to$ <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[ _ _ _ _ _ _ ]</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Biophysical Impact</strong></td><td class="p-3.5 leading-relaxed">Functional Consequence</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">________________________________________________</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">LCA Audit</strong></td><td class="p-3.5 leading-relaxed">Least Common Ancestor ID & Gen</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LCA ID: ______________</code> \| <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">Gen: _____</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">LCA Trait Check</strong></td><td class="p-3.5 leading-relaxed">Did LCA possess the motif?</td><td class="p-3.5 leading-relaxed"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[ YES / NO ]</code></td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Evolutionary Verdict</strong></td><td class="p-3.5 leading-relaxed">Phylogenetic Classification</td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[ HOMOLOGY / HOMOPLASY (CONVERGENT) ]</code></strong></td></tr></tbody></table></div>
 <h3 id="5-post-lab-synthesis-questions" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">5. Post-Lab Synthesis Questions</h3>
 <ol class="list-decimal pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li>How does the existence of neutral introns facilitate the discovery of complex motifs like the bistable latch or half-adder?</li>
@@ -1594,13 +1648,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

@@ -16,12 +16,13 @@
         extend: {
           colors: {
             bio: {
-              bg: '#060911',
-              surface: '#0a0e1a',
-              panel: '#121829',
+              bg: '#080d11',
+              surface: '#0f172a',
+              panel: '#1e293b',
               card: '#0f172a',
-              border: '#1e2c4a',
-              cyan: '#00e5ff',
+              border: '#1e293b',
+              accent: '#10b981',
+              cyan: '#06b6d4',
               amber: '#f59e0b',
               emerald: '#10b981',
               rose: '#f43f5e',
@@ -49,7 +50,8 @@
         processEscapes: true,
         packages: {'[+]': ['color', 'configmacros', 'ams']},
         macros: {
-          color: ['\\\\textcolor{#1}{#2}', 2]
+          color: ['\\\\textcolor{#1}{#2}', 2],
+          AA: '{\\text{Å}}'
         }
       },
       options: {
@@ -62,37 +64,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.mermaid) {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'dark',
-          themeVariables: {
-            darkMode: true,
-            background: '#0a0e1a',
-            primaryColor: '#00e5ff',
-            primaryBorderColor: '#00e5ff',
-            primaryTextColor: '#e2e8f0',
-            lineColor: '#38bdf8',
-            secondaryColor: '#1e293b',
-            tertiaryColor: '#0f172a'
-          }
-        });
+        try {
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+              darkMode: true,
+              background: '#080d11',
+              primaryColor: '#06b6d4',
+              primaryBorderColor: '#0891b2',
+              primaryTextColor: '#f8fafc',
+              lineColor: '#38bdf8',
+              secondaryColor: '#1e293b',
+              tertiaryColor: '#0f172a'
+            },
+            suppressErrorRendering: true
+          });
+          document.querySelectorAll('.mermaid').forEach(function(el) {
+            try {
+              mermaid.run({ nodes: [el] });
+            } catch (err) {
+              console.warn('Mermaid render suppressed warning:', err);
+            }
+          });
+        } catch (e) {
+          console.warn('Mermaid initialization warning:', e);
+        }
       }
     });
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060911; }
-    ::-webkit-scrollbar-thumb { background: #1e2c4a; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #080d11; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
     .card-bio, .card-chemiosmotic {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
       border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .card-digital, .card-silicon {
-      background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
-      border: 1px solid rgba(0, 229, 255, 0.4);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.4);
     }
     .card-margin, .card-analogy {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.7) 100%);
@@ -104,7 +118,7 @@
     }
     .svg-container {
       background: #090e15;
-      border: 1px solid #1e2c4a;
+      border: 1px solid #1e293b;
       border-radius: 0.75rem;
       padding: 1.25rem;
       overflow-x: auto;
@@ -368,7 +382,7 @@
 <body class="bg-bio-bg text-slate-200 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-black leading-relaxed flex flex-col">
 
   <!-- MASTER TOP HEADER (Single Row, Zero Horizontal Scrollbars) -->
-  <header class="border-b border-slate-800 bg-[#060911]/95 backdrop-blur-md sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-[#080d11]/95 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 min-w-0">
         <!-- Flyout Navigation Drawer Button (Always Available) -->
@@ -379,12 +393,12 @@
 
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-400 min-w-0">
           <a href="../index.html" class="hover:text-cyan-400 text-slate-200 flex items-center gap-2 font-bold shrink-0">
-            <img src="../assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded border border-cyan-400/50 shadow-sm inline">
-            <span class="hidden sm:inline">Siliquarium</span>
-            <span class="sm:hidden">Portal</span>
+            <img src="../assets/logos/logo.jpg" alt="Logo" class="w-6 h-6 rounded-lg border border-cyan-500/40 shadow-sm inline">
+            <span class="hidden sm:inline text-slate-100 font-mono">Siliquarium</span>
+            <span class="sm:hidden font-mono">Portal</span>
           </a>
-          <span class="text-slate-600">/</span>
-          <span class="text-cyan-400 font-semibold truncate">Student Study Guides &amp; Equation Decoders</span>
+          <span class="text-slate-700">/</span>
+          <span class="text-emerald-400 font-semibold truncate">Student Study Guides &amp; Equation Decoders</span>
         </nav>
       </div>
 
@@ -397,7 +411,7 @@
             <span class="text-[10px] text-slate-500">▾</span>
           </button>
           <!-- Mega-Menu Overlay -->
-          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/95 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
+          <div id="nav-dropdown-menu" class="hidden absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-slate-950/98 border border-slate-800 shadow-2xl p-4 backdrop-blur-xl z-50 space-y-4 font-mono text-xs max-h-[85vh] overflow-y-auto">
             <div class="space-y-1.5">
       <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-1 border-b border-slate-800">
         <span>🌋</span>
@@ -813,7 +827,7 @@
           </div>
         </div>
 
-        <a href="../../index.html" class="px-3 py-1 bg-cyan-950 border border-cyan-700 text-cyan-300 rounded-lg text-xs hover:bg-cyan-900 transition-colors font-mono font-bold flex items-center gap-1.5 shadow-sm">
+        <a href="../../index.html" class="px-3.5 py-1.5 bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 rounded-lg hover:bg-cyan-900 transition-all font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm">
           <span>🚀</span>
           <span class="hidden md:inline">Live Simulator</span>
         </a>
@@ -824,7 +838,7 @@
   <!-- MASTER VIEWPORT (Flyout Navigation + Full-Width Content) -->
   <div class="max-w-7xl mx-auto flex-1 w-full flex relative">
     <!-- LEFT FLYOUT NAVIGATION DRAWER (Off-Canvas on All Screen Sizes) -->
-    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#060911]/98 backdrop-blur-2xl border-r border-slate-800/90 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <aside id="doc-sidebar" class="fixed top-0 left-0 z-50 h-screen w-80 bg-[#080d11]/98 backdrop-blur-2xl border-r border-slate-800 p-5 space-y-6 overflow-y-auto shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <div class="flex items-center gap-2">
           <img src="../assets/logos/logo.jpg" alt="Logo" class="w-5 h-5 rounded border border-cyan-400/50">
@@ -1072,11 +1086,16 @@
     <!-- MAIN CONTENT VIEWPORT (Full Horizontal Space, Responsive) -->
     <main class="flex-1 min-w-0 px-4 sm:px-8 md:px-12 py-8 md:py-12">
       <div class="max-w-6xl mx-auto space-y-8">
-        <h1 id="deep-dive-student-study-guides-analytical-companion" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🧭 Deep-Dive Student Study Guides & Analytical Companion</h1>
+        <h1 id="deep-dive-investigator-study-guides-analytical-companion" class="text-2xl md:text-3xl font-extrabold font-mono text-slate-100 mt-8 mb-4 pb-2 border-b border-slate-800">🧭 Deep-Dive Investigator Study Guides & Analytical Companion</h1>
 <p class="text-sm text-slate-300 font-sans leading-relaxed my-3"><em class="text-slate-200 italic">Unit-by-Unit Theoretical Scaffolding, Guided Mathematical Derivations, 8 Comprehensive Equation Decoders, and Synthetic Problem Sets</em></p>
 <hr class="border-t border-slate-800 my-8" />
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Modular Companion Suite Navigation:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Companion Portal</a> | <a href="glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Lexicon & Glossary</a> | <a href="bibliography.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="../CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🎓 Curriculum & Syllabus</a></p></div></div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Modular Companion Suite Navigation:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5"><a href="../PEDAGOGICAL_COMPANION_SUITE.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🏛️ Master Companion Portal</a> | <a href="glossary.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📖 Lexicon & Glossary</a> | <a href="bibliography.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">📚 Annotated Bibliography</a> | <a href="../CURRICULUM_AND_SYLLABUS.html" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium">🎓 Curriculum & Syllabus</a></p></div>
+        </div>
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="1-unit-1-the-prebiotic-threshold-howard-pattees-epistemic-cut" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">1. Unit 1: The Prebiotic Threshold & Howard Pattee's Epistemic Cut</h2>
 <h3 id="11-architectural-epistemic-synthesis" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.1 Architectural & Epistemic Synthesis</h3>
@@ -1090,7 +1109,7 @@
 <h3 id="12-conceptual-traps-common-pedagogical-pitfalls" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.2 Conceptual Traps & Common Pedagogical Pitfalls</h3>
 <blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5">[!CAUTION]</p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Pitfall 1: Smuggled Teleology & External Fitness Functions</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Trap:</em> Students frequently imagine that evolutionary simulations evaluate organisms against a human benchmark (e.g., maximizing a math function).</p>
+<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Trap:</em> Investigators frequently imagine that evolutionary simulations evaluate organisms against a human benchmark (e.g., maximizing a math function).</p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Reality:</em> Natural evolution possesses zero objective functions. In Siliquarium, <strong class="text-slate-100 font-semibold">fitness is not a score; fitness is persistence</strong>. An organism survives if and only if its physical wiring extracts enough free energy from incoming hydrothermal bit streams to pay its Landauer switching costs and basal maintenance before its battery hits zero. If the battery hits zero, the cell undergoes irreversible lysis.</p></blockquote>
 <blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5">[!CAUTION]</p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Pitfall 2: The "Warm Little Pond" & The Dilution Catastrophe</strong></p>
@@ -1098,7 +1117,7 @@
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Reality:</em> Without physical boundaries, catalytic polymers diffuse rapidly into the ocean, reducing local concentration to zero and halting multi-step cascades. Furthermore, solar UV radiation in the prebiotic atmosphere destroyed complex organic bonds. Submarine alkaline vents provided both darkness and mineral foam compartments.</p></blockquote>
 <blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5">[!CAUTION]</p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Pitfall 3: Conflating the Symbolic Safe with Dynamic Catalysts</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Trap:</em> Students assume DNA or the 60-bit genome tape directly conducts electricity or acts as an enzyme.</p>
+<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Trap:</em> Investigators assume DNA or the 60-bit genome tape directly conducts electricity or acts as an enzyme.</p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Reality:</em> DNA is an unreactive, rate-independent storage medium. If the hereditary tape conducted power during routine metabolism, thermal noise would corrupt the instructions within seconds. Genetic information is conserved precisely because it is kept safely inert in the safe!</p></blockquote>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="13-color-coordinated-equation-decoders-unit-1" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">1.3 Color-Coordinated Equation Decoders (Unit 1)</h3>
@@ -1111,11 +1130,16 @@
 <li><strong class="text-slate-100 font-semibold">$\textcolor{#f43f5e}{\Delta\text{pH}}$ (Proton Concentration Disparity):</strong> The 4.5-unit pH disparity between alkaline hydrothermal fluid ($\text{pH} \approx 10$) and acidic ocean seawater ($\text{pH} \approx 5.5$).</li>
 </ul>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Term / Variable</th><th class="p-3.5 font-semibold">Role & Classification</th><th class="p-3.5 font-semibold">Biophysical Definition & Terrestrial Analogue</th><th class="p-3.5 font-semibold">In Silico Realization in Siliquarium</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#38bdf8}{\Delta p}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Net Electrochemical Potential</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[OUTPUT: mV]</code></td><td class="p-3.5 leading-relaxed">Total driving force pulling protons across the membrane to drive molecular motors ($F_o F_1$-ATPase drive).</td><td class="p-3.5 leading-relaxed">Master token harvesting yield ($\Delta E_{\text{catalysis}}$) awarded to active pores.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{\Delta \psi}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Transmembrane Electrical Potential</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[INPUT: mV]</code></td><td class="p-3.5 leading-relaxed">Charge disparity across thin mineral walls ($FeS$ dielectric) separating alkaline fluid from ocean.</td><td class="p-3.5 leading-relaxed">Potential difference between Vent Stream $A$ and Ground ($0 \text{ V}$).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#f43f5e}{\Delta \text{pH}}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Proton Concentration Gradient</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[INPUT: pH Units]</code></td><td class="p-3.5 leading-relaxed">4.5-unit pH difference between alkaline vent ($pH \sim 10$) and acidic Hadean ocean ($pH \sim 5.5$).</td><td class="p-3.5 leading-relaxed">Modulated by cyclical vent flow rate and hydrothermal plume rhythm.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{\frac{2.303 R T}{F}}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Nernst Thermal Factor</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[CONSTANT: ~66 mV]</code></td><td class="p-3.5 leading-relaxed">Conversion factor from chemical decadic pH gradient to electrical millivolts at $60^\circ\text{C}$ ($333 \text{ K}$).</td><td class="p-3.5 leading-relaxed">Geochemical conversion coefficient in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/physics/VentPhysics.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">VentPhysics.ts</code></a>.</td></tr></tbody></table></div>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">Why did life evolve to run on an electrical voltage rather than direct chemical combustion? Because chemical combustion in open water releases heat uncontrollably into the ocean, dissipating without persistent storage. By converting chemical redox reactions into an electrochemical circuit across an insulating mineral wall, the alkaline vent created a natural capacitor. Protons stored on one side cannot cross except through specialized microscopic pores, creating a steady, controllable power plant that runs continuously without extinguishing!</p></div></div>
-<div class="card-analogy p-5 rounded-2xl border border-amber-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
-          <div class="font-mono text-amber-400 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
-            <span>🌍</span> Everyday Analogy
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">Why did life evolve to run on an electrical voltage rather than direct chemical combustion? Because chemical combustion in open water releases heat uncontrollably into the ocean, dissipating without persistent storage. By converting chemical redox reactions into an electrochemical circuit across an insulating mineral wall, the alkaline vent created a natural capacitor. Protons stored on one side cannot cross except through specialized microscopic pores, creating a steady, controllable power plant that runs continuously without extinguishing!</p></div>
+        </div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌍</span> Intuitive Anchor &bull; Everyday Analogy
           </div>
           <div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">🌍 Everyday Analogy: The Hydroelectric Hoover Dam</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Dam and Lake Mead.</em> The acidic ocean is a massive reservoir of water (protons) held back by a 5-nanometer thick concrete dam wall (the inorganic $FeS$ rock pore). The height difference of the water behind the dam is the chemical gradient ($\Delta \text{pH}$), and the water pressure against the concrete is the voltage ($\Delta \psi$). If the dam cracks open, water floods uselessly. But if water is channeled through narrow penstock pipes containing waterwheels, the falling water spins generators to produce electricity. The cell does not "burn" fuel; it lets protons fall down an electrical waterfall through rotary molecular turbines ($F_o F_1$-ATP synthase) to charge its molecular batteries!</p></div>
@@ -1130,11 +1154,16 @@
 <li><strong class="text-slate-100 font-semibold">$\ln \textcolor{#f43f5e}{Q}$ (Reaction Quotient Logarithm):</strong> Logarithmic measure of reactant-to-product accumulation ($\textcolor{#f43f5e}{Q = [\text{Red}]/[\text{Ox}]}$).</li>
 </ul>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Term / Variable</th><th class="p-3.5 font-semibold">Role & Classification</th><th class="p-3.5 font-semibold">Biophysical Definition & Terrestrial Analogue</th><th class="p-3.5 font-semibold">In Silico Realization in Siliquarium</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$E$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Net Reduction Potential</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[OUTPUT: V]</code></td><td class="p-3.5 leading-relaxed">The real-time thermodynamic electromotive force available to transfer electrons and drive uphill reactions.</td><td class="p-3.5 leading-relaxed">Dynamic voltage driving signal propagation along pore logic wires.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$E^\circ$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Standard Redox Baseline</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[CONSTANT: V]</code></td><td class="p-3.5 leading-relaxed">Inherent chemical affinity of the $H_2 / CO_2$ redox couple under standard geochemical conditions.</td><td class="p-3.5 leading-relaxed">Baseline chemical energy yield assigned to hydrothermal stream pulses.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\ln Q$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Concentration Disparity</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[VARIABLE: Ratio]</code></td><td class="p-3.5 leading-relaxed">Logarithmic measure of reactant-to-product accumulation; drives potential toward zero at equilibrium.</td><td class="p-3.5 leading-relaxed">Ratio of unspent chemical fuel to waste products inside the pore.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\frac{R T}{z F}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Thermal Voltage Scale</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[SCALING: V]</code></td><td class="p-3.5 leading-relaxed">Thermal energy per unit charge; scales the sensitivity of electrical potential to concentration shifts.</td><td class="p-3.5 leading-relaxed">Thermal noise scaling factor in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/physics/VentPhysics.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">VentPhysics.ts</code></a>.</td></tr></tbody></table></div>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">A chemical reaction at equilibrium ($E = 0$) is thermodynamically dead—it cannot perform work. Life exists if and only if it keeps the reaction quotient $Q$ far away from equilibrium. Hydrothermal vents continuously flush away waste products and pump in fresh reactants, ensuring that $\ln Q$ never reaches the point where voltage collapses.</p></div></div>
-<div class="card-analogy p-5 rounded-2xl border border-amber-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
-          <div class="font-mono text-amber-400 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
-            <span>🌍</span> Everyday Analogy
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">A chemical reaction at equilibrium ($E = 0$) is thermodynamically dead—it cannot perform work. Life exists if and only if it keeps the reaction quotient $Q$ far away from equilibrium. Hydrothermal vents continuously flush away waste products and pump in fresh reactants, ensuring that $\ln Q$ never reaches the point where voltage collapses.</p></div>
+        </div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌍</span> Intuitive Anchor &bull; Everyday Analogy
           </div>
           <div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">🌍 Everyday Analogy: The Crowded Train Car</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Chemical Pressure and Doorway Flow.</em> Imagine a subway train car packed with 200 people, while the station platform outside has only 2 people ($Q \ll 1$). The standard attraction to leave is $E^\circ$, but the sheer overcrowding ($\ln Q$) creates enormous physical pressure forcing people out the door the instant it opens! As people spill onto the platform, the crowd levels out. When the platform is just as crowded as the train ($Q = 1 \implies \ln Q = 0$), movement stops. The vent keeps shoving fresh passengers into the train car, sustaining continuous outflow!</p></div>
@@ -1172,7 +1201,7 @@
 <h3 id="22-conceptual-traps-common-pedagogical-pitfalls" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">2.2 Conceptual Traps & Common Pedagogical Pitfalls</h3>
 <blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5">[!CAUTION]</p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Pitfall 1: The "Free Computation" Fallacy</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Trap:</em> Students assume evaluating Boolean logic has zero physical cost.</p>
+<p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Trap:</em> Investigators assume evaluating Boolean logic has zero physical cost.</p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Reality:</em> Rolf Landauer proved that information processing is fundamentally physical. Erasing a bit or flipping a physical gate dissipates real heat into the environment. In Siliquarium, every gate toggle burns 1 token. Circuits that evolve uncontrolled feedback loops burn through their battery and starve.</p></blockquote>
 <blockquote class="border-l-4 border-slate-700 bg-slate-900/60 p-4 rounded-r-xl my-4 text-slate-300 text-sm leading-relaxed italic font-serif"><p class="leading-relaxed font-sans text-xs my-1.5">[!CAUTION]</p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">Pitfall 2: Confusing XOR as an "Enzyme Primitive"</strong></p>
@@ -1189,11 +1218,16 @@
 <li><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{\ln 2}$ (Binary State Compression Ratio):</strong> Natural logarithm of 2 ($\approx 0.69315$), reflecting the halving of phase space when resetting a bit from $\{0, 1\} \to \{0\}$.</li>
 </ul>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Term / Variable</th><th class="p-3.5 font-semibold">Role & Classification</th><th class="p-3.5 font-semibold">Biophysical Definition & Terrestrial Analogue</th><th class="p-3.5 font-semibold">In Silico Realization in Siliquarium</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#38bdf8}{Q_{\text{Landauer}}}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Irreversible Heat Waste</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[OUTPUT: Joules]</code></td><td class="p-3.5 leading-relaxed">Minimum heat that must be expelled into the surrounding heat bath when 1 bit of information is erased.</td><td class="p-3.5 leading-relaxed">1 Energy Token deducted from the pore battery per gate state switch.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{k_B}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Boltzmann Bridge Constant</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[CONSTANT: J/K]</code></td><td class="p-3.5 leading-relaxed">Connects microscopic statistical microstates ($\Omega$) to macroscopic thermodynamic entropy ($S$).</td><td class="p-3.5 leading-relaxed">Fundamental scale factor connecting bit flips to token deductions.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#fbbf24}{T}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Environmental Heat Sink</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[VARIABLE: Kelvin]</code></td><td class="p-3.5 leading-relaxed">Ocean temperature; at higher temperatures, erasing a bit dissipates proportionally more Joules of heat.</td><td class="p-3.5 leading-relaxed">Local pore temperature modulated by proximity to the caldera plume.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{\ln 2}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Binary State Reduction</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[SCALING: Nats/Bit]</code></td><td class="p-3.5 leading-relaxed">Natural logarithm of 2; reflects the halving of system phase space when resetting a bit from $\{0, 1\} \to \{0\}$.</td><td class="p-3.5 leading-relaxed">The mathematical cost of setting gate output from unknown to deterministic state.</td></tr></tbody></table></div>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">Why is Landauer's bound an inequality ($Q \ge k_B T \ln 2$)? Because $k_B T \ln 2$ is the absolute frictionless quantum floor! Real biological enzymes and CMOS transistors operate at thousands of times this limit due to electrical resistance and molecular friction. In Siliquarium, the 1-token Landauer penalty represents this inescapable physical overhead. If computation were free, evolution would produce infinite cancerous loops of useless logic!</p></div></div>
-<div class="card-analogy p-5 rounded-2xl border border-amber-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
-          <div class="font-mono text-amber-400 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
-            <span>🌍</span> Everyday Analogy
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">Why is Landauer's bound an inequality ($Q \ge k_B T \ln 2$)? Because $k_B T \ln 2$ is the absolute frictionless quantum floor! Real biological enzymes and CMOS transistors operate at thousands of times this limit due to electrical resistance and molecular friction. In Siliquarium, the 1-token Landauer penalty represents this inescapable physical overhead. If computation were free, evolution would produce infinite cancerous loops of useless logic!</p></div>
+        </div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌍</span> Intuitive Anchor &bull; Everyday Analogy
           </div>
           <div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">🌍 Everyday Analogy: The Spring-Loaded Mechanical Coin Counter</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Resetting the Counter.</em> Imagine a mechanical turnstile with a lever that can click into Slot 0 or Slot 1. To read the lever without resetting it requires zero work. But if you want to force the lever back to Slot 0 regardless of where it started, you must push against a spring, compressing it and releasing a puff of friction heat. Erasing the coin counter's memory physically heats up the room!</p></div>
@@ -1208,11 +1242,16 @@
 <li><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{K_m}$ (Michaelis Affinity Constant):</strong> Substrate concentration at which velocity reaches half-maximum ($v = V_{\max} / 2$).</li>
 </ul>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Term / Variable</th><th class="p-3.5 font-semibold">Role & Classification</th><th class="p-3.5 font-semibold">Biophysical Definition & Terrestrial Analogue</th><th class="p-3.5 font-semibold">In Silico Realization in Siliquarium</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$v$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Catalytic Flux</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[OUTPUT: Rate]</code></td><td class="p-3.5 leading-relaxed">Real-time rate of product generation; represents metabolic energy capture per unit time.</td><td class="p-3.5 leading-relaxed">Energy token yield deposited into the pore battery per simulation tick.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$V_{\max}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Enzymatic Capacity Ceiling</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[LIMIT: Max Rate]</code></td><td class="p-3.5 leading-relaxed">Theoretical rate when 100% of enzyme active sites are occupied by substrate.</td><td class="p-3.5 leading-relaxed">Fixed $+3$ token maximum catalytic yield per co-catalytic <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">AND</code> gate event.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$[S]$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Solute Abundance</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[INPUT: Concentration]</code></td><td class="p-3.5 leading-relaxed">Density of incoming reactant molecules carried in the hydrothermal fluid plume.</td><td class="p-3.5 leading-relaxed">Binary state of incoming hydrothermal input stream ($0$ or $1$).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$K_m$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Substrate Affinity Half-Point</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[CONSTANT: mol/L]</code></td><td class="p-3.5 leading-relaxed">Inverse measure of binding affinity: low $K_m$ means tight binding; high $K_m$ means weak binding.</td><td class="p-3.5 leading-relaxed">Activation threshold required for porin channels to trigger gate inputs.</td></tr></tbody></table></div>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">When substrate is scarce ($[S] \ll K_m$), reaction velocity is linear ($v \approx \frac{V_{\max}}{K_m} [S]$): doubling substrate doubles product. But when substrate is flooded ($[S] \gg K_m$), velocity hits a hard glass ceiling ($v \to V_{\max}$): the enzymes are already working as fast as they can! Living cells operate near $K_m$ so they can respond sensitively to changing nutrient levels.</p></div></div>
-<div class="card-analogy p-5 rounded-2xl border border-amber-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
-          <div class="font-mono text-amber-400 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
-            <span>🌍</span> Everyday Analogy
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">When substrate is scarce ($[S] \ll K_m$), reaction velocity is linear ($v \approx \frac{V_{\max}}{K_m} [S]$): doubling substrate doubles product. But when substrate is flooded ($[S] \gg K_m$), velocity hits a hard glass ceiling ($v \to V_{\max}$): the enzymes are already working as fast as they can! Living cells operate near $K_m$ so they can respond sensitively to changing nutrient levels.</p></div>
+        </div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌍</span> Intuitive Anchor &bull; Everyday Analogy
           </div>
           <div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">🌍 Everyday Analogy: The Airport Security Checkpoint</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Passenger Queues and Metal Detectors.</em> The metal detector is the enzyme ($E$); passengers waiting in line are the substrate ($[S]$); passengers walking through are the reaction velocity ($v$). If only 2 passengers arrive every ten minutes ($[S] \ll K_m$), the checkpoint processes them immediately. But if an entire jumbo jet unloads 400 passengers at once ($[S] \gg K_m$), a huge line forms. Even with 400 passengers waiting, the metal detector cannot process people any faster than its physical limit ($V_{\max}$)!</p></div>
@@ -1278,11 +1317,16 @@
 <li><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{n}$ (Hill Cooperativity Exponent):</strong> Steepness coefficient / multimeric binding subunit count.</li>
 </ul>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Term / Variable</th><th class="p-3.5 font-semibold">Role & Classification</th><th class="p-3.5 font-semibold">Biophysical Definition & Terrestrial Analogue</th><th class="p-3.5 font-semibold">In Silico Realization in Siliquarium</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#38bdf8}{f(R)}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Fractional Expression</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[OUTPUT: 0..1]</code></td><td class="p-3.5 leading-relaxed">Output activity of the downstream gene; switches between fully ON ($1$) and fully OFF ($0$).</td><td class="p-3.5 leading-relaxed">Logic gate Boolean output ($0$ or $1$) driving downstream signal wires.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#fbbf24}{R}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Repressor Signal</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[INPUT: mol/L]</code></td><td class="p-3.5 leading-relaxed">Abundance of active repressor proteins (e.g., LacI or TetR) binding to DNA operator sites.</td><td class="p-3.5 leading-relaxed">Output potential of an upstream inhibitory gate wired into an input pin.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{K_d}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Switching Threshold</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[CONSTANT: mol/L]</code></td><td class="p-3.5 leading-relaxed">Apparent dissociation constant; sets the exact inflection point of the biological toggle.</td><td class="p-3.5 leading-relaxed">Switching threshold voltage across pore gate input pins.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{n}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Cooperative Exponent</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[SCALING: Subunits]</code></td><td class="p-3.5 leading-relaxed">Quantifies sigmoidal sharpness. When $n=1$, response is sluggish; when $n \ge 2$, response snaps like a digital switch.</td><td class="p-3.5 leading-relaxed">Non-linear threshold step function implemented in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/domain/PoreWorkshop.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">PoreWorkshop.ts</code></a>.</td></tr></tbody></table></div>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">Why is Hill cooperativity ($n \ge 2$) non-negotiable for living memory? If $n = 1$, the response curve is a gentle, lazy hyperbolic curve with no sharp boundary. Two mutually repressing genes with $n = 1$ can only produce a single dull intermediate equilibrium where both genes are half-on. But when $n \ge 2$ (e.g. repressor proteins forming dimers or tetramers), the curve becomes a sharp, sigmoidal step-function, creating two stable locked states (<strong class="text-slate-100 font-semibold">bistability</strong>)!</p></div></div>
-<div class="card-analogy p-5 rounded-2xl border border-amber-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
-          <div class="font-mono text-amber-400 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
-            <span>🌍</span> Everyday Analogy
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">Why is Hill cooperativity ($n \ge 2$) non-negotiable for living memory? If $n = 1$, the response curve is a gentle, lazy hyperbolic curve with no sharp boundary. Two mutually repressing genes with $n = 1$ can only produce a single dull intermediate equilibrium where both genes are half-on. But when $n \ge 2$ (e.g. repressor proteins forming dimers or tetramers), the curve becomes a sharp, sigmoidal step-function, creating two stable locked states (<strong class="text-slate-100 font-semibold">bistability</strong>)!</p></div>
+        </div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌍</span> Intuitive Anchor &bull; Everyday Analogy
           </div>
           <div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">🌍 Everyday Analogy: The Spring-Loaded Light Switch</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Wall Toggle.</em> If a light switch were loose and greasy without a spring ($n = 1$), you could balance the toggle halfway in the middle, creating a flickering, buzzing, indeterminate state. But a proper electrical wall switch has an internal snap-action spring ($n \ge 2$ cooperativity): as you push it gently, it resists, until suddenly—<em class="text-slate-200 italic">SNAP!</em>—it locks into either completely ON or completely OFF. It is physically impossible for the switch to balance in the middle!</p></div>
@@ -1298,11 +1342,16 @@
 <li><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{\text{HASH}}(\dots)$ (Deterministic Avalanche Mixer):</strong> 64-bit mixer mapping color plus neighbor structure to an invariant hash integer.</li>
 </ul>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Term / Variable</th><th class="p-3.5 font-semibold">Role & Classification</th><th class="p-3.5 font-semibold">Computational Graph Meaning</th><th class="p-3.5 font-semibold">In Silico Realization in Siliquarium</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#38bdf8}{c_v^{(t+1)}}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Refined Node Signature</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[OUTPUT: 64-Bit]</code></td><td class="p-3.5 leading-relaxed">The updated categorical fingerprint of node $v$ capturing its 1-hop structural context.</td><td class="p-3.5 leading-relaxed">Intermediate hash array entry inside <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/WeisfeilerLehmanHasher.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">WeisfeilerLehmanHasher.ts</code></a>.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#fbbf24}{c_v^{(t)}}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Base Gate Identity</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[INPUT: Color]</code></td><td class="p-3.5 leading-relaxed">The gate's intrinsic biophysical primitive: <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_AND</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_NOT</code>, <code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">GATE_OR</code>, etc.</td><td class="p-3.5 leading-relaxed">Initialized from the node's <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/codons/CodonTable.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">CodonType</code></a> at Round 0.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{\text{SORT}}(\dots)$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Permutation Sieve</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[OPERATOR: Canonical]</code></td><td class="p-3.5 leading-relaxed">Sorts incoming neighbor colors lexicographically, guaranteeing identical output regardless of node ID ordering.</td><td class="p-3.5 leading-relaxed">Alphabetical array sort executed prior to string concatenation.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{\text{HASH}}(\dots)$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Avalanche Mixer</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[OPERATOR: Mixer]</code></td><td class="p-3.5 leading-relaxed">Mixes node color with neighbor multiset; identical wiring produces identical 64-bit integers.</td><td class="p-3.5 leading-relaxed">Deterministic string hash function in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/core/paleontology/WeisfeilerLehmanHasher.ts#L60-L75" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">WeisfeilerLehmanHasher.ts</code></a>.</td></tr></tbody></table></div>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">Determining whether two complex directed circuits are topologically identical is an NP-hard problem if you try every possible node permutation ($N!$). The Weisfeiler-Lehman algorithm bypasses this by having each node "look at its neighbors" and update its color iteratively. In just 2 passes, nodes know the shape of their local neighborhood. Sorting the neighbor list guarantees that swapping Gate #1 and Gate #3 produces the exact same final hash string!</p></div></div>
-<div class="card-analogy p-5 rounded-2xl border border-amber-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
-          <div class="font-mono text-amber-400 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
-            <span>🌍</span> Everyday Analogy
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">Determining whether two complex directed circuits are topologically identical is an NP-hard problem if you try every possible node permutation ($N!$). The Weisfeiler-Lehman algorithm bypasses this by having each node "look at its neighbors" and update its color iteratively. In just 2 passes, nodes know the shape of their local neighborhood. Sorting the neighbor list guarantees that swapping Gate #1 and Gate #3 produces the exact same final hash string!</p></div>
+        </div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌍</span> Intuitive Anchor &bull; Everyday Analogy
           </div>
           <div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">🌍 Everyday Analogy: The Neighborhood Roll Call</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">Describing Your Town Without a Map.</em> Suppose you live in a town where the street signs have been removed. How do you prove your town is identical to a town in another state? You hold a roll call: every person lists who they are ("Baker") and lists their immediate neighbors in alphabetical order ("Blacksmith, Miller"). If every person in the other town lists the exact same combination of neighbors, you have mathematically proven the towns have identical street grids—without needing to know the names of the streets!</p></div>
@@ -1310,11 +1359,11 @@
 <hr class="border-t border-slate-800 my-8" />
 <h2 id="4-unit-4-macro-evolutionary-dynamics-lenski-ltee-pelagic-dispersal" class="text-xl md:text-2xl font-bold font-mono text-emerald-400 mt-8 mb-3 pb-1 border-b border-slate-800/80">4. Unit 4: Macro-Evolutionary Dynamics, Lenski LTEE & Pelagic Dispersal</h2>
 <h3 id="41-architectural-epistemic-synthesis" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.1 Architectural & Epistemic Synthesis</h3>
-<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Unit 4 elevates student inquiry to macro-evolutionary timescales, addressing population genetics, long-term experimental evolution (Richard Lenski's LTEE), and spatial biogeography:</p>
+<p class="text-sm text-slate-300 font-sans leading-relaxed my-3">Unit 4 elevates investigator inquiry to macro-evolutionary timescales, addressing population genetics, long-term experimental evolution (Richard Lenski's LTEE), and spatial biogeography:</p>
 <ul class="list-disc pl-6 space-y-1.5 my-4 text-sm text-slate-300 font-sans leading-relaxed">
 <li><strong class="text-slate-100 font-semibold">Kimura's Neutral Theory:</strong> Mutations in non-coding introns (<code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">INTRON_SILENT</code>) or synonymous degenerate codons do not alter metabolic phenotype ($\Delta W = 0$). Lineages wander randomly through neutral Hamming sequence space, enabling them to traverse fitness saddles without dying.</li>
 <li><strong class="text-slate-100 font-semibold">Gene Duplication as the Engine of Innovation:</strong> Following Susumu Ohno (1970), complex motifs rarely arise from single base modifications of essential enzymes. They emerge when redundant duplications free a second copy to explore radical mutations (neofunctionalization).</li>
-<li><strong class="text-slate-100 font-semibold">Rigorous Homology vs. Homoplasy Proofs:</strong> By walking ancestral parent pointers back to the Least Common Ancestor (LCA), students execute mathematical proofs verifying whether shared motifs represent divergent descent (<strong class="text-slate-100 font-semibold">Homology</strong>) or independent convergent discovery (<strong class="text-slate-100 font-semibold">Homoplasy</strong>).</li>
+<li><strong class="text-slate-100 font-semibold">Rigorous Homology vs. Homoplasy Proofs:</strong> By walking ancestral parent pointers back to the Least Common Ancestor (LCA), investigators execute mathematical proofs verifying whether shared motifs represent divergent descent (<strong class="text-slate-100 font-semibold">Homology</strong>) or independent convergent discovery (<strong class="text-slate-100 font-semibold">Homoplasy</strong>).</li>
 </ul>
 <hr class="border-t border-slate-800 my-8" />
 <h3 id="42-conceptual-traps-common-pedagogical-pitfalls" class="text-lg font-bold font-mono text-cyan-400 mt-6 mb-2">4.2 Conceptual Traps & Common Pedagogical Pitfalls</h3>
@@ -1337,11 +1386,16 @@
 <li><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{k = \mu_0}$ (Neutral Substitution Rate):</strong> Long-term rate of substitutions per generation, strictly invariant to population size $N$.</li>
 </ul>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Term / Variable</th><th class="p-3.5 font-semibold">Role & Classification</th><th class="p-3.5 font-semibold">Population Genetics Meaning</th><th class="p-3.5 font-semibold">In Silico Realization in Siliquarium</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#38bdf8}{P_{\text{fix}}}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Fixation Probability</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[OUTPUT: Probability]</code></td><td class="p-3.5 leading-relaxed">The mathematical likelihood that random genetic drift will carry a neutral allele to 100% fixation.</td><td class="p-3.5 leading-relaxed">Probability that an intron bit-flip sweeps across all occupied pores on the reef.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#c084fc}{1}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Mutant Founder Copy</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[CONSTANT: Integer]</code></td><td class="p-3.5 leading-relaxed">Represents the single novel bit-flip introduced during replication in a child pore safe.</td><td class="p-3.5 leading-relaxed">The single bit inversion occurring with probability $p = 0.001$.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#fbbf24}{N}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Census Population Size</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[VARIABLE: Population]</code></td><td class="p-3.5 leading-relaxed">Total number of living, viable organisms currently occupying rock pores on the seamount.</td><td class="p-3.5 leading-relaxed">Number of living cells tracked in the telemetry HUD ($N_{\text{living}}$).</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{k = \mu_0}$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Substitution Rate Invariance</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[THEOREM: Invariant]</code></td><td class="p-3.5 leading-relaxed">Rate of neutral evolutionary substitutions per generation is strictly equal to the mutation rate $\mu_0$, independent of $N$.</td><td class="p-3.5 leading-relaxed">Long-term accumulation of blue edges in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/FossilFreezer.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">FossilFreezer.ts</code></a>.</td></tr></tbody></table></div>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">Why is the neutral substitution rate $k$ completely independent of population size $N$? Because in a larger population, more neutral mutations appear each generation ($N \times \mu_0$), but each individual mutation has a proportionally lower chance of fixing ($1/N$). The population size cancels out perfectly: $(N \cdot \mu_0) \times (1/N) = \mu_0$! Neutral molecular clocks tick at the exact same rate regardless of whether a species has 1,000 or 1,000,000,000 individuals!</p></div></div>
-<div class="card-analogy p-5 rounded-2xl border border-amber-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
-          <div class="font-mono text-amber-400 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
-            <span>🌍</span> Everyday Analogy
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">Why is the neutral substitution rate $k$ completely independent of population size $N$? Because in a larger population, more neutral mutations appear each generation ($N \times \mu_0$), but each individual mutation has a proportionally lower chance of fixing ($1/N$). The population size cancels out perfectly: $(N \cdot \mu_0) \times (1/N) = \mu_0$! Neutral molecular clocks tick at the exact same rate regardless of whether a species has 1,000 or 1,000,000,000 individuals!</p></div>
+        </div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌍</span> Intuitive Anchor &bull; Everyday Analogy
           </div>
           <div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">🌍 Everyday Analogy: The Raffle with Everyone Holding One Ticket</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Fair Lottery.</em> Imagine a lottery where every citizen in a town of $N$ people is given exactly one ticket. What is the chance that Person A wins? Exactly $1/N$. If the town has 100 people, the chance is $1/100$. If the town has 1,000,000 people, the chance is $1/1,000,000$. Because neutral mutations confer zero selective advantage, genetic drift is a perfectly fair lottery where every gene copy has the exact same odds of being drawn for the next generation!</p></div>
@@ -1356,11 +1410,16 @@
 <li><strong class="text-slate-100 font-semibold">$\textcolor{#34d399}{c}$ (Initial Adaptation Velocity):</strong> Initial rate of adaptive fitness discovery during early seamount colonization.</li>
 </ul>
 <div class="overflow-x-auto my-6 rounded-xl border border-slate-800 bg-slate-900/60 shadow-inner"><table class="w-full text-left text-sm font-sans border-collapse"><thead><tr class="bg-slate-950/80 border-b border-slate-800 text-slate-100 font-mono text-xs uppercase tracking-wider"><th class="p-3.5 font-semibold">Term / Variable</th><th class="p-3.5 font-semibold">Role & Classification</th><th class="p-3.5 font-semibold">Experimental Evolution Meaning</th><th class="p-3.5 font-semibold">In Silico Realization in Siliquarium</th></tr></thead><tbody class="divide-y divide-slate-800/60 text-slate-300"><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$\bar{W}(t)$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Mean Population Fitness</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[OUTPUT: Relative]</code></td><td class="p-3.5 leading-relaxed">Ratio of daughter population growth rate to ancestral Generation 0 reference strain.</td><td class="p-3.5 leading-relaxed">Mean metabolic capture efficiency across living pores logged in <a href="file:///h:/My%20Drive/Repos/Siliquarium/src/engine/paleontology/LteeBenchmark.ts" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors font-medium"><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">LteeBenchmark.ts</code></a>.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$t$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Generational Clock</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[INPUT: Generations]</code></td><td class="p-3.5 leading-relaxed">Generational turnover elapsed across continuous chemostat / hydrothermal incubation.</td><td class="p-3.5 leading-relaxed">Maximum generation counter logged in the paleontology HUD badge.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$d$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Diminishing-Returns Exponent</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[CONSTANT: Exponent]</code></td><td class="p-3.5 leading-relaxed">Quantifies why each subsequent adaptive mutation yields a smaller relative benefit than the last.</td><td class="p-3.5 leading-relaxed">Power-law deceleration parameter fitted to the lineage trajectory graph.</td></tr><tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">$c$</strong></td><td class="p-3.5 leading-relaxed"><strong class="text-slate-100 font-semibold">Early Colonization Rate</strong><br/><code class="font-mono text-xs bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded text-cyan-300">[CONSTANT: Rate]</code></td><td class="p-3.5 leading-relaxed">High initial evolutionary velocity when bare substrate and abundant nutrients exist.</td><td class="p-3.5 leading-relaxed">Rapid initial divergence rate observed during the first 500 ticks.</td></tr></tbody></table></div>
-<div class="p-4 rounded-xl bg-cyan-950/30 border-l-4 border-cyan-400 my-4 text-sm text-slate-300"><div class="font-mono text-cyan-400 font-bold text-xs uppercase tracking-wider mb-1">NOTE</div><div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
-<p class="leading-relaxed font-sans text-xs my-1.5">Why doesn't fitness keep accelerating exponentially? Because of <strong class="text-slate-100 font-semibold">diminishing-returns epistasis</strong>. In an unadapted ancestor, a simple point mutation that couples an idle enzyme to an incoming fuel stream provides a massive $+100\%$ boost in survival. But once a lineage already possesses efficient catalytic circuits, additional beneficial mutations can only fine-tune minor delay lines or reduce leak by tiny fractions. Adaptation continues indefinitely, but its velocity decelerates along a power-law!</p></div></div>
-<div class="card-analogy p-5 rounded-2xl border border-amber-500/40 my-6 space-y-2 text-sm text-slate-300 shadow-lg">
-          <div class="font-mono text-amber-400 font-bold flex items-center gap-2 text-xs uppercase tracking-wider border-b border-slate-800/80 pb-2">
-            <span>🌍</span> Everyday Analogy
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>💡</span> Note
+          </div>
+          <div class="leading-relaxed font-sans text-xs text-slate-300"><p class="leading-relaxed font-sans text-xs my-2"><strong class="text-slate-100 font-semibold">💡 The Intuitive Truth Behind the Architecture:</strong></p>
+<p class="leading-relaxed font-sans text-xs my-1.5">Why doesn't fitness keep accelerating exponentially? Because of <strong class="text-slate-100 font-semibold">diminishing-returns epistasis</strong>. In an unadapted ancestor, a simple point mutation that couples an idle enzyme to an incoming fuel stream provides a massive $+100\%$ boost in survival. But once a lineage already possesses efficient catalytic circuits, additional beneficial mutations can only fine-tune minor delay lines or reduce leak by tiny fractions. Adaptation continues indefinitely, but its velocity decelerates along a power-law!</p></div>
+        </div>
+<div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-500/40 text-xs sm:text-sm text-slate-200 space-y-2.5 shadow-xl my-6">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold font-mono uppercase tracking-wider text-xs">
+            <span>🌍</span> Intuitive Anchor &bull; Everyday Analogy
           </div>
           <div class="leading-relaxed font-sans"><p class="leading-relaxed font-sans text-xs my-1.5"><strong class="text-slate-100 font-semibold">🌍 Everyday Analogy: Cleaning a Filthy Garage</strong></p>
 <p class="leading-relaxed font-sans text-xs my-1.5"><em class="text-slate-200 italic">The Law of Diminishing Returns.</em> In the first 10 minutes of cleaning an abandoned garage, you sweep up 5 trash bags of junk—the room looks 80% cleaner almost immediately! But during hour 5, you are on your hands and knees with a toothbrush scrubbing paint specks out of concrete corners. You are still making progress, but each additional minute yields far less visible improvement than the first 10 minutes. The first mutations clean out the big junk; later mutations scrub the corners!</p></div>
@@ -1441,13 +1500,13 @@
   </div>
 
   <!-- MASTER FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-[#0a0e1a] py-8 text-center text-xs font-mono text-slate-500">
+  <footer class="border-t border-slate-800/80 bg-[#080d11] py-8 text-center text-xs font-mono text-slate-500">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <p class="text-slate-400 font-semibold">🐠 Siliquarium: Open-Ended Digital Life &amp; Silicon Abiogenesis Laboratory</p>
       <p>
         <a href="https://github.com/ianohlander/Siliquarium" target="_blank" rel="noopener" class="text-cyan-400 hover:underline">GitHub Repository</a> •
         PolyForm Noncommercial License 1.0.0 •
-        Designed for High School STEM, Undergraduate Biophysics &amp; Systems Biology Research
+        Designed for Rigorous Biophysics &amp; Systems Biology Research
       </p>
     </div>
   </footer>

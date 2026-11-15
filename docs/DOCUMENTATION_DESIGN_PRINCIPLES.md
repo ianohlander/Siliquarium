@@ -3,7 +3,7 @@
 
 ---
 
-> *"If a student cannot feel the physical stakes before encountering the mathematics, the documentation has failed. If an engineer cannot trace the formal derivation directly to a data structure in code, the architecture has failed. World-class technical documentation must be simultaneously a scientific treatise, an interactive museum exhibit, and an unambiguous software blueprint."*
+> *"If a investigator cannot feel the physical stakes before encountering the mathematics, the documentation has failed. If an engineer cannot trace the formal derivation directly to a data structure in code, the architecture has failed. World-class technical documentation must be simultaneously a scientific treatise, an interactive museum exhibit, and an unambiguous software blueprint."*
 
 ---
 
@@ -147,10 +147,10 @@ Chapters and modules are presented not as bullet points, but as **rich cards** w
 
 BooleanGA achieves pedagogical mastery by following a strict epistemological philosophy: **abstract mathematics must never be taught without physical grounding, and physical mechanisms must never be taught without everyday analogies.**
 
-### 4.1 A Teacher's Orientation Prologue
-Every major document opens with a dedicated section entitled *"A Teacher's Orientation: [Existential Theme]"*. 
+### 4.1 Foundational Orientation Prologue
+Every major document opens with a dedicated section entitled *"Foundational Orientation: [Existential Theme]"*. 
 - **The Core Rule:** Frame the entire volume as an existential crisis that physical nature had to overcome (e.g., the *Dilution Catastrophe* in prebiotic chemistry, or *Levinthal's Paradox* in protein folding).
-- **Tone:** Welcoming, authoritative, philosophically grounded, inviting the reader to think as an experimental scientist rather than a passive student.
+- **Tone:** Welcoming, authoritative, philosophically grounded, inviting the reader to think as an experimental scientist rather than a passive investigator.
 
 ### 4.2 The Four Sacred Everyday Analogies
 As codified in Siliquarium's documentation standards, abstract biophysical dynamics must be anchored to the **Four Sacred Analogies**:
@@ -267,7 +267,7 @@ Beneath every schematic diagram or data visualization, BooleanGA embeds a **Comp
     </p>
     <p>
       <strong class="text-purple-400 font-mono">💡 Core Conceptual Principle:</strong> 
-      Synthesizes the big-picture takeaway, dismantling common student misconceptions.
+      Synthesizes the big-picture takeaway, dismantling common investigator misconceptions.
     </p>
   </div>
 </div>

@@ -22,7 +22,7 @@
 > **Siliquarium Theoretical Thesis:**  
 > Biological complexity is not an uncaused miracle, nor does the genome generate information ex nihilo. An organism’s genome is an inverse relief, a photographic negative, and a palimpsest of the ancestral environments in which its lineage survived. The selective environment is the informational fountainhead; natural selection is the physical recording channel; the genome is the rate-independent symbolic archive—the **Genetic Book of the Dead**.
 
-For decades, both critics and students of evolutionary biology have stumbled over a seemingly intractable puzzle: **Where does biological information come from?**
+For decades, both critics and investigators of evolutionary biology have stumbled over a seemingly intractable puzzle: **Where does biological information come from?**
 - In popular culture and introductory textbooks, mutation is described as "random noise," while natural selection is described as a "pruning hook." 
 - But random noise contains only entropy, and pruning merely deletes. How can the combination of noise and deletion create the exquisite precision of a bacterial flagellar motor, a rhodopsin photoreceptor, or—in Siliquarium—a coherent feed-forward loop and an allosteric inverter?
 
